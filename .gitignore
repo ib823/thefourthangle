@@ -1,0 +1,35 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# signing keys
+.keys/
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# Radar output — only commit state, queue, health, last-cycle log
+radar/output/logs/*.log
+!radar/output/logs/last-cycle.log
+radar/output/archive/
+__pycache__/
+*.pyc
+.pytest_cache/

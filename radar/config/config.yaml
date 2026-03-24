@@ -1,0 +1,190 @@
+# TFA Radar Configuration
+# ========================
+
+cycle_interval_minutes: 30
+
+# Malaysian controversy keywords (4 languages)
+keywords:
+  politics:
+    malay: ["kerajaan", "pembangkang", "parlimen", "undang-undang", "pilihanraya", "menteri", "perdana menteri", "UMNO", "PAS", "PKR", "DAP", "Bersatu", "Perikatan", "Pakatan", "rasuah", "skandal", "undi", "mahkamah"]
+    english: ["government", "opposition", "parliament", "election", "minister", "prime minister", "corruption", "scandal", "vote", "court ruling", "policy", "reform", "protest", "rally"]
+    chinese_romanized: ["zhengfu", "fanduipai", "guohui", "xuanju", "buzhang", "tanwu", "choushi", "toupiao"]
+    tamil_romanized: ["arasu", "ethirkatchi", "naadamanram", "therthal", "amaichar", "oozhal", "avalathu"]
+  race:
+    malay: ["kaum", "bangsa", "Melayu", "Cina", "India", "bumiputera", "hak istimewa", "ketuanan", "perpaduan", "perkauman", "diskriminasi", "kuota"]
+    english: ["race", "ethnic", "Malay", "Chinese", "Indian", "bumiputera", "special rights", "ketuanan", "unity", "racism", "discrimination", "quota", "vernacular school"]
+    chinese_romanized: ["zhongzu", "minzu", "malaixiren", "huaren", "yinduren", "tequan", "tuzhuminzu", "qishi"]
+    tamil_romanized: ["inam", "makkal", "malaiyar", "cheeniyar", "indhiyar", "urimai", "paagupaadu"]
+  religion:
+    malay: ["Islam", "agama", "fatwa", "halal", "haram", "syariah", "murtad", "kalimah Allah", "masjid", "surau", "kafir", "liberal", "JAKIM", "JAIS", "bidaah"]
+    english: ["Islam", "religion", "fatwa", "halal", "sharia", "apostasy", "Allah", "mosque", "interfaith", "religious freedom", "secular", "JAKIM", "conversion"]
+    chinese_romanized: ["zongjiao", "yisilanjiao", "qingzhengsi", "xinyang", "ziyou"]
+    tamil_romanized: ["matham", "islamiyam", "koil", "vazhipaadu", "matha sudhanthiram"]
+  economy:
+    malay: ["ekonomi", "harga", "GST", "SST", "subsidi", "petrol", "ringgit", "inflasi", "kos sara hidup", "gaji minimum", "pengangguran", "kemiskinan", "KWSP", "EPF"]
+    english: ["economy", "price", "GST", "SST", "subsidy", "petrol", "ringgit", "inflation", "cost of living", "minimum wage", "unemployment", "poverty", "EPF", "budget"]
+    chinese_romanized: ["jingji", "jiage", "butie", "tongzhangpeng", "shenghuofeiyong", "zuidi gongzi"]
+    tamil_romanized: ["porulaathaaram", "vilai", "maniyam", "panaveekam", "vazhkai selavu"]
+  governance:
+    malay: ["tadbir urus", "akauntabiliti", "ketelusan", "SPRM", "MACC", "audit", "1MDB", "salah guna kuasa", "nepotisme", "kronisme"]
+    english: ["governance", "accountability", "transparency", "MACC", "audit", "1MDB", "abuse of power", "nepotism", "cronyism", "procurement", "conflict of interest"]
+    chinese_romanized: ["zhili", "wenze", "touming", "shenji", "lanyongzhiquan"]
+    tamil_romanized: ["aatchi", "poruppu", "velippadaithhanmai", "athigaara thurpiraiyoagam"]
+  rights:
+    malay: ["hak asasi", "kebebasan bersuara", "kebebasan media", "ISA", "SOSMA", "Akta Hasutan", "tahanan", "demonstrasi", "himpunan"]
+    english: ["human rights", "freedom of speech", "press freedom", "ISA", "SOSMA", "Sedition Act", "detention", "protest", "assembly", "LGBTQ", "death penalty"]
+    chinese_romanized: ["renquan", "yanlunyouziyou", "xinwenziyou", "juliu", "shiwei"]
+    tamil_romanized: ["manitha urimai", "pessu sudhanthiram", "ooadaga sudhanthiram", "kaadhu"]
+
+# Data source endpoints
+sources:
+  twitter:
+    enabled: true
+    search_interval_minutes: 15
+    max_results_per_query: 100
+  news_rss:
+    enabled: true
+    poll_interval_minutes: 15
+    feeds:
+      # VERIFIED WORKING as of 2026-03-24
+      - name: "Free Malaysia Today"
+        url: "https://www.freemalaysiatoday.com/feed/"
+        language: "english"
+      - name: "The Star"
+        url: "https://www.thestar.com.my/rss/News"
+        language: "english"
+      - name: "Malay Mail"
+        url: "https://www.malaymail.com/feed/rss/malaysia"
+        language: "english"
+      # DEAD/BROKEN — removed: Malaysiakini (HTML), NST (404),
+      # The Edge (HTML), Astro Awani (HTML), Berita Harian (404),
+      # Utusan (broken XML), Sin Chew, Nanyang, Tamil Nesan
+  reddit_rss:
+    enabled: true
+    feeds:
+      - name: "r/malaysia hot"
+        url: "https://www.reddit.com/r/malaysia/hot/.rss"
+        subreddit: "malaysia"
+      - name: "r/malaysia new"
+        url: "https://www.reddit.com/r/malaysia/new/.rss"
+        subreddit: "malaysia"
+      - name: "r/malaysia rising"
+        url: "https://www.reddit.com/r/malaysia/rising/.rss"
+        subreddit: "malaysia"
+      - name: "r/malaysians hot"
+        url: "https://www.reddit.com/r/malaysians/hot/.rss"
+        subreddit: "malaysians"
+      - name: "r/bolehland hot"
+        url: "https://www.reddit.com/r/bolehland/hot/.rss"
+        subreddit: "bolehland"
+  gdelt:
+    enabled: true
+    poll_interval_minutes: 30
+    country_filter: "MY"
+  google_trends:
+    enabled: false   # Disable for now — pytrends rate limiting is aggressive
+    poll_interval_minutes: 60
+    region: "MY"
+  parliament:
+    enabled: true
+    # Falls back to news RSS keyword filtering (parlimen.gov.my unreachable from cloud)
+  court:
+    enabled: true
+    # Falls back to news RSS keyword filtering (efiling unreachable from cloud)
+
+# Stream parameters
+streams:
+  volume_monitor:
+    cusum:
+      k: 0.5
+      h: 4.0
+      cooldown_hours: 2
+    bocpd:
+      hazard_lambda: 200
+      changepoint_threshold: 0.5
+      max_run_length: 500
+    stl:
+      daily_period: 96      # 24 hours * 4 (15-min windows)
+      weekly_period: 672     # 7 days * 96
+    baseline_window_days: 7
+    bucket_minutes: 15
+
+  cascade_tracker:
+    hawkes:
+      initial_mu: 1.0
+      initial_alpha: 0.5
+      initial_beta: 1.0
+    branching_ratio_thresholds:
+      normal: 0.5
+      elevated: 0.8
+      critical: 1.0
+    refit_interval_events: 100
+    refit_interval_minutes: 30
+    window_events: 500
+
+  polarization:
+    ethnic_weights:
+      malay: 0.69
+      chinese: 0.23
+      indian: 0.07
+      other: 0.01
+    er_alpha: 1.0
+    alert_threshold: 0.6
+    bimodality_threshold: 0.555
+    window_hours: 24
+
+  narrative_fragmentation:
+    jsd_alert_threshold: 0.3
+    tfidf_top_terms: 20
+    window_hours: 6
+    community_weights:
+      malay: 0.40
+      chinese: 0.25
+      english: 0.25
+      tamil: 0.10
+
+  network_bridge:
+    bridge_alert_threshold: 0.5
+    velocity_threshold: 0.01
+    window_hours: 24
+
+  silence_detector:
+    importance_threshold: 0.4
+    silence_threshold: 0.6
+
+# Fusion layer
+fusion:
+  prior_alpha: 1
+  prior_beta: 9
+  stream_weights:
+    volume_monitor: 0.15
+    cascade_tracker: 0.20
+    polarization: 0.20
+    narrative_fragmentation: 0.15
+    network_bridge: 0.10
+    silence_detector: 0.20
+  decay_rate_per_hour: 0.95
+  archive_threshold: 0.05
+  evidence_thresholds:
+    volume_severity: 0.5
+    cascade_n_star_strong: 0.8
+    cascade_n_star_weak: 0.5
+    polarization_er: 0.6
+    narrative_jsd: 0.3
+    bridge_score: 0.5
+    silence_score: 0.6
+    silence_importance: 0.5
+
+# Priority thresholds
+priority:
+  critical: 0.8
+  high: 0.6
+  medium: 0.4
+  low: 0.0
+
+# Logging
+logging:
+  level: "INFO"
+  rotation: "10 MB"
+  retention: "7 days"
+  log_dir: "radar/output/logs"
