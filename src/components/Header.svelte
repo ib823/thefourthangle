@@ -34,7 +34,7 @@
     <Logo size={28} />
     <span class="brand-text" style="font-size:14px;font-weight:700;color:#212529;letter-spacing:-0.01em;">The Fourth Angle</span>
     <span class="tagline-divider" style="width:1px;height:16px;background:#DEE2E6;margin:0 12px;"></span>
-    <span class="tagline-text" style="font-size:11px;font-weight:400;color:#6C757D;">The Real Minority</span>
+    <span class="tagline-text" style="font-size:11px;font-weight:400;color:#6C757D;">Daily bite-size clarity for smarter thinking and better questions.</span>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
     <a href="/about" style="font-size:11px;font-weight:600;color:#6C757D;text-decoration:none;padding:3px 8px;border-radius:8px;min-height:28px;display:flex;align-items:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#F1F3F5'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>About</a>

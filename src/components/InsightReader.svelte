@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import { CARD_TYPES } from '../data/issues';
   import { markStarted, markCompleted, updateProgress } from '../stores/reader';
+  import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
+  import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
+  import { haptic, stagger, tween, ease } from '../lib/animation';
+  import { lockScroll, unlockScroll } from '../lib/scroll-lock';
 
   interface Card {
     t: string;
@@ -29,11 +33,47 @@
   let { issue, onClose, onNext }: Props = $props();
 
   let current = $state(0);
-  // Reactions handled by SaveButton internally
   let completed = $state(false);
   let readCards = $state(new Set<number>([0]));
   let shareOpen = $state(false);
   let shareCardIndex: number | null = $state(null);
+  let showSwipeHint = $state(false);
+  let swipeHintFaded = $state(false);
+  let completionVisible = $state(false);
+  let completionButtonsVisible = $state<boolean[]>([]);
+
+  // Drag state - NOT reactive for perf (we use direct DOM manipulation during drag)
+  let isDragging = false;
+  let gestureDirection: 'horizontal' | 'vertical' | 'ambiguous' | 'undecided' = 'undecided';
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragDeltaX = 0;
+  let dragDeltaY = 0;
+  let activePointerId: number | null = null;
+  let crossedCommitThreshold = false;
+
+  // Animation cancellation
+  let cancelAnimation: (() => void) | null = null;
+  let animating = false;
+
+  // Reduced motion
+  let prefersReducedMotion = $state(false);
+
+  // Element refs
+  let overlayEl: HTMLDivElement | undefined = $state(undefined);
+  let cardEl: HTMLDivElement | undefined = $state(undefined);
+  let ghost1El: HTMLDivElement | undefined = $state(undefined);
+  let ghost2El: HTMLDivElement | undefined = $state(undefined);
+  let dotsContainerEl: HTMLDivElement | undefined = $state(undefined);
+  let cardAreaEl: HTMLDivElement | undefined = $state(undefined);
+
+  // Velocity tracker
+  const tracker = createVelocityTracker();
+
+  let card = $derived(issue.cards[current]);
+  let meta = $derived(CARD_TYPES[card?.t] ?? CARD_TYPES.hook);
+  let totalCards = $derived(issue.cards.length);
+  let progress = $derived(((current + 1) / totalCards) * 100);
 
   // Reset to first card when issue changes
   let lastIssueId = $state(issue.id);
@@ -45,29 +85,15 @@
       readCards = new Set([0]);
       shareOpen = false;
       shareCardIndex = null;
-      dragging = false;
-      dx = 0;
-      animDir = null;
+      isDragging = false;
+      dragDeltaX = 0;
       animating = false;
+      cancelAnimation?.();
+      cancelAnimation = null;
+      completionVisible = false;
+      completionButtonsVisible = [];
     }
   });
-
-  // Swipe state
-  let dragging = $state(false);
-  let startX = $state(0);
-  let dx = $state(0);
-
-  // Animation direction
-  let animDir = $state<'left' | 'right' | null>(null);
-  let animating = $state(false);
-
-  let overlayEl: HTMLDivElement | undefined = $state(undefined);
-
-  let card = $derived(issue.cards[current]);
-  let meta = $derived(CARD_TYPES[card?.t] ?? CARD_TYPES.hook);
-  let totalCards = $derived(issue.cards.length);
-  let progress = $derived(((current + 1) / totalCards) * 100);
-  let rotation = $derived(Math.max(-3, Math.min(3, dx * 0.012)));
 
   function cardLabel(c: Card): string {
     const m = CARD_TYPES[c.t] ?? CARD_TYPES.hook;
@@ -77,20 +103,242 @@
     return m.label;
   }
 
-  function goTo(index: number, direction: 'left' | 'right') {
+  // Find takeaway text (last view card)
+  let takeaway = $derived.by(() => {
+    for (let i = issue.cards.length - 1; i >= 0; i--) {
+      if (issue.cards[i].t === 'view') return issue.cards[i].big;
+    }
+    return issue.cards[issue.cards.length - 1].big;
+  });
+
+  // --- Swipe threshold logic ---
+  function getCardWidth(): number {
+    return cardEl?.offsetWidth ?? 340;
+  }
+
+  function isAtEdge(direction: 'left' | 'right'): boolean {
+    if (completed) return direction === 'left';
+    if (direction === 'left' && current >= totalCards - 1) return false; // can go to completion
+    if (direction === 'right' && current <= 0) return true;
+    return false;
+  }
+
+  function shouldCommit(dx: number, vx: number): 'left' | 'right' | null {
+    const absDx = Math.abs(dx);
+    const absVx = Math.abs(vx);
+    const width = getCardWidth();
+    const distanceThreshold = width * 0.15;
+
+    if (absVx > 500 || absDx > distanceThreshold) {
+      const direction = (vx !== 0 ? vx : dx) < 0 ? 'left' : 'right';
+      return direction;
+    }
+    return null;
+  }
+
+  // --- Direct DOM transforms during drag ---
+  function applyDragTransform(dx: number) {
+    if (!cardEl) return;
+
+    const width = getCardWidth();
+    const absDx = Math.abs(dx);
+    const rotation = Math.max(-8, Math.min(8, dx * 0.04));
+    const rotateY = dx * 0.015;
+    const scaleVal = 1.0 + absDx * 0.0001;
+
+    cardEl.style.transform = `translateX(${dx}px) rotate(${rotation}deg) rotateY(${rotateY}deg) scale(${scaleVal})`;
+
+    // Ghost card interpolation based on progress
+    const progressFrac = Math.min(absDx / (width * 0.5), 1);
+    if (ghost1El) {
+      const g1Scale = 0.97 + progressFrac * 0.03;
+      const g1TransY = 8 - progressFrac * 8;
+      ghost1El.style.transform = `scale(${g1Scale}) translateY(${g1TransY}px)`;
+    }
+    if (ghost2El) {
+      const g2Scale = 0.94 + progressFrac * 0.03;
+      const g2TransY = 16 - progressFrac * 8;
+      ghost2El.style.transform = `scale(${g2Scale}) translateY(${g2TransY}px)`;
+    }
+
+    // Dot interpolation
+    interpolateDots(dx);
+  }
+
+  function interpolateDots(dx: number) {
+    if (!dotsContainerEl || completed) return;
+    const width = getCardWidth();
+    const progressFrac = Math.min(Math.abs(dx) / (width * 0.3), 1);
+    const dots = dotsContainerEl.querySelectorAll('.dot');
+
+    const nextIndex = dx < 0 ? current + 1 : current - 1;
+    if (nextIndex < 0 || nextIndex >= totalCards) return;
+
+    dots.forEach((dot, i) => {
+      const el = dot as HTMLElement;
+      if (i === current) {
+        // Current dot shrinks
+        const w = 20 - progressFrac * 14;
+        el.style.width = `${w}px`;
+      } else if (i === nextIndex) {
+        // Next dot grows
+        const w = 6 + progressFrac * 14;
+        el.style.width = `${w}px`;
+      }
+    });
+  }
+
+  function resetDotStyles() {
+    if (!dotsContainerEl) return;
+    const dots = dotsContainerEl.querySelectorAll('.dot');
+    dots.forEach((dot) => {
+      (dot as HTMLElement).style.width = '';
+    });
+  }
+
+  function resetGhostStyles() {
+    if (ghost1El) ghost1El.style.transform = '';
+    if (ghost2El) ghost2El.style.transform = '';
+  }
+
+  // --- Navigation with spring physics ---
+  function goTo(index: number, direction: 'left' | 'right', initialVelocity = 0) {
     if (animating || index < 0 || index >= totalCards) return;
-    try { navigator.vibrate?.(10); } catch {}
+    haptic(5);
 
-    animDir = direction;
     animating = true;
-    current = index;
-    readCards = new Set([...readCards, index]);
-    updateProgress(issue.id, index + 1);
+    cancelAnimation?.();
 
-    setTimeout(() => {
+    const width = getCardWidth();
+    const exitTarget = direction === 'right' ? -width * 1.2 : width * 1.2;
+
+    // Exit animation
+    const startPos = dragDeltaX || 0;
+    const remaining = Math.abs(exitTarget - startPos);
+    const exitDuration = prefersReducedMotion ? 0 : Math.max(180, Math.min(350, remaining / width * 350));
+
+    const exitSpring = createSpring(startPos, {
+      stiffness: 600,
+      damping: 38,
+      mass: 1,
+      precision: 5,
+    });
+    exitSpring.velocity = initialVelocity;
+
+    cancelAnimation = animateSpring(exitSpring, exitTarget, (value) => {
+      if (cardEl) {
+        const rot = Math.max(-8, Math.min(8, value * 0.04));
+        cardEl.style.transform = `translateX(${value}px) rotate(${rot}deg)`;
+        cardEl.style.opacity = `${Math.max(0, 1 - Math.abs(value) / (width * 1.5))}`;
+      }
+    }, () => {
+      // Exit complete — switch card
+      current = index;
+      readCards = new Set([...readCards, index]);
+      updateProgress(issue.id, index + 1);
+
+      resetGhostStyles();
+      resetDotStyles();
+
+      // Enter animation
+      if (cardEl) {
+        const enterFrom = direction === 'right' ? 60 : -60;
+        cardEl.style.opacity = '1';
+
+        if (prefersReducedMotion) {
+          cardEl.style.transform = 'translateX(0) rotate(0deg)';
+          animating = false;
+          cancelAnimation = null;
+          return;
+        }
+
+        const enterSpring = createSpring(enterFrom, {
+          stiffness: 500,
+          damping: 26, // slight underdamping for overshoot
+          mass: 1,
+          precision: 0.5,
+        });
+
+        cancelAnimation = animateSpring(enterSpring, 0, (value) => {
+          if (cardEl) {
+            const rot = value * 0.02;
+            cardEl.style.transform = `translateX(${value}px) rotate(${rot}deg)`;
+          }
+        }, () => {
+          if (cardEl) {
+            cardEl.style.transform = '';
+          }
+          animating = false;
+          cancelAnimation = null;
+        });
+      } else {
+        animating = false;
+        cancelAnimation = null;
+      }
+    });
+  }
+
+  function snapBack(initialVelocity = 0) {
+    if (!cardEl) return;
+    animating = true;
+
+    if (prefersReducedMotion) {
+      cardEl.style.transform = '';
+      cardEl.style.transition = '';
+      resetGhostStyles();
+      resetDotStyles();
       animating = false;
-      animDir = null;
-    }, 300);
+      return;
+    }
+
+    const startPos = dragDeltaX;
+    const spring = createSpring(startPos, SPRING_SNAPPY);
+    spring.velocity = initialVelocity;
+
+    cancelAnimation = animateSpring(spring, 0, (value) => {
+      if (cardEl) {
+        const rot = Math.max(-8, Math.min(8, value * 0.04));
+        const sc = 1.0 + Math.abs(value) * 0.0001;
+        cardEl.style.transform = `translateX(${value}px) rotate(${rot}deg) scale(${sc})`;
+      }
+    }, () => {
+      if (cardEl) {
+        cardEl.style.transform = '';
+      }
+      resetGhostStyles();
+      resetDotStyles();
+      animating = false;
+      cancelAnimation = null;
+    });
+  }
+
+  function rubberBandBack() {
+    if (!cardEl) return;
+    animating = true;
+
+    const startPos = dragDeltaX;
+    // Use SPRING_RUBBER with omega=18 equivalent
+    const spring = createSpring(startPos, {
+      stiffness: 324, // omega^2 * mass = 18^2 = 324
+      damping: 36,
+      mass: 1,
+      precision: 0.5,
+    });
+
+    cancelAnimation = animateSpring(spring, 0, (value) => {
+      if (cardEl) {
+        const rot = Math.max(-8, Math.min(8, value * 0.04));
+        cardEl.style.transform = `translateX(${value}px) rotate(${rot}deg)`;
+      }
+    }, () => {
+      if (cardEl) {
+        cardEl.style.transform = '';
+      }
+      resetGhostStyles();
+      resetDotStyles();
+      animating = false;
+      cancelAnimation = null;
+    });
   }
 
   function next() {
@@ -104,6 +352,8 @@
   function prev() {
     if (completed) {
       completed = false;
+      completionVisible = false;
+      completionButtonsVisible = [];
       goTo(totalCards - 1, 'left');
       return;
     }
@@ -113,46 +363,248 @@
   function showCompletion() {
     completed = true;
     markCompleted(issue.id);
+    completionVisible = true;
+    // Stagger buttons in
+    const btnCount = onNext ? 2 : 2; // share + next/done
+    completionButtonsVisible = [];
+    stagger(btnCount, 120, 500, (i) => {
+      completionButtonsVisible = [...completionButtonsVisible, true];
+    });
   }
 
   function restart() {
     completed = false;
+    completionVisible = false;
+    completionButtonsVisible = [];
     current = 0;
     readCards = new Set([0]);
-    animDir = null;
     animating = false;
+    cancelAnimation?.();
+    cancelAnimation = null;
+    if (cardEl) cardEl.style.transform = '';
   }
 
+  // --- Dismiss overlay via vertical drag ---
+  let verticalDismissActive = false;
 
-  // Pointer handlers
+  function handleVerticalDismiss(dy: number) {
+    if (!overlayEl) return;
+    const absDy = Math.abs(dy);
+    const opacity = Math.max(0, 1 - absDy / 400);
+    overlayEl.style.transform = `translateY(${Math.max(0, dy)}px)`;
+    overlayEl.style.opacity = `${opacity}`;
+  }
+
+  function finishVerticalDismiss(dy: number) {
+    if (dy > 200) {
+      onClose();
+    } else if (overlayEl) {
+      // Snap back
+      overlayEl.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+      overlayEl.style.transform = '';
+      overlayEl.style.opacity = '';
+      setTimeout(() => {
+        if (overlayEl) overlayEl.style.transition = '';
+      }, 260);
+    }
+    verticalDismissActive = false;
+  }
+
+  // --- Pointer event handlers ---
   function onPointerDown(e: PointerEvent) {
-    if (animating) return;
-    // Skip if target is a button or inside a button
-    if ((e.target as HTMLElement)?.closest('button')) return;
-    dragging = true;
-    startX = e.clientX;
-    dx = 0;
+    if (animating || completed) return;
+    if (e.button !== 0) return;
+    if ((e.target as HTMLElement)?.closest('button, a, input')) return;
+
+    isDragging = true;
+    gestureDirection = 'undecided';
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragDeltaX = 0;
+    dragDeltaY = 0;
+    activePointerId = e.pointerId;
+    crossedCommitThreshold = false;
+    verticalDismissActive = false;
+
+    tracker.reset();
+    tracker.push(e.clientX, e.clientY);
+
+    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId); } catch {}
+
+    // Remove CSS transitions during drag
+    if (cardEl) {
+      cardEl.style.transition = 'none';
+    }
   }
 
   function onPointerMove(e: PointerEvent) {
-    if (!dragging) return;
-    dx = e.clientX - startX;
+    if (!isDragging || e.pointerId !== activePointerId) return;
+
+    const dx = e.clientX - dragStartX;
+    const dy = e.clientY - dragStartY;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    tracker.push(e.clientX, e.clientY);
+
+    // Gesture disambiguation
+    if (gestureDirection === 'undecided') {
+      if (absDx < 3 && absDy < 3) return; // dead zone
+
+      const classification = classifyGesture(dx, dy);
+      if (classification === 'vertical') {
+        gestureDirection = 'vertical';
+        verticalDismissActive = true;
+        return;
+      }
+      if (classification === 'ambiguous') {
+        if (absDx < 15 && absDy < 15) return; // wait for more data
+        const reclass = classifyGesture(dx, dy);
+        if (reclass === 'vertical') {
+          gestureDirection = 'vertical';
+          verticalDismissActive = true;
+          return;
+        }
+        if (reclass === 'ambiguous') {
+          gestureDirection = 'vertical';
+          verticalDismissActive = true;
+          return;
+        }
+      }
+      gestureDirection = 'horizontal';
+    }
+
+    if (gestureDirection === 'vertical') {
+      dragDeltaY = dy;
+      handleVerticalDismiss(dy);
+      return;
+    }
+
+    if (gestureDirection !== 'horizontal') return;
+
+    e.preventDefault();
+
+    const width = getCardWidth();
+    const maxRubber = width * 0.25;
+
+    // Check if at edge (rubber band)
+    const swipingRight = dx > 0;
+    const swipingLeft = dx < 0;
+    const atLeftEdge = swipingRight && current <= 0 && !completed;
+    const atRightEdge = swipingLeft && current >= totalCards - 1 && !completed;
+
+    if (atLeftEdge || atRightEdge) {
+      dragDeltaX = rubberBand(dx, maxRubber);
+    } else {
+      dragDeltaX = dx;
+    }
+
+    // Check commit threshold for haptic
+    const commitDist = width * 0.15;
+    if (!crossedCommitThreshold && Math.abs(dragDeltaX) > commitDist) {
+      crossedCommitThreshold = true;
+      haptic(5);
+    } else if (crossedCommitThreshold && Math.abs(dragDeltaX) < commitDist * 0.8) {
+      crossedCommitThreshold = false;
+    }
+
+    applyDragTransform(dragDeltaX);
   }
 
-  function onPointerUp() {
-    if (!dragging) return;
-    dragging = false;
+  function onPointerUp(e: PointerEvent) {
+    if (!isDragging || e.pointerId !== activePointerId) return;
 
-    if (dx < -60) {
-      next();
-    } else if (dx > 60) {
-      prev();
+    isDragging = false;
+    activePointerId = null;
+
+    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
+
+    // Restore transition
+    if (cardEl) {
+      cardEl.style.transition = '';
     }
-    dx = 0;
+
+    // Vertical dismiss
+    if (gestureDirection === 'vertical' && verticalDismissActive) {
+      finishVerticalDismiss(dragDeltaY);
+      gestureDirection = 'undecided';
+      return;
+    }
+
+    if (gestureDirection !== 'horizontal') {
+      gestureDirection = 'undecided';
+      return;
+    }
+
+    const { vx } = tracker.getVelocity();
+    const direction = shouldCommit(dragDeltaX, vx);
+
+    if (direction) {
+      // Check edge cases
+      const atLeftEdge = direction === 'right' && current <= 0 && !completed;
+      const atRightEdge = direction === 'left' && current >= totalCards - 1;
+
+      if (atLeftEdge) {
+        rubberBandBack();
+      } else if (atRightEdge) {
+        // Go to completion
+        showCompletion();
+        snapBack(vx);
+      } else if (direction === 'left') {
+        if (current < totalCards - 1) {
+          goTo(current + 1, 'right', vx);
+        } else {
+          showCompletion();
+          snapBack(vx);
+        }
+      } else {
+        // right swipe = go back
+        if (completed) {
+          completed = false;
+          completionVisible = false;
+          goTo(totalCards - 1, 'left', vx);
+        } else if (current > 0) {
+          goTo(current - 1, 'left', vx);
+        } else {
+          rubberBandBack();
+        }
+      }
+    } else {
+      // Snap back
+      snapBack(vx);
+    }
+
+    dragDeltaX = 0;
+    gestureDirection = 'undecided';
+  }
+
+  function onPointerCancel(e: PointerEvent) {
+    if (e.pointerId !== activePointerId) return;
+    isDragging = false;
+    activePointerId = null;
+    gestureDirection = 'undecided';
+    if (cardEl) {
+      cardEl.style.transition = '';
+    }
+    snapBack();
+    dragDeltaX = 0;
+  }
+
+  // Multi-touch cancellation
+  function onTouchStart(e: TouchEvent) {
+    if (e.touches.length > 1 && isDragging) {
+      isDragging = false;
+      activePointerId = null;
+      gestureDirection = 'undecided';
+      if (cardEl) cardEl.style.transition = '';
+      snapBack();
+      dragDeltaX = 0;
+    }
   }
 
   // Keyboard handler
   function onKeyDown(e: KeyboardEvent) {
+    if (shareOpen) return;
     if (e.key === 'ArrowRight') {
       e.preventDefault();
       next();
@@ -165,35 +617,61 @@
     }
   }
 
+  // --- Swipe hint ---
+  function maybeShowSwipeHint() {
+    if (typeof sessionStorage === 'undefined') return;
+    const key = 'tfa_swipe_hint_shown';
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+
+    showSwipeHint = true;
+    let iterCount = 0;
+    const interval = setInterval(() => {
+      iterCount++;
+      if (iterCount >= 3) {
+        clearInterval(interval);
+        swipeHintFaded = true;
+        setTimeout(() => { showSwipeHint = false; }, 400);
+      }
+    }, 1500);
+  }
+
+  // --- Content scroll overflow detection ---
+  let contentOverflows = $state(false);
+  function checkContentOverflow() {
+    const el = cardEl?.querySelector('.card-center');
+    if (el) {
+      contentOverflows = el.scrollHeight > el.clientHeight + 2;
+    }
+  }
+
   onMount(() => {
     overlayEl?.focus();
     markStarted(issue.id);
+    lockScroll();
+
+    // Check reduced motion preference
+    if (typeof window !== 'undefined') {
+      prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    maybeShowSwipeHint();
+
+    // Check overflow after render
+    requestAnimationFrame(checkContentOverflow);
   });
 
-  // Animation transform for the card
-  let cardTransform = $derived.by(() => {
-    if (dragging) {
-      return `translateX(${dx}px) rotate(${rotation}deg)`;
-    }
-    if (animating && animDir === 'right') {
-      return 'translateX(0) rotate(0deg)';
-    }
-    if (animating && animDir === 'left') {
-      return 'translateX(0) rotate(0deg)';
-    }
-    return 'translateX(0) rotate(0deg)';
+  onDestroy(() => {
+    unlockScroll();
+    cancelAnimation?.();
   });
 
-  let cardAnimClass = $derived(
-    animating ? (animDir === 'right' ? 'anim-from-right' : 'anim-from-left') : ''
-  );
-
-  // Find takeaway text (last view card)
-  let takeaway = $derived.by(() => {
-    for (let i = issue.cards.length - 1; i >= 0; i--) {
-      if (issue.cards[i].t === 'view') return issue.cards[i].big;
-    }
-    return issue.cards[issue.cards.length - 1].big;
+  // Recheck content overflow when card changes
+  $effect(() => {
+    // Depend on current card
+    void current;
+    void completed;
+    requestAnimationFrame(checkContentOverflow);
   });
 </script>
 
@@ -202,6 +680,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
   class="overlay"
+  class:reduced-motion={prefersReducedMotion}
   bind:this={overlayEl}
   tabindex="0"
   role="dialog"
@@ -221,15 +700,19 @@
     <button class="close-btn" onclick={onClose} aria-label="Close">&times;</button>
   </div>
 
-  <!-- Headline + Opinion bar -->
+  <!-- Headline -->
   <div class="headline-area">
     <h2 class="headline">{issue.headline}</h2>
   </div>
 
   <!-- Card area -->
-  <div class="card-area">
+  <div
+    class="card-area"
+    bind:this={cardAreaEl}
+    ontouchstart={onTouchStart}
+  >
     {#if completed}
-      <div class="card completion-card">
+      <div class="card completion-card" class:completion-visible={completionVisible}>
         <div class="completion-inner">
           <div class="check-circle">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -239,28 +722,32 @@
           <p class="completion-title">All {totalCards} perspectives</p>
           <p class="completion-takeaway">{takeaway}</p>
           <div class="completion-buttons">
-            <button class="btn-share" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
-            {#if onNext}
-              <button class="btn-next" onclick={onNext}>Next topic</button>
-            {:else}
-              <button class="btn-done" onclick={onClose}>Done</button>
+            {#if completionButtonsVisible.length > 0}
+              <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
+            {/if}
+            {#if completionButtonsVisible.length > 1}
+              {#if onNext}
+                <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
+              {:else}
+                <button class="btn-done completion-btn-enter" onclick={onClose}>Done</button>
+              {/if}
             {/if}
           </div>
         </div>
       </div>
     {:else}
       <!-- Ghost cards -->
-      <div class="ghost ghost-2"></div>
-      <div class="ghost ghost-1"></div>
+      <div class="ghost ghost-2" bind:this={ghost2El}></div>
+      <div class="ghost ghost-1" bind:this={ghost1El}></div>
 
       <!-- Active card -->
       <div
-        class="card active-card {cardAnimClass}"
-        style="transform:{cardTransform};"
+        class="card active-card"
+        bind:this={cardEl}
         onpointerdown={onPointerDown}
         onpointermove={onPointerMove}
         onpointerup={onPointerUp}
-        onpointercancel={onPointerUp}
+        onpointercancel={onPointerCancel}
         role="group"
         aria-label="Card {current + 1} of {totalCards}"
       >
@@ -279,16 +766,21 @@
         </div>
 
         <!-- Card center -->
-        <div class="card-center">
+        <div class="card-center" class:has-overflow={contentOverflows}>
           <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;">{card.big}</p>
           {#if card.sub}
             <p class="sub-text">{card.sub}</p>
           {/if}
         </div>
+        {#if contentOverflows}
+          <div class="content-fade-gradient"></div>
+        {/if}
 
         <!-- Card bottom -->
         <div class="card-bottom">
-          {#if current === totalCards - 2 && !completed}
+          {#if showSwipeHint && current === 0}
+            <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe to continue</span>
+          {:else if current === totalCards - 2 && !completed}
             <span style="font-size:12px;font-weight:600;color:#6C757D;">Almost done</span>
           {:else if current === totalCards - 1 && !completed}
             <span style="font-size:12px;font-weight:600;color:#6C757D;">Last one</span>
@@ -299,7 +791,7 @@
   </div>
 
   <!-- Dot navigation -->
-  <div class="dots">
+  <div class="dots" bind:this={dotsContainerEl}>
     {#each issue.cards as _, i}
       <button
         class="dot"
@@ -341,6 +833,7 @@
     outline: none;
     overflow: hidden;
     touch-action: none;
+    will-change: transform, opacity;
   }
 
   .progress-track {
@@ -407,10 +900,6 @@
     line-height: 1.4;
   }
 
-  .opinion-bar-wrap {
-    margin-bottom: 4px;
-  }
-
   .card-area {
     flex: 1;
     width: 100%;
@@ -418,7 +907,8 @@
     padding: 12px 16px 4px;
     position: relative;
     min-height: 0;
-    touch-action: pan-x;
+    perspective: 1000px;
+    touch-action: none;
   }
 
   .ghost {
@@ -431,6 +921,7 @@
     background: #fff;
     border-radius: 20px;
     pointer-events: none;
+    will-change: transform;
   }
 
   .ghost-2 {
@@ -458,51 +949,20 @@
     padding: 20px 24px;
     display: flex;
     flex-direction: column;
-    touch-action: pan-y;
     user-select: none;
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
   }
 
   .active-card {
     cursor: grab;
-    transition: transform 0.3s cubic-bezier(.25,.1,.25,1);
+    touch-action: none;
   }
 
   .active-card:active {
     cursor: grabbing;
-    transition: none;
-  }
-
-  .card.anim-from-right {
-    animation: slideFromRight 350ms cubic-bezier(.25,.1,.25,1) forwards;
-  }
-
-  .card.anim-from-left {
-    animation: slideFromLeft 350ms cubic-bezier(.25,.1,.25,1) forwards;
-  }
-
-  @keyframes slideFromRight {
-    from {
-      transform: translateX(60px) rotate(1.5deg);
-      opacity: 0.7;
-    }
-    to {
-      transform: translateX(0) rotate(0deg);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideFromLeft {
-    from {
-      transform: translateX(-60px) rotate(-1.5deg);
-      opacity: 0.7;
-    }
-    to {
-      transform: translateX(0) rotate(0deg);
-      opacity: 1;
-    }
   }
 
   .card-top {
@@ -542,6 +1002,24 @@
     gap: 14px;
     min-height: 0;
     overflow-y: auto;
+    overscroll-behavior-y: contain;
+    position: relative;
+  }
+
+  .card-center.has-overflow {
+    mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+  }
+
+  .content-fade-gradient {
+    position: absolute;
+    bottom: 40px;
+    left: 24px;
+    right: 24px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, #fff);
+    pointer-events: none;
+    z-index: 4;
   }
 
   .big-text {
@@ -570,6 +1048,11 @@
     user-select: none;
     display: inline-block;
     animation: nudgeHint 1.5s ease-in-out infinite;
+    transition: opacity 0.4s ease;
+  }
+
+  .swipe-hint-fade {
+    opacity: 0;
   }
 
   @keyframes nudgeHint {
@@ -609,6 +1092,14 @@
     justify-content: center;
     text-align: center;
     max-height: 370px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .completion-card.completion-visible {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .completion-inner {
@@ -674,6 +1165,21 @@
     margin-top: 8px;
   }
 
+  .completion-btn-enter {
+    animation: fadeSlideUp 0.3s ease both;
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .btn-done {
     padding: 10px 28px;
     border-radius: 12px;
@@ -720,5 +1226,32 @@
 
   .btn-next:hover {
     background: #343A40;
+  }
+
+  /* Reduced motion overrides */
+  .reduced-motion .check-circle,
+  .reduced-motion .completion-btn-enter {
+    animation: none;
+  }
+
+  .reduced-motion .check-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .reduced-motion .swipe-hint {
+    animation: none;
+  }
+
+  .reduced-motion .completion-card {
+    transition: none;
+  }
+
+  .reduced-motion .progress-fill {
+    transition: none;
+  }
+
+  .reduced-motion .dot {
+    transition: none;
   }
 </style>

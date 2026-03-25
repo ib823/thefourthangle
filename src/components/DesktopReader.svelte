@@ -5,6 +5,7 @@
   import { CARD_TYPES, opinionLabel } from '../data/issues';
   import { markStarted, markCompleted } from '../stores/reader';
   import SaveButton from './SaveButton.svelte';
+  import ShareModal from './ShareModal.svelte';
 
   interface Props {
     issue: any;
@@ -117,7 +118,13 @@
 <div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:#FFFFFF;">
   <div style="max-width:680px;margin:0 auto;padding:40px 40px;">
     <!-- Reader header -->
-    <h1 style="font-size:32px;font-weight:800;color:#212529;letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
+    <div style="display:flex;align-items:flex-start;gap:16px;">
+      <h1 style="flex:1;font-size:32px;font-weight:800;color:#212529;letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
+      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid #E9ECEF;background:#F8F9FA;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:36px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }} aria-label="Share this issue">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <span style="font-size:12px;font-weight:600;color:#6C757D;">Share</span>
+      </button>
+    </div>
     <p style="font-size:16px;color:#495057;font-weight:450;line-height:1.6;margin:16px 0 0;">{issue.context}</p>
 
     <!-- Opinion Shift -->
@@ -169,15 +176,14 @@
     <!-- Completion -->
     <div style="margin-top:16px;">
       <div style="height:1px;background:#2B8A3E;margin-bottom:24px;border-radius:1px;width:50%;margin:0 auto 24px;"></div>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#51CF66,#37B24D);display:flex;align-items:center;justify-content:center;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span style="font-size:14px;font-weight:600;color:#212529;">All 6 perspectives read</span>
-      </div>
-      {#if viewCard}
-        <p style="font-size:16px;color:#495057;font-style:italic;line-height:1.6;margin:0 0 24px;padding-left:16px;border-left:3px solid #7048E8;">{viewCard.big}</p>
-      {/if}
+      <!-- Share -->
+      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:#F8F9FA;color:#6C757D;border:1px solid #E9ECEF;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
+        onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }}
+        onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share this issue
+      </button>
+
       <!-- Copy for verification -->
       <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:#F8F9FA;color:{copied ? '#2B8A3E' : '#6C757D'};border:1px solid {copied ? '#B2F2BB' : '#E9ECEF'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
         onmouseenter={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }}
@@ -188,18 +194,12 @@
         {/if}
       </button>
 
-      <!-- Next issue (not user-selectable — excluded from copy) -->
-      <div style="user-select:none;-webkit-user-select:none;">
-        {#if onNext && nextHeadline}
-          <button onclick={onNext} style="width:100%;padding:14px 20px;background:#212529;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;text-align:left;transition:background 0.15s ease;"
-            onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#343A40'; }}
-            onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#212529'; }}>
-            Next: {nextHeadline}
-          </button>
-        {/if}
-      </div>
     </div>
 
     <div style="height:60px;"></div>
   </div>
 </div>
+
+{#if shareOpen}
+  <ShareModal {issue} cardIndex={null} onClose={() => { shareOpen = false; }} />
+{/if}
