@@ -1,0 +1,111 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "\"Justice is served\" vs \"political persecution\" — the two dominant framings of Najib's 1MDB-Tanore conviction",
+      "sub": "Both framings reduce a RM2.27 billion institutional failure to a binary about one man, ignoring the systemic gaps that made 1MDB possible and the RM42 billion in public debt Malaysians are still paying."
+    },
+    {
+      "t": "fact",
+      "lens": "legal",
+      "h": "The court found Najib was the apex — but the system let him be",
+      "s": "Judge Sequerah's 7-year, 76-witness trial concluded Najib had an 'unmistakable bond' with Jho Low, who acted as his 'proxy, intermediary, and facilitator.' The four Saudi donation letters were declared forgeries. The defence's central narrative — that RM2.27 billion was a gift from Saudi Arabia — was rejected as having 'no merit.'",
+      "d": "The conviction rests on Section 23(1) of the MACC Act 2009 (abuse of power for gratification) and the AMLATFPUAA 2001 (money laundering). The statutory minimum fine alone — five times the gratification — produces the staggering RM11.38 billion figure. But the legal architecture that enabled this is equally revealing: as 1MDB's sole shareholder via the Finance Minister role, Najib had approval authority under the company's Article 117. The defence argued this was procedurally lawful. The prosecution countered that the power was exercised corruptly. The judge agreed, finding the evidence 'cold, hard, and incontrovertible.' The appeal, filed December 30, will test whether the Court of Appeal reads the same evidence differently — a process that could take years. Meanwhile, the Anti-Money Laundering Act's forfeiture provisions require Najib to return RM2.08 billion or face an additional 2.5 years imprisonment."
+    },
+    {
+      "t": "fact",
+      "lens": "economic",
+      "h": "RM42 billion paid, RM9.7 billion still owed — the bill that outlasts every politician",
+      "s": "While attention focuses on Najib's sentence, the Malaysian government has already paid RM42 billion in 1MDB-related debt servicing. An additional RM9.7 billion remains, with bonds maturing as late as 2039. PM Anwar himself stated in December 2025 that 1MDB remains 'the government's biggest debt.'",
+      "d": "The US DOJ documented US$4.5 billion misappropriated from 1MDB between 2009 and 2015 — funding the Wolf of Wall Street film, a US$250 million superyacht, Beverly Hills mansions, and Van Gogh paintings. The DOJ has recovered or repatriated over US$1.4 billion to Malaysia. But the total debt burden assumed by the government — including bond obligations, interest, and settlements — dwarfs the amounts stolen. For context, Malaysia's 2025 education budget was approximately RM64 billion. The 1MDB debt serviced to date represents roughly 66% of one year's entire education spending. These are schools not built, hospitals not upgraded, subsidies not extended. The B40 — the bottom 40% of Malaysian households — bear this cost indirectly through constrained fiscal space, regardless of whether they voted for or against Najib."
+    },
+    {
+      "t": "fact",
+      "lens": "social",
+      "h": "UMNO's dilemma: party loyalty versus coalition survival",
+      "s": "The verdict triggered fury within UMNO. Senior figures called the conviction an 'affront' and demanded withdrawal from PM Anwar's unity government. On January 6, 2025, at least 3,000 supporters from UMNO, PAS, and Bersatu rallied at the Palace of Justice with 'Justice for Bossku' banners.",
+      "d": "Yet UMNO president Zahid Hamidi chose to stay in the coalition, seeking Najib's release through legal and pardon channels rather than collapsing the government. This calculus reflects UMNO's structural weakness: the party needs government resources and patronage networks to survive electorally, but its grassroots — energised by the Bossku movement and Najib's sons' rising UMNO positions — demand visible loyalty to their imprisoned former leader. The December 22 rejection of the royal addendum for house arrest (the court ruled it unconstitutional without Pardons Board deliberation under Article 42) closed one pathway. Anwar called for calm, urging 'full patience and wisdom.' Civil society groups, led by C4 Centre's Cynthia Gabriel, instead demanded structural reforms: GLC governance overhaul, political financing regulation, and Jho Low's extradition from China. The question is whether the verdict catalyses reform or merely reshuffles the same political chess pieces."
+    },
+    {
+      "t": "reframe",
+      "h": "The man is convicted. The machine that made him possible is not.",
+      "text": "The 1MDB-Tanore verdict is legally significant — 25 charges, RM11.38 billion in fines, a 7-year trial with 76 witnesses. But the structures that enabled one person to channel RM2.27 billion through personal accounts remain largely intact. The Finance Minister still appoints 1MDB-type entity boards. Political financing remains unregulated. GLC governance reforms proposed by C4 Centre are unenacted. Jho Low remains free, reportedly in China. The prosecution proved Najib's guilt. Nobody has yet proven the system will prevent the next Najib. The question Malaysians deserve answered is not whether this man is guilty — the court has spoken — but whether the institutional architecture that permitted a sovereign wealth fund to become a personal ATM has been dismantled or merely embarrassed."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "A conviction of this magnitude — the largest financial corruption case in Malaysian history — matters. It demonstrates that even a sitting prime minister can face legal consequences for the misuse of public funds. That is not trivial in a region where impunity for leaders is the norm. But a conviction is not a reform. The RM42 billion in debt remains. The fiscal constraints on B40 services remain. UMNO's survival instinct — currently channeled into pardon campaigns rather than institutional accountability — remains the dominant political force shaping what comes next. Malaysians across all communities now face a choice: treat this as a conclusion to the 1MDB chapter, or treat it as the evidence base for demanding structural change to the systems of power, patronage, and oversight that no single verdict can fix."
+    }
+  ],
+  "sources": "KL High Court judgment (Dec 26, 2025), MACC Act 2009 Section 23(1), AMLATFPUAA 2001, Al Jazeera, Malay Mail, The Edge Malaysia, Bloomberg, SCMP, CNN, PBS, FMT, Nikkei Asia, US DOJ civil forfeiture filings, IRS repatriation records, MOF debt figures (Ahmad Maslan statement), C4 Centre statements, Borneo Post, The Diplomat, Britannica, Malaysiakini, The Star",
+  "confidence": "High — Court findings are documented in a public judgment after 7 years and 76 witnesses. Financial figures verified across DOJ, MOF, and multiple international outlets. Political dynamics (UMNO position, coalition tensions) verified across SCMP, Nikkei, FMT. Appeal outcome is uncertain and explicitly hedged.",
+  "lenses_used": ["legal", "economic", "social"],
+  "lenses_applicable_but_unused": ["historical", "critical", "theological"]
+}

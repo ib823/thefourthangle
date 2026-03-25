@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verify Content — The Fourth Angle</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;background:#F8F9FA;color:#212529;min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:600px;margin:0 auto;padding:32px 20px 60px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#868E96;text-decoration:none;margin-bottom:24px;min-height:44px}
+.back:hover{color:#495057}
+.back svg{width:16px;height:16px}
+h1{font-size:24px;font-weight:800;color:#212529;letter-spacing:-0.02em;margin-bottom:8px}
+.intro{font-size:15px;color:#495057;line-height:1.6;margin-bottom:24px}
+.warning{font-size:13px;color:#E03131;background:#FFF5F5;border:1px solid #FFC9C9;border-radius:8px;padding:12px 16px;line-height:1.5;margin-bottom:24px}
+.card{background:#FFFFFF;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid #F1F3F5}
+.card h2{font-size:14px;font-weight:700;margin-bottom:4px;color:#212529}
+.card .desc{font-size:13px;color:#495057;line-height:1.5;margin-bottom:16px}
+label{display:block;font-size:12px;font-weight:600;color:#868E96;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+textarea{width:100%;border:1px solid #E9ECEF;border-radius:8px;padding:12px;font-family:inherit;font-size:13px;background:#F8F9FA;color:#212529;resize:vertical;min-height:200px;line-height:1.6;transition:border-color 0.15s ease}
+textarea:focus{outline:none;border-color:#1971C2}
+button.primary{background:#212529;color:#FFFFFF;border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;margin-top:12px;transition:background 0.15s ease;min-height:44px}
+button.primary:hover{background:#343A40}
+.result{margin-top:16px;padding:16px;border-radius:12px;font-size:14px;line-height:1.5}
+.result.ok{background:#EBFBEE;color:#2B8A3E;border:1px solid #B2F2BB}
+.result.ok strong{color:#1B5E20}
+.result.fail{background:#FFF5F5;color:#E03131;border:1px solid #FFC9C9}
+.result.fail strong{color:#B71C1C}
+.result.hidden{display:none}
+.steps{margin-bottom:24px}
+.step{display:flex;gap:12px;margin-bottom:12px}
+.step:last-child{margin-bottom:0}
+.step-num{width:24px;height:24px;border-radius:50%;background:#212529;color:#FFFFFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:13px;color:#495057;line-height:1.5}
+.step-text strong{color:#212529}
+hr{border:none;border-top:1px solid #F1F3F5;margin:20px 0}
+.note{font-size:12px;color:#868E96;line-height:1.5}
+a{color:#1971C2;text-decoration:none}
+a:hover{text-decoration:underline}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 8px;border-radius:4px;margin-bottom:16px}
+.badge-green{color:#2B8A3E;background:#EBFBEE}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="/" class="back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+
+  <h1>Is this content real?</h1>
+  <p class="intro">If you are reading content that claims to be from The Fourth Angle — on any website — you can verify it here.</p>
+
+  <div class="warning">
+    <strong>Why this matters:</strong> Anyone can copy our design and publish biased content under our name. This tool is the only way to prove whether content genuinely came from us. A fake site cannot forge our cryptographic signature.
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>On the desktop reader,</strong> click the "Copy for verification" button at the bottom of any issue. This copies the full content.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Paste it below.</strong> The tool computes a unique fingerprint from the content and checks it against our published signatures.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>If it says AUTHENTIC,</strong> the content was published by The Fourth Angle and has not been modified. If it fails, the content is fake or tampered with.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Verify content</h2>
+    <p class="desc">Paste the full content of an issue. Use the "Copy for verification" button on the desktop reader, or select all visible text from headline through the final card.</p>
+    <label for="content-input">Issue content</label>
+    <textarea id="content-input" placeholder="Paste the full issue content here..."></textarea>
+    <button class="primary" onclick="verifyContent()">Verify this content</button>
+    <div class="result hidden" id="result"></div>
+  </div>
+
+  <hr>
+
+  <div class="card">
+    <h2>How it works</h2>
+    <p class="note" style="margin-bottom:0">Every issue is signed with an Ed25519 private key that only The Fourth Angle holds. The signature is mathematically tied to the exact content — if even one word changes, verification fails. A fake site cannot produce a valid signature because they do not have our private key. This page works entirely offline. You can save it and verify content without an internet connection.</p>
+  </div>
+
+  <div class="badge badge-green">Works offline — no data leaves your device</div>
+</div>
+
+<script>
+const PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAeEr0UCKu2NM+/yZ6Ls8VgU7tLUGL/kvh7Z/NGJ/2oZ0=
+-----END PUBLIC KEY-----`;
+
+const SIGNED_FINGERPRINTS = SIGNATURES_PLACEHOLDER;
+
+function pemToArrayBuffer(pem) {
+  const b64 = pem.replace(/-----[^-]+-----/g, '').replace(/\s/g, '');
+  const bin = atob(b64);
+  const buf = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+  return buf.buffer;
+}
+
+async function getPublicKey() {
+  return crypto.subtle.importKey('spki', pemToArrayBuffer(PUBLIC_KEY_PEM), { name: 'Ed25519' }, false, ['verify']);
+}
+
+async function sha256hex(text) {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function normalizeText(raw) {
+  return raw.split('\n').map(l => l.trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+async function verifyContent() {
+  const raw = document.getElementById('content-input').value;
+  const resultEl = document.getElementById('result');
+
+  if (!raw.trim()) {
+    resultEl.className = 'result fail';
+    resultEl.innerHTML = '<strong>Nothing to verify.</strong> Paste the full content of an issue.';
+    return;
+  }
+
+  const normalized = normalizeText(raw);
+  const fingerprint = await sha256hex(normalized);
+
+  const match = SIGNED_FINGERPRINTS.find(s => s.fp === fingerprint);
+
+  if (match) {
+    try {
+      const key = await getPublicKey();
+      const sigBin = Uint8Array.from(atob(match.sig), c => c.charCodeAt(0));
+      const data = new TextEncoder().encode(match.fp);
+      const valid = await crypto.subtle.verify('Ed25519', key, sigBin, data);
+
+      if (valid) {
+        resultEl.className = 'result ok';
+        resultEl.innerHTML = '<strong>AUTHENTIC</strong> — This content was published by The Fourth Angle.';
+      } else {
+        resultEl.className = 'result fail';
+        resultEl.innerHTML = '<strong>SIGNATURE INVALID</strong> — Fingerprint matches but signature failed.';
+      }
+    } catch (e) {
+      resultEl.className = 'result fail';
+      resultEl.innerHTML = '<strong>VERIFICATION ERROR</strong> — ' + e.message;
+    }
+  } else {
+    resultEl.className = 'result fail';
+    resultEl.innerHTML = '<strong>NOT FOUND</strong> — This content does not match any issue published by The Fourth Angle.';
+  }
+}
+</script>
+</body>
+</html>

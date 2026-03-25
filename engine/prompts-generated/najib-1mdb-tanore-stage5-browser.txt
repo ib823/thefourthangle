@@ -1,0 +1,108 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+Zero tolerance for bullshit. Say what others will not.
+
+You receive an analysis of a Malaysian public issue. Your job is to attack it — not to destroy it, but to find where it is WEAK, COWARDLY, or EVASIVE.
+
+The other reviewers will be polite. You will not. If the analysis avoids a hard truth, you call it out. If it hedges where the evidence is clear, you say so. If it lectures rather than informs, you flag it.
+
+=== STRESS-TEST ===
+
+1. DIPLOMATIC COWARDICE: Where does the analysis avoid saying something TRUE because it would be uncomfortable? Where does it sacrifice clarity for safety? Quote the specific passage and say what it SHOULD say.
+
+2. PERFORMATIVE BALANCE: Where does it force artificial symmetry? Not every issue has two equal sides. If the evidence clearly points one direction but the analysis pretends both readings are equally valid, that is cowardice dressed as balance.
+
+3. AUDIENCE REALITY CHECK: Read the analysis imagining you are:
+   - A taxi driver in Ipoh
+   - A teacher in Kota Bharu
+   - A hawker in Penang
+   - A farmer in Sabah
+   - A factory worker in Johor
+   Would they feel spoken TO or LECTURED AT? Would they share this with friends or roll their eyes?
+
+4. HARD TRUTHS AVOIDED: What uncomfortable truths about these groups are missing?
+   - About the Malay community (not just politics — social, economic, cultural)
+   - About the Chinese community (not just business — class, education, integration)
+   - About the Indian community (not just temples — caste, class, marginalisation)
+   - About the political class (ALL parties — not just the ones in power)
+   - About the monarchy (if relevant)
+   - About Islam in Malaysia (if relevant — distinguish faith from political Islam)
+
+5. TESTABLE PREDICTIONS: If nothing changes, what happens in 6 months? 2 years? Who can fix it and why won't they? Be specific.
+
+6. GENDER REALITY: Are hard truths about how this issue affects men and women differently being avoided?
+
+7. CLASS REALITY: Are economic class truths being obscured by racial or religious framing?
+
+=== NUMERICAL ESTIMATES ===
+
+CONFIDENCE INFLATION: -1.0 (too much hedging — says "may" and "could" when evidence supports "does") to +1.0 (overclaims certainty — states as fact what is actually uncertain). This analysis sits at: [your estimate]. Justify.
+
+SENTIMENT VOLATILITY: 0.0 (flat, consistent tone) to 1.0 (wild emotional swings — calm then angry then sympathetic). Above 0.5 suggests manipulation. This analysis sits at: [your estimate]. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "courage_score": 0-100,
+  "confidence_inflation_estimate": 0.0,
+  "sentiment_volatility_estimate": 0.0,
+  "cowardice_flags": [{"card": 2, "avoided": "what it dodged", "should_say": "what honest analysis requires"}],
+  "false_balance": [{"where": "which part", "evidence_says": "what the evidence actually shows"}],
+  "audience_check": "would real Malaysians read this or tune out — and why",
+  "hard_truths_missing": [{"about": "which group/institution", "truth": "the uncomfortable fact", "why_avoided": "why the analyst probably left it out"}],
+  "gender_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "class_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "predictions": [{"if_nothing_changes": "what happens", "who_can_fix": "specific actors", "why_they_wont": "specific incentives"}],
+  "strongest_card": {"card": 3, "why": "what makes it work"},
+  "weakest_card": {"card": 5, "why": "what makes it fail"},
+  "overall_assessment": "no sugarcoating. one paragraph."
+}
+
+=== THE ANALYSIS TO STRESS-TEST ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "\"Justice is served\" vs \"political persecution\" — the two dominant framings of Najib's 1MDB-Tanore conviction",
+      "sub": "Both framings reduce a RM2.27 billion institutional failure to a binary about one man, ignoring the systemic gaps that made 1MDB possible and the RM42 billion in public debt Malaysians are still paying."
+    },
+    {
+      "t": "fact",
+      "lens": "legal",
+      "h": "The court found Najib was the apex — but the system let him be",
+      "s": "Judge Sequerah's 7-year, 76-witness trial concluded Najib had an 'unmistakable bond' with Jho Low, who acted as his 'proxy, intermediary, and facilitator.' The four Saudi donation letters were declared forgeries. The defence's central narrative — that RM2.27 billion was a gift from Saudi Arabia — was rejected as having 'no merit.'",
+      "d": "The conviction rests on Section 23(1) of the MACC Act 2009 (abuse of power for gratification) and the AMLATFPUAA 2001 (money laundering). The statutory minimum fine alone — five times the gratification — produces the staggering RM11.38 billion figure. But the legal architecture that enabled this is equally revealing: as 1MDB's sole shareholder via the Finance Minister role, Najib had approval authority under the company's Article 117. The defence argued this was procedurally lawful. The prosecution countered that the power was exercised corruptly. The judge agreed, finding the evidence 'cold, hard, and incontrovertible.' The appeal, filed December 30, will test whether the Court of Appeal reads the same evidence differently — a process that could take years. Meanwhile, the Anti-Money Laundering Act's forfeiture provisions require Najib to return RM2.08 billion or face an additional 2.5 years imprisonment."
+    },
+    {
+      "t": "fact",
+      "lens": "economic",
+      "h": "RM42 billion paid, RM9.7 billion still owed — the bill that outlasts every politician",
+      "s": "While attention focuses on Najib's sentence, the Malaysian government has already paid RM42 billion in 1MDB-related debt servicing. An additional RM9.7 billion remains, with bonds maturing as late as 2039. PM Anwar himself stated in December 2025 that 1MDB remains 'the government's biggest debt.'",
+      "d": "The US DOJ documented US$4.5 billion misappropriated from 1MDB between 2009 and 2015 — funding the Wolf of Wall Street film, a US$250 million superyacht, Beverly Hills mansions, and Van Gogh paintings. The DOJ has recovered or repatriated over US$1.4 billion to Malaysia. But the total debt burden assumed by the government — including bond obligations, interest, and settlements — dwarfs the amounts stolen. For context, Malaysia's 2025 education budget was approximately RM64 billion. The 1MDB debt serviced to date represents roughly 66% of one year's entire education spending. These are schools not built, hospitals not upgraded, subsidies not extended. The B40 — the bottom 40% of Malaysian households — bear this cost indirectly through constrained fiscal space, regardless of whether they voted for or against Najib."
+    },
+    {
+      "t": "fact",
+      "lens": "social",
+      "h": "UMNO's dilemma: party loyalty versus coalition survival",
+      "s": "The verdict triggered fury within UMNO. Senior figures called the conviction an 'affront' and demanded withdrawal from PM Anwar's unity government. On January 6, 2025, at least 3,000 supporters from UMNO, PAS, and Bersatu rallied at the Palace of Justice with 'Justice for Bossku' banners.",
+      "d": "Yet UMNO president Zahid Hamidi chose to stay in the coalition, seeking Najib's release through legal and pardon channels rather than collapsing the government. This calculus reflects UMNO's structural weakness: the party needs government resources and patronage networks to survive electorally, but its grassroots — energised by the Bossku movement and Najib's sons' rising UMNO positions — demand visible loyalty to their imprisoned former leader. The December 22 rejection of the royal addendum for house arrest (the court ruled it unconstitutional without Pardons Board deliberation under Article 42) closed one pathway. Anwar called for calm, urging 'full patience and wisdom.' Civil society groups, led by C4 Centre's Cynthia Gabriel, instead demanded structural reforms: GLC governance overhaul, political financing regulation, and Jho Low's extradition from China. The question is whether the verdict catalyses reform or merely reshuffles the same political chess pieces."
+    },
+    {
+      "t": "reframe",
+      "h": "The man is convicted. The machine that made him possible is not.",
+      "text": "The 1MDB-Tanore verdict is legally significant — 25 charges, RM11.38 billion in fines, a 7-year trial with 76 witnesses. But the structures that enabled one person to channel RM2.27 billion through personal accounts remain largely intact. The Finance Minister still appoints 1MDB-type entity boards. Political financing remains unregulated. GLC governance reforms proposed by C4 Centre are unenacted. Jho Low remains free, reportedly in China. The prosecution proved Najib's guilt. Nobody has yet proven the system will prevent the next Najib. The question Malaysians deserve answered is not whether this man is guilty — the court has spoken — but whether the institutional architecture that permitted a sovereign wealth fund to become a personal ATM has been dismantled or merely embarrassed."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "A conviction of this magnitude — the largest financial corruption case in Malaysian history — matters. It demonstrates that even a sitting prime minister can face legal consequences for the misuse of public funds. That is not trivial in a region where impunity for leaders is the norm. But a conviction is not a reform. The RM42 billion in debt remains. The fiscal constraints on B40 services remain. UMNO's survival instinct — currently channeled into pardon campaigns rather than institutional accountability — remains the dominant political force shaping what comes next. Malaysians across all communities now face a choice: treat this as a conclusion to the 1MDB chapter, or treat it as the evidence base for demanding structural change to the systems of power, patronage, and oversight that no single verdict can fix."
+    }
+  ],
+  "sources": "KL High Court judgment (Dec 26, 2025), MACC Act 2009 Section 23(1), AMLATFPUAA 2001, Al Jazeera, Malay Mail, The Edge Malaysia, Bloomberg, SCMP, CNN, PBS, FMT, Nikkei Asia, US DOJ civil forfeiture filings, IRS repatriation records, MOF debt figures (Ahmad Maslan statement), C4 Centre statements, Borneo Post, The Diplomat, Britannica, Malaysiakini, The Star",
+  "confidence": "High — Court findings are documented in a public judgment after 7 years and 76 witnesses. Financial figures verified across DOJ, MOF, and multiple international outlets. Political dynamics (UMNO position, coalition tensions) verified across SCMP, Nikkei, FMT. Appeal outcome is uncertain and explicitly hedged.",
+  "lenses_used": ["legal", "economic", "social"],
+  "lenses_applicable_but_unused": ["historical", "critical", "theological"]
+}

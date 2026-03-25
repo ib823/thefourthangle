@@ -1,0 +1,62 @@
+---
+import '../../styles/global.css';
+import App from '../../components/App.svelte';
+import { ISSUES, opinionLabel } from '../../data/issues';
+
+export function getStaticPaths() {
+  return ISSUES.map(issue => ({
+    params: { id: issue.id },
+    props: { issue },
+  }));
+}
+
+const { issue } = Astro.props;
+const siteUrl = 'https://thefourthangle.pages.dev';
+const issueUrl = `${siteUrl}/issue/${issue.id}`;
+const ogImage = `${siteUrl}/og/issue-${issue.id}.png`;
+const description = `${issue.context} | 6 perspectives. Opinion Shift: ${issue.opinionShift} ${opinionLabel(issue.opinionShift)}.`;
+const title = `${issue.headline} — The Fourth Angle`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F8F9FA" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <meta property="og:title" content={issue.headline} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content={issueUrl} />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="The Fourth Angle" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={issue.headline} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="canonical" href={issueUrl} />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+</head>
+<body>
+  <a href="#main-content" class="sr-only">Skip to content</a>
+  <div id="main-content">
+    <App client:load initialIssueId={issue.id} />
+  </div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

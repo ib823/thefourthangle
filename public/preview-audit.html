@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TFA Link Preview Audit — All Platforms</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#F0F2F5; color:#1a1a1a; }
+  .controls { position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid #ddd; padding:12px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .controls label { font-size:13px; font-weight:600; color:#666; }
+  .controls select, .controls input { font-size:13px; padding:6px 10px; border:1px solid #ccc; border-radius:6px; }
+  .controls input[type=text] { flex:1; min-width:200px; }
+  .viewport-toggle { display:flex; gap:4px; }
+  .viewport-toggle button { padding:6px 12px; border:1px solid #ccc; background:#fff; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; }
+  .viewport-toggle button.active { background:#1a1a1a; color:#fff; border-color:#1a1a1a; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(380px, 1fr)); gap:24px; padding:24px; max-width:1600px; margin:0 auto; }
+  .grid.mobile { grid-template-columns:repeat(auto-fit, minmax(320px, 380px)); }
+  .grid.desktop { grid-template-columns:repeat(auto-fit, minmax(500px, 1fr)); }
+  .platform-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+  .platform-header { padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #eee; }
+  .platform-header .dot { width:10px; height:10px; border-radius:50%; }
+  .platform-header h3 { font-size:14px; font-weight:700; }
+  .platform-header .dims { font-size:11px; color:#999; margin-left:auto; }
+  .preview-frame { padding:16px; }
+  .notes { padding:8px 16px 12px; font-size:11px; color:#888; line-height:1.5; border-top:1px solid #f5f5f5; }
+  .notes span.warn { color:#B85C00; font-weight:600; }
+  .notes span.good { color:#2B8A3E; font-weight:600; }
+  .notes span.bad { color:#E03131; font-weight:600; }
+  .truncated { color:#999; }
+
+  /* Platform-specific preview renderers */
+
+  /* WhatsApp */
+  .wa-preview { background:#E7FFDB; border-radius:8px; padding:6px; max-width:340px; }
+  .wa-bubble { background:#fff; border-radius:8px; overflow:hidden; border:1px solid #E2E8F0; }
+  .wa-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .wa-img img { width:100%; height:100%; object-fit:cover; }
+  .wa-body { padding:8px 12px; }
+  .wa-title { font-size:14px; font-weight:600; color:#1a1a1a; line-height:1.3; margin-bottom:2px; }
+  .wa-desc { font-size:12px; color:#667781; line-height:1.4; }
+  .wa-domain { font-size:11px; color:#8696a0; margin-top:4px; text-transform:uppercase; letter-spacing:0.02em; }
+  .wa-text { padding:8px 0 4px; font-size:14px; color:#111B21; line-height:1.4; }
+  .wa-text b { font-weight:700; }
+
+  /* Telegram */
+  .tg-preview { max-width:400px; }
+  .tg-bubble { background:#EFFDDE; border-radius:12px; padding:8px; }
+  .tg-link { background:#fff; border-radius:8px; overflow:hidden; border-left:3px solid #2AABEE; }
+  .tg-img { width:100%; aspect-ratio:1.78/1; background:#f0f0f0; overflow:hidden; }
+  .tg-img img { width:100%; height:100%; object-fit:cover; }
+  .tg-body { padding:8px 12px; }
+  .tg-site { font-size:11px; color:#2AABEE; font-weight:600; margin-bottom:2px; }
+  .tg-title { font-size:14px; font-weight:600; color:#1a1a1a; line-height:1.3; }
+  .tg-desc { font-size:13px; color:#555; line-height:1.4; margin-top:2px; }
+  .tg-text { padding:8px 0 4px; font-size:14px; color:#1a1a1a; line-height:1.4; }
+
+  /* Twitter/X */
+  .tw-preview { max-width:504px; }
+  .tw-card { border:1px solid #CFD9DE; border-radius:16px; overflow:hidden; }
+  .tw-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; overflow:hidden; }
+  .tw-img img { width:100%; height:100%; object-fit:cover; }
+  .tw-body { padding:12px; }
+  .tw-domain { font-size:13px; color:#536471; display:flex; align-items:center; gap:4px; }
+  .tw-domain svg { width:14px; height:14px; fill:#536471; }
+  .tw-title { font-size:15px; font-weight:400; color:#0F1419; line-height:1.3; margin-top:2px; }
+  .tw-desc { font-size:15px; color:#536471; line-height:1.3; margin-top:2px; }
+
+  /* Facebook */
+  .fb-preview { max-width:500px; }
+  .fb-card { border:1px solid #DADDE1; background:#F0F2F5; overflow:hidden; }
+  .fb-img { width:100%; aspect-ratio:1.91/1; background:#e4e6eb; overflow:hidden; }
+  .fb-img img { width:100%; height:100%; object-fit:cover; }
+  .fb-body { padding:10px 12px; background:#F0F2F5; }
+  .fb-domain { font-size:12px; color:#65676B; text-transform:uppercase; letter-spacing:0.03em; }
+  .fb-title { font-size:16px; font-weight:600; color:#1C1E21; line-height:1.25; margin-top:3px; }
+  .fb-desc { font-size:14px; color:#65676B; line-height:1.33; margin-top:3px; }
+
+  /* LinkedIn */
+  .li-preview { max-width:552px; }
+  .li-card { border:1px solid #E0E0E0; border-radius:8px; overflow:hidden; background:#fff; }
+  .li-img { width:100%; aspect-ratio:1.91/1; background:#f3f2ef; overflow:hidden; }
+  .li-img img { width:100%; height:100%; object-fit:cover; }
+  .li-body { padding:12px 16px; }
+  .li-title { font-size:14px; font-weight:600; color:#000; line-height:1.3; }
+  .li-domain { font-size:12px; color:#666; margin-top:4px; }
+
+  /* Discord */
+  .dc-preview { max-width:520px; }
+  .dc-embed { background:#2B2D31; border-radius:4px; overflow:hidden; display:flex; }
+  .dc-accent { width:4px; flex-shrink:0; }
+  .dc-inner { padding:8px 16px 16px 12px; flex:1; }
+  .dc-site { font-size:12px; color:#B5BAC1; margin-bottom:4px; }
+  .dc-title { font-size:16px; font-weight:600; color:#00A8FC; line-height:1.25; }
+  .dc-desc { font-size:14px; color:#DBDEE1; line-height:1.4; margin-top:8px; }
+  .dc-img { margin-top:16px; border-radius:4px; overflow:hidden; max-width:400px; }
+  .dc-img img { width:100%; display:block; }
+
+  /* iMessage */
+  .im-preview { max-width:320px; }
+  .im-bubble { background:#007AFF; border-radius:18px; padding:8px 14px; color:#fff; font-size:15px; line-height:1.4; margin-bottom:6px; }
+  .im-card { border:1px solid #E5E5EA; border-radius:16px; overflow:hidden; background:#fff; }
+  .im-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; overflow:hidden; }
+  .im-img img { width:100%; height:100%; object-fit:cover; }
+  .im-body { padding:10px 12px; }
+  .im-domain { font-size:11px; color:#8E8E93; text-transform:uppercase; }
+  .im-title { font-size:15px; font-weight:600; color:#1C1C1E; line-height:1.25; margin-top:2px; }
+
+  /* Signal */
+  .sg-preview { max-width:340px; }
+  .sg-bubble { background:#EDF5FD; border-radius:18px; padding:8px; }
+  .sg-link { border-radius:12px; overflow:hidden; background:#fff; border:1px solid #D4E3F5; }
+  .sg-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; overflow:hidden; }
+  .sg-img img { width:100%; height:100%; object-fit:cover; }
+  .sg-body { padding:8px 12px; }
+  .sg-title { font-size:14px; font-weight:600; color:#1a1a1a; line-height:1.3; }
+  .sg-desc { font-size:13px; color:#666; line-height:1.35; margin-top:2px; }
+
+  /* Google Search */
+  .go-preview { max-width:600px; }
+  .go-result { }
+  .go-url { font-size:14px; color:#202124; display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+  .go-url img { width:28px; height:28px; border-radius:50%; background:#f0f0f0; border:1px solid #eee; }
+  .go-url .domain { font-size:12px; color:#4D5156; }
+  .go-title { font-size:20px; color:#1A0DAB; font-weight:400; line-height:1.3; cursor:pointer; }
+  .go-title:hover { text-decoration:underline; }
+  .go-desc { font-size:14px; color:#4D5156; line-height:1.5; margin-top:4px; }
+  .go-date { color:#70757A; }
+
+  /* SMS / Android Messages */
+  .sms-preview { max-width:340px; }
+  .sms-bubble { background:#E3F2FD; border-radius:18px; padding:12px 16px; }
+  .sms-text { font-size:16px; color:#1a1a1a; line-height:1.4; margin-bottom:8px; }
+  .sms-card { border:1px solid #E0E0E0; border-radius:12px; overflow:hidden; background:#fff; }
+  .sms-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; overflow:hidden; }
+  .sms-img img { width:100%; height:100%; object-fit:cover; }
+  .sms-body { padding:8px 12px; }
+  .sms-title { font-size:14px; font-weight:600; color:#1a1a1a; line-height:1.25; }
+  .sms-domain { font-size:12px; color:#999; margin-top:2px; }
+
+  /* Reddit */
+  .rd-preview { max-width:640px; }
+  .rd-post { background:#fff; border:1px solid #ccc; border-radius:4px; padding:8px; display:flex; gap:8px; }
+  .rd-votes { display:flex; flex-direction:column; align-items:center; gap:2px; color:#878A8C; font-size:12px; font-weight:700; padding:4px; }
+  .rd-content { flex:1; }
+  .rd-meta { font-size:12px; color:#787C7E; margin-bottom:4px; }
+  .rd-title { font-size:18px; font-weight:500; color:#1A1A1B; line-height:1.3; margin-bottom:8px; }
+  .rd-thumb { border:1px solid #EDEFF1; border-radius:4px; overflow:hidden; }
+  .rd-thumb img { width:100%; display:block; }
+  .rd-domain-tag { font-size:12px; color:#4FBCFF; }
+
+  /* Threads */
+  .th-preview { max-width:480px; }
+  .th-post { padding:16px; }
+  .th-user { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .th-avatar { width:36px; height:36px; border-radius:50%; background:#eee; }
+  .th-name { font-size:14px; font-weight:600; color:#1a1a1a; }
+  .th-text { font-size:15px; color:#1a1a1a; line-height:1.4; margin-bottom:12px; }
+  .th-card { border:1px solid #DBDBDB; border-radius:16px; overflow:hidden; }
+  .th-img { width:100%; aspect-ratio:1.91/1; background:#f0f0f0; overflow:hidden; }
+  .th-img img { width:100%; height:100%; object-fit:cover; }
+  .th-body { padding:10px 12px; }
+  .th-domain { font-size:12px; color:#999; }
+  .th-title { font-size:14px; font-weight:600; color:#1a1a1a; line-height:1.25; margin-top:2px; }
+
+  .og-img-placeholder { width:100%; height:100%; background:linear-gradient(135deg,#1F1A14 0%,#3D3428 50%,#1F1A14 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#E8D9B3; font-family:'Manrope',system-ui,sans-serif; padding:20px; text-align:center; }
+  .og-img-placeholder .logo { font-size:11px; letter-spacing:0.15em; text-transform:uppercase; opacity:0.6; margin-bottom:12px; }
+  .og-img-placeholder .headline { font-size:22px; font-weight:800; line-height:1.2; max-width:80%; }
+  .og-img-placeholder .score { margin-top:16px; font-size:14px; opacity:0.7; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label>Issue:</label>
+  <select id="issueSelect">
+    <option value="0142">0142 — The Clause Nobody Mentioned in the Amendment (91)</option>
+    <option value="0150">0150 — The Highway Contracts You Are Not Allowed to Read (91)</option>
+    <option value="0120">0120 — The Deportation That Broke Three Laws (88)</option>
+    <option value="0139">0139 — Where RM8B in Digital Allocations Actually Went (84)</option>
+    <option value="0135">0135 — 3 States, 3 Land Policies, One Constitutional Question (76)</option>
+    <option value="0131">0131 — Promise vs Delivery: 2024 Pledges Revisited (58)</option>
+    <option value="0127">0127 — Both Sides Cite Same Study, Opposite Conclusions (45)</option>
+  </select>
+  <div class="viewport-toggle">
+    <button class="active" onclick="setViewport('mobile')">Mobile</button>
+    <button onclick="setViewport('tablet')">Tablet</button>
+    <button onclick="setViewport('desktop')">Desktop</button>
+  </div>
+</div>
+
+<div class="grid mobile" id="grid">
+
+  <!-- WhatsApp -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#25D366"></div>
+      <h3>WhatsApp</h3>
+      <span class="dims">Title: 65 chars | Desc: 300 chars | Img: 1200x630</span>
+    </div>
+    <div class="preview-frame" style="background:#ECE5DD; padding:20px 16px;">
+      <div class="wa-preview">
+        <div class="wa-text"><b id="wa-headline"></b></div>
+        <div class="wa-bubble">
+          <div class="wa-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="wa-img-hl"></span><span class="score" id="wa-img-score"></span></div></div>
+          <div class="wa-body">
+            <div class="wa-domain">thefourthangle.pages.dev</div>
+            <div class="wa-title" id="wa-title"></div>
+            <div class="wa-desc" id="wa-desc"></div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#667781;margin-top:4px;text-align:right;">Opinion Shift: <span id="wa-shift"></span>/100<br>6 perspectives inside.</div>
+      </div>
+    </div>
+    <div class="notes"><span class="good">GOOD:</span> Custom bold markdown, full OG image, score in text. <span class="warn">CACHE:</span> 72+ hours.</div>
+  </div>
+
+  <!-- Telegram -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#0088CC"></div>
+      <h3>Telegram</h3>
+      <span class="dims">Title: ~300 chars | Img: 1280x720 ideal | Cache: 7 days</span>
+    </div>
+    <div class="preview-frame" style="background:#17212B; padding:20px 16px;">
+      <div class="tg-preview">
+        <div class="tg-bubble">
+          <div class="tg-text" id="tg-text" style="color:#fff;"></div>
+          <div class="tg-link">
+            <div class="tg-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="tg-img-hl"></span></div></div>
+            <div class="tg-body">
+              <div class="tg-site">The Fourth Angle</div>
+              <div class="tg-title" id="tg-title"></div>
+              <div class="tg-desc" id="tg-desc"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="warn">NOTE:</span> 1200x630 works but 1280x720 renders better. <span class="warn">CACHE:</span> 7+ days, use @webpage_bot to refresh.</div>
+  </div>
+
+  <!-- Twitter/X -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#1DA1F2"></div>
+      <h3>Twitter / X</h3>
+      <span class="dims">Title: 70 chars | Desc: 200 chars | summary_large_image</span>
+    </div>
+    <div class="preview-frame" style="background:#fff;">
+      <div class="tw-preview">
+        <div style="font-size:15px;color:#0F1419;line-height:1.4;margin-bottom:12px;" id="tw-tweet"></div>
+        <div class="tw-card">
+          <div class="tw-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="tw-img-hl"></span></div></div>
+          <div class="tw-body">
+            <div class="tw-domain"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> thefourthangle.pages.dev</div>
+            <div class="tw-title" id="tw-title"></div>
+            <div class="tw-desc" id="tw-desc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="bad">MISSING:</span> twitter:site, twitter:creator (no account attribution). <span class="warn">CACHE:</span> 7 days.</div>
+  </div>
+
+  <!-- Facebook -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#1877F2"></div>
+      <h3>Facebook</h3>
+      <span class="dims">Title: 88 chars | Desc: 300 chars | Img: 1200x630</span>
+    </div>
+    <div class="preview-frame" style="background:#F0F2F5;">
+      <div class="fb-preview">
+        <div class="fb-card">
+          <div class="fb-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="fb-img-hl"></span></div></div>
+          <div class="fb-body">
+            <div class="fb-domain">thefourthangle.pages.dev</div>
+            <div class="fb-title" id="fb-title"></div>
+            <div class="fb-desc" id="fb-desc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="bad">MISSING:</span> fb:app_id, article:published_time, og:locale. <span class="warn">CACHE:</span> 24+ hrs, use Sharing Debugger.</div>
+  </div>
+
+  <!-- LinkedIn -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#0A66C2"></div>
+      <h3>LinkedIn</h3>
+      <span class="dims">Title: 100 chars | Desc: 200 chars | Img: 1200x627 ideal</span>
+    </div>
+    <div class="preview-frame" style="background:#F3F2EF;">
+      <div class="li-preview">
+        <div class="li-card">
+          <div class="li-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="li-img-hl"></span></div></div>
+          <div class="li-body">
+            <div class="li-title" id="li-title"></div>
+            <div class="li-domain">thefourthangle.pages.dev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="warn">NOTE:</span> Prefers 1200x627 (TFA sends 1200x630 — 3px crop). <span class="bad">MISSING:</span> article:published_time.</div>
+  </div>
+
+  <!-- Discord -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#5865F2"></div>
+      <h3>Discord</h3>
+      <span class="dims">Title: ~100 chars | Desc: ~400 chars | Embed colour</span>
+    </div>
+    <div class="preview-frame" style="background:#313338; padding:20px 16px;">
+      <div class="dc-preview">
+        <div class="dc-embed">
+          <div class="dc-accent" id="dc-accent" style="background:#B85C00;"></div>
+          <div class="dc-inner">
+            <div class="dc-site">The Fourth Angle</div>
+            <div class="dc-title" id="dc-title"></div>
+            <div class="dc-desc" id="dc-desc"></div>
+            <div class="dc-img"><div class="og-img-placeholder" style="aspect-ratio:1.91/1;"><span class="logo">The Fourth Angle</span><span class="headline" id="dc-img-hl" style="font-size:16px;"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="bad">MISSING:</span> og:color meta — Discord defaults to grey sidebar instead of TFA amber. No share button in modal.</div>
+  </div>
+
+  <!-- iMessage -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#007AFF"></div>
+      <h3>iMessage / Apple</h3>
+      <span class="dims">Title: ~50 chars | Image: 1200x630 | Auto-preview</span>
+    </div>
+    <div class="preview-frame" style="background:#fff; padding:20px 16px;">
+      <div class="im-preview">
+        <div class="im-bubble">Check this out 👇</div>
+        <div class="im-card">
+          <div class="im-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="im-img-hl" style="font-size:16px;"></span></div></div>
+          <div class="im-body">
+            <div class="im-domain">thefourthangle.pages.dev</div>
+            <div class="im-title" id="im-title"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="good">GOOD:</span> Auto-preview works via OG tags. No description shown — title only.</div>
+  </div>
+
+  <!-- Signal -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#3A76F0"></div>
+      <h3>Signal</h3>
+      <span class="dims">Same as WhatsApp | Title: 65 chars</span>
+    </div>
+    <div class="preview-frame" style="background:#fff; padding:20px 16px;">
+      <div class="sg-preview">
+        <div class="sg-bubble">
+          <div class="sg-link">
+            <div class="sg-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="sg-img-hl" style="font-size:16px;"></span></div></div>
+            <div class="sg-body">
+              <div class="sg-title" id="sg-title"></div>
+              <div class="sg-desc" id="sg-desc"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="good">GOOD:</span> Same OG rendering as WhatsApp. No share button — copy link only.</div>
+  </div>
+
+  <!-- Google Search -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#4285F4"></div>
+      <h3>Google Search Result</h3>
+      <span class="dims">Title: 60 chars | Desc: 160 chars | JSON-LD for rich results</span>
+    </div>
+    <div class="preview-frame" style="background:#fff;">
+      <div class="go-preview">
+        <div class="go-result">
+          <div class="go-url">
+            <img src="" alt="">
+            <div>
+              <div style="font-size:14px;color:#202124;">thefourthangle.pages.dev</div>
+              <div class="domain">https://thefourthangle.pages.dev/issue/...</div>
+            </div>
+          </div>
+          <div class="go-title" id="go-title"></div>
+          <div class="go-desc"><span class="go-date" id="go-date"></span> — <span id="go-desc"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="bad">MISSING:</span> JSON-LD NewsArticle schema (no rich snippets), no sitemap.xml, no article:published_time. <span class="warn">SEO SCORE:</span> 6/10.</div>
+  </div>
+
+  <!-- SMS / Android Messages -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#1B5E20"></div>
+      <h3>SMS / Android Messages</h3>
+      <span class="dims">Title: 40 chars | Minimal preview</span>
+    </div>
+    <div class="preview-frame" style="background:#fff; padding:20px 16px;">
+      <div class="sms-preview">
+        <div class="sms-bubble">
+          <div class="sms-text" id="sms-text"></div>
+          <div class="sms-card">
+            <div class="sms-img"><div class="og-img-placeholder" style="aspect-ratio:2/1;"><span class="headline" id="sms-img-hl" style="font-size:14px;"></span></div></div>
+            <div class="sms-body">
+              <div class="sms-title" id="sms-title"></div>
+              <div class="sms-domain">thefourthangle.pages.dev</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="good">GOOD:</span> Auto-preview on Android 11+. Minimal but functional.</div>
+  </div>
+
+  <!-- Reddit -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#FF4500"></div>
+      <h3>Reddit</h3>
+      <span class="dims">Title: 300 chars | Img: 1200x627 | Manual share</span>
+    </div>
+    <div class="preview-frame" style="background:#DAE0E6;">
+      <div class="rd-preview">
+        <div class="rd-post">
+          <div class="rd-votes">▲<br>42<br>▼</div>
+          <div class="rd-content">
+            <div class="rd-meta">r/malaysia • Posted by u/reader • 2h</div>
+            <div class="rd-title" id="rd-title"></div>
+            <div class="rd-thumb"><div class="og-img-placeholder" style="aspect-ratio:1.91/1;height:120px;"><span class="headline" id="rd-img-hl" style="font-size:12px;"></span></div></div>
+            <div class="rd-domain-tag" style="margin-top:4px;">thefourthangle.pages.dev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="warn">NOTE:</span> No share button. Manual post only. OG image used as thumbnail.</div>
+  </div>
+
+  <!-- Threads -->
+  <div class="platform-card">
+    <div class="platform-header">
+      <div class="dot" style="background:#000"></div>
+      <h3>Threads</h3>
+      <span class="dims">Title: ~100 chars | Img: 1200x630 | Has share button</span>
+    </div>
+    <div class="preview-frame" style="background:#fff;">
+      <div class="th-preview">
+        <div class="th-post">
+          <div class="th-user">
+            <div class="th-avatar"></div>
+            <div class="th-name">@reader</div>
+          </div>
+          <div class="th-text" id="th-text"></div>
+          <div class="th-card">
+            <div class="th-img"><div class="og-img-placeholder"><span class="logo">The Fourth Angle</span><span class="headline" id="th-img-hl" style="font-size:16px;"></span></div></div>
+            <div class="th-body">
+              <div class="th-domain">thefourthangle.pages.dev</div>
+              <div class="th-title" id="th-title"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><span class="good">GOOD:</span> Share button exists. OG rendering works well.</div>
+  </div>
+
+</div>
+
+<script>
+const issues = {
+  "0142": {
+    headline: "The Clause Nobody Mentioned in the Amendment",
+    context: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content.",
+    opinionShift: 91,
+    description: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content. | 6 perspectives. Opinion Shift: 91 Fundamental."
+  },
+  "0150": {
+    headline: "The Highway Contracts You Are Not Allowed to Read",
+    context: "Works Ministry confirmed that 21 toll concession agreements remain classified under the Official Secrets Act despite repeated parliamentary questions since 2008.",
+    opinionShift: 91,
+    description: "Works Ministry confirmed that 21 toll concession agreements remain classified under the Official Secrets Act despite repeated parliamentary questions since 2008. | 6 perspectives. Opinion Shift: 91 Fundamental."
+  },
+  "0120": {
+    headline: "The Deportation That Broke Three Laws",
+    context: "On 9 March 2026, Malaysia deported 12 asylum seekers despite an active High Court injunction and valid UNHCR documentation.",
+    opinionShift: 88,
+    description: "On 9 March 2026, Malaysia deported 12 asylum seekers despite an active High Court injunction and valid UNHCR documentation. | 6 perspectives. Opinion Shift: 88 Fundamental."
+  },
+  "0139": {
+    headline: "Where RM8B in Digital Allocations Actually Went",
+    context: "Budget 2026 allocated RM8.2B across four ministries for digital infrastructure. Each reports different spending figures.",
+    opinionShift: 84,
+    description: "Budget 2026 allocated RM8.2B across four ministries for digital infrastructure. Each reports different spending figures. | 6 perspectives. Opinion Shift: 84 Significant."
+  },
+  "0135": {
+    headline: "3 States, 3 Land Policies, One Constitutional Question",
+    context: "Johor, Penang, and Selangor each announced different frameworks for converting Malay Reserve Land. All cite the same court ruling.",
+    opinionShift: 76,
+    description: "Johor, Penang, and Selangor each announced different frameworks for converting Malay Reserve Land. All cite the same court ruling. | 6 perspectives. Opinion Shift: 76 Significant."
+  },
+  "0131": {
+    headline: "Promise vs Delivery: 2024 Pledges Revisited",
+    context: "Budget 2024 made 12 pledges. Five met targets. Four missed by 40%. Three quietly disappeared from the tracker.",
+    opinionShift: 58,
+    description: "Budget 2024 made 12 pledges. Five met targets. Four missed by 40%. Three quietly disappeared from the tracker. | 6 perspectives. Opinion Shift: 58 Partial."
+  },
+  "0127": {
+    headline: "Both Sides Cite Same Study, Opposite Conclusions",
+    context: "The World Bank published its 142-page Malaysia Economic Monitor on 19 March 2026. Government and opposition both quoted it within hours.",
+    opinionShift: 45,
+    description: "The World Bank published its 142-page Malaysia Economic Monitor on 19 March 2026. Government and opposition both quoted it within hours. | 6 perspectives. Opinion Shift: 45 Partial."
+  }
+};
+
+function truncate(str, max) {
+  if (str.length <= max) return str;
+  return str.slice(0, max - 3) + '...';
+}
+
+function render(issueId) {
+  const d = issues[issueId];
+  if (!d) return;
+
+  // WhatsApp
+  document.getElementById('wa-headline').textContent = d.headline;
+  document.getElementById('wa-title').textContent = truncate(d.headline, 65);
+  document.getElementById('wa-desc').textContent = truncate(d.description, 300);
+  document.getElementById('wa-shift').textContent = d.opinionShift;
+  document.getElementById('wa-img-hl').textContent = d.headline;
+  document.getElementById('wa-img-score').textContent = 'Opinion Shift: ' + d.opinionShift;
+
+  // Telegram
+  document.getElementById('tg-text').textContent = d.headline + '\n\n' + d.context;
+  document.getElementById('tg-title').textContent = d.headline;
+  document.getElementById('tg-desc').textContent = truncate(d.description, 300);
+  document.getElementById('tg-img-hl').textContent = d.headline;
+
+  // Twitter
+  document.getElementById('tw-tweet').textContent = `"${d.headline}" — 6 perspectives, one issue. Opinion Shift: ${d.opinionShift}.`;
+  document.getElementById('tw-title').textContent = truncate(d.headline, 70);
+  document.getElementById('tw-desc').textContent = truncate(d.description, 200);
+  document.getElementById('tw-img-hl').textContent = d.headline;
+
+  // Facebook
+  document.getElementById('fb-title').textContent = truncate(d.headline, 88);
+  document.getElementById('fb-desc').textContent = truncate(d.description, 300);
+  document.getElementById('fb-img-hl').textContent = d.headline;
+
+  // LinkedIn
+  document.getElementById('li-title').textContent = truncate(d.headline, 100);
+  document.getElementById('li-img-hl').textContent = d.headline;
+
+  // Discord
+  document.getElementById('dc-title').textContent = d.headline;
+  document.getElementById('dc-desc').textContent = truncate(d.description, 400);
+  document.getElementById('dc-img-hl').textContent = d.headline;
+  document.getElementById('dc-accent').style.background = d.opinionShift >= 80 ? '#E03131' : d.opinionShift >= 60 ? '#B85C00' : '#1971C2';
+
+  // iMessage
+  document.getElementById('im-title').textContent = truncate(d.headline, 50);
+  document.getElementById('im-img-hl').textContent = d.headline;
+
+  // Signal
+  document.getElementById('sg-title').textContent = truncate(d.headline, 65);
+  document.getElementById('sg-desc').textContent = truncate(d.description, 300);
+  document.getElementById('sg-img-hl').textContent = d.headline;
+
+  // Google
+  document.getElementById('go-title').textContent = truncate(d.headline + ' — The Fourth Angle', 60);
+  document.getElementById('go-desc').textContent = truncate(d.description, 160);
+  document.getElementById('go-date').textContent = 'Mar 25, 2026';
+
+  // SMS
+  document.getElementById('sms-text').textContent = 'thefourthangle.pages.dev/issue/' + issueId;
+  document.getElementById('sms-title').textContent = truncate(d.headline, 40);
+  document.getElementById('sms-img-hl').textContent = truncate(d.headline, 30);
+
+  // Reddit
+  document.getElementById('rd-title').textContent = d.headline;
+  document.getElementById('rd-img-hl').textContent = truncate(d.headline, 25);
+
+  // Threads
+  document.getElementById('th-text').textContent = `${d.headline} — 6 perspectives. Opinion Shift: ${d.opinionShift}.`;
+  document.getElementById('th-title').textContent = truncate(d.headline, 100);
+  document.getElementById('th-img-hl').textContent = d.headline;
+}
+
+function setViewport(mode) {
+  const grid = document.getElementById('grid');
+  grid.className = 'grid ' + mode;
+  document.querySelectorAll('.viewport-toggle button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+document.getElementById('issueSelect').addEventListener('change', (e) => render(e.target.value));
+render('0142');
+</script>
+
+</body>
+</html>
