@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "rm -rf dist && node scripts/build-verifier.mjs && astro build && node scripts/stealth.mjs",
+    "generate-og": "node scripts/generate-og-images.mjs",
+    "build": "rm -rf dist && node scripts/build-verifier.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "sign": "node scripts/sign-content.mjs"

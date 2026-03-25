@@ -7,6 +7,9 @@ interface Props {
 }
 
 const { title = 'The Fourth Angle', description = 'Daily bite-size clarity for smarter thinking and better questions.' } = Astro.props;
+const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
+const canonicalUrl = `${siteUrl}${Astro.url.pathname === '/' ? '/' : Astro.url.pathname}`;
+const ogImage = `${siteUrl}/og-image.png`;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -16,17 +19,24 @@ const { title = 'The Fourth Angle', description = 'Daily bite-size clarity for s
   <meta name="theme-color" content="#F8F9FA" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta property="og:title" content="The Fourth Angle" />
-  <meta property="og:description" content="Daily bite-size clarity for smarter thinking and better questions." />
-  <meta property="og:image" content="https://thefourthangle.pages.dev/og-image.png" />
-  <meta property="og:url" content="https://thefourthangle.pages.dev/" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content={`${title} — Non-partisan Malaysian issues platform`} />
+  <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The Fourth Angle" />
+  <meta property="og:locale" content="en_MY" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Fourth Angle" />
-  <meta name="twitter:description" content="Daily bite-size clarity for smarter thinking and better questions." />
-  <meta name="twitter:image" content="https://thefourthangle.pages.dev/og-image.png" />
-  <link rel="canonical" href="https://thefourthangle.pages.dev/" />
+  <meta name="twitter:site" content="@fourthangle" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={`${title} — Non-partisan Malaysian issues platform`} />
+  <link rel="canonical" href={canonicalUrl} />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

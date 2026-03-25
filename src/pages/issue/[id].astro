@@ -11,11 +11,22 @@ export function getStaticPaths() {
 }
 
 const { issue } = Astro.props;
-const siteUrl = 'https://thefourthangle.pages.dev';
+const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
 const issueUrl = `${siteUrl}/issue/${issue.id}`;
 const ogImage = `${siteUrl}/og/issue-${issue.id}.png`;
-const description = `${issue.context} | 6 perspectives. Opinion Shift: ${issue.opinionShift} ${opinionLabel(issue.opinionShift)}.`;
+
+// Dual-score og:description — both scores within first 80 chars for WhatsApp
+const os = issue.opinionShift;
+const ns = Math.round(issue.finalScore ?? 0);
+const suffix = ` ${os}% Opinion Shift · Neutrality: ${ns}/100`;
+const maxCtx = 80 - suffix.length - 1;
+let ctxTrunc = issue.context;
+if (ctxTrunc.length > maxCtx) {
+  ctxTrunc = ctxTrunc.substring(0, maxCtx).replace(/\s+\S*$/, '') + '...';
+}
+const description = ctxTrunc + suffix;
 const title = `${issue.headline} — The Fourth Angle`;
+const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}/100`;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -31,14 +42,19 @@ const title = `${issue.headline} — The Fourth Angle`;
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content={imageAlt} />
   <meta property="og:url" content={issueUrl} />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="The Fourth Angle" />
+  <meta property="og:locale" content="en_MY" />
 
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@fourthangle" />
   <meta name="twitter:title" content={issue.headline} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={imageAlt} />
 
   <link rel="canonical" href={issueUrl} />
   <meta name="mobile-web-app-capable" content="yes" />

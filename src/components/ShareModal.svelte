@@ -19,25 +19,32 @@
   let previewText = $derived(shareText.length > 120 ? shareText.slice(0, 117) + '...' : shareText);
   let fullUrl = $derived(`https://thefourthangle.pages.dev/issue/${issue.id}`);
 
-  let tweetText = $derived(`"${issue.headline}" — 6 perspectives, one issue. Opinion Shift: ${issue.opinionShift}.`);
-  let waText = $derived(`*${issue.headline}*\n\n${shareText}\n\nOpinion Shift: ${issue.opinionShift}/100\n6 perspectives inside.\n${fullUrl}`);
-  let tgText = $derived(`${issue.headline}\n\n${shareText}`);
-  let threadsText = $derived(`${issue.headline} — 6 perspectives. Opinion Shift: ${issue.opinionShift}. ${fullUrl}`);
+  let os = $derived(issue.opinionShift);
+  let ns = $derived(Math.round(issue.finalScore ?? 0));
+
+  let tweetText = $derived(`${issue.headline}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nScored by 6 independent review stages.`);
+  let waText = $derived(`*${issue.headline}* — ${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the 6-stage analysis: ${fullUrl}`);
+  let tgText = $derived(`${issue.headline} — ${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the 6-stage analysis:`);
+  let threadsText = $derived(`${issue.headline} — ${os}% shift · ${ns}/100 neutrality\n${fullUrl}`);
+  let linkedinText = $derived(`Worth reading: ${issue.headline}\n\n${os}% of readers may shift their position on this issue.\nScored ${ns}/100 for neutrality across 6 independent review stages.\n\n${fullUrl}`);
 
   let canNativeShare = $state(false);
   onMount(() => { canNativeShare = !!navigator.share; });
 
   const openPlatforms = [
-    { id: 'x', label: 'X / Twitter', color: '#000000', url: () => `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(fullUrl)}` },
-    { id: 'facebook', label: 'Facebook', color: '#1877F2', url: () => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}` },
-    { id: 'whatsapp', label: 'WhatsApp', color: '#25D366', url: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}` },
-    { id: 'telegram', label: 'Telegram', color: '#0088CC', url: () => `https://t.me/share/url?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(tgText)}` },
-    { id: 'threads', label: 'Threads', color: '#000000', url: () => `https://www.threads.com/intent/post?text=${encodeURIComponent(threadsText)}` },
-    { id: 'linkedin', label: 'LinkedIn', color: '#0A66C2', url: () => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fullUrl)}` },
+    { id: 'whatsapp', label: 'WhatsApp', url: () => `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}` },
+    { id: 'telegram', label: 'Telegram', url: () => `https://t.me/share/url?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(tgText)}` },
+    { id: 'x', label: 'X / Twitter', url: () => `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(fullUrl)}` },
+    { id: 'facebook', label: 'Facebook', url: () => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}` },
+    { id: 'linkedin', label: 'LinkedIn', url: () => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fullUrl)}` },
+    { id: 'threads', label: 'Threads', url: () => `https://www.threads.com/intent/post?text=${encodeURIComponent(threadsText)}` },
   ];
 
   let barColor = $derived(
-    issue.opinionShift >= 80 ? '#E03131' : issue.opinionShift >= 60 ? '#B85C00' : issue.opinionShift >= 40 ? '#1971C2' : '#6C757D'
+    os >= 80 ? '#EF4444' : os >= 60 ? '#F59E0B' : os >= 40 ? '#3B82F6' : '#64748B'
+  );
+  let nsColor = $derived(
+    ns >= 75 ? '#3B82F6' : ns >= 50 ? '#EAB308' : '#EF4444'
   );
 
   function openPlatform(p: typeof openPlatforms[0]) {
@@ -56,7 +63,7 @@
     try {
       await navigator.share({
         title: issue.headline,
-        text: `${issue.headline} — 6 perspectives. Opinion Shift: ${issue.opinionShift}.`,
+        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — 6 independent review stages.`,
         url: fullUrl,
       });
     } catch {}
@@ -88,12 +95,13 @@
       <div style="font-size:12px;color:#6C757D;line-height:1.5;margin-bottom:10px;">{previewText}</div>
       <div style="display:flex;align-items:center;gap:8px;">
         <div style="width:44px;height:3px;background:#F1F3F5;border-radius:2px;overflow:hidden;">
-          <div style="width:{issue.opinionShift}%;height:100%;background:{barColor};border-radius:2px;"></div>
+          <div style="width:{os}%;height:100%;background:{barColor};border-radius:2px;"></div>
         </div>
-        <span style="font-size:10px;font-weight:700;color:{barColor};">{issue.opinionShift}</span>
+        <span style="font-size:10px;font-weight:700;color:{barColor};">{os}%</span>
         <span style="font-size:9px;color:#868E96;">Opinion Shift</span>
-        <span style="flex:1;"></span>
-        <span style="font-size:10px;font-weight:600;color:#6C757D;">6 perspectives</span>
+        <span style="font-size:9px;color:#CED4DA;">·</span>
+        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}</span>
+        <span style="font-size:9px;color:#868E96;">Neutrality</span>
       </div>
     </div>
 
