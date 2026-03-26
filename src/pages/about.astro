@@ -32,27 +32,27 @@ import Base from '../layouts/Base.astro';
         <div style="display:flex;align-items:center;gap:0;padding:10px 14px;background:var(--amber-bg);border:1px solid rgba(44,34,21,0.05);border-radius:12px;margin-bottom:14px;">
           <div style="display:flex;align-items:center;gap:8px;flex:1;">
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#2B8A3E;box-shadow:0 0 0 2px #EBFBEE;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">PA</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#B85C00;box-shadow:0 0 0 2px #FFF4E6;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--score-warning);box-shadow:0 0 0 2px var(--verdict-amber-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">BA</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#2B8A3E;box-shadow:0 0 0 2px #EBFBEE;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">FC</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#2B8A3E;box-shadow:0 0 0 2px #EBFBEE;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">AF</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#B85C00;box-shadow:0 0 0 2px #FFF4E6;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--score-warning);box-shadow:0 0 0 2px var(--verdict-amber-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">CT</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:#2B8A3E;box-shadow:0 0 0 2px #EBFBEE;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">SR</span>
             </div>
           </div>
@@ -63,15 +63,15 @@ import Base from '../layouts/Base.astro';
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-secondary);line-height:1.5;">
           <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:#2B8A3E;flex-shrink:0;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--status-green);flex-shrink:0;"></div>
             Balanced — stage found no significant issues
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:#B85C00;flex-shrink:0;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--score-warning);flex-shrink:0;"></div>
             Flagged — stage found moderate concerns
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:#E03131;flex-shrink:0;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--score-critical);flex-shrink:0;"></div>
             Alert — stage found significant issues
           </div>
         </div>
@@ -83,27 +83,27 @@ import Base from '../layouts/Base.astro';
         <p style="font-size:15px;line-height:1.72;color:var(--text-primary);margin:0 0 14px 0;">How much you'd miss by reading only the headline. Higher means more hidden complexity.</p>
         <!-- Example opinion bar -->
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-          <div style="flex:1;height:6px;background:#F1F3F5;border-radius:3px;overflow:hidden;">
-            <div style="height:100%;width:76%;background:#B85C00;border-radius:3px;"></div>
+          <div style="flex:1;height:6px;background:var(--bg-sunken);border-radius:3px;overflow:hidden;">
+            <div style="height:100%;width:76%;background:var(--score-warning);border-radius:3px;"></div>
           </div>
-          <span style="font-family:var(--font-display);font-size:14px;font-weight:700;color:#B85C00;">76</span>
-          <span style="font-size:11px;font-weight:600;color:#495057;">Significant</span>
+          <span style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--score-warning);">76</span>
+          <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">Significant</span>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--card);border-radius:8px;">
-            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:#E03131;">80–100</span>
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:8px;border-left:3px solid var(--score-critical);">
+            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-critical);">80–100</span>
             <span style="font-size:12px;color:var(--text-secondary);">Fundamental</span>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--card);border-radius:8px;">
-            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:#B85C00;">60–79</span>
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:8px;border-left:3px solid var(--score-warning);">
+            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-warning);">60–79</span>
             <span style="font-size:12px;color:var(--text-secondary);">Significant</span>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--card);border-radius:8px;">
-            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:#1971C2;">40–59</span>
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:8px;border-left:3px solid var(--score-info);">
+            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-info);">40–59</span>
             <span style="font-size:12px;color:var(--text-secondary);">Partial</span>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--card);border-radius:8px;">
-            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:#6C757D;">0–39</span>
+          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:8px;border-left:3px solid var(--score-neutral);">
+            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-neutral);">0–39</span>
             <span style="font-size:12px;color:var(--text-secondary);">Surface</span>
           </div>
         </div>
