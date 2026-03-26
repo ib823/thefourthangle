@@ -1,19 +1,51 @@
 :root {
+  /* Backgrounds */
   --bg: #FFFFFF;
+  --bg-elevated: #F8F9FA;
+  --bg-sunken: #F1F3F5;
   --card: #FFFDF9;
   --card-dark: #2B231B;
   --card-dark-end: #34291F;
 
-  --text-primary: #1F1A14;
-  --text-secondary: #4A4136;
-  --text-tertiary: #6B5F4F;
+  /* Text */
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-tertiary: #6C757D;
+  --text-muted: #868E96;
+  --text-faint: #ADB5BD;
   --text-on-dark: #F8F5EF;
   --text-on-dark-muted: rgba(248,245,239,0.9);
 
+  /* Brand */
   --amber: #7A5A12;
   --amber-light: #E8D9B3;
   --amber-bg: rgba(122,90,18,0.04);
 
+  /* Score colors */
+  --score-critical: #E03131;
+  --score-warning: #B85C00;
+  --score-info: #1971C2;
+  --score-neutral: #6C757D;
+
+  /* Status colors */
+  --status-green: #2B8A3E;
+  --status-green-text: #24783C;
+  --status-green-bg: #EBFBEE;
+  --status-blue-text: #1864AB;
+  --status-blue-bg: #E7F5FF;
+  --status-red: #E03131;
+  --status-red-bg: #FFF5F5;
+  --status-red-border: #FFC9C9;
+
+  /* Verdict dot backgrounds */
+  --verdict-green-bg: #EBFBEE;
+  --verdict-amber-bg: #FFF4E6;
+  --verdict-red-bg: #FFF5F5;
+
+  /* Focus/link */
+  --focus: #1971C2;
+
+  /* Lens tag backgrounds */
   --lens-legal: #52525B;
   --lens-social: #6B4C7A;
   --lens-economic: #7A6332;
@@ -21,9 +53,19 @@
   --lens-theological: #6B5B3E;
   --lens-critical: #555555;
 
+  /* Borders */
   --border: #E8DED1;
   --border-light: rgba(44,34,21,0.05);
+  --border-subtle: #E9ECEF;
+  --border-divider: #DEE2E6;
 
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+
+  /* Typography */
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
 
@@ -44,22 +86,46 @@
 
   /* Touch targets */
   --tap-min: 44px;
+
+  /* Overlay */
+  --overlay-bg: rgba(255,255,255,0.96);
+  --header-bg: rgba(248,249,250,0.85);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #1A1A1A;
+    --bg-elevated: #242420;
+    --bg-sunken: #1F1C18;
     --card: #242420;
     --card-dark: #1F1A14;
     --card-dark-end: #2B231B;
     --text-primary: #E8E4DF;
     --text-secondary: #B5AFA6;
     --text-tertiary: #8C8478;
+    --text-muted: #7A7368;
+    --text-faint: #5C5650;
     --text-on-dark: #F8F5EF;
     --text-on-dark-muted: rgba(248,245,239,0.9);
     --amber: #C8963A;
     --amber-light: #4A3D24;
     --amber-bg: rgba(200,150,58,0.08);
+    --score-critical: #F87171;
+    --score-warning: #FBBF24;
+    --score-info: #60A5FA;
+    --score-neutral: #8C8478;
+    --status-green: #4ADE80;
+    --status-green-text: #4ADE80;
+    --status-green-bg: rgba(74,222,128,0.1);
+    --status-blue-text: #60A5FA;
+    --status-blue-bg: rgba(96,165,250,0.1);
+    --status-red: #F87171;
+    --status-red-bg: rgba(248,113,113,0.1);
+    --status-red-border: rgba(248,113,113,0.3);
+    --verdict-green-bg: rgba(74,222,128,0.1);
+    --verdict-amber-bg: rgba(251,191,36,0.1);
+    --verdict-red-bg: rgba(248,113,113,0.1);
+    --focus: #60A5FA;
     --lens-legal: #9CA3AF;
     --lens-social: #A78BBF;
     --lens-economic: #C8A95C;
@@ -68,5 +134,13 @@
     --lens-critical: #9CA3AF;
     --border: #3D3830;
     --border-light: rgba(255,255,255,0.06);
+    --border-subtle: #3D3830;
+    --border-divider: #4A4136;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-md: 0 2px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+    --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+    --overlay-bg: rgba(26,26,26,0.96);
+    --header-bg: rgba(26,26,26,0.85);
   }
 }

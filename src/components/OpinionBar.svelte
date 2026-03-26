@@ -18,7 +18,7 @@
     : false;
 
   let color = $derived(
-    score >= 80 ? '#E03131' : score >= 60 ? '#B85C00' : score >= 40 ? '#1971C2' : '#6C757D'
+    score >= 80 ? 'var(--score-critical)' : score >= 60 ? 'var(--score-warning)' : score >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'
   );
 
   onMount(() => {
@@ -64,7 +64,7 @@
 </script>
 
 <div bind:this={barEl} style="display:flex;align-items:center;gap:8px;">
-  <div style="flex:1;height:{height}px;background:#F1F3F5;border-radius:{height/2}px;overflow:hidden;">
+  <div style="flex:1;height:{height}px;background:var(--bg-sunken);border-radius:{height/2}px;overflow:hidden;">
     <div style="height:100%;width:{fillWidth}%;background:{color};border-radius:{height/2}px;"></div>
   </div>
   {#if showLabel}

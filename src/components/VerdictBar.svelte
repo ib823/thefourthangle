@@ -35,17 +35,17 @@
   ] as const;
 
   function dotColor(score: number | undefined): string {
-    if (score === undefined) return '#CED4DA';
-    if (score >= 75) return '#2B8A3E';
-    if (score >= 50) return '#B85C00';
-    return '#E03131';
+    if (score === undefined) return 'var(--border-divider)';
+    if (score >= 75) return 'var(--status-green)';
+    if (score >= 50) return 'var(--score-warning)';
+    return 'var(--score-critical)';
   }
 
   function dotBg(score: number | undefined): string {
-    if (score === undefined) return '#F1F3F5';
-    if (score >= 75) return '#EBFBEE';
-    if (score >= 50) return '#FFF4E6';
-    return '#FFF5F5';
+    if (score === undefined) return 'var(--bg-sunken)';
+    if (score >= 75) return 'var(--status-green-bg)';
+    if (score >= 50) return 'var(--verdict-amber-bg)';
+    return 'var(--verdict-red-bg)';
   }
 
   function scoreLabel(score: number): string {
@@ -77,7 +77,7 @@
       <span style="
         font-family:var(--font-display, 'Manrope', system-ui, sans-serif);
         font-size:11px;font-weight:700;
-        color:var(--text-tertiary, #6B5F4F);
+        color:var(--text-tertiary);
         margin-left:4px;
       ">{finalScore}</span>
     </div>
@@ -86,8 +86,8 @@
     <div style="
       display:flex;align-items:center;gap:0;
       padding:10px 14px;
-      background:var(--amber-bg, rgba(122,90,18,0.04));
-      border:1px solid var(--border-light, rgba(44,34,21,0.05));
+      background:var(--amber-bg);
+      border:1px solid var(--border-light);
       border-radius:12px;
     ">
       <div style="display:flex;align-items:center;gap:8px;flex:1;">
@@ -102,7 +102,7 @@
             <span style="
               font-family:var(--font-display, 'Manrope', system-ui, sans-serif);
               font-size:8px;font-weight:600;
-              color:var(--text-tertiary, #6B5F4F);
+              color:var(--text-tertiary);
               letter-spacing:0.04em;
               text-transform:uppercase;
             ">{stage.label}</span>
@@ -113,12 +113,12 @@
         <span style="
           font-family:var(--font-display, 'Manrope', system-ui, sans-serif);
           font-size:16px;font-weight:700;
-          color:var(--text-primary, #1F1A14);
+          color:var(--text-primary);
         ">{finalScore}</span>
         <span style="
           font-family:var(--font-display, 'Manrope', system-ui, sans-serif);
           font-size:10px;font-weight:500;
-          color:var(--text-tertiary, #6B5F4F);
+          color:var(--text-tertiary);
         ">/100</span>
       </div>
     </div>

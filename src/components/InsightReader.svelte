@@ -788,8 +788,8 @@
           </div>
           <div style="display:flex;align-items:center;gap:6px;" onpointerdown={(e) => e.stopPropagation()}>
             <SaveButton issueId={issue.id} cardIndex={current} />
-            <button onclick={() => { shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#F8F9FA;border:1px solid #DEE2E6;border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:auto;" aria-label="Share this card">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#868E96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <button onclick={() => { shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:auto;" aria-label="Share this card">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
         </div>
@@ -810,9 +810,9 @@
           {#if showSwipeHint && current === 0}
             <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe to continue</span>
           {:else if current === totalCards - 2 && !completed}
-            <span style="font-size:12px;font-weight:600;color:#6C757D;">Almost done</span>
+            <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Almost done</span>
           {:else if current === totalCards - 1 && !completed}
-            <span style="font-size:12px;font-weight:600;color:#6C757D;">Last one</span>
+            <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Last one</span>
           {/if}
         </div>
       </div>
@@ -828,10 +828,10 @@
         class:read={readCards.has(i) && i !== current}
         style="
           {i === current && !completed
-            ? `width:20px;background:${CARD_TYPES[issue.cards[i].t]?.color ?? '#ADB5BD'};`
+            ? `width:20px;background:${CARD_TYPES[issue.cards[i].t]?.color ?? 'var(--text-faint)'};`
             : readCards.has(i)
-              ? `background:${CARD_TYPES[issue.cards[i].t]?.color ?? '#ADB5BD'};opacity:0.44;`
-              : 'background:#E9ECEF;'}
+              ? `background:${CARD_TYPES[issue.cards[i].t]?.color ?? 'var(--text-faint)'};opacity:0.44;`
+              : 'background:var(--border-subtle);'}
         "
         onclick={() => {
           if (completed) completed = false;
@@ -853,7 +853,7 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.94);
+    background: var(--overlay-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     display: flex;
@@ -868,7 +868,7 @@
   .progress-track {
     width: 100%;
     height: 4px;
-    background: #F1F3F5;
+    background: var(--bg-sunken);
     flex-shrink: 0;
   }
 
@@ -891,18 +891,18 @@
   .counter {
     font-size: 13px;
     font-weight: 600;
-    color: #5A5F64;
+    color: var(--text-secondary);
   }
 
   .close-btn {
     width: 44px;
     height: 44px;
     border: none;
-    background: #F8F9FA;
+    background: var(--bg-elevated);
     border-radius: 10px;
     font-size: 20px;
     line-height: 1;
-    color: #495057;
+    color: var(--text-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -911,7 +911,7 @@
   }
 
   .close-btn:hover {
-    background: #E9ECEF;
+    background: var(--border-subtle);
   }
 
   .headline-area {
@@ -924,7 +924,7 @@
   .headline {
     font-size: 12px;
     font-weight: 600;
-    color: #495057;
+    color: var(--text-secondary);
     margin: 0 0 6px;
     line-height: 1.4;
   }
@@ -947,7 +947,7 @@
     height: auto;
     top: 12px;
     bottom: 4px;
-    background: #fff;
+    background: var(--bg);
     border-radius: 20px;
     pointer-events: none;
     will-change: transform;
@@ -972,7 +972,7 @@
     inset: 0;
     z-index: 3;
     width: auto;
-    background: #fff;
+    background: var(--bg);
     border-radius: 20px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
     padding: 20px 24px;
@@ -1054,14 +1054,14 @@
 
   .big-text {
     font-weight: 700;
-    color: #212529;
+    color: var(--text-primary);
     line-height: 1.35;
     margin: 0;
   }
 
   .sub-text {
     font-size: 15px;
-    color: #5A5F64;
+    color: var(--text-secondary);
     line-height: 1.7;
     margin: 0;
   }
@@ -1074,7 +1074,7 @@
 
   .swipe-hint {
     font-size: 12px;
-    color: #6C757D;
+    color: var(--text-tertiary);
     user-select: none;
     display: inline-block;
     animation: nudgeHint 1.5s ease-in-out infinite;
@@ -1143,7 +1143,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #51CF66, #37B24D);
+    background: linear-gradient(135deg, var(--status-green), var(--status-green-text));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1176,14 +1176,14 @@
   .completion-title {
     font-size: 16px;
     font-weight: 700;
-    color: #212529;
+    color: var(--text-primary);
     margin: 0;
   }
 
   .completion-takeaway {
     font-size: 15px;
     font-style: italic;
-    color: #495057;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
     max-width: 320px;
@@ -1217,13 +1217,13 @@
     font-weight: 600;
     cursor: pointer;
     border: none;
-    background: #212529;
-    color: #fff;
+    background: var(--text-primary);
+    color: var(--bg);
     transition: background 0.15s ease;
   }
 
   .btn-done:hover {
-    background: #343A40;
+    background: var(--text-secondary);
   }
 
   .btn-share {
@@ -1232,15 +1232,15 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    border: 1.5px solid #E9ECEF;
-    background: #F8F9FA;
-    color: #495057;
+    border: 1.5px solid var(--border-subtle);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
     transition: background 0.15s ease;
     touch-action: auto;
   }
 
   .btn-share:hover {
-    background: #E9ECEF;
+    background: var(--border-subtle);
   }
 
   .btn-next {
@@ -1250,13 +1250,13 @@
     font-weight: 600;
     cursor: pointer;
     border: none;
-    background: #212529;
-    color: #fff;
+    background: var(--text-primary);
+    color: var(--bg);
     transition: background 0.15s ease;
   }
 
   .btn-next:hover {
-    background: #343A40;
+    background: var(--text-secondary);
   }
 
   /* Reduced motion overrides */

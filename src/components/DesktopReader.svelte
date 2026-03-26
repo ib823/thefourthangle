@@ -109,29 +109,29 @@
   let viewCard = $derived(issue.cards.findLast((c: any) => c.t === 'view'));
 
   let barColor = $derived(
-    issue.opinionShift >= 80 ? '#E03131' : issue.opinionShift >= 60 ? '#B85C00' : issue.opinionShift >= 40 ? '#1971C2' : '#6C757D'
+    issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
   );
 
   let label = $derived(opinionLabel(issue.opinionShift));
 </script>
 
-<div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:#FFFFFF;">
+<div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:var(--bg);">
   <div style="max-width:640px;margin:0 auto;padding:40px 24px;">
     <!-- Reader header -->
     <div style="display:flex;align-items:flex-start;gap:16px;">
-      <h1 style="flex:1;font-size:32px;font-weight:800;color:#212529;letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
-      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid #E9ECEF;background:#F8F9FA;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }} aria-label="Share this issue">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        <span style="font-size:12px;font-weight:600;color:#6C757D;">Share</span>
+      <h1 style="flex:1;font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
+      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Share</span>
       </button>
     </div>
-    <p style="font-size:16px;color:#495057;font-weight:450;line-height:1.6;margin:16px 0 0;">{issue.context}</p>
+    <p style="font-size:16px;color:var(--text-secondary);font-weight:450;line-height:1.6;margin:16px 0 0;">{issue.context}</p>
 
     <!-- Opinion Shift -->
     <div style="display:flex;align-items:center;gap:12px;margin:20px 0 0;">
       <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={6} showLabel={false} /></div>
       <span style="font-size:14px;font-weight:700;color:{barColor};">{issue.opinionShift}</span>
-      <span style="font-size:11px;font-weight:600;color:#495057;">{label}</span>
+      <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
     </div>
     <!-- Verdict bar -->
     {#if issue.stageScores && issue.finalScore}
@@ -143,12 +143,12 @@
     <!-- Meta row -->
     <div style="display:flex;align-items:center;gap:8px;margin:16px 0 32px;">
       {#if issue.status === 'new'}
-        <span style="font-size:10px;font-weight:700;color:#24783C;background:#EBFBEE;padding:2px 6px;border-radius:4px;text-transform:uppercase;">New</span>
+        <span style="font-size:10px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:2px 6px;border-radius:4px;text-transform:uppercase;">New</span>
       {:else if issue.status === 'updated'}
-        <span style="font-size:10px;font-weight:700;color:#1864AB;background:#E7F5FF;padding:2px 6px;border-radius:4px;text-transform:uppercase;">Updated</span>
+        <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:2px 6px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
       {#if issue.edition > 1}
-        <span style="font-size:10px;color:#6C757D;">Edition {issue.edition}</span>
+        <span style="font-size:10px;color:var(--text-tertiary);">Edition {issue.edition}</span>
       {/if}
     </div>
 
@@ -156,7 +156,7 @@
     {#each issue.cards as card, i}
       {@const meta = CARD_TYPES[card.t] ?? CARD_TYPES.hook}
       <div style="margin-bottom:32px;">
-        <div style="border-top:1px solid #F1F3F5;margin-bottom:20px;"></div>
+        <div style="border-top:1px solid var(--bg-sunken);margin-bottom:20px;"></div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
           <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:{meta.bg};">
             <span style="width:5px;height:5px;border-radius:50%;background:{meta.color};"></span>
@@ -164,9 +164,9 @@
           </div>
           <SaveButton issueId={issue.id} cardIndex={i} />
         </div>
-        <p style="font-size:24px;font-weight:700;color:#212529;line-height:1.35;margin:0;">{card.big}</p>
+        <p style="font-size:24px;font-weight:700;color:var(--text-primary);line-height:1.35;margin:0;">{card.big}</p>
         {#if card.sub}
-          <p style="font-size:15px;color:#495057;line-height:1.6;margin:12px 0 0;">{card.sub}</p>
+          <p style="font-size:15px;color:var(--text-secondary);line-height:1.6;margin:12px 0 0;">{card.sub}</p>
         {/if}
       </div>
     {/each}
@@ -175,22 +175,22 @@
 
     <!-- Completion -->
     <div style="margin-top:16px;">
-      <div style="height:1px;background:#2B8A3E;margin-bottom:24px;border-radius:1px;width:50%;margin:0 auto 24px;"></div>
+      <div style="height:1px;background:var(--status-green);margin-bottom:24px;border-radius:1px;width:50%;margin:0 auto 24px;"></div>
       <!-- Share -->
-      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:#F8F9FA;color:#6C757D;border:1px solid #E9ECEF;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
-        onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }}
-        onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }}>
+      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
+        onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
+        onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share this issue
       </button>
 
       <!-- Copy for verification -->
-      <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:#F8F9FA;color:{copied ? '#2B8A3E' : '#6C757D'};border:1px solid {copied ? '#B2F2BB' : '#E9ECEF'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
-        onmouseenter={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }}
-        onmouseleave={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }}>
+      <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:{copied ? 'var(--status-green)' : 'var(--text-tertiary)'};border:1px solid {copied ? 'var(--status-green)' : 'var(--border-subtle)'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
+        onmouseenter={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
+        onmouseleave={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
         {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}
         {#if !copied}
-          <a href="/verify" style="font-size:11px;color:#868E96;margin-left:4px;" onclick={(e) => e.stopPropagation()}>What is this?</a>
+          <a href="/verify" style="font-size:11px;color:var(--text-muted);margin-left:4px;" onclick={(e) => e.stopPropagation()}>What is this?</a>
         {/if}
       </button>
 

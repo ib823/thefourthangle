@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
-  import { opinionLabel } from '../data/issues';
+  import { opinionLabel, issueCategory } from '../data/issues';
   import { pressAction } from '../lib/actions/press';
   import { tween, stagger, countUp, ease } from '../lib/animation';
 
@@ -21,6 +21,7 @@
   }
 
   let label = $derived(opinionLabel(issue.opinionShift));
+  let category = $derived(issueCategory(issue));
 
   // Viewport animation state
   let hasEnteredViewport = $state(false);
@@ -103,7 +104,7 @@
 
   // Score color
   let scoreColor = $derived(
-    issue.opinionShift >= 80 ? '#E03131' : issue.opinionShift >= 60 ? '#B85C00' : issue.opinionShift >= 40 ? '#1971C2' : '#6C757D'
+    issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
   );
 </script>
 
@@ -116,49 +117,50 @@
   tabindex="0"
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}. {issue.status === 'new' ? 'New.' : issue.status === 'updated' ? 'Updated.' : ''} {isCompleted ? 'Covered.' : isStarted ? 'Exploring.' : 'Unread.'}"
   class="mobile-card"
-  style="background:{isCompleted ? '#FCFCFC' : '#FFFFFF'};box-shadow:0 2px 12px rgba(0,0,0,{isCompleted ? '0.03' : '0.06'});"
+  style="background:var(--bg-elevated);box-shadow:0 2px 12px rgba(0,0,0,{isCompleted ? '0.03' : '0.06'});"
 >
   <!-- Top row: badges -->
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
     {#if isStarted}
       <div class="badge-pill" style="transform:scale({badgeScale});display:flex;align-items:center;gap:4px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="#B85C00" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="#B85C00"/></svg>
-        <span style="font-size:10px;font-weight:600;color:#B85C00;">Exploring</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
+        <span style="font-size:10px;font-weight:600;color:var(--score-warning);">Exploring</span>
       </div>
     {:else if isCompleted}
       <div class="badge-pill" style="transform:scale({badgeScale});display:flex;align-items:center;gap:4px;">
-        <div style="width:16px;height:16px;border-radius:50%;background:#EBFBEE;display:flex;align-items:center;justify-content:center;">
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#2B8A3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <div style="width:16px;height:16px;border-radius:50%;background:var(--status-green-bg);display:flex;align-items:center;justify-content:center;">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <span style="font-size:10px;font-weight:600;color:#2B8A3E;">Covered</span>
+        <span style="font-size:10px;font-weight:600;color:var(--status-green);">Covered</span>
       </div>
     {:else}
       {#if issue.status === 'new'}
-        <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:#24783C;background:#EBFBEE;padding:4px 8px;border-radius:4px;text-transform:uppercase;">New</span>
+        <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:4px 8px;border-radius:4px;text-transform:uppercase;">New</span>
       {:else if issue.status === 'updated'}
-        <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:#1864AB;background:#E7F5FF;padding:4px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
+        <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
     {/if}
     {#if issue.edition > 1}
-      <span style="font-size:10px;color:#6C757D;">Ed.{issue.edition}</span>
+      <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
     {/if}
   </div>
 
   <!-- Headline -->
-  <h2 class="headline" style="color:{isCompleted ? '#495057' : '#212529'};">{issue.headline}</h2>
+  <h2 class="headline" style="color:{isCompleted ? 'var(--text-secondary)' : 'var(--text-primary)'};">{issue.headline}</h2>
+  <span style="font-size:10px;font-weight:500;color:var(--text-tertiary);margin-top:4px;">{category}</span>
 
   <!-- Score row -->
   <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
     <div style="flex:1;">
       <!-- Custom animated bar instead of OpinionBar for viewport-triggered animation -->
       <div style="display:flex;align-items:center;gap:8px;">
-        <div style="flex:1;height:6px;background:#F1F3F5;border-radius:3px;overflow:hidden;">
+        <div style="flex:1;height:6px;background:var(--bg-sunken);border-radius:3px;overflow:hidden;">
           <div class="bar-fill" style="height:100%;width:{barFillPercent}%;background:{scoreColor};border-radius:3px;"></div>
         </div>
       </div>
     </div>
     <span class="score-number" style="color:{scoreColor};">{displayScore}</span>
-    <span style="font-size:11px;font-weight:600;color:#495057;">{label}</span>
+    <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
   </div>
 
   <!-- Opinion dots -->
@@ -166,7 +168,7 @@
     {#each { length: dotCount } as _, i}
       <div
         class="opinion-dot"
-        style="transform:scale({dotScales[i] ?? 0});background:{i < Math.ceil(issue.opinionShift / 20) ? scoreColor : '#E9ECEF'};"
+        style="transform:scale({dotScales[i] ?? 0});background:{i < Math.ceil(issue.opinionShift / 20) ? scoreColor : 'var(--border-subtle)'};"
       ></div>
     {/each}
   </div>
@@ -185,7 +187,7 @@
   <div style="flex:1;min-height:16px;"></div>
   <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
     {#if !readState}
-      <span style="font-size:12px;color:#6C757D;font-weight:500;">Tap to read</span>
+      <span style="font-size:12px;color:var(--text-tertiary);font-weight:500;">Tap to read</span>
     {/if}
   </div>
 </div>
@@ -240,7 +242,7 @@
 
   .context-text {
     font-size: 16px;
-    color: #495057;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 12px 0 0;
     font-weight: 450;

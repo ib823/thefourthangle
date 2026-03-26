@@ -219,7 +219,7 @@
           value={searchQuery}
           oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
           onfocus={onSearchFocus}
-          style="width:100%;padding:10px 16px;font-size:14px;border:1px solid #E9ECEF;border-radius:12px;background:#F1F3F5;color:#212529;outline:none;"
+          style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
         />
       </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
@@ -238,7 +238,7 @@
   <!-- Desktop: split-pane -->
   <main style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
     <!-- Full-width header -->
-    <div style="flex-shrink:0;border-bottom:1px solid #F1F3F5;">
+    <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
       <Header />
     </div>
 
