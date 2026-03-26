@@ -55,15 +55,15 @@
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
 
-  // Share text per platform — optimized for each platform's culture & format
-  // WhatsApp: bold headline, both scores, URL last (triggers link preview bubble)
-  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the 6-stage analysis:\n${fullUrl}`);
-  // Telegram: clean text, scores, URL passed separately via url param
-  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\nScored by 6 independent review stages.`);
+  // Share text per platform — compelling CTA, both scores, platform-optimized
+  // WhatsApp: bold headline, scores, short hook + URL last (triggers link preview)
+  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
+  // Telegram: scores + hook, URL passed separately via url param
+  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read beyond the headline.`);
   // X/Twitter: leave room for user to add thoughts (~180 chars max, URL is separate 23-char param)
-  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100`);
+  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nWhat every side left out.`);
   // Threads: concise, URL included (triggers preview)
-  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n${fullUrl}`);
+  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
 
   let canNativeShare = $state(false);
   onMount(() => { canNativeShare = !!navigator.share; });
@@ -128,7 +128,7 @@
     try {
       await navigator.share({
         title: shareText,
-        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — Scored by 6 independent review stages.`,
+        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — 10-second read. What every side left out.`,
         url: fullUrl,
       });
     } catch {}
