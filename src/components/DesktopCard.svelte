@@ -18,7 +18,7 @@
   let hovered = $state(false);
   let cardEl: HTMLDivElement | undefined = $state(undefined);
 
-  const dotColors = ['#868E96', '#1971C2', '#1971C2', '#1971C2', '#E03131', '#7048E8'];
+  const dotColors = ['#64748B', '#64748B', '#64748B', '#64748B', '#64748B', '#64748B'];
 
   const reducedMotion = typeof window !== 'undefined'
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches

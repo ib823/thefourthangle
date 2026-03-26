@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Issue } from '../data/issues';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import { stagger, haptic } from '../lib/animation';
 
   interface Props {
     issue: Issue;
@@ -10,9 +11,41 @@
   let { issue, cardIndex, onClose }: Props = $props();
 
   let copiedId: string | null = $state(null);
+  let copyPhase: 'idle' | 'out' | 'check' | 'in' | 'revert-out' | 'revert-in' = $state('idle');
+  let copyBgFlash = $state(false);
   let visible = $state(false);
+  let closing = $state(false);
+  let buttonVisible: boolean[] = $state([false, false, false, false, false, false]);
+  let copyRevertTimer: ReturnType<typeof setTimeout> | null = null;
+  let staggerCancel: (() => void) | null = null;
 
-  onMount(() => { requestAnimationFrame(() => { visible = true; }); });
+  // Drag-to-dismiss state
+  let dragStartY = $state(0);
+  let dragOffsetY = $state(0);
+  let isDragging = $state(false);
+  let panelEl: HTMLDivElement | undefined = $state(undefined);
+
+  onMount(() => {
+    requestAnimationFrame(() => {
+      visible = true;
+      // Stagger platform buttons in after panel slides up
+      staggerCancel = stagger(openPlatforms.length, 30, 300, (i) => {
+        buttonVisible[i] = true;
+      });
+    });
+  });
+
+  onDestroy(() => {
+    if (copyRevertTimer) clearTimeout(copyRevertTimer);
+    if (staggerCancel) staggerCancel();
+  });
+
+  function closeWithAnimation() {
+    if (closing) return;
+    closing = true;
+    // 200ms close animation, then call onClose
+    setTimeout(() => { onClose(); }, 200);
+  }
 
   let card = $derived(cardIndex !== null ? issue.cards[cardIndex] : null);
   let shareText = $derived(card ? card.big : issue.headline);
@@ -22,11 +55,15 @@
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
 
-  let tweetText = $derived(`${issue.headline}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nScored by 6 independent review stages.`);
-  let waText = $derived(`*${issue.headline}* — ${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the 6-stage analysis: ${fullUrl}`);
-  let tgText = $derived(`${issue.headline} — ${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the 6-stage analysis:`);
-  let threadsText = $derived(`${issue.headline} — ${os}% shift · ${ns}/100 neutrality\n${fullUrl}`);
-  let linkedinText = $derived(`Worth reading: ${issue.headline}\n\n${os}% of readers may shift their position on this issue.\nScored ${ns}/100 for neutrality across 6 independent review stages.\n\n${fullUrl}`);
+  // Share text per platform — optimized for each platform's culture & format
+  // WhatsApp: bold headline, both scores, URL last (triggers link preview bubble)
+  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the 6-stage analysis:\n${fullUrl}`);
+  // Telegram: clean text, scores, URL passed separately via url param
+  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\nScored by 6 independent review stages.`);
+  // X/Twitter: leave room for user to add thoughts (~180 chars max, URL is separate 23-char param)
+  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100`);
+  // Threads: concise, URL included (triggers preview)
+  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n${fullUrl}`);
 
   let canNativeShare = $state(false);
   onMount(() => { canNativeShare = !!navigator.share; });
@@ -52,38 +89,133 @@
   }
 
   async function copyLink() {
+    if (copyPhase !== 'idle') return;
     try {
       await navigator.clipboard.writeText(fullUrl);
+      haptic(5);
       copiedId = 'link';
-      setTimeout(() => { copiedId = null; }, 1500);
+      copyBgFlash = true;
+
+      // Phase 1: fade out "Copy link" (100ms)
+      copyPhase = 'out';
+      setTimeout(() => {
+        // Phase 2: scale in checkmark (200ms)
+        copyPhase = 'check';
+        setTimeout(() => {
+          // Phase 3: fade in "Copied!" (100ms)
+          copyPhase = 'in';
+
+          // After 300ms, end the bg flash
+          setTimeout(() => { copyBgFlash = false; }, 300);
+
+          // After 2s, reverse back
+          copyRevertTimer = setTimeout(() => {
+            copyPhase = 'revert-out';
+            setTimeout(() => {
+              copyPhase = 'revert-in';
+              copiedId = null;
+              setTimeout(() => {
+                copyPhase = 'idle';
+              }, 100);
+            }, 100);
+          }, 2000);
+        }, 200);
+      }, 100);
     } catch {}
   }
 
   async function nativeShare() {
     try {
       await navigator.share({
-        title: issue.headline,
-        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — 6 independent review stages.`,
+        title: shareText,
+        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — Scored by 6 independent review stages.`,
         url: fullUrl,
       });
     } catch {}
   }
 
   function handleBackdrop(e: MouseEvent) {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) closeWithAnimation();
   }
+
+  // Drag-to-dismiss handlers
+  function onTouchStart(e: TouchEvent) {
+    // Only drag from the top area (handle region)
+    const touch = e.touches[0];
+    dragStartY = touch.clientY;
+    dragOffsetY = 0;
+    isDragging = true;
+  }
+
+  function onTouchMove(e: TouchEvent) {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const delta = touch.clientY - dragStartY;
+    // Only allow dragging downward
+    dragOffsetY = Math.max(0, delta);
+    if (dragOffsetY > 0) {
+      e.preventDefault();
+    }
+  }
+
+  function onTouchEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    if (dragOffsetY > 100) {
+      // Dismiss
+      haptic(5);
+      closeWithAnimation();
+    } else {
+      // Snap back
+      dragOffsetY = 0;
+    }
+  }
+
+  // Compute panel transform based on state
+  let panelTransform = $derived.by(() => {
+    if (isDragging && dragOffsetY > 0) {
+      return `translateY(${dragOffsetY}px)`;
+    }
+    if (closing) {
+      return 'translateY(100%)';
+    }
+    if (visible) {
+      return 'translateY(0)';
+    }
+    return 'translateY(100%)';
+  });
+
+  // Copy button background
+  let copyBg = $derived(copyBgFlash ? '#EBFBEE' : '#F8F9FA');
+  let copyBorder = $derived(copyBgFlash ? '#B2F2BB' : '#F1F3F5');
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   onclick={handleBackdrop}
-  style="position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,{visible ? 0.4 : 0});backdrop-filter:blur({visible ? 12 : 0}px);-webkit-backdrop-filter:blur({visible ? 12 : 0}px);display:flex;align-items:center;justify-content:center;padding:20px;transition:background 0.2s ease, backdrop-filter 0.2s ease;"
+  class="share-backdrop"
+  style="opacity:{visible && !closing ? 1 : 0};"
 >
-  <div style="background:#FFFFFF;border-radius:20px;padding:24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.15);transform:scale({visible ? 1 : 0.95});opacity:{visible ? 1 : 0};transition:transform 0.3s cubic-bezier(.175,.885,.32,1.275), opacity 0.3s ease;position:relative;max-height:90vh;overflow-y:auto;">
+  <div
+    bind:this={panelEl}
+    class="share-panel"
+    class:share-panel--visible={visible && !closing}
+    class:share-panel--closing={closing}
+    class:share-panel--dragging={isDragging}
+    style="transform:{panelTransform};"
+    ontouchstart={onTouchStart}
+    ontouchmove={onTouchMove}
+    ontouchend={onTouchEnd}
+  >
+
+    <!-- Drag handle -->
+    <div style="display:flex;justify-content:center;padding-top:8px;padding-bottom:4px;cursor:grab;">
+      <div class="drag-handle"></div>
+    </div>
 
     <!-- Close -->
-    <button onclick={onClose} style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:#F8F9FA;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6C757D;">x</button>
+    <button onclick={closeWithAnimation} style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:#F8F9FA;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6C757D;">x</button>
 
     <!-- Preview -->
     <div style="background:#F8F9FA;border-radius:14px;padding:18px;border:1px solid #E9ECEF;margin-bottom:20px;">
@@ -100,7 +232,7 @@
         <span style="font-size:10px;font-weight:700;color:{barColor};">{os}%</span>
         <span style="font-size:9px;color:#868E96;">Opinion Shift</span>
         <span style="font-size:9px;color:#CED4DA;">·</span>
-        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}</span>
+        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}<span style="font-size:8px;color:#868E96;">/100</span></span>
         <span style="font-size:9px;color:#868E96;">Neutrality</span>
       </div>
     </div>
@@ -121,10 +253,11 @@
     <!-- Platform grid -->
     <div style="font-size:11px;font-weight:600;color:#6C757D;letter-spacing:0.5px;margin-bottom:8px;">SHARE ON</div>
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;margin-bottom:16px;">
-      {#each openPlatforms as p}
+      {#each openPlatforms as p, i}
         <button
           onclick={() => openPlatform(p)}
-          style="display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 8px;border-radius:12px;background:#F8F9FA;border:1px solid #F1F3F5;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;min-height:44px;"
+          class="share-btn"
+          class:share-btn--visible={buttonVisible[i]}
           onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }}
           onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#F1F3F5'; }}
         >
@@ -138,10 +271,159 @@
     <!-- Copy link -->
     <button
       onclick={copyLink}
-      style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 16px;border-radius:12px;background:{copiedId === 'link' ? '#EBFBEE' : '#F8F9FA'};border:1px solid {copiedId === 'link' ? '#B2F2BB' : '#F1F3F5'};cursor:pointer;transition:background 0.15s ease;"
+      class="copy-btn"
+      style="background:{copyBg};border-color:{copyBorder};"
     >
-      <span style="font-size:13px;font-weight:500;color:#212529;">Copy link</span>
-      <span style="font-size:12px;font-weight:600;color:{copiedId === 'link' ? '#37B24D' : '#6C757D'};">{copiedId === 'link' ? 'Copied' : 'Copy'}</span>
+      <span class="copy-label" class:copy-label--hidden={copyPhase === 'out' || copyPhase === 'check' || copyPhase === 'in'}>
+        Copy link
+      </span>
+      <span class="copy-right">
+        {#if copyPhase === 'check' || copyPhase === 'in'}
+          <span class="copy-check" class:copy-check--visible={copyPhase === 'check' || copyPhase === 'in'}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#37B24D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span class="copy-copied" class:copy-copied--visible={copyPhase === 'in'}>Copied!</span>
+        {:else if copyPhase === 'revert-out'}
+          <span style="opacity:0;transition:opacity 100ms ease;">Copied!</span>
+        {:else if copyPhase === 'revert-in'}
+          <span style="opacity:1;transition:opacity 100ms ease;">Copy</span>
+        {:else if copiedId === 'link'}
+          <span style="color:#37B24D;">Copied!</span>
+        {:else}
+          <span>Copy</span>
+        {/if}
+      </span>
     </button>
   </div>
 </div>
+
+<style>
+  .share-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    transition: opacity 200ms ease;
+  }
+
+  @media (min-width: 640px) {
+    .share-backdrop {
+      align-items: center;
+      padding: 20px;
+    }
+  }
+
+  .share-panel {
+    background: #FFFFFF;
+    border-radius: 20px 20px 0 0;
+    padding: 0 24px 24px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 300ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    will-change: transform;
+  }
+
+  .share-panel--visible {
+    transform: translateY(0);
+  }
+
+  .share-panel--closing {
+    transform: translateY(100%);
+    transition: transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .share-panel--dragging {
+    transition: none;
+  }
+
+  @media (min-width: 640px) {
+    .share-panel {
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  /* Platform button stagger animation */
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 12px;
+    background: #F8F9FA;
+    border: 1px solid #F1F3F5;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, opacity 200ms ease, transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    min-height: 44px;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .share-btn--visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Copy button */
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #F1F3F5;
+    cursor: pointer;
+    transition: background 300ms ease, border-color 300ms ease;
+  }
+
+  .copy-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #212529;
+    transition: opacity 100ms ease;
+  }
+
+  .copy-label--hidden {
+    opacity: 0;
+  }
+
+  .copy-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6C757D;
+  }
+
+  .copy-check {
+    display: inline-flex;
+    transform: scale(0);
+    transition: transform 200ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  }
+
+  .copy-check--visible {
+    transform: scale(1);
+  }
+
+  .copy-copied {
+    opacity: 0;
+    color: #37B24D;
+    transition: opacity 100ms ease;
+  }
+
+  .copy-copied--visible {
+    opacity: 1;
+  }
+</style>
