@@ -47,6 +47,31 @@ export function opinionLabel(s: number): string {
   return "Surface";
 }
 
+const LENS_TO_CATEGORY: Record<string, string> = {
+  'Legal': 'Law & Rights',
+  'Rights': 'Law & Rights',
+  'Economic': 'Money & Economy',
+  'Governance': 'Money & Economy',
+  'Technology': 'Money & Economy',
+  'Social': 'People & Society',
+  'Political': 'People & Society',
+  'Health': 'People & Society',
+  'Environmental': 'Land & Environment',
+  'Regional': 'Land & Environment',
+  'Historical': 'Land & Environment',
+  'Critical': 'People & Society',
+  'Theological': 'People & Society',
+  'Security': 'People & Society',
+};
+
+export function issueCategory(issue: Issue): string {
+  const firstFact = issue.cards.find(c => c.t === 'fact' && c.lens);
+  if (firstFact?.lens && LENS_TO_CATEGORY[firstFact.lens]) {
+    return LENS_TO_CATEGORY[firstFact.lens];
+  }
+  return 'People & Society';
+}
+
 export const ISSUES: Issue[] = [
 {
     id: "0142", opinionShift: 91, status: "new", edition: 1,
@@ -10329,7 +10354,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Immigration autonomy restored in 2022 but customs powers still pending", sub: "Sabah and Sarawak want full control over 17 remaining jurisdictional areas", lens: "Economic" },
     { t: "fact", big: "Constitutional amendment in 2021 restored equal partner status on paper", sub: "Critics say the amendment lacks enforcement mechanisms and judicial clarity", lens: "Political" },
     { t: "reframe", big: "The MA63 delay reveals whether federal power-sharing is genuine or performative", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Only 4 of 21 MA63 items resolved — the process itself reveals who holds real power.", sub: "" },
   ]
 },
 {
@@ -10343,7 +10368,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah received only RM1.2 billion in 2025 petroleum royalties", sub: "State GDP per capita remains 30% below Peninsula average despite oil wealth", lens: "Governance" },
     { t: "fact", big: "Federal government offered SST on petroleum products as compromise in 2023", sub: "Sarawak collected RM5.2 billion from state sales tax but wants both mechanisms", lens: "Social" },
     { t: "reframe", big: "The royalty gap exposes whether resource extraction serves local or central interests", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "At 5% versus 20%, the RM300 billion gap measures federalism's broken promise to Borneo.", sub: "" },
   ]
 },
 {
@@ -10357,7 +10382,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysian Shipowners Association lost 35% of Borneo route contracts", sub: "Local shipping firms lobbied Parliament to reverse the exemption in late 2025", lens: "Political" },
     { t: "fact", big: "Consumer prices in Sabah fell 8% for imported goods in 12 months", sub: "Rural areas still face last-mile delivery costs that offset shipping savings", lens: "Rights" },
     { t: "reframe", big: "Cabotage reform tests whether monopoly protection or consumer welfare drives policy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Cabotage reform saved RM800 million — proof that monopoly costs fall heaviest on the periphery.", sub: "" },
   ]
 },
 {
@@ -10371,7 +10396,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "GPS coalition holds 28 of 31 Sarawak parliamentary seats federally", sub: "Premier Abang Johari leveraged coalition weight to preempt opposition", lens: "Social" },
     { t: "fact", big: "Attorney General Chambers flagged 3 clauses as potentially unconstitutional", sub: "Sarawak state AG countered with 1963 Malaysia Agreement precedent arguments", lens: "Critical" },
     { t: "reframe", big: "Unanimous passage signals whether state rights can be enforced against federal inertia", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "82 unanimous votes signal that autonomy is no longer negotiable for Sarawak's political class.", sub: "" },
   ]
 },
 {
@@ -10385,7 +10410,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Cost overruns total RM8.3 billion above the 2016 revised budget", sub: "PAC report found 12 change orders worth RM2.1 billion lacked proper approval", lens: "Rights" },
     { t: "fact", big: "Only 340km of planned 2,325km is fully open to four-lane traffic", sub: "Communities along incomplete sections still rely on dangerous single-lane roads", lens: "Historical" },
     { t: "reframe", big: "Highway delays reveal whether Borneo infrastructure receives equal federal priority", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Nine years and 60% completion — Pan Borneo's pace reveals infrastructure as political leverage.", sub: "" },
   ]
 },
 {
@@ -10399,7 +10424,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Former NRD officer testified 67 issuance centres operated without oversight", sub: "Documents allegedly linked operations to then-Chief Minister office directly", lens: "Critical" },
     { t: "fact", big: "Sabah population grew from 1.7 million in 1990 to 3.9 million by 2020", sub: "Census data shows foreign-born residents comprise 27% of Sabah population", lens: "Regional" },
     { t: "reframe", big: "Project IC exposes whether political engineering can be undone through accountability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Project IC created voters from migrants. The survivors' demand for a royal commission is overdue.", sub: "" },
   ]
 },
 {
@@ -10413,7 +10438,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Logging concessions overlap with 2.3 million hectares of claimed NCR land", sub: "Timber companies hold provisional leases dating back to 1970s Brooke-era maps", lens: "Historical" },
     { t: "fact", big: "Penan communities filed 340 new claims in 2025 alone over Baram basin lands", sub: "Environmental groups documented 45 illegal logging sites within claimed territories", lens: "Security" },
     { t: "reframe", big: "NCR backlogs test whether indigenous land rights exist on paper or in practice", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "150,000 natives with disputed land titles — NCR reform needs cadastral mapping, not more committees.", sub: "" },
   ]
 },
 {
@@ -10427,7 +10452,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Each family promised 3 hectares of farmland but received only 1.2 hectares", sub: "Much allocated land proved unsuitable for the promised oil palm cultivation", lens: "Regional" },
     { t: "fact", big: "Bakun Dam generates 2,400MW but Sarawak receives only RM50 million annually", sub: "Sarawak Energy sells power to Peninsula via submarine cable at federal-set rates", lens: "Technology" },
     { t: "reframe", big: "Bakun reveals whether displaced communities share in the wealth their sacrifice created", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "25 years without resettlement compensation. Bakun's displaced communities subsidised peninsula electricity.", sub: "" },
   ]
 },
 {
@@ -10441,7 +10466,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "67% of rural Sarawak students scored below national average in SPM 2025", sub: "Urban-rural gap in pass rates widened to 23 points from 18 in 2020", lens: "Security" },
     { t: "fact", big: "Only 28% of interior schools have reliable internet for digital learning", sub: "Education Ministry Jendela programme reached 340 of 1,200 targeted schools", lens: "Legal" },
     { t: "reframe", big: "Teacher vacancies expose whether education equity is a promise or a policy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "42% teacher vacancies in rural Sarawak schools show that posting incentives alone do not work.", sub: "" },
   ]
 },
 {
@@ -10455,7 +10480,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Flying Doctor Service covers only 120 of 380 identified remote communities", sub: "Budget cuts reduced helicopter medical evacuations by 30% from 2023 to 2025", lens: "Technology" },
     { t: "fact", big: "8 district hospitals lack functioning operating theatres as of March 2026", sub: "Surgical patients must be transferred to Queen Elizabeth Hospital in KK", lens: "Economic" },
     { t: "reframe", big: "Preventable deaths measure whether healthcare is a right or a postcode lottery", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "340 preventable deaths yearly — Sabah's healthcare gap is a resource allocation failure, not scarcity.", sub: "" },
   ]
 },
 {
@@ -10469,7 +10494,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah GRS coalition separately demanded 8 cabinet posts for its 18 MPs", sub: "Combined Borneo bloc of 49 seats gives significant leverage in unity government", lens: "Legal" },
     { t: "fact", big: "Last cabinet reshuffle in 2024 added only 1 Sarawak minister to lineup", sub: "GPS sources say 3 key ministries including energy were specifically requested", lens: "Governance" },
     { t: "reframe", big: "Cabinet composition reveals whether Borneo partnership is equal or token", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "GPS wants 35% cabinet seats. Representation without portfolio authority changes nothing structurally.", sub: "" },
   ]
 },
 {
@@ -10483,7 +10508,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12 logging concessions covering 800,000 hectares expire between 2026-2030", sub: "State government faces pressure from industry to renew at existing low rates", lens: "Economic" },
     { t: "fact", big: "Sarawak raised its timber royalties by 60% in 2023 generating RM450 million more", sub: "Sabah Forestry Department cited federal interference in rate-setting processes", lens: "Political" },
     { t: "reframe", big: "Frozen royalties expose whether state resources benefit the state or the industry", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Timber royalties frozen since 1985 — 41 years of unchanged rates while extraction accelerated.", sub: "" },
   ]
 },
 {
@@ -10497,7 +10522,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Education Ministry allocated RM4.2 million for indigenous language in 2026", sub: "Amount covers only 95 trained teachers for 18 indigenous languages statewide", lens: "Governance" },
     { t: "fact", big: "KadazanDusun Cultural Association trained 200 volunteer teachers since 2023", sub: "Community-led weekend classes in 45 villages fill gaps left by formal education", lens: "Social" },
     { t: "reframe", big: "Language loss measures whether cultural preservation is funded or forgotten", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Only 180 schools teach Kadazan. Language survival requires institutional commitment, not symbolic gestures.", sub: "" },
   ]
 },
 {
@@ -10511,7 +10536,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SDEC created 3,400 tech jobs but only 28% went to local Sarawakians", sub: "Skills mismatch means most high-paying positions filled by outside workers", lens: "Political" },
     { t: "fact", big: "Bakun and Murum dams provide 4,400MW capacity for energy-intensive facilities", sub: "Environmental groups question whether indigenous displacement now benefits foreign firms", lens: "Rights" },
     { t: "reframe", big: "Digital investment tests whether Sarawak captures value or just provides cheap power", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM6.8 billion in digital investment proves Sarawak can build an economy beyond resource extraction.", sub: "" },
   ]
 },
 {
@@ -10525,7 +10550,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Plantation firm held provisional lease from 2018 Land and Survey approval", sub: "Court found lease issued without mandatory Section 6 native consultation", lens: "Social" },
     { t: "fact", big: "Similar cases increased 45% since landmark Tuai Rumah Sandah ruling in 2022", sub: "Legal aid groups funded 28 NCR cases in 2025 costing RM3.2 million total", lens: "Critical" },
     { t: "reframe", big: "Court injunctions test whether indigenous consent is a right or a formality", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Three plantation expansions blocked by Iban court action — land rights are won case by case.", sub: "" },
   ]
 },
 {
@@ -10539,7 +10564,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Federal government allocated RM1.8 billion for Sabah water in RMK-13", sub: "Only RM420 million disbursed by end of 2025 citing procurement delays", lens: "Rights" },
     { t: "fact", big: "KK water demand is 680 MLD but treatment capacity is only 520 MLD", sub: "Population growth of 3.2% annually outpaced infrastructure investment for a decade", lens: "Historical" },
     { t: "reframe", big: "Chronic water failure tests whether basic services reach all Malaysians equally", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "800,000 people without daily water in an oil-producing state. The irony is the diagnosis.", sub: "" },
   ]
 },
 {
@@ -10553,7 +10578,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Ambulance response to these villages averages 4 hours versus 18 minutes urban", sub: "3 maternal deaths in Tebedu in 2025 attributed to delayed medical transport", lens: "Critical" },
     { t: "fact", big: "GPS allocated RM85 million for Bidayuh area roads in the 2026 state budget", sub: "Community leaders say actual construction begins years after budget announcements", lens: "Regional" },
     { t: "reframe", big: "Road access gaps reveal whether rural Borneo communities are visible to planners", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "60 years without road access for Bidayuh villages. Basic connectivity is not a development luxury.", sub: "" },
   ]
 },
 {
@@ -10567,7 +10592,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Tourism Ministry estimated RM180 million in lost revenue from stricter rules", sub: "Hotels in Kuching reported 15% drop in Peninsula Malaysian visitors late 2025", lens: "Historical" },
     { t: "fact", big: "Federal AG office questioned whether denials breach Article 8 equality provisions", sub: "Sarawak argued MA63 predates and supersedes uniformity provisions of constitution", lens: "Security" },
     { t: "reframe", big: "Immigration autonomy tests whether MA63 rights can be exercised without penalty", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Immigration control is Sarawak's sharpest autonomy tool — and the one Putrajaya most resists.", sub: "" },
   ]
 },
 {
@@ -10581,7 +10606,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "NRD rejected 78% of Bajau Laut birth registration applications since 2020", sub: "Lack of parental documentation creates intergenerational statelessness cycle", lens: "Regional" },
     { t: "fact", big: "Sabah state spent RM45 million on healthcare for undocumented populations", sub: "Federal reimbursement covered only RM12 million leaving state to absorb rest", lens: "Technology" },
     { t: "reframe", big: "Statelessness reveals whether citizenship is a birthright or a bureaucratic privilege", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45,000 stateless Bajau Laut exist in a legal void that no single ministry can resolve alone.", sub: "" },
   ]
 },
 {
@@ -10595,7 +10620,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Petronas contributed RM40 billion in dividends to federal government in 2025", sub: "Borneo states argue wealth extraction violates MA63 resource ownership terms", lens: "Security" },
     { t: "fact", big: "Terengganu and Kelantan also receive 5% but have not challenged the formula", sub: "Constitutional experts say Borneo states have stronger legal basis than Peninsula", lens: "Legal" },
     { t: "reframe", big: "Revenue sharing tests whether federalism means fair distribution or central extraction", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "The petroleum revenue formula's first review in decades will test whether federalism adapts or fractures.", sub: "" },
   ]
 },
 {
@@ -10609,7 +10634,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Warisan under Shafie Apdal registered 28% support in February 2026 polls", sub: "Opposition targets rural Kadazan and Bajau seats lost in 2020", lens: "Technology" },
     { t: "fact", big: "Election Commission allocated RM180 million for Sabah state election", sub: "Remote polling stations in Tongod and Nabawan require helicopter ballot delivery", lens: "Economic" },
     { t: "reframe", big: "State elections test whether Sabah voters can hold power to account", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Sabah's August 2026 election will measure whether East Malaysian grievances translate into ballot outcomes.", sub: "" },
   ]
 },
 {
@@ -10623,7 +10648,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Illegal fishing by 350 foreign vessels detected in Sarawak waters in 2025", sub: "State argues federal Maritime Agency lacks resources to patrol extensive coast", lens: "Legal" },
     { t: "fact", big: "MA63 legal scholars argue coastal management falls under state jurisdiction", sub: "Federal government counters that maritime law is exclusively a federal matter", lens: "Governance" },
     { t: "reframe", big: "Coastline control tests whether Sarawak sovereignty extends to its own waters", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2,600km of coastline jurisdiction reveals that maritime sovereignty is still an unfinished constitutional question.", sub: "" },
   ]
 },
 {
@@ -10637,7 +10662,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average download speed in rural Sabah is 8 Mbps versus 120 Mbps in KL", sub: "Students in Kudat and Beluran cannot access online learning platforms", lens: "Economic" },
     { t: "fact", big: "Starlink applications from 12,000 Sabah households approved in 2025", sub: "Monthly cost of RM220 unaffordable for communities with RM1,200 median income", lens: "Political" },
     { t: "reframe", big: "Broadband gaps expose whether digital inclusion reaches beyond urban centres", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "34% rural broadband in Sabah — digital exclusion compounds every other disadvantage Borneo faces.", sub: "" },
   ]
 },
 {
@@ -10651,7 +10676,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Singapore expressed interest in purchasing 1,000MW of Sarawak green energy", sub: "Deal would make Sarawak Southeast Asia largest cross-border clean power exporter", lens: "Governance" },
     { t: "fact", big: "Environmental groups warn Baleh Dam displaced 3,000 Kayan and Kenyah people", sub: "Export profits flow to Sarawak Energy while displaced communities receive nothing", lens: "Social" },
     { t: "reframe", big: "Hydropower exports test whether clean energy development comes with fair distribution", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM15 billion hydropower exports could make Sarawak a regional energy hub within 8 years.", sub: "" },
   ]
 },
 {
@@ -10665,7 +10690,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Current arrangement under PM Department has no legislative enforcement power", sub: "Borneo affairs decisions can be overruled by individual line ministries", lens: "Political" },
     { t: "fact", big: "Prime Minister offered a Minister with full cabinet rank as compromise", sub: "GPS rejected offer saying post must come with dedicated enforcement machinery", lens: "Rights" },
     { t: "reframe", big: "Ministry demand tests whether Borneo bloc can convert parliamentary weight into structure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "A Borneo Affairs Ministry would institutionalise what ad hoc negotiations have failed to deliver.", sub: "" },
   ]
 },
 {
@@ -10679,7 +10704,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah spent RM380 million on public services for undocumented residents", sub: "Federal government reimbursed only RM95 million of the state expenditure", lens: "Social" },
     { t: "fact", big: "ESSCOM recorded 180 illegal border crossings per week in eastern waters", sub: "Maritime patrol assets cover only 40% of 1,400km eastern coastline", lens: "Critical" },
     { t: "reframe", big: "Immigration scale tests whether border security matches the severity of the challenge", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "1.2 million undocumented immigrants in Sabah — enforcement without documentation reform creates a permanent underclass.", sub: "" },
   ]
 },
 {
@@ -10693,7 +10718,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sarawak has 1,200 schools but only 45 use indigenous languages as medium", sub: "State wants authority to mandate bilingual education in Iban Bidayuh and Melanau", lens: "Rights" },
     { t: "fact", big: "Education Ministry spends RM340 per Sarawak student versus RM520 per KL student", sub: "Funding disparity persisted for 15 years despite multiple complaints to Parliament", lens: "Historical" },
     { t: "reframe", big: "Education autonomy tests whether Borneo children see themselves in their own curriculum", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Education autonomy was promised in 1963. Sixty-three years later, Sarawak still waits for the handover.", sub: "" },
   ]
 },
 {
@@ -10707,7 +10732,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Mount Kinabalu park limited capacity to 135 climbers per day from 185", sub: "Conservation restrictions reduced revenue by RM18 million but improved trails", lens: "Critical" },
     { t: "fact", big: "Sipadan diving permits now cost RM250 versus RM40 in 2019", sub: "Revenue increase offset by 45% drop in permit applications from international divers", lens: "Regional" },
     { t: "reframe", big: "Tourism recovery tests whether Sabah can rebuild access without sacrificing conservation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.3 billion below tourism targets — Sabah's potential requires infrastructure, not just marketing campaigns.", sub: "" },
   ]
 },
 {
@@ -10721,7 +10746,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Freight rates on Kuching-Sibu route dropped 25% within 3 months of launch", sub: "Competing private operators filed complaints with Competition Commission", lens: "Historical" },
     { t: "fact", big: "Plan to expand to 15 vessels by 2028 serving Sabah and Brunei routes", sub: "State government aims to eventually replace cabotage-dependent shipping entirely", lens: "Security" },
     { t: "reframe", big: "State shipping tests whether Sarawak can build autonomy through commercial infrastructure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Eight state-owned vessels break Sabah's shipping dependency. Vertical integration is Sarawak's autonomy strategy.", sub: "" },
   ]
 },
 {
@@ -10735,7 +10760,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "3,400 backlogged cases involve land disputes worth over RM100,000 each", sub: "Claimants often die before cases resolved passing disputes to next generation", lens: "Regional" },
     { t: "fact", big: "Federal Courts Act does not recognize native court decisions for enforcement", sub: "Successful claimants must re-litigate in civil courts adding 3-5 more years", lens: "Technology" },
     { t: "reframe", big: "Court backlogs test whether indigenous justice systems receive equal institutional support", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12,000 pending native court cases mean justice delayed is customary rights systematically denied.", sub: "" },
   ]
 },
 {
@@ -10749,7 +10774,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Hydrogen production facility in Bintulu aims for 5,000 tonnes by 2028", sub: "Green hydrogen from hydro-powered electrolysis targets Japanese and Korean buyers", lens: "Security" },
     { t: "fact", big: "Carbon credit sales from Sarawak forests generated RM180 million in 2025", sub: "State claims credit for 6 million hectares of protected forest under REDD+", lens: "Legal" },
     { t: "reframe", big: "Renewable targets test whether energy transition creates local benefit or only export revenue", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "70% renewable energy by 2030 — Sarawak's target exceeds the national commitment by 30 points.", sub: "" },
   ]
 },
 {
@@ -10763,7 +10788,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Second amendment proposed federal oversight of state forestry and logging permits", sub: "Sarawak Premier called it a direct attack on 60 years of timber sovereignty", lens: "Technology" },
     { t: "fact", big: "Two-thirds majority requires 148 votes but government mustered only 143", sub: "The bloc demonstrated constitutional veto power for the first time since MA63", lens: "Economic" },
     { t: "reframe", big: "Veto power tests whether East Malaysian MPs can permanently protect state rights", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Three constitutional amendments blocked by East Malaysian MPs show Borneo's parliamentary leverage is real.", sub: "" },
   ]
 },
 {
@@ -10777,7 +10802,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Proposed network would connect KK Sandakan and Tawau with electrified rail", sub: "Journey time KK to Sandakan would drop from 6 hours road to 2.5 hours", lens: "Legal" },
     { t: "fact", big: "Previous railway proposals in 2008 and 2015 shelved due to cost concerns", sub: "Current plan relies on 60% federal funding and 40% private participation", lens: "Governance" },
     { t: "reframe", big: "Railway revival tests whether Sabah infrastructure ambition gets beyond the study phase", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM18 billion for Sabah railway — the business case depends on freight volumes, not political promises.", sub: "" },
   ]
 },
 {
@@ -10791,7 +10816,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "72% of smallholders lack MSPO certification required for EU market access", sub: "Certification costs of RM8,000 per smallholder prohibitive without subsidies", lens: "Economic" },
     { t: "fact", big: "State launched RM150 million palm oil support fund in December 2025", sub: "Fund provides RM200 monthly supplement but covers only 60% of registered growers", lens: "Political" },
     { t: "reframe", big: "Price crashes test whether smallholders bear commodity risk alone or share it with industry", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "40% income drop for smallholders when palm oil crashes. Monoculture is Sarawak's structural vulnerability.", sub: "" },
   ]
 },
 {
@@ -10805,7 +10830,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah Forestry issued only 3 enforcement actions against 18 violations", sub: "Logging companies cited provisional licenses predating corridor protected status", lens: "Governance" },
     { t: "fact", big: "International donors pledged RM220 million for corridor restoration in 2025", sub: "Replanting efforts cover only 4,200 hectares per year at current funding levels", lens: "Social" },
     { t: "reframe", big: "Corridor loss tests whether protected status means protection or just a label", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28,000 hectares of wildlife corridor lost. Sabah's orangutan habitat cannot survive another decade of clearing.", sub: "" },
   ]
 },
 {
@@ -10819,7 +10844,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sarawak argues 5% royalty should apply to LNG export value not wellhead price", sub: "Difference between the two calculations amounts to RM520 million per year", lens: "Political" },
     { t: "fact", big: "Federal government urged out-of-court settlement to prevent market uncertainty", sub: "Petronas share price dropped 4.2% in the week following lawsuit announcement", lens: "Rights" },
     { t: "reframe", big: "This lawsuit tests whether state resource claims can be enforced against federal companies", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Sarawak suing Petronas for RM2.6 billion signals that negotiation has failed as a dispute mechanism.", sub: "" },
   ]
 },
 {
@@ -10833,7 +10858,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah received RM4.8 billion in federal development allocation in RMK-13", sub: "Per capita allocation is RM1,200 versus RM2,800 per capita for Selangor", lens: "Social" },
     { t: "fact", big: "Child malnutrition in Sabah interior affects 22% of children under five", sub: "Rate worsened from 18% in 2020 despite federal food aid expansion", lens: "Critical" },
     { t: "reframe", big: "Persistent poverty tests whether development funds reach the communities most in need", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "19.4% poverty — double the national rate — in a state that exports billions in resources annually.", sub: "" },
   ]
 },
 {
@@ -10847,7 +10872,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SkyBorneo received RM280 million state subsidy for first 3 years operations", sub: "Fares capped at RM150 one-way compared to MASwings previous RM280 average", lens: "Rights" },
     { t: "fact", big: "6 aircraft serve Kuching-Bario Miri-Long Lellang and 4 other highland routes", sub: "Fleet expansion to 12 aircraft planned by 2028 to add Sabah cross-border services", lens: "Historical" },
     { t: "reframe", big: "State airlines test whether Sarawak can build connectivity that federal operators abandoned", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "SkyBorneo is Sarawak's answer to airfares that cost 3 times the peninsular rate per kilometre.", sub: "" },
   ]
 },
 {
@@ -10861,7 +10886,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Article 112C mandates review after every census but none conducted", sub: "Constitutional lawyers say non-review amounts to a federal breach of constitution", lens: "Critical" },
     { t: "fact", big: "Sarawak equivalent grant mechanism replaced by SST arrangement in 2023", sub: "Sabah demands similar treatment or immediate adjustment of frozen amount", lens: "Regional" },
     { t: "reframe", big: "A frozen grant since 1969 tests whether constitutional obligations are enforceable", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM26.7 million special grant — frozen since 1969 — would be RM800 million inflation-adjusted today.", sub: "" },
   ]
 },
 {
@@ -10875,7 +10900,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Labour Department issued only 180 compounds worth RM2.7 million for violations", sub: "Maximum penalty of RM50,000 per offence rarely applied against major plantations", lens: "Historical" },
     { t: "fact", big: "78% of affected workers are documented foreign nationals from Indonesia and Philippines", sub: "Fear of deportation prevents most workers from filing wage complaints officially", lens: "Security" },
     { t: "reframe", big: "Low compliance tests whether minimum wage laws protect workers or just exist on paper", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "52% wage compliance on plantations means nearly half of Sabah's workers earn below minimum standards.", sub: "" },
   ]
 },
 {
@@ -10889,7 +10914,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "3 timber concessions worth RM1.2 billion issued within 30 days of reclassification", sub: "Concessions went to companies linked to individuals in state ruling coalition", lens: "Regional" },
     { t: "fact", big: "Sarawak permanent forest reserve shrunk from 6 million to 4.1 million hectares since 1990", sub: "Rate of reclassification accelerated 35% between 2020 and 2025", lens: "Technology" },
     { t: "reframe", big: "Forest reclassification tests whether permanent protection can be quietly reversed", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Tribal chiefs challenging forest reclassification defend a land governance system older than the state itself.", sub: "" },
   ]
 },
 {
@@ -10903,7 +10928,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah GDP per capita of RM24,800 is 30% below Sarawak RM35,200", sub: "Development gap between two Borneo states has widened since 2015", lens: "Security" },
     { t: "fact", big: "Federal Treasury offered RM8 billion total well below the RM12 billion ask", sub: "Both states submitted separate proposals weakening their bargaining position", lens: "Legal" },
     { t: "reframe", big: "Failed unity tests whether Borneo states can overcome internal divisions for shared goals", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Sabah-Sarawak budget talks collapsed because unity requires shared priorities, not just shared grievances.", sub: "" },
   ]
 },
 {
@@ -10917,7 +10942,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Palm oil mill effluent violations numbered 340 in 2025 up from 220 in 2023", sub: "Average fine of RM15,000 per violation provides little deterrent to producers", lens: "Technology" },
     { t: "fact", big: "Water treatment costs in Sibu rose 45% to RM38 million due to contamination", sub: "Increased chemical treatment raises health concerns about long-term safety", lens: "Economic" },
     { t: "reframe", big: "River pollution tests whether enforcement can match the pace of contamination", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Five consecutive years of worsening river pollution — enforcement without penalties produces only reports.", sub: "" },
   ]
 },
 {
@@ -10931,7 +10956,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah state budget allocated only RM5 million for all heritage conservation", sub: "Amount covers basic maintenance but not restoration of 6 critical sites", lens: "Legal" },
     { t: "fact", big: "UNESCO tentative list includes 3 Sabah sites but nominations need federal support", sub: "Without Heritage Department backing sites cannot proceed to formal nomination", lens: "Governance" },
     { t: "reframe", big: "Zero funding tests whether federal heritage priorities include East Malaysia at all", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Zero federal funding for Sabah heritage sites in 2026. Cultural preservation needs budget lines, not rhetoric.", sub: "" },
   ]
 },
 {
@@ -10945,7 +10970,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Government procurement allocated only 4% of Sarawak contracts to Dayak firms", sub: "Malay-owned firms received 28% despite being minority in state population", lens: "Economic" },
     { t: "fact", big: "DCCI launched RM50 million venture fund for Dayak startups January 2026", sub: "Fund targets technology agriculture processing and tourism across 5 divisions", lens: "Political" },
     { t: "reframe", big: "Dayak business growth tests whether indigenous entrepreneurs get equal access to capital", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.5 billion Dayak business revenue proves indigenous enterprise thrives with institutional support structures.", sub: "" },
   ]
 },
 {
@@ -10959,7 +10984,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rural Sarawak routes average RM4.20 per km versus RM1.40 for Peninsula", sub: "Mavcom received 2,800 complaints about East Malaysia airfares in 2025", lens: "Governance" },
     { t: "fact", big: "MAVCOM proposed fare caps but airlines threatened service cuts", sub: "Industry warned mandatory caps would result in frequency reductions on routes", lens: "Social" },
     { t: "reframe", big: "Flight costs test whether equal access to affordable travel extends to Borneo", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Three times costlier per kilometre — East Malaysia flights impose a geographic tax on Borneo citizens.", sub: "" },
   ]
 },
 {
@@ -10973,7 +10998,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Pilot in Penampang converted 3,200 titles in 2025 with 92% owner approval", sub: "Average property values increased 180% within 6 months of conversion", lens: "Political" },
     { t: "fact", big: "KadazanDusun Cultural Association opposes citing ancestral land protection", sub: "KDCA warns freehold could enable predatory purchases by non-indigenous buyers", lens: "Rights" },
     { t: "reframe", big: "Title conversion tests whether economic empowerment and cultural protection can coexist", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "450,000 title conversions would transform Sabah's land economy. The question is political will, not process.", sub: "" },
   ]
 },
 {
@@ -10987,7 +11012,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Fund invests 60% in Sarawak infrastructure bonds and 40% diversified portfolio", sub: "Strategy keeps investment returns circulating within the state economy", lens: "Social" },
     { t: "fact", big: "Federal EPF expressed concern about potential fragmentation of pension system", sub: "3 other states reportedly studying Sarawak model for possible replication", lens: "Critical" },
     { t: "reframe", big: "State pension tests whether Sarawak financial autonomy can extend to retirement security", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2 billion state pension fund — Sarawak is building parallel institutions where federal ones fall short.", sub: "" },
   ]
 },
 {
@@ -11001,7 +11026,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "New contractor consortium includes 4 Sabah-based firms awarded replacement", sub: "Revised completion date pushed to 2030 adding 4 years to original deadline", lens: "Rights" },
     { t: "fact", big: "12,000 construction workers faced delayed wages totalling RM48 million", sub: "Labour Department intervened to ensure wage recovery before termination", lens: "Historical" },
     { t: "reframe", big: "Contractor failure tests whether mega-project accountability protects public interest", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Contractor terminated after 3 years on Pan Borneo Sabah. Procurement failures compound infrastructure delays.", sub: "" },
   ]
 },
 {
@@ -11015,7 +11040,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Federal government subsidises RM1.2 billion annually to keep SESB tariffs down", sub: "Without subsidy actual cost of Sabah electricity would exceed 62 sen per kWh", lens: "Critical" },
     { t: "fact", big: "Gas pipeline from Kimanis to Sandakan completed 2025 may reduce costs 15%", sub: "SESB projects tariff reduction only in 2028 after gas turbine conversion", lens: "Regional" },
     { t: "reframe", big: "Electricity pricing tests whether essential service costs are equalized nationally", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "38% higher electricity tariff — Sabah subsidises peninsula rates through the very resources it produces.", sub: "" },
   ]
 },
 {
@@ -11029,7 +11054,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "PSB under Wong Soon Koh targets 25 seats across Chinese-majority constituencies", sub: "Party secured 3 seats in 2021 and expanded to 15 branches since then", lens: "Historical" },
     { t: "fact", big: "DAP returned to Sarawak operations in 2025 after 3-year hiatus", sub: "Federal coalition partner presence complicates GPS unity government relationship", lens: "Security" },
     { t: "reframe", big: "Electoral competition tests whether GPS dominance can withstand demographic change", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "GPS facing its strongest electoral challenge signals that autonomy rhetoric must deliver material results.", sub: "" },
   ]
 },
 {
@@ -11043,7 +11068,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Free screening programme tested only 52,000 of targeted 500,000 adults", sub: "Mobile clinic units cover 12 districts but visit rural stations only monthly", lens: "Regional" },
     { t: "fact", big: "Liver cancer rates in Sabah 2.8 times higher than Peninsula linked to hepatitis", sub: "QEH performed 180 liver-related surgeries in 2025 up from 120 in 2022", lens: "Technology" },
     { t: "reframe", big: "Health disparity tests whether disease prevention reaches every Malaysian equally", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Hepatitis B at 4 times the national rate — Sabah's health crisis requires targeted intervention, not averages.", sub: "" },
   ]
 },
 {
@@ -11057,7 +11082,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 18% of Sarawak SPM candidates achieved at least 3 A grades in 2025", sub: "National average was 31% with Selangor leading at 38% of candidates", lens: "Security" },
     { t: "fact", big: "English language proficiency gap was 22 percentage points between regions", sub: "Rural schools average only 3 hours English weekly versus 6 hours nationally", lens: "Legal" },
     { t: "reframe", big: "Score gaps test whether education quality follows geography more than policy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "SPM scores 15 points below national average — East Malaysia's education gap starts before the exam.", sub: "" },
   ]
 },
 {
@@ -11071,7 +11096,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12 Malaysian immigration officers arrested for complicity in facilitation", sub: "Officers allegedly received monthly payments of RM3,000-8,000 from syndicate", lens: "Technology" },
     { t: "fact", big: "Joint operation involved 320 personnel from PDRM ESSCOM and Philippine police", sub: "Intelligence sharing agreement signed 2024 enabled 6 months coordinated surveillance", lens: "Economic" },
     { t: "reframe", big: "Cross-border busts test whether bilateral cooperation can dismantle entrenched networks", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45 arrests in the Sabah-Philippines crime ring expose the security cost of an unresolved border.", sub: "" },
   ]
 },
 {
@@ -11085,7 +11110,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "83% of fire hotspots originated on drained peatland converted for agriculture", sub: "Drainage canals lowered water tables by 1.2m making peat highly combustible", lens: "Legal" },
     { t: "fact", big: "BOMBA deployed 2,400 firefighters but equipment shortage limited response", sub: "Sarawak has only 3 water-bombing aircraft versus recommended minimum of 8", lens: "Governance" },
     { t: "reframe", big: "Peat fires test whether agricultural drainage policies account for fire risk", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45,000 hectares of peat burned in 3 months. Sarawak's fire crisis needs prevention, not response.", sub: "" },
   ]
 },
 {
@@ -11099,7 +11124,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Fisheries Department recorded 480 trawler intrusions within 3 miles in 2025", sub: "Only 35 enforcement actions taken due to limited patrol vessel availability", lens: "Economic" },
     { t: "fact", big: "Indonesia and Philippines enforce 12-mile exclusive artisanal zones", sub: "Malaysia current 5-mile zone is smallest protection among ASEAN fishing nations", lens: "Political" },
     { t: "reframe", big: "Fishing zone boundaries test whether artisanal livelihoods are protected from industrial competition", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12 nautical miles would protect fishermen's livelihoods from industrial trawlers destroying coastal stocks.", sub: "" },
   ]
 },
 {
@@ -11113,7 +11138,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "State lost 4,200 healthcare and education professionals between 2020 and 2025", sub: "Departures exacerbate vacancies of 1,850 teachers and 600 medical officers", lens: "Governance" },
     { t: "fact", big: "GPS introduced RM3,000 return-home incentive but only 2,800 applied in 2025", sub: "Programme requires 3-year state employment commitment limiting private options", lens: "Social" },
     { t: "reframe", big: "Youth exodus tests whether Sarawak can retain talent without matching regional salaries", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18,000 youth leaving annually — Sarawak's brain drain is a verdict on local opportunity, not loyalty.", sub: "" },
   ]
 },
 {
@@ -11127,7 +11152,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 28% of Sabah road network meets JKR federal highway safety standards", sub: "Missing guardrails and no road markings characterize 1,800km of state roads", lens: "Political" },
     { t: "fact", big: "Average emergency response in rural Sabah is 45 minutes versus 12 minutes in KL", sub: "12 district hospitals lack trauma care requiring transfers to Kota Kinabalu", lens: "Rights" },
     { t: "reframe", big: "Road fatality rates test whether infrastructure safety standards apply equally across states", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12.8 road fatality rate — Malaysia's highest — reflects engineering deficits, not driver behaviour alone.", sub: "" },
   ]
 },
 {
@@ -11141,7 +11166,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Proposed tribunal would have 5 judges appointed by Sarawak Governor", sub: "Attorney General Chambers warned this could create parallel legal systems", lens: "Social" },
     { t: "fact", big: "12 ASEAN diplomats protested Sarawak entry denials in 2025", sub: "Foreign Ministry mediated 8 cases where state decisions conflicted federal visas", lens: "Critical" },
     { t: "reframe", big: "Parallel tribunals test whether state autonomy can extend to judicial institutions", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "A state immigration appeals tribunal tests whether Sarawak can build independent judicial institutions.", sub: "" },
   ]
 },
 {
@@ -11155,7 +11180,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Economic study estimated RM280 million annual savings from reduced electricity use", sub: "Extended daylight benefits agriculture tourism and outdoor work sectors", lens: "Rights" },
     { t: "fact", big: "Malaysia last adjusted its time zone in 1982 to unify Peninsula and Borneo", sub: "Government said proposal would face administrative and business complications", lens: "Historical" },
     { t: "reframe", big: "Time zone proposals test whether practical differences between regions are taken seriously", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "A separate Borneo time zone is symbolic, but symbols of autonomy carry real political weight.", sub: "" },
   ]
 },
 {
@@ -11169,7 +11194,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "State demolished 45 settlements in 2025 displacing 12,000 residents", sub: "Only 2,800 displaced households received alternative housing or relocation aid", lens: "Critical" },
     { t: "fact", big: "68% of squatter residents are undocumented or stateless persons", sub: "Remaining 32% are citizens unable to afford formal housing in urban areas", lens: "Regional" },
     { t: "reframe", big: "Squatter prevalence tests whether housing policy reaches the most vulnerable populations", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "380,000 squatter residents in Sabah — regularisation is cheaper and more humane than demolition cycles.", sub: "" },
   ]
 },
 {
@@ -11183,7 +11208,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Biomass pellet exports to Japan and South Korea reached RM680 million in 2025", sub: "Both countries offer premium prices for certified sustainable biomass fuel", lens: "Historical" },
     { t: "fact", big: "Industry employs 12,000 workers but 60% are low-wage processing roles", sub: "Average biomass plant worker earns RM1,800 below manufacturing sector average", lens: "Security" },
     { t: "reframe", big: "Biomass growth tests whether circular economy creates quality jobs or just volume", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM8 billion biomass target by 2028. Sarawak's plantation waste becomes an industrial feedstock opportunity.", sub: "" },
   ]
 },
 {
@@ -11197,7 +11222,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sabah Parks recorded 85 dynamite fishing incidents in 2025 despite patrols", sub: "Each blast destroys average 20 square metres needing 25 years to recover", lens: "Regional" },
     { t: "fact", big: "Dive tourism generates RM1.2 billion but declining reefs threaten industry", sub: "65% of 180 dive operators reported significant reef deterioration at key sites", lens: "Technology" },
     { t: "reframe", big: "Reef decline tests whether marine protection keeps pace with economic pressure on oceans", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "42% coral degradation — Sabah's reef crisis threatens both marine biodiversity and RM8 billion in tourism.", sub: "" },
   ]
 },
 {
@@ -11211,7 +11236,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "State funded construction from petroleum royalty reserves accumulated since 2020", sub: "Move signals Sarawak intent to build parallel healthcare independently", lens: "Security" },
     { t: "fact", big: "Federal Health Ministry normally funds all public hospitals nationally", sub: "Ministry officials expressed concern about precedent of states bypassing coordination", lens: "Legal" },
     { t: "reframe", big: "State hospital tests whether parallel infrastructure strengthens or fragments healthcare", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM580 million hospital built without federal aid. Sarawak is funding its own healthcare infrastructure.", sub: "" },
   ]
 },
 {
@@ -11225,7 +11250,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Bintulu port expansion allocated RM2.8 billion but completion delayed to 2029", sub: "Original 2026 deadline missed due to contractor insolvency and redesign", lens: "Technology" },
     { t: "fact", big: "Sarawak proposed RM4 billion deepwater port at Tanjung Manis for Panamax vessels", sub: "Federal Transport Ministry has not approved project citing competing priorities", lens: "Economic" },
     { t: "reframe", big: "Port shortfalls test whether trade infrastructure matches East Malaysia economic needs", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "800,000 TEUs short — East Malaysian ports need capacity investment before trade growth can materialise.", sub: "" },
   ]
 },
 {
@@ -11239,7 +11264,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Proposed relocation site is 45km from current settlement and fishing grounds", sub: "Orang Sungai depend on river fishing for 70% of food and 60% of income", lens: "Legal" },
     { t: "fact", big: "Flood project contractor linked to company with 3 other RM4.2 billion contracts", sub: "Opposition MPs questioned procurement process in parliamentary session", lens: "Governance" },
     { t: "reframe", big: "Forced relocation tests whether infrastructure development requires community consent", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Forced relocation of Orang Sungai communities repeats a pattern of displacing those with least political power.", sub: "" },
   ]
 },
 {
@@ -11253,7 +11278,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Vietnamese production at 300,000 tonnes undercuts Sarawak 22,000 tonnes", sub: "Price per kg fell from RM65 in 2016 to RM18 in 2025 making farming unprofitable", lens: "Economic" },
     { t: "fact", big: "State allocated RM45 million for pepper industry revitalization in 2026", sub: "Programme promotes premium organic certification for higher niche market prices", lens: "Political" },
     { t: "reframe", big: "Pepper collapse tests whether traditional commodities can survive global competition", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Pepper revenue collapsing from RM3 billion shows Sarawak's commodity dependence remains a systemic risk.", sub: "" },
   ]
 },
 {
@@ -11267,7 +11292,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 35% of East Malaysia military hardware meets operational readiness", sub: "8 of 12 patrol boats based in Sandakan require maintenance or replacement", lens: "Governance" },
     { t: "fact", big: "Defence Ministry allocated RM1.8 billion for East Malaysia military in 2026", sub: "New forward operating base in Semporna targets December 2027 operational date", lens: "Social" },
     { t: "reframe", big: "Military readiness tests whether defence investment matches the eastern border threat", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "The largest East Malaysia military exercise in 15 years signals a regional security recalibration.", sub: "" },
   ]
 },
 {
@@ -11281,7 +11306,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Grid extension to remaining communities would cost estimated RM2.4 billion", sub: "Cost per connection in remote areas reaches RM120,000 versus RM3,500 urban", lens: "Political" },
     { t: "fact", big: "Micro-hydro projects in 28 Penan villages provide 24-hour power at RM15 million", sub: "Model shows community-scale renewables are 8 times cheaper than grid extension", lens: "Rights" },
     { t: "reframe", big: "Electrification gaps test whether energy access is a right regardless of location cost", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "78% longhouse electrification after 60 years of statehood. The last 22% is the hardest stretch.", sub: "" },
   ]
 },
 {
@@ -11295,7 +11320,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Amendment affects estimated 1.8 million hectares of claimed NCR territory", sub: "Compensation rates set at 2020 market value which groups say is inadequate", lens: "Social" },
     { t: "fact", big: "GPS backbenchers initially supported but 12 reversed position after protests", sub: "Premier agreed to pause second reading pending community leader consultation", lens: "Critical" },
     { t: "reframe", big: "Mass protest tests whether indigenous land rights can resist legislative pressure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Land Code amendments spark protests because indigenous land governance predates and should constrain state power.", sub: "" },
   ]
 },
 {
@@ -11309,7 +11334,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "40km elevated circle connecting 26 stations now projected for 2033 completion", sub: "Timeline slipped 3 years from original 2030 target due to land acquisition", lens: "Rights" },
     { t: "fact", big: "Cost per km at RM1.1 billion exceeds Singapore MRT at RM850 million per km", sub: "PAC demanded independent audit of engineering and procurement cost assumptions", lens: "Historical" },
     { t: "reframe", big: "Cost escalation tests whether mega-project governance can control spending", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM45 billion for MRT3 — cost overruns reward contractors while taxpayers absorb the risk premium.", sub: "" },
   ]
 },
 {
@@ -11323,7 +11348,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Daily ridership in first month averaged only 45,000 against projected 120,000", sub: "Incomplete stations mean most commuters cannot reach destinations without transfers", lens: "Critical" },
     { t: "fact", big: "Prasarana reported RM280 million in interest costs during 18-month delay", sub: "Finance Ministry reviewing whether contractor penalties cover the overruns", lens: "Regional" },
     { t: "reframe", big: "Partial opening tests whether incomplete infrastructure delivers promised public benefit", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18 months late, LRT3 still opened. The question is whether penalties match the cost of delay.", sub: "" },
   ]
 },
 {
@@ -11337,7 +11362,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Ridership study projects 35,000 daily passengers generating RM2.8 billion revenue", sub: "Critics argue projections are optimistic given airline competition at RM100-200", lens: "Historical" },
     { t: "fact", big: "Japan and China both submitted preliminary proposals for construction contract", sub: "Geopolitical considerations may weigh as heavily as technical merit in selection", lens: "Security" },
     { t: "reframe", big: "HSR revival tests whether political will can sustain a cross-border mega-project", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM68 billion HSR demands ridership projections that justify the cost — not the other way around.", sub: "" },
   ]
 },
 {
@@ -11351,7 +11376,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average household saves RM180 monthly from abolished tolls on 18 highways", sub: "Savings concentrated in Klang Valley where 14 of 18 abolished toll roads are", lens: "Regional" },
     { t: "fact", big: "Remaining 13 tolled highways generate RM5.6 billion combined annual revenue", sub: "Full abolition would require estimated RM32 billion in total compensation", lens: "Technology" },
     { t: "reframe", big: "Toll abolition tests whether public roads should generate private profit indefinitely", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.2 billion toll abolition redistributes cost from drivers to all taxpayers, including non-users.", sub: "" },
   ]
 },
 {
@@ -11365,7 +11390,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MAHB proposed RM4.5 billion KLIA2 expansion adding 30 million more capacity", sub: "Construction timeline of 5 years means relief would not arrive until 2031", lens: "Security" },
     { t: "fact", big: "Flight delays at KLIA2 increased 35% with average delay of 42 minutes", sub: "Ground handling bottlenecks and gate shortages cited as primary constraints", lens: "Legal" },
     { t: "reframe", big: "Capacity crisis tests whether airport planning can keep pace with aviation growth", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45 million passengers at KLIA2 — a terminal designed as budget now operates as a primary hub.", sub: "" },
   ]
 },
 {
@@ -11379,7 +11404,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Touch n Go covers only Prasarana and KTM but not feeder buses", sub: "Stage Bus operators in Selangor still use separate cash-only or proprietary cards", lens: "Technology" },
     { t: "fact", big: "APAD common ticketing platform promised in 2022 remains in pilot in 2026", sub: "Technical disputes between operators over revenue sharing stalled implementation", lens: "Economic" },
     { t: "reframe", big: "Fragmented ticketing tests whether institutional coordination serves commuters or operators", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Five operators, zero integration. Public transport fragmentation is a governance failure, not a technical one.", sub: "" },
   ]
 },
 {
@@ -11393,7 +11418,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Median house price in KL at RM550,000 is 8.2 times median annual income", sub: "World Bank considers anything above 5.1 times income severely unaffordable", lens: "Legal" },
     { t: "fact", big: "PPR waitlist has 180,000 applicants with average wait time of 6.5 years", sub: "New PPR construction of 8,000 units per year cannot match 25,000 annual applications", lens: "Governance" },
     { t: "reframe", big: "Housing shortfall tests whether affordability is a planning goal or a market afterthought", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "960,000 affordable housing units short. The market alone will never close a gap this structural.", sub: "" },
   ]
 },
 {
@@ -11407,7 +11432,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "72% of hotspots are where drainage capacity is below 2010 design standards", sub: "Urban development since 2010 increased impervious surface 28% without upgrades", lens: "Economic" },
     { t: "fact", big: "Insurance claims for flood damage in KL reached RM1.2 billion in 2025", sub: "12 insurers raised flood premiums 40-60% or excluded flood-prone postcodes", lens: "Political" },
     { t: "reframe", big: "Recurring floods test whether urban development can proceed without drainage accountability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.8 billion flood damage in KL — drainage infrastructure built for 1990s rainfall cannot handle 2025 storms.", sub: "" },
   ]
 },
 {
@@ -11421,7 +11446,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Second 5G network operator licensed 2024 covered only 12% of population", sub: "Dual network approach adds RM4 billion in duplicated infrastructure costs", lens: "Governance" },
     { t: "fact", big: "Average 5G speed in Malaysia of 320 Mbps ranks 8th among 10 ASEAN nations", sub: "South Korea and Singapore exceed 800 Mbps while Malaysia prioritized coverage", lens: "Social" },
     { t: "reframe", big: "5G delays test whether telecoms infrastructure can meet digital economy ambitions", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "42% coverage after 4 years — 5G rollout reveals that spectrum allocation is not the same as deployment.", sub: "" },
   ]
 },
 {
@@ -11435,7 +11460,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Cyberjaya spent RM85 million on smart traffic saving only 4 minutes per trip", sub: "Cost-benefit shows RM21 million per minute of travel time saved", lens: "Political" },
     { t: "fact", big: "Iskandar smart waste achieved 22% efficiency gain across 3 municipalities", sub: "Only successful large deployment but requires RM12 million annual maintenance", lens: "Rights" },
     { t: "reframe", big: "Smart city failure tests whether technology investment follows a sustainability plan", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM1.2 billion on smart city with little result. Technology without governance reform produces expensive dashboards.", sub: "" },
   ]
 },
 {
@@ -11449,7 +11474,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Planning Act allows state conversion with minimal agricultural impact review", sub: "Only 4 of 13 states require food security assessments before land conversion", lens: "Social" },
     { t: "fact", big: "Developers paid RM2.8 billion in conversion premiums to state governments", sub: "Revenue incentive means states financially benefit from approving conversion", lens: "Critical" },
     { t: "reframe", big: "Farmland loss tests whether food security is weighed against development revenue", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "15,000 hectares of farmland consumed yearly — urban sprawl converts food security into property speculation.", sub: "" },
   ]
 },
 {
@@ -11463,7 +11488,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "George Town UNESCO zone lost 8 shophouses to unapproved renovation in 2025", sub: "UNESCO issued formal warning that losses could endanger World Heritage status", lens: "Rights" },
     { t: "fact", big: "Heritage tax incentives attracted only 45 applications in 2 years", sub: "Maximum RM500,000 deduction covers less than 20% of typical restoration costs", lens: "Historical" },
     { t: "reframe", big: "Heritage demolition tests whether cultural value can compete with development economics", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "120 heritage buildings demolished per year. Preservation requires legal protection, not heritage awareness campaigns.", sub: "" },
   ]
 },
 {
@@ -11477,7 +11502,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Mandatory minimums add RM18,000-35,000 to the cost of each housing unit", sub: "Developers pass parking structure cost directly to property buyers", lens: "Critical" },
     { t: "fact", big: "Penang implemented dynamic pricing in 2024 reducing congestion by 18%", sub: "Revenue of RM42 million funded 12km cycling lanes and pedestrian walkways", lens: "Regional" },
     { t: "reframe", big: "Parking policy tests whether cities prioritize car storage or people movement", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Parking reform stalling in 8 cities shows how politically difficult it is to price road space correctly.", sub: "" },
   ]
 },
 {
@@ -11491,7 +11516,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "68% of pedestrian deaths involved victims over 60 years of age", sub: "Signal crossing times of 12 seconds insufficient for elderly to clear 4-lane roads", lens: "Historical" },
     { t: "fact", big: "JKR pedestrian guidelines updated 2024 but adoption is voluntary", sub: "Only Penang and KL made the new standards mandatory for road projects", lens: "Security" },
     { t: "reframe", big: "Pedestrian deaths test whether roads are designed for all users or only vehicles", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "850 pedestrian deaths indict the assumption that roads are built for cars, not the people beside them.", sub: "" },
   ]
 },
 {
@@ -11505,7 +11530,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Penang allocated RM120 million for 200km cycling network by 2028", sub: "George Town pilot achieved 3.2% cycling mode share highest in Malaysia", lens: "Regional" },
     { t: "fact", big: "National cycling deaths rose to 180 in 2025 with 92% on roads without lanes", sub: "MIROS classified Malaysian roads as extremely hostile to cycling regionally", lens: "Technology" },
     { t: "reframe", big: "Cycling gap tests whether sustainable transport receives real infrastructure commitment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "480km of cycling infrastructure nationwide — meaningful modal shift requires a network, not isolated segments.", sub: "" },
   ]
 },
 {
@@ -11519,7 +11544,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Kelantan has worst NRW at 62% losing nearly two-thirds of treated water", sub: "State water operator RM1.8 billion in debt cannot fund replacement", lens: "Security" },
     { t: "fact", big: "Japan reduced NRW to 8% through systematic pipe replacement over 30 years", sub: "Malaysia would need RM45 billion investment to achieve similar results", lens: "Legal" },
     { t: "reframe", big: "Water losses test whether infrastructure maintenance receives the same attention as construction", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM7.2 billion in water losses yearly. Pipe replacement pays for itself; the obstacle is institutional inertia.", sub: "" },
   ]
 },
 {
@@ -11533,7 +11558,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "DOE recorded 2,800 river pollution incidents linked to sewage in 2025", sub: "15 public water intakes temporarily shut due to contamination events", lens: "Technology" },
     { t: "fact", big: "32% of households still served by individual septic tanks not centralized sewage", sub: "Rural and semi-urban areas lack sewage infrastructure entirely in many places", lens: "Economic" },
     { t: "reframe", big: "Sewage failure tests whether waste treatment is funded as essential infrastructure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2.3 million people affected by sewage failures. Treatment plant maintenance is not optional infrastructure spending.", sub: "" },
   ]
 },
 {
@@ -11547,7 +11572,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 45% of construction sites underwent Stage 3 inspection in 2025", sub: "1 inspector per 280 active sites makes comprehensive oversight impossible", lens: "Legal" },
     { t: "fact", big: "CIDB blacklisted 28 contractors but 18 continued operating under new names", sub: "Weak enforcement allows problematic contractors to reorganize and re-bid", lens: "Governance" },
     { t: "reframe", big: "Building collapses test whether construction regulation has real enforcement teeth", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12 building collapses trace back to construction quality failures that inspection regimes failed to prevent.", sub: "" },
   ]
 },
 {
@@ -11561,7 +11586,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sprinkler systems non-functional in 22% of buildings required to have them", sub: "Owners cited maintenance cost of RM15,000-40,000 annually as neglect reason", lens: "Economic" },
     { t: "fact", big: "BOMBA issued 4,200 closure notices but authorities enforced only 1,800", sub: "Political interference cited in 35% of cases where enforcement not carried through", lens: "Political" },
     { t: "reframe", big: "Fire safety gaps test whether building regulations protect lives or just exist on paper", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Below 60% fire safety compliance in commercial buildings — enforcement gaps become fatal during emergencies.", sub: "" },
   ]
 },
 {
@@ -11575,7 +11600,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Waste-to-energy in Ladang Tanah Merah processes only 1,200 tonnes daily", sub: "Single WTE handles just 3% of national waste despite RM1.1 billion cost", lens: "Governance" },
     { t: "fact", big: "Illegal dumps increased from 1,200 to 1,850 between 2022 and 2025", sub: "Local councils spend RM320 million annually cleaning up illegal waste", lens: "Social" },
     { t: "reframe", big: "Landfill capacity tests whether waste management gets ahead of the crisis or reacts after", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Eight landfills approaching capacity. Waste management needs circular economy incentives, not just more dumping sites.", sub: "" },
   ]
 },
 {
@@ -11589,7 +11614,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Proposed development includes 3.5km runway extension and new terminal", sub: "Surrounding area valued at RM28 billion for largest mixed-use development", lens: "Political" },
     { t: "fact", big: "Residents within 5km oppose expansion citing noise and traffic concerns", sub: "Petition with 45,000 signatures submitted to Selangor state government", lens: "Rights" },
     { t: "reframe", big: "Airport revival tests whether development benefits outweigh community impact", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM8 billion Subang redevelopment — the plan must serve commuters and residents, not just aviation demand.", sub: "" },
   ]
 },
 {
@@ -11603,7 +11628,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Westports terminal operates at 92% capacity causing 3-day vessel waits", sub: "Shipping lines rerouted 15% of transhipment to competing ports", lens: "Social" },
     { t: "fact", big: "Carey Island terminal would cost RM8 billion for 7 million TEU capacity", sub: "Environmental concerns over mangrove destruction delayed project 2 years", lens: "Critical" },
     { t: "reframe", big: "Port expansion tests whether Malaysia can compete for maritime trade without environmental cost", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM12 billion needed for Port Klang to stay competitive. Delays hand market share to Singapore and Tanjung Pelepas.", sub: "" },
   ]
 },
 {
@@ -11617,7 +11642,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysia ranks 7th in ASEAN for broadband affordability behind Vietnam", sub: "Both neighbours offer comparable speeds at 40-60% lower monthly prices", lens: "Rights" },
     { t: "fact", big: "Government RM50 broadband subsidy reaches only 800,000 of 4.2 million eligible", sub: "Application process requires MyKad verification excluding undocumented communities", lens: "Historical" },
     { t: "reframe", big: "Broadband costs test whether digital access is priced for inclusion or for profit", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4.2 million households face a broadband affordability gap. Connectivity is infrastructure, not a consumer luxury.", sub: "" },
   ]
 },
 {
@@ -11631,7 +11656,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "CIQ facility in Bukit Chagar will process 60,000 daily commuters at capacity", sub: "Customs clearance target of 3 minutes versus current 45-minute Causeway wait", lens: "Critical" },
     { t: "fact", big: "Property prices within 1km of station rose 35% since 2023", sub: "Speculation pushed affordable housing out of reach for local JB residents", lens: "Regional" },
     { t: "reframe", big: "RTS construction tests whether cross-border transit also addresses housing displacement", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "55% complete — JB-Singapore RTS link will test whether cross-border rail can reshape commuter patterns.", sub: "" },
   ]
 },
 {
@@ -11645,7 +11670,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Track infrastructure dates from 1885 with only 35% upgraded to modern standards", sub: "Speed restrictions on 60% of track limit trains to 60km/h versus 120km/h design", lens: "Historical" },
     { t: "fact", big: "New 38-train EMU procurement worth RM3.2 billion approved delivery starts 2028", sub: "Two-year gap means aging fleet must continue beyond recommended service life", lens: "Security" },
     { t: "reframe", big: "Reliability decline tests whether deferred maintenance creates a self-reinforcing crisis", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "78% on-time performance for KTM Komuter. Reliability below 90% drives commuters back to private vehicles.", sub: "" },
   ]
 },
 {
@@ -11659,7 +11684,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Maintenance budget per PPR unit is RM45 monthly versus RM180 for private condos", sub: "Government collects only RM124 monthly rent from PPR tenants", lens: "Regional" },
     { t: "fact", big: "Rat infestations documented in 85 of 120 surveyed PPR blocks in Klang Valley", sub: "KKM linked 3 leptospirosis deaths in 2025 to PPR sanitation conditions", lens: "Technology" },
     { t: "reframe", big: "PPR decay tests whether public housing maintenance gets proportional investment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "280,000 residents in PPR housing face a maintenance crisis that erodes the promise of public shelter.", sub: "" },
   ]
 },
 {
@@ -11673,7 +11698,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Undersea tunnel connecting island to mainland estimated at RM6.3 billion", sub: "Project studied since 2013 but construction has not commenced", lens: "Security" },
     { t: "fact", big: "Penang traffic congestion costs RM4.2 billion annually in lost productivity", sub: "Average commuter spends 85 minutes daily in traffic versus 65 minutes in KL", lens: "Legal" },
     { t: "reframe", big: "Funding gaps test whether state transport ambition can proceed without federal support", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM28 billion funding gap for Penang transport — ambition without fiscal backing produces plans, not systems.", sub: "" },
   ]
 },
 {
@@ -11687,7 +11712,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "DOSH has only 480 inspectors for 58,000 registered industrial premises", sub: "Each inspector responsible for 121 premises making annual inspection impossible", lens: "Technology" },
     { t: "fact", big: "3 factory collapses in 2025 killed 18 workers in Selangor and Johor", sub: "All 3 buildings had outstanding violation notices never enforced by authorities", lens: "Economic" },
     { t: "reframe", big: "Industrial safety tests whether inspection systems can scale to match the built environment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2,400 industrial building violations found. Safety audits only matter if enforcement follows the findings.", sub: "" },
   ]
 },
 {
@@ -11701,7 +11726,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "22 of 48 major river basin projects behind schedule by 2 or more years", sub: "Contractor capacity constraints and land acquisition are primary causes", lens: "Legal" },
     { t: "fact", big: "Climate projections indicate 35% increase in extreme rainfall by 2035", sub: "Current designs may be inadequate for future rainfall intensities", lens: "Governance" },
     { t: "reframe", big: "Flood protection gaps test whether mitigation keeps pace with climate reality", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45% flood risk coverage means the majority of vulnerable zones have no structural mitigation at all.", sub: "" },
   ]
 },
 {
@@ -11715,7 +11740,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "KL has 8,400 unsold serviced apartments averaging RM850,000 each", sub: "Developers continue launching despite existing oversupply in same locations", lens: "Economic" },
     { t: "fact", big: "Bank Negara tightened developer lending requiring 60% pre-sale before financing", sub: "Policy reduced new launches 25% but existing inventory continues aging unsold", lens: "Political" },
     { t: "reframe", big: "Property overhang tests whether development approval considers market saturation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45,000 empty completed units — the property overhang reflects a mismatch between what is built and what is needed.", sub: "" },
   ]
 },
 {
@@ -11729,7 +11754,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "85% of stations concentrated in KL Selangor and Penang", sub: "East coast and East Malaysia have fewer than 120 charging points combined", lens: "Governance" },
     { t: "fact", big: "TNB committed RM500 million for 5,000 chargers but deployed only 1,800", sub: "Grid capacity constraints limit home charging installation options", lens: "Social" },
     { t: "reframe", big: "Charging gaps test whether EV policy addresses infrastructure before adoption", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2,800 of 10,000 EV chargers installed. Adoption follows infrastructure, and the infrastructure is 72% short.", sub: "" },
   ]
 },
 {
@@ -11743,7 +11768,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "72% of sinkholes occur above water pipes dating from 1970s or earlier", sub: "Persistent leaks erode limestone creating voids up to 15 metres deep", lens: "Political" },
     { t: "fact", big: "Underground utility mapping covers only 35% of KL subsurface infrastructure", sub: "Complete mapping would cost RM280 million but could prevent most incidents", lens: "Rights" },
     { t: "reframe", big: "Sinkholes test whether underground infrastructure gets attention before catastrophic failure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "KL sinkholes tripled in 5 years to 85 incidents. Underground utility mapping would prevent most of them.", sub: "" },
   ]
 },
 {
@@ -11757,7 +11782,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Ministry allocated only RM450 million for repairs against RM2.8 billion needed", sub: "At current funding the repair backlog would take 12 years to clear", lens: "Social" },
     { t: "fact", big: "Selangor school ceiling collapse November 2025 injured 22 students", sub: "Building flagged in 2022 audit but repair not scheduled until 2027", lens: "Critical" },
     { t: "reframe", big: "School safety tests whether children learning environment meets minimum structural standards", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "1,200 school structures at risk of failure. Children's safety cannot wait for the next budget cycle.", sub: "" },
   ]
 },
 {
@@ -11771,7 +11796,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Food safety violations recorded at 35% of rest area food outlets", sub: "Health Ministry issued 480 closure orders to highway food operators", lens: "Rights" },
     { t: "fact", big: "PLUS invested RM85 million upgrading 45 rest areas but 135 remain substandard", sub: "Concession agreement requires only minimum maintenance not quality improvement", lens: "Historical" },
     { t: "reframe", big: "Rest area conditions test whether highway concessions include service quality obligations", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "65% of highway rest areas fail audits. Maintenance contracts without performance penalties produce decay.", sub: "" },
   ]
 },
 {
@@ -11785,7 +11810,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Singapore ABC Waters programme reduced urban flooding 30% since 2006", sub: "KL policy modelled on Singapore but lacks equivalent enforcement resources", lens: "Critical" },
     { t: "fact", big: "Only 12% of existing KL buildings have any rainwater harvesting capacity", sub: "Retrofit incentives of RM5,000 tax relief attracted 2,200 applications in 2 months", lens: "Regional" },
     { t: "reframe", big: "Stormwater rules test whether new development standards actually reduce flood damage", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Stormwater harvesting mandates shift urban water policy from drainage to capture — a structural improvement.", sub: "" },
   ]
 },
 {
@@ -11799,7 +11824,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12,000 buyers continue servicing bank loans averaging RM1,800 monthly", sub: "Banks refuse restructuring citing existing property as collateral despite non-completion", lens: "Historical" },
     { t: "fact", big: "Build-then-sell mandated since 2023 applies only to new projects not existing", sub: "Buyers of pre-2023 projects have no protection under the new framework", lens: "Security" },
     { t: "reframe", big: "Abandoned projects test whether buyer protection is retroactive or only prospective", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18,000 buyers stranded by abandoned projects. Developer insurance should be mandatory before construction begins.", sub: "" },
   ]
 },
 {
@@ -11813,7 +11838,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average age of buildings with critical defects is 25 years never inspected", sub: "Malaysia lacked mandatory facade inspection until DBKL introduced it 2024", lens: "Regional" },
     { t: "fact", big: "Singapore requires facade inspection every 7 years for buildings over 20 years", sub: "Malaysia has no national requirement leaving policy to individual local authorities", lens: "Technology" },
     { t: "reframe", big: "Facade defects test whether building maintenance is regulated before people get hurt", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "3,200 facade defects in KL buildings. Aging towers need mandatory inspection cycles, not voluntary compliance.", sub: "" },
   ]
 },
 {
@@ -11827,7 +11852,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Population reached 2.1 million against projected 3 million creating oversupply", sub: "30,000 completed residential units remain empty in southern corridor", lens: "Security" },
     { t: "fact", big: "Transport delivery achieved 52% of planned connectivity improvements", sub: "RTS Link delay means cross-border traffic still relies on congested Causeway", lens: "Legal" },
     { t: "reframe", big: "Iskandar shortfall tests whether long-term development plans survive political cycles", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Iskandar Malaysia 40% below investment target. Special economic zones succeed on execution, not branding.", sub: "" },
   ]
 },
 {
@@ -11841,7 +11866,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "EIA required for 1,800km passing through forested areas", sub: "Conservation groups estimate 45,000 hectares of forest clearance", lens: "Technology" },
     { t: "fact", big: "World Bank recommended Malaysia shift 60% of transport to public transit", sub: "Current allocation remains 72% highway and 28% public transport in 2026", lens: "Economic" },
     { t: "reframe", big: "Highway expansion tests whether transport investment matches climate commitments", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM85 billion expressway grid over 15 years. Highway-centric planning locks in car dependency for decades.", sub: "" },
   ]
 },
 {
@@ -11855,7 +11880,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sentul fire September 2025 killed 6 residents who could not reach exits", sub: "Investigation found stairwell doors chained shut by management", lens: "Legal" },
     { t: "fact", big: "Maximum penalty of RM50,000 for fire violations not increased since 1988", sub: "BOMBA proposed raising penalties to RM500,000 with mandatory imprisonment", lens: "Governance" },
     { t: "reframe", big: "Blocked escapes test whether fire safety enforcement has real consequences", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Fire escapes blocked in 40% of KL apartments. Building management failures become resident safety crises.", sub: "" },
   ]
 },
 {
@@ -11869,7 +11894,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Building energy efficiency improved only 12% against 40% reduction target", sub: "Government offices account for 78% of Putrajaya electricity consumption", lens: "Economic" },
     { t: "fact", big: "Green space per capita at 22 sqm exceeds the 20 sqm target", sub: "One of only 4 indicators met but maintenance budget cuts threaten upkeep", lens: "Political" },
     { t: "reframe", big: "Green city failure tests whether sustainability targets translate into actual policy change", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Putrajaya missed 8 of 12 green targets. A green city label requires measured outcomes, not aspirations.", sub: "" },
   ]
 },
 {
@@ -11883,7 +11908,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Sunway BRT most successful at 65% target serving 18,000 daily", sub: "Dedicated elevated guideway avoids traffic but serves only 5.4km corridor", lens: "Governance" },
     { t: "fact", big: "Combined annual operating losses reached RM180 million in 2025", sub: "Fare revenue covers only 28% of operating costs across all 4 systems", lens: "Social" },
     { t: "reframe", big: "BRT underperformance tests whether transit planning accounts for last-mile connectivity", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "BRT at 35% of projected ridership in 4 cities. Route design determines whether transit succeeds or fails.", sub: "" },
   ]
 },
 {
@@ -11897,7 +11922,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Morning peak speeds on expressways averaged 22km/h in 2025", sub: "Pre-pandemic average was 32km/h indicating permanent worsening", lens: "Political" },
     { t: "fact", big: "Congestion pricing for KL proposed in 2024 shelved after public backlash", sub: "Singapore ERP reduces CBD traffic 24% but Malaysian political will lacking", lens: "Rights" },
     { t: "reframe", big: "Congestion costs test whether pricing mechanisms can overcome political resistance", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM12 billion yearly congestion cost. Road pricing would fund the transit that reduces the congestion.", sub: "" },
   ]
 },
 {
@@ -11911,7 +11936,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "CIDB safety certification compliance dropped to 68% in 2025", sub: "Small contractors with fewer than 50 workers have only 42% compliance", lens: "Social" },
     { t: "fact", big: "Malaysia fatality rate of 12.8 per 100,000 is 6 times Japan rate", sub: "Mandatory safety officer requirement in 2024 has not yet reduced deaths", lens: "Critical" },
     { t: "reframe", big: "Worker deaths test whether safety regulations reach every construction site", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "168 construction worker deaths in one year. Safety regulation without site-level enforcement is meaningless.", sub: "" },
   ]
 },
 {
@@ -11925,7 +11950,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Electricity for cooling in KL buildings costs RM4.8 billion annually", sub: "Each 1 degree increase raises cooling energy demand by 6%", lens: "Rights" },
     { t: "fact", big: "DBKL tree planting aims for 100,000 trees but planted only 28,000 since 2022", sub: "Survival rate of 55% due to poor soil and maintenance gaps", lens: "Historical" },
     { t: "reframe", big: "Heat islands test whether urban planning accounts for temperature consequences", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "KL is 4.2 degrees hotter than surrounding rural areas. Urban heat demands green infrastructure, not just buildings.", sub: "" },
   ]
 },
 {
@@ -11939,7 +11964,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Water operators accumulated RM12 billion debt due to below-cost tariffs", sub: "Debt prevents investment in replacement perpetuating pipe leakage", lens: "Critical" },
     { t: "fact", big: "SPAN proposed 25% phased increase rejected by Cabinet 3 times since 2020", sub: "Political sensitivity ahead of elections blocked every reform attempt", lens: "Regional" },
     { t: "reframe", big: "Tariff delays test whether essential service pricing can overcome political cycles", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Water tariff reform delayed 12 consecutive years. Underpriced water guarantees underinvested infrastructure.", sub: "" },
   ]
 },
 {
@@ -11953,7 +11978,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "DBKL approved 4 TOD projects totalling RM18 billion near 4 MRT stations", sub: "All 4 feature luxury condos and commercial space with zero affordable units", lens: "Historical" },
     { t: "fact", big: "Hong Kong MTR earns 40% revenue from TOD but Malaysian model fails", sub: "MRT Corp has no property development mandate limiting value capture", lens: "Security" },
     { t: "reframe", big: "TOD delivery tests whether transit investment creates accessible or exclusive neighbourhoods", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "TOD near MRT delivers luxury units, not affordability. Zoning policy, not market forces, determines who benefits.", sub: "" },
   ]
 },
 {
@@ -11967,7 +11992,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Government allocated RM3.5 billion seed fund for affordable housing in 2026", sub: "Estimate suggests RM25 billion total public investment needed over 5 years", lens: "Regional" },
     { t: "fact", big: "Cross-subsidy model requires 30% affordable units in each new project", sub: "Industry lobby reduced requirement from 40% proposed in original draft", lens: "Technology" },
     { t: "reframe", big: "Housing targets test whether delivery mechanisms can match the scale of stated ambition", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "500,000 affordable units by 2030 requires 100,000 per year. Current delivery is below 40,000 annually.", sub: "" },
   ]
 },
 {
@@ -11981,7 +12006,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rail carries only 3.8% of passenger trips versus 18% in Thailand", sub: "Bus and private vehicle dependency results from insufficient rail connectivity", lens: "Security" },
     { t: "fact", big: "RMK-13 allocated 28% of transport budget to rail up from 15% prior", sub: "Shift is significant but experts say 45% needed to close gap by 2040", lens: "Legal" },
     { t: "reframe", big: "Rail density tests whether Malaysia can reverse decades of highway-first policy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Lowest rail density among ASEAN-5 — Malaysia built highways where it needed railways over 40 years.", sub: "" },
   ]
 },
 {
@@ -11995,7 +12020,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Contractor disputes delayed 3 of 8 packages by 18 months each", sub: "RM480 million in approved payments withheld pending dispute resolution", lens: "Technology" },
     { t: "fact", big: "DID revised completion from 2027 to 2032 at current pace", sub: "Climate projections indicate flood frequency will double before protection complete", lens: "Economic" },
     { t: "reframe", big: "Flood wall progress tests whether protection infrastructure can outpace climate change", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12km of 85km riverbank protected. Johor's flood wall covers the visible stretch, not the vulnerable one.", sub: "" },
   ]
 },
 {
@@ -12009,7 +12034,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Full deployment to all 2,400 intersections would cost RM850 million more", sub: "Estimated savings of RM2.8 billion annually at full deployment", lens: "Legal" },
     { t: "fact", big: "System reduced accidents at equipped intersections by 15% in first year", sub: "Better coordination and countdown timers contributed to safety improvement", lens: "Governance" },
     { t: "reframe", big: "Smart traffic tests whether technology investment at scale delivers proportional returns", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "8 minutes average savings per commuter from smart traffic. Scale determines whether pilots become systems.", sub: "" },
   ]
 },
 {
@@ -12023,7 +12048,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Beautification along 10.7km of riverfront is 65% complete and open to public", sub: "Pedestrian walkways attract 12,000 daily visitors but maintenance uncertain", lens: "Economic" },
     { t: "fact", big: "Original 2020 deadline extended twice now targeting 2029", sub: "PAC criticized management for scope changes adding RM1.8 billion to costs", lens: "Political" },
     { t: "reframe", big: "River rehabilitation tests whether long-term projects maintain momentum across administrations", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "35% complete after 12 years. River of Life needs delivery milestones, not extended timelines.", sub: "" },
   ]
 },
 {
@@ -12037,7 +12062,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Local authorities issued only 180 non-compliance notices in 6 years", sub: "Building plans routinely waive energy requirements without documentation", lens: "Governance" },
     { t: "fact", big: "Singapore achieves 89% compliance through integrated plan approval", sub: "Key difference is Singapore rejects plans that fail energy requirements", lens: "Social" },
     { t: "reframe", big: "Energy code failure tests whether mandatory standards are meaningless without enforcement", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Below 25% energy code compliance despite legal mandate. Codes without enforcement are architecture fiction.", sub: "" },
   ]
 },
 {
@@ -12051,7 +12076,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Annual maintenance budget of RM2.8 billion covers only 20% of actual needs", sub: "At current funding backlog would take 7 years if no further deterioration", lens: "Political" },
     { t: "fact", big: "Climate-related road damage increased 35% between 2020 and 2025", sub: "Flooding and landslides destroy repairs faster than maintenance crews work", lens: "Rights" },
     { t: "reframe", big: "Road maintenance tests whether rural infrastructure receives sustained investment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM14 billion rural road backlog. Maintenance debt compounds — delay today costs more tomorrow.", sub: "" },
   ]
 },
 {
@@ -12065,7 +12090,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "6 admirals and senior officials referred to MACC for investigation", sub: "Boustead directors face charges of criminal breach of trust in ongoing trial", lens: "Social" },
     { t: "fact", big: "Navy has zero new combat vessels while regional neighbours added 28 since 2020", sub: "Malaysian maritime patrol capability gap widened critically during programme failure", lens: "Critical" },
     { t: "reframe", big: "LCS failure tests whether defence procurement accountability can be enforced", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM6.1 billion spent, zero ships delivered. LCS is Malaysia's costliest procurement failure to date.", sub: "" },
   ]
 },
 {
@@ -12079,7 +12104,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12-month trial will collect 500,000km of driving data for road conditions", sub: "Data used to develop Malaysian-specific autonomous driving parameters", lens: "Rights" },
     { t: "fact", big: "Public acceptance survey showed 62% willing to use autonomous vehicles", sub: "Safety concerns remain primary hesitation cited by 38% of respondents", lens: "Historical" },
     { t: "reframe", big: "Autonomous trials test whether Malaysia can develop local mobility technology", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "15km autonomous vehicle trial in Putrajaya. Pilots need scaling plans, not just technology demonstrations.", sub: "" },
   ]
 },
 {
@@ -12093,7 +12118,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "December 2025 Pahang floods caught 45,000 residents without warning", sub: "Sensor failure in upstream monitoring station delayed alerts by 6 hours", lens: "Critical" },
     { t: "fact", big: "System upgrade allocated RM480 million but only RM180 million disbursed", sub: "Full nationwide coverage projected for 2030 at current implementation pace", lens: "Regional" },
     { t: "reframe", big: "Warning gaps test whether disaster preparedness matches the frequency of flooding events", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "55% river coverage for flood warnings. The unmonitored 45% is where the next disaster begins.", sub: "" },
   ]
 },
 {
@@ -12107,7 +12132,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Singapore mandates Green Mark for all new buildings achieving 82% green rate", sub: "Malaysia lacks mandatory green building requirement for any building category", lens: "Historical" },
     { t: "fact", big: "Tax incentives for green buildings attracted only 280 applications in 2025", sub: "Maximum RM5 million deduction covers small fraction of typical project cost", lens: "Security" },
     { t: "reframe", big: "Green building adoption tests whether sustainability can advance through incentives alone", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12% green building adoption. Market incentives and code enforcement must work together, not in isolation.", sub: "" },
   ]
 },
 {
@@ -12121,7 +12146,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Ready-mixed concrete costs up 22% due to sand shortage in Peninsula states", sub: "4 states imposed sand export bans driving prices up further in 2025", lens: "Regional" },
     { t: "fact", big: "Developers delayed 180 affordable housing projects citing unviable margins", sub: "Government refused to extend price control beyond existing cement subsidy", lens: "Technology" },
     { t: "reframe", big: "Material costs test whether affordable housing targets survive market price pressures", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28% material cost rise squeezes developers — but the cost is ultimately passed to buyers and renters.", sub: "" },
   ]
 },
 {
@@ -12135,7 +12160,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12,000 vehicles submerged with average RM25,000 damage per vehicle", sub: "Insurance industry paid RM480 million in JB flood claims in December alone", lens: "Security" },
     { t: "fact", big: "5,000 small businesses reported average losses of RM85,000 each", sub: "Federal disaster relief of RM35 million covered only 3% of total damages", lens: "Legal" },
     { t: "reframe", big: "Repeat flooding tests whether infrastructure design standards match current climate reality", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85,000 displaced in Johor flooding. Repeated displacement means mitigation infrastructure has failed structurally.", sub: "" },
   ]
 },
 {
@@ -12149,7 +12174,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12 heritage stations converted to local craft and food markets along the route", sub: "Community-run businesses at stations earned average RM8,500 monthly per stall", lens: "Technology" },
     { t: "fact", big: "Tourism Ministry awarded heritage railway RM12 million marketing grant for 2026", sub: "Plan to extend heritage experience to Sabah colonial railway under consideration", lens: "Economic" },
     { t: "reframe", big: "Heritage railway shows whether cultural infrastructure can generate sustainable local income", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "180,000 tourists from heritage railway show that preservation generates revenue, not just nostalgia.", sub: "" },
   ]
 },
 {
@@ -12163,7 +12188,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "KPKT database showed 480 duplicate allocations across multiple housing projects", sub: "Same individuals received units in 2 or more projects in different states", lens: "Legal" },
     { t: "fact", big: "12 state housing officers suspended pending investigation outcomes", sub: "Allocation system lacked cross-referencing between state and federal databases", lens: "Governance" },
     { t: "reframe", big: "Housing allocation tests whether aid reaches intended beneficiaries or leaks to insiders", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Corruption in PPR allocation means public housing fails the people it was designed to serve.", sub: "" },
   ]
 },
 {
@@ -12177,7 +12202,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Cycling commuter mode share in corridor increased from 1.2% to 3.8%", sub: "Adjacent property values rose 8% within 3 months of highway opening", lens: "Economic" },
     { t: "fact", big: "Plan to extend network to 200km across Penang island by 2030", sub: "Federal government contributed zero to the project which was fully state-funded", lens: "Political" },
     { t: "reframe", big: "Cycling infrastructure shows whether state-level initiative can pioneer national transport change", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Malaysia's first dedicated cycling highway in Penang. One corridor does not make a network.", sub: "" },
   ]
 },
 {
@@ -12191,7 +12216,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Daily rail ridership projected to increase 35% from 1.2 million to 1.62 million", sub: "Revenue sharing formula between operators remains primary unresolved dispute", lens: "Governance" },
     { t: "fact", big: "Prasarana KTM and MRT Corp would retain separate operations under unified fare", sub: "Similar integration in Hong Kong took 8 years and multiple failed attempts", lens: "Social" },
     { t: "reframe", big: "Rail integration tests whether institutional interests can align for commuter benefit", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Klang Valley rail integration succeeds only if fare structures and timetables align across operators.", sub: "" },
   ]
 },
 {
@@ -12205,7 +12230,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Cost per delivery of RM85 compares to RM350 for vehicle-based delivery", sub: "Pilot saved 3 lives by delivering emergency blood products within 30 minutes", lens: "Political" },
     { t: "fact", big: "Expansion to 45 clinics across 4 states planned for 2027 at RM28 million", sub: "Civil Aviation Authority issued special permits for beyond-visual-line-of-sight operations", lens: "Rights" },
     { t: "reframe", big: "Drone delivery shows whether technology can bypass infrastructure gaps in healthcare access", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12 rural clinics served by drone delivery. Remote healthcare logistics need scale, not just pilots.", sub: "" },
   ]
 },
 {
@@ -12219,7 +12244,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "CIDB allocated RM85 million for BIM training centres in 5 states", sub: "Centres target training 8,000 construction professionals over 3 years", lens: "Social" },
     { t: "fact", big: "Singapore mandated BIM in 2015 and achieved 80% industry adoption by 2022", sub: "Malaysian voluntary adoption since 2017 achieved only 22% suggesting mandate needed", lens: "Critical" },
     { t: "reframe", big: "BIM mandate tests whether digital construction standards can transform a traditional industry", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "BIM mandates reduce construction waste by up to 30%. Digital standards modernise an analog industry.", sub: "" },
   ]
 },
 {
@@ -12233,7 +12258,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Unit prices of RM1.2 million place vertical forest firmly in luxury category", sub: "No affordable housing development in Malaysia includes green facade design", lens: "Rights" },
     { t: "fact", big: "Maintenance cost of RM280,000 monthly shared among 480 unit owners", sub: "Irrigation system consumes 45,000 litres of water daily raising sustainability questions", lens: "Historical" },
     { t: "reframe", big: "Vertical forests test whether green building innovation reaches beyond premium developments", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "40,000 plants on vertical forest towers. Green buildings must prove ecological function, not just aesthetics.", sub: "" },
   ]
 },
 {
@@ -12247,7 +12272,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 180 of 4,500 displaced hawkers allocated permanent space in new developments", sub: "Rental in new spaces averages RM2,800 monthly versus RM450 at original locations", lens: "Critical" },
     { t: "fact", big: "Developer committed to affordable hawker units but set prices above market rate", sub: "Community groups petitioned for hawker inclusion in TOD planning guidelines", lens: "Regional" },
     { t: "reframe", big: "Hawker displacement tests whether transit development preserves or destroys local economies", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4,500 hawkers displaced by transit development. Inclusive planning means protecting livelihoods near stations.", sub: "" },
   ]
 },
 {
@@ -12261,7 +12286,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Annual infrastructure maintenance spending would need to triple from current levels", sub: "Current RM22 billion yearly allocation covers only 12% of identified requirements", lens: "Historical" },
     { t: "fact", big: "Rating agencies warned infrastructure deterioration could affect Malaysia credit outlook", sub: "Moody cited infrastructure risk as factor in stable rather than positive outlook", lens: "Security" },
     { t: "reframe", big: "Infrastructure gap tests whether Malaysia can fund maintenance alongside new construction", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM180 billion infrastructure gap — the audit reveals what deferred maintenance costs a generation later.", sub: "" },
   ]
 },
 {
@@ -12275,7 +12300,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Tunnel designed for 50,000 vehicles daily reducing Penang Bridge congestion 25%", sub: "Environmental groups raised concerns about seabed disruption in channel ecology", lens: "Regional" },
     { t: "fact", big: "Contractor consortium includes 3 Malaysian and 2 South Korean firms", sub: "State government funding 40% with federal allocation covering remaining 60%", lens: "Technology" },
     { t: "reframe", big: "Tunnel groundbreaking tests whether mega-projects can finally move from study to steel", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "13 years to break ground on Penang's undersea tunnel. Mega-projects test whether governance can match ambition.", sub: "" },
   ]
 },
 {
@@ -12289,7 +12314,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Naval orders totalled RM6.8 billion including 6 littoral mission ships", sub: "Ships built at Boustead with 60% local content requirement", lens: "Security" },
     { t: "fact", big: "Only 35% of LIMA contracts had confirmed funding at time of signing", sub: "Past LIMA saw 40% of deals cancelled or reduced post-event", lens: "Legal" },
     { t: "reframe", big: "LIMA orders test whether announced deals translate into actual delivered capability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM18.5 billion in LIMA orders — defence procurement must balance capability needs against fiscal discipline.", sub: "" },
   ]
 },
 {
@@ -12303,7 +12328,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Original Scorpene procurement at RM7.3 billion linked to Altantuya case", sub: "French investigation found RM480 million in commissions to intermediary", lens: "Technology" },
     { t: "fact", big: "South Korea and Germany submitted proposals at RM5.5 billion each", sub: "Both significantly below RM12 billion estimate suggesting competitive pricing", lens: "Economic" },
     { t: "reframe", big: "Submarine replacement tests whether defence procurement can avoid past corruption patterns", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM12 billion submarine debate returns. Strategic deterrence requires honest assessment of operational needs.", sub: "" },
   ]
 },
 {
@@ -12317,7 +12342,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MMEA deployed only 8 vessels to patrol 150,000 sq km of contested waters", sub: "China South China Sea fleet exceeds 300 vessels dwarfing Malaysian assets", lens: "Legal" },
     { t: "fact", big: "Malaysia filed 4 diplomatic protests to Beijing all went unanswered", sub: "Government maintains quiet diplomacy while neighbours adopt stronger stances", lens: "Governance" },
     { t: "reframe", big: "Maritime incursions test whether diplomatic restraint protects sovereignty or concedes it", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45% increase in Chinese vessel incursions. South China Sea sovereignty requires presence, not just protests.", sub: "" },
   ]
 },
 {
@@ -12331,7 +12356,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Spanish arbitrator Gonzalo Stampa charged with fraud in 2023", sub: "Criminal proceedings have not yet invalidated award in other jurisdictions", lens: "Economic" },
     { t: "fact", big: "Sulu heirs filed new enforcement actions in 3 additional countries in 2025", sub: "Malaysia must defend simultaneously in multiple courts at significant expense", lens: "Political" },
     { t: "reframe", big: "Sulu claim tests whether arbitral awards from questionable proceedings can be permanently defeated", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "USD14.92 billion Sulu award remains enforceable. Sovereign risk from historical claims demands legal strategy.", sub: "" },
   ]
 },
 {
@@ -12345,7 +12370,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "3 kidnapping incidents in Sulu-Celebes Sea in 2025 involved Malaysian fishermen", sub: "Response times averaging 4 hours allowed perpetrators to cross into Philippines", lens: "Governance" },
     { t: "fact", big: "Radar coverage of ESSZONE reaches only 65% of designated security area", sub: "8 planned radar stations remain unfunded leaving maritime awareness gaps", lens: "Social" },
     { t: "reframe", big: "Funding gaps test whether eastern border security matches the threat assessment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM800 million ESSCOM funding gap. Border security works only when resourced at the scale the threat demands.", sub: "" },
   ]
 },
 {
@@ -12359,7 +12384,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 38% of SOSMA detainees eventually charged in court since 2020", sub: "Remaining 62% released without charge after months of detention", lens: "Political" },
     { t: "fact", big: "Bar Council documented 45 cases of alleged mistreatment during detention", sub: "SUHAKAM called for independent monitoring access to SOSMA facilities", lens: "Rights" },
     { t: "reframe", big: "SOSMA usage tests whether security detention has sufficient safeguards against abuse", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "480 SOSMA detentions without trial in 2025. Preventive detention must have judicial review or it becomes abuse.", sub: "" },
   ]
 },
 {
@@ -12373,7 +12398,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Prisons hold 28,000 drug offenders comprising 40% of total population", sub: "Incarceration cost reached RM1.2 billion annually in 2025", lens: "Social" },
     { t: "fact", big: "Drug overdose deaths reached 1,200 in 2025 up from 840 in 2022", sub: "Harm reduction covers only 15% of estimated 400,000 drug users", lens: "Critical" },
     { t: "reframe", big: "Drug policy tests whether enforcement or harm reduction better serves public health", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.8 billion in drug seizures with meth dominant. Enforcement without demand reduction treats symptoms, not causes.", sub: "" },
   ]
 },
 {
@@ -12387,7 +12412,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Custodial deaths reached 85 in 2025 with only 12 resulting in charges", sub: "SUHAKAM documented 28 cases where cause of death inconsistent with official accounts", lens: "Rights" },
     { t: "fact", big: "Police misconduct complaints rose 35% to 8,400 but dismissals totalled 48", sub: "Internal affairs investigated 1,200 cases with 72% resulting in no action", lens: "Historical" },
     { t: "reframe", big: "Reform stagnation tests whether police accountability requires external enforcement", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "70% of 150 PDRM reform recommendations still pending after 5 years. Police reform needs deadlines, not suggestions.", sub: "" },
   ]
 },
 {
@@ -12401,7 +12426,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Myanmar military junta boycotted 4 of 6 ministerial meetings", sub: "Five-Point Consensus remains unimplemented 4 years after April 2021 adoption", lens: "Critical" },
     { t: "fact", big: "Malaysia hosted 2,800 meetings across 320 events during chair year", sub: "Government spent RM480 million on ASEAN events highest chair budget ever", lens: "Regional" },
     { t: "reframe", big: "ASEAN chair tests whether regional leadership can achieve results beyond economic agreements", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12 ASEAN deals signed but Myanmar stalls — consensus diplomacy reaches its limits on human rights crises.", sub: "" },
   ]
 },
 {
@@ -12415,7 +12440,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "US expressed concern about Chinese equipment in Malaysian armed forces", sub: "Pentagon warned interoperability with FPDA could be affected", lens: "Historical" },
     { t: "fact", big: "Malaysia conducted 8 joint exercises with China in 2025 versus 4 with US", sub: "Balance of military engagement shifted notably toward Beijing recently", lens: "Security" },
     { t: "reframe", big: "China aid tests whether Malaysia can balance competing military partnerships", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM1.2 billion in Chinese military aid. Defence partnerships must be transparent about strategic obligations.", sub: "" },
   ]
 },
 {
@@ -12429,7 +12454,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Tech sector lost RM850 million in contracts citing political risk", sub: "3 semiconductor firms paused expansion plans over uncertainty", lens: "Regional" },
     { t: "fact", big: "Malaysia donated RM280 million humanitarian aid making it ASEAN top donor", sub: "Government dispatched 8 aid shipments and maintained field hospital", lens: "Technology" },
     { t: "reframe", big: "Palestine policy tests whether principled foreign positions have managed economic consequences", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Palestine solidarity linked to RM3.2 billion trade impact. Values-based foreign policy has measurable economic costs.", sub: "" },
   ]
 },
 {
@@ -12443,7 +12468,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Dairy imports from Australia and NZ rose 45% displacing local producers", sub: "Malaysian dairy farms reported 22% revenue decline within 12 months", lens: "Security" },
     { t: "fact", big: "Government procurement opening worth RM8 billion concerns Bumiputera contractors", sub: "5-year transition delays full opening but foreign firms already positioning", lens: "Legal" },
     { t: "reframe", big: "Trade agreements test whether economic gains and sectoral disruption can be balanced", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "CPTPP creates 45,000 jobs but disrupts 12 sectors. Trade liberalisation produces winners and losers simultaneously.", sub: "" },
   ]
 },
 {
@@ -12457,7 +12482,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "UNHCR reported 28 Rohingya deaths in immigration detention in 2025", sub: "Agency called for investigation and access to detention facilities", lens: "Technology" },
     { t: "fact", big: "Polls show 72% of Malaysians oppose accepting more Rohingya refugees", sub: "Social media campaigns depicting Rohingya as threat intensified since 2023", lens: "Economic" },
     { t: "reframe", big: "Refugee policy tests whether humanitarian obligations survive public opinion pressure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "185,000 Rohingya refugees under tighter rules. Humanitarian obligation and border control must coexist, not compete.", sub: "" },
   ]
 },
 {
@@ -12471,7 +12496,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Bank Negara kill switch blocked RM520 million in fraudulent transactions", sub: "System requires banks to freeze suspected accounts within 24 hours", lens: "Legal" },
     { t: "fact", big: "Only 1,200 of 58,000 cybercrime reports resulted in arrests", sub: "Cross-border nature makes prosecution extremely difficult", lens: "Governance" },
     { t: "reframe", big: "Cybercrime scale tests whether enforcement can match the sophistication of criminal networks", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.8 billion in cybercrime losses. Digital enforcement requires cross-border cooperation, not just domestic laws.", sub: "" },
   ]
 },
 {
@@ -12485,7 +12510,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "48% of RMAF fighter aircraft grounded due to maintenance issues", sub: "Fleet of 28 Su-30MKM and 8 FA-18D has only 18 operational at any time", lens: "Economic" },
     { t: "fact", big: "Military housing in 35 camps classified as substandard", sub: "2,800 experienced personnel left in 2025 citing poor conditions", lens: "Political" },
     { t: "reframe", big: "Stagnant budgets test whether defence readiness is a stated or funded priority", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "1.1% of GDP on defence for 5 straight years. Strategic ambiguity depends on capability, which requires spending.", sub: "" },
   ]
 },
 {
@@ -12499,7 +12524,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Special Branch disrupted 4 planned attacks including 1 targeting KLCC", sub: "Suspects acquired materials and conducted surveillance of target location", lens: "Governance" },
     { t: "fact", big: "Malaysia spent RM680 million on counter-terrorism operations in 2025", sub: "Deradicalization programme processed 480 individuals with 12% recidivism", lens: "Social" },
     { t: "reframe", big: "Counter-terrorism tests whether prevention and deradicalization receive equal focus as enforcement", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "120 counter-terrorism arrests in 2025. Prevention succeeds invisibly; failure is catastrophically visible.", sub: "" },
   ]
 },
 {
@@ -12513,7 +12538,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "5 MPs and 2 retired judges appointed for 3-year terms", sub: "Opposition holds 2 of 5 parliamentary seats ensuring bipartisan review", lens: "Political" },
     { t: "fact", big: "Committee can access classified materials but cannot compel testimony", sub: "Critics say limitation makes committee advisory not truly accountable", lens: "Rights" },
     { t: "reframe", big: "Intelligence oversight tests whether parliamentary review has real access or just appearance", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Intelligence oversight committee took 12 years to establish. Accountability delayed is accountability diminished.", sub: "" },
   ]
 },
 {
@@ -12527,7 +12552,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Wisma Putra career officers filed 3 formal objections through civil service union", sub: "Foreign Ministry morale at lowest with 45 resignations in 2025", lens: "Social" },
     { t: "fact", big: "Malaysia Lowy Institute Diplomacy ranking fell from 18th to 24th", sub: "Assessment cited declining professional standards as factor", lens: "Critical" },
     { t: "reframe", big: "Patronage appointments test whether diplomatic service serves national interest or political debt", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Political patronage in diplomatic appointments trades foreign policy expertise for party loyalty.", sub: "" },
   ]
 },
 {
@@ -12541,7 +12566,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Palm oil exports saved RM2.8 billion in reduced tariffs across markets", sub: "India tariff reduction from 40% to 25% opened significant new demand", lens: "Rights" },
     { t: "fact", big: "SME utilization of RCEP preferential tariffs was only 28% in 2025", sub: "Complex rules of origin deter smaller businesses from claiming benefits", lens: "Historical" },
     { t: "reframe", big: "RCEP utilization tests whether trade agreements benefit large firms or the entire economy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM48 billion RCEP benefits — but gains concentrate in sectors that were already globally competitive.", sub: "" },
   ]
 },
 {
@@ -12555,7 +12580,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Kalimantan border has 12 drone stations for 1,032km frontier", sub: "Dense jungle canopy limits drone effectiveness to clearings and rivers", lens: "Critical" },
     { t: "fact", big: "RM450 million allocated for 80 additional border drones under RMK-13", sub: "Full deployment will not be achieved before 2028 due to procurement delays", lens: "Regional" },
     { t: "reframe", big: "Border coverage tests whether surveillance technology can secure challenging terrain", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "35% drone coverage of 2,669km frontier. Border technology without ground presence creates surveillance gaps.", sub: "" },
   ]
 },
 {
@@ -12569,7 +12594,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "LCS programme delivered 0 of 6 vessels after RM6.1 billion spent", sub: "Boustead Naval Shipyard project is costliest defence procurement failure", lens: "Historical" },
     { t: "fact", big: "Average repair time increased from 6 months to 14 months for major systems", sub: "Foreign-sourced spare parts face supply chain delays and currency costs", lens: "Security" },
     { t: "reframe", big: "Fleet readiness tests whether maintenance investment matches operational requirements", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Below 60% surface fleet readiness means the navy cannot simultaneously patrol all territorial waters.", sub: "" },
   ]
 },
 {
@@ -12583,7 +12608,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "China Foreign Ministry protested exercise as provocative and destabilizing", sub: "Beijing issued formal complaint to all 5 participating nations", lens: "Regional" },
     { t: "fact", big: "Australia deployed 2 P-8A Poseidon maritime patrol aircraft from Darwin", sub: "Enhanced surveillance demonstrated interoperability for monitoring contested waters", lens: "Technology" },
     { t: "reframe", big: "FPDA exercises test whether collective defence arrangements deter or provoke regional tensions", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "FPDA testing South China Sea scenarios for the first time signals a regional defence posture shift.", sub: "" },
   ]
 },
 {
@@ -12597,7 +12622,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "86 officers across 3 agencies investigated for complicity in networks", sub: "MACC arrested 12 immigration officers for facilitating victim entry", lens: "Security" },
     { t: "fact", big: "Government spent RM28 million on 8 shelters serving 1,200 victims", sub: "Average shelter stay of 14 months restricts victim mobility and recovery", lens: "Legal" },
     { t: "reframe", big: "Trafficking response tests whether enforcement targets perpetrators or just processes victims", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28% rise in trafficking cases keeps Malaysia at Tier 2. Enforcement alone cannot fix systemic labour exploitation.", sub: "" },
   ]
 },
 {
@@ -12611,7 +12636,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "480 Malaysian fishermen detained by Indonesian authorities since 2020", sub: "Fishermen unknowingly cross disputed lines losing boats and equipment", lens: "Technology" },
     { t: "fact", big: "Joint development zone proposed in 2023 but Indonesia demanded 60-40 split", sub: "Malaysia insists on 50-50 consistent with UNCLOS equidistance principle", lens: "Economic" },
     { t: "reframe", big: "Boundary disputes test whether bilateral negotiations can resolve overlapping maritime claims", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "15 years without resolving the Indonesia maritime boundary. Undrawn lines create space for resource disputes.", sub: "" },
   ]
 },
 {
@@ -12625,7 +12650,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Su-30MKM fleet of 18 has only 10 operational due to engine delays", sub: "AL-31F engine overhauls require 18-month turnaround at Russian facilities", lens: "Legal" },
     { t: "fact", big: "Light Combat Aircraft procurement estimated at RM4-6 billion", sub: "Decision between FA-50 and JF-17 expected by end of 2026", lens: "Governance" },
     { t: "reframe", big: "Fighter readiness tests whether air defence capability matches regional security needs", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Only 18 operational RMAF fighters — air sovereignty requires a fleet large enough to maintain readiness.", sub: "" },
   ]
 },
 {
@@ -12639,7 +12664,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysia signed extradition treaties with 3 new countries in 2025", sub: "Cambodia Laos and Myanmar agreements specifically cover telecom fraud", lens: "Economic" },
     { t: "fact", big: "PDRM estimates 1,800 Malaysians currently in scam centres across region", sub: "Many initially recruited through fake job ads then held against their will", lens: "Political" },
     { t: "reframe", big: "Extradition treaties test whether cross-border legal cooperation can disrupt scam ecosystems", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "8 Malaysians rescued from Cambodia scam centres. Transnational fraud requires joint operations, not just arrests.", sub: "" },
   ]
 },
 {
@@ -12653,7 +12678,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Audit found 45% price inflation across 8 purchases versus market rates", sub: "Intermediary companies received average 28% commission on inflated values", lens: "Governance" },
     { t: "fact", big: "MACC froze RM120 million in assets linked to procurement agents", sub: "Properties vehicles and accounts traced through 15 shell companies in 4 countries", lens: "Social" },
     { t: "reframe", big: "Defence corruption tests whether procurement oversight can prevent systemic waste", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.4 billion procurement corruption probe. Defence spending without transparent oversight invites systematic abuse.", sub: "" },
   ]
 },
 {
@@ -12667,7 +12692,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Joint exercises detected 4 state-sponsored intrusion attempts during pilot", sub: "Intrusions targeted defence communications and maritime awareness systems", lens: "Political" },
     { t: "fact", big: "China expressed concern over expanded US-Malaysia cyber cooperation", sub: "Beijing called for bilateral matters not influenced by third-party arrangements", lens: "Rights" },
     { t: "reframe", big: "Cyber cooperation tests whether Malaysia can deepen US ties without alienating China", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "US defence pact expanding to cybersecurity. Alliance scope creep requires parliamentary scrutiny and public debate.", sub: "" },
   ]
 },
 {
@@ -12681,7 +12706,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Halal exports to Middle East reached RM18.5 billion up 42% from 2023", sub: "UAE alone imported RM4.8 billion in Malaysian halal food and pharma", lens: "Social" },
     { t: "fact", big: "Khazanah raised RM4.2 billion in Gulf sukuk in 2025", sub: "Islamic finance positions Malaysia as key intermediary for Middle East-ASEAN capital", lens: "Critical" },
     { t: "reframe", big: "Trade growth tests whether economic partnership translates into diplomatic influence", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM82 billion Middle East trade surge — diversification reduces dependence but introduces new geopolitical exposures.", sub: "" },
   ]
 },
 {
@@ -12695,7 +12720,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MMEA covers 614,000 sq km with only 160 capable vessels", sub: "Equivalent to 1 patrol vessel per 3,800 square kilometres of ocean", lens: "Rights" },
     { t: "fact", big: "Government approved only RM1.2 billion of RM8.5 billion for first phase", sub: "Full modernization would not be achieved until 2040 at current funding", lens: "Historical" },
     { t: "reframe", big: "Coastguard funding tests whether maritime security gets investment proportional to risk", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM8.5 billion coastguard modernization over a decade. Maritime security is a continuous investment, not a one-time purchase.", sub: "" },
   ]
 },
 {
@@ -12709,7 +12734,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Training includes 18 months with rotations to US UK and Australian units", sub: "RM280 million allocated for equipment and training over 3-year establishment", lens: "Critical" },
     { t: "fact", big: "One battalion based in Sabah specifically for eastern maritime security", sub: "Unit specializes in interdiction and hostage rescue in littoral environment", lens: "Regional" },
     { t: "reframe", big: "Special forces expansion tests whether elite capability addresses Borneo security requirements", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Two new special forces battalions expand capability. Force structure growth must match threat assessment, not prestige.", sub: "" },
   ]
 },
 {
@@ -12723,7 +12748,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Wisma Putra cited changed geopolitical landscape for the shift", sub: "Critics say Malaysia sacrificed principled stance for defence benefits", lens: "Historical" },
     { t: "fact", big: "82 nations voted in favour while 35 including Malaysia voted against", sub: "NAM members expressed disappointment at Malaysia departure from consensus", lens: "Security" },
     { t: "reframe", big: "Nuclear vote tests whether principled foreign policy survives strategic relationship pressures", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Reversing the nuclear weapons ban vote signals shifting alignment priorities over disarmament principles.", sub: "" },
   ]
 },
 {
@@ -12737,7 +12762,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 12 medical officers serve all 14 detention centres nationwide", sub: "1 doctor per 1,540 detainees versus WHO recommendation of 1 per 300", lens: "Regional" },
     { t: "fact", big: "UNHCR access restricted on 28 occasions in 2025", sub: "Agency could not verify conditions or identify persons needing protection", lens: "Technology" },
     { t: "reframe", big: "Detention deaths test whether immigration enforcement operates within human rights standards", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45 immigration detention deaths in one year. Custody deaths demand independent investigation, not internal review.", sub: "" },
   ]
 },
 {
@@ -12751,7 +12776,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "FNSS offered co-production of PARS vehicles at DRB-HICOM facilities", sub: "Joint venture would produce 150 vehicles with 65% local content for Army", lens: "Security" },
     { t: "fact", big: "STM to provide technical assistance for littoral combat ship programme", sub: "Turkish MILGEM experience could address delayed LCS project", lens: "Legal" },
     { t: "reframe", big: "Turkey partnership tests whether defence cooperation can accelerate stalled procurement programmes", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Turkey defence partnership signed. Industrial cooperation must transfer technology, not just purchase equipment.", sub: "" },
   ]
 },
 {
@@ -12765,7 +12790,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Real estate accounted for 52% of laundered assets seized by value", sub: "180 properties in KL Penang and Johor used as laundering vehicles", lens: "Technology" },
     { t: "fact", big: "Mutual legal assistance requests to other jurisdictions rose 45%", sub: "Faster cooperation with Singapore and HK reduced case resolution by 6 months", lens: "Economic" },
     { t: "reframe", big: "Money laundering seizures test whether cross-border cooperation can match criminal sophistication", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "MACC seizes RM2.1 billion in money laundering. Recovery without systemic reform leaves the pipeline intact.", sub: "" },
   ]
 },
 {
@@ -12779,7 +12804,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Trilateral patrol covers only 60% of the shipping lane", sub: "Night patrols reduced 25% due to fuel costs and vessel availability", lens: "Legal" },
     { t: "fact", big: "Insurance premiums for transit increased 15% affecting RM12 billion cargo", sub: "Lloyd reclassified 2 zones as elevated risk first time since 2016", lens: "Governance" },
     { t: "reframe", big: "Piracy increase tests whether multilateral patrols can secure global shipping chokepoints", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85 Malacca Strait piracy incidents in 2025. Maritime chokepoint security requires trilateral coordination.", sub: "" },
   ]
 },
 {
@@ -12793,7 +12818,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "85% were on Umrah visas who overstayed to seek employment", sub: "Agencies in Malaysia facilitated scheme charging RM12,000 per worker", lens: "Economic" },
     { t: "fact", big: "Foreign Ministry summoned Saudi ambassador demanding investigation", sub: "Reports of physical mistreatment during detention prompted formal protest", lens: "Political" },
     { t: "reframe", big: "Deportation crisis tests whether labour migration protections extend to workers abroad", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2,800 workers deported from Saudi in a diplomatic row. Worker protection starts before departure, not after crisis.", sub: "" },
   ]
 },
 {
@@ -12807,7 +12832,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "NACSA has only 320 analysts for entire government infrastructure", sub: "Private sector offers 3 times salary making retention difficult", lens: "Governance" },
     { t: "fact", big: "RM580 million allocated for government cybersecurity upgrades in 2026", sub: "Amount covers only 40% of vulnerabilities across 800 government systems", lens: "Social" },
     { t: "reframe", big: "Government cyber defence tests whether public systems can be secured against state-level threats", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "48,000 government cyberattacks detected. Cyber defence at this scale needs dedicated military-grade infrastructure.", sub: "" },
   ]
 },
 {
@@ -12821,7 +12846,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Co-development of 2 Earth observation satellites by 2030 included", sub: "Satellites will monitor deforestation maritime traffic and disaster response", lens: "Political" },
     { t: "fact", big: "Malaysia space industry generated only RM1.8 billion versus RM28 billion target", sub: "Space technology gap remains significant despite MYSA establishment 2019", lens: "Rights" },
     { t: "reframe", big: "Space cooperation tests whether international partnerships can accelerate domestic capability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Japan space cooperation pact. Satellite capability serves both civilian and strategic intelligence functions.", sub: "" },
   ]
 },
 {
@@ -12835,7 +12860,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "8 inmate deaths attributed to overcrowding health failures in 2025", sub: "TB infection rate in prisons 12 times higher than general population", lens: "Social" },
     { t: "fact", big: "Rehabilitation participation dropped to 22% as facilities diverted to housing", sub: "Recidivism at 38% partly due to inability to provide rehabilitation", lens: "Critical" },
     { t: "reframe", big: "Prison overcrowding tests whether sentencing policy accounts for system capacity", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "236% prison overcrowding with 45,000 above capacity. Incarceration policy must include alternatives to custody.", sub: "" },
   ]
 },
 {
@@ -12849,7 +12874,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysia has no equivalent of EU Common Position on arms controls", sub: "Decisions made by Defence Ministry without mandatory rights assessment", lens: "Rights" },
     { t: "fact", big: "Civil society documented Malaysian-made vehicles in 3 conflict zones", sub: "Vehicles sold to intermediaries re-exported without Malaysian approval", lens: "Historical" },
     { t: "reframe", big: "Arms exports test whether defence trade includes responsibility for end-use", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM1.8 billion arms exports raise ethics questions. Export policy needs criteria beyond commercial value.", sub: "" },
   ]
 },
 {
@@ -12863,7 +12888,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Joint command centre in Tawau coordinates 24-hour surveillance", sub: "Real-time sharing replaces previous 48-hour information exchange delays", lens: "Critical" },
     { t: "fact", big: "Abu Sayyaf conducted 8 kidnapping operations in border region in 2025", sub: "Ransom payments totalling RM45 million funded continued operations", lens: "Regional" },
     { t: "reframe", big: "Hot pursuit provisions test whether bilateral security cooperation can eliminate cross-border threats", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Philippines security pact targeting Abu Sayyaf. Joint operations work when intelligence sharing is genuine.", sub: "" },
   ]
 },
 {
@@ -12877,7 +12902,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "58% of levy cost passed to workers through salary deductions despite rules", sub: "Labour Department found 12,000 violations but compounded only 2,800", lens: "Historical" },
     { t: "fact", big: "Estimated 1.5 million undocumented workers pay no levy at all", sub: "Underground workforce costs RM5.8 billion in lost levy revenue annually", lens: "Security" },
     { t: "reframe", big: "Worker levies test whether labour migration policy prioritizes revenue or worker welfare", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM8.5 billion foreign worker levy revenue. Dependence on levy income creates a perverse incentive against reform.", sub: "" },
   ]
 },
 {
@@ -12891,7 +12916,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "US State Department expressed disappointment over BRICS engagement", sub: "Washington warned of potential complications for existing agreements", lens: "Regional" },
     { t: "fact", big: "New Development Bank offered USD2 billion infrastructure financing", sub: "Loans at 1.5% below World Bank rates could fund RM8.5 billion projects", lens: "Technology" },
     { t: "reframe", big: "BRICS membership tests whether Malaysia can expand partnerships without alienating existing allies", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "BRICS dialogue partnership signals a non-aligned position — strategic hedging requires clarity about red lines.", sub: "" },
   ]
 },
 {
@@ -12905,7 +12930,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysia recalled ambassador and summoned Philippine envoy in KL", sub: "Strongest action between countries since 2013 Lahad Datu incursion", lens: "Security" },
     { t: "fact", big: "ASEAN Secretary General called for bilateral dialogue and respect", sub: "Other ASEAN members remained silent avoiding taking sides", lens: "Legal" },
     { t: "reframe", big: "Sabah claim revival tests whether dormant territorial disputes can be permanently resolved", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Philippines reasserting Sabah claim in 2026. Historical claims require legal forums, not diplomatic escalation.", sub: "" },
   ]
 },
 {
@@ -12919,7 +12944,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "8 Malaysian peacekeepers wounded in 2025 during cross-border incidents", sub: "Escalation in regional conflict increased risk to Malaysian contingent", lens: "Technology" },
     { t: "fact", big: "Skills gained in peacekeeping transferred to domestic disaster response", sub: "450 returned peacekeepers deployed during December 2025 flood operations", lens: "Economic" },
     { t: "reframe", big: "Peacekeeping commitment tests whether Malaysia international obligations justify the cost and risk", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "850 peacekeepers in Lebanon for decades. Sustained deployment needs domestic support and clear mission renewal.", sub: "" },
   ]
 },
 {
@@ -12933,7 +12958,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Property seizures across 6 countries yielded RM2.8 billion in assets", sub: "Yacht Equanimity sold for USD126 million returned to Malaysian government", lens: "Legal" },
     { t: "fact", big: "Remaining RM18 billion involves assets in 12 jurisdictions with ongoing litigation", sub: "Some recovery blocked by sovereign immunity and statute of limitation issues", lens: "Governance" },
     { t: "reframe", big: "1MDB recovery tests whether accountability mechanisms can retrieve stolen public wealth", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM12 billion in 1MDB asset recovery. The investigation succeeds only if recovered assets reach public accounts.", sub: "" },
   ]
 },
 {
@@ -12947,7 +12972,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "4 operatives conducted technical surveillance on telecommunications infrastructure", sub: "Equipment seized included military-grade interception devices worth RM8 million", lens: "Economic" },
     { t: "fact", big: "3 operatives posed as business executives with legitimate corporate covers", sub: "Government chose not to publicly name the countries involved", lens: "Political" },
     { t: "reframe", big: "Espionage detentions test whether Malaysia intelligence services can protect against state-level threats", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12 foreign intelligence operatives detained. Espionage response must be proportionate and publicly accountable.", sub: "" },
   ]
 },
 {
@@ -12961,7 +12986,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Staff of 120 includes representatives from 8 participating ASEAN nations", sub: "Vietnam and Myanmar opted out of initial participation citing sovereignty", lens: "Governance" },
     { t: "fact", big: "Centre detected 45 suspicious vessel movements in first 2 months of operation", sub: "Information led to 8 joint enforcement actions across 3 ASEAN member waters", lens: "Social" },
     { t: "reframe", big: "Maritime centre tests whether ASEAN cooperation can produce shared security capabilities", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "ASEAN maritime centre in Kuantan — regional hubs work when staffed, funded, and given operational authority.", sub: "" },
   ]
 },
 {
@@ -12975,7 +13000,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Scam syndicates used Singapore bank accounts to receive Malaysian victim funds", sub: "280 Singapore-based mule accounts identified and frozen during operations", lens: "Political" },
     { t: "fact", big: "Joint arrest operations netted 45 suspects across both countries", sub: "Information sharing agreement allows police to access partner banking records", lens: "Rights" },
     { t: "reframe", big: "Cross-border cooperation tests whether neighbouring jurisdictions can close scam escape routes", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM320 million recovered through Singapore cyber fraud cooperation. Cross-border crime needs cross-border enforcement.", sub: "" },
   ]
 },
 {
@@ -12989,7 +13014,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "ESSCOM 10-year operations plan proposed permanent security zone legislation", sub: "Cabinet has deferred the bill through 4 parliamentary sessions since 2022", lens: "Social" },
     { t: "fact", big: "Eastern Sabah security zone covers 1.4 million sq km of sea territory", sub: "Permanent base infrastructure in Semporna is only 45% complete", lens: "Critical" },
     { t: "reframe", big: "Anniversary tests whether crisis-driven security measures become permanent institutions", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "13 years after Lahad Datu without security resolution. Eastern Sabah's vulnerability persists despite ESSCOM.", sub: "" },
   ]
 },
 {
@@ -13003,7 +13028,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Each vessel capable of carrying 2-4 tonnes of contraband per trip", sub: "Malaysian territorial waters have 45 identified smuggling corridors", lens: "Rights" },
     { t: "fact", big: "Joint patrols with Indonesian navy covered only 35% of corridors", sub: "Revenue loss from maritime smuggling estimated at RM2.8 billion annually", lens: "Historical" },
     { t: "reframe", big: "Smuggling interdiction tests whether maritime enforcement resources match the scale of illicit trade", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28 tonnes of smuggled goods intercepted. Coast guard interdiction is the visible fraction of a larger flow.", sub: "" },
   ]
 },
 {
@@ -13017,7 +13042,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Largest tenant manufactures drone components exporting to 8 countries", sub: "Revenue from drone component exports reached RM280 million in 2025", lens: "Critical" },
     { t: "fact", big: "Park operates at 65% occupancy with capacity for 15 more companies", sub: "Government targets full occupancy by 2028 adding RM800 million in output", lens: "Regional" },
     { t: "reframe", big: "Defence industry park tests whether Malaysia can build domestic defence manufacturing capability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28 companies in the Nilai defence tech park. Industrial clusters need anchor tenants and export markets to thrive.", sub: "" },
   ]
 },
 {
@@ -13031,7 +13056,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "New bill gives commissioners power to access police records and premises", sub: "Disciplinary recommendations would be binding rather than advisory", lens: "Historical" },
     { t: "fact", big: "Police unions opposed the bill with 45,000 officers signing petition", sub: "PDRM leadership expressed concern about operational interference", lens: "Security" },
     { t: "reframe", big: "IPCMC bill tests whether police accountability can be strengthened against institutional resistance", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "IPCMC revival with stronger powers. Independent police oversight only works with investigative independence.", sub: "" },
   ]
 },
 {
@@ -13045,7 +13070,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Estimated recoverable reserves of 800 million barrels over 30-year production life", sub: "Zone could generate RM180 billion in total revenue for both countries", lens: "Regional" },
     { t: "fact", big: "Model cited as potential template for resolving other ASEAN maritime disputes", sub: "Environmental monitoring includes real-time reef and marine mammal tracking", lens: "Technology" },
     { t: "reframe", big: "Joint development tests whether resource sharing can resolve maritime boundary disputes permanently", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "First oil from the Brunei joint development zone proves that shared sovereignty can produce shared revenue.", sub: "" },
   ]
 },
 {
@@ -13059,7 +13084,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Defence Ministry enhanced personal protective equipment after Q2 review", sub: "RM45 million allocated for upgraded armoured vehicles for peacekeeping units", lens: "Security" },
     { t: "fact", big: "Parliamentary oversight committee reviewed all 28 incidents in closed session", sub: "Committee recommended additional hazard pay and family support for deployed personnel", lens: "Legal" },
     { t: "reframe", big: "Peacekeeping risks test whether Malaysia adequately protects and compensates deployed personnel", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28 peacekeeping safety incidents abroad. Troop-contributing nations must negotiate better force protection terms.", sub: "" },
   ]
 },
 {
@@ -13073,7 +13098,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Opposition argued undisclosed sharing compromises Malaysian sovereignty", sub: "Government countered that intelligence cooperation is essential for national security", lens: "Technology" },
     { t: "fact", big: "Sharing reportedly includes South China Sea vessel tracking data", sub: "Arrangements pre-date formal oversight mechanisms now being established", lens: "Economic" },
     { t: "reframe", big: "Intelligence sharing tests whether security cooperation requires transparency to maintain legitimacy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Five Eyes intelligence sharing under scrutiny. Partnership access must be weighed against sovereignty costs.", sub: "" },
   ]
 },
 {
@@ -13087,7 +13112,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "UNHCR classified Bajau Laut as indigenous maritime population not illegal immigrants", sub: "International maritime law recognizes traditional passage rights for sea nomads", lens: "Legal" },
     { t: "fact", big: "Sabah state government has no registration programme for boat-dwelling communities", sub: "Children born on boats cannot be registered creating permanent statelessness", lens: "Governance" },
     { t: "reframe", big: "Sea community enforcement tests whether traditional lifestyles survive modern border regimes", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Sabah sea gypsies face eviction from traditional waters. Maritime indigenous rights lack the legal protection land rights have.", sub: "" },
   ]
 },
 {
@@ -13101,7 +13126,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Interpol red notice led to arrests after 8-month investigation across 4 countries", sub: "Malaysia ratified IAEA Additional Protocol in 2023 enabling deeper cooperation", lens: "Economic" },
     { t: "fact", big: "Case revealed Malaysia as transit point for illicit nuclear material networks", sub: "Government tightened port radiation scanning from 15% to 45% of containers", lens: "Political" },
     { t: "reframe", big: "Nuclear smuggling tests whether Malaysia can secure itself against unconventional threats", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "3 nuclear material smuggling arrests. Non-proliferation enforcement requires specialised capacity, not general policing.", sub: "" },
   ]
 },
 {
@@ -13115,7 +13140,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Army receives RM28 billion for armoured vehicles artillery and communications", sub: "Remaining RM12 billion for cyber defence intelligence and space capabilities", lens: "Governance" },
     { t: "fact", big: "Paper acknowledges South China Sea and eastern Sabah as primary threat areas", sub: "Parliamentary committee approved paper but funding commitment remains uncertain", lens: "Social" },
     { t: "reframe", big: "White Paper tests whether strategic planning translates into sustained defence investment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM120 billion 15-year defence plan. Long-term planning only works if successive governments honour the commitment.", sub: "" },
   ]
 },
 {
@@ -13129,7 +13154,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Amendment imposes RM500,000 fine on platforms failing to comply in 24 hours", sub: "Social media companies warned timeline is technically impossible for review", lens: "Political" },
     { t: "fact", big: "CIJ documented 85 cases of legitimate content wrongly removed in 2025", sub: "Satire political commentary and whistleblower posts among incorrectly flagged", lens: "Rights" },
     { t: "reframe", big: "Takedown powers test whether content regulation serves public safety or silences dissent", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Expanded MCMC takedown powers need judicial checks. Content regulation without due process becomes censorship.", sub: "" },
   ]
 },
 {
@@ -13143,7 +13168,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "TikTok WhatsApp Facebook Instagram and Telegram among 28 affected", sub: "Each must submit quarterly content moderation reports to MCMC", lens: "Social" },
     { t: "fact", big: "Digital rights groups warn licensing creates tool for censorship of dissent", sub: "Conditions include vague requirement to prevent content affecting public order", lens: "Critical" },
     { t: "reframe", big: "Platform licensing tests whether regulation enables accountability or government control", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28 platforms licensed — social media licensing works only if rules apply equally to all, including government.", sub: "" },
   ]
 },
 {
@@ -13157,7 +13182,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Conviction rate of 72% with average fine RM18,000 or 3 months jail", sub: "Most defendants are individuals not organized disinformation networks", lens: "Rights" },
     { t: "fact", big: "Only 8 of 480 prosecutions targeted organized commercial disinformation", sub: "Resources focus on individual posts rather than systematic fake news factories", lens: "Historical" },
     { t: "reframe", big: "Prosecution patterns test whether fake news laws target disinformation or dissent", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "480 fake news prosecutions under Section 233. Vague laws produce selective enforcement and self-censorship.", sub: "" },
   ]
 },
 {
@@ -13171,7 +13196,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Proposed amendment increases maximum from RM500,000 to RM10 million", sub: "Industry lobbying delayed bill through 3 parliamentary sessions since 2023", lens: "Critical" },
     { t: "fact", big: "Malaysia ranks 45th globally in data protection behind Thailand and Philippines", sub: "Both neighbours updated frameworks in 2024 with stronger provisions", lens: "Regional" },
     { t: "reframe", big: "PDPA delay tests whether industry lobbying can indefinitely block citizen data protection", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "32 million records exposed while PDPA reform stalls. Data protection delayed is data protection denied.", sub: "" },
   ]
 },
 {
@@ -13185,7 +13210,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Independent security audit identified 8 critical vulnerabilities in platform", sub: "3 vulnerabilities could theoretically allow identity spoofing if exploited", lens: "Historical" },
     { t: "fact", big: "12 million Malaysians including most over-60s have not registered", sub: "Digital divide means government must maintain parallel physical services", lens: "Security" },
     { t: "reframe", big: "Digital ID tests whether convenience and security can coexist in government systems", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18 million MyDigital ID users with security concerns. Digital identity must be built on trust, not mandates.", sub: "" },
   ]
 },
 {
@@ -13199,7 +13224,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average government website uptime 94% versus 99.9% for Singapore", sub: "Downtime costs 4.5 million lost hours annually in failed transactions", lens: "Regional" },
     { t: "fact", big: "Cross-agency data sharing covers only 28 of 78 federal agencies", sub: "Citizens submit same information to multiple agencies for many processes", lens: "Technology" },
     { t: "reframe", big: "E-government gaps test whether digital transformation reaches beyond the easy services", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45% e-government coverage. Digitising services without digitising the bureaucracy behind them saves nobody time.", sub: "" },
   ]
 },
 {
@@ -13213,7 +13238,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rural cashless adoption lags at 35% versus 78% in urban areas", sub: "Limited merchant coverage and internet reliability constrain rural uptake", lens: "Security" },
     { t: "fact", big: "Bank Negara identified RM2.8 billion in e-wallet fraud up 85% from prior year", sub: "Unauthorized transactions and social engineering are fastest growing categories", lens: "Legal" },
     { t: "reframe", big: "Cashless growth tests whether financial inclusion and fraud prevention scale together", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "68% cashless transactions. Financial inclusion requires that the 32% using cash are not left behind.", sub: "" },
   ]
 },
 {
@@ -13227,7 +13252,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SC licensed 11 platforms but 28 unlicensed operators also active", sub: "Unlicensed platforms charge 35-80% interest targeting desperate borrowers", lens: "Technology" },
     { t: "fact", big: "B40 households account for 65% of borrowers with RM2,800 average income", sub: "Debt servicing consumes 42% of income for typical B40 P2P borrower", lens: "Economic" },
     { t: "reframe", big: "Fintech lending tests whether financial inclusion comes with adequate borrower protection", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2.8 million unbanked served by fintech. Alternative lending fills gaps banks created through exclusion.", sub: "" },
   ]
 },
 {
@@ -13241,7 +13266,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SC blocked access to 45 unlicensed platforms operating offshore", sub: "Investors lost RM680 million to scams and collapses on unlicensed exchanges", lens: "Legal" },
     { t: "fact", big: "Bank Negara maintained ban on crypto as legal tender despite exchange trading", sub: "Central bank studying CBDC with digital ringgit pilot expected late 2027", lens: "Governance" },
     { t: "reframe", big: "Crypto regulation tests whether investor protection can keep pace with financial innovation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM28 billion crypto volume — regulation must protect consumers without pushing activity to unregulated platforms.", sub: "" },
   ]
 },
 {
@@ -13255,7 +13280,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 22% of data centres use renewable energy for operations", sub: "Most rely on gas and coal power contradicting sustainability commitments", lens: "Economic" },
     { t: "fact", big: "Water consumption for cooling reached 45 million litres daily in 2025", sub: "Selangor water authority raised concerns about impact on residential supply", lens: "Political" },
     { t: "reframe", big: "Data centre growth tests whether digital infrastructure accounts for energy and water costs", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2,400MW consumed by data centres. Malaysia's digital economy runs on energy — the source matters.", sub: "" },
   ]
 },
 {
@@ -13269,7 +13294,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MCMC initially resisted before approving in 2024 with local conditions", sub: "Conditions include data localization filtering and 30% Bumiputera dealers", lens: "Governance" },
     { t: "fact", big: "Local telcos lost estimated 45,000 rural subscribers to Starlink in 2025", sub: "Industry lobbied for restrictions arguing satellite undermines terrestrial investment", lens: "Social" },
     { t: "reframe", big: "Starlink adoption tests whether satellite can bridge the rural connectivity gap affordably", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "180,000 rural Starlink subscribers. Satellite broadband proves demand exists where terrestrial investment was absent.", sub: "" },
   ]
 },
 {
@@ -13283,7 +13308,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Star Media and Sin Chew controlled by MCA-linked entities own 28% print", sub: "Chinese-language media concentrated in 2 groups with aligned editorial positions", lens: "Political" },
     { t: "fact", big: "Only 4 independent digital outlets reach more than 500,000 monthly readers", sub: "Malaysiakini and FMT face constant legal and financial pressure", lens: "Rights" },
     { t: "reframe", big: "Media concentration tests whether information diversity can survive ownership consolidation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "6 groups control 85% of media. Ownership concentration makes editorial independence structurally impossible.", sub: "" },
   ]
 },
 {
@@ -13297,7 +13322,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "2 journalists detained under SOSMA for reporting on defence procurement", sub: "Detention lasted 28 days before release without charges", lens: "Social" },
     { t: "fact", big: "Malaysia ranks below Philippines at 109th and Indonesia at 98th", sub: "Only Vietnam Myanmar and Laos rank lower in Southeast Asia", lens: "Critical" },
     { t: "reframe", big: "Press freedom decline tests whether journalism can function under increasing legal pressure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Press freedom ranking fell 8 places to 115th. Rankings measure perception, but the trend is the signal.", sub: "" },
   ]
 },
 {
@@ -13311,7 +13336,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysiakini faces 3 active suits totalling RM120 million", sub: "Legal defence costs of RM2.8 million annually consume editorial resources", lens: "Rights" },
     { t: "fact", big: "Malaysia has no anti-SLAPP legislation to protect against strategic litigation", sub: "Bar Council proposed SLAPP protection bill in 2024 not yet tabled", lens: "Historical" },
     { t: "reframe", big: "Defamation suits test whether legal costs can silence journalism without convictions", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM580 million in defamation suits against media. Legal costs function as prior restraint on reporting.", sub: "" },
   ]
 },
 {
@@ -13325,7 +13350,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average response time for removal was 72 hours across platforms", sub: "TikTok responded fastest at 48 hours while Twitter/X averaged 120 hours", lens: "Critical" },
     { t: "fact", big: "Platforms employed only 280 Malay language moderators combined", sub: "Insufficient local capacity means most moderation relies on automated systems", lens: "Regional" },
     { t: "reframe", big: "Content moderation tests whether platform responsibility matches their reach in Malaysia", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "45,000 harmful posts monthly despite moderation. Platform scale makes human review insufficient; AI review is unaccountable.", sub: "" },
   ]
 },
 {
@@ -13339,7 +13364,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Police arrested 2,800 connected to gambling syndicates in 2025", sub: "Arrests target local agents as overseas operators remain unreachable", lens: "Historical" },
     { t: "fact", big: "3.2 million Malaysians gamble online with 480,000 showing addiction signs", sub: "Problem gambling hotline received 28,000 calls up 35% from prior year", lens: "Security" },
     { t: "reframe", big: "Gambling enforcement tests whether legal tools can match the pace of offshore technology", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM12 billion online gambling despite bans. Prohibition without enforcement creates an unregulated shadow economy.", sub: "" },
   ]
 },
 {
@@ -13353,7 +13378,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SMS filtering blocked 850 million messages but 180 million got through", sub: "Scammers shift to WhatsApp and Telegram where filtering is harder", lens: "Regional" },
     { t: "fact", big: "Average victim aged 45-60 with moderate income and limited digital literacy", sub: "65% of victims did not report crime due to shame and embarrassment", lens: "Technology" },
     { t: "reframe", big: "Scam losses test whether technical defences can protect against human manipulation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM1.8 billion scam losses despite blocking systems. Technical defences fail when social engineering bypasses them.", sub: "" },
   ]
 },
 {
@@ -13367,7 +13392,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 280 of 4,800 cases resulted in formal action under existing laws", sub: "Legal framework lacks specific cyberbullying provisions relying on general statutes", lens: "Security" },
     { t: "fact", big: "Education Ministry programme reached only 2,200 of 10,000 schools", sub: "Programme relies on volunteer teachers with no dedicated budget", lens: "Legal" },
     { t: "reframe", big: "Cyberbullying scale tests whether child protection keeps pace with children online activity", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4,800 cyberbullying cases involving minors — 55% increase demands school-level prevention, not just criminal penalties.", sub: "" },
   ]
 },
 {
@@ -13381,7 +13406,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 12% of funding went to companies headquartered outside KL", sub: "Penang Johor and East Malaysia startups struggle to access VC networks", lens: "Technology" },
     { t: "fact", big: "Penjana Kapital RM1 billion fund invested in only 180 of 2,400 applicants", sub: "Criteria criticized for favouring established companies over early-stage", lens: "Economic" },
     { t: "reframe", big: "Startup funding tests whether venture capital circulates beyond the KL bubble", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.5 billion VC raised. Startup funding without market access produces valuations, not sustainable businesses.", sub: "" },
   ]
 },
 {
@@ -13395,7 +13420,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "28% of students relied on mobile-only internet for education in 2025", sub: "Data caps of 30GB monthly insufficient for video learning platforms", lens: "Legal" },
     { t: "fact", big: "JENDELA achieved 95% 4G coverage but speed below 10 Mbps in 35% of areas", sub: "Coverage claims mask quality issues making services practically unusable", lens: "Governance" },
     { t: "reframe", big: "Digital divide tests whether connectivity statistics reflect actual usability for citizens", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "8.5 million without reliable internet. The digital divide is an infrastructure deficit with economic consequences.", sub: "" },
   ]
 },
 {
@@ -13409,7 +13434,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Shopee Malaysia reported 15% revenue decline attributed to TikTok competition", sub: "Traditional platforms lobbied for equal regulatory treatment", lens: "Economic" },
     { t: "fact", big: "KPDNHEP recorded 3,200 complaints about product quality and refund failures", sub: "Consumer protection enforcement on social commerce technically challenging", lens: "Political" },
     { t: "reframe", big: "Social commerce tests whether consumer protection frameworks can adapt to new sales channels", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM18 billion TikTok Shop disrupts e-commerce. Platform marketplaces shift power from retailers to algorithms.", sub: "" },
   ]
 },
 {
@@ -13423,7 +13448,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM2.8 billion spent but RM1.8 billion more needed to complete", sub: "Original budget of RM3.2 billion insufficient due to scope expansion", lens: "Governance" },
     { t: "fact", big: "Security audit found 12 migrated systems had higher vulnerability", sub: "Rapid migration without adequate testing introduced new attack surfaces", lens: "Social" },
     { t: "reframe", big: "Cloud migration tests whether government can modernize systems without creating new risks", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "38% government cloud migration after 4 years. Digital transformation stalls when agencies lack technical capacity.", sub: "" },
   ]
 },
 {
@@ -13437,7 +13462,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Intel Infineon and 6 others offered 25% salary premiums to attract talent", sub: "Average semiconductor salary rose to RM8,500 up 35% from 2022", lens: "Political" },
     { t: "fact", big: "Government launched RM500 million semiconductor talent programme in 2025", sub: "Programme covers 5,000 engineers but industry needs double annually", lens: "Rights" },
     { t: "reframe", big: "Talent shortage tests whether Malaysia can retain its semiconductor industry position", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12,000 engineer shortage in semiconductors. Talent pipelines take 5 years — investment must start now.", sub: "" },
   ]
 },
 {
@@ -13451,7 +13476,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "PDRM has only 12 officers trained in deepfake detection and forensics", sub: "Technology for creating convincing deepfakes freely available to anyone", lens: "Social" },
     { t: "fact", big: "Malaysia has no specific law criminalizing malicious deepfake creation", sub: "Prosecutors rely on general fraud and CMA not designed for this technology", lens: "Critical" },
     { t: "reframe", big: "Deepfake crime tests whether legal frameworks can adapt to rapidly evolving manipulation tools", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM280 million deepfake losses. Synthetic media fraud outpaces verification technology and legal frameworks.", sub: "" },
   ]
 },
 {
@@ -13465,7 +13490,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MCMC free Wi-Fi covers 8,200 hotspots but security was optional", sub: "New mandatory requirements carry compliance deadline of December 2026", lens: "Rights" },
     { t: "fact", big: "2.8 million Malaysians use public Wi-Fi as primary internet access", sub: "B40 users who cannot afford home broadband disproportionately exposed", lens: "Historical" },
     { t: "reframe", big: "Wi-Fi security tests whether free internet comes with adequate protection for users", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "72% of public Wi-Fi hotspots vulnerable. Free connectivity without security exposes users to greater risk.", sub: "" },
   ]
 },
 {
@@ -13479,7 +13504,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Traditional banks lost estimated RM4.5 billion deposits to digital rivals", sub: "Big 8 responded by launching own features and matching rates", lens: "Critical" },
     { t: "fact", big: "Digital bank lending reached only RM1.2 billion indicating cautious approach", sub: "Bank Negara framework limits rapid scaling of lending portfolios", lens: "Regional" },
     { t: "reframe", big: "Digital banking tests whether new entrants can serve the underbanked or just compete for deposits", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4.5 million digital bank customers in 18 months. Speed of adoption tests whether regulatory frameworks can keep pace.", sub: "" },
   ]
 },
 {
@@ -13493,7 +13518,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Workforce gap of 12,000 professionals is largest contributor to decline", sub: "Private sector poaches government talent at 2-3 times salary", lens: "Historical" },
     { t: "fact", big: "Singapore maintained top-5 with RM2.8 billion annual cyber investment", sub: "Malaysia RM580 million is one-fifth of Singapore spending", lens: "Security" },
     { t: "reframe", big: "Ranking decline tests whether cybersecurity can be sustained without competitive funding", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Cybersecurity ranking fell from 8th to 48th globally. Rankings change when investment stalls and threats evolve.", sub: "" },
   ]
 },
 {
@@ -13507,7 +13532,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12 journalists received credible death threats related to investigations", sub: "Police opened files on all 12 but only 3 progressed to suspect ID", lens: "Regional" },
     { t: "fact", big: "4 journalists discovered surveillance software on their devices", sub: "Forensic analysis traced 2 instances to government agency capabilities", lens: "Technology" },
     { t: "reframe", big: "Journalist safety tests whether press freedom includes physical protection for reporters", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28 journalist safety incidents including assaults. Press safety requires investigation, not just condemnation.", sub: "" },
   ]
 },
 {
@@ -13521,7 +13546,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Cross-border purchases at 42% of complaints beyond Malaysian jurisdiction", sub: "Chinese platform sellers subject of 28,000 complaints for counterfeits", lens: "Security" },
     { t: "fact", big: "KPDNHEP acted on only 4,200 of 85,000 complaints due to capacity", sub: "280 enforcement officers for all consumer protection nationwide", lens: "Legal" },
     { t: "reframe", big: "E-commerce fraud tests whether consumer protection can scale to match online transaction volume", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85,000 e-commerce fraud cases — 45% surge. Consumer trust erodes faster than platforms can rebuild it.", sub: "" },
   ]
 },
 {
@@ -13535,7 +13560,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 22 of 78 federal agencies meet minimum publishing requirements", sub: "Health education and finance among agencies with lowest compliance", lens: "Technology" },
     { t: "fact", big: "South Korea portal has 82% coverage generating USD5 billion value", sub: "Malaysia limited availability restricts potential RM8 billion opportunity", lens: "Economic" },
     { t: "reframe", big: "Open data gaps test whether government transparency commitments produce actual public data", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18% of government datasets on the open data portal. Transparency requires releasing data, not just building portals.", sub: "" },
   ]
 },
 {
@@ -13549,7 +13574,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Foreign VC participation grew 55% with Singapore and Japan most active", sub: "Cross-border investment benefited from double taxation agreement network", lens: "Legal" },
     { t: "fact", big: "Only 8% of investment went to female-founded startups despite 35% of founders", sub: "Gender disparity persists despite government matching incentives for women", lens: "Governance" },
     { t: "reframe", big: "VC incentives test whether startup funding can be directed toward diversity and geography", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.8 billion VC tax incentives. Tax breaks work when they fund innovation, not financial engineering.", sub: "" },
   ]
 },
 {
@@ -13563,7 +13588,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average time from report to freeze reduced from 72 hours to 8 hours", sub: "Bank cooperation improved after BNM mandated 2-hour response", lens: "Economic" },
     { t: "fact", big: "Total losses of RM2.8 billion mean RM520 million is only 18.5% recovery", sub: "Remaining RM2.28 billion transferred to mule accounts or overseas", lens: "Political" },
     { t: "reframe", big: "Recovery rates test whether rapid response can close the gap between losses and recoveries", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM520 million recovered by scam response centre. Recovery rates matter more than total losses reported.", sub: "" },
   ]
 },
 {
@@ -13577,7 +13602,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "228 gig delivery riders killed in road accidents in 2025", sub: "Platform companies provide minimal insurance with RM10,000 death benefit", lens: "Governance" },
     { t: "fact", big: "Self-Employment Social Security Act tabled 2024 has not progressed", sub: "Platform companies lobbied against mandatory contributions", lens: "Social" },
     { t: "reframe", big: "Gig worker vulnerability tests whether labour protections can extend to platform economy", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "2.5 million gig workers without protections. Labour law built for factories cannot govern platform economies.", sub: "" },
   ]
 },
 {
@@ -13591,7 +13616,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "TV advertising revenue fell 25% to RM1.8 billion from RM2.4 billion in 2022", sub: "Digital advertising surpassed TV for first time reaching RM3.2 billion", lens: "Political" },
     { t: "fact", big: "RTM news viewership dropped from 2.8 million to 1.2 million in 3 years", sub: "Government broadcaster losing relevance as youth consume news on social media", lens: "Rights" },
     { t: "reframe", big: "TV decline tests whether public broadcasters can remain relevant in the streaming era", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "TV viewership below 50% for the first time. Broadcast decline accelerates when content follows audiences online.", sub: "" },
   ]
 },
 {
@@ -13605,7 +13630,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "JPN confirmed vulnerability but said exploitation requires specialized equipment", sub: "Security community noted equipment costs only RM800 commercially available", lens: "Social" },
     { t: "fact", big: "28 million active MyKad use chip technology standardized in 2001 without updates", sub: "Next-generation MyKad planned for 2028 leaving 3-year exposure window", lens: "Critical" },
     { t: "reframe", big: "MyKad vulnerability tests whether national identity infrastructure gets timely security updates", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "MyKad biometric data clonable from contactless scans. Identity documents must be secure against the attacks they face.", sub: "" },
   ]
 },
 {
@@ -13619,7 +13644,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "12,000 full-time creators registered with LHDN for tax in 2025", sub: "Estimated 80,000 additional creators earn part-time income", lens: "Rights" },
     { t: "fact", big: "Government grant programme allocated RM45 million benefiting 850 creators", sub: "Grants of RM25,000-100,000 target educational cultural and documentary content", lens: "Historical" },
     { t: "reframe", big: "Content economy tests whether local language creators can build sustainable careers", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.8 billion local language content industry. Cultural production at scale needs distribution, not just creation.", sub: "" },
   ]
 },
 {
@@ -13633,7 +13658,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rural digital literacy at 42% lags urban 68% by 26 points", sub: "Programmes reach only 180,000 of 3.5 million identified underserved adults", lens: "Critical" },
     { t: "fact", big: "Government spent RM85 million on digital literacy programmes in 2025", sub: "Budget covers only 5% of the underserved population", lens: "Regional" },
     { t: "reframe", big: "Literacy gaps test whether digital access without digital skills creates new vulnerabilities", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "142% phone penetration but 58% digital literacy. Access without capability produces consumption, not empowerment.", sub: "" },
   ]
 },
 {
@@ -13647,7 +13672,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Operations from 3 countries focused on amplifying racial tensions", sub: "Content reached 8.5 million Malaysians before detection and removal", lens: "Historical" },
     { t: "fact", big: "MCMC coordinated with platforms to remove 85% of identified accounts", sub: "Remaining 15% switched to encrypted platforms where monitoring impossible", lens: "Security" },
     { t: "reframe", big: "Foreign disinformation tests whether platform cooperation can protect elections from outside interference", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Disinformation from 12 countries detected. Foreign influence operations exploit domestic polarisation as an entry point.", sub: "" },
   ]
 },
 {
@@ -13661,7 +13686,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average data breach cost reached RM8.2 million for Malaysian companies", sub: "Without insurance companies face potential bankruptcy from cyber incidents", lens: "Regional" },
     { t: "fact", big: "Bank Negara mandated minimum cyber insurance for financial institutions 2026", sub: "Requirement adds RM120 million in annual premiums across banking sector", lens: "Technology" },
     { t: "reframe", big: "Insurance growth tests whether cyber risk management reaches beyond large corporations", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85% growth in cybersecurity insurance to RM680 million. Insurance markets price risk that regulation has failed to prevent.", sub: "" },
   ]
 },
 {
@@ -13675,7 +13700,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Protest-related shutdowns affected 1.2 million users for 6-12 hours", sub: "Mobile speeds reduced to unusable 0.5 Mbps in protest areas", lens: "Security" },
     { t: "fact", big: "Access Now listed Malaysia among 28 countries ordering shutdowns in 2025", sub: "Economic cost of 4 shutdowns estimated at RM85 million lost productivity", lens: "Legal" },
     { t: "reframe", big: "Internet shutdowns test whether government can restrict access without democratic accountability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4 internet shutdowns in 2025 by MCMC. Network disruption is a governance tool that undermines digital rights.", sub: "" },
   ]
 },
 {
@@ -13689,7 +13714,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Parents spent average RM3,600 on supplementary online education per child", sub: "Spending grew 45% but performance metrics showed no improvement", lens: "Technology" },
     { t: "fact", big: "12 startups received RM180 million in government grants since 2023", sub: "Grant conditions lack measurable learning outcome requirements", lens: "Economic" },
     { t: "reframe", big: "EdTech quality tests whether investment in education technology translates to actual learning", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.8 billion EdTech with quality questioned. Education technology works when pedagogy drives design, not profit.", sub: "" },
   ]
 },
 {
@@ -13703,7 +13728,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Earth observation data reduces dependency on RM45 million annual imagery purchases", sub: "Agriculture ministry uses MYSA-1 for crop monitoring reducing response time", lens: "Legal" },
     { t: "fact", big: "Constellation of 5 microsatellites by 2030 planned at RM180 million total", sub: "Full constellation provides daily imaging of Malaysian territory", lens: "Governance" },
     { t: "reframe", big: "Satellite development tests whether Malaysia can build independent space observation capability", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "MYSA-1 satellite launch. Space sovereignty begins with domestic capability for communications and observation.", sub: "" },
   ]
 },
 {
@@ -13717,7 +13742,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Interpol identified 1,200 Malaysian IP addresses accessing CSAM in 2025", sub: "Cross-referencing led to 85 arrests with 12 also directly abusing children", lens: "Economic" },
     { t: "fact", big: "Platform CSAM reporting increased 65% after mandatory reporting law", sub: "TikTok alone reported 8,500 suspected items to authorities in 2025", lens: "Political" },
     { t: "reframe", big: "CSAM enforcement tests whether detection and prosecution can match the scale of online exploitation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "48,000 child exploitation takedowns. Scale of detection reveals scale of the problem, not its resolution.", sub: "" },
   ]
 },
 {
@@ -13731,7 +13756,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "VPN usage grew 65% to 8.5 million users partly to circumvent blocking", sub: "MCMC has not attempted to restrict VPN access unlike neighbours", lens: "Governance" },
     { t: "fact", big: "Transparency report shows zero judicial orders for 92% of blocks", sub: "MCMC blocks under administrative authority without court review", lens: "Social" },
     { t: "reframe", big: "DNS blocking expansion tests whether web censorship operates with adequate transparency and oversight", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12,000 websites blocked by DNS. Blocking lists grow easily — the harder question is who decides and reviews.", sub: "" },
   ]
 },
 {
@@ -13745,7 +13770,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rental rates of RM2,800 monthly per operator 35% below regional average", sub: "Cost savings expected to flow to consumers through lower pricing", lens: "Political" },
     { t: "fact", big: "Rural tower deployment increased 22% under sharing versus projected 8%", sub: "Shared economics make previously unviable rural locations feasible", lens: "Rights" },
     { t: "reframe", big: "Tower sharing tests whether infrastructure cooperation produces consumer benefit or just industry savings", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM2.4 billion saved through telecom tower sharing. Infrastructure sharing reduces cost without reducing competition.", sub: "" },
   ]
 },
 {
@@ -13759,7 +13784,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysian tech companies report 28% annual turnover highest among sectors", sub: "Companies spend RM45,000 recruiting and training each replacement", lens: "Social" },
     { t: "fact", big: "DE Rantau visa attracted 4,200 foreign workers to replace departing talent", sub: "Programme criticized for bringing in workers below emigrating salary expectations", lens: "Critical" },
     { t: "reframe", big: "Tech emigration tests whether Malaysia can retain talent without matching regional compensation", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "18,000 tech workers emigrating yearly. Talent loss at this rate erodes the workforce faster than training replaces it.", sub: "" },
   ]
 },
 {
@@ -13773,7 +13798,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MySejahtera most downloaded at 42 million but active users dropped 85%", sub: "Government spent RM70 million to repurpose as general health platform", lens: "Rights" },
     { t: "fact", big: "MAMPU proposed consolidating 380 apps into 12 super-apps by domain", sub: "Agency resistance protecting budget allocations has blocked consolidation", lens: "Historical" },
     { t: "reframe", big: "App proliferation tests whether government digital strategy prioritizes user needs or agency turf", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "380 government apps with low adoption. Fewer, better apps serve citizens; proliferation serves bureaucratic silos.", sub: "" },
   ]
 },
 {
@@ -13787,7 +13812,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Malaysia connects to 24 cables but 18 land at Mersing or Kuantan", sub: "Geographic concentration means single event could disable majority of traffic", lens: "Critical" },
     { t: "fact", big: "RM1.8 billion diversification to 3 new sites remains in planning", sub: "New landings in Sarawak Sabah and Penang would distribute risk", lens: "Regional" },
     { t: "reframe", big: "Cable concentration tests whether internet resilience receives infrastructure-level investment", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Submarine cable vulnerability threatens connectivity. A single cable cut could isolate Malaysian internet for days.", sub: "" },
   ]
 },
 {
@@ -13801,7 +13826,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "65% of Magistrate Court cases filed digitally but High Court only 28%", sub: "Complex cases and judicial preference limit upper court digitization", lens: "Historical" },
     { t: "fact", big: "Rural courts in 8 states lack bandwidth for reliable video hearings", sub: "12 courtrooms upgraded with RM8 million but 45 more need connectivity", lens: "Security" },
     { t: "reframe", big: "Court digitization tests whether justice system technology reaches all courts equally", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "280,000 cases handled online. Digital courts succeed when access to justice improves, not just efficiency.", sub: "" },
   ]
 },
 {
@@ -13815,7 +13840,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Alibaba Cainiao hub processes 65% of DFTZ parcel volume", sub: "Chinese e-commerce dominance raises dependency concerns", lens: "Regional" },
     { t: "fact", big: "Customs processing reduced from 4 hours to 45 minutes since 2022", sub: "Automated declaration handles 98% without manual inspection", lens: "Technology" },
     { t: "reframe", big: "DFTZ concentration tests whether digital trade diversifies or depends on a single ecosystem", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM28 billion digital free trade zone. Platform facilitation works when small businesses, not just MNCs, benefit.", sub: "" },
   ]
 },
 {
@@ -13829,7 +13854,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Local data centre capacity must grow 45% to absorb required storage", sub: "Current 85 centres would need expansion to approximately 120 by deadline", lens: "Security" },
     { t: "fact", big: "Critics argue localization increases costs without improving security", sub: "PDPA reform would better protect data than geographic storage requirements", lens: "Legal" },
     { t: "reframe", big: "Data sovereignty tests whether geographic control of data provides real citizen protection", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Data sovereignty with mandatory local storage by 2027. Localisation costs must be weighed against security benefits.", sub: "" },
   ]
 },
 {
@@ -13843,7 +13868,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MACC acted on 850 reports leading to 45 formal investigations", sub: "35 reports led to criminal charges within the first 12 months", lens: "Technology" },
     { t: "fact", big: "Platform identity protection tested in court with zero leaks to date", sub: "Whistleblower Protection Act 2010 updated in 2025 to cover digital submissions", lens: "Economic" },
     { t: "reframe", big: "Whistleblower protection tests whether anonymous reporting can survive institutional pressure", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "12,000 whistleblower reports in year one. Reporting volume means nothing without investigation and protection.", sub: "" },
   ]
 },
 {
@@ -13857,7 +13882,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Programme created 1,200 local jobs in coworking hospitality and services", sub: "Average rental increases of 18% in nomad hotspots affect local residents", lens: "Legal" },
     { t: "fact", big: "12 countries offer competing digital nomad visas in Asia-Pacific", sub: "Malaysia programme ranked 6th in Asia for attractiveness and value", lens: "Governance" },
     { t: "reframe", big: "Digital nomad impact tests whether foreign worker programmes benefit or displace local communities", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "4,200 digital nomads on the new visa. Remote worker programmes succeed on ecosystem, not just tax incentives.", sub: "" },
   ]
 },
 {
@@ -13871,7 +13896,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Platforms given 6 months to implement government-approved verification system", sub: "Options include MyKad-linked verification and parental consent apps", lens: "Economic" },
     { t: "fact", big: "Digital rights groups warn age verification creates surveillance infrastructure", sub: "Children privacy data from verification could be vulnerable to breaches", lens: "Political" },
     { t: "reframe", big: "Age verification tests whether child protection justifies creating new digital identity databases", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Under-16 age verification on social media. Enforcement depends on technical design, not legislative intent alone.", sub: "" },
   ]
 },
 {
@@ -13885,7 +13910,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MCMC empowered to audit algorithms for bias and manipulation indicators", sub: "Platforms have 12 months to comply with disclosure requirements", lens: "Governance" },
     { t: "fact", big: "Industry warned full algorithmic disclosure would expose trade secrets", sub: "Compromise allows summary disclosure with detailed access for auditors only", lens: "Social" },
     { t: "reframe", big: "Algorithm regulation tests whether platform accountability can be achieved without revealing proprietary systems", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Algorithmic transparency disclosure required. Platforms must explain how content is amplified, not just what is removed.", sub: "" },
   ]
 },
 {
@@ -13899,7 +13924,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Platform liability remains unclear as sellers not platform face prosecution", sub: "Consumer complaints about counterfeits reached 28,000 across major platforms", lens: "Political" },
     { t: "fact", big: "Only 4,200 sellers suspended with most reopening under new accounts", sub: "Platforms earn commission on counterfeit sales without penalty", lens: "Rights" },
     { t: "reframe", big: "Counterfeit enforcement tests whether platforms share responsibility for goods sold through their systems", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM1.8 billion counterfeit goods seized online. Marketplace liability must match marketplace profit from transactions.", sub: "" },
   ]
 },
 {
@@ -13913,7 +13938,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "NACSA empowered to order remediation measures for identified vulnerabilities", sub: "Estimated compliance cost of RM2.8 billion across all affected organizations", lens: "Social" },
     { t: "fact", big: "SMEs in critical supply chains face disproportionate compliance burden", sub: "Government allocated RM180 million to support SME cybersecurity upgrades", lens: "Critical" },
     { t: "reframe", big: "Cybersecurity law tests whether mandatory reporting improves security or just increases compliance costs", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Mandatory cyber incident reporting changes the calculus. Disclosure obligations create accountability that voluntary norms cannot.", sub: "" },
   ]
 },
 {
@@ -13927,7 +13952,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Spotify reports Malaysia among top 10 Southeast Asian podcast markets", sub: "280 new Malaysian podcasts launched in 2025 across all 3 major languages", lens: "Rights" },
     { t: "fact", big: "Content creators struggle to monetize with average earning RM2,800 monthly", sub: "Platform algorithms favour English content reducing Malaysian language discovery", lens: "Historical" },
     { t: "reframe", big: "Podcast growth tests whether local audio content can build sustainable creator economics", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "8.5 million podcast listeners. Audio content thrives in Malaysia because it fits commute patterns and mobile habits.", sub: "" },
   ]
 },
 {
@@ -13941,7 +13966,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM1.2 billion spent on MyHEALTH but interoperability gaps remain", sub: "Private hospitals excluded from mandate covering only public sector", lens: "Critical" },
     { t: "fact", big: "Patient record access enables 42% faster diagnosis at connected hospitals", sub: "Emergency transfers between connected hospitals reduced duplicate testing 60%", lens: "Regional" },
     { t: "reframe", big: "Health digitization tests whether medical records modernization reaches beyond early adopter hospitals", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "35% digital health record coverage. Electronic records save lives only when the entire system is connected.", sub: "" },
   ]
 },
 {
@@ -13955,7 +13980,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "SUHAKAM documented 280 complaints of suspected surveillance in 2025", sub: "Journalists activists and opposition politicians reported phone monitoring", lens: "Historical" },
     { t: "fact", big: "Bar Council challenged amendments as violating Article 5 liberty protections", sub: "Constitutional court hearing scheduled for Q3 2026", lens: "Security" },
     { t: "reframe", big: "Surveillance expansion tests whether security powers can expand without proportional oversight", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Surveillance powers expanded without judicial oversight. Executive convenience does not justify bypassing constitutional checks.", sub: "" },
   ]
 },
 {
@@ -13969,7 +13994,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "System handles trade with 18 countries across ASEAN and Middle East", sub: "Each transaction creates immutable audit trail reducing fraud by 85%", lens: "Regional" },
     { t: "fact", big: "BNM developed platform with 4 central banks under Project Nexus", sub: "Interoperability with Singapore and Thailand platforms achieved in 2025", lens: "Technology" },
     { t: "reframe", big: "Blockchain trade tests whether distributed technology can reduce real costs in traditional commerce", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM8.5 billion blockchain trade processing. Distributed ledger adoption depends on interoperability, not isolated platforms.", sub: "" },
   ]
 },
 {
@@ -13983,7 +14008,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Racial hate speech targeting Chinese and Indian communities rose 45%", sub: "Religious content attacking minority Muslim sects increased 38%", lens: "Security" },
     { t: "fact", big: "Platform removal of hate speech in Malay language took average 96 hours", sub: "English language hate speech removed 3 times faster at 32 hours", lens: "Legal" },
     { t: "reframe", big: "Hate speech enforcement tests whether content regulation works equally across languages and communities", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "28,000 hate speech reports — 65% rise. Online hatred flourishes where platform incentives reward engagement over safety.", sub: "" },
   ]
 },
 {
@@ -13997,7 +14022,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 28% of Malaysian farmers have smartphones capable of running the app", sub: "Rural connectivity gaps prevent 180,000 additional farmers from accessing", lens: "Technology" },
     { t: "fact", big: "Platform available in Malay only excluding indigenous language communities", sub: "RM45 million annual operating cost funded by Agriculture Ministry", lens: "Economic" },
     { t: "reframe", big: "Digital agriculture tests whether technology platforms can serve farmers beyond the already connected", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "120,000 farmers on digital agriculture platform. Technology adoption in farming succeeds with extension support, not just apps.", sub: "" },
   ]
 },
 {
@@ -14011,7 +14036,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 28 Malaysian game studios versus 850 in South Korea", sub: "Local development talent lost to Singapore studios offering 3x salaries", lens: "Legal" },
     { t: "fact", big: "Government allocated RM28 million for game development grants in 2026", sub: "MyGameDev programme funded 45 indie studios producing local content", lens: "Governance" },
     { t: "reframe", big: "Gaming industry tests whether Malaysia can capture development value not just consumption revenue", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "RM4.2 billion gaming industry revenue. Malaysia's creative economy needs IP protection and talent retention policies.", sub: "" },
   ]
 },
 {
@@ -14025,7 +14050,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Students could not access Khan Academy and 28 other educational platforms", sub: "MCMC filtering categories applied to schools designed for general public use", lens: "Economic" },
     { t: "fact", big: "Teachers must submit individual unblocking requests taking 2-4 weeks each", sub: "Only 180 of 4,500 unblocking requests processed by end of 2025", lens: "Political" },
     { t: "reframe", big: "Education filtering tests whether child protection tools account for learning access needs", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "40% of educational content blocked by mandatory school filters. Over-blocking defeats the purpose of digital learning.", sub: "" },
   ]
 },
 {
@@ -14039,7 +14064,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Service operates 8am-6pm weekdays leaving evenings and weekends uncovered", sub: "Only 180 certified interpreters serve the entire national platform", lens: "Governance" },
     { t: "fact", big: "Expansion to healthcare interpretation planned for 2027 with RM12 million budget", sub: "Emergency services access through sign language not yet available", lens: "Social" },
     { t: "reframe", big: "Accessibility technology tests whether digital inclusion extends to disability communities", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85,000 deaf users on Malaysian Sign Language app. Assistive technology works when designed with, not for, its users.", sub: "" },
   ]
 },
 {
@@ -14053,7 +14078,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Semiconductor and biotechnology sectors drove 72% of new patent filings", sub: "University-industry collaboration produced 850 commercialized research outputs", lens: "Political" },
     { t: "fact", big: "Malaysia trails Singapore at 7th and South Korea at 10th in the index", sub: "Gap narrowed but fundamental research output remains significantly lower", lens: "Rights" },
     { t: "reframe", big: "Innovation ranking tests whether R&D investment trajectory can be sustained long-term", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Global Innovation Index rank 32nd, up 5 spots. Rankings improve when R&D spending exceeds 1.5% of GDP consistently.", sub: "" },
   ]
 },
 {
@@ -14067,7 +14092,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "78% of victims were women aged 18-35 targeted by former partners", sub: "Average time from report to charge was 4.5 months", lens: "Social" },
     { t: "fact", big: "Support services for victims include digital content removal assistance", sub: "MCMC issued 1,200 takedown orders for intimate images in 2025", lens: "Critical" },
     { t: "reframe", big: "Revenge porn law tests whether criminal penalties can deter digital intimate image abuse", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "85 revenge porn cases after criminalisation. Legal deterrence works only with victim-centred enforcement and support.", sub: "" },
   ]
 },
 {
@@ -14081,7 +14106,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Healthcare and education systems accounted for 40% of critical findings", sub: "Both sectors had lowest cybersecurity staffing and budget allocations", lens: "Rights" },
     { t: "fact", big: "NACSA given 90-day deadline to remediate immediately exploitable vulnerabilities", sub: "Full remediation programme estimated at RM2.8 billion over 3 years", lens: "Historical" },
     { t: "reframe", big: "Infrastructure audit tests whether vulnerability disclosure leads to actual remediation or just reporting", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "450 digital infrastructure vulnerabilities found. Audit findings matter only if remediation follows within fixed deadlines.", sub: "" },
   ]
 },
 {
@@ -14095,7 +14120,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Act includes right of appeal against content removal decisions", sub: "Independent tribunal established to review disputed takedown orders", lens: "Critical" },
     { t: "fact", big: "Digital rights groups praised appeal mechanism but criticized broad definitions", sub: "Commissioner appointment by Home Minister rather than Parliament raised concerns", lens: "Regional" },
     { t: "reframe", big: "Online Safety Act tests whether comprehensive regulation can balance protection with fundamental freedoms", sub: "" },
-    { t: "view", big: "What would genuine resolution look like if all stakeholders had equal voice", sub: "" },
+    { t: "view", big: "Comprehensive Online Safety Act 2026. Good regulation balances safety enforcement with expression rights through judicial review.", sub: "" },
   ]
 }
 ];
