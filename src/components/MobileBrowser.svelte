@@ -103,19 +103,19 @@
     if (peekCardEl) {
       const peekScale = 0.95 + progress * 0.05; // 0.95 -> 1.0
       const peekTranslateY = 12 - progress * 12; // 12 -> 0
-      const peekOpacity = 0.6 + progress * 0.4; // 0.6 -> 1.0
+      const peekBrightness = 0.96 + progress * 0.04; // 0.96 -> 1.0
       peekCardEl.style.transition = 'none';
       peekCardEl.style.transform = `scale(${peekScale}) translateY(${peekTranslateY}px)`;
-      peekCardEl.style.opacity = String(peekOpacity);
+      peekCardEl.style.filter = `brightness(${peekBrightness})`;
     }
 
     if (thirdCardEl) {
       const thirdScale = 0.90 + progress * 0.05; // 0.90 -> 0.95
       const thirdTranslateY = 24 - progress * 12; // 24 -> 12
-      const thirdOpacity = 0.3 + progress * 0.3; // 0.3 -> 0.6
+      const thirdBrightness = 0.92 + progress * 0.04; // 0.92 -> 0.96
       thirdCardEl.style.transition = 'none';
       thirdCardEl.style.transform = `scale(${thirdScale}) translateY(${thirdTranslateY}px)`;
-      thirdCardEl.style.opacity = String(thirdOpacity);
+      thirdCardEl.style.filter = `brightness(${thirdBrightness})`;
     }
   }
 
@@ -127,12 +127,12 @@
     if (peekCardEl) {
       peekCardEl.style.transition = '';
       peekCardEl.style.transform = '';
-      peekCardEl.style.opacity = '';
+      peekCardEl.style.filter = '';
     }
     if (thirdCardEl) {
       thirdCardEl.style.transition = '';
       thirdCardEl.style.transform = '';
-      thirdCardEl.style.opacity = '';
+      thirdCardEl.style.filter = '';
     }
   }
 
@@ -351,7 +351,7 @@
     {#if current + 2 <= visibleRange.end}
       <div
         bind:this={thirdCardEl}
-        style="position:absolute;inset:0 12px 12px 12px;transform:scale(0.90) translateY(24px);opacity:0.3;pointer-events:none;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;transition:transform 0.35s cubic-bezier(.25,.1,.25,1),opacity 0.35s ease;content-visibility:auto;"
+        style="position:absolute;inset:0 12px 12px 12px;transform:scale(0.90) translateY(24px);pointer-events:none;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;transition:transform 0.35s cubic-bezier(.25,.1,.25,1);content-visibility:auto;filter:brightness(0.92);"
       >
         <MobileCard issue={issues[current + 2]} readState={getState(issues[current + 2].id)} onOpen={() => {}} />
       </div>
@@ -361,7 +361,7 @@
     {#if current + 1 <= visibleRange.end}
       <div
         bind:this={peekCardEl}
-        style="position:absolute;inset:0 12px 12px 12px;transform:scale(0.95) translateY(12px);opacity:0.6;pointer-events:none;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;transition:transform 0.35s cubic-bezier(.25,.1,.25,1),opacity 0.35s ease;content-visibility:auto;"
+        style="position:absolute;inset:0 12px 12px 12px;transform:scale(0.95) translateY(12px);pointer-events:none;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;transition:transform 0.35s cubic-bezier(.25,.1,.25,1);content-visibility:auto;filter:brightness(0.96);"
       >
         <MobileCard issue={issues[current + 1]} readState={getState(issues[current + 1].id)} onOpen={() => {}} />
       </div>
