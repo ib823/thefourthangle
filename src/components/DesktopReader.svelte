@@ -116,11 +116,11 @@
 </script>
 
 <div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:#FFFFFF;">
-  <div style="max-width:680px;margin:0 auto;padding:40px 40px;">
+  <div style="max-width:640px;margin:0 auto;padding:40px 24px;">
     <!-- Reader header -->
     <div style="display:flex;align-items:flex-start;gap:16px;">
       <h1 style="flex:1;font-size:32px;font-weight:800;color:#212529;letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
-      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid #E9ECEF;background:#F8F9FA;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:36px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }} aria-label="Share this issue">
+      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid #E9ECEF;background:#F8F9FA;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#E9ECEF'; (e.currentTarget as HTMLElement).style.borderColor = '#DEE2E6'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = '#F8F9FA'; (e.currentTarget as HTMLElement).style.borderColor = '#E9ECEF'; }} aria-label="Share this issue">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         <span style="font-size:12px;font-weight:600;color:#6C757D;">Share</span>
       </button>

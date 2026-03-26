@@ -215,7 +215,7 @@
     </div>
 
     <!-- Close -->
-    <button onclick={closeWithAnimation} style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:#F8F9FA;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6C757D;">x</button>
+    <button onclick={closeWithAnimation} style="position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:10px;background:#F8F9FA;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:#6C757D;">x</button>
 
     <!-- Preview -->
     <div style="background:#F8F9FA;border-radius:14px;padding:18px;border:1px solid #E9ECEF;margin-bottom:20px;">

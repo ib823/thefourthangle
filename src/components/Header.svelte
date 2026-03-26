@@ -59,7 +59,7 @@
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
         style="flex:1;padding:8px 12px;font-size:14px;border:1px solid #E9ECEF;border-radius:8px;background:#F1F3F5;color:#212529;outline:none;"
       />
-      <button onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:#6C757D;padding:8px;min-height:36px;">Cancel</button>
+      <button onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:#6C757D;padding:8px;min-height:44px;">Cancel</button>
     </div>
   {:else}
     <!-- Normal header -->
@@ -71,11 +71,11 @@
     </div>
     <div style="display:flex;align-items:center;gap:4px;">
       {#if onSearchToggle}
-        <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;min-height:28px;min-width:28px;border-radius:8px;transition:background 0.15s ease;" aria-label="Search">
+        <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:8px;transition:background 0.15s ease;" aria-label="Search">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
       {/if}
-      <a href="/about" style="font-size:11px;font-weight:600;color:#6C757D;text-decoration:none;padding:3px 8px;border-radius:8px;min-height:28px;display:flex;align-items:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#F1F3F5'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>About</a>
+      <a href="/about" style="font-size:11px;font-weight:600;color:#6C757D;text-decoration:none;padding:8px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = '#F1F3F5'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>About</a>
     </div>
   {/if}
   <div style="position:absolute;bottom:0;left:0;right:0;display:flex;gap:1px;height:1.5px;">

@@ -8,8 +8,9 @@
   import DesktopEmptyState from './DesktopEmptyState.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
-  import { readIssues } from '../stores/reader';
+  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady } from '../lib/search';
+  import { issueCategory } from '../data/issues';
   import { getAnimationTier } from '../lib/animation';
 
   interface Props {
@@ -38,10 +39,26 @@
     searchQuery = '';
     searchActive = false;
   }
+  // Restore position: initialIssueId (from URL) takes priority, then saved position
+  let restoredPosition = getSavedPosition();
+  let restoredCardIndex = $state(restoredPosition?.cardIndex ?? 0);
+  let showContextWhisper = $state(!!restoredPosition && restoredPosition.cardIndex > 0);
+
   let activeIssue: (typeof issues)[0] | null = $state(
-    initialIssueId ? issues.find(i => i.id === initialIssueId) ?? null : null
+    initialIssueId
+      ? issues.find(i => i.id === initialIssueId) ?? null
+      : restoredPosition
+        ? issues.find(i => i.id === restoredPosition!.feedIssueId) ?? null
+        : null
   );
   let readMap: Record<string, string> = $state({});
+
+  // Compute initial feed index for mobile browser
+  let initialFeedIndex = $state(
+    restoredPosition
+      ? Math.max(0, issues.findIndex(i => i.id === restoredPosition!.feedIssueId))
+      : 0
+  );
 
   function getState(id: string) {
     const raw = readMap[id];
@@ -55,9 +72,42 @@
     return unsub;
   });
 
+  // Save position whenever active issue changes
+  $effect(() => {
+    if (activeIssue) {
+      savePosition(activeIssue.id, 0);
+    }
+  });
+
+  // Interest-based feed sorting (invisible personalization)
+  let sortedIssues = $derived.by(() => {
+    const base = filteredIssues;
+    // Only personalize after 10+ completed issues
+    const completedCount = Object.values(readMap).filter(v => {
+      if (!v) return false;
+      if (v === 'true') return true;
+      try { return JSON.parse(v).state === 'completed'; } catch { return false; }
+    }).length;
+    if (completedCount < 10) return base;
+
+    const reactionMap = getReactions();
+    const affinity = computeAffinity(readMap, reactionMap, issues);
+
+    // Separate read and unread
+    const read = base.filter(i => readMap[i.id]);
+    const unread = base.filter(i => !readMap[i.id]);
+
+    // Sort unread by relevance (subtle — max 2-3 position shift)
+    const scored = unread.map(i => ({ issue: i, score: scoreIssue(i, affinity) }));
+    scored.sort((a, b) => b.score - a.score);
+
+    // Interleave: read issues stay in their original positions, unread sorted by relevance
+    return [...scored.map(s => s.issue), ...read];
+  });
+
   function checkViewport() {
     const w = window.innerWidth;
-    if (w <= 768) viewMode = 'mobile';
+    if (w < 768) viewMode = 'mobile';
     else if (w < 1024) viewMode = 'tablet';
     else viewMode = 'desktop';
   }
@@ -149,7 +199,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={filteredIssues} onOpenIssue={openIssue} />
+    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} {initialFeedIndex} />
   </main>
 
   {#if activeIssue}
@@ -173,7 +223,7 @@
         />
       </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
-        {#each filteredIssues as issue, i}
+        {#each sortedIssues as issue, i}
           <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} />
         {/each}
       </div>
@@ -195,7 +245,7 @@
     <!-- Split pane -->
     <div style="flex:1;display:flex;overflow:hidden;">
       <DesktopFeed
-        issues={filteredIssues}
+        issues={sortedIssues}
         activeId={activeIssue?.id ?? null}
         {readMap}
         onSelectIssue={openIssue}

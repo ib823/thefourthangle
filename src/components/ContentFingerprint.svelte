@@ -39,7 +39,7 @@
     </span>
     <button
       onclick={copyFingerprint}
-      style="background:none;border:1px solid var(--border);border-radius:6px;padding:3px 8px;font-size:11px;color:var(--text-tertiary);cursor:pointer;white-space:nowrap;"
+      style="background:none;border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--text-tertiary);cursor:pointer;white-space:nowrap;min-height:44px;display:flex;align-items:center;"
     >
       {copied ? 'Copied' : 'Copy'}
     </button>
