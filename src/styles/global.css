@@ -42,6 +42,61 @@ body {
   }
 }
 
+/* Animation tier classes — set by JS on <html> */
+.anim-tier-3 *, .anim-tier-4 * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.anim-tier-4 *, .anim-tier-4 *::before, .anim-tier-4 *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Focus ring animation for keyboard users */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #1971C2;
+  transition: box-shadow var(--duration-fast, 150ms) var(--ease-out-cubic, ease-out);
+}
+
+/* Loading skeleton shimmer */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #F1F3F5 25%, #E9ECEF 50%, #F1F3F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Error shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+/* SVG checkmark draw */
+@keyframes drawCheck {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Drag handle indicator */
+.drag-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: #DEE2E6;
+  margin: 8px auto;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -71,5 +126,41 @@ body {
   }
   *::-webkit-scrollbar-thumb:hover {
     background: #ADB5BD;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg, #1A1A1A);
+    color: var(--text-primary, #E8E4DF);
+  }
+
+  ::selection {
+    background: rgba(200, 150, 58, 0.25);
+  }
+
+  :focus-visible {
+    box-shadow: 0 0 0 2px var(--amber, #C8963A);
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #2A2620 25%, #33302A 50%, #2A2620 75%);
+    background-size: 200% 100%;
+  }
+
+  .drag-handle {
+    background: #3D3830;
+  }
+
+  @media (min-width: 1024px) {
+    * {
+      scrollbar-color: #3D3830 transparent;
+    }
+    *::-webkit-scrollbar-thumb {
+      background: #3D3830;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+      background: #4A4338;
+    }
   }
 }

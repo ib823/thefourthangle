@@ -9,6 +9,8 @@
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
   import { readIssues } from '../stores/reader';
+  import { loadSearchIndex, search as doSearch, isLoaded as searchReady } from '../lib/search';
+  import { getAnimationTier } from '../lib/animation';
 
   interface Props {
     initialIssueId?: string;
@@ -16,6 +18,26 @@
   let { initialIssueId }: Props = $props();
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
+  let searchQuery = $state('');
+  let searchActive = $state(false);
+
+  let filteredIssues = $derived.by(() => {
+    if (!searchQuery.trim()) return issues;
+    const ids = doSearch(searchQuery);
+    if (ids.length === 0) return [];
+    const idSet = new Set(ids);
+    return issues.filter(i => idSet.has(i.id));
+  });
+
+  function onSearchFocus() {
+    loadSearchIndex();
+    searchActive = true;
+  }
+
+  function onSearchClear() {
+    searchQuery = '';
+    searchActive = false;
+  }
   let activeIssue: (typeof issues)[0] | null = $state(
     initialIssueId ? issues.find(i => i.id === initialIssueId) ?? null : null
   );
@@ -43,6 +65,11 @@
   onMount(() => {
     checkViewport();
     window.addEventListener('resize', checkViewport);
+
+    // Set animation tier class on <html> for CSS perf rules
+    const tier = getAnimationTier();
+    document.documentElement.classList.add('anim-tier-' + tier);
+
     return () => window.removeEventListener('resize', checkViewport);
   });
 
@@ -76,9 +103,19 @@
 
   // Keyboard nav for desktop feed
   onMount(() => {
-    if (viewMode !== 'desktop') return;
     function onKeyDown(e: KeyboardEvent) {
+      // Ctrl+K or / to focus search (desktop/tablet only)
+      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !searchActive)) {
+        if (viewMode !== 'mobile') {
+          e.preventDefault();
+          onSearchFocus();
+          const input = document.querySelector('[data-search-input]') as HTMLInputElement;
+          input?.focus();
+          return;
+        }
+      }
       if (viewMode !== 'desktop') return;
+      if (e.key === 'Escape' && searchActive) { onSearchClear(); return; }
       if (e.key === 'Escape' && activeIssue) { activeIssue = null; return; }
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault();
@@ -105,8 +142,14 @@
 {#if viewMode === 'mobile'}
   <!-- Mobile: Tinder-style vertical browse -->
   <main style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
-    <Header />
-    <MobileBrowser {issues} onOpenIssue={openIssue} />
+    <Header
+      onSearchToggle={() => { searchActive = true; loadSearchIndex(); }}
+      searchMode={searchActive}
+      {searchQuery}
+      onSearchInput={(q) => { searchQuery = q; }}
+      onSearchClear={onSearchClear}
+    />
+    <MobileBrowser issues={filteredIssues} onOpenIssue={openIssue} />
   </main>
 
   {#if activeIssue}
@@ -118,8 +161,19 @@
   <main style="min-height:100vh;">
     <Header />
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
+      <div style="margin-bottom:16px;">
+        <input
+          data-search-input
+          type="text"
+          placeholder="Search issues..."
+          value={searchQuery}
+          oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
+          onfocus={onSearchFocus}
+          style="width:100%;padding:10px 16px;font-size:14px;border:1px solid #E9ECEF;border-radius:12px;background:#F1F3F5;color:#212529;outline:none;"
+        />
+      </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
-        {#each issues as issue, i}
+        {#each filteredIssues as issue, i}
           <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} />
         {/each}
       </div>
@@ -141,10 +195,14 @@
     <!-- Split pane -->
     <div style="flex:1;display:flex;overflow:hidden;">
       <DesktopFeed
-        {issues}
+        issues={filteredIssues}
         activeId={activeIssue?.id ?? null}
         {readMap}
         onSelectIssue={openIssue}
+        {searchQuery}
+        onSearchInput={(q) => { searchQuery = q; }}
+        {onSearchFocus}
+        {onSearchClear}
       />
 
       {#if activeIssue}

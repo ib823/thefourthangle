@@ -9,6 +9,7 @@
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
   import { haptic, stagger, tween, ease } from '../lib/animation';
   import { lockScroll, unlockScroll } from '../lib/scroll-lock';
+  import { observeScroll, applyFadeGradient, shouldBlockSwipe, type ScrollState } from '../lib/scroll-physics';
 
   interface Card {
     t: string;
@@ -66,6 +67,13 @@
   let ghost2El: HTMLDivElement | undefined = $state(undefined);
   let dotsContainerEl: HTMLDivElement | undefined = $state(undefined);
   let cardAreaEl: HTMLDivElement | undefined = $state(undefined);
+  let cardContentEl: HTMLDivElement | undefined = $state(undefined);
+
+  // Scroll physics state for card content
+  let scrollState: ScrollState = $state({ atTop: true, atBottom: true, canScroll: false, scrollProgress: 0 });
+  let scrollIndicatorVisible = $state(false);
+  let scrollIndicatorTimer: ReturnType<typeof setTimeout> | null = null;
+  let cleanupScrollObserver: (() => void) | null = null;
 
   // Velocity tracker
   const tracker = createVelocityTracker();
@@ -416,6 +424,9 @@
     if (e.button !== 0) return;
     if ((e.target as HTMLElement)?.closest('button, a, input')) return;
 
+    // Block swipe initiation when user is mid-scroll in card content
+    if (cardContentEl && shouldBlockSwipe(cardContentEl)) return;
+
     isDragging = true;
     gestureDirection = 'undecided';
     dragStartX = e.clientX;
@@ -636,13 +647,26 @@
     }, 1500);
   }
 
-  // --- Content scroll overflow detection ---
-  let contentOverflows = $state(false);
-  function checkContentOverflow() {
-    const el = cardEl?.querySelector('.card-center');
-    if (el) {
-      contentOverflows = el.scrollHeight > el.clientHeight + 2;
-    }
+  // --- Content scroll overflow detection (now driven by scroll-physics) ---
+  let contentOverflows = $derived(scrollState.canScroll);
+
+  function attachScrollObserver() {
+    cleanupScrollObserver?.();
+    cleanupScrollObserver = null;
+
+    if (!cardContentEl) return;
+
+    cleanupScrollObserver = observeScroll(cardContentEl, (state) => {
+      scrollState = state;
+      applyFadeGradient(cardContentEl!, state);
+
+      // Show scroll indicator while scrolling, fade out after stop
+      scrollIndicatorVisible = true;
+      if (scrollIndicatorTimer) clearTimeout(scrollIndicatorTimer);
+      scrollIndicatorTimer = setTimeout(() => {
+        scrollIndicatorVisible = false;
+      }, 1200);
+    });
   }
 
   onMount(() => {
@@ -657,21 +681,25 @@
 
     maybeShowSwipeHint();
 
-    // Check overflow after render
-    requestAnimationFrame(checkContentOverflow);
+    // Attach scroll observer after first render
+    requestAnimationFrame(attachScrollObserver);
   });
 
   onDestroy(() => {
     unlockScroll();
     cancelAnimation?.();
+    cleanupScrollObserver?.();
+    if (scrollIndicatorTimer) clearTimeout(scrollIndicatorTimer);
   });
 
-  // Recheck content overflow when card changes
+  // Re-attach scroll observer when card changes (new content element)
   $effect(() => {
-    // Depend on current card
+    // Depend on current card and completed state
     void current;
     void completed;
-    requestAnimationFrame(checkContentOverflow);
+    // Reset scroll state for new card
+    scrollState = { atTop: true, atBottom: true, canScroll: false, scrollProgress: 0 };
+    requestAnimationFrame(attachScrollObserver);
   });
 </script>
 
@@ -766,15 +794,15 @@
         </div>
 
         <!-- Card center -->
-        <div class="card-center" class:has-overflow={contentOverflows}>
+        <div class="card-center" bind:this={cardContentEl} class:has-overflow={contentOverflows}>
           <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;">{card.big}</p>
           {#if card.sub}
             <p class="sub-text">{card.sub}</p>
           {/if}
+          {#if contentOverflows}
+            <div class="scroll-indicator" class:scroll-indicator-visible={scrollIndicatorVisible} style="top:{scrollState.scrollProgress * 100}%;"></div>
+          {/if}
         </div>
-        {#if contentOverflows}
-          <div class="content-fade-gradient"></div>
-        {/if}
 
         <!-- Card bottom -->
         <div class="card-bottom">
@@ -1006,20 +1034,21 @@
     position: relative;
   }
 
-  .card-center.has-overflow {
-    mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+  .scroll-indicator {
+    position: absolute;
+    right: 2px;
+    width: 3px;
+    height: 24px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
   }
 
-  .content-fade-gradient {
-    position: absolute;
-    bottom: 40px;
-    left: 24px;
-    right: 24px;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent, #fff);
-    pointer-events: none;
-    z-index: 4;
+  .scroll-indicator-visible {
+    opacity: 1;
   }
 
   .big-text {
