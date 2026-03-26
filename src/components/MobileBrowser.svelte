@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
-  import { readIssues } from '../stores/reader';
+  import { readIssues, savePosition } from '../stores/reader';
   import { createSpring, animateSpring, SPRING_SNAPPY, SPRING_RUBBER, type SpringState } from '../lib/spring';
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
   import { haptic } from '../lib/animation';
@@ -9,11 +9,12 @@
   interface Props {
     issues: any[];
     onOpenIssue: (issue: any) => void;
+    initialFeedIndex?: number;
   }
-  let { issues, onOpenIssue }: Props = $props();
+  let { issues, onOpenIssue, initialFeedIndex = 0 }: Props = $props();
 
   let mounted = $state(false);
-  let current = $state(0);
+  let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
   let isDragging = $state(false);
   let readMap: Record<string, string> = $state({});
   let animating = $state(false);
@@ -296,6 +297,11 @@
       resetCardStyles();
       current = dir === 'up' ? current + 1 : current - 1;
 
+      // Persist feed position
+      if (issues[current]) {
+        savePosition(issues[current].id, 0);
+      }
+
       // Enter phase: spring from slight offset to 0
       const enterOffset = dir === 'up' ? 60 : -60;
       dragOffset = enterOffset;
@@ -340,7 +346,7 @@
   onpointercancel={onPointerCancel}
 >
   <!-- Card area -->
-  <div style="flex:1;position:relative;padding:0 12px 12px;opacity:{mounted ? 1 : 0};transition:opacity 0.4s ease;">
+  <div style="flex:1;position:relative;padding:0 12px max(12px, env(safe-area-inset-bottom, 12px));opacity:{mounted ? 1 : 0};transition:opacity 0.4s ease;">
     <!-- Third peek card behind -->
     {#if current + 2 <= visibleRange.end}
       <div

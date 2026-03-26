@@ -215,6 +215,9 @@
     margin: 16px 0 0;
     letter-spacing: -0.02em;
     transition: color var(--duration-normal, 250ms) var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1));
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .bar-fill {

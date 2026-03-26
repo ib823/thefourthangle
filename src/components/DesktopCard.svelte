@@ -95,7 +95,7 @@
       </div>
     {/if}
   </div>
-  <h3 style="font-size:15px;font-weight:600;color:var(--text-primary);margin:10px 0 0;line-height:1.35;">{issue.headline}</h3>
+  <h3 style="font-size:15px;font-weight:600;color:var(--text-primary);margin:10px 0 0;line-height:1.35;overflow-wrap:break-word;word-break:break-word;">{issue.headline}</h3>
   <span style="font-size:10px;font-weight:500;color:var(--text-tertiary);margin-top:2px;display:block;">{issueCategory(issue)}</span>
   <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
   <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">

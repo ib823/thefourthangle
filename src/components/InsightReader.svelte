@@ -863,6 +863,14 @@
     overflow: hidden;
     touch-action: none;
     will-change: transform, opacity;
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    animation: overlayEnter 0.3s var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1)) both;
+  }
+
+  @keyframes overlayEnter {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .progress-track {
@@ -1057,6 +1065,9 @@
     color: var(--text-primary);
     line-height: 1.35;
     margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .sub-text {
