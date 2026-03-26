@@ -49,7 +49,7 @@
 
   let card = $derived(cardIndex !== null ? issue.cards[cardIndex] : null);
   let shareText = $derived(card ? card.big : issue.headline);
-  let previewText = $derived(shareText.length > 120 ? shareText.slice(0, 117) + '...' : shareText);
+  let previewText = $derived(card ? (shareText.length > 120 ? shareText.slice(0, 117) + '...' : shareText) : (issue.context.length > 120 ? issue.context.slice(0, 117) + '...' : issue.context));
   let fullUrl = $derived(`https://thefourthangle.pages.dev/issue/${issue.id}`);
 
   let os = $derived(issue.opinionShift);
@@ -187,7 +187,7 @@
 
   // Copy button background
   let copyBg = $derived(copyBgFlash ? 'var(--status-green-bg)' : 'var(--bg-elevated)');
-  let copyBorder = $derived(copyBgFlash ? 'var(--status-green-bg)' : 'var(--bg-sunken)');
+  let copyBorder = $derived(copyBgFlash ? 'var(--status-green)' : 'var(--border-subtle)');
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -259,7 +259,7 @@
           class="share-btn"
           class:share-btn--visible={buttonVisible[i]}
           onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
-          onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--bg-sunken)'; }}
+          onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
         >
           <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{p.label}</span>
         </button>
@@ -348,7 +348,9 @@
   @media (min-width: 640px) {
     .share-panel {
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-xl);
+      max-height: max-content;
+      margin: auto 0;
     }
   }
 
@@ -361,7 +363,7 @@
     padding: 12px 8px;
     border-radius: 12px;
     background: var(--bg-elevated);
-    border: 1px solid var(--bg-sunken);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
     transition: background 0.15s ease, border-color 0.15s ease, opacity 200ms ease, transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     min-height: 44px;
@@ -382,7 +384,7 @@
     width: 100%;
     padding: 12px 16px;
     border-radius: 12px;
-    border: 1px solid var(--bg-sunken);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
     transition: background 300ms ease, border-color 300ms ease;
   }
