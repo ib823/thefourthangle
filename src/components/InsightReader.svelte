@@ -786,7 +786,7 @@
             <span class="pill-dot" style="background:{meta.color};"></span>
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;">
+          <div style="display:flex;align-items:center;gap:6px;" onpointerdown={(e) => e.stopPropagation()}>
             <SaveButton issueId={issue.id} cardIndex={current} />
             <button onclick={() => { shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#F8F9FA;border:1px solid #DEE2E6;border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:auto;" aria-label="Share this card">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#868E96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
