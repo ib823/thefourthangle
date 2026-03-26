@@ -4,7 +4,7 @@
  * dual scores (Opinion Shift + Neutrality), and safe-zone compliance.
  */
 import sharp from 'sharp';
-import { readFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -185,16 +185,41 @@ function buildSvg(issue) {
 </svg>`;
 }
 
+// ── AI background directory ──
+const bgDir = join(root, 'public', 'og', 'backgrounds');
+
 // ── Generate all images ──
 console.log(`Generating OG images for ${issues.length} issues...`);
 
 let count = 0;
 let errors = 0;
+let withBg = 0;
 for (const issue of issues) {
   try {
     const svg = buildSvg(issue);
     const outPath = join(outDir, `issue-${issue.id}.png`);
-    await sharp(Buffer.from(svg)).png({ quality: 80, compressionLevel: 9 }).toFile(outPath);
+    const bgPath = join(bgDir, `issue-${issue.id}-bg.png`);
+
+    if (existsSync(bgPath)) {
+      // Composite: AI background + dark gradient overlay + SVG data layer
+      const bg = await sharp(bgPath).resize(1200, 630, { fit: 'cover' }).toBuffer();
+      const gradient = Buffer.from(
+        `<svg width="1200" height="630"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0f0f23" stop-opacity="0.3"/><stop offset="40%" stop-color="#0f0f23" stop-opacity="0.75"/><stop offset="100%" stop-color="#0f0f23" stop-opacity="0.92"/></linearGradient></defs><rect width="1200" height="630" fill="url(#g)"/></svg>`
+      );
+      const overlay = Buffer.from(svg.replace(/<rect width="1200" height="630" fill="#0f0f23"\/>/, ''));
+
+      await sharp(bg)
+        .composite([
+          { input: await sharp(gradient).toBuffer(), blend: 'over' },
+          { input: await sharp(Buffer.from(overlay)).toBuffer(), blend: 'over' },
+        ])
+        .png({ compressionLevel: 9 })
+        .toFile(outPath);
+      withBg++;
+    } else {
+      // Fallback: solid dark background (current behavior)
+      await sharp(Buffer.from(svg)).png({ quality: 80, compressionLevel: 9 }).toFile(outPath);
+    }
     count++;
     if (count % 100 === 0) console.log(`  ${count}/${issues.length} done`);
   } catch (e) {
@@ -203,5 +228,5 @@ for (const issue of issues) {
   }
 }
 
-console.log(`Done: ${count} OG images generated, ${errors} errors.`);
+console.log(`Done: ${count} OG images generated (${withBg} with AI backgrounds), ${errors} errors.`);
 if (errors > 0) process.exit(1);
