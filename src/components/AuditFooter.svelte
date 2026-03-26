@@ -87,6 +87,6 @@
   </div>
 
   <div style="background:var(--amber-bg);border:1px solid rgba(139,101,8,0.12);border-radius:10px;padding:14px;margin-top:14px;">
-    <p style="font-size:12px;line-height:1.6;color:var(--text-primary);margin:0;font-style:italic;">We do not claim neutrality. We claim measurable balance across 12 published dimensions, verified factual accuracy, quantified inter-stage conflict, and radical transparency about our methodology and its limits.</p>
+    <p style="font-size:12px;line-height:1.6;color:var(--text-primary);margin:0;font-style:italic;">We do not claim neutrality. We claim measurable balance across 12 published dimensions, a documented fact-verification process, quantified inter-stage conflict, and radical transparency about our methodology and its limits.</p>
   </div>
 </div>
