@@ -75,14 +75,9 @@
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
 
-    <!-- Metadata row: category + reaction heart -->
-    <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+    <!-- Metadata row: category -->
+    <div style="margin-top:2px;">
       <span style="font-size:10px;font-weight:500;color:var(--text-muted);">{issueCategory(issue)}</span>
-      {#if hasReaction}
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.7;">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
-      {/if}
     </div>
 
     {#if issue.stageScores && issue.finalScore}
@@ -98,5 +93,13 @@
       </div>
     {/if}
   </div>
-  <span style="font-size:14px;font-weight:700;color:{scoreColor};flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums;" title="Opinion Shift: {issue.opinionShift} — {label}. How much you'd miss by reading only the headline.">{issue.opinionShift}</span>
+  <!-- Right column: score + heart -->
+  <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding-top:2px;">
+    <span style="font-size:14px;font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;" title="Opinion Shift: {issue.opinionShift} — {label}. How much you'd miss by reading only the headline.">{issue.opinionShift}</span>
+    {#if hasReaction}
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="opacity:0.65;">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    {/if}
+  </div>
 </div>
