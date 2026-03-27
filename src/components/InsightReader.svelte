@@ -32,13 +32,15 @@
     issue: Issue;
     onClose: () => void;
     onNext?: () => void;
+    initialCardIndex?: number;
   }
 
-  let { issue, onClose, onNext }: Props = $props();
+  let { issue, onClose, onNext, initialCardIndex = 0 }: Props = $props();
 
-  let current = $state(0);
+  let current = $state(Math.min(initialCardIndex, 5));
   let completed = $state(false);
-  let readCards = $state(new Set<number>([0]));
+  // Mark all cards up to initial position as read
+  let readCards = $state(new Set<number>(Array.from({ length: Math.min(initialCardIndex, 5) + 1 }, (_, i) => i)));
   let shareOpen = $state(false);
   let shareCardIndex: number | null = $state(null);
   let showSwipeHint = $state(false);

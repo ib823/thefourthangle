@@ -154,6 +154,11 @@
       loadAndOpenIssue(activeIssue.id);
     }
 
+    // If position restore (returning user within 24h), auto-open the reader
+    if (!initialIssueId && restoredPosition && restoredPosition.cardIndex > 0 && activeIssue) {
+      loadAndOpenIssue(activeIssue.id);
+    }
+
     // Back-button support: close reader on popstate
     function onPopState(e: PopStateEvent) {
       if (activeIssue && !e.state?.reader) {
@@ -186,6 +191,7 @@
 
   function openIssue(issue: FeedIssue) {
     activeIssue = issue;
+    restoredCardIndex = 0; // Clear resume position — only used once on return
     loadAndOpenIssue(issue.id);
   }
 
@@ -272,7 +278,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -299,7 +305,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} />
   {/if}
 
 {:else}
