@@ -4,7 +4,7 @@
   import VerdictBar from './VerdictBar.svelte';
   import { opinionLabel, issueCategory } from '../data/issues';
   import { pressAction } from '../lib/actions/press';
-  import { tween, stagger, countUp, ease } from '../lib/animation';
+  import { tween, countUp, ease } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';
@@ -32,7 +32,6 @@
   let hasEnteredViewport = $state(false);
   let displayScore = $state(0);
   let barFillPercent = $state(0);
-  let dotScales: number[] = $state([]);
   let badgeScale = $state(0);
   let prefersReducedMotion = false;
 
@@ -40,21 +39,15 @@
   let observer: IntersectionObserver | undefined;
   let cleanups: (() => void)[] = [];
 
-  // Number of opinion dots (mapped from score thresholds)
-  const dotCount = 5;
+  // Opinion dots removed — redundant with progress bar
 
   onMount(() => {
     prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Initialize dot scales
-    dotScales = Array(dotCount).fill(0);
-
     if (prefersReducedMotion) {
-      // Skip animations, show final state immediately
       hasEnteredViewport = true;
       displayScore = issue.opinionShift;
       barFillPercent = issue.opinionShift;
-      dotScales = Array(dotCount).fill(1);
       badgeScale = 1;
       return;
     }
@@ -89,13 +82,7 @@
     });
     cleanups.push(cancelCount);
 
-    // 3. Opinion dots sequential pop-in: 50ms stagger
-    const cancelDots = stagger(dotCount, 50, 400, (index) => {
-      dotScales = [...dotScales.slice(0, index), 1, ...dotScales.slice(index + 1)];
-    });
-    cleanups.push(cancelDots);
-
-    // 4. Badge pills pop-in: 150ms delay, then spring
+    // 3. Badge pills pop-in: 150ms delay, then spring
     const badgeTimeout = setTimeout(() => {
       badgeScale = 1;
     }, 150);
@@ -123,8 +110,17 @@
   tabindex="0"
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}. {issue.status === 'new' ? 'New.' : issue.status === 'updated' ? 'Updated.' : ''} {isCompleted ? 'Covered.' : isStarted ? 'Exploring.' : 'Unread.'}"
   class="mobile-card"
-  style="background:var(--bg-elevated);box-shadow:0 2px 12px rgba(0,0,0,{isCompleted ? '0.03' : '0.06'});"
+  style="background:var(--bg-elevated);box-shadow:0 2px 12px rgba(0,0,0,{isCompleted ? '0.03' : '0.06'});position:relative;"
 >
+  <!-- Reaction heart: top-right, prominent -->
+  {#if hasReaction}
+    <div style="position:absolute;top:20px;right:20px;opacity:0.6;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </div>
+  {/if}
+
   <!-- Top row: badges -->
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
     {#if isStarted}
@@ -145,11 +141,6 @@
       {:else if issue.status === 'updated'}
         <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
-    {/if}
-    {#if hasReaction}
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.7;">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
     {/if}
     {#if issue.edition > 1}
       <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
@@ -172,16 +163,6 @@
     </div>
     <span class="score-number" style="color:{scoreColor};">{displayScore}</span>
     <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
-  </div>
-
-  <!-- Opinion dots -->
-  <div style="display:flex;gap:4px;margin-top:8px;">
-    {#each { length: dotCount } as _, i}
-      <div
-        class="opinion-dot"
-        style="transform:scale({dotScales[i] ?? 0});background:{i < Math.ceil(issue.opinionShift / 20) ? scoreColor : 'var(--border-subtle)'};"
-      ></div>
-    {/each}
   </div>
 
   <!-- Verdict bar -->
@@ -257,13 +238,6 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .opinion-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    transition: transform var(--duration-medium, 350ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
-  }
-
   .badge-pill {
     transition: transform var(--duration-medium, 350ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
   }
@@ -280,7 +254,6 @@
     .mobile-card,
     .headline,
     .bar-fill,
-    .opinion-dot,
     .badge-pill {
       transition: none !important;
     }
