@@ -192,6 +192,11 @@
   // Origin rect for shared-element transition
   let readerOriginRect: DOMRect | null = $state(null);
 
+  // Preload issue data on pointerdown — starts fetch before tap fires
+  function prefetchIssue(issue: FeedIssue) {
+    loadFullIssue(issue.id); // fire-and-forget, result is cached
+  }
+
   function openIssue(issue: FeedIssue, originRect?: DOMRect) {
     activeIssue = issue;
     readerOriginRect = originRect ?? null;
@@ -278,7 +283,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} {initialFeedIndex} />
+    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} />
   </main>
 
   {#if activeFullIssue}
@@ -302,7 +307,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
         {#each sortedIssues as issue, i}
-          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} />
+          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} />
         {/each}
       </div>
     </div>

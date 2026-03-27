@@ -9,9 +9,10 @@
   interface Props {
     issues: IssueSummary[];
     onOpenIssue: (issue: IssueSummary, originRect?: DOMRect) => void;
+    onPrefetch?: (issue: IssueSummary) => void;
     initialFeedIndex?: number;
   }
-  let { issues, onOpenIssue, initialFeedIndex = 0 }: Props = $props();
+  let { issues, onOpenIssue, onPrefetch, initialFeedIndex = 0 }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
@@ -131,6 +132,7 @@
         issue={issue}
         readState={getState(issue.id)}
         onOpen={() => handleOpenIssue(issue)}
+        onPrefetch={() => onPrefetch?.(issue)}
       />
     </div>
   {/each}

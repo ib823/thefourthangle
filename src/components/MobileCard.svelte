@@ -13,8 +13,9 @@
     issue: IssueSummary;
     readState: ReadState | null;
     onOpen: () => void;
+    onPrefetch?: () => void;
   }
-  let { issue, readState, onOpen }: Props = $props();
+  let { issue, readState, onOpen, onPrefetch }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -115,6 +116,7 @@
   bind:this={cardEl}
   use:pressAction={{ scale: 0.97 }}
   onclick={onOpen}
+  onpointerdown={() => onPrefetch?.()}
   onkeydown={handleKeydown}
   role="article"
   tabindex="0"

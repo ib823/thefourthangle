@@ -12,8 +12,9 @@
     index: number;
     readState: ReadState | null;
     onOpen: () => void;
+    onPrefetch?: () => void;
   }
-  let { issue, index, readState, onOpen }: Props = $props();
+  let { issue, index, readState, onOpen, onPrefetch }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -68,7 +69,7 @@
 <div
   bind:this={cardEl}
   onclick={onOpen}
-  onmouseenter={() => hovered = true}
+  onmouseenter={() => { hovered = true; onPrefetch?.(); }}
   onmouseleave={() => hovered = false}
   onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); } }}
   role="article"
