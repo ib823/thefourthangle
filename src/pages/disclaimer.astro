@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 <Base title="Disclaimer & Legal Notice — The Fourth Angle" description="Legal disclaimer, editorial standards, and content policies for The Fourth Angle analysis platform.">
   <div style="max-width:640px;margin:0 auto;">
     <header style="padding:16px 18px;display:flex;align-items:center;gap:12px;">
-      <a href="/" style="font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
+      <a href="/" style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Back
       </a>
@@ -13,134 +13,118 @@ import Base from '../layouts/Base.astro';
     </header>
     <article style="padding:20px 18px;max-width:640px;">
 
-      <h1 style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--text-primary);margin:0 0 24px 0;letter-spacing:-0.02em;line-height:1.2;">Disclaimer & Legal Notice</h1>
+      <h1 style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--text-primary);margin:0 0 8px 0;letter-spacing:-0.02em;line-height:1.2;">Disclaimer & Legal Notice</h1>
+      <p style="font-family:var(--font-body);font-size:15px;color:var(--text-tertiary);margin:0 0 32px 0;">Last reviewed March 2026</p>
 
-      <!-- 1. Platform Identity -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">1. Analysis Platform, Not a News Outlet</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">The Fourth Angle is an independent, non-partisan <strong>analysis platform</strong>. We are not a licensed news outlet, media organisation, or press entity. We do not claim to publish news. We publish independent analysis and commentary on matters of public interest based on publicly available information.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">This platform operates under the regulatory framework of the Communications and Multimedia Act 1998.</p>
-      </section>
+      <!-- Group 1: What We Are -->
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Analysis Platform, Not a News Outlet</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">The Fourth Angle is an independent, non-partisan <strong>analysis platform</strong>. We are not a licensed news outlet, media organisation, or press entity. We publish independent analysis and commentary on matters of public interest based on publicly available information. This platform operates under the Communications and Multimedia Act 1998.</p>
+      </div>
 
-      <!-- 2. Opinion & Analysis -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">2. Opinion and Analysis — Not Statements of Fact</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">All content published on The Fourth Angle constitutes <strong>analysis, opinion, and commentary</strong> on publicly available information. Content is protected as fair comment on matters of public interest under Malaysian law.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">Where factual claims are made, they are sourced and cited. We distinguish between factual assertions (supported by cited sources) and analytical opinion (our assessment based on available evidence). Readers should consult original sources to form their own conclusions.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Scores, metrics, and measurements (including Opinion Shift and Neutrality scores) represent our editorial assessment methodology and are opinions, not objective truth claims.</p>
-      </section>
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Opinion and Analysis</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">All content constitutes <strong>analysis, opinion, and commentary</strong>. Content is protected as fair comment on matters of public interest under Malaysian law.</p>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Factual claims are sourced and cited. Scores and measurements represent our editorial methodology — they are opinions, not objective truth claims.</p>
+      </div>
 
-      <!-- 3. Good Faith -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">3. Good Faith Statement</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">All analysis is published in good faith based on publicly available sources and our honest assessment. We do not intend to defame, harass, annoy, threaten, incite, or cause harm to any individual, group, organisation, or institution.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Where our analysis examines public figures, government officials, or institutions, such commentary is directed at their public actions and policies — not their private lives or personal character — and is offered in the public interest.</p>
-      </section>
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Good Faith</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">All analysis is published in good faith. We do not intend to defame, harass, threaten, or cause harm. Commentary on public figures is directed at their public actions and policies — not their private lives.</p>
+      </div>
 
-      <!-- 4. 3R Framework -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">4. Race, Religion, and Royalty</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">The Fourth Angle respects the equal dignity of all races and ethnic communities in Malaysia. We do not publish content intended to degrade, demean, or cause enmity between racial groups. Analysis of policies affecting racial communities is conducted with respect for all communities involved.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">We respect all religions and religious beliefs. We do not intend to insult, demean, or attack any religion, religious figure, or religious institution. Analysis of religious institutions, policies, or social issues is conducted with respect for religious beliefs and is intended to promote public understanding, not to cause disharmony or disrespect.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">We respect the constitutional position and role of the Malaysian monarchy. We do not advocate for changes to the system of constitutional governance. Analysis of royal institutions and policies is conducted within the context of public administration and constitutional governance.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">We distinguish between critique of public policy and disrespect for communities, beliefs, or institutions. Our mission is to inform — not to divide.</p>
-      </section>
+      <!-- Group 2: Respect & Sensitivity -->
+      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Respect & Sensitivity</h2>
 
-      <!-- 5. Constitutional Framework -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">5. Respect for Constitutional Framework</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">The Fourth Angle respects Malaysia's constitutional framework and the rule of law. We do not advocate for the overthrow or change of government by unlawful means. We do not advocate violence, armed rebellion, or any unlawful action. Analysis of government policy is commentary on lawful governance and is intended to support informed democratic participation.</p>
-      </section>
-
-      <!-- 6. No Guarantee of Accuracy -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">6. No Guarantee of Accuracy</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">We aim for accuracy but make no warranty that content is error-free. Analysis may contain errors, outdated information, unintended bias, or unverified claims despite our editorial review process. Content is provided on an "as is" basis.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Readers should independently verify information before relying on it for any purpose. We encourage checking original sources, which are cited within each issue.</p>
-      </section>
-
-      <!-- 7. Timeliness -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">7. Timeliness of Information</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Issues are published based on information available at the time of publication. Circumstances, facts, laws, and policies may have changed since publication. Each issue shows its edition number. We are not obligated to update published content, though we may do so and will indicate updates accordingly.</p>
-      </section>
-
-      <!-- 8. Sources -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">8. Sources and Official Secrets</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">The Fourth Angle uses only publicly available and publicly disclosed information. We do not receive, store, or publish material classified under the Official Secrets Act 1972 or any other classification regime. All sources are disclosed in our published audit for each issue.</p>
-      </section>
-
-      <!-- 9. No Professional Advice -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">9. Not Professional Advice</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Content on this platform is not legal, financial, medical, investment, or professional advice. Do not rely on this platform for decisions affecting your personal, financial, or legal circumstances. Consult qualified professionals.</p>
-      </section>
-
-      <!-- 10. Limitation of Liability -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">10. Limitation of Liability</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">To the maximum extent permitted by Malaysian law, The Fourth Angle disclaims all liability for damages arising from use of this platform or reliance on its content, including direct, indirect, incidental, or consequential damages. Use of this site constitutes acceptance of this limitation.</p>
-      </section>
-
-      <!-- 11. External Links -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">11. External Links</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Links to external websites are provided for reference only. The Fourth Angle does not endorse, verify, or accept responsibility for content on external sites.</p>
-      </section>
-
-      <!-- 12. Editorial Standards -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">12. Editorial Standards and Review Process</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">Every issue undergoes a documented 6-stage editorial review process before publication: Primary Analysis, Bias Audit, Fact Verification, Alternative Framing, Contrarian Stress-Test, and Synthesis Review. Each stage produces a score. The complete audit — including bias measurements across 12 dimensions, confidence levels, and source attribution — is published with every issue.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">This process demonstrates our commitment to responsible analysis. Full details of our methodology are available on our <a href="/about" style="color:var(--focus);text-decoration:none;">About</a> page.</p>
-      </section>
-
-      <!-- 13. Corrections -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">13. Corrections Policy</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">If factual errors are identified in any published issue, we are committed to correcting them. Corrections are reflected in updated editions (indicated by the edition number on each issue). We welcome reports of potential inaccuracies.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">To report an error or concern, contact us at <a href="mailto:thefourthangle@proton.me" style="color:var(--focus);text-decoration:none;">thefourthangle@proton.me</a>.</p>
-      </section>
-
-      <!-- 14. Content Authenticity -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">14. Content Authenticity</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Every issue carries a cryptographic fingerprint (SHA-256) and Ed25519 digital signature. This allows readers to verify that content has not been tampered with or falsely attributed. Our <a href="/verify.html" style="color:var(--focus);text-decoration:none;">verification tool</a> is available offline.</p>
-      </section>
-
-      <!-- 15. Privacy -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">15. Privacy and Data</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">The Fourth Angle is a static website. We do not require user accounts, operate user tracking, or use third-party analytics. We do not collect names, email addresses, locations, or any personally identifiable information.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">This site uses your browser's local storage to remember your reading progress and preferences (such as which issues you have read and your saved cards). This data is stored entirely on your device, is never transmitted to any server, and can be cleared at any time through your browser settings.</p>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">Standard server logs maintained by our hosting provider (Cloudflare) may record IP addresses and request metadata as part of normal infrastructure operations. This is governed by Cloudflare's privacy policy.</p>
-      </section>
-
-      <!-- 16. Independence -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">16. Independence</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">The Fourth Angle is independently operated. We accept no political funding, government grants, or payments from any political party, politician, government-linked entity, or special interest group. Our analysis reflects our honest assessment, not advocacy for any political position.</p>
-      </section>
-
-      <!-- 17. Governing Law -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">17. Governing Law</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0;">This disclaimer and your use of this platform are governed by the laws of Malaysia. Any disputes shall be subject to the exclusive jurisdiction of the courts of Malaysia.</p>
-      </section>
-
-      <!-- 18. Contact -->
-      <section style="margin-bottom:28px;">
-        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 10px 0;">18. Contact and Complaints</h2>
-        <p style="font-size:14px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">For complaints, concerns about accuracy, correction requests, or legal notices:</p>
-        <a href="mailto:thefourthangle@proton.me" style="font-size:14px;line-height:1.72;color:var(--focus);text-decoration:none;">thefourthangle@proton.me</a>
-      </section>
-
-      <section style="margin-bottom:28px;">
-        <div style="background:var(--amber-bg);border:1px solid rgba(139,101,8,0.12);border-radius:12px;padding:18px;">
-          <p style="font-size:13px;line-height:1.72;color:var(--text-secondary);margin:0;font-style:italic;">By using this platform, you acknowledge that you have read and understood this disclaimer. This disclaimer may be updated from time to time. Continued use constitutes acceptance of the current version.</p>
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Race, Religion, and Royalty</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);">
+          <p style="margin:0;">We respect the equal dignity of all races and ethnic communities. We do not publish content intended to degrade or cause enmity between racial groups.</p>
+          <p style="margin:0;">We respect all religions and religious beliefs. We do not intend to insult or attack any religion, religious figure, or institution.</p>
+          <p style="margin:0;">We respect the constitutional position of the Malaysian monarchy. We do not advocate for changes to constitutional governance.</p>
+          <p style="margin:0;font-style:italic;color:var(--text-tertiary);">We distinguish between critique of public policy and disrespect for communities, beliefs, or institutions. Our mission is to inform — not to divide.</p>
         </div>
-      </section>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Constitutional Framework</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">We respect Malaysia's constitutional framework and rule of law. We do not advocate violence, armed rebellion, or unlawful action. Analysis of government policy supports informed democratic participation.</p>
+      </div>
+
+      <!-- Group 3: Accuracy & Limits -->
+      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Accuracy & Limitations</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">No Accuracy Guarantee</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Content is provided "as is." Analysis may contain errors or outdated information despite our review process.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Timeliness</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Issues reflect information at time of publication. Each shows its edition number.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Not Professional Advice</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Content is not legal, financial, medical, or professional advice. Consult qualified professionals.</p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">External Links</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Links to external websites are for reference only. We do not endorse external content.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Sources</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">We use only publicly available information. We do not receive, store, or publish material classified under the Official Secrets Act 1972. All sources are disclosed in our published audit for each issue.</p>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Limitation of Liability</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">To the maximum extent permitted by Malaysian law, The Fourth Angle disclaims all liability for damages arising from use of this platform or reliance on its content.</p>
+      </div>
+
+      <!-- Group 4: Standards & Trust -->
+      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Standards & Trust</h2>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Editorial Review Process</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Every issue undergoes a 6-stage editorial review: Primary Analysis, Bias Audit, Fact Verification, Alternative Framing, Contrarian Stress-Test, and Synthesis Review. The complete audit is published with every issue. <a href="/about" style="color:var(--focus);text-decoration:none;">Full methodology</a></p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Corrections</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Errors are corrected in updated editions. Report concerns to <a href="mailto:thefourthangle@proton.me" style="color:var(--focus);text-decoration:none;">thefourthangle@proton.me</a></p>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
+          <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Authenticity</h3>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Every issue carries a cryptographic fingerprint (SHA-256) + Ed25519 signature. <a href="/verify.html" style="color:var(--focus);text-decoration:none;">Verify content</a></p>
+        </div>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Privacy and Data</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">No user accounts, no tracking, no third-party analytics, no personally identifiable information collected.</p>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">Your browser's local storage remembers reading progress. This data stays on your device, is never transmitted, and can be cleared via browser settings.</p>
+        <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-tertiary);margin:0;">Cloudflare (our host) may record standard server logs per their privacy policy.</p>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
+        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Independence</h2>
+        <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Independently operated. No political funding, government grants, or payments from any political party, politician, or government-linked entity.</p>
+      </div>
+
+      <!-- Footer -->
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+        <div style="background:var(--amber-bg);border:1px solid rgba(139,101,8,0.12);border-radius:12px;padding:20px;">
+          <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 8px 0;">Governed by the laws of Malaysia. Disputes subject to Malaysian courts.</p>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-tertiary);margin:0;font-style:italic;">Continued use of this platform constitutes acceptance of this disclaimer.</p>
+        </div>
+        <div style="text-align:center;">
+          <p style="font-family:var(--font-body);font-size:13px;color:var(--text-tertiary);margin:0 0 4px 0;">Questions, corrections, or legal notices</p>
+          <a href="mailto:thefourthangle@proton.me" style="font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--focus);text-decoration:none;">thefourthangle@proton.me</a>
+        </div>
+      </div>
 
     </article>
     <div style="height:40px;"></div>
