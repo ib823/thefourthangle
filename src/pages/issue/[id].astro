@@ -2,8 +2,6 @@
 import '../../styles/global.css';
 import App from '../../components/App.svelte';
 import { ISSUES, opinionLabel } from '../../data/issues';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 
 export function getStaticPaths() {
   return ISSUES.map(issue => ({
@@ -29,10 +27,6 @@ if (ctxTrunc.length > maxCtx) {
 const description = ctxTrunc + suffix;
 const title = `${issue.headline} — The Fourth Angle`;
 const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}/100`;
-
-// Read pre-built feed summaries for App.svelte SSR
-const feedJson = readFileSync(join(process.cwd(), 'public', 'issues-feed.json'), 'utf8');
-const feedData = JSON.parse(feedJson);
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +67,7 @@ const feedData = JSON.parse(feedJson);
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
   <div id="main-content">
-    <App client:load initialIssueId={issue.id} feedData={feedData} />
+    <App client:load initialIssueId={issue.id} />
   </div>
   <script>
     if ('serviceWorker' in navigator) {

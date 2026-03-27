@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { Issue } from '../data/issues';
   import { issueCategory, CARD_TYPES } from '../data/issues';
-  import { loadFullIssue } from '../lib/issues-loader';
+  import { loadFeedIssues, loadFullIssue } from '../lib/issues-loader';
   import Header from './Header.svelte';
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
@@ -136,6 +136,18 @@
 
     const tier = getAnimationTier();
     document.documentElement.classList.add('anim-tier-' + tier);
+
+    // If feedData was not passed as SSR prop (issue pages), fetch lazily
+    if (issues.length === 0) {
+      loadFeedIssues().then(data => {
+        issues = data;
+        // Restore position/selection from feed data
+        if (initialIssueId) {
+          const found = data.find(i => i.id === initialIssueId);
+          if (found) activeIssue = found;
+        }
+      });
+    }
 
     // If deep link, fetch full issue data for reader
     if (initialIssueId && activeIssue) {
