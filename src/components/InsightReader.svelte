@@ -137,8 +137,12 @@
   });
 
   // --- Swipe threshold logic ---
+  let cachedCardWidth = 0;
   function getCardWidth(): number {
-    return cardEl?.offsetWidth ?? 340;
+    // Cache offsetWidth per drag session to avoid layout reads on every pointer move
+    if (cachedCardWidth > 0) return cachedCardWidth;
+    cachedCardWidth = cardEl?.offsetWidth ?? 340;
+    return cachedCardWidth;
   }
 
   function isAtEdge(direction: 'left' | 'right'): boolean {
@@ -426,11 +430,13 @@
   }
 
   function finishVerticalDismiss(dy: number) {
-    if (dy > 200) {
+    const { vy } = tracker.getVelocity();
+    // Dismiss if dragged far enough OR fast enough downward flick
+    if (dy > 200 || vy > 500) {
       onClose();
     } else if (overlayEl) {
       // Snap back
-      overlayEl.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+      overlayEl.style.transition = 'transform var(--duration-normal, 250ms) var(--ease-out-cubic, ease), opacity var(--duration-normal, 250ms) var(--ease-out-cubic, ease)';
       overlayEl.style.transform = '';
       overlayEl.style.opacity = '';
       setTimeout(() => {
@@ -458,6 +464,7 @@
     activePointerId = e.pointerId;
     crossedCommitThreshold = false;
     verticalDismissActive = false;
+    cachedCardWidth = 0; // Reset width cache for this drag session
 
     tracker.reset();
     tracker.push(e.clientX, e.clientY);
@@ -499,8 +506,9 @@
           return;
         }
         if (reclass === 'ambiguous') {
-          gestureDirection = 'vertical';
-          verticalDismissActive = true;
+          // Ambiguous twice — cancel gesture rather than risk accidental dismiss
+          isDragging = false;
+          gestureDirection = 'undecided';
           return;
         }
       }
@@ -943,7 +951,7 @@
   .progress-fill {
     height: 100%;
     border-radius: 0 2px 2px 0;
-    transition: width 0.3s ease, background 0.3s ease;
+    transition: width var(--duration-normal, 250ms) ease, background var(--duration-normal, 250ms) ease;
   }
 
   .header {
@@ -975,7 +983,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.15s ease;
+    transition: background var(--duration-fast, 150ms) ease;
   }
 
   .close-btn:hover {
@@ -1101,6 +1109,7 @@
     overflow-y: auto;
     overscroll-behavior-y: contain;
     position: relative;
+    touch-action: pan-y; /* Allow native vertical scroll within card content */
   }
 
   .scroll-indicator {
@@ -1195,7 +1204,7 @@
     max-height: 370px;
     opacity: 0;
     transform: scale(0.95);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition: opacity var(--duration-medium, 350ms) ease, transform var(--duration-medium, 350ms) ease;
   }
 
   .completion-card.completion-visible {
@@ -1290,7 +1299,7 @@
     border: none;
     background: var(--text-primary);
     color: var(--bg);
-    transition: background 0.15s ease;
+    transition: background var(--duration-fast, 150ms) ease;
   }
 
   .btn-done:hover {
@@ -1306,7 +1315,7 @@
     border: 1.5px solid var(--border-subtle);
     background: var(--bg-elevated);
     color: var(--text-secondary);
-    transition: background 0.15s ease;
+    transition: background var(--duration-fast, 150ms) ease;
     touch-action: auto;
   }
 
@@ -1323,7 +1332,7 @@
     border: none;
     background: var(--text-primary);
     color: var(--bg);
-    transition: background 0.15s ease;
+    transition: background var(--duration-fast, 150ms) ease;
   }
 
   .btn-next:hover {

@@ -133,6 +133,17 @@
     window.open(p.url(), '_blank', 'noopener');
   }
 
+  // Sequential animation helper — replaces nested setTimeout chains
+  function sequence(steps: Array<[number, () => void]>): number {
+    let total = 0;
+    const timers: number[] = [];
+    for (const [delay, fn] of steps) {
+      total += delay;
+      timers.push(setTimeout(fn, total) as unknown as number);
+    }
+    return timers[timers.length - 1];
+  }
+
   async function copyLink() {
     if (copyPhase !== 'idle') return;
     try {
@@ -141,31 +152,15 @@
       copiedId = 'link';
       copyBgFlash = true;
 
-      // Phase 1: fade out "Copy link" (100ms)
       copyPhase = 'out';
-      setTimeout(() => {
-        // Phase 2: scale in checkmark (200ms)
-        copyPhase = 'check';
-        setTimeout(() => {
-          // Phase 3: fade in "Copied!" (100ms)
-          copyPhase = 'in';
-
-          // After 300ms, end the bg flash
-          setTimeout(() => { copyBgFlash = false; }, 300);
-
-          // After 2s, reverse back
-          copyRevertTimer = setTimeout(() => {
-            copyPhase = 'revert-out';
-            setTimeout(() => {
-              copyPhase = 'revert-in';
-              copiedId = null;
-              setTimeout(() => {
-                copyPhase = 'idle';
-              }, 100);
-            }, 100);
-          }, 2000);
-        }, 200);
-      }, 100);
+      copyRevertTimer = sequence([
+        [100, () => { copyPhase = 'check'; }],
+        [200, () => { copyPhase = 'in'; }],
+        [300, () => { copyBgFlash = false; }],
+        [2000, () => { copyPhase = 'revert-out'; }],
+        [100, () => { copyPhase = 'revert-in'; copiedId = null; }],
+        [100, () => { copyPhase = 'idle'; }],
+      ]);
     } catch {}
   }
 
@@ -183,20 +178,32 @@
     if (e.target === e.currentTarget) closeWithAnimation();
   }
 
-  // Drag-to-dismiss handlers
+  // Drag-to-dismiss with velocity-based commit
+  let lastTouchY = 0;
+  let lastTouchTime = 0;
+  let dragVelocity = 0;
+
   function onTouchStart(e: TouchEvent) {
-    // Only drag from the top area (handle region)
     const touch = e.touches[0];
     dragStartY = touch.clientY;
+    lastTouchY = touch.clientY;
+    lastTouchTime = performance.now();
     dragOffsetY = 0;
+    dragVelocity = 0;
     isDragging = true;
   }
 
   function onTouchMove(e: TouchEvent) {
     if (!isDragging) return;
     const touch = e.touches[0];
+    const now = performance.now();
+    const dt = (now - lastTouchTime) / 1000;
+    if (dt > 0.001) {
+      dragVelocity = (touch.clientY - lastTouchY) / dt; // px/s, positive = downward
+    }
+    lastTouchY = touch.clientY;
+    lastTouchTime = now;
     const delta = touch.clientY - dragStartY;
-    // Only allow dragging downward
     dragOffsetY = Math.max(0, delta);
     if (dragOffsetY > 0) {
       e.preventDefault();
@@ -206,12 +213,11 @@
   function onTouchEnd() {
     if (!isDragging) return;
     isDragging = false;
-    if (dragOffsetY > 100) {
-      // Dismiss
+    // Dismiss if: dragged far enough OR fast enough downward flick
+    if (dragOffsetY > 100 || dragVelocity > 500) {
       haptic(5);
       closeWithAnimation();
     } else {
-      // Snap back
       dragOffsetY = 0;
     }
   }

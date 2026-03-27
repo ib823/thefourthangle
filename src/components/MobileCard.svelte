@@ -224,7 +224,7 @@
   }
 
   .bar-fill {
-    transition: width 400ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    transition: width var(--duration-slow, 450ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
   }
 
   .score-number {
@@ -239,11 +239,11 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    transition: transform 300ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+    transition: transform var(--duration-medium, 350ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
   }
 
   .badge-pill {
-    transition: transform 300ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+    transition: transform var(--duration-medium, 350ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
   }
 
   .context-text {

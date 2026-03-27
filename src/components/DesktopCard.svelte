@@ -69,7 +69,7 @@
     box-shadow:{hovered ? '0 8px 30px rgba(0,0,0,0.08)' : '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)'};
     transform:{visible ? (hovered ? 'translateY(-3px) scale(1.006)' : 'translateY(0) scale(1)') : 'translateY(24px)'};
     opacity:{visible ? 1 : 0};
-    transition:transform var(--duration-medium, 350ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), opacity var(--duration-medium, 350ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), box-shadow var(--duration-fast, 150ms) var(--ease-out-cubic, ease-out);
+    transition:transform var(--duration-medium, 350ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), opacity var(--duration-medium, 350ms) var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     content-visibility:auto;
     contain-intrinsic-size:0 200px;
   "
