@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
-  import { readIssues, savePosition } from '../stores/reader';
+  import { readIssues, savePosition, getReactions } from '../stores/reader';
   import { haptic } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -17,6 +17,11 @@
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
   let readMap: Record<string, string> = $state({});
+  let reactionMap = $derived(getReactions());
+
+  function hasReaction(issueId: string): boolean {
+    return (reactionMap[issueId]?.length ?? 0) > 0;
+  }
 
   // DOM refs
   let containerEl: HTMLDivElement | undefined = $state();
@@ -133,6 +138,7 @@
         readState={getState(issue.id)}
         onOpen={() => handleOpenIssue(issue)}
         onPrefetch={() => onPrefetch?.(issue)}
+        hasReaction={hasReaction(issue.id)}
       />
     </div>
   {/each}

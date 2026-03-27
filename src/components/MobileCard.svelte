@@ -14,8 +14,9 @@
     readState: ReadState | null;
     onOpen: () => void;
     onPrefetch?: () => void;
+    hasReaction?: boolean;
   }
-  let { issue, readState, onOpen, onPrefetch }: Props = $props();
+  let { issue, readState, onOpen, onPrefetch, hasReaction = false }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -145,6 +146,11 @@
         <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
     {/if}
+    {#if hasReaction}
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.7;">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    {/if}
     {#if issue.edition > 1}
       <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
     {/if}
@@ -188,11 +194,25 @@
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
 
-  <!-- Bottom — source attribution placeholder + hint -->
+  <!-- Bottom -->
   <div style="flex:1;min-height:16px;"></div>
-  <div style="flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
-    {#if !readState}
-      <span style="font-size:12px;color:var(--text-tertiary);font-weight:500;">Tap to read</span>
+  <div style="flex-shrink:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      {#if !readState}
+        <span style="font-size:12px;color:var(--text-tertiary);font-weight:500;">Tap to read</span>
+      {:else if isStarted}
+        <span style="font-size:12px;color:var(--score-warning);font-weight:500;">Continue reading</span>
+      {:else if isCompleted}
+        <span style="font-size:12px;color:var(--text-muted);font-weight:500;">Read again</span>
+      {/if}
+    </div>
+    <!-- Progress bar for reading state -->
+    {#if isStarted && readState && readState.progress > 0}
+      <div style="margin-top:8px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
+        <div style="height:100%;width:{(readState.progress / 6) * 100}%;background:var(--score-warning);border-radius:2px;transition:width var(--duration-normal, 250ms) ease;"></div>
+      </div>
+    {:else if isCompleted}
+      <div style="margin-top:8px;height:3px;background:var(--status-green);border-radius:2px;opacity:0.3;"></div>
     {/if}
   </div>
 </div>
