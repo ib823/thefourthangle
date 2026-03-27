@@ -20,29 +20,30 @@
   let copyRevertTimer: ReturnType<typeof setTimeout> | null = null;
   let staggerCancel: (() => void) | null = null;
 
-  // Drag-to-dismiss state
+  // Drag-to-dismiss state (mobile only)
   let dragStartY = $state(0);
   let dragOffsetY = $state(0);
   let isDragging = $state(false);
   let panelEl: HTMLDivElement | undefined = $state(undefined);
 
+  // Desktop detection
+  let isDesktop = $state(false);
+
   // Accessibility: focus management
   let focusOrigin: Element | null = null;
 
   onMount(() => {
-    // Store the element that opened the modal so we can return focus on close
     focusOrigin = document.activeElement;
+    isDesktop = window.innerWidth >= 640;
 
     requestAnimationFrame(() => {
       visible = true;
-      // Stagger platform buttons in after panel slides up
-      staggerCancel = stagger(openPlatforms.length, 30, 300, (i) => {
+      staggerCancel = stagger(openPlatforms.length, 40, 250, (i) => {
         buttonVisible[i] = true;
       });
-      // Move focus into the modal panel after it becomes visible
       requestAnimationFrame(() => {
-        const closeBtn = panelEl?.querySelector('button');
-        if (closeBtn) (closeBtn as HTMLElement).focus();
+        const closeBtn = panelEl?.querySelector('.close-btn') as HTMLElement;
+        if (closeBtn) closeBtn.focus();
       });
     });
   });
@@ -50,7 +51,6 @@
   onDestroy(() => {
     if (copyRevertTimer) clearTimeout(copyRevertTimer);
     if (staggerCancel) staggerCancel();
-    // Return focus to the element that triggered the modal
     if (focusOrigin && 'focus' in focusOrigin) {
       (focusOrigin as HTMLElement).focus();
     }
@@ -59,11 +59,9 @@
   function closeWithAnimation() {
     if (closing) return;
     closing = true;
-    // 200ms close animation, then call onClose
     setTimeout(() => { onClose(); }, 200);
   }
 
-  // Accessibility: keyboard handler for Escape and focus trap
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
       e.preventDefault();
@@ -71,7 +69,6 @@
       closeWithAnimation();
       return;
     }
-    // Focus trap: cycle Tab within the panel
     if (e.key === 'Tab' && panelEl) {
       const focusable = panelEl.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -80,15 +77,9 @@
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
       } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
   }
@@ -101,14 +92,9 @@
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
 
-  // Share text per platform — compelling CTA, both scores, platform-optimized
-  // WhatsApp: bold headline, scores, short hook + URL last (triggers link preview)
   let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
-  // Telegram: scores + hook, URL passed separately via url param
   let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read beyond the headline.`);
-  // X/Twitter: leave room for user to add thoughts (~180 chars max, URL is separate 23-char param)
   let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nWhat every side left out.`);
-  // Threads: concise, URL included (triggers preview)
   let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
 
   let canNativeShare = $state(false);
@@ -134,7 +120,6 @@
     window.open(p.url(), '_blank', 'noopener');
   }
 
-  // Sequential animation helper — replaces nested setTimeout chains
   function sequence(steps: Array<[number, () => void]>): number {
     let total = 0;
     const timers: number[] = [];
@@ -179,12 +164,13 @@
     if (e.target === e.currentTarget) closeWithAnimation();
   }
 
-  // Drag-to-dismiss with velocity-based commit
+  // Drag-to-dismiss (mobile only)
   let lastTouchY = 0;
   let lastTouchTime = 0;
   let dragVelocity = 0;
 
   function onTouchStart(e: TouchEvent) {
+    if (isDesktop) return;
     const touch = e.touches[0];
     dragStartY = touch.clientY;
     lastTouchY = touch.clientY;
@@ -195,18 +181,17 @@
   }
 
   function onTouchMove(e: TouchEvent) {
-    if (!isDragging) return;
+    if (!isDragging || isDesktop) return;
     const touch = e.touches[0];
     const now = performance.now();
     const dt = (now - lastTouchTime) / 1000;
     if (dt > 0.001) {
-      dragVelocity = (touch.clientY - lastTouchY) / dt; // px/s, positive = downward
+      dragVelocity = (touch.clientY - lastTouchY) / dt;
     }
     lastTouchY = touch.clientY;
     lastTouchTime = now;
     const delta = touch.clientY - dragStartY;
     dragOffsetY = Math.max(0, delta);
-    // Only prevent default when clearly dragging down to dismiss (past threshold)
     if (dragOffsetY > 10) {
       e.preventDefault();
     }
@@ -215,7 +200,6 @@
   function onTouchEnd() {
     if (!isDragging) return;
     isDragging = false;
-    // Dismiss if: dragged far enough OR fast enough downward flick
     if (dragOffsetY > 150 || dragVelocity > 500) {
       haptic(5);
       closeWithAnimation();
@@ -224,21 +208,19 @@
     }
   }
 
-  // Compute panel transform based on state
   let panelTransform = $derived.by(() => {
     if (isDragging && dragOffsetY > 0) {
       return `translateY(${dragOffsetY}px)`;
     }
     if (closing) {
-      return 'translateY(100%)';
+      return isDesktop ? 'scale(0.95) translateY(8px)' : 'translateY(100%)';
     }
     if (visible) {
-      return 'translateY(0)';
+      return isDesktop ? 'scale(1) translateY(0)' : 'translateY(0)';
     }
-    return 'translateY(100%)';
+    return isDesktop ? 'scale(0.95) translateY(8px)' : 'translateY(100%)';
   });
 
-  // Copy button background
   let copyBg = $derived(copyBgFlash ? 'var(--status-green-bg)' : 'var(--bg-elevated)');
   let copyBorder = $derived(copyBgFlash ? 'var(--status-green)' : 'var(--border-subtle)');
 </script>
@@ -248,7 +230,7 @@
 <div
   onclick={handleBackdrop}
   class="share-backdrop"
-  style="opacity:{visible && !closing ? 1 : 0};"
+  class:share-backdrop--visible={visible && !closing}
 >
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
@@ -267,60 +249,58 @@
     ontouchend={onTouchEnd}
   >
 
-    <!-- Drag handle -->
-    <div style="display:flex;justify-content:center;padding-top:8px;padding-bottom:2px;cursor:grab;">
+    <!-- Drag handle (mobile only) -->
+    <div class="drag-handle-wrap">
       <div class="drag-handle"></div>
     </div>
 
-    <!-- Close -->
-    <button onclick={closeWithAnimation} style="position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:8px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-tertiary);transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'none'; }} aria-label="Close">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+    <!-- Header -->
+    <div class="panel-header">
+      <span class="panel-title">Share</span>
+      <button class="close-btn" onclick={closeWithAnimation} aria-label="Close">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
 
-    <!-- Preview -->
-    <div style="background:var(--bg-elevated);border-radius:12px;padding:14px;border:1px solid var(--border-light);margin-bottom:16px;">
-      <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.35;margin-bottom:6px;">{issue.headline}</div>
-      <div style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-bottom:8px;">{previewText}</div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <div style="width:40px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-          <div style="width:{os}%;height:100%;background:{barColor};border-radius:2px;"></div>
+    <!-- Preview card -->
+    <div class="preview-card">
+      <div class="preview-headline">{issue.headline}</div>
+      <div class="preview-context">{previewText}</div>
+      <div class="preview-scores">
+        <div class="preview-bar-track">
+          <div class="preview-bar-fill" style="width:{os}%;background:{barColor};"></div>
         </div>
-        <span style="font-size:10px;font-weight:700;color:{barColor};">{os}%</span>
-        <span style="font-size:8px;color:var(--text-muted);">Opinion Shift</span>
-        <span style="font-size:8px;color:var(--text-faint);">·</span>
-        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}</span>
-        <span style="font-size:8px;color:var(--text-muted);">Neutrality</span>
+        <span class="preview-score" style="color:{barColor};">{os}%</span>
+        <span class="preview-label">Opinion Shift</span>
+        <span class="preview-dot">&middot;</span>
+        <span class="preview-score" style="color:{nsColor};">{ns}</span>
+        <span class="preview-label">Neutrality</span>
       </div>
     </div>
 
     <!-- Native share (mobile primary action) -->
     {#if canNativeShare}
-      <button
-        onclick={nativeShare}
-        style="width:100%;padding:12px 16px;background:var(--text-primary);color:var(--bg);border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:12px;transition:background 0.15s ease;display:flex;align-items:center;justify-content:center;gap:6px;"
-      >
+      <button class="native-share-btn" onclick={nativeShare}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share
       </button>
     {/if}
 
     <!-- Platform grid -->
-    <div style="font-size:10px;font-weight:600;color:var(--text-muted);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px;">Share on</div>
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:6px;margin-bottom:12px;">
+    <div class="section-label">Share on</div>
+    <div class="platform-grid">
       {#each openPlatforms as p, i}
         <button
           onclick={() => openPlatform(p)}
           class="share-btn"
           class:share-btn--visible={buttonVisible[i]}
-          onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
-          onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
         >
-          <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{p.label}</span>
+          <span class="share-btn-label">{p.label}</span>
         </button>
       {/each}
     </div>
 
-    <div style="height:1px;background:var(--bg-sunken);margin-bottom:10px;"></div>
+    <div class="divider"></div>
 
     <!-- Copy link -->
     <button
@@ -329,6 +309,7 @@
       style="background:{copyBg};border-color:{copyBorder};"
     >
       <span class="copy-label" class:copy-label--hidden={copyPhase === 'out' || copyPhase === 'check' || copyPhase === 'in'}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         Copy link
       </span>
       <span class="copy-right">
@@ -352,108 +333,299 @@
 </div>
 
 <style>
+  /* ── Backdrop ── */
   .share-backdrop {
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     padding: 0;
+    opacity: 0;
     transition: opacity 200ms ease;
+  }
+  .share-backdrop--visible {
+    opacity: 1;
   }
 
   @media (min-width: 640px) {
     .share-backdrop {
       align-items: center;
-      padding: 20px;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.55);
     }
   }
 
+  /* ── Panel ── */
   .share-panel {
     background: var(--bg);
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
     padding: 0 20px max(20px, env(safe-area-inset-bottom, 20px));
-    max-width: 360px;
+    max-width: 400px;
     width: 100%;
     box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12);
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
     transform: translateY(100%);
-    transition: transform 300ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    transition: transform 300ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                opacity 200ms ease;
     will-change: transform;
+    opacity: 0;
   }
-
   .share-panel--visible {
     transform: translateY(0);
+    opacity: 1;
   }
-
   .share-panel--closing {
     transform: translateY(100%);
-    transition: transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    opacity: 0;
+    transition: transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+                opacity 150ms ease;
   }
-
   .share-panel--dragging {
     transition: none;
   }
 
   @media (min-width: 640px) {
     .share-panel {
-      border-radius: 16px;
-      box-shadow: var(--shadow-lg);
+      border-radius: 14px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.06);
       max-height: max-content;
       margin: auto 0;
+      padding: 0 24px 24px;
+      transform: scale(0.95) translateY(8px);
+      opacity: 0;
+    }
+    .share-panel--visible {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    .share-panel--closing {
+      transform: scale(0.95) translateY(8px);
+      opacity: 0;
     }
   }
 
-  /* Platform button stagger animation */
-  .share-btn {
+  /* ── Drag handle (mobile only) ── */
+  .drag-handle-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 4px;
+  }
+  @media (min-width: 640px) {
+    .drag-handle-wrap {
+      display: none;
+    }
+  }
+
+  /* ── Header ── */
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0 16px;
+  }
+  @media (min-width: 640px) {
+    .panel-header {
+      padding: 20px 0 18px;
+    }
+  }
+  .panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 640px) {
+    .panel-title {
+      font-size: 16px;
+    }
+  }
+
+  /* ── Close button ── */
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-sunken);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    transition: background var(--duration-fast, 150ms) ease;
+    flex-shrink: 0;
+  }
+  .close-btn:hover {
+    background: var(--border-subtle);
+  }
+
+  /* ── Preview card ── */
+  .preview-card {
+    background: var(--bg-elevated);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 20px;
+  }
+  .preview-headline {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .preview-context {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .preview-scores {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .preview-bar-track {
+    width: 40px;
+    height: 3px;
+    background: var(--bg-sunken);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .preview-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .preview-score {
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .preview-label {
+    font-size: 9px;
+    color: var(--text-muted);
+  }
+  .preview-dot {
+    font-size: 9px;
+    color: var(--text-faint);
+  }
+
+  /* ── Native share button ── */
+  .native-share-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--text-primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: opacity var(--duration-fast, 150ms) ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 10px 8px;
+    min-height: 44px;
+  }
+  .native-share-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  /* ── Platform grid ── */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 640px) {
+    .platform-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+  }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border-radius: 10px;
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, opacity 200ms ease, transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    transition: background var(--duration-fast, 150ms) ease,
+                border-color var(--duration-fast, 150ms) ease,
+                opacity 200ms ease,
+                transform 200ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
     min-height: 44px;
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.92);
   }
-
   .share-btn--visible {
     opacity: 1;
     transform: scale(1);
   }
+  .share-btn:hover {
+    background: var(--bg-sunken);
+    border-color: var(--border-divider);
+  }
+  .share-btn-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
 
-  /* Copy button */
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin-bottom: 12px;
+  }
+
+  /* ── Copy button ── */
   .copy-btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 10px 14px;
+    padding: 12px 14px;
     border-radius: 10px;
     border: 1px solid var(--border-subtle);
     cursor: pointer;
     transition: background 300ms ease, border-color 300ms ease;
+    min-height: 44px;
   }
-
+  .copy-btn:hover {
+    background: var(--bg-sunken);
+  }
   .copy-label {
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-primary);
     transition: opacity 100ms ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-
   .copy-label--hidden {
     opacity: 0;
   }
-
   .copy-right {
     display: flex;
     align-items: center;
@@ -462,23 +634,19 @@
     font-weight: 600;
     color: var(--text-tertiary);
   }
-
   .copy-check {
     display: inline-flex;
     transform: scale(0);
     transition: transform 200ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
   }
-
   .copy-check--visible {
     transform: scale(1);
   }
-
   .copy-copied {
     opacity: 0;
     color: var(--status-green);
     transition: opacity 100ms ease;
   }
-
   .copy-copied--visible {
     opacity: 1;
   }
