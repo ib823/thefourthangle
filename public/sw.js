@@ -64,3 +64,74 @@ self.addEventListener('fetch', (event) => {
     fetch(event.request).catch(() => caches.match(event.request))
   );
 });
+
+// ── Push Notifications ──
+
+const NOTIFY_API = 'https://tfa-notify.YOUR_SUBDOMAIN.workers.dev';
+
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+  try {
+    const data = event.data.json();
+    const options = {
+      body: data.body || '',
+      icon: data.icon || '/icons/icon-192.png',
+      badge: data.badge || '/icons/icon-192.png',
+      image: data.image,
+      tag: data.tag || 'tfa-default',
+      data: data.data || {},
+      actions: data.actions || [],
+      requireInteraction: false,
+    };
+    event.waitUntil(
+      self.registration.showNotification(data.title || 'The Fourth Angle', options)
+    );
+  } catch {
+    event.waitUntil(
+      self.registration.showNotification('The Fourth Angle', {
+        body: event.data.text(),
+        icon: '/icons/icon-192.png',
+      })
+    );
+  }
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const action = event.action;
+  const data = event.notification.data || {};
+
+  if (action === 'dismiss') return;
+
+  const targetUrl = data.url
+    ? new URL(data.url, self.location.origin).href
+    : self.location.origin;
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
+      // Focus existing tab if open
+      for (const client of windowClients) {
+        if (client.url === targetUrl && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Open new tab
+      return clients.openWindow(targetUrl);
+    })
+  );
+});
+
+// Heartbeat: update lastSeen on the notification server
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'HEARTBEAT') {
+    const endpoint = event.data.endpoint;
+    if (endpoint) {
+      fetch(NOTIFY_API + '/api/heartbeat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint }),
+      }).catch(() => {});
+    }
+  }
+});

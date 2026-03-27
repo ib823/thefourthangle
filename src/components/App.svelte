@@ -190,6 +190,14 @@
       loadAndOpenIssue(activeIssue.id);
     }
 
+    // Push notification heartbeat — update lastSeen for re-engagement tracking
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      const endpoint = localStorage.getItem('tfa-push-endpoint');
+      if (endpoint) {
+        navigator.serviceWorker.controller.postMessage({ type: 'HEARTBEAT', endpoint });
+      }
+    }
+
     // Back-button support: close reader on popstate
     function onPopState(e: PopStateEvent) {
       if (activeIssue && !e.state?.reader) {

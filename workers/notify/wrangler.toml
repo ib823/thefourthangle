@@ -1,0 +1,22 @@
+name = "tfa-notify"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[triggers]
+# Every 15 min: check for new issues
+# Every Monday 8am MYT (UTC+8 = midnight UTC): weekly digest
+# Every day 9am MYT: re-engagement check
+crons = ["*/15 * * * *", "0 0 * * 1", "0 1 * * *"]
+
+[[kv_namespaces]]
+binding = "SUBS"
+id = "REPLACE_WITH_KV_ID"
+
+[vars]
+SITE_URL = "https://thefourthangle.pages.dev"
+VAPID_SUBJECT = "mailto:thefourthangle@proton.me"
+VAPID_PUBLIC_KEY = "BC4OHktzXFQlu1GclVNzYvWJhPUSiBsUVivd2r0bG2CUf6clO1WZoIfHsl_ScIvtqH1tzb5YwuHeD66O1TofboM"
+
+# VAPID_PRIVATE_KEY must be set as a secret:
+# npx wrangler secret put VAPID_PRIVATE_KEY --config workers/notify/wrangler.toml
+# Then paste: PSw9DPEUPXldJlU-sAm0T0ohOD7pft6k9K3AYnQs26o

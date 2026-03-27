@@ -4,6 +4,7 @@
   import VerdictBar from './VerdictBar.svelte';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
+  import PushPrompt from './PushPrompt.svelte';
   import { CARD_TYPES } from '../data/issues';
   import { markStarted, markCompleted, updateProgress, savePosition } from '../stores/reader';
   import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
@@ -910,6 +911,7 @@
               {/if}
             {/if}
           </div>
+          <PushPrompt />
         </div>
       </div>
     {:else}
