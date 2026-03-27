@@ -34,6 +34,13 @@
       return;
     }
 
+    // Skip entry animation on repeat visits
+    const key = 'tfa_entry_seen';
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(key)) {
+      visible = true;
+      return;
+    }
+
     // Stagger by grid position: row * 80 + col * 40
     const col = index % 2;
     const row = Math.floor(index / 2);
@@ -44,7 +51,10 @@
     // Only animate if in viewport
     const obs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        setTimeout(() => { visible = true; }, delay);
+        setTimeout(() => {
+          visible = true;
+          if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
+        }, delay);
         obs.disconnect();
       }
     }, { threshold: 0.1 });

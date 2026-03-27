@@ -2,6 +2,7 @@
   import type { Issue } from '../data/issues';
   import { onMount, onDestroy } from 'svelte';
   import { stagger, haptic } from '../lib/animation';
+  import { createSpring, animateSpring } from '../lib/spring';
 
   interface Props {
     issue: Issue;
@@ -205,7 +206,8 @@
     lastTouchTime = now;
     const delta = touch.clientY - dragStartY;
     dragOffsetY = Math.max(0, delta);
-    if (dragOffsetY > 0) {
+    // Only prevent default when clearly dragging down to dismiss (past threshold)
+    if (dragOffsetY > 10) {
       e.preventDefault();
     }
   }
@@ -214,7 +216,7 @@
     if (!isDragging) return;
     isDragging = false;
     // Dismiss if: dragged far enough OR fast enough downward flick
-    if (dragOffsetY > 100 || dragVelocity > 500) {
+    if (dragOffsetY > 150 || dragVelocity > 500) {
       haptic(5);
       closeWithAnimation();
     } else {

@@ -12,10 +12,15 @@ export interface SpringConfig {
   precision: number;  // settle threshold (default 0.01)
 }
 
-export const SPRING_DEFAULT: SpringConfig = { stiffness: 400, damping: 28, mass: 1, precision: 0.01 };
-export const SPRING_SNAPPY: SpringConfig = { stiffness: 600, damping: 32, mass: 1, precision: 0.01 };
-export const SPRING_GENTLE: SpringConfig = { stiffness: 200, damping: 22, mass: 1, precision: 0.01 };
-export const SPRING_RUBBER: SpringConfig = { stiffness: 800, damping: 36, mass: 1, precision: 0.01 };
+// Two canonical spring presets for the entire app
+export const SPRING_STANDARD: SpringConfig = { stiffness: 500, damping: 30, mass: 1, precision: 0.01 };
+export const SPRING_BOUNCE: SpringConfig = { stiffness: 600, damping: 34, mass: 1, precision: 0.01 };
+
+// Legacy aliases — map to unified presets
+export const SPRING_DEFAULT: SpringConfig = SPRING_STANDARD;
+export const SPRING_SNAPPY: SpringConfig = SPRING_STANDARD;
+export const SPRING_GENTLE: SpringConfig = SPRING_STANDARD;
+export const SPRING_RUBBER: SpringConfig = SPRING_BOUNCE;
 
 export interface SpringState {
   value: number;

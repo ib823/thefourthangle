@@ -33,9 +33,10 @@
     onClose: () => void;
     onNext?: () => void;
     initialCardIndex?: number;
+    originRect?: DOMRect;
   }
 
-  let { issue, onClose, onNext, initialCardIndex = 0 }: Props = $props();
+  let { issue, onClose, onNext, initialCardIndex = 0, originRect }: Props = $props();
 
   let current = $state(Math.min(initialCardIndex, 5));
   let completed = $state(false);
@@ -57,6 +58,11 @@
   let dragDeltaY = 0;
   let activePointerId: number | null = null;
   let crossedCommitThreshold = false;
+  let canDismissFromHere = false; // restrict dismiss to header/card-top zones
+  let pointerCaptured = false; // track whether we've captured the pointer
+
+  // Cached dot elements — avoid querySelectorAll on every pointermove
+  let cachedDots: HTMLElement[] = [];
 
   // Animation cancellation
   let cancelAnimation: (() => void) | null = null;
@@ -174,10 +180,9 @@
     const width = getCardWidth();
     const absDx = Math.abs(dx);
     const rotation = Math.max(-8, Math.min(8, dx * 0.04));
-    const rotateY = dx * 0.015;
     const scaleVal = 1.0 + absDx * 0.0001;
 
-    cardEl.style.transform = `translateX(${dx}px) rotate(${rotation}deg) rotateY(${rotateY}deg) scale(${scaleVal})`;
+    cardEl.style.transform = `translateX(${dx}px) rotate(${rotation}deg) scale(${scaleVal})`;
 
     // Ghost card interpolation based on progress
     const progressFrac = Math.min(absDx / (width * 0.5), 1);
@@ -196,35 +201,36 @@
     interpolateDots(dx);
   }
 
+  function cacheDotElements() {
+    if (dotsContainerEl) {
+      cachedDots = Array.from(dotsContainerEl.querySelectorAll('.dot')) as HTMLElement[];
+    }
+  }
+
   function interpolateDots(dx: number) {
-    if (!dotsContainerEl || completed) return;
+    if (cachedDots.length === 0 || completed) return;
     const width = getCardWidth();
     const progressFrac = Math.min(Math.abs(dx) / (width * 0.3), 1);
-    const dots = dotsContainerEl.querySelectorAll('.dot');
 
     const nextIndex = dx < 0 ? current + 1 : current - 1;
     if (nextIndex < 0 || nextIndex >= totalCards) return;
 
-    dots.forEach((dot, i) => {
-      const el = dot as HTMLElement;
+    for (let i = 0; i < cachedDots.length; i++) {
+      const el = cachedDots[i];
       if (i === current) {
-        // Current dot shrinks
         const w = 20 - progressFrac * 14;
         el.style.width = `${w}px`;
       } else if (i === nextIndex) {
-        // Next dot grows
         const w = 6 + progressFrac * 14;
         el.style.width = `${w}px`;
       }
-    });
+    }
   }
 
   function resetDotStyles() {
-    if (!dotsContainerEl) return;
-    const dots = dotsContainerEl.querySelectorAll('.dot');
-    dots.forEach((dot) => {
-      (dot as HTMLElement).style.width = '';
-    });
+    for (const dot of cachedDots) {
+      dot.style.width = '';
+    }
   }
 
   function resetGhostStyles() {
@@ -234,7 +240,16 @@
 
   // --- Navigation with spring physics ---
   function goTo(index: number, direction: 'left' | 'right', initialVelocity = 0) {
-    if (animating || index < 0 || index >= totalCards) return;
+    if (index < 0 || index >= totalCards) return;
+    // Allow interruption of ongoing animation
+    if (animating) {
+      cancelAnimation?.();
+      cancelAnimation = null;
+      animating = false;
+      if (cardEl) { cardEl.style.transform = ''; cardEl.style.opacity = ''; }
+      resetGhostStyles();
+      resetDotStyles();
+    }
     haptic(5);
     savePosition(issue.id, index);
 
@@ -250,8 +265,8 @@
     const exitDuration = prefersReducedMotion ? 0 : Math.max(180, Math.min(350, remaining / width * 350));
 
     const exitSpring = createSpring(startPos, {
-      stiffness: 600,
-      damping: 38,
+      stiffness: 500,
+      damping: 30,
       mass: 1,
       precision: 5,
     });
@@ -287,7 +302,7 @@
 
         const enterSpring = createSpring(enterFrom, {
           stiffness: 500,
-          damping: 26, // slight underdamping for overshoot
+          damping: 30,
           mass: 1,
           precision: 0.5,
         });
@@ -427,6 +442,9 @@
     if (!overlayEl) return;
     const absDy = Math.abs(dy);
     const opacity = Math.max(0, 1 - absDy / 400);
+    // Disable expensive backdrop-filter during drag for perf
+    overlayEl.style.backdropFilter = 'none';
+    (overlayEl.style as any).webkitBackdropFilter = 'none';
     overlayEl.style.transform = `translateY(${Math.max(0, dy)}px)`;
     overlayEl.style.opacity = `${opacity}`;
   }
@@ -437,25 +455,53 @@
     if (dy > 200 || vy > 500) {
       onClose();
     } else if (overlayEl) {
-      // Snap back
-      overlayEl.style.transition = 'transform var(--duration-normal, 250ms) var(--ease-out-cubic, ease), opacity var(--duration-normal, 250ms) var(--ease-out-cubic, ease)';
-      overlayEl.style.transform = '';
-      overlayEl.style.opacity = '';
-      setTimeout(() => {
-        if (overlayEl) overlayEl.style.transition = '';
-      }, 260);
+      // Snap back with spring
+      const startDy = Math.max(0, dy);
+      const spring = createSpring(startDy, { stiffness: 500, damping: 30, mass: 1, precision: 0.5 });
+      cancelAnimation = animateSpring(spring, 0, (value) => {
+        if (overlayEl) {
+          overlayEl.style.transform = `translateY(${value}px)`;
+          overlayEl.style.opacity = `${Math.max(0, 1 - Math.abs(value) / 400)}`;
+        }
+      }, () => {
+        if (overlayEl) {
+          overlayEl.style.transform = '';
+          overlayEl.style.opacity = '';
+          // Restore backdrop-filter after snap-back
+          overlayEl.style.backdropFilter = '';
+          (overlayEl.style as any).webkitBackdropFilter = '';
+        }
+        cancelAnimation = null;
+      });
     }
     verticalDismissActive = false;
   }
 
   // --- Pointer event handlers ---
   function onPointerDown(e: PointerEvent) {
-    if (animating || completed) return;
+    if (completed) return;
     if (e.button !== 0) return;
     if ((e.target as HTMLElement)?.closest('button, a, input')) return;
 
+    // If content area is scrollable and touch landed there, let browser handle it
+    const target = e.target as HTMLElement;
+    if (target.closest('.card-center') && cardContentEl) {
+      const { scrollHeight, clientHeight } = cardContentEl;
+      if (scrollHeight > clientHeight + 2) return; // let browser scroll natively
+    }
+
     // Block swipe initiation when user is mid-scroll in card content
     if (cardContentEl && shouldBlockSwipe(cardContentEl)) return;
+
+    // Allow interruption of ongoing animation
+    if (animating) {
+      cancelAnimation?.();
+      cancelAnimation = null;
+      animating = false;
+      if (cardEl) { cardEl.style.transform = ''; cardEl.style.opacity = ''; }
+      resetGhostStyles();
+      resetDotStyles();
+    }
 
     isDragging = true;
     gestureDirection = 'undecided';
@@ -466,12 +512,17 @@
     activePointerId = e.pointerId;
     crossedCommitThreshold = false;
     verticalDismissActive = false;
+    pointerCaptured = false;
     cachedCardWidth = 0; // Reset width cache for this drag session
+
+    // Determine if this touch can trigger vertical dismiss (only from header zones)
+    canDismissFromHere = !!(target.closest('.card-top, .headline-area, .progress-track, .header, .dots'));
 
     tracker.reset();
     tracker.push(e.clientX, e.clientY);
 
-    try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId); } catch {}
+    // Do NOT capture pointer here — wait until gesture is classified as horizontal
+    // This allows the browser to handle vertical scroll natively
 
     // Remove CSS transitions during drag
     if (cardEl) {
@@ -489,37 +540,36 @@
 
     tracker.push(e.clientX, e.clientY);
 
-    // Gesture disambiguation
+    // Gesture disambiguation — single pass, minimal dead zone
     if (gestureDirection === 'undecided') {
-      if (absDx < 3 && absDy < 3) return; // dead zone
+      if (absDx < 3 && absDy < 3) return; // minimal dead zone
 
       const classification = classifyGesture(dx, dy);
-      if (classification === 'vertical') {
+      if (classification === 'horizontal') {
+        gestureDirection = 'horizontal';
+        // NOW capture the pointer — only for confirmed horizontal swipes
+        try { (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId); pointerCaptured = true; } catch {}
+        // Dynamically block touch-action during horizontal drag
+        if (cardEl) (cardEl as HTMLElement).style.touchAction = 'none';
+      } else {
+        // Vertical or ambiguous — default to vertical (scroll or dismiss)
         gestureDirection = 'vertical';
-        verticalDismissActive = true;
-        return;
-      }
-      if (classification === 'ambiguous') {
-        if (absDx < 15 && absDy < 15) return; // wait for more data
-        const reclass = classifyGesture(dx, dy);
-        if (reclass === 'vertical') {
-          gestureDirection = 'vertical';
+        if (canDismissFromHere) {
           verticalDismissActive = true;
-          return;
-        }
-        if (reclass === 'ambiguous') {
-          // Ambiguous twice — cancel gesture rather than risk accidental dismiss
+        } else {
+          // Not in dismiss zone — release entirely, let browser handle scroll
           isDragging = false;
           gestureDirection = 'undecided';
           return;
         }
       }
-      gestureDirection = 'horizontal';
     }
 
     if (gestureDirection === 'vertical') {
-      dragDeltaY = dy;
-      handleVerticalDismiss(dy);
+      if (verticalDismissActive) {
+        dragDeltaY = dy;
+        handleVerticalDismiss(dy);
+      }
       return;
     }
 
@@ -560,10 +610,14 @@
     isDragging = false;
     activePointerId = null;
 
-    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
+    if (pointerCaptured) {
+      try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
+      pointerCaptured = false;
+    }
 
-    // Restore transition
+    // Restore touch-action and transition
     if (cardEl) {
+      (cardEl as HTMLElement).style.touchAction = '';
       cardEl.style.transition = '';
     }
 
@@ -626,7 +680,9 @@
     isDragging = false;
     activePointerId = null;
     gestureDirection = 'undecided';
+    pointerCaptured = false;
     if (cardEl) {
+      (cardEl as HTMLElement).style.touchAction = '';
       cardEl.style.transition = '';
     }
     snapBack();
@@ -720,8 +776,41 @@
     // Announce initial card for screen readers
     requestAnimationFrame(announceCard);
 
+    // Cache dot elements for perf
+    requestAnimationFrame(cacheDotElements);
+
     // Attach scroll observer after first render
     requestAnimationFrame(attachScrollObserver);
+
+    // Shared-element entry animation from card origin
+    if (originRect && overlayEl && !prefersReducedMotion) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const sx = originRect.width / vw;
+      const sy = originRect.height / vh;
+      const tx = originRect.left;
+      const ty = originRect.top;
+
+      // Disable the CSS entry animation when using shared-element
+      overlayEl.style.animation = 'none';
+
+      const spring = createSpring(1, { stiffness: 500, damping: 30, mass: 1, precision: 0.01 });
+      animateSpring(spring, 0, (t) => {
+        if (overlayEl) {
+          overlayEl.style.transformOrigin = '0 0';
+          overlayEl.style.transform = `translate(${tx * t}px, ${ty * t}px) scale(${1 + (sx - 1) * t}, ${1 + (sy - 1) * t})`;
+          overlayEl.style.borderRadius = `${20 * t}px`;
+          overlayEl.style.opacity = `${1 - t * 0.3}`;
+        }
+      }, () => {
+        if (overlayEl) {
+          overlayEl.style.transform = '';
+          overlayEl.style.transformOrigin = '';
+          overlayEl.style.borderRadius = '';
+          overlayEl.style.opacity = '';
+        }
+      });
+    }
   });
 
   onDestroy(() => {
@@ -743,6 +832,7 @@
     // Reset scroll state for new card
     scrollState = { atTop: true, atBottom: true, canScroll: false, scrollProgress: 0 };
     requestAnimationFrame(attachScrollObserver);
+    requestAnimationFrame(cacheDotElements);
   });
 </script>
 
@@ -866,7 +956,7 @@
         <!-- Card bottom -->
         <div class="card-bottom">
           {#if showSwipeHint && current === 0}
-            <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe to continue</span>
+            <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe or tap arrows</span>
           {:else if current === totalCards - 2 && !completed}
             <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Almost done</span>
           {:else if current === totalCards - 1 && !completed}
@@ -874,6 +964,18 @@
           {/if}
         </div>
       </div>
+
+      <!-- Nav chevrons -->
+      {#if current > 0}
+        <button class="nav-chevron nav-prev" onclick={prev} aria-label="Previous card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      {/if}
+      {#if current < totalCards - 1}
+        <button class="nav-chevron nav-next" onclick={next} aria-label="Next card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      {/if}
     {/if}
   </div>
 
@@ -931,7 +1033,7 @@
     align-items: center;
     outline: none;
     overflow: hidden;
-    touch-action: none;
+    touch-action: auto;
     will-change: transform, opacity;
     padding-top: env(safe-area-inset-top, 0);
     padding-bottom: env(safe-area-inset-bottom, 0);
@@ -1015,7 +1117,7 @@
     position: relative;
     min-height: 0;
     perspective: 1000px;
-    touch-action: none;
+    touch-action: pan-y;
   }
 
   .ghost {
@@ -1060,12 +1162,11 @@
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform-style: preserve-3d;
   }
 
   .active-card {
     cursor: grab;
-    touch-action: none;
+    touch-action: pan-y;
   }
 
   .active-card:active {
@@ -1159,7 +1260,7 @@
     color: var(--text-tertiary);
     user-select: none;
     display: inline-block;
-    animation: nudgeHint 1.5s ease-in-out infinite;
+    animation: nudgeHint 1.5s ease-in-out 3;
     transition: opacity 0.4s ease;
   }
 
@@ -1182,9 +1283,9 @@
   }
 
   .dot {
-    width: 6px;
-    height: 4px;
-    border-radius: 100px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     border: none;
     padding: 20px 6px;
     min-height: 44px;
@@ -1196,6 +1297,7 @@
 
   .dot.active {
     height: 8px;
+    border-radius: 100px;
   }
 
   /* Completion card */
@@ -1365,6 +1467,38 @@
   }
 
   .reduced-motion .dot {
+    transition: none;
+  }
+
+  /* Navigation chevron buttons */
+  .nav-chevron {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: var(--bg-elevated);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 150ms ease, background 150ms ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    touch-action: manipulation;
+  }
+  .nav-chevron:hover {
+    opacity: 1;
+    background: var(--bg);
+  }
+  .nav-prev { left: 2px; }
+  .nav-next { right: 2px; }
+
+  .reduced-motion .nav-chevron {
     transition: none;
   }
 </style>

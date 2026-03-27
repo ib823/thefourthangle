@@ -189,8 +189,12 @@
     }
   }
 
-  function openIssue(issue: FeedIssue) {
+  // Origin rect for shared-element transition
+  let readerOriginRect: DOMRect | null = $state(null);
+
+  function openIssue(issue: FeedIssue, originRect?: DOMRect) {
     activeIssue = issue;
+    readerOriginRect = originRect ?? null;
     restoredCardIndex = 0; // Clear resume position — only used once on return
     loadAndOpenIssue(issue.id);
   }
@@ -278,7 +282,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -305,7 +309,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} />
   {/if}
 
 {:else}

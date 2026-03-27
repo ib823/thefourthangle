@@ -21,10 +21,10 @@ export function pressAction(node: HTMLElement, config: Partial<PressConfig> = {}
     // Immediate — 1 frame, no transition
     node.style.transition = 'none';
     node.style.transform = `scale(${cfg.scale})`;
-    node.style.filter = `brightness(${cfg.brightness})`;
+    node.style.opacity = `${cfg.brightness}`;
     // Restore transition after 1 frame
     requestAnimationFrame(() => {
-      node.style.transition = `transform ${cfg.duration}ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)), filter ${cfg.duration}ms var(--ease-out-cubic, ease-out)`;
+      node.style.transition = `transform ${cfg.duration}ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)), opacity ${cfg.duration}ms var(--ease-out-cubic, ease-out)`;
     });
   }
 
@@ -32,7 +32,7 @@ export function pressAction(node: HTMLElement, config: Partial<PressConfig> = {}
     if (!pressed) return;
     pressed = false;
     node.style.transform = '';
-    node.style.filter = '';
+    node.style.opacity = '';
   }
 
   function onCancel() {
