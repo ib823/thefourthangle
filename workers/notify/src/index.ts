@@ -19,9 +19,7 @@ interface Subscription {
   lastSeen: number;
 }
 
-interface IssueFeed {
-  issues: Array<{ id: string; headline: string; opinionShift: number; finalScore: number; context: string }>;
-}
+type IssueFeed = Array<{ id: string; headline: string; opinionShift: number; finalScore: number; context: string }>;
 
 // ── CORS headers ──
 const CORS = {
@@ -157,51 +155,65 @@ function reEngagementPayload(count: number): string {
 // ── API Handlers ──
 
 async function handleSubscribe(request: Request, env: Env): Promise<Response> {
-  const body = await request.json() as { endpoint: string; keys: { p256dh: string; auth: string } };
-  if (!body.endpoint || !body.keys?.p256dh || !body.keys?.auth) {
-    return json({ error: 'Invalid subscription' }, 400);
+  try {
+    const body = await request.json() as { endpoint: string; keys: { p256dh: string; auth: string } };
+    if (!body.endpoint || !body.keys?.p256dh || !body.keys?.auth) {
+      return json({ error: 'Invalid subscription' }, 400);
+    }
+
+    const sub: Subscription = {
+      endpoint: body.endpoint,
+      keys: body.keys,
+      subscribedAt: Date.now(),
+      lastSeen: Date.now(),
+    };
+
+    // Simple key from endpoint — take last 20 chars of URL for uniqueness
+    const key = `sub:${Date.now()}_${body.endpoint.slice(-20).replace(/[^a-zA-Z0-9]/g, '')}`;
+    await env.SUBS.put(key, JSON.stringify(sub));
+
+    return json({ success: true, key });
+  } catch (e: any) {
+    return json({ error: e.message || 'Subscribe failed' }, 500);
   }
-
-  const sub: Subscription = {
-    endpoint: body.endpoint,
-    keys: body.keys,
-    subscribedAt: Date.now(),
-    lastSeen: Date.now(),
-  };
-
-  // Use endpoint hash as key to deduplicate
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(body.endpoint));
-  const key = `sub:${uint8ArrayToBase64url(new Uint8Array(hash)).slice(0, 16)}`;
-  await env.SUBS.put(key, JSON.stringify(sub));
-
-  return json({ success: true });
 }
 
 async function handleUnsubscribe(request: Request, env: Env): Promise<Response> {
-  const body = await request.json() as { endpoint: string };
-  if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
+  try {
+    const body = await request.json() as { endpoint: string };
+    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
 
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(body.endpoint));
-  const key = `sub:${uint8ArrayToBase64url(new Uint8Array(hash)).slice(0, 16)}`;
-  await env.SUBS.delete(key);
-
-  return json({ success: true });
+    // Find and delete by scanning for matching endpoint
+    const subs = await getAllSubscriptions(env);
+    for (const { key, sub } of subs) {
+      if (sub.endpoint === body.endpoint) {
+        await env.SUBS.delete(key);
+        break;
+      }
+    }
+    return json({ success: true });
+  } catch (e: any) {
+    return json({ error: e.message }, 500);
+  }
 }
 
 async function handleHeartbeat(request: Request, env: Env): Promise<Response> {
-  const body = await request.json() as { endpoint: string };
-  if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
+  try {
+    const body = await request.json() as { endpoint: string };
+    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
 
-  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(body.endpoint));
-  const key = `sub:${uint8ArrayToBase64url(new Uint8Array(hash)).slice(0, 16)}`;
-  const existing = await env.SUBS.get(key);
-  if (existing) {
-    const sub = JSON.parse(existing) as Subscription;
-    sub.lastSeen = Date.now();
-    await env.SUBS.put(key, JSON.stringify(sub));
+    const subs = await getAllSubscriptions(env);
+    for (const { key, sub } of subs) {
+      if (sub.endpoint === body.endpoint) {
+        sub.lastSeen = Date.now();
+        await env.SUBS.put(key, JSON.stringify(sub));
+        break;
+      }
+    }
+    return json({ success: true });
+  } catch (e: any) {
+    return json({ error: e.message }, 500);
   }
-
-  return json({ success: true });
 }
 
 // ── CRON Handlers ──
@@ -228,7 +240,7 @@ async function checkNewIssues(env: Env): Promise<void> {
 
   // Get last known issue count
   const lastCount = parseInt(await env.SUBS.get('meta:issueCount') || '0', 10);
-  const currentCount = feed.issues.length;
+  const currentCount = feed.length;
 
   if (currentCount <= lastCount) {
     await env.SUBS.put('meta:issueCount', String(currentCount));
@@ -236,7 +248,7 @@ async function checkNewIssues(env: Env): Promise<void> {
   }
 
   // New issues found — the newest are at the start of the array
-  const newIssues = feed.issues.slice(0, currentCount - lastCount);
+  const newIssues = feed.slice(0, currentCount - lastCount);
   const subs = await getAllSubscriptions(env);
 
   // Send notification for the most recent new issue only (avoid spam)
@@ -264,7 +276,7 @@ async function sendWeeklyDigest(env: Env): Promise<void> {
   const feed = await resp.json() as IssueFeed;
 
   // Count issues published this week (approximation: use last 7 issues)
-  const recentIssues = feed.issues.slice(0, 7);
+  const recentIssues = feed.slice(0, 7);
   if (recentIssues.length === 0) return;
 
   const topIssue = recentIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
@@ -291,7 +303,7 @@ async function checkReEngagement(env: Env): Promise<void> {
       const lastReEngage = parseInt(await env.SUBS.get(`reengaged:${key}`) || '0', 10);
       if (now - lastReEngage < 30 * 24 * 60 * 60 * 1000) continue; // Max once per 30 days
 
-      const payload = reEngagementPayload(feed.issues.length);
+      const payload = reEngagementPayload(feed.length);
       await sendPush(sub, payload, env);
       await env.SUBS.put(`reengaged:${key}`, String(now));
     }

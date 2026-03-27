@@ -76,7 +76,7 @@ self.addEventListener('push', (event) => {
     const options = {
       body: data.body || '',
       icon: data.icon || '/icons/icon-192.png',
-      badge: data.badge || '/icons/icon-192.png',
+      badge: data.badge || '/icons/badge-96.png',
       image: data.image,
       tag: data.tag || 'tfa-default',
       data: data.data || {},
