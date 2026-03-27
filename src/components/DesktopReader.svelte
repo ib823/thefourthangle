@@ -88,11 +88,18 @@
     return card.t === 'fact' && card.lens ? `${m.label} \u00B7 ${card.lens}` : m.label;
   }
 
+  // F13: Content fade on article switch
+  let contentOpacity = $state(1);
   let lastId = $state(issue.id);
   $effect(() => {
     if (issue.id !== lastId) {
       lastId = issue.id;
-      scrollEl?.scrollTo({ top: 0, behavior: 'smooth' });
+      // Brief fade-out then fade-in
+      contentOpacity = 0;
+      requestAnimationFrame(() => {
+        scrollEl?.scrollTo({ top: 0, behavior: 'instant' });
+        setTimeout(() => { contentOpacity = 1; }, 50);
+      });
     }
     markStarted(issue.id);
   });
@@ -117,7 +124,7 @@
   let label = $derived(opinionLabel(issue.opinionShift));
 </script>
 
-<div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:var(--bg);">
+<div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:var(--bg);opacity:{contentOpacity};transition:opacity var(--duration-fast, 150ms) var(--ease-out-cubic, ease);">
   <!-- Screen reader announcement for issue change -->
   <div class="sr-only" aria-live="polite" aria-atomic="true">Now reading: {issue.headline}</div>
   <div style="max-width:640px;margin:0 auto;padding:40px 24px;">

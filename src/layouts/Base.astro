@@ -53,6 +53,22 @@ const ogImage = `${siteUrl}/og-image.png`;
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
+    // F02/F03: Crossfade route transition using View Transitions API
+    // Progressive enhancement — falls back to instant navigation on unsupported browsers
+    if ('startViewTransition' in document) {
+      document.addEventListener('click', (e) => {
+        const anchor = (e.target as Element)?.closest('a[href]') as HTMLAnchorElement | null;
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
+        // Same-origin internal navigation only
+        if (anchor.origin !== location.origin) return;
+        e.preventDefault();
+        (document as any).startViewTransition(() => {
+          location.href = href;
+        });
+      });
+    }
   </script>
 </body>
 </html>

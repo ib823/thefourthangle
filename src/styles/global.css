@@ -110,6 +110,16 @@ body {
   margin: 8px auto;
 }
 
+/* F02/F03: View Transition crossfade for route changes */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-fast, 150ms);
+  animation-timing-function: var(--ease-out-cubic, ease);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

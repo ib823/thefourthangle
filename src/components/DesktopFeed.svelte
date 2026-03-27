@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
   import { getReadCount } from '../stores/reader';
   import { issueCategory } from '../data/issues';
@@ -32,7 +33,6 @@
 
   let displayIssues = $derived.by(() => {
     if (sortMode === 'editorial') return issues;
-    // Group by category, maintain editorial order within groups
     const grouped = new Map<string, IssueSummary[]>();
     for (const issue of issues) {
       const cat = issueCategory(issue);
@@ -43,8 +43,84 @@
   });
 
   let isGrouped = $derived(sortMode === 'topic' && typeof displayIssues === 'object' && 'grouped' in displayIssues);
+
+  // F01: Virtual feed — only render items near the viewport
+  let scrollContainerEl: HTMLDivElement | undefined = $state(undefined);
+  let scrollTop = $state(0);
+  let containerHeight = $state(800);
+  const ITEM_HEIGHT = 132; // Approximate feed row height
+  const BUFFER = 8; // Extra items above/below viewport
+
+  function onFeedScroll() {
+    if (scrollContainerEl) {
+      scrollTop = scrollContainerEl.scrollTop;
+    }
+  }
+
+  onMount(() => {
+    if (scrollContainerEl) {
+      containerHeight = scrollContainerEl.clientHeight;
+      const ro = new ResizeObserver((entries) => {
+        containerHeight = entries[0].contentRect.height;
+      });
+      ro.observe(scrollContainerEl);
+      return () => ro.disconnect();
+    }
+  });
+
+  // Compute visible range for editorial (flat) mode
+  let visibleStart = $derived(Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER));
+  let visibleEnd = $derived(Math.min(issues.length, Math.ceil((scrollTop + containerHeight) / ITEM_HEIGHT) + BUFFER));
+  let totalHeight = $derived(issues.length * ITEM_HEIGHT);
+
+  // F06: Roving tabindex — only focused item is tabbable
+  let focusedIndex = $state(-1);
+
+  function onFeedKeyDown(e: KeyboardEvent) {
+    if (sortMode === 'topic') return; // Only roving tabindex in editorial mode
+    const flatIssues = issues;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      focusedIndex = Math.min(focusedIndex + 1, flatIssues.length - 1);
+      scrollToFocused();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      focusedIndex = Math.max(focusedIndex - 1, 0);
+      scrollToFocused();
+    } else if (e.key === 'Enter' && focusedIndex >= 0) {
+      e.preventDefault();
+      onSelectIssue(flatIssues[focusedIndex]);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      focusedIndex = 0;
+      scrollToFocused();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      focusedIndex = flatIssues.length - 1;
+      scrollToFocused();
+    }
+  }
+
+  function scrollToFocused() {
+    if (!scrollContainerEl || focusedIndex < 0) return;
+    const itemTop = focusedIndex * ITEM_HEIGHT;
+    const itemBottom = itemTop + ITEM_HEIGHT;
+    const viewTop = scrollContainerEl.scrollTop;
+    const viewBottom = viewTop + containerHeight;
+    if (itemTop < viewTop) {
+      scrollContainerEl.scrollTop = itemTop;
+    } else if (itemBottom > viewBottom) {
+      scrollContainerEl.scrollTop = itemBottom - containerHeight;
+    }
+    // Focus the visible item
+    requestAnimationFrame(() => {
+      const el = scrollContainerEl?.querySelector(`[data-index="${focusedIndex}"]`) as HTMLElement;
+      el?.focus();
+    });
+  }
 </script>
 
+<!-- F10: role="listbox" for semantic feed grouping -->
 <aside aria-label="Issue list" style="width:360px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:var(--bg);display:flex;flex-direction:column;">
   <div style="padding:12px 20px;flex-shrink:0;">
     <div style="position:relative;">
@@ -83,12 +159,22 @@
       {/if}
     </div>
   </div>
-  <div style="flex:1;overflow-y:auto;">
+
+  <!-- F01: Virtualized feed scroll container -->
+  <div
+    bind:this={scrollContainerEl}
+    onscroll={onFeedScroll}
+    onkeydown={onFeedKeyDown}
+    role="listbox"
+    aria-label="Issues"
+    style="flex:1;overflow-y:auto;"
+  >
     {#if issues.length === 0 && isSearching}
       <div style="padding:40px 20px;text-align:center;">
         <p style="font-size:13px;color:var(--text-muted);">No issues match "{searchQuery}"</p>
       </div>
     {:else if sortMode === 'topic' && !isSearching}
+      <!-- Topic mode: no virtualization (grouped layout is complex), but rare use -->
       {#each [...(displayIssues as { grouped: Map<string, IssueSummary[]> }).grouped.entries()] as [category, groupIssues]}
         <div style="padding:12px 20px 4px;border-top:1px solid var(--bg-sunken);">
           <span style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.5px;">{category}</span>
@@ -98,9 +184,21 @@
         {/each}
       {/each}
     {:else}
-      {#each issues as issue}
-        <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} />
-      {/each}
+      <!-- F01: Virtual windowed list — only render visible items + buffer -->
+      <div style="height:{totalHeight}px;position:relative;">
+        {#each issues.slice(visibleStart, visibleEnd) as issue, i}
+          {@const idx = visibleStart + i}
+          <div
+            style="position:absolute;top:{idx * ITEM_HEIGHT}px;left:0;right:0;height:{ITEM_HEIGHT}px;"
+            data-index={idx}
+            role="option"
+            aria-selected={activeId === issue.id}
+            tabindex={focusedIndex === idx ? 0 : -1}
+          >
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} />
+          </div>
+        {/each}
+      </div>
     {/if}
   </div>
   <div style="padding:12px 20px;border-top:1px solid var(--bg-sunken);flex-shrink:0;">

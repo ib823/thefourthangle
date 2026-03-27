@@ -26,8 +26,7 @@
   onkeydown={(e) => { if (e.key === 'Enter') onClick(); }}
   onmouseenter={() => hovered = true}
   onmouseleave={() => hovered = false}
-  role="button"
-  tabindex="0"
+  role="presentation"
   aria-current={isActive ? 'true' : undefined}
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}."
   style="
