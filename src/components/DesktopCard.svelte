@@ -70,7 +70,7 @@
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}. {isCompleted ? 'Covered.' : isStarted ? 'Reading.' : 'Unread.'}"
   style="
     background:{isCompleted ? 'var(--bg-elevated)' : 'var(--bg)'};
-    border-radius:16px;padding:18px;cursor:pointer;position:relative;
+    border-radius:16px;padding:18px;cursor:pointer;
     box-shadow:{hovered ? '0 8px 30px rgba(0,0,0,0.08)' : '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)'};
     transform:{visible ? (hovered ? 'translateY(-3px) scale(1.006)' : 'translateY(0) scale(1)') : 'translateY(24px)'};
     opacity:{visible ? 1 : 0};
@@ -79,16 +79,7 @@
     contain-intrinsic-size:0 240px;
   "
 >
-  <!-- Reaction heart: top-right -->
-  {#if hasReaction}
-    <div style="position:absolute;top:16px;right:16px;opacity:0.6;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
-    </div>
-  {/if}
-
-  <!-- Top row: status badges -->
+  <!-- Top row: status badges + heart -->
   <div style="display:flex;align-items:center;gap:6px;">
     {#if issue.status === 'new' && !readState}
       <span style="font-size:10px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:0.04em;">New</span>
@@ -99,6 +90,11 @@
       <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
     {/if}
     <div style="flex:1;"></div>
+    {#if hasReaction}
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    {/if}
     {#if isStarted}
       <div style="display:flex;align-items:center;gap:4px;">
         <svg width="14" height="14" viewBox="0 0 24 24" style="flex-shrink:0;">
