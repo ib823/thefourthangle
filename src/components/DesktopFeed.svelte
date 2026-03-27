@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
-  import { getReadCount, getReactions } from '../stores/reader';
+  import { getReadCount, reactions } from '../stores/reader';
   import { issueCategory } from '../data/issues';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -31,8 +31,15 @@
   let filterMode = $state<'all' | 'new' | 'reading' | 'done'>('all');
   let sortMode = $state<'editorial' | 'topic'>('editorial');
 
-  // Reactions map for heart indicator
-  let reactionMap = $derived(getReactions());
+  // Reactions — subscribe to the atom for real-time updates
+  let reactionRaw = $state('{}');
+  $effect(() => {
+    const unsub = reactions.subscribe(v => { reactionRaw = v; });
+    return unsub;
+  });
+  let reactionMap: Record<string, number[]> = $derived.by(() => {
+    try { return JSON.parse(reactionRaw); } catch { return {}; }
+  });
 
   function hasReaction(issueId: string): boolean {
     return (reactionMap[issueId]?.length ?? 0) > 0;

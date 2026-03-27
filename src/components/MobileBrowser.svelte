@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
-  import { readIssues, savePosition, getReactions } from '../stores/reader';
+  import { readIssues, savePosition, reactions } from '../stores/reader';
   import { haptic } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -17,7 +17,16 @@
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
   let readMap: Record<string, string> = $state({});
-  let reactionMap = $derived(getReactions());
+
+  // Reactions — subscribe to the atom for real-time updates
+  let reactionRaw = $state('{}');
+  $effect(() => {
+    const unsub = reactions.subscribe(v => { reactionRaw = v; });
+    return unsub;
+  });
+  let reactionMap: Record<string, number[]> = $derived.by(() => {
+    try { return JSON.parse(reactionRaw); } catch { return {}; }
+  });
 
   function hasReaction(issueId: string): boolean {
     return (reactionMap[issueId]?.length ?? 0) > 0;
