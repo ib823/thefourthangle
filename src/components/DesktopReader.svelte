@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
-  import ContentFingerprint from './ContentFingerprint.svelte';
   import { CARD_TYPES, opinionLabel } from '../data/issues';
   import { markStarted, markCompleted } from '../stores/reader';
   import SaveButton from './SaveButton.svelte';
@@ -196,9 +195,6 @@
           <a href="/verify" style="font-size:11px;color:var(--text-muted);margin-left:4px;" onclick={(e) => e.stopPropagation()}>What is this?</a>
         {/if}
       </button>
-
-      <!-- Cryptographic fingerprint -->
-      <ContentFingerprint issueId={issue.id} />
 
     </div>
 

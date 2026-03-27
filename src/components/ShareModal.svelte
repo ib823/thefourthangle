@@ -260,30 +260,28 @@
   >
 
     <!-- Drag handle -->
-    <div style="display:flex;justify-content:center;padding-top:8px;padding-bottom:4px;cursor:grab;">
+    <div style="display:flex;justify-content:center;padding-top:8px;padding-bottom:2px;cursor:grab;">
       <div class="drag-handle"></div>
     </div>
 
     <!-- Close -->
-    <button onclick={closeWithAnimation} style="position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:10px;background:var(--bg-elevated);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-tertiary);">x</button>
+    <button onclick={closeWithAnimation} style="position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:8px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-tertiary);transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'none'; }} aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
 
     <!-- Preview -->
-    <div style="background:var(--bg-elevated);border-radius:14px;padding:18px;border:1px solid var(--border-subtle);margin-bottom:20px;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
-        <img src="/logo.png?v=2" alt="" width="18" height="20" style="display:block;" />
-        <span style="font-size:9px;font-weight:700;color:var(--text-tertiary);letter-spacing:1.5px;text-transform:uppercase;">THE FOURTH ANGLE</span>
-      </div>
-      <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:6px;line-height:1.35;">{issue.headline}</div>
-      <div style="font-size:12px;color:var(--text-tertiary);line-height:1.5;margin-bottom:10px;">{previewText}</div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <div style="width:44px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
+    <div style="background:var(--bg-elevated);border-radius:12px;padding:14px;border:1px solid var(--border-light);margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.35;margin-bottom:6px;">{issue.headline}</div>
+      <div style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-bottom:8px;">{previewText}</div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:40px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
           <div style="width:{os}%;height:100%;background:{barColor};border-radius:2px;"></div>
         </div>
         <span style="font-size:10px;font-weight:700;color:{barColor};">{os}%</span>
-        <span style="font-size:9px;color:var(--text-muted);">Opinion Shift</span>
-        <span style="font-size:9px;color:var(--text-faint);">·</span>
-        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}<span style="font-size:8px;color:var(--text-muted);">/100</span></span>
-        <span style="font-size:9px;color:var(--text-muted);">Neutrality</span>
+        <span style="font-size:8px;color:var(--text-muted);">Opinion Shift</span>
+        <span style="font-size:8px;color:var(--text-faint);">·</span>
+        <span style="font-size:10px;font-weight:700;color:{nsColor};">{ns}</span>
+        <span style="font-size:8px;color:var(--text-muted);">Neutrality</span>
       </div>
     </div>
 
@@ -291,24 +289,22 @@
     {#if canNativeShare}
       <button
         onclick={nativeShare}
-        style="width:100%;padding:14px 20px;background:var(--text-primary);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px;transition:background 0.15s ease;display:flex;align-items:center;justify-content:center;gap:8px;"
-        onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--text-primary)'; }}
-        onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--text-primary)'; }}
+        style="width:100%;padding:12px 16px;background:var(--text-primary);color:var(--bg);border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:12px;transition:background 0.15s ease;display:flex;align-items:center;justify-content:center;gap:6px;"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share
       </button>
     {/if}
 
     <!-- Platform grid -->
-    <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.5px;margin-bottom:8px;">SHARE ON</div>
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;margin-bottom:16px;">
+    <div style="font-size:10px;font-weight:600;color:var(--text-muted);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px;">Share on</div>
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:6px;margin-bottom:12px;">
       {#each openPlatforms as p, i}
         <button
           onclick={() => openPlatform(p)}
           class="share-btn"
           class:share-btn--visible={buttonVisible[i]}
-          onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
+          onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
           onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
         >
           <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{p.label}</span>
@@ -316,7 +312,7 @@
       {/each}
     </div>
 
-    <div style="height:1px;background:var(--bg-sunken);margin-bottom:14px;"></div>
+    <div style="height:1px;background:var(--bg-sunken);margin-bottom:10px;"></div>
 
     <!-- Copy link -->
     <button
@@ -330,7 +326,7 @@
       <span class="copy-right">
         {#if copyPhase === 'check' || copyPhase === 'in'}
           <span class="copy-check" class:copy-check--visible={copyPhase === 'check' || copyPhase === 'in'}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#37B24D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
           <span class="copy-copied" class:copy-copied--visible={copyPhase === 'in'}>Copied!</span>
         {:else if copyPhase === 'revert-out'}
@@ -370,8 +366,8 @@
   .share-panel {
     background: var(--bg);
     border-radius: 20px 20px 0 0;
-    padding: 0 24px max(24px, env(safe-area-inset-bottom, 24px));
-    max-width: 380px;
+    padding: 0 20px max(20px, env(safe-area-inset-bottom, 20px));
+    max-width: 360px;
     width: 100%;
     box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12);
     position: relative;
@@ -397,8 +393,8 @@
 
   @media (min-width: 640px) {
     .share-panel {
-      border-radius: 20px;
-      box-shadow: var(--shadow-xl);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
       max-height: max-content;
       margin: auto 0;
     }
@@ -410,8 +406,8 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 12px 8px;
-    border-radius: 12px;
+    padding: 10px 8px;
+    border-radius: 10px;
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     cursor: pointer;
@@ -432,8 +428,8 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 12px 16px;
-    border-radius: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
     border: 1px solid var(--border-subtle);
     cursor: pointer;
     transition: background 300ms ease, border-color 300ms ease;
