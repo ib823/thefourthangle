@@ -15,6 +15,8 @@
     sharedEntities: string[];
     headline: string;
     opinionShift: number;
+    readState: string | null;
+    hasReaction: boolean;
   }
 
   interface Props {
@@ -22,8 +24,9 @@
     onNext?: () => void;
     nextHeadline?: string;
     connections?: Connection[];
+    onNavigateToIssue?: (issueId: string) => void;
   }
-  let { issue, onNext, nextHeadline, connections = [] }: Props = $props();
+  let { issue, onNext, nextHeadline, connections = [], onNavigateToIssue }: Props = $props();
 
   // Reactions handled by SaveButton component
   let scrollEl: HTMLDivElement | undefined = $state(undefined);
@@ -205,13 +208,30 @@
           <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">{connections.length} connected issues</div>
           <div style="display:flex;flex-direction:column;gap:6px;">
             {#each connections.slice(0, 4) as conn}
-              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--bg-elevated);border:1px solid var(--border-subtle);">
+              <button
+                onclick={() => onNavigateToIssue?.(conn.id)}
+                style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--bg-elevated);border:1px solid var(--border-subtle);cursor:pointer;text-align:left;width:100%;transition:background var(--duration-fast, 150ms) ease;"
+                onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }}
+                onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
+              >
                 <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;font-weight:600;color:var(--text-primary);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;">{conn.headline}</div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">{conn.sharedEntities.slice(0, 3).join(' · ')}</div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    {#if conn.readState === 'completed'}
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+                    {:else if conn.readState === 'started'}
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
+                    {/if}
+                    <div style="font-size:12px;font-weight:{conn.readState === 'completed' ? '500' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;">{conn.headline}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+                    <span style="font-size:10px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
+                    {#if conn.hasReaction}
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    {/if}
+                  </div>
                 </div>
                 <span style="font-size:12px;font-weight:700;color:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};font-variant-numeric:tabular-nums;flex-shrink:0;">{conn.opinionShift}%</span>
-              </div>
+              </button>
             {/each}
           </div>
         </div>

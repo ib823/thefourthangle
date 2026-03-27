@@ -35,18 +35,21 @@
     sharedEntities: string[];
     headline: string;
     opinionShift: number;
+    readState: string | null;
+    hasReaction: boolean;
   }
 
   interface Props {
     issue: Issue;
     onClose: () => void;
     onNext?: () => void;
+    onNavigateToIssue?: (issueId: string) => void;
     initialCardIndex?: number;
     originRect?: DOMRect;
     connections?: Connection[];
   }
 
-  let { issue, onClose, onNext, initialCardIndex = 0, originRect, connections = [] }: Props = $props();
+  let { issue, onClose, onNext, onNavigateToIssue, initialCardIndex = 0, originRect, connections = [] }: Props = $props();
 
   let patternSheetOpen = $state(false);
 
@@ -1050,18 +1053,29 @@
             class="pattern-issue-card"
             onclick={() => {
               patternSheetOpen = false;
-              // Navigate to connected issue — close current, open new
-              onClose();
+              if (onNavigateToIssue) {
+                onNavigateToIssue(conn.id);
+              }
             }}
           >
             <div style="flex:1;min-width:0;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                {#if conn.readState === 'completed'}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+                {:else if conn.readState === 'started'}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
+                {/if}
+                <div style="font-size:13px;font-weight:{conn.readState === 'completed' ? '500' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
+              </div>
               <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
                 <div style="width:32px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:{conn.opinionShift}%;background:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};border-radius:2px;"></div>
                 </div>
                 <span style="font-size:10px;font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
                 <span style="font-size:9px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
+                {#if conn.hasReaction}
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {/if}
               </div>
             </div>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>

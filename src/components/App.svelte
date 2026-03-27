@@ -240,17 +240,37 @@
     return getConnections(activeIssue.id);
   });
 
-  // Resolve connection data: enrich with headlines from feed
+  // Resolve connection data: enrich with headlines, read state, reactions from feed
   let resolvedConnections = $derived.by(() => {
     return activeConnections.map(c => {
       const feedIssue = issues.find(i => i.id === c.id);
+      const readRaw = readMap[c.id];
+      let readState: string | null = null;
+      if (readRaw === 'true') readState = 'completed';
+      else if (readRaw) {
+        try { readState = JSON.parse(readRaw).state ?? null; } catch {}
+      }
       return {
         ...c,
         headline: feedIssue?.headline ?? '',
         opinionShift: feedIssue?.opinionShift ?? 0,
+        readState,
+        hasReaction: hasReaction(c.id),
       };
-    }).filter(c => c.headline); // only include if we have feed data
+    }).filter(c => c.headline);
   });
+
+  // Navigate to a connected issue from within a reader
+  function navigateToIssue(issueId: string) {
+    const target = issues.find(i => i.id === issueId);
+    if (target) {
+      activeIssue = null;
+      activeFullIssue = null;
+      readerOriginRect = null;
+      // Small delay for reader to close, then open new issue
+      requestAnimationFrame(() => openIssue(target));
+    }
+  }
 
   // Preload issue data on pointerdown — starts fetch before tap fires
   function prefetchIssue(issue: FeedIssue) {
@@ -347,7 +367,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -374,7 +394,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
   {/if}
 
 {:else}
@@ -401,6 +421,7 @@
           onNext={isLastIssue ? undefined : openNextIssue}
           {nextHeadline}
           connections={resolvedConnections}
+          onNavigateToIssue={navigateToIssue}
         />
       {:else}
         <DesktopEmptyState issueCount={issues.length} />
