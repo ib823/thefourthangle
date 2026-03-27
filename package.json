@@ -11,6 +11,7 @@
     "generate-og": "node scripts/generate-og-images.mjs",
     "build": "rm -rf dist && node scripts/build-issues-json.mjs && node scripts/build-verifier.mjs && node scripts/build-search-index.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs",
     "preview": "astro preview",
+    "test": "vitest run",
     "astro": "astro",
     "sign": "node scripts/sign-content.mjs"
   },
@@ -19,10 +20,14 @@
     "@nanostores/persistent": "^1.3.3",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.0.8",
-    "motion": "^12.38.0",
+    "minisearch": "^7.2.0",
     "nanostores": "^1.2.0",
     "svelte": "^5.54.1",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0",
+    "vitest": "^3.1.1"
   }
 }
