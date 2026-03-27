@@ -45,7 +45,7 @@
   let isGrouped = $derived(sortMode === 'topic' && typeof displayIssues === 'object' && 'grouped' in displayIssues);
 </script>
 
-<aside aria-label="Issue list" style="width:360px;height:100vh;overflow-y:auto;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:var(--bg);display:flex;flex-direction:column;">
+<aside aria-label="Issue list" style="width:360px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:var(--bg);display:flex;flex-direction:column;">
   <div style="padding:12px 20px;flex-shrink:0;">
     <div style="position:relative;">
       <input

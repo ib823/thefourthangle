@@ -118,11 +118,13 @@
 </script>
 
 <div bind:this={scrollEl} role="article" aria-label="Issue reader" style="flex:1;overflow-y:auto;background:var(--bg);">
+  <!-- Screen reader announcement for issue change -->
+  <div class="sr-only" aria-live="polite" aria-atomic="true">Now reading: {issue.headline}</div>
   <div style="max-width:640px;margin:0 auto;padding:40px 24px;">
     <!-- Reader header -->
     <div style="display:flex;align-items:flex-start;gap:16px;">
       <h1 style="flex:1;font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
-      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue">
+      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Share</span>
       </button>

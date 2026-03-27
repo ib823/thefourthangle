@@ -844,7 +844,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:5;" onpointerdown={(e) => e.stopPropagation()}>
             <SaveButton issueId={issue.id} cardIndex={current} />
-            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card">
+            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
