@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
 
   const VAPID_PUBLIC_KEY = 'BC4OHktzXFQlu1GclVNzYvWJhPUSiBsUVivd2r0bG2CUf6clO1WZoIfHsl_ScIvtqH1tzb5YwuHeD66O1TofboM';
-  const NOTIFY_API = 'https://tfa-notify.YOUR_SUBDOMAIN.workers.dev';
+  const NOTIFY_API = 'https://tfa-notify.4thangle.workers.dev';
 
   let showPrompt = $state(false);
   let subscribed = $state(false);

@@ -67,7 +67,7 @@ self.addEventListener('fetch', (event) => {
 
 // ── Push Notifications ──
 
-const NOTIFY_API = 'https://tfa-notify.YOUR_SUBDOMAIN.workers.dev';
+const NOTIFY_API = 'https://tfa-notify.4thangle.workers.dev';
 
 self.addEventListener('push', (event) => {
   if (!event.data) return;
