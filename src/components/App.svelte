@@ -101,26 +101,44 @@
     }
   });
 
-  // Interest-based feed sorting (invisible personalization)
-  let sortedIssues = $derived.by(() => {
-    const base = filteredIssues;
-    const completedCount = Object.values(readMap).filter(v => {
+  // Interest-based feed sorting — computed ONCE on load, stable during session.
+  // Prevents jarring list reorder when the user clicks/reads an issue.
+  let stableSortOrder: string[] | null = null;
+
+  function computeStableSort(issueList: FeedIssue[], rMap: Record<string, string>): FeedIssue[] {
+    const completedCount = Object.values(rMap).filter(v => {
       if (!v) return false;
       if (v === 'true') return true;
       try { return JSON.parse(v).state === 'completed'; } catch { return false; }
     }).length;
-    if (completedCount < 10) return base;
+    if (completedCount < 10) return issueList;
 
     const reactionMap = getReactions();
-    const affinity = computeAffinity(readMap, reactionMap, issues);
+    const affinity = computeAffinity(rMap, reactionMap, issueList);
 
-    const read = base.filter(i => readMap[i.id]);
-    const unread = base.filter(i => !readMap[i.id]);
+    const read = issueList.filter(i => rMap[i.id]);
+    const unread = issueList.filter(i => !rMap[i.id]);
 
     const scored = unread.map(i => ({ issue: i, score: scoreIssue(i, affinity) }));
     scored.sort((a, b) => b.score - a.score);
 
     return [...scored.map(s => s.issue), ...read];
+  }
+
+  // Compute sort order once when issues first load, then freeze it
+  $effect(() => {
+    if (issues.length > 0 && !stableSortOrder) {
+      const sorted = computeStableSort(issues, readMap);
+      stableSortOrder = sorted.map(i => i.id);
+    }
+  });
+
+  // Apply stable sort to filtered results — order stays fixed during session
+  let sortedIssues = $derived.by(() => {
+    const base = filteredIssues;
+    if (!stableSortOrder) return base;
+    const orderMap = new Map(stableSortOrder.map((id, idx) => [id, idx]));
+    return [...base].sort((a, b) => (orderMap.get(a.id) ?? 999) - (orderMap.get(b.id) ?? 999));
   });
 
   function checkViewport() {
