@@ -286,21 +286,22 @@
       </button>
     {/if}
 
-    <!-- Platform grid -->
-    <div class="section-label">Share on</div>
-    <div class="platform-grid">
-      {#each openPlatforms as p, i}
-        <button
-          onclick={() => openPlatform(p)}
-          class="share-btn"
-          class:share-btn--visible={buttonVisible[i]}
-        >
-          <span class="share-btn-label">{p.label}</span>
-        </button>
-      {/each}
-    </div>
-
-    <div class="divider"></div>
+    <!-- Platform grid: only on desktop where native share is unavailable -->
+    {#if !canNativeShare}
+      <div class="section-label">Share on</div>
+      <div class="platform-grid">
+        {#each openPlatforms as p, i}
+          <button
+            onclick={() => openPlatform(p)}
+            class="share-btn"
+            class:share-btn--visible={buttonVisible[i]}
+          >
+            <span class="share-btn-label">{p.label}</span>
+          </button>
+        {/each}
+      </div>
+      <div class="divider"></div>
+    {/if}
 
     <!-- Copy link -->
     <button
