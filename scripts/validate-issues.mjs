@@ -279,6 +279,28 @@ for (const issue of issues) {
   if (uniqueLenses.size < factLenses.length) {
     warn(id, 'cards', `Duplicate lens across fact cards: ${factLenses.join(', ')}`);
   }
+
+  // ── Optional fields: related, sourceDate ──
+  if (issue.related) {
+    if (!Array.isArray(issue.related)) {
+      err(id, 'related', 'Must be an array of issue ID strings');
+    } else {
+      for (const rid of issue.related) {
+        if (typeof rid !== 'string' || !/^\d{4}$/.test(rid)) {
+          err(id, 'related', `Invalid related ID: "${rid}" — must be 4-digit string`);
+        }
+        if (rid === issue.id) {
+          err(id, 'related', `Issue cannot reference itself`);
+        }
+      }
+    }
+  }
+
+  if (issue.sourceDate) {
+    if (typeof issue.sourceDate !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(issue.sourceDate)) {
+      err(id, 'sourceDate', `Invalid format: "${issue.sourceDate}" — must be YYYY-MM-DD`);
+    }
+  }
 }
 
 // ══════════════════════════════════════════════

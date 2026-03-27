@@ -24,6 +24,8 @@ export interface Issue {
   cards: Card[];
   stageScores?: StageScores;
   finalScore?: number;
+  related?: string[];    // manually curated related issue IDs
+  sourceDate?: string;   // ISO date when source information was retrieved
 }
 
 export const CARD_TYPES: Record<string, { label: string; color: string; bg: string }> = {

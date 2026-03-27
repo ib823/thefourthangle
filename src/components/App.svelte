@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { Issue } from '../data/issues';
   import { issueCategory, CARD_TYPES } from '../data/issues';
-  import { loadFeedIssues, loadFullIssue } from '../lib/issues-loader';
+  import { loadFeedIssues, loadFullIssue, loadFactGraph, getConnections } from '../lib/issues-loader';
   import Header from './Header.svelte';
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
@@ -180,6 +180,9 @@
       });
     }
 
+    // Load fact graph lazily (non-blocking, low priority)
+    loadFactGraph();
+
     // If deep link, fetch full issue data for reader
     if (initialIssueId && activeIssue) {
       loadAndOpenIssue(activeIssue.id);
@@ -230,6 +233,24 @@
 
   // Origin rect for shared-element transition
   let readerOriginRect: DOMRect | null = $state(null);
+
+  // Connections for the active issue — derived from fact graph
+  let activeConnections = $derived.by(() => {
+    if (!activeIssue) return [];
+    return getConnections(activeIssue.id);
+  });
+
+  // Resolve connection data: enrich with headlines from feed
+  let resolvedConnections = $derived.by(() => {
+    return activeConnections.map(c => {
+      const feedIssue = issues.find(i => i.id === c.id);
+      return {
+        ...c,
+        headline: feedIssue?.headline ?? '',
+        opinionShift: feedIssue?.opinionShift ?? 0,
+      };
+    }).filter(c => c.headline); // only include if we have feed data
+  });
 
   // Preload issue data on pointerdown — starts fetch before tap fires
   function prefetchIssue(issue: FeedIssue) {
@@ -326,7 +347,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -353,7 +374,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
   {/if}
 
 {:else}
@@ -379,6 +400,7 @@
           issue={activeFullIssue}
           onNext={isLastIssue ? undefined : openNextIssue}
           {nextHeadline}
+          connections={resolvedConnections}
         />
       {:else}
         <DesktopEmptyState issueCount={issues.length} />

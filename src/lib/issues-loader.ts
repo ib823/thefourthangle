@@ -71,3 +71,53 @@ export function loadFullIssue(id: string): Promise<Issue | null> {
 export function getFullIssue(id: string): Issue | null {
   return issueCache.get(id) ?? null;
 }
+
+// --- Fact graph cache ---
+interface FactConnection {
+  id: string;
+  weight: number;
+  sharedEntities: string[];
+}
+
+interface FactGraph {
+  connections: Record<string, FactConnection[]>;
+  connectionCounts: Record<string, number>;
+  entities: Record<string, { name: string; type: string; issues: string[]; count: number }>;
+  meta: { generatedAt: string; issueCount: number; entityCount: number; connectedIssues: number; totalEdges: number };
+}
+
+let graphCache: FactGraph | null = null;
+let graphPromise: Promise<FactGraph | null> | null = null;
+
+export function loadFactGraph(): Promise<FactGraph | null> {
+  if (graphCache) return Promise.resolve(graphCache);
+  if (graphPromise) return graphPromise;
+
+  graphPromise = fetch('/fact-graph.json')
+    .then(res => {
+      if (!res.ok) return null;
+      return res.json();
+    })
+    .then((data: FactGraph | null) => {
+      if (data) graphCache = data;
+      return data;
+    })
+    .catch(() => null);
+
+  return graphPromise;
+}
+
+/** Get connections for a specific issue. Returns empty array if graph not loaded or no connections. */
+export function getConnections(issueId: string): FactConnection[] {
+  return graphCache?.connections[issueId] ?? [];
+}
+
+/** Get connection count for feed display. Returns 0 if graph not loaded. */
+export function getConnectionCount(issueId: string): number {
+  return graphCache?.connectionCounts[issueId] ?? 0;
+}
+
+/** Check if fact graph is loaded */
+export function isFactGraphLoaded(): boolean {
+  return graphCache !== null;
+}

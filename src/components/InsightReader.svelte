@@ -29,15 +29,26 @@
     finalScore?: number;
   }
 
+  interface Connection {
+    id: string;
+    weight: number;
+    sharedEntities: string[];
+    headline: string;
+    opinionShift: number;
+  }
+
   interface Props {
     issue: Issue;
     onClose: () => void;
     onNext?: () => void;
     initialCardIndex?: number;
     originRect?: DOMRect;
+    connections?: Connection[];
   }
 
-  let { issue, onClose, onNext, initialCardIndex = 0, originRect }: Props = $props();
+  let { issue, onClose, onNext, initialCardIndex = 0, originRect, connections = [] }: Props = $props();
+
+  let patternSheetOpen = $state(false);
 
   let current = $state(Math.min(initialCardIndex, 5));
   let completed = $state(false);
@@ -899,6 +910,14 @@
             {/if}
           </div>
 
+          {#if connections.length >= 2}
+            <button class="connection-nudge" onclick={() => { patternSheetOpen = true; }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              {connections.length} connected {connections.length === 1 ? 'issue' : 'issues'}
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          {/if}
+
           <div class="completion-buttons">
             {#if completionButtonsVisible.length > 0}
               <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
@@ -959,6 +978,8 @@
         <div class="card-bottom">
           {#if showSwipeHint && current === 0}
             <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe or tap arrows</span>
+          {:else if card.t === 'fact' && connections.length > 0}
+            <span style="font-size:11px;color:var(--text-muted);">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
           {:else if current === totalCards - 2 && !completed}
             <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Almost done</span>
           {:else if current === totalCards - 1 && !completed}
@@ -1008,6 +1029,53 @@
 
 {#if shareOpen}
   <ShareModal issue={issue} cardIndex={shareCardIndex} onClose={() => { shareOpen = false; }} />
+{/if}
+
+{#if patternSheetOpen && connections.length > 0}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="pattern-backdrop" class:pattern-backdrop--visible={patternSheetOpen} onclick={(e) => { if (e.target === e.currentTarget) patternSheetOpen = false; }}>
+    <div class="pattern-panel" class:pattern-panel--visible={patternSheetOpen} role="dialog" aria-modal="true" aria-label="Connected issues">
+      <div class="drag-handle-wrap"><div class="drag-handle"></div></div>
+      <div class="panel-header">
+        <span class="panel-title">Connected issues</span>
+        <button class="close-btn" onclick={() => { patternSheetOpen = false; }} aria-label="Close">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:8px;">
+        {#each connections.slice(0, 5) as conn}
+          <button
+            class="pattern-issue-card"
+            onclick={() => {
+              patternSheetOpen = false;
+              // Navigate to connected issue — close current, open new
+              onClose();
+            }}
+          >
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
+                <div style="width:32px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:{conn.opinionShift}%;background:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};border-radius:2px;"></div>
+                </div>
+                <span style="font-size:10px;font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
+                <span style="font-size:9px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
+              </div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        {/each}
+      </div>
+
+      {#if connections.length > 5}
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:4px 0;">
+          +{connections.length - 5} more
+        </div>
+      {/if}
+    </div>
+  </div>
 {/if}
 
 <style>
@@ -1504,5 +1572,27 @@
 
   .reduced-motion .nav-chevron {
     transition: none;
+  }
+
+  /* Connection nudge on completion card */
+  .connection-nudge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--duration-fast, 150ms) ease;
+    min-height: 36px;
+    margin-bottom: 4px;
+  }
+  .connection-nudge:hover {
+    background: var(--bg-sunken);
   }
 </style>

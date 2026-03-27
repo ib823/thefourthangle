@@ -9,12 +9,21 @@
 
   import type { Issue } from '../data/issues';
 
+  interface Connection {
+    id: string;
+    weight: number;
+    sharedEntities: string[];
+    headline: string;
+    opinionShift: number;
+  }
+
   interface Props {
     issue: Issue;
     onNext?: () => void;
     nextHeadline?: string;
+    connections?: Connection[];
   }
-  let { issue, onNext, nextHeadline }: Props = $props();
+  let { issue, onNext, nextHeadline, connections = [] }: Props = $props();
 
   // Reactions handled by SaveButton component
   let scrollEl: HTMLDivElement | undefined = $state(undefined);
@@ -179,6 +188,9 @@
         {#if card.sub}
           <p style="font-size:15px;color:var(--text-secondary);line-height:1.6;margin:12px 0 0;">{card.sub}</p>
         {/if}
+        {#if card.t === 'fact' && connections.length > 0}
+          <span style="font-size:11px;color:var(--text-muted);margin-top:8px;display:block;">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
+        {/if}
       </div>
     {/each}
 
@@ -187,6 +199,24 @@
     <!-- Completion -->
     <div style="margin-top:16px;">
       <div style="height:1px;background:var(--status-green);margin-bottom:24px;border-radius:1px;width:50%;margin:0 auto 24px;"></div>
+      <!-- Connected issues -->
+      {#if connections.length >= 2}
+        <div style="margin-bottom:16px;">
+          <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">{connections.length} connected issues</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            {#each connections.slice(0, 4) as conn}
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--bg-elevated);border:1px solid var(--border-subtle);">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:600;color:var(--text-primary);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;">{conn.headline}</div>
+                  <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">{conn.sharedEntities.slice(0, 3).join(' · ')}</div>
+                </div>
+                <span style="font-size:12px;font-weight:700;color:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};font-variant-numeric:tabular-nums;flex-shrink:0;">{conn.opinionShift}%</span>
+              </div>
+            {/each}
+          </div>
+        </div>
+      {/if}
+
       <!-- Share -->
       <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
         onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
