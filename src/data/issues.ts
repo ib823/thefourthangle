@@ -4825,6 +4825,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "3 of 5 outlets had published investigations into government-linked companies", sub: "Pattern suggests editorial independence correlates with licence risk", lens: "Political" },
     { t: "fact", big: "Combined readership of 5 outlets exceeded 2.3 million monthly readers", sub: "Licence denial effectively silences journalism that serves public interest", lens: "Social" },
     { t: "reframe", big: "When 5 watchdog outlets lose licences, the public loses its eyes", sub: "" },
+    { t: "view", big: "Press licensing that requires no justification is indistinguishable from censorship. The question is whether Malaysia wants accountability or silence.", sub: "" },
   ]
 },
 {
@@ -4993,6 +4994,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 23 of 222 MPs participated in the December 2024 renewal debate", sub: "Low participation suggests security laws face insufficient legislative scrutiny", lens: "Political" },
     { t: "fact", big: "Civil society coalition submitted 15,000-signature petition opposing renewal", sub: "Petition was not acknowledged during the abbreviated parliamentary session", lens: "Social" },
     { t: "reframe", big: "45 minutes to extend 5 years of preventive detention is not democratic oversight", sub: "" },
+    { t: "view", big: "A law that permits detention without trial deserves more than 45 minutes of scrutiny every five years. Renewal is not review.", sub: "" },
   ]
 },
 {

@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "astro dev",
     "generate-og": "node scripts/generate-og-images.mjs",
-    "build": "rm -rf dist && node scripts/build-issues-json.mjs && node scripts/build-verifier.mjs && node scripts/build-search-index.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs",
+    "validate": "node scripts/validate-issues.mjs",
+    "build": "rm -rf dist && node scripts/validate-issues.mjs && node scripts/build-issues-json.mjs && node scripts/build-verifier.mjs && node scripts/build-search-index.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs",
     "preview": "astro preview",
     "test": "vitest run",
     "astro": "astro",
