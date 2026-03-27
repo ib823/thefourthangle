@@ -6,9 +6,12 @@
   import { pressAction } from '../lib/actions/press';
   import { tween, stagger, countUp, ease } from '../lib/animation';
 
+  import type { IssueSummary } from '../lib/issues-loader';
+  import type { ReadState } from '../stores/reader';
+
   interface Props {
-    issue: any;
-    readState: any;
+    issue: IssueSummary;
+    readState: ReadState | null;
     onOpen: () => void;
   }
   let { issue, readState, onOpen }: Props = $props();

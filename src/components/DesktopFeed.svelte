@@ -3,11 +3,13 @@
   import { getReadCount } from '../stores/reader';
   import { issueCategory } from '../data/issues';
 
+  import type { IssueSummary } from '../lib/issues-loader';
+
   interface Props {
-    issues: any[];
+    issues: IssueSummary[];
     activeId: string | null;
     readMap: Record<string, string>;
-    onSelectIssue: (issue: any) => void;
+    onSelectIssue: (issue: IssueSummary) => void;
     searchQuery?: string;
     onSearchInput?: (query: string) => void;
     onSearchFocus?: () => void;
@@ -31,7 +33,7 @@
   let displayIssues = $derived.by(() => {
     if (sortMode === 'editorial') return issues;
     // Group by category, maintain editorial order within groups
-    const grouped = new Map<string, any[]>();
+    const grouped = new Map<string, IssueSummary[]>();
     for (const issue of issues) {
       const cat = issueCategory(issue);
       if (!grouped.has(cat)) grouped.set(cat, []);
@@ -87,7 +89,7 @@
         <p style="font-size:13px;color:var(--text-muted);">No issues match "{searchQuery}"</p>
       </div>
     {:else if sortMode === 'topic' && !isSearching}
-      {#each [...(displayIssues as any).grouped.entries()] as [category, groupIssues]}
+      {#each [...(displayIssues as { grouped: Map<string, IssueSummary[]> }).grouped.entries()] as [category, groupIssues]}
         <div style="padding:12px 20px 4px;border-top:1px solid var(--bg-sunken);">
           <span style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.5px;">{category}</span>
         </div>

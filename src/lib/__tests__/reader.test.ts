@@ -46,8 +46,8 @@ describe('getReadCount', () => {
 
 describe('computeAffinity', () => {
   const issues = [
-    { id: '001', cards: [{ t: 'fact', lens: 'Legal' }, { t: 'fact', lens: 'Economic' }] },
-    { id: '002', cards: [{ t: 'fact', lens: 'Legal' }, { t: 'fact', lens: 'Social' }] },
+    { id: '001', opinionShift: 50, cards: [{ t: 'fact', lens: 'Legal' }, { t: 'fact', lens: 'Economic' }] },
+    { id: '002', opinionShift: 70, cards: [{ t: 'fact', lens: 'Legal' }, { t: 'fact', lens: 'Social' }] },
   ];
 
   it('returns empty for no read issues', () => {

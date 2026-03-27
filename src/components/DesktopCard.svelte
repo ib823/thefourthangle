@@ -4,10 +4,13 @@
   import VerdictBar from './VerdictBar.svelte';
   import { issueCategory } from '../data/issues';
 
+  import type { IssueSummary } from '../lib/issues-loader';
+  import type { ReadState } from '../stores/reader';
+
   interface Props {
-    issue: any;
+    issue: IssueSummary;
     index: number;
-    readState: any;
+    readState: ReadState | null;
     onOpen: () => void;
   }
   let { issue, index, readState, onOpen }: Props = $props();

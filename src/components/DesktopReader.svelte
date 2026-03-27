@@ -8,8 +8,10 @@
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
 
+  import type { Issue } from '../data/issues';
+
   interface Props {
-    issue: any;
+    issue: Issue;
     onNext?: () => void;
     nextHeadline?: string;
   }
@@ -68,7 +70,7 @@
 
     lines.push('');
     lines.push('All 6 perspectives read');
-    const vc = [...issue.cards].reverse().find((c: any) => c.t === 'view');
+    const vc = [...issue.cards].reverse().find((c) => c.t === 'view');
     if (vc) lines.push(vc.big);
 
     return lines.join('\n');
@@ -82,7 +84,7 @@
     } catch {}
   }
 
-  function cardLabel(card: any) {
+  function cardLabel(card: Issue['cards'][number]) {
     const m = CARD_TYPES[card.t] ?? CARD_TYPES.hook;
     return card.t === 'fact' && card.lens ? `${m.label} \u00B7 ${card.lens}` : m.label;
   }
@@ -107,7 +109,7 @@
     return () => obs.disconnect();
   });
 
-  let viewCard = $derived(issue.cards.findLast((c: any) => c.t === 'view'));
+  let viewCard = $derived(issue.cards.findLast((c) => c.t === 'view'));
 
   let barColor = $derived(
     issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'

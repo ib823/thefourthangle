@@ -112,12 +112,12 @@
     if (completedCount < 10) return base;
 
     const reactionMap = getReactions();
-    const affinity = computeAffinity(readMap, reactionMap, issues as any[]);
+    const affinity = computeAffinity(readMap, reactionMap, issues);
 
     const read = base.filter(i => readMap[i.id]);
     const unread = base.filter(i => !readMap[i.id]);
 
-    const scored = unread.map(i => ({ issue: i, score: scoreIssue(i as any, affinity) }));
+    const scored = unread.map(i => ({ issue: i, score: scoreIssue(i, affinity) }));
     scored.sort((a, b) => b.score - a.score);
 
     return [...scored.map(s => s.issue), ...read];

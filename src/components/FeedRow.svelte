@@ -2,9 +2,12 @@
   import { opinionLabel, issueCategory } from '../data/issues';
   import VerdictBar from './VerdictBar.svelte';
 
+  import type { IssueSummary } from '../lib/issues-loader';
+  import type { ReadState } from '../stores/reader';
+
   interface Props {
-    issue: any;
-    readState: { state: string; progress: number } | null;
+    issue: IssueSummary;
+    readState: ReadState | null;
     isActive: boolean;
     onClick: () => void;
   }

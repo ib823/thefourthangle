@@ -6,9 +6,11 @@
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
   import { haptic } from '../lib/animation';
 
+  import type { IssueSummary } from '../lib/issues-loader';
+
   interface Props {
-    issues: any[];
-    onOpenIssue: (issue: any) => void;
+    issues: IssueSummary[];
+    onOpenIssue: (issue: IssueSummary) => void;
     initialFeedIndex?: number;
   }
   let { issues, onOpenIssue, initialFeedIndex = 0 }: Props = $props();

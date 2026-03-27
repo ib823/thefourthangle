@@ -74,16 +74,22 @@ export function clearPosition() {
   savedPosition.set('');
 }
 
+// Minimal shape for affinity scoring — compatible with both Issue and IssueSummary
+interface AffinityIssue {
+  id: string;
+  opinionShift: number;
+  cards: Array<{ t: string; lens?: string }>;
+}
+
 // Affinity-based feed personalization
-export function computeAffinity(readMap: Record<string, string>, reactionMap: Record<string, number[]>, issues: any[]): Record<string, number> {
+export function computeAffinity(readMap: Record<string, string>, reactionMap: Record<string, number[]>, issues: AffinityIssue[]): Record<string, number> {
   const lensScores: Record<string, number> = {};
   for (const issue of issues) {
-    const id = issue.id;
-    const read = readMap[id];
+    const read = readMap[issue.id];
     if (!read) continue;
     const completed = read === 'true' || (() => { try { return JSON.parse(read).state === 'completed'; } catch { return false; } })();
-    const reacted = reactionMap[id]?.length ?? 0;
-    const lenses = (issue.cards ?? []).filter((c: any) => c.lens).map((c: any) => c.lens);
+    const reacted = reactionMap[issue.id]?.length ?? 0;
+    const lenses = issue.cards.filter(c => c.lens).map(c => c.lens!);
     for (const lens of lenses) {
       if (!lensScores[lens]) lensScores[lens] = 0;
       lensScores[lens] += completed ? 1 : 0.3;
@@ -93,9 +99,9 @@ export function computeAffinity(readMap: Record<string, string>, reactionMap: Re
   return lensScores;
 }
 
-export function scoreIssue(issue: any, affinity: Record<string, number>): number {
+export function scoreIssue(issue: AffinityIssue, affinity: Record<string, number>): number {
   let score = 0;
-  const lenses = (issue.cards ?? []).filter((c: any) => c.lens).map((c: any) => c.lens);
+  const lenses = issue.cards.filter(c => c.lens).map(c => c.lens!);
   for (const lens of lenses) score += affinity[lens] || 0;
   score += issue.opinionShift * 0.003;
   return score;
