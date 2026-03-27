@@ -10,7 +10,7 @@
   import DesktopEmptyState from './DesktopEmptyState.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
-  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, computeAffinity, scoreIssue } from '../stores/reader';
+  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
 
@@ -93,6 +93,19 @@
     const unsub = readIssues.subscribe(v => { readMap = { ...v }; });
     return unsub;
   });
+
+  // Reactions subscription for real-time heart indicators
+  let reactionRaw = $state('{}');
+  $effect(() => {
+    const unsub = reactions.subscribe(v => { reactionRaw = v; });
+    return unsub;
+  });
+  let appReactionMap: Record<string, number[]> = $derived.by(() => {
+    try { return JSON.parse(reactionRaw); } catch { return {}; }
+  });
+  function hasReaction(issueId: string): boolean {
+    return (appReactionMap[issueId]?.length ?? 0) > 0;
+  }
 
   // Save position whenever active issue changes
   $effect(() => {
@@ -325,7 +338,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
         {#each sortedIssues as issue, i}
-          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} />
+          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} />
         {/each}
       </div>
     </div>
