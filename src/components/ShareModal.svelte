@@ -25,12 +25,23 @@
   let isDragging = $state(false);
   let panelEl: HTMLDivElement | undefined = $state(undefined);
 
+  // Accessibility: focus management
+  let focusOrigin: Element | null = null;
+
   onMount(() => {
+    // Store the element that opened the modal so we can return focus on close
+    focusOrigin = document.activeElement;
+
     requestAnimationFrame(() => {
       visible = true;
       // Stagger platform buttons in after panel slides up
       staggerCancel = stagger(openPlatforms.length, 30, 300, (i) => {
         buttonVisible[i] = true;
+      });
+      // Move focus into the modal panel after it becomes visible
+      requestAnimationFrame(() => {
+        const closeBtn = panelEl?.querySelector('button');
+        if (closeBtn) (closeBtn as HTMLElement).focus();
       });
     });
   });
@@ -38,6 +49,10 @@
   onDestroy(() => {
     if (copyRevertTimer) clearTimeout(copyRevertTimer);
     if (staggerCancel) staggerCancel();
+    // Return focus to the element that triggered the modal
+    if (focusOrigin && 'focus' in focusOrigin) {
+      (focusOrigin as HTMLElement).focus();
+    }
   });
 
   function closeWithAnimation() {
@@ -45,6 +60,36 @@
     closing = true;
     // 200ms close animation, then call onClose
     setTimeout(() => { onClose(); }, 200);
+  }
+
+  // Accessibility: keyboard handler for Escape and focus trap
+  function onKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      closeWithAnimation();
+      return;
+    }
+    // Focus trap: cycle Tab within the panel
+    if (e.key === 'Tab' && panelEl) {
+      const focusable = panelEl.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
   }
 
   let card = $derived(cardIndex !== null ? issue.cards[cardIndex] : null);
@@ -78,10 +123,10 @@
   ];
 
   let barColor = $derived(
-    os >= 80 ? '#EF4444' : os >= 60 ? '#F59E0B' : os >= 40 ? '#3B82F6' : '#64748B'
+    os >= 80 ? 'var(--score-critical)' : os >= 60 ? 'var(--score-warning)' : os >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'
   );
   let nsColor = $derived(
-    ns >= 75 ? '#3B82F6' : ns >= 50 ? '#EAB308' : '#EF4444'
+    ns >= 75 ? 'var(--score-info)' : ns >= 50 ? 'var(--score-warning)' : 'var(--score-critical)'
   );
 
   function openPlatform(p: typeof openPlatforms[0]) {
@@ -197,6 +242,7 @@
   class="share-backdrop"
   style="opacity:{visible && !closing ? 1 : 0};"
 >
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
     bind:this={panelEl}
     class="share-panel"
@@ -204,6 +250,10 @@
     class:share-panel--closing={closing}
     class:share-panel--dragging={isDragging}
     style="transform:{panelTransform};"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Share {issue.headline}"
+    onkeydown={onKeyDown}
     ontouchstart={onTouchStart}
     ontouchmove={onTouchMove}
     ontouchend={onTouchEnd}

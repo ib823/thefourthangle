@@ -6,7 +6,6 @@ export interface ReadState {
 }
 
 export const readIssues = persistentMap<Record<string, string>>('tfa-read:', {});
-export const hasSeenOpinionExplainer = persistentAtom<string>('tfa-os-seen', 'false');
 
 export function getReadState(id: string): ReadState | null {
   const raw = readIssues.get()[id];
@@ -33,9 +32,6 @@ export function markCompleted(id: string) {
   readIssues.setKey(id, JSON.stringify({ state: 'completed', progress: 6 }));
 }
 
-// Legacy compat
-export function markRead(id: string) { markCompleted(id); }
-
 // Reactions — "this insight hit hard"
 export const reactions = persistentAtom<string>('tfa-reactions', '{}');
 
@@ -57,14 +53,52 @@ export function addReaction(issueId: string, cardIndex: number): void {
   }
 }
 
-// Simulated baseline count per card (deterministic from content hash)
-export function baselineCount(issueId: string, cardIndex: number): number {
-  let h = 0;
-  const s = issueId + ':' + cardIndex;
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+// Position persistence — resume reading
+const savedPosition = persistentAtom<string>('tfa-pos', '');
+
+export function savePosition(feedIssueId: string, cardIndex: number) {
+  savedPosition.set(JSON.stringify({ feedIssueId, cardIndex, ts: Date.now() }));
+}
+
+export function getSavedPosition(): { feedIssueId: string; cardIndex: number; ts: number } | null {
+  try {
+    const raw = savedPosition.get();
+    if (!raw) return null;
+    const p = JSON.parse(raw);
+    if (Date.now() - p.ts > 24 * 60 * 60 * 1000) return null; // Expire after 24h
+    return p;
+  } catch { return null; }
+}
+
+export function clearPosition() {
+  savedPosition.set('');
+}
+
+// Affinity-based feed personalization
+export function computeAffinity(readMap: Record<string, string>, reactionMap: Record<string, number[]>, issues: any[]): Record<string, number> {
+  const lensScores: Record<string, number> = {};
+  for (const issue of issues) {
+    const id = issue.id;
+    const read = readMap[id];
+    if (!read) continue;
+    const completed = read === 'true' || (() => { try { return JSON.parse(read).state === 'completed'; } catch { return false; } })();
+    const reacted = reactionMap[id]?.length ?? 0;
+    const lenses = (issue.cards ?? []).filter((c: any) => c.lens).map((c: any) => c.lens);
+    for (const lens of lenses) {
+      if (!lensScores[lens]) lensScores[lens] = 0;
+      lensScores[lens] += completed ? 1 : 0.3;
+      lensScores[lens] += reacted * 0.5;
+    }
   }
-  return 5 + (Math.abs(h) % 46); // Range 5-50
+  return lensScores;
+}
+
+export function scoreIssue(issue: any, affinity: Record<string, number>): number {
+  let score = 0;
+  const lenses = (issue.cards ?? []).filter((c: any) => c.lens).map((c: any) => c.lens);
+  for (const lens of lenses) score += affinity[lens] || 0;
+  score += issue.opinionShift * 0.003;
+  return score;
 }
 
 export function getReadCount(map: Record<string, string>): { completed: number; started: number } {

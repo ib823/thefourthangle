@@ -125,7 +125,7 @@ export function detectAnimationTier(): AnimationTier {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 4;
 
   const cores = navigator.hardwareConcurrency || 4;
-  const memory = (navigator as any).deviceMemory || 8; // deviceMemory API (Chrome only)
+  const memory = (navigator as any).deviceMemory || 4; // deviceMemory API (Chrome only), conservative fallback
 
   if (cores >= 4 && memory >= 4) return 1;
   if (cores >= 2) return 2;

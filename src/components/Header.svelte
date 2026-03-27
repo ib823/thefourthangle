@@ -1,17 +1,17 @@
 <script lang="ts">
   import Logo from './Logo.svelte';
   import { readIssues } from '../stores/reader';
-  import { ISSUES } from '../data/issues';
   import { loadSearchIndex, search as doSearch } from '../lib/search';
 
   interface Props {
+    issueIds?: string[];
     onSearchToggle?: () => void;
     searchMode?: boolean;
     searchQuery?: string;
     onSearchInput?: (q: string) => void;
     onSearchClear?: () => void;
   }
-  let { onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear }: Props = $props();
+  let { issueIds = [], onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear }: Props = $props();
 
   let readCount = $state(0);
   let readMap: Record<string, string> = $state({});
@@ -49,7 +49,6 @@
 
 <header style="height:48px;padding:0 16px;padding-top:env(safe-area-inset-top, 0);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:10;background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
   {#if searchMode}
-    <!-- Search mode (mobile) -->
     <div style="flex:1;display:flex;align-items:center;gap:8px;">
       <input
         bind:this={searchInputEl}
@@ -62,7 +61,6 @@
       <button onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
     </div>
   {:else}
-    <!-- Normal header -->
     <div class="brand-container" style="display:flex;align-items:center;gap:10px;">
       <Logo size={28} />
       <span class="brand-text" style="font-size:14px;font-weight:700;color:var(--text-primary);letter-spacing:-0.01em;">The Fourth Angle</span>
@@ -79,8 +77,8 @@
     </div>
   {/if}
   <div style="position:absolute;bottom:0;left:0;right:0;display:flex;gap:1px;height:1.5px;">
-    {#each ISSUES as issue, i}
-      <div style="flex:1;background:{segmentColor(issue.id)};"></div>
+    {#each issueIds as id}
+      <div style="flex:1;background:{segmentColor(id)};"></div>
     {/each}
   </div>
 </header>

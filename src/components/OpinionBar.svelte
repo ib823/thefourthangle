@@ -63,8 +63,8 @@
   }
 </script>
 
-<div bind:this={barEl} style="display:flex;align-items:center;gap:8px;">
-  <div style="flex:1;height:{height}px;background:var(--bg-sunken);border-radius:{height/2}px;overflow:hidden;">
+<div bind:this={barEl} style="display:flex;align-items:center;gap:8px;" role="meter" aria-label="Opinion Shift" aria-valuenow={score} aria-valuemin={0} aria-valuemax={100}>
+  <div style="flex:1;height:{height}px;background:var(--bg-sunken);border-radius:{height/2}px;overflow:hidden;" aria-hidden="true">
     <div style="height:100%;width:{fillWidth}%;background:{color};border-radius:{height/2}px;"></div>
   </div>
   {#if showLabel}

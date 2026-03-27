@@ -1,6 +1,10 @@
 <script lang="ts">
   import { readIssues } from '../stores/reader';
-  import { ISSUES } from '../data/issues';
+
+  interface Props {
+    issueCount?: number;
+  }
+  let { issueCount = 0 }: Props = $props();
 
   let readCount = $state(0);
   $effect(() => {
@@ -14,7 +18,7 @@
     return unsub;
   });
 
-  let remaining = $derived((ISSUES.length - readCount) * 2);
+  let remaining = $derived((issueCount - readCount) * 2);
 </script>
 
 <div style="flex:1;display:flex;flex-direction:column;position:relative;">

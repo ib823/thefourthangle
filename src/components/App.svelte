@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { ISSUES as issues } from '../data/issues';
+  import type { Issue } from '../data/issues';
+  import { issueCategory, CARD_TYPES } from '../data/issues';
+  import { loadFullIssue } from '../lib/issues-loader';
   import Header from './Header.svelte';
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
@@ -10,17 +12,35 @@
   import InsightReader from './InsightReader.svelte';
   import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady } from '../lib/search';
-  import { issueCategory } from '../data/issues';
   import { getAnimationTier } from '../lib/animation';
+
+  interface FeedIssue {
+    id: string;
+    opinionShift: number;
+    status: "new" | "updated" | null;
+    edition: number;
+    headline: string;
+    context: string;
+    stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
+    finalScore?: number;
+    cards: Array<{ t: string; lens?: string }>;
+  }
 
   interface Props {
     initialIssueId?: string;
+    feedData?: FeedIssue[];
   }
-  let { initialIssueId }: Props = $props();
+  let { initialIssueId, feedData = [] }: Props = $props();
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
   let searchQuery = $state('');
   let searchActive = $state(false);
+
+  // Feed data comes from Astro props (SSR-available) or from async fetch
+  let issues = $state<FeedIssue[]>(feedData);
+
+  // Full issue for the reader (has card text)
+  let activeFullIssue = $state<Issue | null>(null);
 
   let filteredIssues = $derived.by(() => {
     if (!searchQuery.trim()) return issues;
@@ -39,12 +59,14 @@
     searchQuery = '';
     searchActive = false;
   }
+
   // Restore position: initialIssueId (from URL) takes priority, then saved position
   let restoredPosition = getSavedPosition();
   let restoredCardIndex = $state(restoredPosition?.cardIndex ?? 0);
   let showContextWhisper = $state(!!restoredPosition && restoredPosition.cardIndex > 0);
 
-  let activeIssue: (typeof issues)[0] | null = $state(
+  // Active issue in feed context (summary)
+  let activeIssue: FeedIssue | null = $state(
     initialIssueId
       ? issues.find(i => i.id === initialIssueId) ?? null
       : restoredPosition
@@ -82,7 +104,6 @@
   // Interest-based feed sorting (invisible personalization)
   let sortedIssues = $derived.by(() => {
     const base = filteredIssues;
-    // Only personalize after 10+ completed issues
     const completedCount = Object.values(readMap).filter(v => {
       if (!v) return false;
       if (v === 'true') return true;
@@ -91,17 +112,14 @@
     if (completedCount < 10) return base;
 
     const reactionMap = getReactions();
-    const affinity = computeAffinity(readMap, reactionMap, issues);
+    const affinity = computeAffinity(readMap, reactionMap, issues as any[]);
 
-    // Separate read and unread
     const read = base.filter(i => readMap[i.id]);
     const unread = base.filter(i => !readMap[i.id]);
 
-    // Sort unread by relevance (subtle — max 2-3 position shift)
-    const scored = unread.map(i => ({ issue: i, score: scoreIssue(i, affinity) }));
+    const scored = unread.map(i => ({ issue: i, score: scoreIssue(i as any, affinity) }));
     scored.sort((a, b) => b.score - a.score);
 
-    // Interleave: read issues stay in their original positions, unread sorted by relevance
     return [...scored.map(s => s.issue), ...read];
   });
 
@@ -116,26 +134,66 @@
     checkViewport();
     window.addEventListener('resize', checkViewport);
 
-    // Set animation tier class on <html> for CSS perf rules
     const tier = getAnimationTier();
     document.documentElement.classList.add('anim-tier-' + tier);
 
-    return () => window.removeEventListener('resize', checkViewport);
+    // If deep link, fetch full issue data for reader
+    if (initialIssueId && activeIssue) {
+      loadAndOpenIssue(activeIssue.id);
+    }
+
+    // Back-button support: close reader on popstate
+    function onPopState(e: PopStateEvent) {
+      if (activeIssue && !e.state?.reader) {
+        readerHistoryPushed = false;
+        activeIssue = null;
+        activeFullIssue = null;
+      }
+    }
+    window.addEventListener('popstate', onPopState);
+
+    return () => {
+      window.removeEventListener('resize', checkViewport);
+      window.removeEventListener('popstate', onPopState);
+    };
   });
 
-  function openIssue(issue: (typeof issues)[0]) {
+  // --- History state for reader back-button support ---
+  let readerHistoryPushed = false;
+
+  async function loadAndOpenIssue(id: string) {
+    const full = await loadFullIssue(id);
+    if (full) {
+      activeFullIssue = full;
+    }
+    if (!readerHistoryPushed) {
+      history.pushState({ reader: true }, '');
+      readerHistoryPushed = true;
+    }
+  }
+
+  function openIssue(issue: FeedIssue) {
     activeIssue = issue;
+    loadAndOpenIssue(issue.id);
   }
 
   function closeReader() {
-    activeIssue = null;
+    if (readerHistoryPushed) {
+      readerHistoryPushed = false;
+      history.back();
+    } else {
+      activeIssue = null;
+      activeFullIssue = null;
+    }
   }
 
   function openNextIssue() {
     if (!activeIssue) return;
     const idx = issues.findIndex(i => i.id === activeIssue!.id);
     if (idx >= 0 && idx < issues.length - 1) {
-      activeIssue = issues[idx + 1];
+      const next = issues[idx + 1];
+      activeIssue = next;
+      loadAndOpenIssue(next.id);
     }
   }
 
@@ -154,7 +212,6 @@
   // Keyboard nav for desktop feed
   onMount(() => {
     function onKeyDown(e: KeyboardEvent) {
-      // Ctrl+K or / to focus search (desktop/tablet only)
       if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !searchActive)) {
         if (viewMode !== 'mobile') {
           e.preventDefault();
@@ -166,22 +223,22 @@
       }
       if (viewMode !== 'desktop') return;
       if (e.key === 'Escape' && searchActive) { onSearchClear(); return; }
-      if (e.key === 'Escape' && activeIssue) { activeIssue = null; return; }
+      if (e.key === 'Escape' && activeIssue) { closeReader(); return; }
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault();
-        if (!activeIssue) { activeIssue = issues[0]; return; }
+        if (!activeIssue && issues.length) { openIssue(issues[0]); return; }
         const idx = issues.findIndex(i => i.id === activeIssue!.id);
-        if (idx < issues.length - 1) activeIssue = issues[idx + 1];
+        if (idx < issues.length - 1) openIssue(issues[idx + 1]);
       }
       if (e.key === 'k' || e.key === 'ArrowUp') {
         e.preventDefault();
         if (!activeIssue) return;
         const idx = issues.findIndex(i => i.id === activeIssue!.id);
-        if (idx > 0) activeIssue = issues[idx - 1];
+        if (idx > 0) openIssue(issues[idx - 1]);
       }
       if (e.key === 'Enter') {
-        if (!activeIssue) { activeIssue = issues[0]; return; }
-        openIssue(activeIssue);
+        if (!activeIssue && issues.length) { openIssue(issues[0]); return; }
+        if (activeIssue) openIssue(activeIssue);
       }
     }
     window.addEventListener('keydown', onKeyDown);
@@ -190,9 +247,9 @@
 </script>
 
 {#if viewMode === 'mobile'}
-  <!-- Mobile: Tinder-style vertical browse -->
   <main style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
     <Header
+      issueIds={issues.map(i => i.id)}
       onSearchToggle={() => { searchActive = true; loadSearchIndex(); }}
       searchMode={searchActive}
       {searchQuery}
@@ -202,14 +259,13 @@
     <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} {initialFeedIndex} />
   </main>
 
-  {#if activeIssue}
-    <InsightReader issue={activeIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
+  {#if activeFullIssue}
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
   {/if}
 
 {:else if viewMode === 'tablet'}
-  <!-- Tablet: grid + overlay reader -->
   <main style="min-height:100vh;">
-    <Header />
+    <Header issueIds={issues.map(i => i.id)} />
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
       <div style="margin-bottom:16px;">
         <input
@@ -230,19 +286,16 @@
     </div>
   </main>
 
-  {#if activeIssue}
-    <InsightReader issue={activeIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
+  {#if activeFullIssue}
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} />
   {/if}
 
 {:else}
-  <!-- Desktop: split-pane -->
   <main style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
-    <!-- Full-width header -->
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-      <Header />
+      <Header issueIds={issues.map(i => i.id)} />
     </div>
 
-    <!-- Split pane -->
     <div style="flex:1;display:flex;overflow:hidden;">
       <DesktopFeed
         issues={sortedIssues}
@@ -255,14 +308,14 @@
         {onSearchClear}
       />
 
-      {#if activeIssue}
+      {#if activeFullIssue}
         <DesktopReader
-          issue={activeIssue}
+          issue={activeFullIssue}
           onNext={isLastIssue ? undefined : openNextIssue}
           {nextHeadline}
         />
       {:else}
-        <DesktopEmptyState />
+        <DesktopEmptyState issueCount={issues.length} />
       {/if}
     </div>
   </main>

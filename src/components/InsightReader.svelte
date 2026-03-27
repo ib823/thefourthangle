@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
+  import VerdictBar from './VerdictBar.svelte';
+  import ContentFingerprint from './ContentFingerprint.svelte';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import { CARD_TYPES } from '../data/issues';
@@ -23,6 +25,8 @@
     headline: string;
     opinionShift: number;
     cards: Card[];
+    stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
+    finalScore?: number;
   }
 
   interface Props {
@@ -83,6 +87,9 @@
   let totalCards = $derived(issue.cards.length);
   let progress = $derived(((current + 1) / totalCards) * 100);
 
+  // Accessibility: screen reader announcements for card transitions
+  let announcement = $state('');
+
   // Reset to first card when issue changes
   let lastIssueId = $state(issue.id);
   $effect(() => {
@@ -109,6 +116,17 @@
       return `${m.label} \u00B7 ${c.lens}`;
     }
     return m.label;
+  }
+
+  function announceCard() {
+    const c = issue.cards[current];
+    if (c) {
+      announcement = `Card ${current + 1} of ${totalCards}: ${cardLabel(c)}`;
+    }
+  }
+
+  function announceCompletion() {
+    announcement = `All ${totalCards} perspectives read.`;
   }
 
   // Find takeaway text (last view card)
@@ -258,6 +276,7 @@
           cardEl.style.transform = 'translateX(0) rotate(0deg)';
           animating = false;
           cancelAnimation = null;
+          announceCard();
           return;
         }
 
@@ -279,10 +298,12 @@
           }
           animating = false;
           cancelAnimation = null;
+          announceCard();
         });
       } else {
         animating = false;
         cancelAnimation = null;
+        announceCard();
       }
     });
   }
@@ -373,6 +394,7 @@
     completed = true;
     markCompleted(issue.id);
     completionVisible = true;
+    announceCompletion();
     // Stagger buttons in
     const btnCount = onNext ? 2 : 2; // share + next/done
     completionButtonsVisible = [];
@@ -670,7 +692,11 @@
     });
   }
 
+  // Accessibility: store focus origin for restoration on close
+  let focusOrigin: Element | null = null;
+
   onMount(() => {
+    focusOrigin = document.activeElement;
     overlayEl?.focus();
     markStarted(issue.id);
     lockScroll();
@@ -682,6 +708,9 @@
 
     maybeShowSwipeHint();
 
+    // Announce initial card for screen readers
+    requestAnimationFrame(announceCard);
+
     // Attach scroll observer after first render
     requestAnimationFrame(attachScrollObserver);
   });
@@ -691,6 +720,10 @@
     cancelAnimation?.();
     cleanupScrollObserver?.();
     if (scrollIndicatorTimer) clearTimeout(scrollIndicatorTimer);
+    // Restore focus to the element that opened the reader
+    if (focusOrigin && 'focus' in focusOrigin) {
+      (focusOrigin as HTMLElement).focus();
+    }
   });
 
   // Re-attach scroll observer when card changes (new content element)
@@ -713,8 +746,12 @@
   bind:this={overlayEl}
   tabindex="0"
   role="dialog"
-  aria-label="Insight reader"
+  aria-modal="true"
+  aria-label="Reading: {issue.headline}"
 >
+  <!-- Screen reader announcements for card transitions -->
+  <div class="sr-announce" aria-live="polite" aria-atomic="true">{announcement}</div>
+
   <!-- Progress bar -->
   <div class="progress-track">
     <div
@@ -741,7 +778,7 @@
     ontouchstart={onTouchStart}
   >
     {#if completed}
-      <div class="card completion-card" class:completion-visible={completionVisible}>
+      <div class="card completion-card" class:completion-visible={completionVisible} style="overflow-y:auto;">
         <div class="completion-inner">
           <div class="check-circle">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -749,7 +786,24 @@
             </svg>
           </div>
           <p class="completion-title">All {totalCards} perspectives</p>
-          <p class="completion-takeaway">{takeaway}</p>
+
+          <!-- Trust summary: Opinion Shift + Verdict Bar -->
+          <div style="width:100%;max-width:300px;margin:4px 0;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={4} showLabel={false} /></div>
+              <span style="font-size:12px;font-weight:700;color:var(--text-secondary);">{issue.opinionShift}%</span>
+              <span style="font-size:10px;color:var(--text-tertiary);">Opinion Shift</span>
+            </div>
+            {#if issue.stageScores && issue.finalScore}
+              <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} compact={false} />
+            {/if}
+          </div>
+
+          <!-- Cryptographic fingerprint -->
+          <div style="width:100%;max-width:300px;">
+            <ContentFingerprint issueId={issue.id} />
+          </div>
+
           <div class="completion-buttons">
             {#if completionButtonsVisible.length > 0}
               <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
@@ -849,6 +903,18 @@
 {/if}
 
 <style>
+  .sr-announce {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .overlay {
     position: fixed;
     inset: 0;

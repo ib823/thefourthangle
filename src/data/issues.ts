@@ -27,17 +27,17 @@ export interface Issue {
 }
 
 export const CARD_TYPES: Record<string, { label: string; color: string; bg: string }> = {
-  hook:    { label: "What they said",      color: "#868E96", bg: "#F8F9FA" },
-  fact:    { label: "What we found",       color: "#1971C2", bg: "#E7F5FF" },
-  reframe: { label: "The real question",   color: "#E03131", bg: "#FFF5F5" },
-  view:    { label: "The considered view",  color: "#7048E8", bg: "#F3F0FF" },
+  hook:    { label: "What they said",      color: "var(--card-hook-color)", bg: "var(--card-hook-bg)" },
+  fact:    { label: "What we found",       color: "var(--card-fact-color)", bg: "var(--card-fact-bg)" },
+  reframe: { label: "The real question",   color: "var(--card-reframe-color)", bg: "var(--card-reframe-bg)" },
+  view:    { label: "The considered view",  color: "var(--card-view-color)", bg: "var(--card-view-bg)" },
 };
 
 export function opinionColor(s: number): string {
-  if (s >= 80) return "#E03131";
-  if (s >= 60) return "#B85C00";
-  if (s >= 40) return "#1971C2";
-  return "#868E96";
+  if (s >= 80) return "var(--score-critical)";
+  if (s >= 60) return "var(--score-warning)";
+  if (s >= 40) return "var(--score-info)";
+  return "var(--score-neutral)";
 }
 
 export function opinionLabel(s: number): string {

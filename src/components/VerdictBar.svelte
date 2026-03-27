@@ -61,7 +61,8 @@
     <!-- Compact: dots + score only, for card previews -->
     <div
       style="display:flex;align-items:center;gap:4px;"
-      title="Neutrality: {finalScore}/100 — 6-stage editorial review"
+      role="group"
+      aria-label="Neutrality: {finalScore} out of 100 — 6-stage editorial review"
     >
       {#each stages as stage}
         {@const val = scores[stage.key as keyof StageScores]}
@@ -71,7 +72,8 @@
             background:{dotColor(val)};
             opacity:0.85;
           "
-          title="{stage.full}: {val}/100"
+          role="img"
+          aria-label="{stage.full}: {val !== undefined ? val + '/100' : 'N/A'}{val !== undefined ? ' — ' + scoreLabel(val) : ''}"
         ></div>
       {/each}
       <span style="
@@ -83,17 +85,21 @@
     </div>
   {:else}
     <!-- Full: stage labels + dots + score badge -->
-    <div style="
-      display:flex;align-items:center;gap:0;
-      padding:10px 14px;
-      background:var(--amber-bg);
-      border:1px solid var(--border-light);
-      border-radius:12px;
-    ">
+    <div
+      style="
+        display:flex;align-items:center;gap:0;
+        padding:10px 14px;
+        background:var(--amber-bg);
+        border:1px solid var(--border-light);
+        border-radius:12px;
+      "
+      role="group"
+      aria-label="6-stage editorial review — Neutrality: {finalScore} out of 100"
+    >
       <div style="display:flex;align-items:center;gap:8px;flex:1;">
         {#each stages as stage}
           {@const val = scores[stage.key as keyof StageScores]}
-          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;" title="{stage.full}: {val}/100">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;" role="img" aria-label="{stage.full}: {val}/100 — {scoreLabel(val)}">
             <div style="
               width:10px;height:10px;border-radius:50%;
               background:{dotColor(val)};
