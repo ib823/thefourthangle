@@ -878,7 +878,7 @@
     ontouchstart={onTouchStart}
   >
     {#if completed}
-      <div class="card completion-card" class:completion-visible={completionVisible} style="overflow-y:auto;">
+      <div class="card completion-card" class:completion-visible={completionVisible}>
         <div class="completion-inner">
           <div class="check-circle">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1305,9 +1305,9 @@
   /* Completion card */
   .completion-card {
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
-    max-height: 370px;
+    overflow-y: auto;
     opacity: 0;
     transform: scale(0.95);
     transition: opacity var(--duration-medium, 350ms) ease, transform var(--duration-medium, 350ms) ease;
@@ -1323,6 +1323,8 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    padding: 24px 0 16px;
+    width: 100%;
   }
 
   .check-circle {
