@@ -1,7 +1,9 @@
 import sharp from 'sharp';
 import path from 'path';
 
-const ROOT = '/workspaces/thefourthangle';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 async function process() {
   // === LOGO 2B (black mark, transparent bg) — for page content ===

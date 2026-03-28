@@ -23,8 +23,29 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# operational security — never commit
+*opsec*
+*stealth-guide*
+*build-prompt*
+claude-code-build-prompt.md
+fourth-angle-zero-cost-stealth-guide.md
+addendum-no-ai-references.md
+
+# IDE / workspace
+.vscode/
+
+# temporary images / screenshots
+*.png
+!public/**/*.png
+!Logo/**/*.png
+!logo-concepts/**/*.png
+
 # jetbrains setting folder
 .idea/
+
+# Cloudflare Wrangler local state — contains account-scoped IDs
+.wrangler/
+workers/**/.wrangler/
 
 # Radar output — only commit state, queue, health, last-cycle log
 radar/output/logs/*.log
