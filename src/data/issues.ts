@@ -77,7 +77,7 @@ export function issueCategory(issue: Issue): string {
 
 export const ISSUES: Issue[] = [
 {
-    id: "0142", opinionShift: 91, status: "new", edition: 1,
+    id: "0142", published: true, opinionShift: 91, status: "new", edition: 1,
     headline: "The Clause Nobody Mentioned in the Amendment",
     context: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content.",
     stageScores: { pa: 88, ba: 74, fc: 91, af: 62, ct: 45, sr: 79 },
@@ -92,7 +92,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0139", opinionShift: 84, status: "new", edition: 1,
+    id: "0139", published: true, opinionShift: 84, status: "new", edition: 1,
     headline: "Where RM8B in Digital Allocations Actually Went",
     context: "Budget 2026 allocated RM8.2B across four ministries for digital infrastructure. Each reports different spending figures.",
     stageScores: { pa: 85, ba: 78, fc: 89, af: 65, ct: 52, sr: 82 },
@@ -107,7 +107,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0135", opinionShift: 76, status: "updated", edition: 3,
+    id: "0135", published: true, opinionShift: 76, status: "updated", edition: 3,
     headline: "3 States, 3 Land Policies, One Constitutional Question",
     context: "Johor, Penang, and Selangor each announced different frameworks for converting Malay Reserve Land. All cite the same court ruling.",
     stageScores: { pa: 83, ba: 72, fc: 84, af: 68, ct: 58, sr: 80 },
@@ -122,7 +122,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0131", opinionShift: 58, status: null, edition: 2,
+    id: "0131", published: true, opinionShift: 58, status: null, edition: 2,
     headline: "Promise vs Delivery: 2024 Pledges Revisited",
     context: "Budget 2024 made 12 pledges. Five met targets. Four missed by 40%. Three quietly disappeared from the tracker.",
     stageScores: { pa: 87, ba: 82, fc: 88, af: 74, ct: 67, sr: 84 },
@@ -137,7 +137,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0127", opinionShift: 45, status: null, edition: 1,
+    id: "0127", published: true, opinionShift: 45, status: null, edition: 1,
     headline: "Both Sides Cite Same Study, Opposite Conclusions",
     context: "The World Bank published its 142-page Malaysia Economic Monitor on 19 March 2026. Government and opposition both quoted it within hours.",
     stageScores: { pa: 89, ba: 85, fc: 92, af: 78, ct: 72, sr: 86 },
@@ -152,7 +152,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0124", opinionShift: 69, status: "updated", edition: 2,
+    id: "0124", published: true, opinionShift: 69, status: "updated", edition: 2,
     headline: "What the Halal Dispute Is Actually About",
     context: "Kelantan and Terengganu proposed halal standards exceeding JAKIM's requirements. The real fight: who controls a RM5.6B certification industry.",
     stageScores: { pa: 84, ba: 71, fc: 86, af: 63, ct: 55, sr: 78 },
@@ -167,7 +167,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0120", opinionShift: 88, status: "new", edition: 1,
+    id: "0120", published: true, opinionShift: 88, status: "new", edition: 1,
     headline: "The Deportation That Broke Three Laws",
     context: "On 9 March 2026, Malaysia deported 12 asylum seekers despite an active High Court injunction and valid UNHCR documentation.",
     stageScores: { pa: 86, ba: 68, fc: 90, af: 59, ct: 43, sr: 76 },
@@ -182,7 +182,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0117", opinionShift: 72, status: null, edition: 1,
+    id: "0117", published: true, opinionShift: 72, status: null, edition: 1,
     headline: "The Subsidy That Costs More Than the Subsidy",
     context: "Government proposed targeted fuel subsidies. Projected savings: RM2.1B. The system to deliver those savings costs RM1.8B.",
     stageScores: { pa: 82, ba: 76, fc: 87, af: 70, ct: 62, sr: 81 },
@@ -197,7 +197,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0114", opinionShift: 81, status: null, edition: 1,
+    id: "0114", published: true, opinionShift: 81, status: null, edition: 1,
     headline: "The School Curriculum Nobody Voted For",
     context: "The Education Ministry replaced 36 individual-rights-based outcomes with 28 communitarian-duty-based outcomes in Moral Education. No debate. No consultation.",
     stageScores: { pa: 85, ba: 69, fc: 83, af: 61, ct: 48, sr: 77 },
@@ -212,7 +212,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0111", opinionShift: 64, status: null, edition: 1,
+    id: "0111", published: true, opinionShift: 64, status: null, edition: 1,
     headline: "Why East Malaysia Pays More for Everything",
     context: "Cabotage policy restricts Peninsular–East Malaysia shipping to local vessels. A bag of rice costs 30% more in Kota Kinabalu than KL.",
     stageScores: { pa: 86, ba: 80, fc: 88, af: 72, ct: 65, sr: 83 },
@@ -227,7 +227,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0108", opinionShift: 73, status: "new", edition: 1,
+    id: "0108", published: true, opinionShift: 73, status: "new", edition: 1,
     headline: "The Judicial Appointment Nobody Can Explain",
     context: "The new Chief Justice was appointed in February 2026 after the JAC recommendation was reportedly overridden. No public record of the decision exists.",
     stageScores: { pa: 84, ba: 73, fc: 85, af: 67, ct: 57, sr: 79 },
@@ -242,7 +242,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0143", opinionShift: 72, status: "new", edition: 1,
+    id: "0143", published: true, opinionShift: 72, status: "new", edition: 1,
     headline: "Why Government-Linked Companies Never Actually Reform",
     context: "The EPU announced its fifth GLC transformation programme since 2005, targeting 37 entities controlling RM500B in assets, while board appointments remain political.",
     stageScores: { pa: 81, ba: 75, fc: 86, af: 66, ct: 54, sr: 80 },
@@ -257,7 +257,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0144", opinionShift: 65, status: "new", edition: 1,
+    id: "0144", published: true, opinionShift: 65, status: "new", edition: 1,
     headline: "The Quiet Privatization of Public Hospitals",
     context: "MOH awarded 14 new hospital support service contracts to private firms in 2025 while public health allocation as a share of GDP fell to 2.2%, below the WHO threshold.",
     stageScores: { pa: 83, ba: 79, fc: 87, af: 71, ct: 63, sr: 82 },
@@ -272,7 +272,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0145", opinionShift: 48, status: null, edition: 1,
+    id: "0145", published: true, opinionShift: 48, status: null, edition: 1,
     headline: "Same Floods, Same Areas, Same Speeches, Every Year",
     context: "The December 2025 floods displaced 120,000 people across Pahang, Kelantan, and Terengganu — the same districts as 2014, 2021, 2022, 2023, and 2024.",
     stageScores: { pa: 90, ba: 84, fc: 93, af: 76, ct: 70, sr: 85 },
@@ -287,7 +287,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0146", opinionShift: 78, status: "new", edition: 1,
+    id: "0146", published: true, opinionShift: 78, status: "new", edition: 1,
     headline: "2.5 Million Workers With Zero Safety Net",
     context: "DOSM estimates 2.5 million gig and informal workers lack EPF, SOCSO, or EIS coverage, while Parliament debates a voluntary opt-in framework.",
     stageScores: { pa: 82, ba: 70, fc: 84, af: 60, ct: 49, sr: 76 },
@@ -302,7 +302,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0147", opinionShift: 42, status: null, edition: 2,
+    id: "0147", published: true, opinionShift: 42, status: null, edition: 2,
     headline: "The Rankings Game Malaysian Universities Cannot Win",
     context: "Five public universities spent RM340M on internationalization initiatives to climb QS rankings while graduate employability within Malaysia fell to 79%.",
     stageScores: { pa: 91, ba: 86, fc: 90, af: 79, ct: 73, sr: 87 },
@@ -317,7 +317,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0148", opinionShift: 55, status: null, edition: 1,
+    id: "0148", published: true, opinionShift: 55, status: null, edition: 1,
     headline: "Eight States, One River, No Agreement That Works",
     context: "Selangor's raw water reserves dropped below 30% in February 2026 while interstate water transfer negotiations with Pahang stalled for the ninth consecutive year.",
     stageScores: { pa: 88, ba: 81, fc: 89, af: 73, ct: 66, sr: 83 },
@@ -332,7 +332,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0149", opinionShift: 83, status: "new", edition: 1,
+    id: "0149", published: true, opinionShift: 83, status: "new", edition: 1,
     headline: "RM40 Billion in Student Loans Nobody Knows How to Collect",
     context: "PTPTN's outstanding loans reached RM40.2B with a repayment rate of 47%, while the government proposed converting to income-contingent repayment without a functional tax integration system.",
     stageScores: { pa: 84, ba: 72, fc: 88, af: 63, ct: 50, sr: 78 },
@@ -347,7 +347,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0150", opinionShift: 91, status: "new", edition: 1,
+    id: "0150", published: true, opinionShift: 91, status: "new", edition: 1,
     headline: "The Highway Contracts You Are Not Allowed to Read",
     context: "Works Ministry confirmed that 21 toll concession agreements remain classified under the Official Secrets Act despite repeated parliamentary questions since 2008.",
     stageScores: { pa: 87, ba: 67, fc: 89, af: 58, ct: 42, sr: 74 },
@@ -362,7 +362,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0151", opinionShift: 68, status: "updated", edition: 2,
+    id: "0151", published: true, opinionShift: 68, status: "updated", edition: 2,
     headline: "The Printing Presses Act Still Controls Malaysian Media",
     context: "Home Ministry renewed 247 publication permits in January 2026 under the Printing Presses and Publications Act 1984, which requires annual government approval for all print media.",
     stageScores: { pa: 83, ba: 77, fc: 86, af: 69, ct: 60, sr: 81 },
@@ -377,7 +377,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0152", opinionShift: 87, status: "new", edition: 1,
+    id: "0152", published: true, opinionShift: 87, status: "new", edition: 1,
     headline: "Child Marriage Is Legal in Malaysia. In Multiple Ways.",
     context: "Suhakam reported 1,856 child marriages between 2020 and 2025 across civil and syariah jurisdictions, with state laws setting minimum ages between 14 and 16.",
     stageScores: { pa: 86, ba: 66, fc: 88, af: 57, ct: 44, sr: 75 },
@@ -392,7 +392,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0153", opinionShift: 56, status: null, edition: 1,
+    id: "0153", published: true, opinionShift: 56, status: null, edition: 1,
     headline: "Palm Oil's Brussels Problem Is Really a Governance Problem",
     context: "The EU Deforestation Regulation took effect in December 2025, requiring supply chain traceability that 62% of Malaysian smallholders cannot currently provide.",
     stageScores: { pa: 88, ba: 83, fc: 91, af: 75, ct: 68, sr: 84 },
@@ -407,7 +407,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0154", opinionShift: 93, status: "updated", edition: 3,
+    id: "0154", published: true, opinionShift: 93, status: "updated", edition: 3,
     headline: "RM9 Billion for Ships That Do Not Exist",
     context: "The PAC's eighth report on the Littoral Combat Ship programme confirmed RM6.08B spent with zero vessels delivered, while Boustead Naval Shipyard's accounts remain qualified.",
     stageScores: { pa: 85, ba: 64, fc: 87, af: 56, ct: 40, sr: 72 },
@@ -422,7 +422,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0155", opinionShift: 61, status: null, edition: 2,
+    id: "0155", published: true, opinionShift: 61, status: null, edition: 2,
     headline: "KL Has Five Rail Systems That Do Not Connect",
     context: "Prasarana and MRT Corp operate parallel rail networks with 14 interchange stations requiring passengers to exit, walk, and re-tap, while ridership remains at 23% of designed capacity.",
     stageScores: { pa: 86, ba: 80, fc: 89, af: 72, ct: 64, sr: 82 },
@@ -437,7 +437,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0156", opinionShift: 62, status: "new", edition: 1,
+    id: "0156", published: true, opinionShift: 62, status: "new", edition: 1,
     headline: "RM1,500 Minimum Wage — On Paper",
     context: "Malaysia raised the minimum wage to RM1,500 in May 2022, but enforcement covers less than half the workforce.",
     stageScores: { pa: 84, ba: 78, fc: 87, af: 70, ct: 61, sr: 80 },
@@ -452,7 +452,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0157", opinionShift: 87, status: "new", edition: 1,
+    id: "0157", published: true, opinionShift: 87, status: "new", edition: 1,
     headline: "The Land the Constitution Forgot to Protect",
     context: "Article 8(5)(c) permits Orang Asli reservation, but the Aboriginal Peoples Act 1954 allows the state to revoke it without consent.",
     stageScores: { pa: 87, ba: 65, fc: 86, af: 58, ct: 43, sr: 74 },
@@ -467,7 +467,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0158", opinionShift: 78, status: "new", edition: 1,
+    id: "0158", published: true, opinionShift: 78, status: "new", edition: 1,
     headline: "The Cybersecurity Law's Quiet Powers",
     context: "The Cyber Security Act 2024 grants NACSA powers to access systems and compel data without judicial warrant.",
     stageScores: { pa: 83, ba: 71, fc: 85, af: 62, ct: 51, sr: 77 },
@@ -482,7 +482,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0159", opinionShift: 71, status: null, edition: 1,
+    id: "0159", published: true, opinionShift: 71, status: null, edition: 1,
     headline: "2 Million Documented. 4 Million Estimated. Zero Plan.",
     context: "Malaysia has approximately 2 million documented foreign workers and an estimated 2–4 million undocumented, creating a parallel economy the government neither controls nor acknowledges.",
     stageScores: { pa: 85, ba: 76, fc: 88, af: 69, ct: 60, sr: 81 },
@@ -497,7 +497,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0160", opinionShift: 74, status: "updated", edition: 2,
+    id: "0160", published: true, opinionShift: 74, status: "updated", edition: 2,
     headline: "The 60-Year Promise Sarawak Is Still Waiting For",
     context: "The Malaysia Agreement 1963 guaranteed Sarawak autonomy over immigration, land, and resources, but key provisions remain unimplemented.",
     stageScores: { pa: 82, ba: 74, fc: 86, af: 67, ct: 56, sr: 79 },
@@ -512,7 +512,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0161", opinionShift: 53, status: null, edition: 1,
+    id: "0161", published: true, opinionShift: 53, status: null, edition: 1,
     headline: "Why 80% of New Housing Is Unaffordable for 80% of Malaysians",
     context: "The median household earns RM6,338 per month, but 78% of new housing launched in 2024 was priced above RM500,000.",
     stageScores: { pa: 89, ba: 83, fc: 91, af: 77, ct: 69, sr: 85 },
@@ -527,7 +527,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0162", opinionShift: 82, status: null, edition: 1,
+    id: "0162", published: true, opinionShift: 82, status: null, edition: 1,
     headline: "Who Picks the Judges — After the Reforms",
     context: "The Judicial Appointments Commission was established in 2009 to depoliticise appointments, but the PM retains final authority under Article 122B.",
     stageScores: { pa: 84, ba: 70, fc: 85, af: 61, ct: 47, sr: 76 },
@@ -542,7 +542,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0163", opinionShift: 68, status: "new", edition: 1,
+    id: "0163", published: true, opinionShift: 68, status: "new", edition: 1,
     headline: "The Funding Gap Between Schools Nobody Publishes",
     context: "Malaysia funds national, Chinese, and Tamil schools under different formulas, but the per-pupil breakdown has never been officially published.",
     stageScores: { pa: 86, ba: 79, fc: 88, af: 71, ct: 63, sr: 82 },
@@ -557,7 +557,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0164", opinionShift: 85, status: null, edition: 1,
+    id: "0164", published: true, opinionShift: 85, status: null, edition: 1,
     headline: "The Death Penalty Repeal That Stopped Halfway",
     context: "Parliament replaced mandatory death sentences with judicial discretion in 2023, but 1,340 prisoners remain on death row under the old law.",
     stageScores: { pa: 85, ba: 67, fc: 87, af: 59, ct: 46, sr: 75 },
@@ -572,7 +572,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0165", opinionShift: 91, status: "new", edition: 1,
+    id: "0165", published: true, opinionShift: 91, status: "new", edition: 1,
     headline: "Every Election. No Rules. No Receipts.",
     context: "Malaysia has held 15 general elections without a campaign finance law — parties are not required to disclose donors, spending, or funding sources.",
     stageScores: { pa: 87, ba: 66, fc: 89, af: 57, ct: 41, sr: 73 },
@@ -587,7 +587,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0166", opinionShift: 56, status: null, edition: 1,
+    id: "0166", published: true, opinionShift: 56, status: null, edition: 1,
     headline: "The Palm Oil Nation That Cannot Feed Itself",
     context: "Malaysia exports RM90 billion in palm oil annually but imports 60% of its food, including rice, vegetables, and meat.",
     stageScores: { pa: 88, ba: 82, fc: 90, af: 76, ct: 68, sr: 84 },
@@ -602,7 +602,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0167", opinionShift: 67, status: "updated", edition: 2,
+    id: "0167", published: true, opinionShift: 67, status: "updated", edition: 2,
     headline: "Disability Rights Law With No Budget Behind It",
     context: "The Persons with Disabilities Act 2008 guarantees access to education, employment, and public facilities but includes no enforcement mechanism or dedicated funding.",
     stageScores: { pa: 84, ba: 78, fc: 86, af: 70, ct: 62, sr: 81 },
@@ -617,7 +617,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0168", opinionShift: 75, status: null, edition: 1,
+    id: "0168", published: true, opinionShift: 75, status: null, edition: 1,
     headline: "Who Pays When the River Dies",
     context: "Since 2019, at least 14 major river contamination events have disrupted water supply in Selangor, Johor, and Penang, affecting over 8 million people.",
     stageScores: { pa: 83, ba: 74, fc: 87, af: 66, ct: 58, sr: 79 },
@@ -632,7 +632,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0169", opinionShift: 78, status: "new", edition: 1,
+    id: "0169", published: true, opinionShift: 78, status: "new", edition: 1,
     headline: "The Sedition Act Was Supposed to Be Gone by Now",
     context: "Pakatan Harapan promised to repeal the Sedition Act 1948 within 100 days of taking office in 2018 — it remains fully enforceable in 2026.",
     stageScores: { pa: 82, ba: 71, fc: 84, af: 63, ct: 50, sr: 77 },
@@ -647,7 +647,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0170", opinionShift: 85, status: "new", edition: 1,
+    id: "0170", published: true, opinionShift: 85, status: "new", edition: 1,
     headline: "The Top 20% Own Nearly Everything",
     context: "DOSM's 2023 Household Income Survey shows the top 20% of Malaysian households control approximately 70% of national wealth while the bottom 40% hold under 8%.",
     stageScores: { pa: 86, ba: 68, fc: 88, af: 60, ct: 44, sr: 76 },
@@ -662,7 +662,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0171", opinionShift: 62, status: null, edition: 1,
+    id: "0171", published: true, opinionShift: 62, status: null, edition: 1,
     headline: "One Psychiatrist for Every 200,000 People",
     context: "Malaysia has approximately 500 psychiatrists serving 33 million people — a ratio seven times below WHO recommendations for upper-middle-income nations.",
     stageScores: { pa: 87, ba: 81, fc: 89, af: 73, ct: 64, sr: 83 },
@@ -677,7 +677,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0172", opinionShift: 89, status: "new", edition: 1,
+    id: "0172", published: true, opinionShift: 89, status: "new", edition: 1,
     headline: "How 80,000 Voters Outweigh 180,000",
     context: "Malaysia's electoral boundaries give Putrajaya (20,834 voters) and Kapar (179,000 voters) each one parliamentary seat — a 9:1 disparity in vote weight.",
     stageScores: { pa: 85, ba: 65, fc: 87, af: 56, ct: 42, sr: 73 },
@@ -692,7 +692,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0173", opinionShift: 55, status: null, edition: 1,
+    id: "0173", published: true, opinionShift: 55, status: null, edition: 1,
     headline: "Lynas and the Question Kuantan Never Got to Answer",
     context: "Lynas Malaysia operates the world's largest rare earth processing plant in Gebeng, Kuantan — its licence has been renewed repeatedly despite unresolved waste disposal.",
     stageScores: { pa: 89, ba: 84, fc: 92, af: 77, ct: 71, sr: 86 },
@@ -707,7 +707,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0174", opinionShift: 43, status: null, edition: 1,
+    id: "0174", published: true, opinionShift: 43, status: null, edition: 1,
     headline: "Rural Broadband: The Coverage Number That Counts Wrong",
     context: "MCMC reports 97% broadband coverage nationally, but the metric counts any signal — including speeds too low for a video call — as covered.",
     stageScores: { pa: 91, ba: 87, fc: 93, af: 80, ct: 74, sr: 88 },
@@ -722,7 +722,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0175", opinionShift: 82, status: "new", edition: 1,
+    id: "0175", published: true, opinionShift: 82, status: "new", edition: 1,
     headline: "They Paved the Fishing Ground and Called It Progress",
     context: "Penang South Reclamation will create 1,800 hectares of new land by filling active coastal fishing zones that sustain 4,000 fishing families.",
     stageScores: { pa: 83, ba: 69, fc: 85, af: 61, ct: 48, sr: 76 },
@@ -737,7 +737,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0176", opinionShift: 71, status: "updated", edition: 2,
+    id: "0176", published: true, opinionShift: 71, status: "updated", edition: 2,
     headline: "The Revolving Door Between GLCs and Parliament",
     context: "At least 34 sitting MPs or senators hold directorships in government-linked companies, with combined board fees exceeding RM12 million annually.",
     stageScores: { pa: 84, ba: 76, fc: 87, af: 68, ct: 59, sr: 80 },
@@ -752,7 +752,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0177", opinionShift: 57, status: null, edition: 1,
+    id: "0177", published: true, opinionShift: 57, status: null, edition: 1,
     headline: "GST Was Killed. SST Doesn't Work. Now What?",
     context: "Malaysia repealed the 6% GST in 2018 and reverted to SST, losing approximately RM20 billion in annual revenue and narrowing the tax base to 15% of the workforce.",
     stageScores: { pa: 88, ba: 82, fc: 90, af: 74, ct: 66, sr: 84 },
@@ -767,7 +767,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0178", opinionShift: 75, status: "new", edition: 1,
+    id: "0178", published: true, opinionShift: 75, status: "new", edition: 1,
     headline: "The Sea Is Coming and the Plan Is Not Ready",
     context: "NAHRIM projects 0.7-metre sea level rise by 2100 affecting 2.5 million Malaysians in coastal zones, but the National Adaptation Plan remains in draft since 2022.",
     stageScores: { pa: 83, ba: 75, fc: 86, af: 67, ct: 57, sr: 79 },
@@ -782,7 +782,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0179", opinionShift: 92, status: "new", edition: 1,
+    id: "0179", published: true, opinionShift: 92, status: "new", edition: 1,
     headline: "Born Here, Documented Nowhere",
     context: "An estimated 50,000 to 100,000 children born in Malaysia lack citizenship due to gaps in the Federal Constitution, statelessness of parents, or administrative failures.",
     stageScores: { pa: 86, ba: 63, fc: 88, af: 55, ct: 41, sr: 72 },
@@ -797,7 +797,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0180", opinionShift: 38, status: null, edition: 1,
+    id: "0180", published: true, opinionShift: 38, status: null, edition: 1,
     headline: "Universities That Cannot Disagree with the Minister",
     context: "The Universities and University Colleges Act 1971 gives the Education Minister power to appoint vice-chancellors, approve curricula, and prohibit student political activity.",
     stageScores: { pa: 92, ba: 88, fc: 95, af: 82, ct: 78, sr: 88 },
@@ -812,7 +812,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0181", opinionShift: 80, status: "updated", edition: 2,
+    id: "0181", published: true, opinionShift: 80, status: "updated", edition: 2,
     headline: "The RM1.5 Trillion Number Nobody Wants to Explain",
     context: "Malaysia's official federal debt stands at RM1.2 trillion, but including guarantees, 1MDB liabilities, and committed lease payments pushes total obligations past RM1.5 trillion.",
     stageScores: { pa: 84, ba: 72, fc: 86, af: 64, ct: 52, sr: 78 },
@@ -827,7 +827,7 @@ export const ISSUES: Issue[] = [
     ]
   },
 {
-  id: "1001", opinionShift: 78, status: null, edition: 1,
+  id: "1001", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "MACC's 2025 conviction rate drops to 34%",
   context: "MACC secured only 34% convictions in 2025, down from 52% in 2023, raising questions about prosecutorial effectiveness under Chief Commissioner Azam Baki's successor.",
   stageScores: { pa: 88, ba: 76, fc: 89, af: 72, ct: 65, sr: 82 }, finalScore: 82.1,
@@ -841,7 +841,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1002", opinionShift: 65, status: "new", edition: 1,
+  id: "1002", published: true, opinionShift: 65, status: "new", edition: 1,
   headline: "AG's office cleared 8 ministers in 14 months",
   context: "Attorney General Ahmad Terrirudin cleared eight cabinet ministers of corruption allegations between January 2025 and March 2026 without any cases reaching trial.",
   stageScores: { pa: 85, ba: 72, fc: 86, af: 68, ct: 58, sr: 78 }, finalScore: 78.3,
@@ -855,7 +855,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1003", opinionShift: 82, status: null, edition: 1,
+  id: "1003", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "PAC uncovers RM4.2 billion in unverified GLC spending",
   context: "The Public Accounts Committee's March 2026 report revealed RM4.2 billion in GLC expenditures that could not be fully verified across Khazanah, PNB, and MARA subsidiaries.",
   stageScores: { pa: 91, ba: 82, fc: 92, af: 75, ct: 70, sr: 85 }, finalScore: 85.7,
@@ -869,7 +869,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1004", opinionShift: 55, status: null, edition: 1,
+  id: "1004", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Sabah demands return of 40% oil royalty rights",
   context: "Sabah Chief Minister Hajiji Noor formally requested renegotiation of the Malaysia Agreement 1963 petroleum terms, seeking 40% royalty up from the current 5%.",
   stageScores: { pa: 82, ba: 68, fc: 80, af: 65, ct: 52, sr: 75 }, finalScore: 73.8,
@@ -883,7 +883,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1005", opinionShift: 71, status: null, edition: 2,
+  id: "1005", published: true, opinionShift: 71, status: null, edition: 2,
   headline: "Only 3 of 13 state assemblies publish hansard online",
   context: "A TFA audit found that only Selangor, Penang, and Sarawak publish complete state assembly proceedings online, leaving 10 states with no accessible legislative record.",
   stageScores: { pa: 79, ba: 64, fc: 82, af: 60, ct: 48, sr: 72 }, finalScore: 70.4,
@@ -897,7 +897,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1006", opinionShift: 88, status: null, edition: 1,
+  id: "1006", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "RM12.8 billion defence procurement bypassed open tender",
   context: "Defence Ministry awarded RM12.8 billion in contracts through direct negotiation between 2023-2025, circumventing Treasury guidelines requiring open competitive bidding.",
   stageScores: { pa: 90, ba: 85, fc: 93, af: 78, ct: 72, sr: 86 }, finalScore: 87.2,
@@ -911,7 +911,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1007", opinionShift: 42, status: null, edition: 1,
+  id: "1007", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "PM's department employs 43,000 — more than 5 ministries combined",
   context: "The Prime Minister's Department headcount reached 43,000 staff in 2025, exceeding the combined workforce of the Education, Health, Finance, Home Affairs, and Defence policy divisions.",
   stageScores: { pa: 84, ba: 70, fc: 81, af: 62, ct: 55, sr: 74 }, finalScore: 74.1,
@@ -925,7 +925,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1008", opinionShift: 73, status: "new", edition: 1,
+  id: "1008", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Whistleblower Protection Act shields only 9 people since 2010",
   context: "Since the Whistleblower Protection Act 2010 took effect, only nine individuals have received formal protection status, with four subsequently reporting retaliation.",
   stageScores: { pa: 86, ba: 74, fc: 88, af: 70, ct: 60, sr: 80 }, finalScore: 79.5,
@@ -939,7 +939,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1009", opinionShift: 61, status: null, edition: 1,
+  id: "1009", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Local councillors still appointed, not elected, after 48 years",
   context: "Malaysia suspended local government elections in 1976 and has not restored them, making it one of the only democracies where municipal councillors are appointed by state governments.",
   stageScores: { pa: 80, ba: 66, fc: 84, af: 58, ct: 45, sr: 70 }, finalScore: 71.2,
@@ -953,7 +953,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1010", opinionShift: 85, status: null, edition: 1,
+  id: "1010", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Auditor General flagged same 6 ministries for 5 consecutive years",
   context: "The Auditor General's 2025 report repeated findings of financial mismanagement in the same six ministries flagged annually since 2021, with no corrective action taken.",
   stageScores: { pa: 89, ba: 80, fc: 90, af: 74, ct: 68, sr: 84 }, finalScore: 84.3,
@@ -967,7 +967,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1011", opinionShift: 58, status: null, edition: 1,
+  id: "1011", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Senate rubber-stamped 97% of bills without amendment in 2025",
   context: "Dewan Negara passed 97% of government bills without any amendments in 2025, continuing its pattern as a legislative rubber stamp rather than a revising chamber.",
   stageScores: { pa: 81, ba: 65, fc: 83, af: 61, ct: 47, sr: 73 }, finalScore: 72.5,
@@ -981,7 +981,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1012", opinionShift: 76, status: "updated", edition: 2,
+  id: "1012", published: true, opinionShift: 76, status: "updated", edition: 2,
   headline: "SPRM seized RM320 million in assets but returned RM180 million",
   context: "MACC's asset forfeiture unit seized RM320 million in 2024-2025 but courts ordered RM180 million returned due to procedural errors in filing applications.",
   stageScores: { pa: 87, ba: 78, fc: 87, af: 71, ct: 63, sr: 81 }, finalScore: 80.9,
@@ -995,7 +995,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1013", opinionShift: 47, status: null, edition: 1,
+  id: "1013", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Cabinet decisions remain classified under Official Secrets Act",
   context: "All cabinet meeting minutes and decisions remain permanently classified under the Official Secrets Act 1972, with no declassification timeline or public disclosure mechanism.",
   stageScores: { pa: 78, ba: 62, fc: 79, af: 57, ct: 42, sr: 69 }, finalScore: 68.5,
@@ -1009,7 +1009,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1014", opinionShift: 69, status: null, edition: 1,
+  id: "1014", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "Procurement fraud costs Malaysia RM15 billion annually says TI",
   context: "Transparency International Malaysia estimated procurement fraud costs the federal government RM15 billion per year, roughly 4.5% of total government expenditure.",
   stageScores: { pa: 88, ba: 81, fc: 91, af: 76, ct: 67, sr: 83 }, finalScore: 83.6,
@@ -1023,7 +1023,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1015", opinionShift: 53, status: "new", edition: 1,
+  id: "1015", published: true, opinionShift: 53, status: "new", edition: 1,
   headline: "Election Commission redrew 14 constituencies without public hearing",
   context: "The Election Commission completed constituency redelineation in 14 federal seats in Johor and Pahang in February 2026 without holding the mandatory public objection sessions.",
   stageScores: { pa: 83, ba: 71, fc: 85, af: 66, ct: 54, sr: 76 }, finalScore: 75.2,
@@ -1037,7 +1037,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1016", opinionShift: 80, status: null, edition: 1,
+  id: "1016", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "GLC board members hold average 4.7 directorships each",
   context: "A corporate governance review found that directors of Malaysia's top 20 GLCs hold an average of 4.7 board seats each, raising concerns about oversight capacity and conflicts of interest.",
   stageScores: { pa: 85, ba: 73, fc: 86, af: 69, ct: 59, sr: 79 }, finalScore: 77.8,
@@ -1051,7 +1051,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1017", opinionShift: 63, status: null, edition: 1,
+  id: "1017", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Civil service promotion still 80% seniority-based despite reform pledge",
   context: "Despite the 2024 Public Service Remuneration System overhaul, 80% of promotions in the federal civil service remain seniority-based rather than merit-based.",
   stageScores: { pa: 80, ba: 67, fc: 81, af: 63, ct: 50, sr: 74 }, finalScore: 72.0,
@@ -1065,7 +1065,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1018", opinionShift: 91, status: null, edition: 1,
+  id: "1018", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "1MDB asset recovery reached only 38% after 9 years",
   context: "As of March 2026, Malaysia has recovered only RM16.3 billion of the estimated RM42.8 billion in 1MDB-related losses, nine years after investigations began.",
   stageScores: { pa: 92, ba: 86, fc: 94, af: 80, ct: 75, sr: 87 }, finalScore: 87.8,
@@ -1079,7 +1079,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1019", opinionShift: 50, status: null, edition: 1,
+  id: "1019", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Parliament sat for only 67 days in 2025 — lowest in ASEAN",
   context: "Dewan Rakyat sat for only 67 days in 2025, the fewest among ASEAN parliamentary democracies and below the 80-day minimum recommended by the Commonwealth Parliamentary Association.",
   stageScores: { pa: 82, ba: 69, fc: 83, af: 64, ct: 51, sr: 75 }, finalScore: 74.6,
@@ -1093,7 +1093,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1020", opinionShift: 74, status: "new", edition: 1,
+  id: "1020", published: true, opinionShift: 74, status: "new", edition: 1,
   headline: "Selangor's integrity unit recovered RM47 million from internal fraud",
   context: "Selangor's state integrity and governance unit recovered RM47 million from internal fraud cases in 2025, becoming a model for state-level anti-corruption efforts.",
   stageScores: { pa: 84, ba: 75, fc: 85, af: 70, ct: 62, sr: 80 }, finalScore: 79.0,
@@ -1107,7 +1107,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1021", opinionShift: 67, status: null, edition: 1,
+  id: "1021", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "MACC chief's tenure extended 3 times — independence questioned",
   context: "The MACC Chief Commissioner received a third contract extension in January 2026, serving beyond the standard two-year term amid concerns about executive influence over the anti-graft body.",
   stageScores: { pa: 83, ba: 70, fc: 84, af: 67, ct: 56, sr: 77 }, finalScore: 76.3,
@@ -1121,7 +1121,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1022", opinionShift: 56, status: null, edition: 1,
+  id: "1022", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Federal-state water dispute leaves Kedah with RM800 million owed",
   context: "Kedah claims the federal government owes RM800 million in raw water compensation dating back to 2005 for water supplied to Penang and Perak through the Muda River system.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 59, ct: 44, sr: 71 }, finalScore: 69.8,
@@ -1135,7 +1135,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1023", opinionShift: 83, status: null, edition: 1,
+  id: "1023", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Political appointees to GLIC boards tripled under unity government",
   context: "Government-linked investment companies saw political appointee board members triple from 18 to 54 between 2022 and 2025 under the unity government's coalition arrangement.",
   stageScores: { pa: 86, ba: 77, fc: 88, af: 73, ct: 64, sr: 82 }, finalScore: 81.4,
@@ -1149,7 +1149,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1024", opinionShift: 45, status: null, edition: 1,
+  id: "1024", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "EAIC received 1,200 complaints but investigated only 89 in 2025",
   context: "The Enforcement Agency Integrity Commission received 1,200 complaints against enforcement officers in 2025 but completed investigations into only 89 cases.",
   stageScores: { pa: 81, ba: 66, fc: 82, af: 61, ct: 49, sr: 73 }, finalScore: 71.7,
@@ -1163,7 +1163,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1025", opinionShift: 72, status: null, edition: 1,
+  id: "1025", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Minister's political secretary approved RM290 million in contracts",
   context: "A political secretary to the Works Minister was found to have approved RM290 million in road maintenance contracts despite having no legal procurement authority.",
   stageScores: { pa: 87, ba: 79, fc: 89, af: 74, ct: 66, sr: 83 }, finalScore: 82.8,
@@ -1177,7 +1177,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1026", opinionShift: 60, status: "new", edition: 1,
+  id: "1026", published: true, opinionShift: 60, status: "new", edition: 1,
   headline: "National Anti-Corruption Plan 2019-2023 met only 41% of targets",
   context: "An independent review of the National Anti-Corruption Plan found that only 41% of its 115 initiatives were fully implemented by the extended deadline of December 2025.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 66, ct: 55, sr: 77 }, finalScore: 75.8,
@@ -1191,7 +1191,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1027", opinionShift: 77, status: null, edition: 1,
+  id: "1027", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "State religious agencies spent RM6.2 billion with minimal federal oversight",
   context: "Malaysia's 14 state Islamic religious agencies collectively spent RM6.2 billion in 2025, operating largely outside federal audit jurisdiction due to constitutional separation of religious affairs.",
   stageScores: { pa: 84, ba: 74, fc: 86, af: 68, ct: 57, sr: 78 }, finalScore: 78.8,
@@ -1205,7 +1205,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1028", opinionShift: 44, status: null, edition: 1,
+  id: "1028", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Freedom of Information exists in only 2 states after 14 years",
   context: "Fourteen years after Selangor enacted Malaysia's first FOI law in 2011, only Selangor and Penang have Freedom of Information legislation, with no federal equivalent.",
   stageScores: { pa: 78, ba: 61, fc: 78, af: 56, ct: 41, sr: 68 }, finalScore: 68.2,
@@ -1219,7 +1219,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1029", opinionShift: 86, status: null, edition: 1,
+  id: "1029", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Tabung Haji's RM10 billion bailout still not fully explained",
   context: "Seven years after the government injected RM10 billion to rescue Tabung Haji in 2018, a complete forensic audit has never been publicly released explaining how losses accumulated.",
   stageScores: { pa: 89, ba: 83, fc: 91, af: 77, ct: 71, sr: 85 }, finalScore: 85.2,
@@ -1233,7 +1233,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1030", opinionShift: 52, status: null, edition: 1,
+  id: "1030", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Deputy ministers attend only 34% of parliamentary question sessions",
   context: "An analysis of Hansard records showed deputy ministers attended only 34% of oral question time sessions assigned to their portfolios in 2025.",
   stageScores: { pa: 79, ba: 64, fc: 80, af: 59, ct: 46, sr: 71 }, finalScore: 70.8,
@@ -1247,7 +1247,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1031", opinionShift: 70, status: null, edition: 2,
+  id: "1031", published: true, opinionShift: 70, status: null, edition: 2,
   headline: "Sarawak autonomy deal gives state control over 22 federal powers",
   context: "Sarawak's 2024 devolution agreement transferred effective control over 22 areas including immigration, maritime jurisdiction, and resource management from federal to state authority.",
   stageScores: { pa: 85, ba: 76, fc: 87, af: 71, ct: 61, sr: 81 }, finalScore: 80.3,
@@ -1261,7 +1261,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1032", opinionShift: 39, status: null, edition: 1,
+  id: "1032", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Judicial Appointments Commission has no public selection criteria",
   context: "The Judicial Appointments Commission, established in 2009, still does not publish its criteria for recommending judicial candidates, operating entirely behind closed doors.",
   stageScores: { pa: 77, ba: 60, fc: 79, af: 55, ct: 40, sr: 69 }, finalScore: 68.8,
@@ -1275,7 +1275,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1033", opinionShift: 79, status: null, edition: 1,
+  id: "1033", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "RM2.3 billion flood mitigation funds spent but floods worsen annually",
   context: "The federal government spent RM2.3 billion on flood mitigation between 2022-2025, yet flood damage increased 40% over the same period according to NADMA data.",
   stageScores: { pa: 86, ba: 78, fc: 88, af: 72, ct: 64, sr: 82 }, finalScore: 81.8,
@@ -1289,7 +1289,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1034", opinionShift: 62, status: "updated", edition: 2,
+  id: "1034", published: true, opinionShift: 62, status: "updated", edition: 2,
   headline: "SUHAKAM's 15 recommendations ignored by government since 2020",
   context: "The Human Rights Commission of Malaysia has had 15 formal recommendations to Parliament ignored by the executive since 2020, including on deaths in custody and indigenous land rights.",
   stageScores: { pa: 80, ba: 67, fc: 82, af: 63, ct: 52, sr: 74 }, finalScore: 73.2,
@@ -1303,7 +1303,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1035", opinionShift: 48, status: null, edition: 1,
+  id: "1035", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Ministerial asset declarations still voluntary after 25 years of promises",
   context: "Despite pledges from every government since 1999, ministerial asset declarations remain voluntary with no verification mechanism or public disclosure requirement.",
   stageScores: { pa: 81, ba: 65, fc: 81, af: 60, ct: 47, sr: 72 }, finalScore: 71.0,
@@ -1317,7 +1317,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1036", opinionShift: 87, status: null, edition: 1,
+  id: "1036", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "FELDA settlers' land titles delayed 30 years despite RM1.2 billion allocation",
   context: "Over 47,000 FELDA settlers are still waiting for individual land titles despite RM1.2 billion allocated for the land titling programme since the 1990s.",
   stageScores: { pa: 88, ba: 82, fc: 90, af: 76, ct: 69, sr: 84 }, finalScore: 84.8,
@@ -1331,7 +1331,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1037", opinionShift: 57, status: null, edition: 1,
+  id: "1037", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Anti-hopping law has 3 loopholes parties already exploit",
   context: "The 2022 anti-party-hopping constitutional amendment contains three identified loopholes that allow MPs to effectively switch allegiances without triggering vacancy provisions.",
   stageScores: { pa: 82, ba: 68, fc: 83, af: 64, ct: 53, sr: 75 }, finalScore: 74.3,
@@ -1345,7 +1345,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1038", opinionShift: 75, status: null, edition: 1,
+  id: "1038", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Putrajaya spent RM890 million on consultants in 2025 alone",
   context: "Federal government spending on external consultants reached RM890 million in 2025, a 35% increase from 2023, despite having 1.7 million civil servants on payroll.",
   stageScores: { pa: 85, ba: 76, fc: 87, af: 70, ct: 62, sr: 80 }, finalScore: 80.0,
@@ -1359,7 +1359,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1039", opinionShift: 66, status: "new", edition: 1,
+  id: "1039", published: true, opinionShift: 66, status: "new", edition: 1,
   headline: "Penang's third vote seat formula challenges federal allocation model",
   context: "Penang proposed a new parliamentary seat allocation formula based on GDP contribution and population density, challenging the rural-weighted federal model in place since 1974.",
   stageScores: { pa: 81, ba: 69, fc: 83, af: 65, ct: 54, sr: 76 }, finalScore: 75.5,
@@ -1373,7 +1373,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1040", opinionShift: 90, status: null, edition: 1,
+  id: "1040", published: true, opinionShift: 90, status: null, edition: 1,
   headline: "Retired civil servants hold 340 GLC positions worth RM120 million",
   context: "A governance audit found 340 retired senior civil servants occupying GLC board and advisory positions with combined annual compensation of RM120 million.",
   stageScores: { pa: 87, ba: 81, fc: 89, af: 75, ct: 68, sr: 83 }, finalScore: 83.9,
@@ -1387,7 +1387,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1041", opinionShift: 43, status: null, edition: 1,
+  id: "1041", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Parliamentary committee system has zero subpoena power",
   context: "None of Malaysia's 14 parliamentary select committees possess subpoena power, relying entirely on voluntary cooperation from government witnesses and document providers.",
   stageScores: { pa: 78, ba: 62, fc: 80, af: 57, ct: 43, sr: 70 }, finalScore: 69.2,
@@ -1401,7 +1401,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1042", opinionShift: 81, status: null, edition: 1,
+  id: "1042", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "LTAT fund's RM4.1 billion investment losses under criminal review",
   context: "The Armed Forces Fund Board's RM4.1 billion in investment losses between 2018-2023 are under criminal investigation by MACC following the Auditor General's special audit report.",
   stageScores: { pa: 88, ba: 80, fc: 90, af: 74, ct: 66, sr: 83 }, finalScore: 83.2,
@@ -1415,7 +1415,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1043", opinionShift: 54, status: null, edition: 1,
+  id: "1043", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "State governments bypass 11 environmental requirements through gazette orders",
   context: "At least six state governments used emergency gazette orders to bypass 11 federal environmental requirements for development projects between 2023 and 2025.",
   stageScores: { pa: 82, ba: 70, fc: 84, af: 66, ct: 55, sr: 76 }, finalScore: 75.0,
@@ -1429,7 +1429,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1044", opinionShift: 68, status: null, edition: 1,
+  id: "1044", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Integrity pact for mega-projects signed but never enforced",
   context: "The Corporate Integrity Pledge signed by 1,400 companies since 2011 has never resulted in a single enforcement action despite documented breaches by at least 23 signatory companies.",
   stageScores: { pa: 80, ba: 68, fc: 82, af: 62, ct: 51, sr: 74 }, finalScore: 73.5,
@@ -1443,7 +1443,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1045", opinionShift: 84, status: null, edition: 1,
+  id: "1045", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Treasury's RM38 billion special purpose vehicle escapes parliamentary scrutiny",
   context: "The Treasury established a RM38 billion special purpose vehicle for infrastructure funding that operates outside normal parliamentary appropriation and audit processes.",
   stageScores: { pa: 89, ba: 84, fc: 92, af: 78, ct: 73, sr: 86 }, finalScore: 86.4,
@@ -1457,7 +1457,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1046", opinionShift: 41, status: null, edition: 1,
+  id: "1046", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "MPs' constituency allocation lacks any spending guidelines or audit",
   context: "Each MP receives RM3-5 million annually in constituency development funds with no standardised spending guidelines, no audit requirement, and no public reporting mechanism.",
   stageScores: { pa: 79, ba: 63, fc: 81, af: 58, ct: 44, sr: 70 }, finalScore: 69.5,
@@ -1471,7 +1471,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1047", opinionShift: 73, status: "new", edition: 1,
+  id: "1047", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Johor's special economic zone gives state power to override 5 federal laws",
   context: "The Johor-Singapore Special Economic Zone agreement grants Johor state authority to override five federal regulations on labour, customs, immigration, taxation, and environmental standards.",
   stageScores: { pa: 84, ba: 74, fc: 85, af: 69, ct: 58, sr: 79 }, finalScore: 78.0,
@@ -1485,7 +1485,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1048", opinionShift: 59, status: null, edition: 1,
+  id: "1048", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "MACC's unexplained wealth orders used only 4 times in 5 years",
   context: "MACC's power to issue unexplained wealth orders under the 2019 amendment has been used only four times in five years, despite being designed as a key anti-corruption tool.",
   stageScores: { pa: 82, ba: 69, fc: 83, af: 64, ct: 52, sr: 75 }, finalScore: 74.8,
@@ -1499,7 +1499,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1049", opinionShift: 92, status: null, edition: 1,
+  id: "1049", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "RM5.4 billion development fund missing from Sabah state accounts",
   context: "Sabah's state accounts showed a RM5.4 billion discrepancy between federal development allocations received and expenditures recorded between 2019-2024.",
   stageScores: { pa: 91, ba: 85, fc: 94, af: 79, ct: 74, sr: 87 }, finalScore: 88.0,
@@ -1513,7 +1513,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1050", opinionShift: 46, status: null, edition: 1,
+  id: "1050", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Opposition MPs allocated zero committee chairmanships despite convention",
   context: "The government allocated all 14 parliamentary select committee chairmanships to ruling coalition MPs in 2025, breaking with the convention of giving PAC chair to the opposition.",
   stageScores: { pa: 80, ba: 65, fc: 80, af: 60, ct: 48, sr: 72 }, finalScore: 70.1,
@@ -1527,7 +1527,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1051", opinionShift: 78, status: null, edition: 1,
+  id: "1051", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Regulatory capture: 8 agency heads came from industries they regulate",
   context: "Eight federal regulatory agency heads appointed in 2024-2025 previously held senior positions in the industries their agencies are mandated to regulate.",
   stageScores: { pa: 85, ba: 75, fc: 86, af: 70, ct: 61, sr: 80 }, finalScore: 79.7,
@@ -1541,7 +1541,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1052", opinionShift: 64, status: null, edition: 1,
+  id: "1052", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Municipal councils collected RM2.1 billion but 40% went to salaries",
   context: "Malaysia's 155 local authorities collected RM2.1 billion in assessment taxes in 2025, with 40% absorbed by staff salaries and only 31% reaching infrastructure and services.",
   stageScores: { pa: 81, ba: 67, fc: 82, af: 63, ct: 50, sr: 73 }, finalScore: 72.8,
@@ -1555,7 +1555,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1053", opinionShift: 85, status: "updated", edition: 3,
+  id: "1053", published: true, opinionShift: 85, status: "updated", edition: 3,
   headline: "PETRONAS paid RM52.3 billion dividend but disclosed zero project details",
   context: "PETRONAS paid a RM52.3 billion dividend to the federal government in 2025 but published no project-level breakdown of how the remaining revenue was allocated internally.",
   stageScores: { pa: 88, ba: 83, fc: 91, af: 76, ct: 70, sr: 85 }, finalScore: 85.9,
@@ -1569,7 +1569,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1054", opinionShift: 49, status: null, edition: 1,
+  id: "1054", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Only 12% of government data portals actually function as open data",
   context: "An audit of 28 federal government open data portals found that only 12% meet international open data standards with machine-readable, downloadable, and regularly updated datasets.",
   stageScores: { pa: 78, ba: 61, fc: 79, af: 56, ct: 42, sr: 69 }, finalScore: 68.9,
@@ -1583,7 +1583,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1055", opinionShift: 71, status: null, edition: 1,
+  id: "1055", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Conflict of interest rules exempt 3 categories of senior officials",
   context: "Malaysia's conflict of interest regulations under General Orders exempt three categories of senior officials including ministers, deputy ministers, and political secretaries.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 56, sr: 77 }, finalScore: 76.0,
@@ -1597,7 +1597,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1056", opinionShift: 38, status: null, edition: 1,
+  id: "1056", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "State assemblies average only 18 sitting days per year",
   context: "Malaysia's 13 state legislative assemblies averaged only 18 sitting days per year in 2025, with Perlis sitting for just 7 days and Pahang for only 9 days.",
   stageScores: { pa: 76, ba: 59, fc: 77, af: 55, ct: 40, sr: 68 }, finalScore: 68.0,
@@ -1611,7 +1611,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1057", opinionShift: 76, status: null, edition: 1,
+  id: "1057", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Government lobbying remains completely unregulated in Malaysia",
   context: "Malaysia has no lobbying register, disclosure requirement, or regulatory framework governing interactions between lobbyists and government decision-makers.",
   stageScores: { pa: 82, ba: 70, fc: 83, af: 65, ct: 54, sr: 76 }, finalScore: 75.3,
@@ -1625,7 +1625,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1058", opinionShift: 89, status: null, edition: 1,
+  id: "1058", published: true, opinionShift: 89, status: null, edition: 1,
   headline: "Customs department lost RM7.8 billion in uncollected duties",
   context: "The Royal Malaysian Customs Department failed to collect RM7.8 billion in assessed duties and taxes in 2025, representing a 23% increase in uncollected revenue from the previous year.",
   stageScores: { pa: 90, ba: 84, fc: 93, af: 79, ct: 72, sr: 86 }, finalScore: 86.8,
@@ -1639,7 +1639,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1059", opinionShift: 51, status: null, edition: 1,
+  id: "1059", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Parliamentary opposition has zero formal recognition in Standing Orders",
   context: "Malaysia's parliamentary Standing Orders contain no formal recognition of the Leader of the Opposition, opposition rights, or shadow cabinet — unlike most Westminster systems.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 58, ct: 45, sr: 71 }, finalScore: 69.4,
@@ -1653,7 +1653,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1060", opinionShift: 74, status: "new", edition: 1,
+  id: "1060", published: true, opinionShift: 74, status: "new", edition: 1,
   headline: "KPKT approved 340 strata developments but inspected only 52",
   context: "The Housing Ministry approved 340 new strata developments in 2025 but conducted site inspections on only 52, leaving 288 developments without regulatory quality verification.",
   stageScores: { pa: 84, ba: 72, fc: 85, af: 68, ct: 57, sr: 78 }, finalScore: 77.1,
@@ -1667,7 +1667,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1061", opinionShift: 67, status: null, edition: 1,
+  id: "1061", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Dewan Rakyat debates last 45 minutes per bill on average",
   context: "Analysis of 2025 Hansard records showed Dewan Rakyat spent an average of 45 minutes debating each bill, with some legislation passed in under 15 minutes.",
   stageScores: { pa: 81, ba: 66, fc: 82, af: 62, ct: 49, sr: 73 }, finalScore: 72.3,
@@ -1681,7 +1681,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1062", opinionShift: 58, status: null, edition: 1,
+  id: "1062", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "MACC's prevention division received only 6% of total budget",
   context: "MACC allocated only 6% of its RM380 million budget to corruption prevention programmes in 2025, with 71% going to investigation and enforcement operations.",
   stageScores: { pa: 80, ba: 68, fc: 81, af: 63, ct: 51, sr: 74 }, finalScore: 73.0,
@@ -1695,7 +1695,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1063", opinionShift: 83, status: null, edition: 2,
+  id: "1063", published: true, opinionShift: 83, status: null, edition: 2,
   headline: "State assemblymen's declarations reveal 47% have business conflicts",
   context: "A cross-state analysis of voluntary asset declarations found that 47% of state assemblymen hold active business interests in sectors regulated by their state governments.",
   stageScores: { pa: 86, ba: 77, fc: 88, af: 72, ct: 63, sr: 81 }, finalScore: 81.2,
@@ -1709,7 +1709,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1064", opinionShift: 40, status: null, edition: 1,
+  id: "1064", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Government responses to parliamentary questions take average 67 days",
   context: "Written parliamentary questions received government responses in an average of 67 days in 2025, with 18% of questions never receiving any response at all.",
   stageScores: { pa: 77, ba: 60, fc: 78, af: 56, ct: 41, sr: 68 }, finalScore: 68.3,
@@ -1723,7 +1723,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1065", opinionShift: 70, status: null, edition: 1,
+  id: "1065", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Kelantan's RM3.1 billion federal allocation tracking remains opaque",
   context: "Kelantan received RM3.1 billion in federal development allocations in 2025 but the state government published no breakdown of how funds were distributed across projects.",
   stageScores: { pa: 83, ba: 72, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 76.5,
@@ -1737,7 +1737,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1066", opinionShift: 55, status: null, edition: 1,
+  id: "1066", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "National Audit Department has 200 unfilled auditor positions",
   context: "The National Audit Department reported 200 unfilled auditor positions out of 1,800 approved posts in 2025, with chronic underfunding contributing to a growing audit backlog.",
   stageScores: { pa: 80, ba: 66, fc: 81, af: 61, ct: 49, sr: 73 }, finalScore: 71.5,
@@ -1751,7 +1751,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1067", opinionShift: 93, status: null, edition: 1,
+  id: "1067", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "RM18 billion highway concession terms remain classified for 30 years",
   context: "Concession agreements for major toll highways worth RM18 billion remain classified under OSA, with full terms not scheduled for disclosure until 2035 at the earliest.",
   stageScores: { pa: 90, ba: 86, fc: 95, af: 80, ct: 76, sr: 88 }, finalScore: 87.5,
@@ -1765,7 +1765,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1068", opinionShift: 61, status: null, edition: 1,
+  id: "1068", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Bumiputera procurement quota lacks any performance evaluation",
   context: "The 30% Bumiputera procurement quota for government contracts has never been formally evaluated for effectiveness since its introduction, with no data on whether it achieves its economic restructuring objectives.",
   stageScores: { pa: 82, ba: 69, fc: 83, af: 64, ct: 53, sr: 75 }, finalScore: 74.0,
@@ -1779,7 +1779,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1069", opinionShift: 79, status: "new", edition: 1,
+  id: "1069", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "Conference of Rulers' deliberations on 4 key bills never disclosed",
   context: "The Conference of Rulers considered four significant bills in 2025 including constitutional amendments, but deliberation details and voting records were not made public.",
   stageScores: { pa: 84, ba: 73, fc: 85, af: 69, ct: 58, sr: 79 }, finalScore: 78.5,
@@ -1793,7 +1793,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1070", opinionShift: 47, status: null, edition: 1,
+  id: "1070", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Statutory bodies' reserves total RM280 billion with minimal oversight",
   context: "Malaysia's 147 statutory bodies hold combined reserves of RM280 billion, operating under varying levels of oversight with many not subject to regular parliamentary scrutiny.",
   stageScores: { pa: 83, ba: 70, fc: 84, af: 66, ct: 54, sr: 76 }, finalScore: 75.7,
@@ -1807,7 +1807,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1071", opinionShift: 86, status: null, edition: 1,
+  id: "1071", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Putrajaya's RM1.4 billion smart city project has zero measurable outcomes",
   context: "The Putrajaya Smart City Initiative launched in 2021 with RM1.4 billion allocation has produced no published outcome metrics, KPIs, or measurable improvements after four years.",
   stageScores: { pa: 87, ba: 79, fc: 89, af: 73, ct: 65, sr: 82 }, finalScore: 82.4,
@@ -1821,7 +1821,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1072", opinionShift: 53, status: null, edition: 1,
+  id: "1072", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Sedition Act used 23 times since reform promise — only against opposition",
   context: "The Sedition Act 1948, which the government promised to repeal in 2018, has been used 23 times since 2022 — all against opposition politicians, activists, and journalists.",
   stageScores: { pa: 81, ba: 67, fc: 82, af: 62, ct: 50, sr: 74 }, finalScore: 73.7,
@@ -1835,7 +1835,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1073", opinionShift: 68, status: null, edition: 1,
+  id: "1073", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "EPF governance reform stalled — 9 board seats still politically appointed",
   context: "Despite the 2023 EPF governance reform proposal, nine of thirteen board positions remain politically appointed, with no independent director requirement implemented.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 56, sr: 77 }, finalScore: 76.8,
@@ -1849,7 +1849,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1074", opinionShift: 95, status: null, edition: 1,
+  id: "1074", published: true, opinionShift: 95, status: null, edition: 1,
   headline: "RM23 billion MRT3 project awarded without competitive international tender",
   context: "The RM23 billion MRT3 Circle Line project was awarded through direct negotiation to a consortium without an open international competitive bidding process.",
   stageScores: { pa: 91, ba: 87, fc: 95, af: 81, ct: 77, sr: 88 }, finalScore: 87.0,
@@ -1863,7 +1863,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1075", opinionShift: 44, status: null, edition: 1,
+  id: "1075", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Ombudsman proposal shelved for the 6th time since 2008",
   context: "A parliamentary ombudsman bill was shelved for the sixth time in January 2026, with the government citing 'insufficient consensus' despite cross-party support.",
   stageScores: { pa: 78, ba: 62, fc: 79, af: 57, ct: 43, sr: 70 }, finalScore: 69.0,
@@ -1877,7 +1877,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1076", opinionShift: 72, status: null, edition: 1,
+  id: "1076", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Anti-corruption court backlog grew to 847 pending cases",
   context: "Malaysia's Special Corruption Court had 847 cases pending as of December 2025, up from 523 in 2023, with average case duration stretching to 4.2 years.",
   stageScores: { pa: 84, ba: 73, fc: 85, af: 69, ct: 58, sr: 79 }, finalScore: 78.2,
@@ -1891,7 +1891,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1077", opinionShift: 60, status: null, edition: 1,
+  id: "1077", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Government's RM680 million advertising spend lacks transparency",
   context: "Federal government spent RM680 million on advertising and media campaigns in 2025, with no publicly accessible breakdown of which media outlets received what amounts.",
   stageScores: { pa: 82, ba: 70, fc: 83, af: 65, ct: 54, sr: 76 }, finalScore: 75.9,
@@ -1905,7 +1905,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1078", opinionShift: 88, status: null, edition: 1,
+  id: "1078", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Penang tunnel project: RM6.3 billion committed, 0% tunnel built",
   context: "The Penang undersea tunnel project has committed RM6.3 billion in public funds since 2013 but zero metres of the actual tunnel have been constructed after 13 years.",
   stageScores: { pa: 89, ba: 82, fc: 91, af: 77, ct: 70, sr: 84 }, finalScore: 84.5,
@@ -1919,7 +1919,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1079", opinionShift: 50, status: null, edition: 1,
+  id: "1079", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Speaker's ruling on 12 controversial motions cannot be challenged",
   context: "The Dewan Rakyat Speaker made 12 contested rulings in 2025 on admissibility of opposition motions, with no mechanism for appeal or review of Speaker's decisions.",
   stageScores: { pa: 79, ba: 64, fc: 80, af: 59, ct: 46, sr: 71 }, finalScore: 70.5,
@@ -1933,7 +1933,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1080", opinionShift: 65, status: "updated", edition: 2,
+  id: "1080", published: true, opinionShift: 65, status: "updated", edition: 2,
   headline: "Federal land administration has 340,000 unresolved title disputes",
   context: "The Department of Director General of Lands and Mines reported 340,000 unresolved land title disputes nationwide in 2025, some dating back to the 1970s.",
   stageScores: { pa: 83, ba: 72, fc: 84, af: 67, ct: 56, sr: 78 }, finalScore: 77.3,
@@ -1947,7 +1947,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1081", opinionShift: 77, status: null, edition: 1,
+  id: "1081", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Parliamentary standing committee on defence has never held a public hearing",
   context: "The Parliamentary Select Committee on Defence and Home Affairs has never conducted a public hearing since its establishment, meeting only in closed sessions.",
   stageScores: { pa: 82, ba: 68, fc: 83, af: 64, ct: 53, sr: 75 }, finalScore: 74.4,
@@ -1961,7 +1961,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1082", opinionShift: 42, status: null, edition: 1,
+  id: "1082", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "State Islamic councils' RM4.2 billion wakaf assets lack centralized registry",
   context: "Wakaf (endowment) assets managed by 14 state Islamic councils are estimated at RM4.2 billion but no centralized national registry exists to track or verify holdings.",
   stageScores: { pa: 79, ba: 64, fc: 81, af: 60, ct: 47, sr: 72 }, finalScore: 71.3,
@@ -1975,7 +1975,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1083", opinionShift: 81, status: null, edition: 1,
+  id: "1083", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "5 regulatory agencies share overlapping jurisdiction on fintech",
   context: "Five federal agencies — Bank Negara, Securities Commission, MDEC, MCMC, and the Finance Ministry — claim overlapping regulatory authority over fintech companies, creating compliance chaos.",
   stageScores: { pa: 84, ba: 75, fc: 86, af: 70, ct: 61, sr: 80 }, finalScore: 79.3,
@@ -1989,7 +1989,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1084", opinionShift: 56, status: null, edition: 1,
+  id: "1084", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Government backbenchers proposed 3 private member bills — all blocked",
   context: "Three private member bills proposed by government backbenchers in 2025 were blocked from reaching debate by the government whip, undermining parliamentary independence.",
   stageScores: { pa: 80, ba: 65, fc: 81, af: 61, ct: 48, sr: 72 }, finalScore: 71.8,
@@ -2003,7 +2003,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1085", opinionShift: 69, status: "new", edition: 1,
+  id: "1085", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "JKR project delays cost government RM3.8 billion in 2025",
   context: "Public Works Department project delays resulted in RM3.8 billion in cost overruns and extension of time claims across 142 federal infrastructure projects in 2025.",
   stageScores: { pa: 85, ba: 76, fc: 87, af: 71, ct: 60, sr: 81 }, finalScore: 80.6,
@@ -2017,7 +2017,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1086", opinionShift: 48, status: null, edition: 1,
+  id: "1086", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Malaysia's anti-money laundering regime has 12 identified gaps says FATF",
   context: "The Financial Action Task Force's 2025 mutual evaluation identified 12 significant gaps in Malaysia's anti-money laundering framework, risking potential greylisting.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 66, ct: 55, sr: 77 }, finalScore: 76.1,
@@ -2031,7 +2031,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1087", opinionShift: 75, status: null, edition: 1,
+  id: "1087", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Public Complaints Bureau resolved 34% of cases — 52,000 citizens ignored",
   context: "The Public Complaints Bureau resolved only 34% of 78,000 complaints received in 2025, leaving 52,000 citizens without resolution or formal response to their grievances.",
   stageScores: { pa: 81, ba: 68, fc: 82, af: 63, ct: 51, sr: 74 }, finalScore: 73.3,
@@ -2045,7 +2045,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1088", opinionShift: 63, status: null, edition: 1,
+  id: "1088", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Fiscal Responsibility Act promised in Budget 2024 — still not tabled",
   context: "A Fiscal Responsibility Act announced during Budget 2024 has not been tabled in Parliament after two years, leaving Malaysia without a legal framework for fiscal discipline.",
   stageScores: { pa: 82, ba: 69, fc: 83, af: 64, ct: 52, sr: 75 }, finalScore: 74.7,
@@ -2059,7 +2059,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1089", opinionShift: 84, status: null, edition: 1,
+  id: "1089", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Immigration department corruption index ranked worst among 28 agencies",
   context: "The Immigration Department ranked last in MACC's internal corruption perception index among 28 federal enforcement agencies for the third consecutive year in 2025.",
   stageScores: { pa: 86, ba: 78, fc: 88, af: 73, ct: 64, sr: 82 }, finalScore: 82.6,
@@ -2073,7 +2073,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1090", opinionShift: 37, status: null, edition: 1,
+  id: "1090", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Senate reform commission's 23 recommendations archived without debate",
   context: "The Senate Reform Commission established in 2020 submitted 23 recommendations for Dewan Negara reform in 2022, which were archived without parliamentary debate or government response.",
   stageScores: { pa: 76, ba: 59, fc: 77, af: 55, ct: 40, sr: 68 }, finalScore: 68.6,
@@ -2087,7 +2087,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1091", opinionShift: 66, status: null, edition: 1,
+  id: "1091", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Agency performance ratings: 92% scored 'excellent' despite AG findings",
   context: "The Performance Management and Delivery Unit rated 92% of federal agencies as 'excellent' in 2025, contradicting the Auditor General's critical findings on the same agencies.",
   stageScores: { pa: 81, ba: 67, fc: 82, af: 62, ct: 50, sr: 73 }, finalScore: 72.6,
@@ -2101,7 +2101,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1092", opinionShift: 80, status: null, edition: 1,
+  id: "1092", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Najib's home detention raises questions about YDPA pardon scope",
   context: "Former PM Najib Razak's transfer to home detention under a royal pardon order raised constitutional questions about the scope of YDPA pardoning power and executive influence.",
   stageScores: { pa: 88, ba: 80, fc: 90, af: 75, ct: 68, sr: 84 }, finalScore: 84.0,
@@ -2115,7 +2115,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1093", opinionShift: 54, status: null, edition: 1,
+  id: "1093", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "National security legislation reviewed by 0 civil society organisations",
   context: "Three national security bills introduced in 2025 went through the legislative process without any formal consultation with civil society organisations, legal bodies, or academic experts.",
   stageScores: { pa: 80, ba: 66, fc: 82, af: 61, ct: 49, sr: 73 }, finalScore: 72.1,
@@ -2129,7 +2129,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1094", opinionShift: 71, status: null, edition: 1,
+  id: "1094", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "State governments owe KWSP RM670 million in unpaid employer contributions",
   context: "Seven state governments collectively owe EPF RM670 million in unpaid employer contributions for their staff, with some arrears dating back to 2019.",
   stageScores: { pa: 84, ba: 73, fc: 85, af: 68, ct: 57, sr: 79 }, finalScore: 77.5,
@@ -2143,7 +2143,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1095", opinionShift: 45, status: null, edition: 1,
+  id: "1095", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "MARA's RM1.5 billion London property scandal: zero convictions after 8 years",
   context: "Eight years after the MARA Inc London property acquisition scandal involving RM1.5 billion, no individual has been convicted despite MACC completing its investigation in 2020.",
   stageScores: { pa: 85, ba: 74, fc: 86, af: 69, ct: 58, sr: 80 }, finalScore: 79.8,
@@ -2157,7 +2157,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1096", opinionShift: 87, status: null, edition: 1,
+  id: "1096", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "Government guarantee exposure hit RM340 billion — double the 2018 level",
   context: "Federal government guarantee exposure reached RM340 billion in 2025, doubling from RM170 billion in 2018, creating massive contingent liabilities not reflected in official debt figures.",
   stageScores: { pa: 89, ba: 84, fc: 92, af: 78, ct: 71, sr: 85 }, finalScore: 86.1,
@@ -2171,7 +2171,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1097", opinionShift: 52, status: null, edition: 1,
+  id: "1097", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Anti-Sexual Harassment Act has only 18 trained tribunal members nationwide",
   context: "The Anti-Sexual Harassment Act 2022 came into force in 2023, but as of 2026 only 18 trained tribunal members have been appointed nationwide to handle cases.",
   stageScores: { pa: 79, ba: 64, fc: 80, af: 59, ct: 45, sr: 71 }, finalScore: 70.2,
@@ -2185,7 +2185,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1098", opinionShift: 73, status: "new", edition: 1,
+  id: "1098", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "GLCs paid RM2.8 billion in board fees while 6 reported losses",
   context: "Government-linked companies paid RM2.8 billion in combined board fees and executive compensation in 2025, including at six GLCs that reported net operating losses.",
   stageScores: { pa: 85, ba: 77, fc: 87, af: 71, ct: 62, sr: 81 }, finalScore: 81.6,
@@ -2199,7 +2199,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1099", opinionShift: 59, status: null, edition: 1,
+  id: "1099", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "State economic development corporations hold RM45 billion in unreported assets",
   context: "Thirteen state economic development corporations collectively hold an estimated RM45 billion in assets but most publish no annual reports or financial statements.",
   stageScores: { pa: 83, ba: 72, fc: 84, af: 66, ct: 55, sr: 77 }, finalScore: 76.2,
@@ -2213,7 +2213,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1100", opinionShift: 91, status: null, edition: 1,
+  id: "1100", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "Customs scandal: 47 containers of sanctioned goods cleared without inspection",
   context: "Forty-seven containers of goods subject to international trade sanctions were cleared through Port Klang without mandatory inspection in 2025, exposing systemic customs enforcement failure.",
   stageScores: { pa: 90, ba: 85, fc: 93, af: 79, ct: 73, sr: 86 }, finalScore: 86.5,
@@ -2227,7 +2227,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1101", opinionShift: 46, status: null, edition: 1,
+  id: "1101", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Constitutional amendments require only simple majority to table",
   context: "While constitutional amendments require two-thirds majority to pass, they can be tabled with simple majority, allowing the government to use constitutional change as political signalling.",
   stageScores: { pa: 78, ba: 61, fc: 79, af: 57, ct: 42, sr: 69 }, finalScore: 68.7,
@@ -2241,7 +2241,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1102", opinionShift: 82, status: null, edition: 2,
+  id: "1102", published: true, opinionShift: 82, status: null, edition: 2,
   headline: "Subsidy rationalisation saved RM14 billion but delivery mechanism leaks 30%",
   context: "Malaysia's 2024-2025 subsidy rationalisation saved RM14 billion on paper, but implementation audits show 30% of targeted subsidies still reached non-eligible recipients.",
   stageScores: { pa: 87, ba: 79, fc: 89, af: 74, ct: 65, sr: 83 }, finalScore: 82.0,
@@ -2255,7 +2255,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1103", opinionShift: 40, status: null, edition: 1,
+  id: "1103", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Dewan Rakyat has no code of ethics — 4th attempt to draft one failed",
   context: "The fourth attempt to establish a parliamentary code of ethics for Dewan Rakyat members failed in 2025 when the drafting committee dissolved without producing a final document.",
   stageScores: { pa: 77, ba: 60, fc: 78, af: 56, ct: 41, sr: 68 }, finalScore: 68.4,
@@ -2269,7 +2269,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1104", opinionShift: 64, status: null, edition: 1,
+  id: "1104", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "SPRM investigated 12 state excos but AG declined all prosecutions",
   context: "MACC completed investigations into 12 state executive councillors for corruption between 2023-2025, but the Attorney General declined prosecution in every case.",
   stageScores: { pa: 84, ba: 73, fc: 85, af: 68, ct: 57, sr: 78 }, finalScore: 77.6,
@@ -2283,7 +2283,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1105", opinionShift: 78, status: null, edition: 1,
+  id: "1105", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Ministry KPIs changed mid-year in 7 cases to show better performance",
   context: "Seven federal ministries changed their Key Performance Indicators mid-year in 2025, invariably lowering targets to convert projected failures into reported successes.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 56, sr: 77 }, finalScore: 76.6,
@@ -2297,7 +2297,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1106", opinionShift: 55, status: null, edition: 1,
+  id: "1106", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Federal-state concurrent list creates 34 unresolved jurisdiction conflicts",
   context: "Malaysia's concurrent legislative list has generated 34 unresolved federal-state jurisdiction conflicts as of 2025, with no constitutional court or mechanism to settle disputes.",
   stageScores: { pa: 80, ba: 66, fc: 81, af: 61, ct: 49, sr: 73 }, finalScore: 71.9,
@@ -2311,7 +2311,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1107", opinionShift: 70, status: null, edition: 1,
+  id: "1107", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Menteri Besar Inc companies worth RM28 billion operate without public scrutiny",
   context: "State investment arms known as 'Menteri Besar Incorporated' companies across 11 states manage combined assets of RM28 billion with minimal transparency or accountability requirements.",
   stageScores: { pa: 84, ba: 74, fc: 86, af: 69, ct: 59, sr: 79 }, finalScore: 78.9,
@@ -2325,7 +2325,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1108", opinionShift: 36, status: null, edition: 1,
+  id: "1108", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Youth Parliament initiative abandoned after 2 sessions with 0 legislative impact",
   context: "The Youth Parliament pilot programme launched in 2023 was discontinued after two sessions, having produced zero policy recommendations that were forwarded to the actual Parliament.",
   stageScores: { pa: 75, ba: 58, fc: 76, af: 55, ct: 40, sr: 68 }, finalScore: 68.1,
@@ -2339,7 +2339,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1109", opinionShift: 76, status: null, edition: 1,
+  id: "1109", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "RM890 million in pandemic procurement still unaccounted for",
   context: "The Auditor General's 2025 follow-up report found RM890 million in COVID-19 emergency procurement from 2020-2022 remains unaccounted for across seven ministries.",
   stageScores: { pa: 87, ba: 79, fc: 89, af: 73, ct: 64, sr: 82 }, finalScore: 82.2,
@@ -2353,7 +2353,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1110", opinionShift: 62, status: null, edition: 1,
+  id: "1110", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Backbench MPs speak average 4.2 minutes per parliamentary session",
   context: "Analysis of Hansard records showed backbench MPs spoke for an average of only 4.2 minutes per parliamentary session in 2025, with some not speaking at all.",
   stageScores: { pa: 79, ba: 64, fc: 80, af: 59, ct: 46, sr: 71 }, finalScore: 70.6,
@@ -2367,7 +2367,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1111", opinionShift: 85, status: "new", edition: 1,
+  id: "1111", published: true, opinionShift: 85, status: "new", edition: 1,
   headline: "Sabah and Sarawak receive 15% of federal development funds despite 60% of landmass",
   context: "Sabah and Sarawak collectively received only 15% of federal development allocation in 2025 despite comprising 60% of Malaysia's total land area and 20% of population.",
   stageScores: { pa: 86, ba: 78, fc: 88, af: 72, ct: 63, sr: 81 }, finalScore: 81.0,
@@ -2381,7 +2381,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1112", opinionShift: 57, status: null, edition: 1,
+  id: "1112", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Chief Secretary to Government serves as both regulator and regulated",
   context: "The Chief Secretary to the Government simultaneously chairs the public service reform committee and leads the civil service being reformed, creating an inherent conflict of interest.",
   stageScores: { pa: 80, ba: 66, fc: 82, af: 62, ct: 50, sr: 74 }, finalScore: 73.4,
@@ -2395,7 +2395,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1113", opinionShift: 69, status: null, edition: 1,
+  id: "1113", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "18 regulatory agencies have never been sunset-reviewed since creation",
   context: "Eighteen federal regulatory agencies established between 1970-2000 have never undergone a sunset review to assess whether their original mandate remains relevant or effective.",
   stageScores: { pa: 81, ba: 67, fc: 82, af: 63, ct: 51, sr: 74 }, finalScore: 73.6,
@@ -2409,7 +2409,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1114", opinionShift: 43, status: null, edition: 1,
+  id: "1114", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "National Consultative Council on political financing met once then went silent",
   context: "The National Consultative Council on Political Financing established in 2016 met once in December 2016 and has not convened since, leaving political financing completely unregulated.",
   stageScores: { pa: 78, ba: 62, fc: 79, af: 57, ct: 43, sr: 70 }, finalScore: 69.6,
@@ -2423,7 +2423,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1115", opinionShift: 74, status: null, edition: 1,
+  id: "1115", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Cabinet committees bypass parliament on 23 policy decisions",
   context: "Twenty-three major policy decisions in 2025 were made through cabinet committees rather than parliamentary debate, including changes affecting taxation, education, and environmental standards.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 76.4,
@@ -2437,7 +2437,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1116", opinionShift: 88, status: null, edition: 1,
+  id: "1116", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "RM2.1 billion rural road programme: 40% of roads failed quality inspection",
   context: "Forty percent of roads completed under the RM2.1 billion Program Jalan Perhubungan Luar Bandar failed quality inspections within two years of completion, requiring costly repairs.",
   stageScores: { pa: 88, ba: 81, fc: 90, af: 76, ct: 67, sr: 84 }, finalScore: 84.6,
@@ -2451,7 +2451,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1117", opinionShift: 50, status: null, edition: 1,
+  id: "1117", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Parliamentary select committees published only 8 reports in 2025",
   context: "Malaysia's 14 parliamentary select committees published a combined total of only 8 reports in 2025, with 6 committees producing no public output whatsoever.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 59, ct: 45, sr: 71 }, finalScore: 70.0,
@@ -2465,7 +2465,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1118", opinionShift: 79, status: "updated", edition: 2,
+  id: "1118", published: true, opinionShift: 79, status: "updated", edition: 2,
   headline: "MACC's corruption perception survey suppressed for second consecutive year",
   context: "MACC's annual National Corruption Barometer survey results were not published for the second year running, with officials citing 'methodology review' despite using the same methodology since 2018.",
   stageScores: { pa: 85, ba: 76, fc: 87, af: 71, ct: 62, sr: 80 }, finalScore: 80.4,
@@ -2479,7 +2479,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1119", opinionShift: 60, status: null, edition: 1,
+  id: "1119", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Government used emergency ordinance 7 times for non-emergency legislation",
   context: "The federal government invoked emergency ordinance powers seven times between 2023-2025 for legislation that did not meet traditional emergency criteria, bypassing parliamentary debate.",
   stageScores: { pa: 84, ba: 72, fc: 85, af: 68, ct: 57, sr: 78 }, finalScore: 77.0,
@@ -2493,7 +2493,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1120", opinionShift: 94, status: null, edition: 1,
+  id: "1120", published: true, opinionShift: 94, status: null, edition: 1,
   headline: "Malaysia's overall governance score dropped 8 points in 3 years — worst in decade",
   context: "Malaysia's composite governance score across Worldwide Governance Indicators, Corruption Perceptions Index, and Open Budget Index dropped 8 points from 2022 to 2025, the worst decline in a decade.",
   stageScores: { pa: 92, ba: 88, fc: 95, af: 82, ct: 78, sr: 88 }, finalScore: 87.6,
@@ -2507,7 +2507,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1121", opinionShift: 72, status: null, edition: 1,
+  id: "1121", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Budget 2026 Allocates RM303B Amid Fiscal Squeeze",
   context: "Finance Minister Anwar Ibrahim tabled Budget 2026 in October 2025 with a RM303 billion allocation, the largest in Malaysian history, while targeting a fiscal deficit of 3.8% of GDP.",
   stageScores: { pa: 88, ba: 76, fc: 89, af: 72, ct: 65, sr: 82 }, finalScore: 78.7,
@@ -2521,7 +2521,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1122", opinionShift: 58, status: "new", edition: 1,
+  id: "1122", published: true, opinionShift: 58, status: "new", edition: 1,
   headline: "Ringgit Slides Past 4.75 Against US Dollar",
   context: "The Malaysian ringgit weakened to 4.78 against the US dollar in January 2026, its lowest point since the 1998 Asian Financial Crisis, driven by capital outflows and a strong greenback.",
   stageScores: { pa: 90, ba: 82, fc: 87, af: 68, ct: 58, sr: 79 }, finalScore: 77.4,
@@ -2535,7 +2535,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1123", opinionShift: 85, status: null, edition: 1,
+  id: "1123", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Fuel Subsidy Rationalisation Saves RM8B But Hurts Millions",
   context: "The government implemented targeted diesel subsidy removal in June 2025 affecting commercial and T20 users, saving RM8 billion annually while retail prices rose from RM2.15 to RM3.35 per litre.",
   stageScores: { pa: 91, ba: 85, fc: 92, af: 78, ct: 72, sr: 85 }, finalScore: 83.8,
@@ -2549,7 +2549,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1124", opinionShift: 47, status: null, edition: 1,
+  id: "1124", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "EPF Dividend Falls to 5.1% for 2025",
   context: "The Employees Provident Fund declared a 5.1% conventional dividend for 2025, down from 5.5% in 2024, citing volatile global markets and lower returns on equity portfolios.",
   stageScores: { pa: 82, ba: 70, fc: 80, af: 62, ct: 52, sr: 74 }, finalScore: 70.9,
@@ -2563,7 +2563,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1125", opinionShift: 63, status: null, edition: 2,
+  id: "1125", published: true, opinionShift: 63, status: null, edition: 2,
   headline: "GST Reintroduction Debate Returns With 4% Proposal",
   context: "Economy Minister Rafizi Ramli hinted in February 2026 that a revised GST at 4% could replace SST to broaden the tax base, sparking fierce debate among coalition partners.",
   stageScores: { pa: 86, ba: 78, fc: 85, af: 70, ct: 60, sr: 80 }, finalScore: 76.5,
@@ -2577,7 +2577,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1126", opinionShift: 51, status: null, edition: 1,
+  id: "1126", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Palm Oil Prices Crash 28% Below 2024 Peak",
   context: "Crude palm oil futures fell to RM3,200 per tonne in March 2026 from RM4,450 in mid-2024, squeezing FELDA settlers and plantation workers across Sabah and Sarawak.",
   stageScores: { pa: 79, ba: 68, fc: 78, af: 60, ct: 48, sr: 72 }, finalScore: 68.2,
@@ -2591,7 +2591,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1127", opinionShift: 77, status: "new", edition: 1,
+  id: "1127", published: true, opinionShift: 77, status: "new", edition: 1,
   headline: "National Debt Hits RM1.25 Trillion Milestone in 2025",
   context: "Malaysia's federal government debt reached RM1.25 trillion or 64.3% of GDP by end-2025, approaching the self-imposed statutory ceiling of 65% set under the revised fiscal framework.",
   stageScores: { pa: 87, ba: 80, fc: 88, af: 74, ct: 68, sr: 84 }, finalScore: 80.2,
@@ -2605,7 +2605,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1128", opinionShift: 42, status: null, edition: 1,
+  id: "1128", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Gig Workers Exceed 1.3 Million Without Social Protection",
   context: "DOSM reported that gig economy workers in Malaysia surpassed 1.3 million in 2025, with over 78% lacking EPF contributions, SOCSO coverage, or any form of employment insurance.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 65, ct: 55, sr: 76 }, finalScore: 72.8,
@@ -2619,7 +2619,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1129", opinionShift: 68, status: null, edition: 1,
+  id: "1129", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Minimum Wage Rise to RM1,700 Draws Mixed Reactions",
   context: "The government announced a minimum wage increase from RM1,500 to RM1,700 effective January 2026, with SMEs given a 6-month grace period amid warnings of job losses and business closures.",
   stageScores: { pa: 85, ba: 74, fc: 84, af: 69, ct: 58, sr: 78 }, finalScore: 74.8,
@@ -2633,7 +2633,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1130", opinionShift: 56, status: null, edition: 1,
+  id: "1130", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "PTPTN Loan Repayment Rate Stalls at 48% Nationwide",
   context: "The National Higher Education Fund Corporation reported that only 48% of RM47 billion in outstanding PTPTN loans were being actively repaid in 2025, with 2.1 million borrowers in arrears.",
   stageScores: { pa: 80, ba: 66, fc: 79, af: 63, ct: 50, sr: 73 }, finalScore: 68.5,
@@ -2647,7 +2647,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1131", opinionShift: 73, status: "new", edition: 1,
+  id: "1131", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Khazanah Reports RM12B Paper Loss on Global Tech Bets",
   context: "Sovereign wealth fund Khazanah Nasional disclosed a RM12 billion unrealised loss in its global technology portfolio for 2025, primarily from holdings in Chinese tech firms amid US-China tensions.",
   stageScores: { pa: 84, ba: 77, fc: 86, af: 71, ct: 62, sr: 81 }, finalScore: 76.8,
@@ -2661,7 +2661,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1132", opinionShift: 44, status: null, edition: 1,
+  id: "1132", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Property Overhang Reaches 37,000 Unsold Units Worth RM23B",
   context: "NAPIC data showed Malaysia's residential property overhang hit 37,142 unsold completed units valued at RM23.4 billion by Q3 2025, concentrated in Johor, Selangor, and Penang.",
   stageScores: { pa: 78, ba: 65, fc: 77, af: 59, ct: 45, sr: 70 }, finalScore: 69.3,
@@ -2675,7 +2675,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1133", opinionShift: 81, status: null, edition: 1,
+  id: "1133", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Petronas Dividend to Government Falls RM10B Short",
   context: "Petronas declared a RM32 billion dividend to the federal government for 2025, RM10 billion below the RM42 billion budgeted, as global oil prices averaged USD62 per barrel against the USD75 assumption.",
   stageScores: { pa: 89, ba: 83, fc: 90, af: 76, ct: 70, sr: 86 }, finalScore: 82.3,
@@ -2689,7 +2689,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1134", opinionShift: 39, status: null, edition: 1,
+  id: "1134", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "FDI Into Malaysia Surges 23% to RM82 Billion",
   context: "MIDA reported approved foreign direct investment of RM82.4 billion in 2025, up 23% from 2024, driven by semiconductor, data centre, and renewable energy projects primarily in Penang and Johor.",
   stageScores: { pa: 81, ba: 71, fc: 83, af: 64, ct: 53, sr: 75 }, finalScore: 71.8,
@@ -2703,7 +2703,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1135", opinionShift: 65, status: "updated", edition: 2,
+  id: "1135", published: true, opinionShift: 65, status: "updated", edition: 2,
   headline: "Cost of Living Crisis Pushes 600,000 Into B40 Bracket",
   context: "DOSM's 2025 Household Income Survey revealed 600,000 households slipped from M40 into B40 classification between 2022 and 2025, driven by stagnant wages and persistent inflation above 3.5%.",
   stageScores: { pa: 92, ba: 84, fc: 91, af: 75, ct: 66, sr: 83 }, finalScore: 81.8,
@@ -2717,7 +2717,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1136", opinionShift: 53, status: null, edition: 1,
+  id: "1136", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "SME Loan Rejection Rate Climbs to 52% at Major Banks",
   context: "Bank Negara data showed that 52% of SME loan applications were rejected by commercial banks in 2025, up from 41% in 2022, with micro-enterprises and Bumiputera-owned firms facing the highest barriers.",
   stageScores: { pa: 80, ba: 69, fc: 81, af: 61, ct: 49, sr: 71 }, finalScore: 68.8,
@@ -2731,7 +2731,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1137", opinionShift: 71, status: null, edition: 1,
+  id: "1137", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Electricity Tariff Hike of 17% Hits Manufacturers Hard",
   context: "Tenaga Nasional announced a 17% average tariff increase effective January 2026 under the Incentive-Based Regulation mechanism, with industrial users absorbing the largest increase at 21 sen per kWh.",
   stageScores: { pa: 86, ba: 75, fc: 85, af: 67, ct: 57, sr: 77 }, finalScore: 74.7,
@@ -2745,7 +2745,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1138", opinionShift: 88, status: "new", edition: 1,
+  id: "1138", published: true, opinionShift: 88, status: "new", edition: 1,
   headline: "Bumiputera Economic Equity Stagnates at 17.2% After 55 Years",
   context: "EPU's 2025 review showed Bumiputera corporate equity ownership at 17.2%, barely changed from 16.2% in 2010, despite over RM500 billion in cumulative policy support since the New Economic Policy began in 1971.",
   stageScores: { pa: 88, ba: 81, fc: 90, af: 77, ct: 73, sr: 85 }, finalScore: 82.0,
@@ -2759,7 +2759,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1139", opinionShift: 46, status: null, edition: 1,
+  id: "1139", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Digital Bank Licences See 780,000 Sign-Ups in Year One",
   context: "Malaysia's five licensed digital banks collectively onboarded 780,000 customers in their first year of operations ending March 2026, with GXBank leading at 320,000 accounts but profitability still years away.",
   stageScores: { pa: 77, ba: 64, fc: 76, af: 58, ct: 44, sr: 69 }, finalScore: 68.0,
@@ -2773,7 +2773,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1140", opinionShift: 60, status: null, edition: 1,
+  id: "1140", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Sugar Tax Revenue Hits RM1.8B But Diabetes Rates Unchanged",
   context: "The excise duty on sugary drinks introduced in 2019 collected RM1.8 billion cumulatively by 2025, but Malaysia's diabetes prevalence remained at 18.3% of adults, the highest in ASEAN.",
   stageScores: { pa: 82, ba: 73, fc: 84, af: 66, ct: 54, sr: 78 }, finalScore: 73.4,
@@ -2787,7 +2787,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1141", opinionShift: 75, status: null, edition: 2,
+  id: "1141", published: true, opinionShift: 75, status: null, edition: 2,
   headline: "Johor-Singapore SEZ Promises 100,000 Jobs Over 10 Years",
   context: "The Johor-Singapore Special Economic Zone officially launched in January 2026, offering tax rates as low as 5% to attract RM120 billion in investments and create 100,000 high-income jobs over a decade.",
   stageScores: { pa: 85, ba: 76, fc: 86, af: 70, ct: 61, sr: 80 }, finalScore: 76.3,
@@ -2801,7 +2801,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1142", opinionShift: 50, status: null, edition: 1,
+  id: "1142", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Rubber Smallholders Earn Below RM800 Monthly Average",
   context: "The Malaysian Rubber Board reported that 280,000 rubber smallholders earned an average of RM780 per month in 2025, as natural rubber prices remained depressed at RM4.20 per kg amid synthetic rubber competition.",
   stageScores: { pa: 79, ba: 67, fc: 78, af: 60, ct: 47, sr: 72 }, finalScore: 70.1,
@@ -2815,7 +2815,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1143", opinionShift: 83, status: "new", edition: 1,
+  id: "1143", published: true, opinionShift: 83, status: "new", edition: 1,
   headline: "Cryptocurrency Losses Hit RM2.1B Among Malaysian Investors",
   context: "Securities Commission Malaysia estimated that Malaysian retail investors lost RM2.1 billion in cryptocurrency investments during 2024-2025, with 78% of losses occurring on unregistered offshore platforms.",
   stageScores: { pa: 83, ba: 74, fc: 83, af: 68, ct: 56, sr: 79 }, finalScore: 74.2,
@@ -2829,7 +2829,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1144", opinionShift: 57, status: null, edition: 1,
+  id: "1144", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Affordable Housing Programme Delivers Only 34% of Target",
   context: "The Rumah Mampu Milik programme delivered only 47,600 units of its 140,000-unit target for 2020-2025, with delays blamed on land costs, contractor failures, and cross-agency coordination breakdowns.",
   stageScores: { pa: 84, ba: 72, fc: 82, af: 64, ct: 51, sr: 75 }, finalScore: 72.4,
@@ -2843,7 +2843,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1145", opinionShift: 69, status: null, edition: 1,
+  id: "1145", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "GLC Reform Tracker Shows 22% of Targets Met After 2 Years",
   context: "The MAHB, Petronas, and Tenaga-led GLC transformation programme launched in 2023 achieved only 22% of its 180 reform KPIs after 2 years, according to the PCG's 2025 progress report.",
   stageScores: { pa: 81, ba: 70, fc: 80, af: 63, ct: 52, sr: 74 }, finalScore: 70.5,
@@ -2857,7 +2857,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1146", opinionShift: 36, status: null, edition: 1,
+  id: "1146", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "E-Wallet Transactions Surpass RM48 Billion in 2025",
   context: "Bank Negara reported that e-wallet transactions reached RM48.3 billion in 2025 across 56 licensed providers, with Touch 'n Go eWallet, GrabPay, and Boost commanding 82% market share.",
   stageScores: { pa: 76, ba: 62, fc: 76, af: 57, ct: 42, sr: 68 }, finalScore: 68.4,
@@ -2871,7 +2871,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1147", opinionShift: 78, status: null, edition: 1,
+  id: "1147", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "PNB's ASB Returns Drop to 4.25% — Lowest in 18 Years",
   context: "Permodalan Nasional Berhad declared a 4.25% distribution for Amanah Saham Bumiputera in 2025, the lowest since 2007, affecting 10.4 million unitholders who rely on ASB as their primary savings vehicle.",
   stageScores: { pa: 87, ba: 79, fc: 88, af: 73, ct: 64, sr: 82 }, finalScore: 79.0,
@@ -2885,7 +2885,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1148", opinionShift: 41, status: null, edition: 1,
+  id: "1148", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Malaysia's Trade Surplus Narrows to RM98B in 2025",
   context: "DOSM reported Malaysia's trade surplus narrowed to RM98.4 billion in 2025 from RM132 billion in 2024, as semiconductor export growth slowed and imports of capital goods surged for data centre construction.",
   stageScores: { pa: 78, ba: 66, fc: 79, af: 59, ct: 46, sr: 70 }, finalScore: 69.8,
@@ -2899,7 +2899,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1149", opinionShift: 62, status: "new", edition: 1,
+  id: "1149", published: true, opinionShift: 62, status: "new", edition: 1,
   headline: "Flood Damage Costs Kelantan RM4.7B Over 3 Consecutive Years",
   context: "Annual monsoon floods caused cumulative economic damage of RM4.7 billion in Kelantan from 2023-2025, destroying crops, displacing 180,000 people, and wiping out small businesses that had not yet recovered from previous floods.",
   stageScores: { pa: 86, ba: 78, fc: 87, af: 71, ct: 60, sr: 81 }, finalScore: 77.2,
@@ -2913,7 +2913,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1150", opinionShift: 55, status: null, edition: 1,
+  id: "1150", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Foreign Worker Levy Overhaul Raises RM4.2B But Costs Soar",
   context: "The restructured foreign worker levy system introduced in mid-2025 raised RM4.2 billion in revenue but pushed hiring costs 35% higher, leading to worker shortages in plantations, construction, and manufacturing.",
   stageScores: { pa: 81, ba: 71, fc: 81, af: 65, ct: 53, sr: 76 }, finalScore: 71.9,
@@ -2927,7 +2927,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1151", opinionShift: 70, status: null, edition: 1,
+  id: "1151", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Tabung Haji Investment Losses Resurface With RM1.4B Write-Down",
   context: "Lembaga Tabung Haji disclosed a RM1.4 billion write-down on legacy property and equity investments in its 2025 annual report, reviving concerns about the fund's management of 9.3 million depositors' hajj savings.",
   stageScores: { pa: 85, ba: 77, fc: 86, af: 72, ct: 63, sr: 80 }, finalScore: 77.3,
@@ -2941,7 +2941,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1152", opinionShift: 48, status: null, edition: 1,
+  id: "1152", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Highway Toll Abolition Costs Government RM3.8B Annually",
   context: "The government's gradual toll abolition programme covering 8 highways by 2026 costs RM3.8 billion per year in compensation to concessionaires, with critics questioning whether the money could be better spent on public transport.",
   stageScores: { pa: 80, ba: 68, fc: 80, af: 62, ct: 50, sr: 73 }, finalScore: 69.0,
@@ -2955,7 +2955,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1153", opinionShift: 86, status: null, edition: 1,
+  id: "1153", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Sarawak Demands 20% Oil Royalty Up From Current 5%",
   context: "Sarawak Premier Abang Johari reiterated demands for a 20% petroleum royalty in January 2026, threatening to withhold state GPS support for the federal coalition if Putrajaya does not honour the Malaysia Agreement 1963 terms.",
   stageScores: { pa: 90, ba: 84, fc: 91, af: 78, ct: 71, sr: 86 }, finalScore: 83.3,
@@ -2969,7 +2969,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1154", opinionShift: 43, status: "updated", edition: 2,
+  id: "1154", published: true, opinionShift: 43, status: "updated", edition: 2,
   headline: "Tax Amnesty Programme Collects RM7.2B From Undeclared Income",
   context: "LHDN's Special Voluntary Disclosure Programme 2.0 running from July 2025 to June 2026 collected RM7.2 billion in the first 6 months from 184,000 taxpayers declaring previously hidden income and assets.",
   stageScores: { pa: 79, ba: 67, fc: 79, af: 61, ct: 48, sr: 71 }, finalScore: 71.5,
@@ -2983,7 +2983,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1155", opinionShift: 64, status: null, edition: 1,
+  id: "1155", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Paddy Farmers Protest RM1,200 Per Tonne Price Cap",
   context: "BERNAS's paddy procurement price ceiling of RM1,200 per tonne sparked protests among 170,000 rice farmers in Kedah and Perlis in February 2026, who demanded RM1,500 to cover rising input costs.",
   stageScores: { pa: 84, ba: 73, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 73.8,
@@ -2997,7 +2997,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1156", opinionShift: 52, status: null, edition: 1,
+  id: "1156", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Youth Unemployment Persists at 11.4% Despite GDP Growth",
   context: "DOSM reported that youth unemployment for 15-24 year olds remained stubbornly high at 11.4% in 2025, more than triple the national rate of 3.3%, with 480,000 young Malaysians unable to find work.",
   stageScores: { pa: 83, ba: 75, fc: 83, af: 66, ct: 54, sr: 76 }, finalScore: 73.5,
@@ -3011,7 +3011,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1157", opinionShift: 79, status: "new", edition: 1,
+  id: "1157", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "Penang Reclamation Project Threatens RM4.8B Fishing Industry",
   context: "The Penang South Reclamation project to create 4,500 acres of new land worth RM70 billion faced renewed opposition in 2026 from 12,000 fishermen who claim it will destroy their RM4.8 billion annual catch livelihoods.",
   stageScores: { pa: 87, ba: 80, fc: 88, af: 74, ct: 66, sr: 83 }, finalScore: 79.8,
@@ -3025,7 +3025,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1158", opinionShift: 37, status: null, edition: 1,
+  id: "1158", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Malaysia's Fintech Sector Raises RM3.6B in 2025 Funding",
   context: "Malaysian fintech companies raised RM3.6 billion in venture capital and growth funding during 2025, led by payments and lending platforms, though 68% of funding went to just 5 companies headquartered in Kuala Lumpur.",
   stageScores: { pa: 77, ba: 63, fc: 77, af: 58, ct: 43, sr: 69 }, finalScore: 69.9,
@@ -3039,7 +3039,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1159", opinionShift: 74, status: null, edition: 1,
+  id: "1159", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Cooking Oil Subsidy Costs RM4.1B as Smuggling Persists",
   context: "The government spent RM4.1 billion subsidising cooking oil in 2025 while KPDN estimated that 28% of subsidised palm olein was smuggled to Thailand and Indonesia where prices are 40% higher.",
   stageScores: { pa: 85, ba: 76, fc: 85, af: 69, ct: 58, sr: 79 }, finalScore: 75.3,
@@ -3053,7 +3053,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1160", opinionShift: 59, status: null, edition: 1,
+  id: "1160", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Sabah Poverty Rate at 19.2% — Highest in Malaysia",
   context: "DOSM's 2025 data confirmed Sabah's poverty rate at 19.2%, nearly 6 times the national average of 3.4%, with 680,000 Sabahans living below the poverty line despite the state's vast natural resource wealth.",
   stageScores: { pa: 88, ba: 81, fc: 89, af: 73, ct: 64, sr: 82 }, finalScore: 79.5,
@@ -3067,7 +3067,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1161", opinionShift: 67, status: null, edition: 1,
+  id: "1161", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "FELDA Settlers Owe RM8.3B in Unrecoverable Loans",
   context: "FELDA's 2025 annual report revealed that 112,000 settlers collectively owe RM8.3 billion in loans, with 58% of balances classified as non-performing after decades of low CPO prices and mismanaged restructuring programmes.",
   stageScores: { pa: 84, ba: 74, fc: 84, af: 68, ct: 57, sr: 78 }, finalScore: 74.4,
@@ -3081,7 +3081,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1162", opinionShift: 45, status: null, edition: 1,
+  id: "1162", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Construction Sector Faces 35% Cost Inflation Since 2021",
   context: "CIDB reported that construction material costs rose 35% cumulatively from 2021 to 2025, with steel bars up 42%, cement up 28%, and sand up 51%, causing RM18 billion in project cost overruns across government contracts.",
   stageScores: { pa: 80, ba: 69, fc: 80, af: 62, ct: 49, sr: 73 }, finalScore: 69.4,
@@ -3095,7 +3095,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1163", opinionShift: 82, status: null, edition: 1,
+  id: "1163", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Wealth Tax Proposal on Top 0.1% Stirs Political Firestorm",
   context: "Deputy Finance Minister Ahmad Maslan proposed a 2% annual wealth tax on individuals with net assets exceeding RM50 million in February 2026, potentially raising RM8 billion from approximately 3,200 ultra-wealthy Malaysians.",
   stageScores: { pa: 89, ba: 82, fc: 90, af: 76, ct: 69, sr: 84 }, finalScore: 81.7,
@@ -3109,7 +3109,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1164", opinionShift: 54, status: "new", edition: 1,
+  id: "1164", published: true, opinionShift: 54, status: "new", edition: 1,
   headline: "Halal Industry Revenue Misses RM56B Target by 39%",
   context: "HDC reported Malaysia's halal export revenue at RM34.2 billion in 2025, falling 39% short of the RM56 billion target set under the Halal Industry Master Plan 2030, with competition from Turkey, UAE, and Indonesia intensifying.",
   stageScores: { pa: 79, ba: 65, fc: 78, af: 60, ct: 47, sr: 71 }, finalScore: 71.1,
@@ -3123,7 +3123,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1165", opinionShift: 91, status: null, edition: 1,
+  id: "1165", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "1MDB Final Recovery Reaches Only 38% of RM42B Losses",
   context: "The 1MDB task force reported cumulative asset recovery of RM16.1 billion by end-2025, representing 38% of the estimated RM42 billion in total losses, with remaining recoverable assets scattered across 8 jurisdictions.",
   stageScores: { pa: 91, ba: 86, fc: 93, af: 80, ct: 75, sr: 88 }, finalScore: 85.5,
@@ -3137,7 +3137,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1166", opinionShift: 40, status: null, edition: 1,
+  id: "1166", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Insurance Penetration Stalls at 55% Leaving 13M Unprotected",
   context: "Bank Negara's 2025 Financial Stability Review showed life insurance and family takaful penetration at 55%, unchanged from 2020, leaving 13 million working-age Malaysians without any life or medical coverage.",
   stageScores: { pa: 78, ba: 64, fc: 77, af: 58, ct: 44, sr: 70 }, finalScore: 68.7,
@@ -3151,7 +3151,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1167", opinionShift: 76, status: null, edition: 1,
+  id: "1167", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Rapid Transit System Link KL-Singapore Revived at RM52B",
   context: "Malaysia and Singapore announced revival of the KL-Singapore High Speed Rail concept in March 2026 as a Rapid Transit System Link with revised cost of RM52 billion, after Malaysia paid RM320 million compensation for cancelling the original HSR in 2021.",
   stageScores: { pa: 86, ba: 79, fc: 87, af: 72, ct: 63, sr: 81 }, finalScore: 78.0,
@@ -3165,7 +3165,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1168", opinionShift: 49, status: null, edition: 1,
+  id: "1168", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Grocery Prices Up 22% in 3 Years While Wages Grow 6%",
   context: "DOSM's Consumer Price Index data showed food-at-home prices rose 22% cumulatively from 2023 to 2025, far outpacing nominal wage growth of 6% over the same period, with vegetables, fish, and eggs showing the steepest increases.",
   stageScores: { pa: 90, ba: 80, fc: 88, af: 71, ct: 59, sr: 80 }, finalScore: 78.1,
@@ -3179,7 +3179,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1169", opinionShift: 61, status: null, edition: 3,
+  id: "1169", published: true, opinionShift: 61, status: null, edition: 3,
   headline: "ECRL Cost Balloons to RM88B From Original RM55B",
   context: "The East Coast Rail Link's revised cost estimate reached RM88 billion in 2025 including land acquisition and interest during construction, up 60% from the renegotiated RM55 billion price agreed with China Communications Construction Company.",
   stageScores: { pa: 87, ba: 81, fc: 89, af: 75, ct: 67, sr: 83 }, finalScore: 80.3,
@@ -3193,7 +3193,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1170", opinionShift: 93, status: "new", edition: 1,
+  id: "1170", published: true, opinionShift: 93, status: "new", edition: 1,
   headline: "Bumiputera Contract Quota System Loses RM12B to Rent-Seeking",
   context: "A MACC investigation revealed that an estimated RM12 billion annually in government procurement value is lost to Ali Baba arrangements where Bumiputera quota holders sell contracts to non-Bumiputera operators for 5-15% commissions.",
   stageScores: { pa: 90, ba: 85, fc: 92, af: 79, ct: 74, sr: 87 }, finalScore: 84.5,
@@ -3207,7 +3207,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1171", opinionShift: 38, status: null, edition: 1,
+  id: "1171", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Renewable Energy Target of 31% by 2025 Achieves Only 24%",
   context: "Malaysia's renewable energy mix reached 24% of installed capacity by end-2025, missing the 31% target under the National Energy Policy, with solar farm approvals delayed by land acquisition disputes and grid connectivity bottlenecks.",
   stageScores: { pa: 79, ba: 66, fc: 78, af: 59, ct: 46, sr: 72 }, finalScore: 70.7,
@@ -3221,7 +3221,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1172", opinionShift: 66, status: null, edition: 1,
+  id: "1172", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Bank Profits Hit RM42B Record While Lending Margins Squeeze SMEs",
   context: "Malaysia's 8 listed banks reported combined net profit of RM42.3 billion in 2025, driven by fee income and treasury gains, even as SMEs complained of tightening credit conditions and higher effective borrowing costs.",
   stageScores: { pa: 83, ba: 73, fc: 82, af: 66, ct: 55, sr: 77 }, finalScore: 73.3,
@@ -3235,7 +3235,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1173", opinionShift: 84, status: null, edition: 1,
+  id: "1173", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Penang Semiconductor Cluster Faces Water Shortage Crisis",
   context: "Penang's semiconductor manufacturing hub — producing 8% of global chip packaging output — faces recurring water supply disruptions as dam reserves fell below 50% in February 2026, threatening RM62 billion in annual production.",
   stageScores: { pa: 88, ba: 82, fc: 90, af: 76, ct: 68, sr: 84 }, finalScore: 81.3,
@@ -3249,7 +3249,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1174", opinionShift: 35, status: null, edition: 1,
+  id: "1174", published: true, opinionShift: 35, status: null, edition: 1,
   headline: "Malaysia's Carbon Market Launches With Only 12 Participants",
   context: "Bursa Carbon Exchange completed its first year of operations in 2025 with only 12 active participants and RM48 million in traded volume, far below the projected RM500 million, as regulatory uncertainty kept most companies on the sideline.",
   stageScores: { pa: 75, ba: 58, fc: 75, af: 55, ct: 40, sr: 68 }, finalScore: 68.6,
@@ -3263,7 +3263,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1175", opinionShift: 72, status: "updated", edition: 2,
+  id: "1175", published: true, opinionShift: 72, status: "updated", edition: 2,
   headline: "RM15B MRT3 Circle Line Faces 18-Month Delay",
   context: "The RM15 billion MRT Circle Line in Kuala Lumpur encountered an 18-month delay in January 2026 due to tunnelling complications and land acquisition disputes, pushing completion from 2028 to late 2029.",
   stageScores: { pa: 84, ba: 75, fc: 85, af: 69, ct: 58, sr: 79 }, finalScore: 75.1,
@@ -3277,7 +3277,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1176", opinionShift: 58, status: null, edition: 1,
+  id: "1176", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Agriculture Sector Shrinks to 6.8% of GDP — Lowest Ever",
   context: "Agriculture's share of Malaysian GDP fell to 6.8% in 2025, the lowest in the nation's history, even as 1.8 million workers — 12% of the workforce — remain employed in the sector at average wages below the poverty threshold.",
   stageScores: { pa: 81, ba: 70, fc: 81, af: 64, ct: 52, sr: 75 }, finalScore: 71.2,
@@ -3291,7 +3291,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1177", opinionShift: 80, status: null, edition: 1,
+  id: "1177", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Passport Backlog Reaches 500,000 Amid Emigration Surge",
   context: "The Immigration Department reported a backlog of 500,000 passport applications in March 2026, driven by a 48% increase in applications as Malaysians — particularly young professionals — seek overseas employment and residency.",
   stageScores: { pa: 86, ba: 78, fc: 86, af: 72, ct: 62, sr: 81 }, finalScore: 77.5,
@@ -3305,7 +3305,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1178", opinionShift: 46, status: null, edition: 1,
+  id: "1178", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Vehicle Sales Hit 800,000 Units But Household Debt Soars",
   context: "MAA reported 2025 vehicle sales of 802,000 units, a record year driven by Perodua and Proton, while Bank Negara flagged that hire purchase debt reached RM310 billion — 20% of total household borrowing.",
   stageScores: { pa: 80, ba: 68, fc: 79, af: 61, ct: 48, sr: 73 }, finalScore: 70.3,
@@ -3319,7 +3319,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1179", opinionShift: 70, status: "new", edition: 1,
+  id: "1179", published: true, opinionShift: 70, status: "new", edition: 1,
   headline: "MARA Education Loans Show 72% Non-Performing Rate",
   context: "Majlis Amanah Rakyat disclosed that 72% of its RM14.8 billion education loan portfolio was non-performing in 2025, the worst recovery rate of any government lending agency, threatening MARA's financial sustainability.",
   stageScores: { pa: 83, ba: 76, fc: 84, af: 70, ct: 60, sr: 79 }, finalScore: 75.4,
@@ -3333,7 +3333,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1180", opinionShift: 53, status: null, edition: 1,
+  id: "1180", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Johor Property Glut Worsens With 14,800 Unsold Condos",
   context: "NAPIC data showed Johor's residential property overhang reached 14,800 unsold completed units in 2025, the highest in Malaysia, driven by overbuilding of luxury condos in Iskandar Malaysia targeting foreign buyers who never came.",
   stageScores: { pa: 78, ba: 65, fc: 78, af: 60, ct: 47, sr: 71 }, finalScore: 69.6,
@@ -3347,7 +3347,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1181", opinionShift: 87, status: null, edition: 1,
+  id: "1181", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "Subsidy Bill Reaches RM82B — One-Third of Federal Revenue",
   context: "The Finance Ministry disclosed that total subsidies, incentives, and social assistance reached RM82 billion in 2025, consuming 33% of federal revenue and crowding out development spending on infrastructure, education, and healthcare.",
   stageScores: { pa: 91, ba: 84, fc: 91, af: 77, ct: 70, sr: 85 }, finalScore: 83.0,
@@ -3361,7 +3361,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1182", opinionShift: 43, status: null, edition: 1,
+  id: "1182", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Aquaculture Industry Targets RM8B But Pollution Limits Growth",
   context: "The Fisheries Department reported aquaculture output of RM5.4 billion in 2025, short of the RM8 billion National Aquaculture Plan target, as coastal pollution and disease outbreaks destroyed 22% of shrimp farm production in Perak and Johor.",
   stageScores: { pa: 77, ba: 63, fc: 76, af: 57, ct: 43, sr: 69 }, finalScore: 70.2,
@@ -3375,7 +3375,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1183", opinionShift: 68, status: null, edition: 1,
+  id: "1183", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "MAHB Airport Privatisation Debate Returns After GMR Offer",
   context: "India's GMR Group submitted a RM18 billion offer to acquire a 30% stake in Malaysia Airports Holdings Berhad in February 2026, reigniting debate about whether strategic national infrastructure should be privatised to foreign operators.",
   stageScores: { pa: 85, ba: 77, fc: 86, af: 71, ct: 61, sr: 80 }, finalScore: 76.7,
@@ -3389,7 +3389,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1184", opinionShift: 56, status: null, edition: 1,
+  id: "1184", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Graduate Starting Salary Stagnant at RM2,300 for 8 Years",
   context: "DOSM's Graduate Tracer Study 2025 revealed that median starting salary for fresh graduates remained at RM2,300 per month, virtually unchanged since 2017 in nominal terms and declining 14% in real terms after inflation adjustment.",
   stageScores: { pa: 84, ba: 73, fc: 83, af: 65, ct: 53, sr: 76 }, finalScore: 72.9,
@@ -3403,7 +3403,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1185", opinionShift: 75, status: null, edition: 1,
+  id: "1185", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Illegal Logging Costs Sarawak RM2.8B in Lost Timber Revenue",
   context: "The Sarawak Forestry Corporation estimated RM2.8 billion in timber revenue was lost to illegal logging operations in 2025, with satellite imagery revealing 48,000 hectares of protected forest cleared without valid permits.",
   stageScores: { pa: 86, ba: 79, fc: 88, af: 73, ct: 64, sr: 82 }, finalScore: 78.8,
@@ -3417,7 +3417,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1186", opinionShift: 41, status: null, edition: 1,
+  id: "1186", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "RM6.2B Tun Razak Exchange Fills Only 52% After 10 Years",
   context: "The Tun Razak Exchange financial district in KL achieved only 52% occupancy a decade after launch, with the 70-acre development struggling to attract tenants despite RM6.2 billion in infrastructure investment and tax incentives.",
   stageScores: { pa: 79, ba: 66, fc: 79, af: 60, ct: 48, sr: 72 }, finalScore: 71.6,
@@ -3431,7 +3431,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1187", opinionShift: 64, status: "new", edition: 1,
+  id: "1187", published: true, opinionShift: 64, status: "new", edition: 1,
   headline: "Wage Subsidy Programme Cost RM18B But Saved Only 62% of Targeted Jobs",
   context: "Post-pandemic audit of the Wage Subsidy Programme found it cost RM18 billion from 2020-2023 but preserved only 62% of the 2.8 million jobs it targeted, with RM4.2 billion going to companies that would have retained workers anyway.",
   stageScores: { pa: 82, ba: 71, fc: 82, af: 66, ct: 54, sr: 77 }, finalScore: 72.7,
@@ -3445,7 +3445,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1188", opinionShift: 50, status: null, edition: 1,
+  id: "1188", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "LNG Export Revenue Falls 28% as Global Gas Prices Normalise",
   context: "Malaysia's LNG export revenue dropped 28% to RM58 billion in 2025 from RM81 billion in 2023, as global gas prices normalised post-Ukraine crisis, squeezing Petronas margins and reducing government petroleum tax collections.",
   stageScores: { pa: 81, ba: 72, fc: 81, af: 63, ct: 51, sr: 74 }, finalScore: 71.0,
@@ -3459,7 +3459,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1189", opinionShift: 73, status: null, edition: 2,
+  id: "1189", published: true, opinionShift: 73, status: null, edition: 2,
   headline: "Taxi Industry Collapse Leaves 48,000 Drivers Without Income",
   context: "Malaysia's traditional taxi industry reported that 48,000 of its 78,000 licensed drivers earned below RM1,500 monthly in 2025, with e-hailing services capturing 82% of urban point-to-point transport market.",
   stageScores: { pa: 82, ba: 70, fc: 80, af: 64, ct: 52, sr: 75 }, finalScore: 71.3,
@@ -3473,7 +3473,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1190", opinionShift: 59, status: null, edition: 1,
+  id: "1190", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "EPF Account 3 Withdrawals Hit RM12B in First 8 Months",
   context: "The new EPF Account 3 flexible withdrawal facility saw RM12 billion withdrawn in its first 8 months since April 2025, with 6.2 million members accessing funds primarily for debt repayment and daily expenses rather than emergencies.",
   stageScores: { pa: 85, ba: 76, fc: 85, af: 69, ct: 57, sr: 79 }, finalScore: 75.2,
@@ -3487,7 +3487,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1191", opinionShift: 47, status: null, edition: 1,
+  id: "1191", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Durian Exports to China Surge 340% to RM8.2B",
   context: "Malaysia's durian exports to China exploded 340% to RM8.2 billion in 2025 following the fresh durian export protocol agreement, making Musang King and Black Thorn premium varieties Malaysia's fastest-growing agricultural export.",
   stageScores: { pa: 80, ba: 68, fc: 80, af: 62, ct: 50, sr: 74 }, finalScore: 69.1,
@@ -3501,7 +3501,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1192", opinionShift: 90, status: null, edition: 1,
+  id: "1192", published: true, opinionShift: 90, status: null, edition: 1,
   headline: "Civil Service Costs Consume 82% of Operating Budget",
   context: "Treasury data showed that civil service emoluments, pensions, and benefits consumed RM128 billion or 82% of the federal operating budget in 2025, leaving only RM28 billion for supplies, maintenance, and programme delivery.",
   stageScores: { pa: 90, ba: 85, fc: 92, af: 78, ct: 72, sr: 86 }, finalScore: 83.9,
@@ -3515,7 +3515,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1193", opinionShift: 44, status: null, edition: 1,
+  id: "1193", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Rare Earth Processing in Pahang Draws RM14B Investment But Environmental Fears",
   context: "Lynas Corporation's expanded rare earth processing facility in Gebeng, Pahang received RM14 billion in new investment commitments in 2025 to supply the global EV battery chain, while residents renewed protests over radioactive waste storage.",
   stageScores: { pa: 83, ba: 74, fc: 84, af: 67, ct: 56, sr: 78 }, finalScore: 74.1,
@@ -3529,7 +3529,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1194", opinionShift: 66, status: null, edition: 1,
+  id: "1194", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Credit Card Debt Rises 18% to RM42B Among Young Borrowers",
   context: "Bank Negara data revealed credit card outstanding balances for borrowers aged 21-35 grew 18% to RM42 billion in 2025, with minimum payment behaviour rising to 34% of cardholders as cost of living pressures mount.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 66, ct: 55, sr: 77 }, finalScore: 73.1,
@@ -3543,7 +3543,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1195", opinionShift: 81, status: "new", edition: 1,
+  id: "1195", published: true, opinionShift: 81, status: "new", edition: 1,
   headline: "Kelantan and Terengganu Receive Lowest Per Capita Federal Allocation",
   context: "Budget 2026 analysis revealed that Kelantan and Terengganu received the lowest per capita federal development allocation at RM680 and RM720 respectively, compared to the national average of RM1,450, raising allegations of political punishment.",
   stageScores: { pa: 87, ba: 80, fc: 88, af: 74, ct: 65, sr: 83 }, finalScore: 79.6,
@@ -3557,7 +3557,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1196", opinionShift: 52, status: null, edition: 1,
+  id: "1196", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Oil Palm Replanting Fund Faces RM1.8B Shortfall",
   context: "MPOB reported that the oil palm replanting fund faces a RM1.8 billion shortfall to finance the replacement of 420,000 hectares of ageing palms past their 25-year productive life, threatening future production and smallholder income.",
   stageScores: { pa: 79, ba: 67, fc: 79, af: 61, ct: 49, sr: 73 }, finalScore: 72.5,
@@ -3571,7 +3571,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1197", opinionShift: 78, status: null, edition: 1,
+  id: "1197", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "RM28B Data Centre Boom Strains Selangor's Water and Power",
   context: "Selangor's data centre corridor attracted RM28 billion in investments by 2025, but the 42 approved facilities require 850 MW of power and 120 million litres of cooling water daily — straining infrastructure originally built for residential use.",
   stageScores: { pa: 85, ba: 78, fc: 86, af: 71, ct: 62, sr: 80 }, finalScore: 77.0,
@@ -3585,7 +3585,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1198", opinionShift: 39, status: null, edition: 1,
+  id: "1198", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Micro-Credit Interest Rates at 18% Trap B40 Borrowers",
   context: "Bank Negara's 2025 review found that micro-credit facilities offered by licensed moneylenders charged effective interest rates averaging 18% annually, trapping 480,000 B40 borrowers in revolving debt cycles.",
   stageScores: { pa: 80, ba: 69, fc: 80, af: 63, ct: 51, sr: 74 }, finalScore: 70.0,
@@ -3599,7 +3599,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1199", opinionShift: 71, status: null, edition: 1,
+  id: "1199", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Public Transport Ridership Stalls at 22% Modal Share in KL",
   context: "Prasarana reported that public transport modal share in Greater KL remained at 22% in 2025, unchanged since 2019 despite RM62 billion invested in MRT1, MRT2, and LRT extensions over the previous decade.",
   stageScores: { pa: 84, ba: 75, fc: 84, af: 68, ct: 58, sr: 79 }, finalScore: 74.9,
@@ -3613,7 +3613,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1200", opinionShift: 63, status: null, edition: 1,
+  id: "1200", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Plantation Workers' Wages Still Below Living Wage at RM1,800",
   context: "The Malaysian Estate Owners Association reported that average plantation worker wages reached RM1,800 monthly in 2025, still 28% below Bank Negara's estimated living wage of RM2,500 for a single adult in rural areas.",
   stageScores: { pa: 82, ba: 71, fc: 82, af: 65, ct: 54, sr: 76 }, finalScore: 72.6,
@@ -3627,7 +3627,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1201", opinionShift: 85, status: null, edition: 1,
+  id: "1201", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Fiscal Deficit Target of 3.5% Missed for Fifth Consecutive Year",
   context: "The Finance Ministry confirmed Malaysia's 2025 fiscal deficit at 4.1% of GDP, missing the 3.5% target for the fifth straight year, as revenue shortfalls from lower petroleum prices offset spending discipline efforts.",
   stageScores: { pa: 88, ba: 82, fc: 89, af: 75, ct: 67, sr: 84 }, finalScore: 80.8,
@@ -3641,7 +3641,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1202", opinionShift: 48, status: null, edition: 1,
+  id: "1202", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Private Hospital Costs Rise 45% While Public Hospitals Overflow",
   context: "Malaysian Association of Private Hospitals reported that average treatment costs rose 45% between 2021 and 2025, pushing more patients into already overcrowded public hospitals where wait times for specialist appointments now average 4-6 months.",
   stageScores: { pa: 85, ba: 74, fc: 84, af: 67, ct: 55, sr: 78 }, finalScore: 74.3,
@@ -3655,7 +3655,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1203", opinionShift: 57, status: "new", edition: 1,
+  id: "1203", published: true, opinionShift: 57, status: "new", edition: 1,
   headline: "Wholesale and Retail Sector Sees 8,200 Shop Closures in 2025",
   context: "The Malaysian Retailers Association reported 8,200 physical retail store closures in 2025, up 34% from 2024, driven by e-commerce growth, rising rents, and consumer spending compression among M40 households.",
   stageScores: { pa: 81, ba: 70, fc: 81, af: 63, ct: 51, sr: 75 }, finalScore: 70.8,
@@ -3669,7 +3669,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1204", opinionShift: 76, status: null, edition: 1,
+  id: "1204", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Penang Bridge Toll Revenue Funds Mainland — Not Penang Development",
   context: "Civil society groups revealed that RM4.8 billion in cumulative Penang Bridge toll revenue collected since 1985 was channelled to federal consolidated revenue rather than ringfenced for Penang infrastructure, despite the bridge being built to serve the state.",
   stageScores: { pa: 83, ba: 75, fc: 83, af: 68, ct: 58, sr: 79 }, finalScore: 74.6,
@@ -3683,7 +3683,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1205", opinionShift: 42, status: null, edition: 1,
+  id: "1205", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "SME Digitalisation Grant Reaches Only 12% of Eligible Businesses",
   context: "MDEC's SME Digitalisation Programme disbursed grants to only 48,000 of the 400,000 eligible micro and small enterprises by end-2025, with application complexity and digital literacy barriers preventing uptake among the businesses that need it most.",
   stageScores: { pa: 78, ba: 64, fc: 77, af: 59, ct: 45, sr: 70 }, finalScore: 68.9,
@@ -3697,7 +3697,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1206", opinionShift: 69, status: null, edition: 1,
+  id: "1206", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "Illegal Money Lending Traps 380,000 Borrowers in Debt Spiral",
   context: "PDRM estimated that 380,000 Malaysians owed money to Ah Long (illegal moneylenders) in 2025, with total underground lending estimated at RM8.4 billion charging rates of 120-360% annually, fuelled by rising cost of living and formal credit rejection.",
   stageScores: { pa: 86, ba: 78, fc: 87, af: 72, ct: 62, sr: 81 }, finalScore: 77.7,
@@ -3711,7 +3711,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1207", opinionShift: 55, status: null, edition: 1,
+  id: "1207", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Petrochemical Hub in Pengerang Operates at 52% Capacity",
   context: "The RM72 billion Pengerang Integrated Complex in Johor operated at only 52% capacity in 2025, four years after commissioning, due to technical issues, demand uncertainty, and the 2020 refinery fire that caused RM2.8 billion in damage.",
   stageScores: { pa: 81, ba: 72, fc: 82, af: 64, ct: 53, sr: 76 }, finalScore: 72.1,
@@ -3725,7 +3725,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1208", opinionShift: 88, status: null, edition: 1,
+  id: "1208", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Corruption Costs Malaysia RM47B Annually — 3% of GDP",
   context: "Transparency International Malaysia estimated that corruption costs the Malaysian economy RM47 billion annually through procurement leakage, bribery, and regulatory rent-seeking, equivalent to 3% of GDP or the entire education development budget.",
   stageScores: { pa: 91, ba: 84, fc: 93, af: 79, ct: 73, sr: 87 }, finalScore: 84.6,
@@ -3739,7 +3739,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1209", opinionShift: 36, status: null, edition: 1,
+  id: "1209", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Islamic Finance Assets Hit RM1.2T But Financial Inclusion Gaps Persist",
   context: "Malaysia's Islamic finance industry reached RM1.2 trillion in assets in 2025, maintaining its position as the world's largest Islamic capital market, while critics note the system primarily serves wealthy investors rather than achieving its social justice mandate.",
   stageScores: { pa: 78, ba: 65, fc: 78, af: 58, ct: 44, sr: 71 }, finalScore: 69.7,
@@ -3753,7 +3753,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1210", opinionShift: 62, status: "updated", edition: 3,
+  id: "1210", published: true, opinionShift: 62, status: "updated", edition: 3,
   headline: "Bantuan Sara Hidup Cash Transfers Reach 8.2M Recipients",
   context: "The expanded Bantuan Sara Hidup Rakyat programme disbursed RM12.4 billion to 8.2 million recipients in 2025, with maximum individual payments rising to RM3,100 annually, while economists debate whether direct transfers address structural poverty drivers.",
   stageScores: { pa: 84, ba: 73, fc: 83, af: 66, ct: 54, sr: 77 }, finalScore: 73.7,
@@ -3767,7 +3767,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1211", opinionShift: 79, status: null, edition: 1,
+  id: "1211", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Proton Market Share Falls to 14% as Chinese EVs Surge",
   context: "Proton's domestic market share fell to 14.2% in 2025 from 18.8% in 2023, as BYD, Chery, and Geely EVs captured 12% of new car sales while the national carmaker's EV strategy remained dependent on Geely technology transfer that has yet to materialise.",
   stageScores: { pa: 85, ba: 77, fc: 86, af: 71, ct: 62, sr: 81 }, finalScore: 77.1,
@@ -3781,7 +3781,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1212", opinionShift: 44, status: null, edition: 1,
+  id: "1212", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Water Privatisation in Selangor Costs Consumers RM1.4B Extra Annually",
   context: "The restructured Selangor water concession under Air Selangor resulted in tariff increases totalling RM1.4 billion in additional annual consumer costs since 2019, while NRW (non-revenue water) remained at 28% due to ageing pipe infrastructure.",
   stageScores: { pa: 80, ba: 68, fc: 80, af: 62, ct: 50, sr: 74 }, finalScore: 69.2,
@@ -3795,7 +3795,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1213", opinionShift: 65, status: null, edition: 1,
+  id: "1213", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Import Permit System for Rice Generates RM800M in Rent-Seeking",
   context: "A MITI review found that Malaysia's approved permit (AP) system for rice imports generates an estimated RM800 million annually in economic rent for 42 AP holders, who profit from the gap between world market prices and controlled domestic prices.",
   stageScores: { pa: 84, ba: 76, fc: 85, af: 69, ct: 59, sr: 80 }, finalScore: 75.5,
@@ -3809,7 +3809,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1214", opinionShift: 51, status: null, edition: 1,
+  id: "1214", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Childcare Costs Consume 28% of Dual-Income B40 Household Earnings",
   context: "Women, Family and Community Development Ministry data showed that formal childcare costs averaged RM850 per child monthly in urban areas in 2025, consuming up to 28% of dual-income B40 household earnings and forcing many mothers out of the workforce.",
   stageScores: { pa: 82, ba: 71, fc: 81, af: 65, ct: 53, sr: 76 }, finalScore: 72.2,
@@ -3823,7 +3823,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1215", opinionShift: 74, status: null, edition: 1,
+  id: "1215", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Sabah Gas Pipeline Project Cancelled After RM3.1B Spent",
   context: "The Sabah-Sarawak Gas Pipeline project was officially cancelled in 2025 after RM3.1 billion had been spent since 2009, with the AG's audit finding that only 14% of pipeline infrastructure was completed and much of the spending was mismanaged.",
   stageScores: { pa: 87, ba: 80, fc: 89, af: 74, ct: 66, sr: 83 }, finalScore: 79.9,
@@ -3837,7 +3837,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1216", opinionShift: 60, status: null, edition: 1,
+  id: "1216", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Ride-Hailing Drivers Average RM6.20 Per Hour After Costs",
   context: "A University Malaya study found that Grab and Maxim drivers in Kuala Lumpur earned an effective hourly rate of RM6.20 after deducting fuel, vehicle wear, platform commissions, and insurance — below the RM8.65 minimum wage equivalent.",
   stageScores: { pa: 83, ba: 74, fc: 83, af: 67, ct: 56, sr: 78 }, finalScore: 73.9,
@@ -3851,7 +3851,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1217", opinionShift: 82, status: "new", edition: 1,
+  id: "1217", published: true, opinionShift: 82, status: "new", edition: 1,
   headline: "RM6.4B School Meal Programme Shows 34% Nutrient Deficiency",
   context: "The Education Ministry's RM6.4 billion school feeding programme serving 3.2 million students was found by a 2025 Health Ministry audit to deliver meals meeting only 66% of recommended nutritional standards, with protein and vitamin deficiencies prevalent.",
   stageScores: { pa: 86, ba: 79, fc: 88, af: 73, ct: 64, sr: 82 }, finalScore: 78.9,
@@ -3865,7 +3865,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1218", opinionShift: 46, status: null, edition: 1,
+  id: "1218", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "SOCSO's Employment Injury Claims Surge 28% in Manufacturing",
   context: "SOCSO reported a 28% increase in employment injury claims from the manufacturing sector in 2025, with 42,800 workplace accidents recorded including 186 fatalities, as companies cut safety budgets amid rising operational costs.",
   stageScores: { pa: 81, ba: 70, fc: 80, af: 63, ct: 51, sr: 75 }, finalScore: 70.6,
@@ -3879,7 +3879,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1219", opinionShift: 71, status: null, edition: 1,
+  id: "1219", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Bukit Bintang Luxury Market Booms While Retail Workers Earn RM1,500",
   context: "Kuala Lumpur's luxury retail segment reported RM8.4 billion in sales in 2025 — a record year driven by tourist spending and wealthy domestic consumers — while the 28,000 retail workers serving them earned an average of RM1,500 monthly.",
   stageScores: { pa: 82, ba: 72, fc: 82, af: 66, ct: 55, sr: 77 }, finalScore: 73.0,
@@ -3893,7 +3893,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1220", opinionShift: 58, status: null, edition: 1,
+  id: "1220", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "MITI's Trade Agreements Cover 64% of Commerce But SMEs Can't Access",
   context: "Malaysia has 18 active free trade agreements covering 64% of its total trade, but a 2025 MITI study found that only 28% of eligible SME exports actually utilised preferential tariff rates due to complex rules-of-origin compliance requirements.",
   stageScores: { pa: 79, ba: 67, fc: 79, af: 61, ct: 49, sr: 73 }, finalScore: 71.7,
@@ -3907,7 +3907,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1221", opinionShift: 87, status: null, edition: 1,
+  id: "1221", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "Statutory Bodies Accumulated RM14B in Unexplained Asset Gains",
   context: "The Auditor General's 2025 report flagged RM14 billion in unexplained asset valuation gains across 18 statutory bodies, with land revaluations, investment mark-ups, and interagency transfers lacking proper documentation or independent verification.",
   stageScores: { pa: 89, ba: 83, fc: 91, af: 77, ct: 70, sr: 85 }, finalScore: 82.5,
@@ -3921,7 +3921,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1222", opinionShift: 40, status: null, edition: 1,
+  id: "1222", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Malaysia's Semiconductor Packaging Revenue Hits RM120B",
   context: "MIDA reported that Malaysia's semiconductor packaging, assembly, and testing (OSAT) sector generated RM120 billion in revenue in 2025, making Malaysia the world's 6th largest chip packaging hub, though value-capture remains at the lower end of the semiconductor chain.",
   stageScores: { pa: 82, ba: 72, fc: 82, af: 64, ct: 52, sr: 76 }, finalScore: 72.3,
@@ -3935,7 +3935,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1223", opinionShift: 67, status: null, edition: 1,
+  id: "1223", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "KWAP Pension Fund Returns Lag EPF by 1.8% Over 5 Years",
   context: "The Retirement Fund Inc (KWAP) managing RM172 billion in civil servant pension assets delivered 5-year annualised returns of 3.6% versus EPF's 5.4%, raising concerns about the management of public sector retirement savings.",
   stageScores: { pa: 83, ba: 74, fc: 83, af: 67, ct: 56, sr: 78 }, finalScore: 74.0,
@@ -3949,7 +3949,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1224", opinionShift: 53, status: "new", edition: 1,
+  id: "1224", published: true, opinionShift: 53, status: "new", edition: 1,
   headline: "Melaka Tourism Revenue Falls 18% Despite RM2.1B Investment",
   context: "Melaka's tourism revenue declined 18% to RM8.4 billion in 2025 despite RM2.1 billion in state and federal tourism infrastructure investment since 2020, as overtourism backlash, traffic congestion, and rising accommodation costs deterred repeat visitors.",
   stageScores: { pa: 79, ba: 66, fc: 78, af: 60, ct: 48, sr: 72 }, finalScore: 71.4,
@@ -3963,7 +3963,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1225", opinionShift: 76, status: null, edition: 1,
+  id: "1225", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Domestic Gas Price Subsidy Creates RM6B Arbitrage to Petrochemicals",
   context: "Malaysia's subsidised domestic gas price at RM28.36 per mmBTU versus market price of RM48 per mmBTU creates a RM6 billion annual subsidy that disproportionately benefits petrochemical companies rather than households.",
   stageScores: { pa: 84, ba: 77, fc: 85, af: 70, ct: 60, sr: 80 }, finalScore: 76.0,
@@ -3977,7 +3977,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1226", opinionShift: 45, status: null, edition: 1,
+  id: "1226", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Labuan Offshore Hub Loses 120 Companies to Singapore in 2025",
   context: "Labuan International Business and Financial Centre lost 120 registered companies in 2025 as firms migrated to Singapore's more transparent regulatory environment, amid FATF scrutiny of Malaysia's offshore financial centre compliance.",
   stageScores: { pa: 78, ba: 64, fc: 77, af: 58, ct: 45, sr: 70 }, finalScore: 70.4,
@@ -3991,7 +3991,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1227", opinionShift: 92, status: null, edition: 1,
+  id: "1227", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "Political Appointees in GLCs Earn RM680M Combined",
   context: "A governance watchdog analysis found that 342 political appointees across 48 major GLCs and statutory bodies earned a combined RM680 million in directors' fees, salaries, and benefits in 2025 — with many holding multiple concurrent board positions.",
   stageScores: { pa: 91, ba: 86, fc: 94, af: 80, ct: 76, sr: 88 }, finalScore: 85.8,
@@ -4005,7 +4005,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1228", opinionShift: 55, status: null, edition: 1,
+  id: "1228", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Timber Industry Revenue Falls 22% as Deforestation Regulations Bite",
   context: "Malaysia's timber export revenue fell 22% to RM18.4 billion in 2025 as the EU Deforestation Regulation (EUDR) excluded Malaysian timber products from key European markets pending compliance certification that 62% of exporters failed to obtain.",
   stageScores: { pa: 82, ba: 73, fc: 83, af: 66, ct: 55, sr: 78 }, finalScore: 73.6,
@@ -4019,7 +4019,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1229", opinionShift: 63, status: null, edition: 2,
+  id: "1229", published: true, opinionShift: 63, status: null, edition: 2,
   headline: "Kampung Baru Redevelopment Stalls Again After 40 Years of Plans",
   context: "The proposed RM45 billion redevelopment of Kampung Baru in central KL stalled again in 2025 as only 34% of the 5,300 landowners agreed to the government's compensation framework, extending a deadlock that has persisted through 8 prime ministers.",
   stageScores: { pa: 84, ba: 75, fc: 84, af: 69, ct: 58, sr: 79 }, finalScore: 75.0,
@@ -4033,7 +4033,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1230", opinionShift: 49, status: null, edition: 1,
+  id: "1230", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "FGV Holdings Posts 8th Consecutive Quarterly Loss",
   context: "Felda Global Ventures Holdings reported its 8th consecutive quarterly loss in Q4 2025, with accumulated losses of RM4.2 billion since its troubled IPO in 2012, the largest in Malaysian corporate history for a GLC.",
   stageScores: { pa: 83, ba: 74, fc: 84, af: 68, ct: 57, sr: 79 }, finalScore: 74.5,
@@ -4047,7 +4047,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1231", opinionShift: 80, status: null, edition: 1,
+  id: "1231", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Tax Revenue Per Capita at RM7,400 — Lowest in Developed ASEAN",
   context: "Malaysia's tax revenue per capita of RM7,400 in 2025 ranked lowest among upper-middle-income ASEAN nations, below Thailand's RM8,900 and well behind Singapore's RM42,000, reflecting a narrow tax base and widespread non-compliance.",
   stageScores: { pa: 87, ba: 80, fc: 88, af: 74, ct: 65, sr: 83 }, finalScore: 79.7,
@@ -4061,7 +4061,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1232", opinionShift: 38, status: null, edition: 1,
+  id: "1232", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Terengganu Oil Royalty Dispute Resurfaces With RM8.2B Claim",
   context: "Terengganu filed a revised claim for RM8.2 billion in oil royalties allegedly underpaid by the federal government since 2000, arguing that Petronas calculations systematically undervalued production from the state's offshore fields.",
   stageScores: { pa: 82, ba: 73, fc: 82, af: 66, ct: 55, sr: 77 }, finalScore: 73.2,
@@ -4075,7 +4075,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1233", opinionShift: 72, status: "updated", edition: 2,
+  id: "1233", published: true, opinionShift: 72, status: "updated", edition: 2,
   headline: "MAHB Passenger Service Charge Hike Draws Tourism Backlash",
   context: "MAHB's RM25 increase in international passenger service charge to RM98 per departure, effective April 2026, drew sharp criticism from airlines and tourism bodies who warned it would reduce Malaysia's competitiveness against Thailand and Indonesia.",
   stageScores: { pa: 82, ba: 71, fc: 81, af: 64, ct: 53, sr: 76 }, finalScore: 72.0,
@@ -4089,7 +4089,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1234", opinionShift: 61, status: null, edition: 1,
+  id: "1234", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "B40 Household Savings Rate Turns Negative at -2.8%",
   context: "Bank Negara's 2025 Financial Stability Report revealed that B40 households have a negative savings rate of -2.8%, meaning they spend more than they earn each month, funding the gap through debt, EPF withdrawals, and informal borrowing.",
   stageScores: { pa: 88, ba: 80, fc: 89, af: 73, ct: 63, sr: 82 }, finalScore: 79.2,
@@ -4103,7 +4103,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1235", opinionShift: 54, status: null, edition: 1,
+  id: "1235", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Penang Second Bridge Maintenance Costs Triple Original Estimates",
   context: "The Sultan Abdul Halim Muadzam Shah Bridge connecting Penang mainland and island reported maintenance costs tripling to RM280 million annually by 2025, from the RM95 million projected during the RM4.5 billion construction phase.",
   stageScores: { pa: 80, ba: 69, fc: 80, af: 62, ct: 50, sr: 74 }, finalScore: 69.5,
@@ -4117,7 +4117,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1236", opinionShift: 77, status: null, edition: 1,
+  id: "1236", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "GLICs Hold RM1.8 Trillion But Coordination Between 7 Funds Is Minimal",
   context: "Malaysia's 7 Government-Linked Investment Companies collectively manage RM1.8 trillion in assets — equivalent to 112% of GDP — but operate with minimal coordination, leading to overlapping investments, conflicting objectives, and suboptimal national returns.",
   stageScores: { pa: 86, ba: 78, fc: 87, af: 72, ct: 63, sr: 81 }, finalScore: 77.8,
@@ -4131,7 +4131,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1237", opinionShift: 43, status: null, edition: 1,
+  id: "1237", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Craft Beer Industry Faces RM420M Loss From Excise Tax Hike",
   context: "The 15% excise duty increase on alcoholic beverages in Budget 2026 threatens to eliminate 62 of Malaysia's 84 craft breweries, with the Malaysian Craft Brewers Association estimating RM420 million in industry revenue loss and 2,400 job cuts.",
   stageScores: { pa: 77, ba: 63, fc: 76, af: 58, ct: 44, sr: 69 }, finalScore: 68.3,
@@ -4145,7 +4145,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1238", opinionShift: 68, status: null, edition: 1,
+  id: "1238", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "PETRONAS Upstream Capex Cuts 22% Amid Energy Transition Pressure",
   context: "Petronas reduced upstream capital expenditure by 22% to RM28 billion in 2025, prioritising energy transition investments over new oil and gas exploration, raising concerns about long-term supply security and employment in petroleum-dependent states.",
   stageScores: { pa: 84, ba: 76, fc: 85, af: 70, ct: 60, sr: 80 }, finalScore: 75.8,
@@ -4159,7 +4159,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1239", opinionShift: 95, status: "new", edition: 1,
+  id: "1239", published: true, opinionShift: 95, status: "new", edition: 1,
   headline: "Richest 50 Malaysians' Wealth Equals Bottom 12 Million Citizens",
   context: "Forbes Malaysia 2025 list showed that the combined wealth of Malaysia's 50 richest individuals at RM412 billion equals the total net worth of the bottom 12 million Malaysian adults, highlighting extreme wealth concentration in a nation still grappling with poverty.",
   stageScores: { pa: 92, ba: 87, fc: 95, af: 82, ct: 78, sr: 88 }, finalScore: 87.0,
@@ -4173,7 +4173,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1240", opinionShift: 83, status: null, edition: 1,
+  id: "1240", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Malaysia's Productivity Growth Flatlines at 1.2% — Lowest in 20 Years",
   context: "MPC reported that Malaysia's labour productivity growth stalled at 1.2% in 2025, the lowest in two decades, as the economy remained trapped in a middle-income model dependent on low-wage labour rather than innovation-driven output.",
   stageScores: { pa: 88, ba: 82, fc: 90, af: 76, ct: 68, sr: 84 }, finalScore: 81.4,
@@ -4187,7 +4187,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1241", opinionShift: 78, status: null, edition: 1,
+  id: "1241", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "SOSMA detentions hit 5-year high in 2025",
   context: "Home Ministry data revealed 147 individuals detained under SOSMA in 2025, the highest since the law's enactment in 2012.",
   stageScores: { pa: 88, ba: 76, fc: 90, af: 72, ct: 65, sr: 82 }, finalScore: 82.1,
@@ -4201,7 +4201,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1242", opinionShift: 65, status: "new", edition: 1,
+  id: "1242", published: true, opinionShift: 65, status: "new", edition: 1,
   headline: "Sedition Act charges triple against online commentators",
   context: "Attorney General's Chambers filed 36 sedition charges in 2025, predominantly targeting social media users critical of government policies.",
   stageScores: { pa: 85, ba: 71, fc: 86, af: 68, ct: 58, sr: 79 }, finalScore: 78.4,
@@ -4215,7 +4215,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1243", opinionShift: 72, status: null, edition: 1,
+  id: "1243", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "PPPA amendment restricts 14 more online publications",
   context: "The Printing Presses and Publications Act was amended in March 2025 to extend licensing requirements to digital-only news outlets.",
   stageScores: { pa: 82, ba: 68, fc: 84, af: 65, ct: 55, sr: 76 }, finalScore: 75.8,
@@ -4229,7 +4229,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1244", opinionShift: 58, status: null, edition: 1,
+  id: "1244", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "CMA Section 233 used against 52 activists",
   context: "The Communications and Multimedia Act's Section 233 on improper use of network facilities was invoked against 52 individuals in 2025 for online criticism.",
   stageScores: { pa: 80, ba: 65, fc: 82, af: 62, ct: 52, sr: 74 }, finalScore: 73.2,
@@ -4243,7 +4243,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1245", opinionShift: 82, status: null, edition: 1,
+  id: "1245", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Peaceful Assembly Act bars 3 major rallies",
   context: "Police denied permits for three planned peaceful assemblies in Kuala Lumpur in early 2025, citing Peaceful Assembly Act 2012 restrictions.",
   stageScores: { pa: 87, ba: 74, fc: 88, af: 70, ct: 62, sr: 80 }, finalScore: 80.5,
@@ -4257,7 +4257,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1246", opinionShift: 88, status: "new", edition: 1,
+  id: "1246", published: true, opinionShift: 88, status: "new", edition: 1,
   headline: "180,000 refugees lack legal status in Malaysia",
   context: "UNHCR Malaysia reported approximately 180,000 registered refugees and asylum seekers in Malaysia as of January 2025, none with formal legal status.",
   stageScores: { pa: 90, ba: 80, fc: 92, af: 75, ct: 70, sr: 85 }, finalScore: 85.3,
@@ -4271,7 +4271,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1247", opinionShift: 75, status: null, edition: 1,
+  id: "1247", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Stateless children exceed 12,000 in Sabah alone",
   context: "A 2025 study by Sabah-based NGOs estimated over 12,000 stateless children in the state, many born to undocumented parents.",
   stageScores: { pa: 86, ba: 73, fc: 87, af: 69, ct: 60, sr: 78 }, finalScore: 79.1,
@@ -4285,7 +4285,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1248", opinionShift: 91, status: null, edition: 1,
+  id: "1248", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "Death penalty moratorium covers 1,337 inmates since 2018",
   context: "Malaysia's moratorium on executions, in place since 2018, applies to 1,337 death row inmates as Parliament debates the Abolition of Mandatory Death Penalty Act.",
   stageScores: { pa: 91, ba: 82, fc: 93, af: 78, ct: 72, sr: 86 }, finalScore: 86.7,
@@ -4299,7 +4299,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1249", opinionShift: 68, status: "updated", edition: 1,
+  id: "1249", published: true, opinionShift: 68, status: "updated", edition: 1,
   headline: "Mandatory sentencing affects 23 offences under Malaysian law",
   context: "Legal reform advocates highlighted that 23 offences in Malaysian statutes still carry mandatory minimum sentences, limiting judicial discretion.",
   stageScores: { pa: 79, ba: 66, fc: 83, af: 63, ct: 50, sr: 75 }, finalScore: 74.0,
@@ -4313,7 +4313,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1250", opinionShift: 70, status: "updated", edition: 1,
+  id: "1250", published: true, opinionShift: 70, status: "updated", edition: 1,
   headline: "Prison overcrowding reaches 127% capacity nationwide",
   context: "The Malaysian Prisons Department reported that 55 prisons nationwide operated at 127% capacity in 2025, raising serious concerns about conditions.",
   stageScores: { pa: 84, ba: 70, fc: 85, af: 67, ct: 56, sr: 77 }, finalScore: 76.5,
@@ -4327,7 +4327,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1251", opinionShift: 85, status: null, edition: 1,
+  id: "1251", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "IPCMC bill stalled for 6th consecutive year",
   context: "The Independent Police Complaints and Misconduct Commission bill, first proposed in 2019, remains unlegislated as of March 2025.",
   stageScores: { pa: 89, ba: 78, fc: 91, af: 74, ct: 68, sr: 84 }, finalScore: 84.2,
@@ -4341,7 +4341,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1252", opinionShift: 76, status: null, edition: 1,
+  id: "1252", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Immigration detention centres hold 2,400 children",
   context: "As of February 2025, approximately 2,400 children were held in immigration detention centres across Malaysia, according to UNHCR estimates.",
   stageScores: { pa: 87, ba: 75, fc: 89, af: 71, ct: 63, sr: 81 }, finalScore: 81.0,
@@ -4355,7 +4355,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1253", opinionShift: 90, status: "new", edition: 1,
+  id: "1253", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "LGBTQ Malaysians face 42 state-level criminal provisions",
   context: "A 2025 legal mapping by human rights groups identified 42 provisions across state syariah enactments and federal law criminalising LGBTQ identities and conduct.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 54, sr: 76 }, finalScore: 77.3,
@@ -4369,7 +4369,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1254", opinionShift: 62, status: null, edition: 1,
+  id: "1254", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Gender equality bill shelved after 3 drafts",
   context: "The Gender Equality Act, drafted three times since 2019, was shelved again in 2025 after opposition from conservative groups.",
   stageScores: { pa: 81, ba: 67, fc: 84, af: 64, ct: 51, sr: 73 }, finalScore: 72.8,
@@ -4383,7 +4383,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1255", opinionShift: 55, status: null, edition: 1,
+  id: "1255", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Disability rights registration covers only 600,000 of 4.8 million",
   context: "The Social Welfare Department's OKU registry recorded only 600,000 persons with disabilities in 2025, against an estimated 4.8 million Malaysians with disabilities.",
   stageScores: { pa: 78, ba: 63, fc: 81, af: 60, ct: 47, sr: 72 }, finalScore: 70.9,
@@ -4397,7 +4397,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1256", opinionShift: 87, status: "new", edition: 1,
+  id: "1256", published: true, opinionShift: 87, status: "new", edition: 1,
   headline: "Orang Asli NCR land claims backlog exceeds 200 cases",
   context: "Over 200 native customary rights land claims by Orang Asli communities remain unresolved in Malaysian courts as of 2025.",
   stageScores: { pa: 88, ba: 77, fc: 90, af: 73, ct: 66, sr: 83 }, finalScore: 83.6,
@@ -4411,7 +4411,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1257", opinionShift: 60, status: null, edition: 1,
+  id: "1257", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Child marriage persists with 1,856 applications in 2024",
   context: "State religious authorities received 1,856 applications for underage Muslim marriages in 2024, with the majority involving girls under 16.",
   stageScores: { pa: 83, ba: 69, fc: 85, af: 66, ct: 53, sr: 75 }, finalScore: 75.2,
@@ -4425,7 +4425,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1258", opinionShift: 73, status: "new", edition: 1,
+  id: "1258", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Internet freedom declines for 4th consecutive year",
   context: "Freedom House's Freedom on the Net 2025 report downgraded Malaysia's internet freedom score for the fourth year running, citing increased content controls.",
   stageScores: { pa: 82, ba: 70, fc: 86, af: 67, ct: 57, sr: 78 }, finalScore: 77.0,
@@ -4439,7 +4439,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1259", opinionShift: 52, status: null, edition: 1,
+  id: "1259", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "PDPA enforcement sees only 8 penalties since 2013",
   context: "The Personal Data Protection Act 2010, enforced since 2013, has resulted in only 8 enforcement actions and penalties in over a decade.",
   stageScores: { pa: 77, ba: 60, fc: 79, af: 58, ct: 44, sr: 70 }, finalScore: 69.5,
@@ -4453,7 +4453,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1260", opinionShift: 64, status: null, edition: 1,
+  id: "1260", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Whistleblower Protection Act covers only 15 cases",
   context: "Since its enactment in 2010, the Whistleblower Protection Act has been applied to protect only 15 individuals, according to 2025 parliamentary data.",
   stageScores: { pa: 78, ba: 62, fc: 80, af: 61, ct: 48, sr: 71 }, finalScore: 71.3,
@@ -4467,7 +4467,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1261", opinionShift: 80, status: null, edition: 1,
+  id: "1261", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Legal aid reaches only 18% of eligible Malaysians",
   context: "The Legal Aid Department served approximately 43,000 individuals in 2024, estimated to be only 18% of those financially eligible for assistance.",
   stageScores: { pa: 85, ba: 73, fc: 87, af: 70, ct: 61, sr: 80 }, finalScore: 79.8,
@@ -4481,7 +4481,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1262", opinionShift: 93, status: null, edition: 1,
+  id: "1262", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "Syariah-civil jurisdiction clash affects 4,200 families",
   context: "Unilateral child conversion disputes and custody battles between syariah and civil courts affected over 4,200 families as of 2025.",
   stageScores: { pa: 90, ba: 81, fc: 92, af: 76, ct: 71, sr: 85 }, finalScore: 85.9,
@@ -4495,7 +4495,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1263", opinionShift: 86, status: "new", edition: 1,
+  id: "1263", published: true, opinionShift: 86, status: "new", edition: 1,
   headline: "Apostasy proceedings involve 135 Malaysians since 2020",
   context: "At least 135 Malaysians have faced apostasy-related proceedings in state syariah courts since 2020, with lengthy and uncertain outcomes.",
   stageScores: { pa: 85, ba: 74, fc: 88, af: 69, ct: 59, sr: 79 }, finalScore: 79.5,
@@ -4509,7 +4509,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1264", opinionShift: 48, status: null, edition: 1,
+  id: "1264", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Rukun Negara lacks legal enforcement after 55 years",
   context: "Despite being Malaysia's national ideology since 1970, the Rukun Negara has no legal standing or enforcement mechanism as of 2025.",
   stageScores: { pa: 76, ba: 59, fc: 78, af: 57, ct: 42, sr: 69 }, finalScore: 68.4,
@@ -4523,7 +4523,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1265", opinionShift: 71, status: null, edition: 1,
+  id: "1265", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Citizenship by operation of law denied to 9,400 applicants",
   context: "The National Registration Department denied 9,400 citizenship applications under Article 15A of the Federal Constitution between 2020 and 2024.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 58, sr: 78 }, finalScore: 77.6,
@@ -4537,7 +4537,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1266", opinionShift: 67, status: "new", edition: 1,
+  id: "1266", published: true, opinionShift: 67, status: "new", edition: 1,
   headline: "Police use of force complaints rose 34% in 2024",
   context: "IPCC received a 34% increase in complaints about excessive police use of force in 2024, totalling 892 formal complaints.",
   stageScores: { pa: 84, ba: 72, fc: 87, af: 69, ct: 60, sr: 79 }, finalScore: 78.8,
@@ -4551,7 +4551,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1267", opinionShift: 79, status: null, edition: 1,
+  id: "1267", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Migrant worker exploitation affects 2.1 million documented workers",
   context: "Malaysia's 2.1 million documented migrant workers face systemic rights violations including passport confiscation and wage theft, per a 2025 ILO report.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 81.4,
@@ -4565,7 +4565,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1268", opinionShift: 56, status: "updated", edition: 1,
+  id: "1268", published: true, opinionShift: 56, status: "updated", edition: 1,
   headline: "Sexual harassment tribunal receives 340 complaints in first year",
   context: "The Anti-Sexual Harassment Tribunal established under the 2022 Act received 340 complaints in its first full year of operation in 2024.",
   stageScores: { pa: 80, ba: 66, fc: 83, af: 63, ct: 50, sr: 74 }, finalScore: 73.8,
@@ -4579,7 +4579,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1269", opinionShift: 83, status: null, edition: 1,
+  id: "1269", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Sedition charges target 7 academics in 18 months",
   context: "Seven university academics faced sedition investigations between mid-2023 and end of 2024 for publishing research and commentary on sensitive topics.",
   stageScores: { pa: 86, ba: 74, fc: 88, af: 71, ct: 62, sr: 81 }, finalScore: 80.9,
@@ -4593,7 +4593,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1270", opinionShift: 44, status: null, edition: 1,
+  id: "1270", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Domestic violence reports rise 23% but convictions stagnate",
   context: "Police received 8,400 domestic violence reports in 2024, a 23% increase from 2023, while conviction rates remained at 12%.",
   stageScores: { pa: 82, ba: 68, fc: 84, af: 65, ct: 52, sr: 76 }, finalScore: 75.4,
@@ -4607,7 +4607,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1271", opinionShift: 77, status: "updated", edition: 1,
+  id: "1271", published: true, opinionShift: 77, status: "updated", edition: 1,
   headline: "Penan blockade enters 3rd year over logging roads",
   context: "Penan communities in Sarawak's Baram district maintained blockades against logging roads for a third consecutive year in 2025, defending native customary land.",
   stageScores: { pa: 86, ba: 75, fc: 89, af: 71, ct: 63, sr: 81 }, finalScore: 80.2,
@@ -4621,7 +4621,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1272", opinionShift: 69, status: "new", edition: 1,
+  id: "1272", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Freedom of religion tested in 8 cross-faith custody disputes",
   context: "Eight high-profile custody cases involving interfaith families reached Malaysian courts in 2024-2025, testing constitutional protections on religion.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 57, sr: 78 }, finalScore: 77.9,
@@ -4635,7 +4635,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1273", opinionShift: 59, status: null, edition: 1,
+  id: "1273", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Undocumented migrants detained in 18 facilities nationwide",
   context: "As of January 2025, an estimated 18,000 undocumented migrants were held in 18 immigration detention centres across Malaysia.",
   stageScores: { pa: 81, ba: 67, fc: 83, af: 64, ct: 51, sr: 74 }, finalScore: 74.4,
@@ -4649,7 +4649,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1274", opinionShift: 81, status: null, edition: 1,
+  id: "1274", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Transgender persons face 26 state-level syariah offences",
   context: "Legal analysis in 2025 identified 26 provisions across state syariah enactments that criminalise cross-dressing and transgender expression for Muslims.",
   stageScores: { pa: 84, ba: 73, fc: 87, af: 70, ct: 60, sr: 80 }, finalScore: 79.3,
@@ -4663,7 +4663,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1275", opinionShift: 53, status: null, edition: 1,
+  id: "1275", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Marital rape exemption survives 4th reform attempt",
   context: "Parliament rejected the fourth attempt to remove the marital rape exemption from Penal Code Section 375 in November 2024.",
   stageScores: { pa: 82, ba: 69, fc: 85, af: 66, ct: 54, sr: 77 }, finalScore: 76.1,
@@ -4677,7 +4677,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1276", opinionShift: 74, status: null, edition: 1,
+  id: "1276", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Orang Asli school dropout rate reaches 42% nationally",
   context: "Education Ministry data showed a 42% dropout rate among Orang Asli students before completing secondary school in 2024.",
   stageScores: { pa: 84, ba: 72, fc: 86, af: 68, ct: 58, sr: 79 }, finalScore: 78.1,
@@ -4691,7 +4691,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1277", opinionShift: 63, status: null, edition: 1,
+  id: "1277", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Police body camera pilot covers only 800 officers",
   context: "After 3 years of planning, the Royal Malaysia Police body camera pilot launched in 2024 covering only 800 officers in Kuala Lumpur.",
   stageScores: { pa: 79, ba: 64, fc: 82, af: 62, ct: 49, sr: 73 }, finalScore: 72.4,
@@ -4705,7 +4705,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1278", opinionShift: 89, status: "new", edition: 1,
+  id: "1278", published: true, opinionShift: 89, status: "new", edition: 1,
   headline: "Forced disappearance of Pastor Koh enters 8th year",
   context: "The enforced disappearance of Pastor Raymond Koh in February 2017 remained unsolved in 2025 despite Suhakam's finding of police involvement.",
   stageScores: { pa: 89, ba: 79, fc: 91, af: 75, ct: 69, sr: 84 }, finalScore: 84.8,
@@ -4719,7 +4719,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1279", opinionShift: 47, status: null, edition: 1,
+  id: "1279", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Death in custody inquests completed for only 38% of cases",
   context: "Of 127 deaths in police custody between 2020 and 2024, inquests were completed for only 48 cases as of early 2025.",
   stageScores: { pa: 83, ba: 70, fc: 85, af: 67, ct: 55, sr: 77 }, finalScore: 76.8,
@@ -4733,7 +4733,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1280", opinionShift: 66, status: null, edition: 1,
+  id: "1280", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Anti-Stalking Act protects 1,200 victims in first year",
   context: "The Anti-Stalking Act, passed in 2024, resulted in 1,200 protection orders issued in its first year of enforcement.",
   stageScores: { pa: 80, ba: 67, fc: 83, af: 64, ct: 52, sr: 75 }, finalScore: 74.8,
@@ -4747,7 +4747,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1281", opinionShift: 84, status: null, edition: 1,
+  id: "1281", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Sedition investigation targets Sarawak autonomy advocates",
   context: "Four Sarawakian activists were investigated under the Sedition Act in 2024 for advocating greater state autonomy under the Malaysia Agreement 1963.",
   stageScores: { pa: 85, ba: 74, fc: 88, af: 70, ct: 62, sr: 80 }, finalScore: 80.7,
@@ -4761,7 +4761,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1282", opinionShift: 50, status: null, edition: 1,
+  id: "1282", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Access to justice index ranks Malaysia 47th globally",
   context: "The World Justice Project Rule of Law Index 2025 ranked Malaysia 47th of 142 countries, with civil justice scoring lowest among all categories.",
   stageScores: { pa: 78, ba: 62, fc: 80, af: 59, ct: 45, sr: 71 }, finalScore: 70.2,
@@ -4775,7 +4775,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1283", opinionShift: 92, status: null, edition: 1,
+  id: "1283", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "Rohingya community faces 12 hate speech incidents monthly",
   context: "Monitoring by human rights groups recorded an average of 12 hate speech incidents targeting Rohingya refugees monthly in Malaysia during 2024.",
   stageScores: { pa: 88, ba: 78, fc: 90, af: 74, ct: 67, sr: 83 }, finalScore: 83.9,
@@ -4789,7 +4789,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1284", opinionShift: 57, status: "new", edition: 1,
+  id: "1284", published: true, opinionShift: 57, status: "new", edition: 1,
   headline: "Bail reform stalls with 14,000 remand prisoners awaiting trial",
   context: "As of December 2024, approximately 14,000 prisoners were held on remand awaiting trial, many unable to afford bail amounts set by courts.",
   stageScores: { pa: 81, ba: 68, fc: 84, af: 65, ct: 53, sr: 76 }, finalScore: 75.0,
@@ -4803,7 +4803,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1285", opinionShift: 40, status: null, edition: 1,
+  id: "1285", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Data privacy complaints surge 67% after PDPA amendment",
   context: "Following the 2024 PDPA amendment introducing mandatory breach notification, data privacy complaints to JPDP surged 67% in the second half of 2024.",
   stageScores: { pa: 77, ba: 61, fc: 79, af: 58, ct: 43, sr: 70 }, finalScore: 69.2,
@@ -4817,7 +4817,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1286", opinionShift: 75, status: "new", edition: 1,
+  id: "1286", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Newspaper licence denials affect 5 independent outlets",
   context: "The Home Ministry declined to renew printing licences for 5 independent news outlets in 2024-2025 under the Printing Presses and Publications Act.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 57, sr: 78 }, finalScore: 77.4,
@@ -4832,7 +4832,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1287", opinionShift: 61, status: null, edition: 1,
+  id: "1287", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Children in conflict with law held 47 days average before hearing",
   context: "Children arrested and charged in Malaysia spent an average of 47 days in remand before their first court hearing in 2024.",
   stageScores: { pa: 80, ba: 66, fc: 83, af: 63, ct: 50, sr: 74 }, finalScore: 73.5,
@@ -4846,7 +4846,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1288", opinionShift: 95, status: null, edition: 1,
+  id: "1288", published: true, opinionShift: 95, status: null, edition: 1,
   headline: "Emergency Ordinance detainees exceed 600 under remand",
   context: "Over 600 individuals remained detained under various Emergency Ordinance provisions as of 2025, despite states of emergency having ended.",
   stageScores: { pa: 90, ba: 80, fc: 93, af: 77, ct: 72, sr: 86 }, finalScore: 87.2,
@@ -4860,7 +4860,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1289", opinionShift: 46, status: null, edition: 1,
+  id: "1289", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Disability accessibility compliance below 30% for public buildings",
   context: "A 2025 JKM audit found that less than 30% of public buildings in Malaysia comply with Persons with Disabilities Act accessibility requirements.",
   stageScores: { pa: 78, ba: 63, fc: 80, af: 59, ct: 45, sr: 71 }, finalScore: 70.5,
@@ -4874,7 +4874,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1290", opinionShift: 70, status: "updated", edition: 1,
+  id: "1290", published: true, opinionShift: 70, status: "updated", edition: 1,
   headline: "Suhakam funding frozen at 2019 levels despite expanded mandate",
   context: "Malaysia's national human rights commission Suhakam received the same RM12 million budget in 2025 as in 2019 despite additional mandated responsibilities.",
   stageScores: { pa: 82, ba: 69, fc: 85, af: 66, ct: 55, sr: 77 }, finalScore: 76.3,
@@ -4888,7 +4888,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1291", opinionShift: 38, status: null, edition: 1,
+  id: "1291", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Legal recognition of customary marriages remains inconsistent",
   context: "Customary marriages among indigenous and non-Muslim communities face inconsistent legal recognition across states, affecting property and inheritance rights.",
   stageScores: { pa: 76, ba: 60, fc: 78, af: 57, ct: 42, sr: 69 }, finalScore: 68.8,
@@ -4902,7 +4902,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1292", opinionShift: 86, status: null, edition: 1,
+  id: "1292", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "POCA preventive detention holds 420 without trial",
   context: "The Prevention of Crime Act 1959, amended in 2014, held 420 individuals under preventive detention without trial as of January 2025.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 82.5,
@@ -4916,7 +4916,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1293", opinionShift: 54, status: null, edition: 1,
+  id: "1293", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Syariah criminal jurisdiction expanded in 3 states",
   context: "Three states expanded the scope of their syariah criminal jurisdiction in 2024, increasing penalties and adding new offences.",
   stageScores: { pa: 81, ba: 67, fc: 84, af: 64, ct: 52, sr: 75 }, finalScore: 74.6,
@@ -4930,7 +4930,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1294", opinionShift: 78, status: "new", edition: 1,
+  id: "1294", published: true, opinionShift: 78, status: "new", edition: 1,
   headline: "Unilateral child conversion ban enforcement lacking in 6 states",
   context: "Despite the 2018 Federal Court ruling requiring both parents' consent for child conversion, 6 states had not amended their enactments by 2025.",
   stageScores: { pa: 85, ba: 73, fc: 87, af: 70, ct: 61, sr: 80 }, finalScore: 79.7,
@@ -4944,7 +4944,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1295", opinionShift: 42, status: null, edition: 1,
+  id: "1295", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Workplace discrimination complaints exceed 2,800 in 2024",
   context: "The Industrial Relations Department and Human Resources Ministry received over 2,800 workplace discrimination complaints in 2024.",
   stageScores: { pa: 79, ba: 64, fc: 81, af: 61, ct: 47, sr: 72 }, finalScore: 71.7,
@@ -4958,7 +4958,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1296", opinionShift: 83, status: "updated", edition: 1,
+  id: "1296", published: true, opinionShift: 83, status: "updated", edition: 1,
   headline: "Whipping punishment carried out on 1,460 prisoners in 2024",
   context: "Malaysian prisons administered judicial whipping on 1,460 prisoners in 2024, with human rights groups calling for abolition of corporal punishment.",
   stageScores: { pa: 86, ba: 75, fc: 88, af: 71, ct: 63, sr: 81 }, finalScore: 81.7,
@@ -4972,7 +4972,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1297", opinionShift: 49, status: null, edition: 1,
+  id: "1297", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Indigenous land titles take average 12 years to process",
   context: "Orang Asli communities in Peninsular Malaysia wait an average of 12 years for native land title processing through the Department of Orang Asli Development.",
   stageScores: { pa: 80, ba: 66, fc: 82, af: 63, ct: 49, sr: 73 }, finalScore: 72.1,
@@ -4986,7 +4986,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1298", opinionShift: 88, status: null, edition: 1,
+  id: "1298", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "SOSMA renewal passed without parliamentary debate in 2024",
   context: "SOSMA's 5-year renewal was passed by Parliament in December 2024 with minimal debate, extending the security law until 2029.",
   stageScores: { pa: 88, ba: 77, fc: 90, af: 73, ct: 66, sr: 83 }, finalScore: 83.3,
@@ -5001,7 +5001,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1299", opinionShift: 36, status: null, edition: 1,
+  id: "1299", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Birth registration gap leaves 50,000 children undocumented",
   context: "NRD estimates suggested approximately 50,000 children in Malaysia lacked birth registration as of 2025, primarily in Sabah and rural Peninsular areas.",
   stageScores: { pa: 77, ba: 61, fc: 79, af: 58, ct: 43, sr: 70 }, finalScore: 68.2,
@@ -5015,7 +5015,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1300", opinionShift: 73, status: null, edition: 1,
+  id: "1300", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Contempt of court charges silence 9 government critics",
   context: "Nine individuals were charged with contempt of court in 2024 for publicly commenting on ongoing legal proceedings involving government officials.",
   stageScores: { pa: 82, ba: 70, fc: 85, af: 67, ct: 56, sr: 78 }, finalScore: 76.9,
@@ -5029,7 +5029,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1301", opinionShift: 85, status: "new", edition: 1,
+  id: "1301", published: true, opinionShift: 85, status: "new", edition: 1,
   headline: "Forced labour indicators found in 3 glove manufacturing plants",
   context: "A 2025 Department of Labour investigation found forced labour indicators in 3 major glove manufacturing plants employing over 8,000 migrant workers.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 65, sr: 82 }, finalScore: 82.8,
@@ -5043,7 +5043,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1302", opinionShift: 51, status: null, edition: 1,
+  id: "1302", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Mental health detainees held 280 days average in institutions",
   context: "Persons detained under the Mental Health Act 2001 for assessment spent an average of 280 days in psychiatric institutions before case resolution.",
   stageScores: { pa: 79, ba: 65, fc: 81, af: 62, ct: 48, sr: 73 }, finalScore: 72.6,
@@ -5057,7 +5057,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1303", opinionShift: 76, status: null, edition: 1,
+  id: "1303", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Press council proposal rejected by media groups for 3rd time",
   context: "A government proposal to establish a media council with regulatory powers was rejected by journalist associations for the third time in 2025.",
   stageScores: { pa: 81, ba: 68, fc: 84, af: 65, ct: 54, sr: 76 }, finalScore: 75.6,
@@ -5071,7 +5071,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1304", opinionShift: 67, status: null, edition: 1,
+  id: "1304", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Conversion therapy programmes operate in 7 states",
   context: "Human rights monitoring found that government-linked conversion therapy programmes for LGBTQ individuals operated in at least 7 Malaysian states in 2024.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 57, sr: 78 }, finalScore: 77.7,
@@ -5085,7 +5085,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1305", opinionShift: 90, status: "new", edition: 1,
+  id: "1305", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "Mandatory death penalty for drug trafficking repealed but 780 await resentencing",
   context: "Following the 2023 abolition of mandatory death for drug trafficking, 780 inmates convicted under the Dangerous Drugs Act await resentencing hearings.",
   stageScores: { pa: 89, ba: 79, fc: 91, af: 75, ct: 68, sr: 84 }, finalScore: 84.5,
@@ -5099,7 +5099,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1306", opinionShift: 43, status: null, edition: 1,
+  id: "1306", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Syariah compliance officers monitor 4,200 businesses",
   context: "State religious authorities deployed syariah compliance officers to monitor 4,200 food and entertainment businesses in 2024, raising civil liberties questions.",
   stageScores: { pa: 78, ba: 63, fc: 80, af: 60, ct: 46, sr: 71 }, finalScore: 70.8,
@@ -5113,7 +5113,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1307", opinionShift: 72, status: null, edition: 1,
+  id: "1307", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Political financing transparency law remains absent since 2018 promise",
   context: "Despite a 2018 election promise, Malaysia still lacks political financing legislation as of 2025, leaving party funding opaque.",
   stageScores: { pa: 82, ba: 70, fc: 85, af: 67, ct: 56, sr: 78 }, finalScore: 76.6,
@@ -5127,7 +5127,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1308", opinionShift: 55, status: "updated", edition: 1,
+  id: "1308", published: true, opinionShift: 55, status: "updated", edition: 1,
   headline: "Refugee work permits pilot covers only 450 individuals",
   context: "A limited pilot program granting work permits to refugees, launched in 2024, covered only 450 of 180,000 registered refugees.",
   stageScores: { pa: 80, ba: 66, fc: 83, af: 63, ct: 50, sr: 74 }, finalScore: 73.0,
@@ -5141,7 +5141,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1309", opinionShift: 79, status: null, edition: 1,
+  id: "1309", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Environmental defenders face 18 lawsuits in Sarawak",
   context: "Eighteen strategic lawsuits against public participation (SLAPPs) were filed against environmental activists in Sarawak between 2022 and 2025.",
   stageScores: { pa: 84, ba: 73, fc: 87, af: 69, ct: 60, sr: 80 }, finalScore: 79.0,
@@ -5155,7 +5155,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1310", opinionShift: 37, status: null, edition: 1,
+  id: "1310", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Right to information law covers only 2 states",
   context: "As of 2025, only Selangor and Penang have enacted freedom of information laws, leaving the federal level and 11 states without right to information legislation.",
   stageScores: { pa: 76, ba: 60, fc: 78, af: 57, ct: 41, sr: 69 }, finalScore: 68.6,
@@ -5169,7 +5169,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1311", opinionShift: 81, status: null, edition: 1,
+  id: "1311", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Caning of women introduced in Terengganu syariah amendment",
   context: "Terengganu's 2024 syariah criminal procedure amendment introduced caning as a punishment for Muslim women convicted of specific moral offences.",
   stageScores: { pa: 86, ba: 75, fc: 88, af: 71, ct: 62, sr: 81 }, finalScore: 81.2,
@@ -5183,7 +5183,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1312", opinionShift: 58, status: null, edition: 1,
+  id: "1312", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Migrant domestic workers excluded from Employment Act protections",
   context: "Despite 2022 Employment Act amendments, an estimated 340,000 migrant domestic workers remain excluded from key labour protections in Malaysia.",
   stageScores: { pa: 81, ba: 67, fc: 84, af: 64, ct: 52, sr: 75 }, finalScore: 74.2,
@@ -5197,7 +5197,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1313", opinionShift: 69, status: "new", edition: 1,
+  id: "1313", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Election Commission independence questioned after 3 boundary changes",
   context: "The Election Commission's 3 constituency boundary redelineation exercises in 2024 were challenged in court for alleged partisan gerrymandering.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 57, sr: 79 }, finalScore: 78.2,
@@ -5211,7 +5211,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1314", opinionShift: 62, status: null, edition: 1,
+  id: "1314", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Juvenile detention facilities lack education for 670 minors",
   context: "The Prisons Department reported that 670 juveniles in detention facilities had limited or no access to formal education programmes in 2024.",
   stageScores: { pa: 80, ba: 66, fc: 83, af: 63, ct: 50, sr: 74 }, finalScore: 73.3,
@@ -5225,7 +5225,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1315", opinionShift: 94, status: "new", edition: 1,
+  id: "1315", published: true, opinionShift: 94, status: "new", edition: 1,
   headline: "National Security Council Act grants PM unchecked emergency powers",
   context: "The National Security Council Act 2016 allows the Prime Minister to declare security areas without parliamentary approval, raising constitutional concerns.",
   stageScores: { pa: 89, ba: 80, fc: 92, af: 76, ct: 70, sr: 85 }, finalScore: 86.2,
@@ -5239,7 +5239,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1316", opinionShift: 45, status: null, edition: 1,
+  id: "1316", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Foreign spouse visa delays average 14 months for processing",
   context: "Foreign spouses of Malaysian citizens waited an average of 14 months for long-term visit pass processing in 2024, affecting family unity.",
   stageScores: { pa: 78, ba: 63, fc: 80, af: 60, ct: 46, sr: 71 }, finalScore: 70.1,
@@ -5253,7 +5253,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1317", opinionShift: 77, status: null, edition: 1,
+  id: "1317", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "University student activism restricted by UUCA Section 15",
   context: "Three university students were disciplined under the Universities and University Colleges Act Section 15 in 2024 for participating in off-campus political activities.",
   stageScores: { pa: 83, ba: 72, fc: 86, af: 69, ct: 59, sr: 79 }, finalScore: 78.5,
@@ -5267,7 +5267,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1318", opinionShift: 41, status: null, edition: 1,
+  id: "1318", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Occupational safety deaths reach 287 in 2024",
   context: "DOSH recorded 287 workplace fatalities in 2024, with construction and manufacturing sectors accounting for 68% of deaths.",
   stageScores: { pa: 79, ba: 64, fc: 82, af: 62, ct: 48, sr: 73 }, finalScore: 71.9,
@@ -5281,7 +5281,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1319", opinionShift: 87, status: "updated", edition: 1,
+  id: "1319", published: true, opinionShift: 87, status: "updated", edition: 1,
   headline: "Preventive detention laws total 7 across Malaysian statutes",
   context: "Malaysia maintains 7 separate laws allowing preventive detention without trial, more than any other ASEAN nation as of 2025.",
   stageScores: { pa: 87, ba: 77, fc: 90, af: 73, ct: 66, sr: 83 }, finalScore: 83.0,
@@ -5295,7 +5295,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1320", opinionShift: 39, status: null, edition: 1,
+  id: "1320", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Court interpreter shortage affects 4,300 non-Malay cases",
   context: "Shortage of court interpreters in Malaysia delayed approximately 4,300 cases involving non-Malay and non-English speaking parties in 2024.",
   stageScores: { pa: 77, ba: 61, fc: 79, af: 58, ct: 43, sr: 70 }, finalScore: 69.8,
@@ -5309,7 +5309,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1321", opinionShift: 74, status: "new", edition: 1,
+  id: "1321", published: true, opinionShift: 74, status: "new", edition: 1,
   headline: "Anti-discrimination bill drafted covering 12 protected grounds",
   context: "A coalition of 45 civil society organisations drafted a comprehensive anti-discrimination bill covering 12 protected grounds for parliamentary consideration in 2025.",
   stageScores: { pa: 84, ba: 72, fc: 87, af: 69, ct: 59, sr: 80 }, finalScore: 78.9,
@@ -5323,7 +5323,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1322", opinionShift: 56, status: null, edition: 1,
+  id: "1322", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Trafficking victims receive only RM4.8 million support annually",
   context: "Government allocation for trafficking victim support totalled RM4.8 million in 2025, serving approximately 600 identified victims nationwide.",
   stageScores: { pa: 80, ba: 67, fc: 83, af: 64, ct: 51, sr: 75 }, finalScore: 74.1,
@@ -5337,7 +5337,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1323", opinionShift: 82, status: null, edition: 1,
+  id: "1323", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Sedition Act used against 4 lawyers representing government critics",
   context: "Four lawyers were investigated under the Sedition Act in 2024 for statements made while representing clients in politically sensitive cases.",
   stageScores: { pa: 86, ba: 74, fc: 88, af: 71, ct: 63, sr: 81 }, finalScore: 81.5,
@@ -5351,7 +5351,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1324", opinionShift: 48, status: null, edition: 1,
+  id: "1324", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Solitary confinement used on 340 prisoners exceeding UN limits",
   context: "A 2024 Suhakam inspection found 340 prisoners subjected to solitary confinement exceeding the 15-day maximum recommended by the UN Mandela Rules.",
   stageScores: { pa: 81, ba: 68, fc: 84, af: 65, ct: 53, sr: 76 }, finalScore: 75.7,
@@ -5365,7 +5365,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1325", opinionShift: 66, status: null, edition: 1,
+  id: "1325", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Suriani ruling on maternal citizenship rights faces government appeal",
   context: "The landmark 2024 Federal Court ruling granting Malaysian mothers equal rights to confer citizenship on overseas-born children was appealed by the government.",
   stageScores: { pa: 85, ba: 73, fc: 87, af: 70, ct: 61, sr: 80 }, finalScore: 79.6,
@@ -5379,7 +5379,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1326", opinionShift: 60, status: null, edition: 1,
+  id: "1326", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Police remand procedures questioned after 23 allegations of abuse",
   context: "Twenty-three individuals alleged physical abuse during police remand in 2024, prompting calls for reform of remand facility oversight.",
   stageScores: { pa: 82, ba: 69, fc: 85, af: 66, ct: 55, sr: 77 }, finalScore: 76.2,
@@ -5393,7 +5393,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1327", opinionShift: 91, status: "updated", edition: 1,
+  id: "1327", published: true, opinionShift: 91, status: "updated", edition: 1,
   headline: "Sosma Section 4 challenged in Federal Court test case",
   context: "A landmark Federal Court case in 2025 challenges the constitutionality of SOSMA Section 4's 28-day detention without judicial review.",
   stageScores: { pa: 88, ba: 78, fc: 91, af: 74, ct: 67, sr: 84 }, finalScore: 84.9,
@@ -5407,7 +5407,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1328", opinionShift: 35, status: null, edition: 1,
+  id: "1328", published: true, opinionShift: 35, status: null, edition: 1,
   headline: "Prisoners' voting rights remain unaddressed since 2019 review",
   context: "Recommendations to restore voting rights to prisoners from a 2019 Election Commission review have not been implemented as of 2025.",
   stageScores: { pa: 76, ba: 59, fc: 78, af: 56, ct: 40, sr: 68 }, finalScore: 68.0,
@@ -5421,7 +5421,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1329", opinionShift: 71, status: "updated", edition: 1,
+  id: "1329", published: true, opinionShift: 71, status: "updated", edition: 1,
   headline: "Rohingya education access limited to 120 community centres",
   context: "Rohingya refugee children in Malaysia access education through only 120 community learning centres, serving approximately 12,000 of 45,000 school-age children.",
   stageScores: { pa: 83, ba: 70, fc: 85, af: 67, ct: 56, sr: 78 }, finalScore: 77.2,
@@ -5435,7 +5435,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1330", opinionShift: 64, status: null, edition: 1,
+  id: "1330", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Witness protection programme shelters only 89 witnesses since 2009",
   context: "Malaysia's Witness Protection Act 2009 has sheltered only 89 witnesses in 16 years, raising questions about its effectiveness in combating serious crime.",
   stageScores: { pa: 79, ba: 65, fc: 82, af: 62, ct: 49, sr: 73 }, finalScore: 72.9,
@@ -5449,7 +5449,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1331", opinionShift: 80, status: null, edition: 1,
+  id: "1331", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Street protest organisers face RM20,000 fines under amended PAA",
   context: "The 2024 amendment to the Peaceful Assembly Act increased fines for organisers of assemblies deemed non-compliant from RM10,000 to RM20,000.",
   stageScores: { pa: 84, ba: 72, fc: 86, af: 69, ct: 60, sr: 79 }, finalScore: 79.2,
@@ -5463,7 +5463,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1332", opinionShift: 52, status: null, edition: 1,
+  id: "1332", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Child labour detected in 340 palm oil estates in 2024",
   context: "The Department of Labour detected child labour in 340 palm oil estates during 2024 inspections, involving approximately 1,200 children of migrant workers.",
   stageScores: { pa: 82, ba: 69, fc: 85, af: 66, ct: 54, sr: 77 }, finalScore: 76.0,
@@ -5477,7 +5477,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1333", opinionShift: 68, status: "new", edition: 1,
+  id: "1333", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "Mandatory HIV testing for migrants violates medical ethics",
   context: "Malaysia's mandatory HIV testing requirement for all migrant workers was challenged in 2025 as violating medical ethics and human rights standards.",
   stageScores: { pa: 81, ba: 68, fc: 84, af: 65, ct: 53, sr: 76 }, finalScore: 75.3,
@@ -5491,7 +5491,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1334", opinionShift: 75, status: null, edition: 1,
+  id: "1334", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Religious enforcement raids target 450 private premises in 2024",
   context: "State religious enforcement officers conducted 450 raids on private premises in 2024 investigating khalwat and other moral offences.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 58, sr: 79 }, finalScore: 78.3,
@@ -5505,7 +5505,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1335", opinionShift: 57, status: null, edition: 1,
+  id: "1335", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Sabah and Sarawak MA63 rights review stalls on 21 items",
   context: "The inter-governmental committee reviewing Malaysia Agreement 1963 implementation reported that 21 of 40 priority items remained unresolved as of 2025.",
   stageScores: { pa: 82, ba: 70, fc: 85, af: 67, ct: 56, sr: 78 }, finalScore: 76.4,
@@ -5519,7 +5519,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1336", opinionShift: 84, status: "new", edition: 1,
+  id: "1336", published: true, opinionShift: 84, status: "new", edition: 1,
   headline: "Section 124B sedition charges target online government critics",
   context: "Penal Code Section 124B on activities detrimental to parliamentary democracy was used against 11 online government critics in 2024.",
   stageScores: { pa: 85, ba: 74, fc: 88, af: 71, ct: 62, sr: 81 }, finalScore: 80.4,
@@ -5533,7 +5533,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1337", opinionShift: 46, status: null, edition: 1,
+  id: "1337", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Orang Asli healthcare access requires average 2-hour travel",
   context: "A 2025 Health Ministry survey found that Orang Asli communities travel an average of 2 hours to reach the nearest healthcare facility.",
   stageScores: { pa: 79, ba: 64, fc: 82, af: 62, ct: 49, sr: 73 }, finalScore: 72.3,
@@ -5547,7 +5547,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1338", opinionShift: 78, status: "new", edition: 1,
+  id: "1338", published: true, opinionShift: 78, status: "new", edition: 1,
   headline: "MACC independence undermined by PM appointment power",
   context: "Reform groups highlighted that the Prime Minister's power to appoint the MACC chief commissioner undermines the anti-corruption body's independence.",
   stageScores: { pa: 84, ba: 73, fc: 87, af: 69, ct: 60, sr: 80 }, finalScore: 79.4,
@@ -5561,7 +5561,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1339", opinionShift: 65, status: null, edition: 1,
+  id: "1339", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Bail conditions restrict movement for 2,300 accused persons",
   context: "Courts imposed restrictive bail conditions including travel bans and reporting requirements on 2,300 accused persons awaiting trial in 2024.",
   stageScores: { pa: 80, ba: 67, fc: 83, af: 64, ct: 52, sr: 75 }, finalScore: 74.3,
@@ -5575,7 +5575,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1340", opinionShift: 88, status: null, edition: 1,
+  id: "1340", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Federal Constitution amendment to enshrine right to housing proposed",
   context: "A cross-party coalition of 34 MPs proposed a constitutional amendment to enshrine the right to adequate housing in the Federal Constitution in 2025.",
   stageScores: { pa: 86, ba: 75, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 82.3,
@@ -5589,7 +5589,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1341", opinionShift: 72, status: null, edition: 1,
+  id: "1341", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "AUKU Amendment Stalls After 3 Parliamentary Sessions",
   context: "The Universities and University Colleges Act 1971 amendment bill has been delayed since 2023 despite promises of reform.",
   stageScores: { pa: 88, ba: 72, fc: 89, af: 68, ct: 55, sr: 78 }, finalScore: 75.2,
@@ -5603,7 +5603,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1342", opinionShift: 65, status: null, edition: 1,
+  id: "1342", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Vernacular School Funding Cut 18% in Budget 2026",
   context: "Chinese and Tamil vernacular schools saw allocation reductions in the 2026 federal budget despite enrollment increases.",
   stageScores: { pa: 85, ba: 76, fc: 82, af: 72, ct: 58, sr: 80 }, finalScore: 76.1,
@@ -5617,7 +5617,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1343", opinionShift: 78, status: "new", edition: 1,
+  id: "1343", published: true, opinionShift: 78, status: "new", edition: 1,
   headline: "Graduate Unemployment Hits 35,000 in First Quarter 2026",
   context: "DOSM data shows 35,000 fresh graduates remained unemployed six months after graduation in Q1 2026.",
   stageScores: { pa: 90, ba: 68, fc: 88, af: 62, ct: 48, sr: 75 }, finalScore: 72.3,
@@ -5631,7 +5631,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1344", opinionShift: 55, status: "new", edition: 1,
+  id: "1344", published: true, opinionShift: 55, status: "new", edition: 1,
   headline: "PTPTN Repayment Rate Drops Below 50% for 2025",
   context: "The National Higher Education Fund Corporation reported that less than half of borrowers made scheduled repayments in 2025.",
   stageScores: { pa: 82, ba: 80, fc: 85, af: 65, ct: 52, sr: 82 }, finalScore: 74.8,
@@ -5645,7 +5645,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1345", opinionShift: 82, status: null, edition: 1,
+  id: "1345", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Rural Sabah Schools Report 40% Teacher Vacancy Rate",
   context: "Interior Division schools in Sabah face severe teacher shortages with 4 out of 10 positions unfilled in early 2026.",
   stageScores: { pa: 91, ba: 64, fc: 90, af: 58, ct: 44, sr: 72 }, finalScore: 70.5,
@@ -5659,7 +5659,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1346", opinionShift: 61, status: null, edition: 1,
+  id: "1346", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Matriculation vs STPM Debate Resurfaces After 2026 Intake",
   context: "The 2026 matriculation intake of 40,000 students reignited debate over dual-track university entry fairness.",
   stageScores: { pa: 86, ba: 70, fc: 83, af: 70, ct: 60, sr: 76 }, finalScore: 74.3,
@@ -5673,7 +5673,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1347", opinionShift: 48, status: "updated", edition: 1,
+  id: "1347", published: true, opinionShift: 48, status: "updated", edition: 1,
   headline: "TVET Enrollment Reaches 260,000 but Industry Uptake Lags",
   context: "Technical and vocational education enrollment grew 15% in 2025 but employer surveys show low confidence in graduate skills.",
   stageScores: { pa: 79, ba: 75, fc: 80, af: 74, ct: 62, sr: 83 }, finalScore: 76.8,
@@ -5687,7 +5687,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1348", opinionShift: 70, status: null, edition: 1,
+  id: "1348", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Special Education Waiting List Exceeds 15,000 Nationwide",
   context: "Parents report waiting over 18 months for special education placement in MOE integrated programs as of early 2026.",
   stageScores: { pa: 89, ba: 66, fc: 87, af: 60, ct: 46, sr: 74 }, finalScore: 71.9,
@@ -5701,7 +5701,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1349", opinionShift: 58, status: "new", edition: 1,
+  id: "1349", published: true, opinionShift: 58, status: "new", edition: 1,
   headline: "Private University Tuition Rises 22% Over 3 Years",
   context: "MOHE data shows average private university tuition increased from RM28,000 to RM34,000 per year between 2023 and 2026.",
   stageScores: { pa: 84, ba: 78, fc: 81, af: 69, ct: 56, sr: 79 }, finalScore: 75.6,
@@ -5715,7 +5715,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1350", opinionShift: 85, status: null, edition: 1,
+  id: "1350", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "UNDI18 Voter Turnout Among Youth Only 38% in 2025",
   context: "The 2025 state elections saw historically low turnout among newly eligible 18-20 year old voters.",
   stageScores: { pa: 87, ba: 62, fc: 86, af: 64, ct: 50, sr: 70 }, finalScore: 70.8,
@@ -5729,7 +5729,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1351", opinionShift: 44, status: null, edition: 1,
+  id: "1351", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "National Service Program Returns With RM1.2 Billion Budget",
   context: "The revived PLKN 2.0 program was announced in late 2025 targeting 150,000 youth annually starting mid-2026.",
   stageScores: { pa: 80, ba: 74, fc: 79, af: 76, ct: 64, sr: 84 }, finalScore: 78.2,
@@ -5743,7 +5743,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1352", opinionShift: 67, status: "new", edition: 1,
+  id: "1352", published: true, opinionShift: 67, status: "new", edition: 1,
   headline: "Digital Literacy Gap Leaves 45% of Rural Students Behind",
   context: "MOE's 2025 digital readiness assessment found nearly half of rural students lack basic computer skills.",
   stageScores: { pa: 88, ba: 69, fc: 84, af: 66, ct: 52, sr: 77 }, finalScore: 73.4,
@@ -5757,7 +5757,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1353", opinionShift: 53, status: null, edition: 1,
+  id: "1353", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Early Childhood Education Only Reaches 72% of B40 Children",
   context: "UNICEF Malaysia's 2025 report found significant preschool enrollment gaps among low-income families.",
   stageScores: { pa: 83, ba: 77, fc: 82, af: 71, ct: 58, sr: 81 }, finalScore: 76.5,
@@ -5771,7 +5771,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1354", opinionShift: 75, status: null, edition: 1,
+  id: "1354", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Brain Drain Costs Malaysia 6,000 Skilled Graduates Annually",
   context: "TalentCorp data indicates approximately 6,000 Malaysian graduates emigrate to work abroad each year since 2022.",
   stageScores: { pa: 86, ba: 71, fc: 88, af: 63, ct: 47, sr: 73 }, finalScore: 72.0,
@@ -5785,7 +5785,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1355", opinionShift: 42, status: null, edition: 1,
+  id: "1355", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Textbook Controversy Over Revised History Syllabus 2026",
   context: "The Form 4 history textbook revision sparked debate over coverage of May 13 and the social contract narrative.",
   stageScores: { pa: 85, ba: 65, fc: 91, af: 59, ct: 42, sr: 69 }, finalScore: 69.8,
@@ -5799,7 +5799,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1356", opinionShift: 63, status: "updated", edition: 1,
+  id: "1356", published: true, opinionShift: 63, status: "updated", edition: 1,
   headline: "Scholarship Distribution Favors 3 States Disproportionately",
   context: "JPA and MARA scholarship data for 2025 shows Selangor, Johor, and KL receive 52% of all awards despite being 38% of population.",
   stageScores: { pa: 81, ba: 73, fc: 83, af: 67, ct: 54, sr: 80 }, finalScore: 73.8,
@@ -5813,7 +5813,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1357", opinionShift: 88, status: null, edition: 1,
+  id: "1357", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "International Schools Surge to 235 Raising Segregation Concerns",
   context: "Malaysia now has 235 registered international schools as of 2026, up from 180 in 2020, with growing local enrollment.",
   stageScores: { pa: 78, ba: 82, fc: 78, af: 75, ct: 66, sr: 85 }, finalScore: 78.8,
@@ -5827,7 +5827,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1358", opinionShift: 57, status: null, edition: 1,
+  id: "1358", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "University Research Funding Drops to 0.4% of GDP",
   context: "Malaysia's gross expenditure on R&D in higher education fell to 0.4% of GDP in 2025, down from 0.5% in 2020.",
   stageScores: { pa: 77, ba: 79, fc: 80, af: 73, ct: 60, sr: 82 }, finalScore: 77.4,
@@ -5841,7 +5841,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1359", opinionShift: 73, status: null, edition: 1,
+  id: "1359", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Student Housing Crisis Hits 8 Public Universities in 2026",
   context: "At least 8 public universities cannot house all eligible students due to insufficient hostel capacity for 2026 intake.",
   stageScores: { pa: 84, ba: 67, fc: 85, af: 61, ct: 49, sr: 71 }, finalScore: 71.2,
@@ -5855,7 +5855,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1360", opinionShift: 50, status: "new", edition: 1,
+  id: "1360", published: true, opinionShift: 50, status: "new", edition: 1,
   headline: "Moral Education Curriculum Unchanged for 15 Years",
   context: "Non-Muslim students study the same Pendidikan Moral syllabus introduced in 2011 with no substantive revision.",
   stageScores: { pa: 76, ba: 76, fc: 77, af: 77, ct: 68, sr: 86 }, finalScore: 79.2,
@@ -5869,7 +5869,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1361", opinionShift: 80, status: null, edition: 1,
+  id: "1361", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Language Policy Shift Mandates More Bahasa in STEM Subjects",
   context: "MOE announced that from 2027, at least 60% of STEM instruction in national schools must be conducted in Bahasa Malaysia.",
   stageScores: { pa: 89, ba: 63, fc: 89, af: 60, ct: 45, sr: 70 }, finalScore: 70.1,
@@ -5883,7 +5883,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1362", opinionShift: 46, status: "new", edition: 1,
+  id: "1362", published: true, opinionShift: 46, status: "new", edition: 1,
   headline: "UPU System Rejects 48,000 First-Choice University Applications",
   context: "The centralized university placement system denied first-choice programs to 48,000 applicants for the 2026 academic year.",
   stageScores: { pa: 82, ba: 72, fc: 81, af: 68, ct: 55, sr: 78 }, finalScore: 74.0,
@@ -5897,7 +5897,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1363", opinionShift: 69, status: null, edition: 1,
+  id: "1363", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "School Infrastructure Backlog Reaches RM4.5 Billion in 2026",
   context: "The Public Works Department estimates RM4.5 billion is needed to address deferred maintenance across 10,300 public schools.",
   stageScores: { pa: 90, ba: 65, fc: 90, af: 57, ct: 43, sr: 72 }, finalScore: 70.3,
@@ -5911,7 +5911,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1364", opinionShift: 91, status: "updated", edition: 1,
+  id: "1364", published: true, opinionShift: 91, status: "updated", edition: 1,
   headline: "Youth Unemployment Rate Doubles National Average at 10.8%",
   context: "DOSM reported 10.8% unemployment among 15-24 year olds in Q4 2025, compared to 5.2% nationally.",
   stageScores: { pa: 91, ba: 61, fc: 92, af: 56, ct: 41, sr: 69 }, finalScore: 69.2,
@@ -5925,7 +5925,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1365", opinionShift: 56, status: null, edition: 1,
+  id: "1365", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Coding Education Reaches Only 30% of Secondary Schools",
   context: "Three years after the 2023 national coding education initiative, only 30% of secondary schools offer structured programming courses.",
   stageScores: { pa: 80, ba: 75, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 77.8,
@@ -5939,7 +5939,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1366", opinionShift: 62, status: null, edition: 1,
+  id: "1366", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "University Autonomy Index Places Malaysia at 34 of 50 Countries",
   context: "The European University Association's 2025 global autonomy index ranked Malaysia low on institutional self-governance.",
   stageScores: { pa: 78, ba: 77, fc: 80, af: 72, ct: 59, sr: 79 }, finalScore: 75.9,
@@ -5953,7 +5953,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1367", opinionShift: 47, status: null, edition: 1,
+  id: "1367", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Orang Asli School Dropout Rate Remains at 42% Through Form 5",
   context: "MOE data for 2025 shows 42% of Orang Asli students do not complete secondary education.",
   stageScores: { pa: 92, ba: 60, fc: 93, af: 55, ct: 40, sr: 68 }, finalScore: 68.5,
@@ -5967,7 +5967,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1368", opinionShift: 71, status: "new", edition: 1,
+  id: "1368", published: true, opinionShift: 71, status: "new", edition: 1,
   headline: "Higher Education Funding Per Student Falls 28% Since 2015",
   context: "Real per-student government funding for public universities declined 28% from 2015 to 2025 after adjusting for inflation.",
   stageScores: { pa: 85, ba: 68, fc: 86, af: 64, ct: 50, sr: 75 }, finalScore: 73.0,
@@ -5981,7 +5981,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1369", opinionShift: 38, status: "new", edition: 1,
+  id: "1369", published: true, opinionShift: 38, status: "new", edition: 1,
   headline: "Youth Political Participation Shifts to Online Petitions Over Parties",
   context: "A 2025 Merdeka Center survey found 68% of youth prefer online activism over joining political parties.",
   stageScores: { pa: 79, ba: 74, fc: 78, af: 76, ct: 65, sr: 84 }, finalScore: 79.5,
@@ -5995,7 +5995,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1370", opinionShift: 83, status: null, edition: 1,
+  id: "1370", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "STEM Enrollment Falls 8% While Arts Programs Grow in 2026",
   context: "Public university STEM enrollment declined for the third consecutive year while humanities and social science programs expanded.",
   stageScores: { pa: 83, ba: 70, fc: 84, af: 66, ct: 53, sr: 76 }, finalScore: 73.6,
@@ -6009,7 +6009,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1371", opinionShift: 59, status: null, edition: 1,
+  id: "1371", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Teacher Workload Survey Reveals 58-Hour Average Work Week",
   context: "NUTP's 2025 national survey of 12,000 teachers found average weekly hours far exceed the contracted 40 hours.",
   stageScores: { pa: 87, ba: 66, fc: 85, af: 63, ct: 48, sr: 73 }, finalScore: 72.6,
@@ -6023,7 +6023,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1372", opinionShift: 76, status: null, edition: 1,
+  id: "1372", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "B40 Students 3 Times More Likely to Repeat Primary School Years",
   context: "MOE internal data leaked in 2025 shows B40 children have triple the grade retention rate of M40 and T20 peers.",
   stageScores: { pa: 90, ba: 62, fc: 91, af: 58, ct: 44, sr: 70 }, finalScore: 69.6,
@@ -6037,7 +6037,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1373", opinionShift: 52, status: "updated", edition: 1,
+  id: "1373", published: true, opinionShift: 52, status: "updated", edition: 1,
   headline: "Private Tuition Industry Worth RM6.7 Billion Raises Equity Concerns",
   context: "The shadow education sector serving 2.4 million students highlights gaps in the formal education system.",
   stageScores: { pa: 81, ba: 78, fc: 80, af: 71, ct: 57, sr: 81 }, finalScore: 77.0,
@@ -6051,7 +6051,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1374", opinionShift: 64, status: null, edition: 1,
+  id: "1374", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Sabah and Sarawak Demand Control Over Own Education Systems",
   context: "East Malaysian state governments formally requested devolution of education authority under the Malaysia Agreement 1963.",
   stageScores: { pa: 86, ba: 64, fc: 88, af: 62, ct: 47, sr: 74 }, finalScore: 72.8,
@@ -6065,7 +6065,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1375", opinionShift: 40, status: null, edition: 1,
+  id: "1375", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Religious School Regulation Gaps Expose 320,000 Students to Risk",
   context: "Unregistered and loosely regulated tahfiz and religious schools operate outside MOE oversight affecting hundreds of thousands.",
   stageScores: { pa: 88, ba: 63, fc: 92, af: 57, ct: 42, sr: 69 }, finalScore: 69.4,
@@ -6079,7 +6079,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1376", opinionShift: 87, status: null, edition: 1,
+  id: "1376", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "UiTM Expansion Plan Adds 15,000 Seats Amid Quality Debate",
   context: "UiTM announced plans to increase enrollment capacity by 15,000 across 5 new satellite campuses by 2028.",
   stageScores: { pa: 82, ba: 71, fc: 81, af: 69, ct: 56, sr: 77 }, finalScore: 74.5,
@@ -6093,7 +6093,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1377", opinionShift: 68, status: "new", edition: 1,
+  id: "1377", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "School Counselors Handle 800 Students Each Despite Rising Mental Health Needs",
   context: "MOE's counselor-to-student ratio remains at 1:800 while student mental health referrals doubled between 2022 and 2025.",
   stageScores: { pa: 89, ba: 67, fc: 87, af: 61, ct: 46, sr: 71 }, finalScore: 71.5,
@@ -6107,7 +6107,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1378", opinionShift: 54, status: null, edition: 1,
+  id: "1378", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Dual Language Programme Covers Only 2,100 of 7,800 Schools",
   context: "The DLP allowing English-medium science and math teaching has expanded slowly since its 2016 launch.",
   stageScores: { pa: 80, ba: 76, fc: 79, af: 73, ct: 61, sr: 82 }, finalScore: 77.2,
@@ -6121,7 +6121,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1379", opinionShift: 77, status: "new", edition: 1,
+  id: "1379", published: true, opinionShift: 77, status: "new", edition: 1,
   headline: "MARA Scholarship Recipients Face Bonding Disputes Worth RM890 Million",
   context: "Over 3,400 MARA scholarship recipients face legal action or bond disputes over service requirements as of 2025.",
   stageScores: { pa: 83, ba: 69, fc: 84, af: 65, ct: 51, sr: 74 }, finalScore: 72.2,
@@ -6135,7 +6135,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1380", opinionShift: 45, status: null, edition: 1,
+  id: "1380", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Preschool Teacher Salaries Average RM1,400 Below Minimum Wage Compliance",
   context: "Private preschool teachers earn an average of RM1,400 monthly, below the RM1,500 minimum wage, according to 2025 ECCE survey.",
   stageScores: { pa: 86, ba: 70, fc: 86, af: 64, ct: 49, sr: 73 }, finalScore: 73.2,
@@ -6149,7 +6149,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1381", opinionShift: 90, status: "updated", edition: 1,
+  id: "1381", published: true, opinionShift: 90, status: "updated", edition: 1,
   headline: "English Proficiency Among SPM Students Declines for 5th Year",
   context: "SPM English paper results show declining pass rates for five consecutive years from 2021 to 2025.",
   stageScores: { pa: 88, ba: 65, fc: 88, af: 60, ct: 45, sr: 71 }, finalScore: 70.6,
@@ -6163,7 +6163,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1382", opinionShift: 36, status: null, edition: 1,
+  id: "1382", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Education Blueprint 2013-2025 Achieves Only 42% of Targets",
   context: "An independent review found that the Malaysia Education Blueprint met less than half of its 150 stated targets by expiry.",
   stageScores: { pa: 81, ba: 73, fc: 82, af: 70, ct: 58, sr: 80 }, finalScore: 76.3,
@@ -6177,7 +6177,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1383", opinionShift: 74, status: null, edition: 1,
+  id: "1383", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Campus Sexual Harassment Cases Rise 67% With Few Consequences",
   context: "University disciplinary records show a 67% increase in reported sexual harassment between 2023 and 2025.",
   stageScores: { pa: 90, ba: 61, fc: 90, af: 56, ct: 41, sr: 68 }, finalScore: 68.8,
@@ -6191,7 +6191,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1384", opinionShift: 60, status: null, edition: 1,
+  id: "1384", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Homeschooling Registration Triples to 18,000 Students Nationally",
   context: "Registered homeschooled students tripled from 6,000 in 2020 to 18,000 in 2025 with regulatory gaps widening.",
   stageScores: { pa: 77, ba: 79, fc: 78, af: 75, ct: 63, sr: 85 }, finalScore: 79.8,
@@ -6205,7 +6205,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1385", opinionShift: 49, status: "new", edition: 1,
+  id: "1385", published: true, opinionShift: 49, status: "new", edition: 1,
   headline: "Graduate Overqualification Rate Hits 38% in Service Sector",
   context: "DOSM labor force data shows 38% of degree holders work in jobs requiring only SPM-level qualifications.",
   stageScores: { pa: 84, ba: 72, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 74.6,
@@ -6219,7 +6219,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1386", opinionShift: 81, status: "new", edition: 1,
+  id: "1386", published: true, opinionShift: 81, status: "new", edition: 1,
   headline: "Education Ministry Spends 16% of Budget on Administration Not Teaching",
   context: "Parliamentary analysis reveals MOE spends RM9.2 billion of its RM57 billion budget on administrative overhead.",
   stageScores: { pa: 85, ba: 68, fc: 86, af: 63, ct: 50, sr: 75 }, finalScore: 73.5,
@@ -6233,7 +6233,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1387", opinionShift: 43, status: null, edition: 1,
+  id: "1387", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Pendidikan Islam Curriculum Review Stalls After 8-Year Delay",
   context: "The Islamic education curriculum for national schools has not been updated since 2017 despite a scheduled 5-year review cycle.",
   stageScores: { pa: 79, ba: 75, fc: 80, af: 74, ct: 62, sr: 83 }, finalScore: 78.4,
@@ -6247,7 +6247,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1388", opinionShift: 66, status: null, edition: 1,
+  id: "1388", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Student Loan Default Triggers Travel Ban for 145,000 Borrowers",
   context: "Immigration Department confirmed 145,000 Malaysians face travel restrictions due to PTPTN loan defaults as of 2025.",
   stageScores: { pa: 87, ba: 64, fc: 89, af: 59, ct: 43, sr: 70 }, finalScore: 70.9,
@@ -6261,7 +6261,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1389", opinionShift: 95, status: null, edition: 1,
+  id: "1389", published: true, opinionShift: 95, status: null, edition: 1,
   headline: "17 Schools in Kelantan Flood Zones Damaged for 4th Consecutive Year",
   context: "Annual monsoon flooding damaged 17 schools in Kelantan for the fourth year running affecting 12,000 students.",
   stageScores: { pa: 91, ba: 62, fc: 91, af: 57, ct: 42, sr: 69 }, finalScore: 69.0,
@@ -6275,7 +6275,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1390", opinionShift: 51, status: null, edition: 1,
+  id: "1390", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Malaysian Qualifications Agency Deregisters 12 Programs for Poor Quality",
   context: "MQA revoked accreditation for 12 degree programs at 8 private institutions in 2025 affecting 4,500 enrolled students.",
   stageScores: { pa: 83, ba: 71, fc: 83, af: 67, ct: 53, sr: 77 }, finalScore: 74.2,
@@ -6289,7 +6289,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1391", opinionShift: 84, status: null, edition: 1,
+  id: "1391", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Public Exam Pressure Linked to 2,300 Student Mental Health Cases",
   context: "MOE crisis intervention data for 2025 recorded 2,300 student mental health emergencies during PT3 and SPM exam periods.",
   stageScores: { pa: 90, ba: 63, fc: 90, af: 58, ct: 44, sr: 70 }, finalScore: 70.4,
@@ -6303,7 +6303,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1392", opinionShift: 39, status: "updated", edition: 1,
+  id: "1392", published: true, opinionShift: 39, status: "updated", edition: 1,
   headline: "Foreign Worker Children Denied Schooling Despite 120,000 Eligible",
   context: "Approximately 120,000 children of documented foreign workers have no access to public education in Malaysia.",
   stageScores: { pa: 88, ba: 61, fc: 92, af: 55, ct: 40, sr: 68 }, finalScore: 68.2,
@@ -6317,7 +6317,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1393", opinionShift: 70, status: null, edition: 1,
+  id: "1393", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Academic Integrity Violations at Universities Surge 85% Since 2022",
   context: "Public university disciplinary data shows academic dishonesty cases nearly doubled in three years.",
   stageScores: { pa: 81, ba: 74, fc: 81, af: 70, ct: 57, sr: 79 }, finalScore: 75.3,
@@ -6331,7 +6331,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1394", opinionShift: 57, status: "new", edition: 1,
+  id: "1394", published: true, opinionShift: 57, status: "new", edition: 1,
   headline: "Postgraduate Enrollment Falls 22% as Funding and Jobs Shrink",
   context: "Master's and PhD enrollment at public universities declined sharply from 2023 to 2025 amid reduced scholarships.",
   stageScores: { pa: 78, ba: 77, fc: 79, af: 73, ct: 61, sr: 82 }, finalScore: 77.6,
@@ -6345,7 +6345,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1395", opinionShift: 86, status: null, edition: 1,
+  id: "1395", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "School Bullying Reports Reach 14,800 With Cyberbullying Up 120%",
   context: "MOE's anti-bullying unit recorded 14,800 formal bullying reports in 2025 with online harassment cases surging.",
   stageScores: { pa: 91, ba: 60, fc: 91, af: 56, ct: 41, sr: 69 }, finalScore: 68.9,
@@ -6359,7 +6359,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1396", opinionShift: 41, status: null, edition: 1,
+  id: "1396", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Community Colleges Remain Underutilized at 58% Capacity Nationwide",
   context: "Malaysia's 102 community colleges operate at 58% average enrollment capacity despite significant infrastructure investment.",
   stageScores: { pa: 76, ba: 80, fc: 77, af: 76, ct: 66, sr: 86 }, finalScore: 80.2,
@@ -6373,7 +6373,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1397", opinionShift: 73, status: "updated", edition: 1,
+  id: "1397", published: true, opinionShift: 73, status: "updated", edition: 1,
   headline: "Gifted Education Program Serves Only 2,800 of Estimated 50,000 Eligible",
   context: "MOE's PERMATA Pintar and PERMATApintar programs identify and serve a tiny fraction of high-ability students.",
   stageScores: { pa: 80, ba: 73, fc: 80, af: 72, ct: 59, sr: 80 }, finalScore: 76.0,
@@ -6387,7 +6387,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1398", opinionShift: 55, status: null, edition: 1,
+  id: "1398", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Physical Education Reduced to 1 Period Weekly in 65% of Schools",
   context: "Despite MOE policy requiring 2 periods, most schools allocate only 1 period for physical education due to exam preparation pressure.",
   stageScores: { pa: 82, ba: 72, fc: 82, af: 69, ct: 55, sr: 78 }, finalScore: 74.9,
@@ -6401,7 +6401,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1399", opinionShift: 79, status: null, edition: 1,
+  id: "1399", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Teacher Transfer System Separates 28,000 Families Annually",
   context: "MOE's centralized transfer system moves teachers to new locations often separating them from spouses and children.",
   stageScores: { pa: 86, ba: 66, fc: 85, af: 62, ct: 48, sr: 73 }, finalScore: 72.4,
@@ -6415,7 +6415,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1400", opinionShift: 37, status: null, edition: 1,
+  id: "1400", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Technical University Conversion Leaves 5 Institutions in Limbo",
   context: "Five polytechnics designated for upgrade to technical university status in 2022 remain in administrative limbo in 2026.",
   stageScores: { pa: 77, ba: 78, fc: 78, af: 75, ct: 64, sr: 84 }, finalScore: 79.0,
@@ -6429,7 +6429,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1401", opinionShift: 92, status: "new", edition: 1,
+  id: "1401", published: true, opinionShift: 92, status: "new", edition: 1,
   headline: "Sijil Kemahiran Malaysia Holders Earn 40% Less Than Degree Holders",
   context: "Skills certificate holders face persistent wage discrimination despite equivalent competency in technical fields.",
   stageScores: { pa: 84, ba: 69, fc: 84, af: 65, ct: 51, sr: 75 }, finalScore: 73.9,
@@ -6443,7 +6443,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1402", opinionShift: 63, status: "new", edition: 1,
+  id: "1402", published: true, opinionShift: 63, status: "new", edition: 1,
   headline: "Library Access Drops as 340 School Libraries Lack Books and Staff",
   context: "MOE audit found 340 school libraries effectively non-functional due to absent librarians and outdated collections.",
   stageScores: { pa: 80, ba: 74, fc: 80, af: 72, ct: 59, sr: 80 }, finalScore: 76.4,
@@ -6457,7 +6457,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1403", opinionShift: 47, status: null, edition: 1,
+  id: "1403", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Student Visa Fraud Uncovered at 14 Private Institutions in 2025",
   context: "Immigration Department investigations revealed 14 private colleges acting as visa mills for 8,200 foreign students.",
   stageScores: { pa: 85, ba: 67, fc: 88, af: 61, ct: 46, sr: 72 }, finalScore: 71.8,
@@ -6471,7 +6471,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1404", opinionShift: 68, status: null, edition: 1,
+  id: "1404", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Arts and Music Education Absent From 72% of Rural Primary Schools",
   context: "Creative arts instruction is effectively unavailable in most rural primary schools due to lack of specialist teachers.",
   stageScores: { pa: 82, ba: 71, fc: 82, af: 68, ct: 54, sr: 78 }, finalScore: 74.7,
@@ -6485,7 +6485,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1405", opinionShift: 58, status: null, edition: 1,
+  id: "1405", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Open Distance Learning Enrollment Hits 280,000 With Quality Questions",
   context: "ODL programs at public and private universities enrolled 280,000 students in 2025 but completion rates remain low.",
   stageScores: { pa: 79, ba: 76, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 78.0,
@@ -6499,7 +6499,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1406", opinionShift: 75, status: null, edition: 1,
+  id: "1406", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "National Education Philosophy Review Proposed After 36 Years",
   context: "Academics and civil society called for a review of the Falsafah Pendidikan Kebangsaan adopted in 1988.",
   stageScores: { pa: 78, ba: 75, fc: 80, af: 73, ct: 60, sr: 81 }, finalScore: 77.9,
@@ -6513,7 +6513,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1407", opinionShift: 44, status: null, edition: 1,
+  id: "1407", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Student Transportation Costs Burden 180,000 Rural Families",
   context: "Inadequate school bus services force rural families to spend up to 20% of income on student transportation.",
   stageScores: { pa: 85, ba: 68, fc: 84, af: 64, ct: 50, sr: 75 }, finalScore: 73.7,
@@ -6527,7 +6527,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1408", opinionShift: 89, status: null, edition: 1,
+  id: "1408", published: true, opinionShift: 89, status: null, edition: 1,
   headline: "Student Debt Exceeds RM15,000 Average Before First Job",
   context: "Combined PTPTN loans, credit card debt, and personal loans leave average fresh graduates with RM15,000 in debt.",
   stageScores: { pa: 87, ba: 66, fc: 87, af: 62, ct: 48, sr: 73 }, finalScore: 72.9,
@@ -6541,7 +6541,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1409", opinionShift: 52, status: "new", edition: 1,
+  id: "1409", published: true, opinionShift: 52, status: "new", edition: 1,
   headline: "Academic Staff at Public Universities 35% Contract Workers",
   context: "One-third of academic staff at public universities are on fixed-term contracts without permanent tenure prospects.",
   stageScores: { pa: 81, ba: 73, fc: 81, af: 69, ct: 55, sr: 78 }, finalScore: 75.0,
@@ -6555,7 +6555,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1410", opinionShift: 61, status: null, edition: 1,
+  id: "1410", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Sex Education Remains Taboo Despite 14,000 Teen Pregnancies Annually",
   context: "Comprehensive sexuality education is not taught in Malaysian schools while teenage pregnancy rates remain stubbornly high.",
   stageScores: { pa: 89, ba: 63, fc: 89, af: 59, ct: 43, sr: 70 }, finalScore: 70.7,
@@ -6569,7 +6569,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1411", opinionShift: 78, status: null, edition: 1,
+  id: "1411", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Foreign Faculty at Public Universities Falls to 4.2% Below Target",
   context: "International academic staff at public universities declined to 4.2% versus the 15% target set in the education blueprint.",
   stageScores: { pa: 77, ba: 76, fc: 78, af: 74, ct: 63, sr: 84 }, finalScore: 78.6,
@@ -6583,7 +6583,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1412", opinionShift: 40, status: "updated", edition: 1,
+  id: "1412", published: true, opinionShift: 40, status: "updated", edition: 1,
   headline: "Orang Asli Scholarship Access Rate Only 3.2% of Eligible Students",
   context: "Despite dedicated scholarship programs, only 3.2% of eligible Orang Asli students receive higher education funding.",
   stageScores: { pa: 90, ba: 61, fc: 92, af: 56, ct: 41, sr: 68 }, finalScore: 68.4,
@@ -6597,7 +6597,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1413", opinionShift: 65, status: "updated", edition: 1,
+  id: "1413", published: true, opinionShift: 65, status: "updated", edition: 1,
   headline: "Education Technology Spending Reaches RM2.1 Billion With Mixed Results",
   context: "Government and school-level spending on education technology hit RM2.1 billion in 2025 but learning outcomes show no improvement.",
   stageScores: { pa: 82, ba: 72, fc: 81, af: 69, ct: 56, sr: 78 }, finalScore: 75.4,
@@ -6611,7 +6611,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1414", opinionShift: 53, status: null, edition: 1,
+  id: "1414", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Cluster School Status Benefits Only 650 of 10,200 Public Schools",
   context: "The elite cluster school designation gives extra resources to 650 schools while the remaining 9,550 receive standard allocations.",
   stageScores: { pa: 81, ba: 73, fc: 80, af: 71, ct: 57, sr: 79 }, finalScore: 75.7,
@@ -6625,7 +6625,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1415", opinionShift: 71, status: null, edition: 1,
+  id: "1415", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "SPM Examination Costs Families RM450 in Hidden Fees and Materials",
   context: "Beyond official exam fees, families spend an average of RM450 on revision books, trial papers, and extra classes for SPM.",
   stageScores: { pa: 83, ba: 70, fc: 83, af: 67, ct: 53, sr: 76 }, finalScore: 74.1,
@@ -6639,7 +6639,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1416", opinionShift: 48, status: null, edition: 1,
+  id: "1416", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "University Endowment Funds Total Only RM3.8 Billion Across 20 Institutions",
   context: "Combined endowments of all 20 public universities equal less than a single mid-tier US university's fund.",
   stageScores: { pa: 76, ba: 78, fc: 77, af: 75, ct: 64, sr: 85 }, finalScore: 79.3,
@@ -6653,7 +6653,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1417", opinionShift: 82, status: "new", edition: 1,
+  id: "1417", published: true, opinionShift: 82, status: "new", edition: 1,
   headline: "School Canteen Food Safety Violations Found at 28% of Schools",
   context: "MOH and MOE joint audit found food safety violations in canteens at 2,856 of 10,200 schools inspected in 2025.",
   stageScores: { pa: 88, ba: 64, fc: 87, af: 61, ct: 47, sr: 72 }, finalScore: 71.6,
@@ -6667,7 +6667,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1418", opinionShift: 36, status: null, edition: 1,
+  id: "1418", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Co-Curricular Activities Consume RM1.8 Billion But Lack Outcome Data",
   context: "Schools spend RM1.8 billion annually on co-curricular programs with no systematic measurement of student development outcomes.",
   stageScores: { pa: 77, ba: 77, fc: 78, af: 74, ct: 63, sr: 84 }, finalScore: 79.6,
@@ -6681,7 +6681,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1419", opinionShift: 69, status: null, edition: 1,
+  id: "1419", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "Polytechnic Graduates Outperform University Graduates in Employer Satisfaction",
   context: "2025 employer survey shows higher satisfaction with polytechnic graduates' practical skills compared to degree holders.",
   stageScores: { pa: 80, ba: 74, fc: 80, af: 72, ct: 59, sr: 80 }, finalScore: 76.6,
@@ -6695,7 +6695,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1420", opinionShift: 85, status: null, edition: 1,
+  id: "1420", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "School Dropout Rate in Sabah at 8.4% Triple the National Average",
   context: "Sabah's primary and secondary school dropout rate of 8.4% far exceeds the national rate of 2.8% in 2025.",
   stageScores: { pa: 91, ba: 61, fc: 91, af: 56, ct: 41, sr: 69 }, finalScore: 69.3,
@@ -6709,7 +6709,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1421", opinionShift: 46, status: null, edition: 1,
+  id: "1421", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Academic Freedom Violations at 6 Universities Documented by Scholars at Risk",
   context: "Scholars at Risk Network documented 6 incidents of academic freedom restriction at Malaysian universities in 2025.",
   stageScores: { pa: 85, ba: 65, fc: 88, af: 60, ct: 45, sr: 71 }, finalScore: 71.0,
@@ -6723,7 +6723,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1422", opinionShift: 60, status: null, edition: 1,
+  id: "1422", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "School Meal Program Budget of RM3.50 Per Student Deemed Inadequate",
   context: "The Rancangan Makanan Tambahan allocates only RM3.50 per meal per student despite food cost inflation since 2020.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 63, ct: 49, sr: 74 }, finalScore: 73.3,
@@ -6737,7 +6737,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1423", opinionShift: 74, status: "new", edition: 1,
+  id: "1423", published: true, opinionShift: 74, status: "new", edition: 1,
   headline: "Disabled Students Face 62% Higher University Dropout Rate",
   context: "Students with disabilities enrolled in public universities drop out at 18% compared to 11% for non-disabled peers.",
   stageScores: { pa: 88, ba: 64, fc: 87, af: 61, ct: 47, sr: 72 }, finalScore: 71.3,
@@ -6751,7 +6751,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1424", opinionShift: 55, status: null, edition: 1,
+  id: "1424", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Form 6 Enrollment Collapses 35% as Students Seek Alternatives",
   context: "STPM-track Form 6 enrollment fell 35% from 2020 to 2025 as students choose matriculation, polytechnics, or private paths.",
   stageScores: { pa: 79, ba: 75, fc: 79, af: 73, ct: 61, sr: 82 }, finalScore: 77.3,
@@ -6765,7 +6765,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1425", opinionShift: 43, status: "new", edition: 1,
+  id: "1425", published: true, opinionShift: 43, status: "new", edition: 1,
   headline: "Environmental Education Module Added to 200 Schools as Pilot",
   context: "MOE launched a pilot environmental literacy program in 200 schools in 2025 ahead of potential national rollout.",
   stageScores: { pa: 76, ba: 79, fc: 77, af: 76, ct: 65, sr: 86 }, finalScore: 80.5,
@@ -6779,7 +6779,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1426", opinionShift: 67, status: null, edition: 1,
+  id: "1426", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Malaysia's PISA 2025 Results Show Widening Urban-Rural Achievement Gap",
   context: "The latest PISA results reveal that the performance gap between urban and rural students grew by 15 points since 2022.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 62, ct: 49, sr: 74 }, finalScore: 73.1,
@@ -6793,7 +6793,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1427", opinionShift: 50, status: null, edition: 1,
+  id: "1427", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Principal Leadership Quality Varies Widely Across States",
   context: "MOE's competency assessment of 2,400 school principals found significant variation in management and pedagogical leadership.",
   stageScores: { pa: 78, ba: 76, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 78.3,
@@ -6807,7 +6807,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1428", opinionShift: 88, status: "updated", edition: 1,
+  id: "1428", published: true, opinionShift: 88, status: "updated", edition: 1,
   headline: "University Student Activism Punished Under Outdated Disciplinary Rules",
   context: "Multiple students at 3 public universities faced suspension in 2025 for participating in off-campus peaceful protests.",
   stageScores: { pa: 87, ba: 63, fc: 89, af: 59, ct: 43, sr: 70 }, finalScore: 71.4,
@@ -6821,7 +6821,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1429", opinionShift: 38, status: null, edition: 1,
+  id: "1429", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "National Higher Education Strategic Plan 2.0 Delayed by 18 Months",
   context: "The successor to PSPTN Phase 3 was due in mid-2024 but has not been released as of early 2026.",
   stageScores: { pa: 76, ba: 77, fc: 78, af: 75, ct: 64, sr: 85 }, finalScore: 80.0,
@@ -6835,7 +6835,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1430", opinionShift: 72, status: null, edition: 1,
+  id: "1430", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Malaysian Students Rank 45th in Global Financial Literacy Assessment",
   context: "OECD's 2025 financial literacy assessment placed Malaysian 15-year-olds well below the global average.",
   stageScores: { pa: 80, ba: 74, fc: 80, af: 72, ct: 59, sr: 80 }, finalScore: 76.2,
@@ -6849,7 +6849,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1431", opinionShift: 76, status: null, edition: 1,
+  id: "1431", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Public Hospital Wait Times Average 4.2 Hours in Emergency Departments",
   context: "MOH data for 2025 shows average emergency department waiting time at government hospitals has risen to 4.2 hours.",
   stageScores: { pa: 91, ba: 66, fc: 90, af: 60, ct: 44, sr: 72 }, finalScore: 72.1,
@@ -6863,7 +6863,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1432", opinionShift: 83, status: "new", edition: 1,
+  id: "1432", published: true, opinionShift: 83, status: "new", edition: 1,
   headline: "Specialist Doctor Shortage Reaches 5,800 Vacancies Nationwide",
   context: "MOH reports 5,800 unfilled specialist positions across public hospitals as experienced doctors migrate to private sector.",
   stageScores: { pa: 90, ba: 63, fc: 91, af: 57, ct: 42, sr: 69 }, finalScore: 69.7,
@@ -6877,7 +6877,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1433", opinionShift: 69, status: "new", edition: 1,
+  id: "1433", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Mental Health Services Reach Only 12% of Malaysians Who Need Them",
   context: "National Health and Morbidity Survey 2025 estimates 4.2 million Malaysians need mental health support but only 500,000 access services.",
   stageScores: { pa: 89, ba: 65, fc: 88, af: 62, ct: 48, sr: 74 }, finalScore: 72.7,
@@ -6891,7 +6891,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1434", opinionShift: 58, status: null, edition: 1,
+  id: "1434", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "B40 Healthcare Spending Rises to 6.8% of Household Income",
   context: "Low-income households spend proportionally more on healthcare despite public system availability due to access barriers.",
   stageScores: { pa: 86, ba: 70, fc: 85, af: 65, ct: 51, sr: 76 }, finalScore: 74.4,
@@ -6905,7 +6905,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1435", opinionShift: 91, status: null, edition: 1,
+  id: "1435", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "Health Privatization Debate Reignited by 3 Hospital PPP Proposals",
   context: "Three new public-private partnership hospital proposals in 2025 revived debate over healthcare privatization risks.",
   stageScores: { pa: 88, ba: 68, fc: 89, af: 63, ct: 47, sr: 73 }, finalScore: 68.0,
@@ -6919,7 +6919,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1436", opinionShift: 45, status: null, edition: 1,
+  id: "1436", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Medical Officer Contract System Leaves 23,000 Doctors in Limbo",
   context: "Over 23,000 contract medical officers remain without permanent positions or clear career pathways in the public system.",
   stageScores: { pa: 90, ba: 64, fc: 90, af: 58, ct: 43, sr: 70 }, finalScore: 70.0,
@@ -6933,7 +6933,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1437", opinionShift: 72, status: null, edition: 1,
+  id: "1437", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Rural Clinic Coverage Falls Short With 1,200 Communities Underserved",
   context: "MOH mapping shows 1,200 rural communities beyond 10km from the nearest government health clinic.",
   stageScores: { pa: 88, ba: 66, fc: 87, af: 61, ct: 46, sr: 72 }, finalScore: 71.7,
@@ -6947,7 +6947,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1438", opinionShift: 64, status: null, edition: 1,
+  id: "1438", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Maternal Mortality Ratio Rises to 28 Per 100,000 Live Births",
   context: "Malaysia's maternal mortality ratio increased from 23.3 in 2020 to 28 per 100,000 live births in 2025.",
   stageScores: { pa: 91, ba: 62, fc: 91, af: 57, ct: 42, sr: 69 }, finalScore: 69.5,
@@ -6961,7 +6961,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1439", opinionShift: 52, status: null, edition: 1,
+  id: "1439", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Child Vaccination Rate Drops to 88% Below Herd Immunity Threshold",
   context: "National Immunisation Programme coverage for children under 2 fell below the 95% threshold for herd immunity in 2025.",
   stageScores: { pa: 90, ba: 67, fc: 89, af: 63, ct: 48, sr: 74 }, finalScore: 68.1,
@@ -6975,7 +6975,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1440", opinionShift: 80, status: "new", edition: 1,
+  id: "1440", published: true, opinionShift: 80, status: "new", edition: 1,
   headline: "Dengue Deaths Reach 148 in 2025 Despite RM380 Million Spent on Control",
   context: "Dengue fatalities hit 148 in 2025 with 125,000 reported cases despite significant government vector control spending.",
   stageScores: { pa: 89, ba: 65, fc: 88, af: 62, ct: 47, sr: 73 }, finalScore: 72.5,
@@ -6989,7 +6989,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1441", opinionShift: 37, status: null, edition: 1,
+  id: "1441", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Drug Policy Reform Debate Intensifies After 2,400 Overdose Deaths",
   context: "Malaysia recorded 2,400 drug overdose deaths in 2025 amid ongoing debate over harm reduction versus enforcement approaches.",
   stageScores: { pa: 86, ba: 68, fc: 87, af: 64, ct: 50, sr: 75 }, finalScore: 68.3,
@@ -7003,7 +7003,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1442", opinionShift: 56, status: "updated", edition: 1,
+  id: "1442", published: true, opinionShift: 56, status: "updated", edition: 1,
   headline: "Smoking Prevalence Stalls at 21% Despite Generational End Game Policy",
   context: "The Generational End Game tobacco policy effective since 2024 has not yet shown measurable impact on overall smoking rates.",
   stageScores: { pa: 84, ba: 72, fc: 83, af: 69, ct: 55, sr: 78 }, finalScore: 75.5,
@@ -7017,7 +7017,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1443", opinionShift: 70, status: null, edition: 1,
+  id: "1443", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Healthcare Workforce Migration Costs Malaysia 1,200 Doctors Annually",
   context: "Approximately 1,200 Malaysian doctors emigrate each year seeking better pay and working conditions abroad.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 62, ct: 48, sr: 73 }, finalScore: 68.6,
@@ -7031,7 +7031,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1444", opinionShift: 48, status: "updated", edition: 1,
+  id: "1444", published: true, opinionShift: 48, status: "updated", edition: 1,
   headline: "Traditional Medicine Regulation Leaves 12,000 Practitioners Unregistered",
   context: "Approximately 12,000 traditional and complementary medicine practitioners operate without formal registration as of 2025.",
   stageScores: { pa: 80, ba: 74, fc: 80, af: 72, ct: 60, sr: 81 }, finalScore: 77.5,
@@ -7045,7 +7045,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1445", opinionShift: 86, status: null, edition: 1,
+  id: "1445", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Medical Tourism Revenue Hits RM2.4 Billion While Public System Struggles",
   context: "Malaysia's medical tourism industry generated RM2.4 billion in 2025 as resources are directed toward international patients.",
   stageScores: { pa: 83, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 75.1,
@@ -7059,7 +7059,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1446", opinionShift: 62, status: null, edition: 1,
+  id: "1446", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Non-Communicable Diseases Account for 73% of All Malaysian Deaths",
   context: "NCDs including heart disease, diabetes, and cancer caused 73% of deaths in Malaysia in 2025.",
   stageScores: { pa: 89, ba: 65, fc: 88, af: 62, ct: 47, sr: 73 }, finalScore: 68.7,
@@ -7073,7 +7073,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1447", opinionShift: 41, status: null, edition: 1,
+  id: "1447", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Organ Donation Rate Remains at 0.9 Per Million Below Global Average",
   context: "Malaysia's organ donation rate of 0.9 per million population is among the lowest globally despite awareness campaigns.",
   stageScores: { pa: 82, ba: 73, fc: 82, af: 70, ct: 57, sr: 80 }, finalScore: 76.7,
@@ -7087,7 +7087,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1448", opinionShift: 75, status: "new", edition: 1,
+  id: "1448", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Food Safety Violations at 34% of Inspected Premises in 2025",
   context: "Joint MOH-local authority inspections found food safety violations at over one-third of food establishments checked.",
   stageScores: { pa: 87, ba: 68, fc: 86, af: 64, ct: 50, sr: 75 }, finalScore: 69.9,
@@ -7101,7 +7101,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1449", opinionShift: 54, status: null, edition: 1,
+  id: "1449", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Antimicrobial Resistance Deaths Reach 4,500 Annually in Malaysia",
   context: "AMR-related deaths increased 22% since 2022 as antibiotic misuse continues in both human and animal health sectors.",
   stageScores: { pa: 84, ba: 71, fc: 84, af: 67, ct: 53, sr: 77 }, finalScore: 75.8,
@@ -7115,7 +7115,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1450", opinionShift: 67, status: null, edition: 1,
+  id: "1450", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Disability Services Budget Frozen at RM320 Million for 4th Year",
   context: "JKM allocation for disability services has not increased since 2022 despite growing registration of persons with disabilities.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 63, ct: 49, sr: 74 }, finalScore: 77.1,
@@ -7129,7 +7129,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1451", opinionShift: 89, status: null, edition: 1,
+  id: "1451", published: true, opinionShift: 89, status: null, edition: 1,
   headline: "Elderly Care Facilities Serve Only 6% of Seniors Needing Assistance",
   context: "Malaysia has 340 registered elderly care homes but demand from aging population far exceeds available capacity.",
   stageScores: { pa: 88, ba: 66, fc: 87, af: 61, ct: 46, sr: 72 }, finalScore: 71.1,
@@ -7143,7 +7143,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1452", opinionShift: 43, status: null, edition: 1,
+  id: "1452", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Palliative Care Available in Only 38% of Government Hospitals",
   context: "Palliative care services remain limited with most public hospitals lacking dedicated teams for end-of-life care.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 69, ct: 55, sr: 79 }, finalScore: 78.9,
@@ -7157,7 +7157,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1453", opinionShift: 78, status: "new", edition: 1,
+  id: "1453", published: true, opinionShift: 78, status: "new", edition: 1,
   headline: "Pharmaceutical Drug Prices 2.4 Times Higher Than International Reference",
   context: "MOH study found medicine prices in Malaysia average 2.4 times the international reference price for essential drugs.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 79.1,
@@ -7171,7 +7171,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1454", opinionShift: 35, status: null, edition: 1,
+  id: "1454", published: true, opinionShift: 35, status: null, edition: 1,
   headline: "MySejahtera Health Data Governance Remains Unresolved Since 2022",
   context: "The legal status and ownership of health data collected through MySejahtera during COVID-19 remains unclear 4 years later.",
   stageScores: { pa: 81, ba: 74, fc: 81, af: 71, ct: 58, sr: 80 }, finalScore: 76.9,
@@ -7185,7 +7185,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1455", opinionShift: 71, status: null, edition: 1,
+  id: "1455", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Pandemic Preparedness Budget Cut 42% From COVID-Era Levels",
   context: "Malaysia's pandemic preparedness allocation was reduced from RM1.8 billion in 2023 to RM1.05 billion in 2026.",
   stageScores: { pa: 85, ba: 70, fc: 84, af: 66, ct: 52, sr: 77 }, finalScore: 79.7,
@@ -7199,7 +7199,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1456", opinionShift: 60, status: "new", edition: 1,
+  id: "1456", published: true, opinionShift: 60, status: "new", edition: 1,
   headline: "Community Health Center Model Piloted in 15 Underserved Areas",
   context: "MOH launched 15 community health centers integrating primary care, mental health, and social services in 2025.",
   stageScores: { pa: 79, ba: 76, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 78.5,
@@ -7213,7 +7213,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1457", opinionShift: 84, status: null, edition: 1,
+  id: "1457", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Health Insurance Coverage Gaps Leave 6 Million Malaysians Exposed",
   context: "An estimated 6 million working-age Malaysians have neither employer health coverage nor private health insurance.",
   stageScores: { pa: 88, ba: 65, fc: 88, af: 61, ct: 46, sr: 72 }, finalScore: 79.9,
@@ -7227,7 +7227,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1458", opinionShift: 49, status: null, edition: 1,
+  id: "1458", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Suicide Rate Rises to 8.4 Per 100,000 With Youth Most Affected",
   context: "Malaysia's suicide rate increased to 8.4 per 100,000 population in 2025 with the highest rates among 18-24 year olds.",
   stageScores: { pa: 91, ba: 62, fc: 91, af: 57, ct: 42, sr: 69 }, finalScore: 69.1,
@@ -7241,7 +7241,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1459", opinionShift: 66, status: "updated", edition: 1,
+  id: "1459", published: true, opinionShift: 66, status: "updated", edition: 1,
   headline: "Private Hospital Charges Rise 35% in 3 Years With No Price Controls",
   context: "Average private hospital charges increased 35% between 2023 and 2025 as the sector remains largely unregulated on pricing.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 64, ct: 50, sr: 76 }, finalScore: 80.1,
@@ -7255,7 +7255,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1460", opinionShift: 77, status: null, edition: 1,
+  id: "1460", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Blood Supply Reaches Critical Shortage 14 Times in 2025",
   context: "National Blood Centre declared critical shortage alerts 14 times in 2025 as donation rates lag behind rising demand.",
   stageScores: { pa: 85, ba: 68, fc: 85, af: 63, ct: 49, sr: 74 }, finalScore: 80.3,
@@ -7269,7 +7269,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1461", opinionShift: 39, status: null, edition: 1,
+  id: "1461", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Occupational Health Services Cover Only 22% of Malaysian Workers",
   context: "Most Malaysian workers lack access to workplace health services despite Occupational Safety and Health Act requirements.",
   stageScores: { pa: 80, ba: 75, fc: 80, af: 73, ct: 61, sr: 82 }, finalScore: 78.1,
@@ -7283,7 +7283,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1462", opinionShift: 57, status: "updated", edition: 1,
+  id: "1462", published: true, opinionShift: 57, status: "updated", edition: 1,
   headline: "Nurse-to-Patient Ratio at Public Hospitals Reaches 1 to 12",
   context: "Government hospitals report nurse staffing ratios far below international standards amid recruitment challenges.",
   stageScores: { pa: 89, ba: 64, fc: 89, af: 59, ct: 44, sr: 70 }, finalScore: 70.2,
@@ -7297,7 +7297,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1463", opinionShift: 73, status: null, edition: 1,
+  id: "1463", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Child Malnutrition Persists at 21% Among B40 Children Under 5",
   context: "UNICEF-MOH survey found that 1 in 5 B40 children under 5 shows signs of stunting or wasting.",
   stageScores: { pa: 90, ba: 63, fc: 90, af: 58, ct: 43, sr: 70 }, finalScore: 80.4,
@@ -7311,7 +7311,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1464", opinionShift: 46, status: "new", edition: 1,
+  id: "1464", published: true, opinionShift: 46, status: "new", edition: 1,
   headline: "Dialysis Center Growth Outpaces Prevention Spending 8 to 1",
   context: "Malaysia adds 45 new dialysis centers annually while kidney disease prevention programs receive minimal funding.",
   stageScores: { pa: 85, ba: 70, fc: 84, af: 66, ct: 52, sr: 77 }, finalScore: 80.6,
@@ -7325,7 +7325,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1465", opinionShift: 81, status: null, edition: 1,
+  id: "1465", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Air Pollution Linked to 12,800 Premature Deaths in Malaysia 2025",
   context: "DOE and MOH joint study attributed 12,800 premature deaths to air quality exceeding WHO guidelines in 2025.",
   stageScores: { pa: 88, ba: 66, fc: 87, af: 62, ct: 48, sr: 73 }, finalScore: 80.7,
@@ -7339,7 +7339,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1466", opinionShift: 52, status: null, edition: 1,
+  id: "1466", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Health Literacy Survey Shows 56% of Adults Cannot Interpret Labels",
   context: "MOH health literacy assessment found majority of adults struggle to understand medicine labels and nutritional information.",
   stageScores: { pa: 82, ba: 73, fc: 81, af: 70, ct: 57, sr: 79 }, finalScore: 80.8,
@@ -7353,7 +7353,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1467", opinionShift: 68, status: null, edition: 1,
+  id: "1467", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Maternal Mental Health Screening Rate Only 18% Postpartum",
   context: "Fewer than 1 in 5 new mothers receive postnatal mental health screening despite high rates of postpartum depression.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 80.9,
@@ -7367,7 +7367,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1468", opinionShift: 40, status: null, edition: 1,
+  id: "1468", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Generic Medicine Adoption at Only 35% Despite 60% Cost Savings",
   context: "Malaysian doctors prescribe branded medicines 65% of the time despite generics being equally effective and far cheaper.",
   stageScores: { pa: 81, ba: 75, fc: 80, af: 72, ct: 60, sr: 81 }, finalScore: 77.7,
@@ -7381,7 +7381,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1469", opinionShift: 87, status: null, edition: 1,
+  id: "1469", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "Hospital-Acquired Infections Affect 14,000 Patients in Public Hospitals",
   context: "MOH surveillance data for 2025 shows 14,000 patients contracted infections during hospital stays.",
   stageScores: { pa: 90, ba: 64, fc: 90, af: 58, ct: 44, sr: 70 }, finalScore: 81.0,
@@ -7395,7 +7395,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1470", opinionShift: 55, status: null, edition: 1,
+  id: "1470", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Water Quality Issues Affect 2.4 Million Residents in 5 States",
   context: "DOE reports persistent water quality problems from pollution and aging infrastructure affecting millions.",
   stageScores: { pa: 88, ba: 67, fc: 87, af: 62, ct: 48, sr: 73 }, finalScore: 81.1,
@@ -7409,7 +7409,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1471", opinionShift: 93, status: "new", edition: 1,
+  id: "1471", published: true, opinionShift: 93, status: "new", edition: 1,
   headline: "Opioid Substitution Therapy Waitlist Grows to 8,500 Patients",
   context: "Methadone and buprenorphine treatment programs cannot accommodate growing demand from opioid-dependent patients.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 64, ct: 51, sr: 76 }, finalScore: 81.2,
@@ -7423,7 +7423,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1472", opinionShift: 44, status: "new", edition: 1,
+  id: "1472", published: true, opinionShift: 44, status: "new", edition: 1,
   headline: "Healthcare Worker Violence Incidents Reach 3,200 in 2025",
   context: "Attacks on healthcare workers in government facilities increased 28% in 2025 prompting calls for protective legislation.",
   stageScores: { pa: 87, ba: 66, fc: 86, af: 62, ct: 48, sr: 73 }, finalScore: 81.3,
@@ -7437,7 +7437,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1473", opinionShift: 63, status: null, edition: 1,
+  id: "1473", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Rare Disease Patients Face Average 5.2-Year Diagnostic Delay",
   context: "Malaysian rare disease patients wait an average of 5.2 years from symptom onset to accurate diagnosis.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 81.4,
@@ -7451,7 +7451,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1474", opinionShift: 50, status: null, edition: 1,
+  id: "1474", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Dental Care Wait at Public Clinics Averages 3 Months for Non-Emergency",
   context: "Public dental clinic capacity is overwhelmed with patients waiting months for routine procedures.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 69, ct: 55, sr: 79 }, finalScore: 81.5,
@@ -7465,7 +7465,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1475", opinionShift: 79, status: "updated", edition: 1,
+  id: "1475", published: true, opinionShift: 79, status: "updated", edition: 1,
   headline: "Childhood Cancer Survival Rate Lags Regional Peers at 52%",
   context: "Malaysia's 5-year childhood cancer survival rate of 52% trails Singapore's 82% and Thailand's 65%.",
   stageScores: { pa: 89, ba: 64, fc: 89, af: 59, ct: 44, sr: 70 }, finalScore: 81.6,
@@ -7479,7 +7479,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1476", opinionShift: 42, status: null, edition: 1,
+  id: "1476", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Rehabilitation Services Reach Only 15% of Stroke Survivors",
   context: "Post-stroke rehabilitation is available to a small fraction of patients due to severe therapist shortages.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 81.7,
@@ -7493,7 +7493,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1477", opinionShift: 65, status: null, edition: 1,
+  id: "1477", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Sugar Tax Revenue of RM600 Million Not Directed to Health Programs",
   context: "Revenue from the sugar-sweetened beverage tax introduced in 2019 goes to general revenue rather than health promotion.",
   stageScores: { pa: 82, ba: 73, fc: 82, af: 70, ct: 58, sr: 80 }, finalScore: 81.8,
@@ -7507,7 +7507,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1478", opinionShift: 88, status: null, edition: 1,
+  id: "1478", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Ambulance Response Time Averages 22 Minutes in Urban Areas",
   context: "Emergency ambulance response time in Malaysian cities significantly exceeds the international 8-minute standard.",
   stageScores: { pa: 89, ba: 65, fc: 88, af: 62, ct: 47, sr: 73 }, finalScore: 81.9,
@@ -7521,7 +7521,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1479", opinionShift: 47, status: "new", edition: 1,
+  id: "1479", published: true, opinionShift: 47, status: "new", edition: 1,
   headline: "Telemedicine Consultations Reach 2.8 Million But Regulation Gaps Persist",
   context: "Telemedicine use surged post-COVID but regulatory framework for virtual healthcare remains incomplete.",
   stageScores: { pa: 80, ba: 75, fc: 80, af: 73, ct: 61, sr: 82 }, finalScore: 82.0,
@@ -7535,7 +7535,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1480", opinionShift: 71, status: null, edition: 1,
+  id: "1480", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Hepatitis C Treatment Access Limited to 12% of Diagnosed Patients",
   context: "Despite availability of curative DAA medications, only 12% of diagnosed hepatitis C patients receive treatment.",
   stageScores: { pa: 85, ba: 68, fc: 85, af: 64, ct: 50, sr: 75 }, finalScore: 82.1,
@@ -7549,7 +7549,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1481", opinionShift: 36, status: null, edition: 1,
+  id: "1481", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Adolescent Mental Health Services Absent in 78% of Districts",
   context: "Child and adolescent mental health services are available in only 34 of 154 health districts nationwide.",
   stageScores: { pa: 89, ba: 63, fc: 89, af: 59, ct: 43, sr: 70 }, finalScore: 82.2,
@@ -7563,7 +7563,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1482", opinionShift: 74, status: null, edition: 1,
+  id: "1482", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Cancer Screening Rates Below 20% for Breast Cervical and Colorectal",
   context: "National cancer screening participation remains critically low despite free programs offered at government facilities.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 82.3,
@@ -7577,7 +7577,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1483", opinionShift: 59, status: null, edition: 1,
+  id: "1483", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Public Health Laboratory Capacity Underfunded by RM180 Million",
   context: "IMR and state public health laboratories face equipment shortages and staffing gaps affecting disease surveillance.",
   stageScores: { pa: 82, ba: 72, fc: 82, af: 69, ct: 55, sr: 79 }, finalScore: 82.4,
@@ -7591,7 +7591,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1484", opinionShift: 82, status: null, edition: 1,
+  id: "1484", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Homeless Population Health Needs Unmet as Street Count Reaches 8,400",
   context: "JKM's 2025 census counted 8,400 homeless individuals with most having untreated chronic health conditions.",
   stageScores: { pa: 88, ba: 65, fc: 87, af: 61, ct: 46, sr: 72 }, finalScore: 82.5,
@@ -7605,7 +7605,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1485", opinionShift: 45, status: null, edition: 1,
+  id: "1485", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Contraceptive Access for Unmarried Women Restricted at Government Clinics",
   context: "Unmarried women face significant barriers accessing contraception at government health facilities due to unofficial policies.",
   stageScores: { pa: 85, ba: 68, fc: 86, af: 63, ct: 48, sr: 73 }, finalScore: 82.6,
@@ -7619,7 +7619,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1486", opinionShift: 68, status: "new", edition: 1,
+  id: "1486", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "Industrial Pollution Linked to Cancer Clusters in 4 Districts",
   context: "Epidemiological studies identified statistically significant cancer clusters near industrial zones in 4 Malaysian districts.",
   stageScores: { pa: 90, ba: 64, fc: 90, af: 58, ct: 44, sr: 70 }, finalScore: 82.7,
@@ -7633,7 +7633,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1487", opinionShift: 53, status: null, edition: 1,
+  id: "1487", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Breastfeeding Rate at 6 Months Drops to 40% Below National Target",
   context: "Exclusive breastfeeding rate at 6 months fell below the 50% national target set in the National Nutrition Policy.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 70, ct: 57, sr: 80 }, finalScore: 82.8,
@@ -7647,7 +7647,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1488", opinionShift: 76, status: "updated", edition: 1,
+  id: "1488", published: true, opinionShift: 76, status: "updated", edition: 1,
   headline: "Medical Negligence Claims Rise 45% But Patients Face 7-Year Court Waits",
   context: "Medical negligence litigation increased significantly while case resolution times stretched to an average of 7 years.",
   stageScores: { pa: 85, ba: 68, fc: 85, af: 64, ct: 50, sr: 75 }, finalScore: 82.9,
@@ -7661,7 +7661,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1489", opinionShift: 61, status: null, edition: 1,
+  id: "1489", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Pesticide Poisoning Hospitalizes 4,800 Agricultural Workers Annually",
   context: "Farm workers face high rates of pesticide exposure with 4,800 requiring hospital treatment in 2025.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 64, ct: 51, sr: 76 }, finalScore: 83.0,
@@ -7675,7 +7675,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1490", opinionShift: 85, status: "updated", edition: 1,
+  id: "1490", published: true, opinionShift: 85, status: "updated", edition: 1,
   headline: "Tuberculosis Incidence Remains High at 92 Per 100,000 Population",
   context: "Malaysia's TB rate remains stubbornly high and is classified by WHO as a high-burden country for tuberculosis.",
   stageScores: { pa: 87, ba: 66, fc: 87, af: 62, ct: 48, sr: 73 }, finalScore: 83.1,
@@ -7689,7 +7689,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1491", opinionShift: 38, status: null, edition: 1,
+  id: "1491", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Autism Diagnosis Wait Time Reaches 18 Months at Public Facilities",
   context: "Children suspected of autism spectrum disorder face 18-month waits for diagnostic assessment at government hospitals.",
   stageScores: { pa: 88, ba: 65, fc: 88, af: 61, ct: 46, sr: 72 }, finalScore: 83.2,
@@ -7703,7 +7703,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1492", opinionShift: 70, status: null, edition: 1,
+  id: "1492", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Hearing Screening for Newborns Available at Only 42% of Hospitals",
   context: "Universal newborn hearing screening is not yet available at all birthing facilities despite evidence of effectiveness.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 69, ct: 55, sr: 79 }, finalScore: 83.3,
@@ -7717,7 +7717,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1493", opinionShift: 48, status: null, edition: 1,
+  id: "1493", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Healthcare Spending at 4.8% of GDP Trails ASEAN Peers",
   context: "Malaysia's total health expenditure as share of GDP remains below regional peers despite increasing healthcare needs.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 68, ct: 53, sr: 77 }, finalScore: 83.4,
@@ -7731,7 +7731,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1494", opinionShift: 64, status: "new", edition: 1,
+  id: "1494", published: true, opinionShift: 64, status: "new", edition: 1,
   headline: "Postpartum Care Coverage Ends at 42 Days Leaving Mothers Unsupported",
   context: "Government postnatal care protocol provides only 3 home visits within 42 days with no support thereafter.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 69, ct: 56, sr: 79 }, finalScore: 83.5,
@@ -7745,7 +7745,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1495", opinionShift: 90, status: null, edition: 1,
+  id: "1495", published: true, opinionShift: 90, status: null, edition: 1,
   headline: "Foreign Worker Health Levy System Excludes 1.8 Million From Care",
   context: "Documented foreign workers pay mandatory health levies but access to public healthcare remains restricted and confusing.",
   stageScores: { pa: 87, ba: 66, fc: 87, af: 62, ct: 47, sr: 73 }, finalScore: 83.6,
@@ -7759,7 +7759,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1496", opinionShift: 41, status: null, edition: 1,
+  id: "1496", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Mental Health First Aid Training Reaches Only 2% of Workplaces",
   context: "Workplace mental health first aid remains rare despite rising rates of employee psychological distress.",
   stageScores: { pa: 80, ba: 75, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 78.7,
@@ -7773,7 +7773,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1497", opinionShift: 56, status: null, edition: 1,
+  id: "1497", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Cosmetic Surgery Complications Rise 62% With Unregulated Providers",
   context: "Complications from cosmetic procedures performed by non-specialists increased sharply as the industry booms.",
   stageScores: { pa: 84, ba: 70, fc: 84, af: 67, ct: 53, sr: 77 }, finalScore: 83.7,
@@ -7787,7 +7787,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1498", opinionShift: 75, status: null, edition: 1,
+  id: "1498", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Child Abuse Reports Reach 7,200 With Only 380 Investigators Nationwide",
   context: "JKM received 7,200 child abuse reports in 2025 but has far too few social workers to investigate and follow up.",
   stageScores: { pa: 91, ba: 62, fc: 91, af: 56, ct: 41, sr: 69 }, finalScore: 83.8,
@@ -7801,7 +7801,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1499", opinionShift: 49, status: null, edition: 1,
+  id: "1499", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Pharmacy-Led Services Limited Despite 14,000 Registered Pharmacists",
   context: "Malaysia's pharmacists are underutilized for primary healthcare delivery despite capacity to provide expanded services.",
   stageScores: { pa: 79, ba: 76, fc: 79, af: 74, ct: 62, sr: 83 }, finalScore: 83.9,
@@ -7815,7 +7815,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1500", opinionShift: 66, status: "new", edition: 1,
+  id: "1500", published: true, opinionShift: 66, status: "new", edition: 1,
   headline: "Chronic Pain Management Relies on Opioids With Few Alternatives Offered",
   context: "Pain management services in Malaysia remain heavily opioid-dependent with limited access to multidisciplinary approaches.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 69, ct: 55, sr: 79 }, finalScore: 84.0,
@@ -7829,7 +7829,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1501", opinionShift: 83, status: null, edition: 1,
+  id: "1501", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Emergency Psychiatry Beds at Only 2.1 Per 100,000 Population",
   context: "Acute psychiatric bed shortage means patients in crisis are often held in general wards or turned away entirely.",
   stageScores: { pa: 89, ba: 64, fc: 89, af: 59, ct: 44, sr: 70 }, finalScore: 84.1,
@@ -7843,7 +7843,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1502", opinionShift: 58, status: "new", edition: 1,
+  id: "1502", published: true, opinionShift: 58, status: "new", edition: 1,
   headline: "Hypertension Awareness at Only 48% Despite Affecting 6.4 Million Adults",
   context: "Less than half of Malaysians with high blood pressure know they have the condition due to inadequate screening.",
   stageScores: { pa: 85, ba: 70, fc: 84, af: 66, ct: 52, sr: 77 }, finalScore: 84.2,
@@ -7857,7 +7857,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1503", opinionShift: 44, status: null, edition: 1,
+  id: "1503", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Hospital Food Quality Rated Poor by 58% of Inpatients Surveyed",
   context: "MOH patient satisfaction survey found majority of hospital inpatients dissatisfied with food quality and nutrition.",
   stageScores: { pa: 78, ba: 76, fc: 78, af: 75, ct: 64, sr: 84 }, finalScore: 79.4,
@@ -7871,7 +7871,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1504", opinionShift: 72, status: null, edition: 1,
+  id: "1504", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Neonatal Mortality Rate Stagnates at 4.8 Per 1,000 Live Births",
   context: "Progress in reducing newborn deaths has plateaued since 2018 with premature birth complications as the leading cause.",
   stageScores: { pa: 90, ba: 65, fc: 89, af: 61, ct: 46, sr: 72 }, finalScore: 84.3,
@@ -7885,7 +7885,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1505", opinionShift: 51, status: "updated", edition: 1,
+  id: "1505", published: true, opinionShift: 51, status: "updated", edition: 1,
   headline: "Alcohol-Related Hospital Admissions Rise 28% Among 18-25 Age Group",
   context: "Young adult alcohol-related hospitalizations increased significantly from 2022 to 2025 amid binge drinking trends.",
   stageScores: { pa: 83, ba: 73, fc: 82, af: 70, ct: 57, sr: 80 }, finalScore: 84.4,
@@ -7899,7 +7899,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1506", opinionShift: 62, status: null, edition: 1,
+  id: "1506", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Home-Based Palliative Care Serves Only 4,200 Patients Despite 52,000 Need",
   context: "Community-based end-of-life care reaches a small fraction of terminal patients who prefer to die at home.",
   stageScores: { pa: 86, ba: 69, fc: 85, af: 64, ct: 51, sr: 76 }, finalScore: 84.5,
@@ -7913,7 +7913,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1507", opinionShift: 79, status: null, edition: 1,
+  id: "1507", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Public Health Workforce Vacancy Rate Hits 18% Across All Categories",
   context: "MOH faces critical staffing shortages with nearly 1 in 5 public health positions unfilled nationwide.",
   stageScores: { pa: 87, ba: 67, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 84.6,
@@ -7927,7 +7927,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1508", opinionShift: 43, status: null, edition: 1,
+  id: "1508", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Lead Contamination Found in 12% of Children's Toys Tested by MOH",
   context: "MOH product safety testing found unsafe lead levels in 12% of children's toys sampled from Malaysian retailers.",
   stageScores: { pa: 86, ba: 68, fc: 86, af: 64, ct: 50, sr: 75 }, finalScore: 84.7,
@@ -7941,7 +7941,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1509", opinionShift: 87, status: "new", edition: 1,
+  id: "1509", published: true, opinionShift: 87, status: "new", edition: 1,
   headline: "Domestic Violence Shelters at Capacity With 1,400 Women Turned Away",
   context: "Government and NGO shelters for domestic violence survivors reached maximum capacity turning away 1,400 women in 2025.",
   stageScores: { pa: 91, ba: 63, fc: 91, af: 57, ct: 42, sr: 69 }, finalScore: 84.8,
@@ -7955,7 +7955,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1510", opinionShift: 55, status: null, edition: 1,
+  id: "1510", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Fluoride in Public Water Supply Covers Only 78% of Population",
   context: "Water fluoridation programs remain incomplete with 22% of Malaysians drinking non-fluoridated water.",
   stageScores: { pa: 80, ba: 74, fc: 80, af: 73, ct: 61, sr: 82 }, finalScore: 84.9,
@@ -7969,7 +7969,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1511", opinionShift: 94, status: null, edition: 1,
+  id: "1511", published: true, opinionShift: 94, status: null, edition: 1,
   headline: "Zoonotic Disease Surveillance Covers Only 35% of Wildlife Markets",
   context: "Disease surveillance at live animal markets and wildlife trade points remains critically inadequate post-COVID.",
   stageScores: { pa: 85, ba: 69, fc: 85, af: 65, ct: 51, sr: 76 }, finalScore: 85.0,
@@ -7983,7 +7983,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1512", opinionShift: 47, status: null, edition: 1,
+  id: "1512", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Rehabilitation Drug Programs Show 78% Relapse Rate Within 2 Years",
   context: "Government drug rehabilitation centers report high relapse rates indicating need for approach reform.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 85.1,
@@ -7997,7 +7997,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1513", opinionShift: 69, status: "new", edition: 1,
+  id: "1513", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Medical Equipment Maintenance Backlog Idles 2,200 Machines Nationwide",
   context: "Public hospitals have 2,200 medical equipment units out of service due to maintenance and spare parts procurement delays.",
   stageScores: { pa: 86, ba: 68, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 85.2,
@@ -8011,7 +8011,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1514", opinionShift: 60, status: null, edition: 1,
+  id: "1514", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Migrant Worker Health Screening Misses 45% of Communicable Diseases",
   context: "FOMEMA mandatory health screening for foreign workers fails to detect nearly half of communicable disease cases.",
   stageScores: { pa: 84, ba: 70, fc: 84, af: 67, ct: 53, sr: 77 }, finalScore: 85.3,
@@ -8025,7 +8025,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1515", opinionShift: 80, status: null, edition: 1,
+  id: "1515", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Maternal Nutrition Program Reaches Only 55% of Pregnant B40 Women",
   context: "Government nutrition supplementation program for low-income pregnant women has significant coverage gaps.",
   stageScores: { pa: 87, ba: 66, fc: 86, af: 62, ct: 48, sr: 73 }, finalScore: 85.4,
@@ -8039,7 +8039,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1516", opinionShift: 42, status: null, edition: 1,
+  id: "1516", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Health Impact Assessments Required for Only 8% of New Developments",
   context: "Most major development projects proceed without mandatory health impact assessment despite environmental health risks.",
   stageScores: { pa: 81, ba: 74, fc: 81, af: 71, ct: 58, sr: 80 }, finalScore: 85.5,
@@ -8053,7 +8053,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1517", opinionShift: 73, status: "new", edition: 1,
+  id: "1517", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Traditional Birth Attendants Still Deliver 8% of Babies in Rural Areas",
   context: "Despite efforts to ensure skilled birth attendance, traditional birth attendants remain active in remote communities.",
   stageScores: { pa: 86, ba: 68, fc: 86, af: 63, ct: 49, sr: 74 }, finalScore: 85.6,
@@ -8067,7 +8067,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1518", opinionShift: 65, status: null, edition: 1,
+  id: "1518", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "E-Cigarette Health Effects Monitoring Absent Despite 3.2 Million Users",
   context: "Malaysia has no systematic health surveillance for e-cigarette users despite rapid growth of vaping population.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 85.7,
@@ -8081,7 +8081,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1519", opinionShift: 53, status: null, edition: 1,
+  id: "1519", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Hospital Bed Occupancy Rate Exceeds 90% at 28 Government Hospitals",
   context: "Overcrowding at public hospitals persists with 28 facilities operating above safe occupancy levels throughout 2025.",
   stageScores: { pa: 88, ba: 65, fc: 88, af: 61, ct: 46, sr: 72 }, finalScore: 85.8,
@@ -8095,7 +8095,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1520", opinionShift: 92, status: null, edition: 1,
+  id: "1520", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "Public Health Budget Transparency Ranks 42nd of 54 Countries Assessed",
   context: "Malaysia scored poorly on global health budget transparency index with limited public access to expenditure data.",
   stageScores: { pa: 82, ba: 73, fc: 82, af: 70, ct: 57, sr: 80 }, finalScore: 85.9,
@@ -8109,7 +8109,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1521", opinionShift: 78, status: null, edition: 1,
+  id: "1521", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Kelantan Lost 14,000 Hectares of Forest in 2024",
   context: "Satellite data from Global Forest Watch confirmed Kelantan lost 14,000 hectares of primary forest between January and December 2024, the highest in Peninsular Malaysia.",
   stageScores: { pa: 87, ba: 72, fc: 88, af: 68, ct: 55, sr: 78 }, finalScore: 70.2,
@@ -8123,7 +8123,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1522", opinionShift: 65, status: null, edition: 1,
+  id: "1522", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Lynas Moves 450,000 Tonnes of Waste to Gebeng",
   context: "Lynas Malaysia disclosed in March 2025 that 450,000 tonnes of water leach purification residue remain stored at its Gebeng facility pending permanent disposal approval.",
   stageScores: { pa: 82, ba: 68, fc: 85, af: 62, ct: 48, sr: 75 }, finalScore: 82.8,
@@ -8137,7 +8137,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1523", opinionShift: 82, status: null, edition: 1,
+  id: "1523", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Sg Kim Kim Poisoning Costs Pasir Gudang RM1.2B",
   context: "A 2025 University of Malaya study estimated the total economic cost of the 2019 Sg Kim Kim chemical dumping at RM1.2 billion including healthcare, lost productivity, and remediation.",
   stageScores: { pa: 89, ba: 76, fc: 90, af: 70, ct: 58, sr: 82 }, finalScore: 78.9,
@@ -8151,7 +8151,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1524", opinionShift: 58, status: null, edition: 1,
+  id: "1524", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Coral Bleaching Hits 67% of Tioman Marine Park",
   context: "The Department of Marine Parks confirmed in September 2024 that 67% of surveyed coral in Tioman Marine Park showed moderate to severe bleaching following record sea temperatures.",
   stageScores: { pa: 80, ba: 65, fc: 82, af: 58, ct: 44, sr: 72 }, finalScore: 69.6,
@@ -8165,7 +8165,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1525", opinionShift: 71, status: null, edition: 1,
+  id: "1525", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "2024 Floods Cost Kelantan RM4.3B but Mitigation Stalled",
   context: "The 2024 monsoon floods caused RM4.3 billion in damages across Kelantan, while the RM1.8 billion flood mitigation project approved in 2017 remains only 34% complete.",
   stageScores: { pa: 88, ba: 74, fc: 87, af: 66, ct: 52, sr: 80 }, finalScore: 78.0,
@@ -8179,7 +8179,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1526", opinionShift: 62, status: null, edition: 1,
+  id: "1526", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Penang Mangrove Loss Reaches 40% Since 1990",
   context: "A 2025 USM remote sensing study found Penang has lost 40% of its mangrove cover since 1990, primarily to reclamation projects including the Penang South Islands development.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 60, ct: 46, sr: 74 }, finalScore: 84.2,
@@ -8193,7 +8193,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1527", opinionShift: 85, status: null, edition: 1,
+  id: "1527", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Borneo Pygmy Elephants Down to 1,500 Individuals",
   context: "WWF-Malaysia's 2025 census estimated only 1,500 Borneo pygmy elephants remain in Sabah, down from 2,040 in 2015, primarily due to habitat fragmentation from oil palm expansion.",
   stageScores: { pa: 86, ba: 70, fc: 86, af: 64, ct: 50, sr: 76 }, finalScore: 77.5,
@@ -8207,7 +8207,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1528", opinionShift: 73, status: null, edition: 1,
+  id: "1528", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Peat Fires Released 120 Million Tonnes of CO2 in 2024",
   context: "CIFOR data showed Malaysian peat fires in 2024 released approximately 120 million tonnes of CO2 equivalent, concentrated in Sarawak and southern Johor peatlands.",
   stageScores: { pa: 84, ba: 71, fc: 83, af: 63, ct: 49, sr: 77 }, finalScore: 75.6,
@@ -8221,7 +8221,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1529", opinionShift: 45, status: "new", edition: 1,
+  id: "1529", published: true, opinionShift: 45, status: "new", edition: 1,
   headline: "Malaysia's Carbon Tax Proposal Shelved for Third Time",
   context: "The Ministry of Finance confirmed in January 2026 that the proposed carbon tax, first floated in 2021, has been deferred again to 2028 following industry lobbying.",
   stageScores: { pa: 79, ba: 62, fc: 80, af: 57, ct: 42, sr: 70 }, finalScore: 78.4,
@@ -8235,7 +8235,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1530", opinionShift: 55, status: "updated", edition: 1,
+  id: "1530", published: true, opinionShift: 55, status: "updated", edition: 1,
   headline: "Solar Feed-in Tariff Cuts Leave 12,000 Applications Stranded",
   context: "SEDA Malaysia reduced the solar feed-in tariff by 38% in mid-2025, leaving approximately 12,000 approved but uninstalled residential applications economically unviable.",
   stageScores: { pa: 81, ba: 64, fc: 81, af: 59, ct: 43, sr: 71 }, finalScore: 68.1,
@@ -8249,7 +8249,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1531", opinionShift: 69, status: "new", edition: 1,
+  id: "1531", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Cameron Highlands Lost 2,300 Hectares to Illegal Farms",
   context: "A 2025 JUPEM aerial survey found 2,300 hectares of illegally cleared agricultural land in Cameron Highlands, much of it on steep slopes exceeding 25 degrees.",
   stageScores: { pa: 85, ba: 69, fc: 86, af: 65, ct: 51, sr: 79 }, finalScore: 87.7,
@@ -8263,7 +8263,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1532", opinionShift: 76, status: null, edition: 1,
+  id: "1532", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "EIA Process Approved 94% of Projects in 2024",
   context: "DOE data obtained via parliamentary question revealed that 94% of Environmental Impact Assessments submitted in 2024 were approved, raising questions about the process's independence.",
   stageScores: { pa: 86, ba: 73, fc: 89, af: 67, ct: 54, sr: 81 }, finalScore: 69.5,
@@ -8277,7 +8277,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1533", opinionShift: 48, status: null, edition: 1,
+  id: "1533", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Sand Mining Removes 78 Million Tonnes from Johor Rivers",
   context: "DID Johor reported that 78 million tonnes of river sand were extracted in 2024, contributing to accelerated riverbank erosion affecting 14 kampungs along Sungai Johor.",
   stageScores: { pa: 80, ba: 63, fc: 82, af: 58, ct: 41, sr: 69 }, finalScore: 80.4,
@@ -8291,7 +8291,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1534", opinionShift: 88, status: "new", edition: 1,
+  id: "1534", published: true, opinionShift: 88, status: "new", edition: 1,
   headline: "Bakun Dam Displaced 10,000 Orang Ulu with Broken Promises",
   context: "Twenty-five years after resettlement began, a 2025 SUHAKAM inquiry found that Bakun Dam displaced communities at Sungai Asap still lack promised land titles and infrastructure.",
   stageScores: { pa: 90, ba: 77, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 68.5,
@@ -8305,7 +8305,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1535", opinionShift: 52, status: null, edition: 1,
+  id: "1535", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Plastic Pollution Costs Malaysia RM6.5B Annually",
   context: "A 2025 World Bank study estimated Malaysia's annual economic cost from plastic pollution at RM6.5 billion, including marine damage, tourism loss, and healthcare impacts.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 45, sr: 73 }, finalScore: 86.9,
@@ -8319,7 +8319,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1536", opinionShift: 67, status: null, edition: 1,
+  id: "1536", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "E-Waste Recycling Covers Only 15% of Annual Generation",
   context: "DOE's 2025 report found Malaysia generates 365,000 tonnes of e-waste annually but only 54,750 tonnes are processed through licensed recyclers.",
   stageScores: { pa: 81, ba: 65, fc: 84, af: 60, ct: 47, sr: 74 }, finalScore: 82.4,
@@ -8333,7 +8333,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1537", opinionShift: 74, status: null, edition: 1,
+  id: "1537", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Selangor Water Catchments Face 30% Capacity Loss by 2030",
   context: "LUAS warned in its 2025 strategic plan that Selangor's water catchment areas face 30% capacity reduction by 2030 due to encroachment and sedimentation.",
   stageScores: { pa: 87, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 68.2,
@@ -8347,7 +8347,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1538", opinionShift: 60, status: "new", edition: 1,
+  id: "1538", published: true, opinionShift: 60, status: "new", edition: 1,
   headline: "Baleh Dam Threatens 3,000 Iban Ancestral Burial Sites",
   context: "The Baleh Hydroelectric Dam in Sarawak, expected to flood 6,541 hectares by 2028, will submerge an estimated 3,000 Iban ancestral burial sites and 15 longhouses.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 48, sr: 75 }, finalScore: 77.3,
@@ -8361,7 +8361,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1539", opinionShift: 81, status: null, edition: 1,
+  id: "1539", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Coastal Erosion Threatens 1,400km of Malaysian Shoreline",
   context: "NAHRIM's 2025 national coastal vulnerability assessment found 1,400km of Malaysian coastline — 29% of the total — now classified as critically or severely eroding.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 65, ct: 52, sr: 78 }, finalScore: 81.0,
@@ -8375,7 +8375,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1540", opinionShift: 43, status: "updated", edition: 1,
+  id: "1540", published: true, opinionShift: 43, status: "updated", edition: 1,
   headline: "Urban Heat Island Effect Raises KL Temperatures by 4°C",
   context: "A 2025 UKM study using 180 sensor stations found that central Kuala Lumpur is consistently 4°C hotter than surrounding suburbs due to the urban heat island effect.",
   stageScores: { pa: 78, ba: 61, fc: 79, af: 56, ct: 40, sr: 68 }, finalScore: 75.4,
@@ -8389,7 +8389,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1541", opinionShift: 70, status: null, edition: 1,
+  id: "1541", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Green Building Standard Covers Only 4% of New Developments",
   context: "CIDB data shows only 4% of new commercial and residential projects in 2024 achieved Green Building Index certification despite government incentives launched in 2009.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 58, ct: 43, sr: 70 }, finalScore: 72.0,
@@ -8403,7 +8403,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1542", opinionShift: 86, status: null, edition: 1,
+  id: "1542", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Pahang Logging Road Network Expanded 340km into Virgin Forest",
   context: "Satellite analysis by the Rimba Collective revealed 340km of new logging roads carved into previously unroaded primary forest in Pahang's Taman Negara buffer zone during 2024.",
   stageScores: { pa: 88, ba: 75, fc: 90, af: 69, ct: 56, sr: 83 }, finalScore: 85.1,
@@ -8417,7 +8417,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1543", opinionShift: 53, status: null, edition: 1,
+  id: "1543", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Renewable Energy Target Shortfall Reaches 6.7 Percentage Points",
   context: "Malaysia's renewable energy share reached 24.3% of installed capacity in 2025 against the 31% target, a shortfall driven by delayed large-scale solar and biomass projects.",
   stageScores: { pa: 80, ba: 64, fc: 81, af: 59, ct: 44, sr: 72 }, finalScore: 81.1,
@@ -8431,7 +8431,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1544", opinionShift: 64, status: null, edition: 1,
+  id: "1544", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Sabah Shark Fin Trade Worth RM48M Despite 2014 Ban",
   context: "A 2025 TRAFFIC investigation documented RM48 million in shark fin exports from Sabah in 2024 despite the state's 2014 ban on shark finning in its waters.",
   stageScores: { pa: 83, ba: 67, fc: 85, af: 62, ct: 49, sr: 76 }, finalScore: 84.0,
@@ -8445,7 +8445,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1545", opinionShift: 77, status: null, edition: 1,
+  id: "1545", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Johor River Pollution Index Worsens for 5th Consecutive Year",
   context: "DOE's 2024 Water Quality Index shows Sungai Johor deteriorated to Class III-IV across 62% of monitoring stations, the worst reading since monitoring began in 1998.",
   stageScores: { pa: 86, ba: 70, fc: 87, af: 64, ct: 50, sr: 77 }, finalScore: 80.8,
@@ -8459,7 +8459,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1546", opinionShift: 39, status: "new", edition: 1,
+  id: "1546", published: true, opinionShift: 39, status: "new", edition: 1,
   headline: "Malaysia's Climate Adaptation Plan Has Zero Allocated Budget",
   context: "The National Adaptation Plan launched in November 2024 identified 48 priority actions but the 2025-2026 budget allocated no specific line items for implementation.",
   stageScores: { pa: 78, ba: 60, fc: 78, af: 55, ct: 41, sr: 69 }, finalScore: 83.3,
@@ -8473,7 +8473,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1547", opinionShift: 72, status: null, edition: 1,
+  id: "1547", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Perak Limestone Hills Quarrying Destroys 12 Endemic Species Habitats",
   context: "A 2025 MNS biodiversity survey found that 12 species endemic to Perak's limestone hills have lost more than 80% of their habitat due to quarrying expansion since 2010.",
   stageScores: { pa: 82, ba: 66, fc: 84, af: 61, ct: 47, sr: 73 }, finalScore: 72.6,
@@ -8487,7 +8487,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1548", opinionShift: 56, status: "updated", edition: 1,
+  id: "1548", published: true, opinionShift: 56, status: "updated", edition: 1,
   headline: "Langkawi Geopark Status Under UNESCO Review After Overdevelopment",
   context: "UNESCO placed Langkawi Global Geopark under review in January 2026 following concerns that 14 new resort developments encroach on 3 of 7 designated geosites.",
   stageScores: { pa: 83, ba: 69, fc: 83, af: 62, ct: 46, sr: 75 }, finalScore: 84.7,
@@ -8501,7 +8501,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1549", opinionShift: 91, status: null, edition: 1,
+  id: "1549", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "Orang Asli Blockade Stops Logging in Royal Belum for 87 Days",
   context: "In late 2025, 200 Temiar villagers established a blockade on logging roads entering Royal Belum State Park's buffer zone, halting operations for 87 days before police dismantled it.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 72.9,
@@ -8515,7 +8515,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1550", opinionShift: 47, status: "new", edition: 1,
+  id: "1550", published: true, opinionShift: 47, status: "new", edition: 1,
   headline: "Sarawak Peatland Drainage Covers 1.2 Million Hectares",
   context: "Wetlands International's 2025 mapping project found 1.2 million hectares of Sarawak's peatlands have been drained for agriculture, representing 52% of the state's total peat area.",
   stageScores: { pa: 80, ba: 62, fc: 82, af: 57, ct: 42, sr: 70 }, finalScore: 80.1,
@@ -8529,7 +8529,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1551", opinionShift: 83, status: null, edition: 1,
+  id: "1551", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Haze Returns as 478 Hotspots Detected in Sumatra and Kalimantan",
   context: "ASEAN Specialised Meteorological Centre recorded 478 hotspots across Sumatra and Kalimantan in September 2025, pushing Malaysia's API above 200 in 6 states for 18 days.",
   stageScores: { pa: 87, ba: 73, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 70.6,
@@ -8543,7 +8543,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1552", opinionShift: 40, status: "updated", edition: 1,
+  id: "1552", published: true, opinionShift: 40, status: "updated", edition: 1,
   headline: "Terengganu Turtle Nesting Sites Decline 62% Since 2000",
   context: "The Department of Fisheries recorded only 3,400 turtle nesting events across Terengganu in 2024, down 62% from 8,900 in 2000, with leatherback turtles functionally extinct.",
   stageScores: { pa: 81, ba: 64, fc: 80, af: 58, ct: 43, sr: 71 }, finalScore: 78.2,
@@ -8557,7 +8557,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1553", opinionShift: 66, status: null, edition: 1,
+  id: "1553", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Penang Hill Development Adds 2,800 Vehicle Trips Daily",
   context: "Penang Island City Council data shows development approvals on Penang Hill's slopes generated an estimated 2,800 additional daily vehicle trips in 2024, worsening landslide risk.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 48, sr: 75 }, finalScore: 82.3,
@@ -8571,7 +8571,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1554", opinionShift: 75, status: "new", edition: 1,
+  id: "1554", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Malaysian Tiger Population Falls Below 150 Individuals",
   context: "DWNP's 2025 national tiger survey using 1,200 camera traps estimated fewer than 150 Malayan tigers remain in the wild, down from 250 in the 2018 survey.",
   stageScores: { pa: 88, ba: 74, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 80.5,
@@ -8585,7 +8585,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1555", opinionShift: 50, status: "new", edition: 1,
+  id: "1555", published: true, opinionShift: 50, status: "new", edition: 1,
   headline: "Kedah Rice Fields Lose 8,400 Hectares to Development Since 2015",
   context: "MADA reported that 8,400 hectares of designated rice paddies in the Muda agricultural zone were converted to non-agricultural use between 2015 and 2024.",
   stageScores: { pa: 82, ba: 65, fc: 83, af: 60, ct: 44, sr: 72 }, finalScore: 71.8,
@@ -8599,7 +8599,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1556", opinionShift: 89, status: null, edition: 1,
+  id: "1556", published: true, opinionShift: 89, status: null, edition: 1,
   headline: "Selangor River Contamination Caused 7 Water Cuts in 18 Months",
   context: "Air Selangor recorded 7 unscheduled water supply disruptions between July 2024 and December 2025 affecting 8.5 million consumers, all caused by upstream pollution incidents.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 71, ct: 58, sr: 84 }, finalScore: 84.6,
@@ -8613,7 +8613,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1557", opinionShift: 46, status: null, edition: 1,
+  id: "1557", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Malacca Coastal Reclamation Alters 22km of Natural Shoreline",
   context: "Malacca's 3 major reclamation projects — Melaka Gateway, Pulau Melaka, and Melaka Waterfront — have collectively altered 22km of natural shoreline since 2014.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 57, ct: 42, sr: 70 }, finalScore: 70.3,
@@ -8627,7 +8627,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1558", opinionShift: 68, status: null, edition: 1,
+  id: "1558", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Sarawak Palm Oil Mills Discharge Exceeds BOD Limits at 34% of Sites",
   context: "DOE Sarawak's 2024 compliance audit found 34% of palm oil mills exceeded biological oxygen demand discharge limits, up from 22% in 2020.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 47, sr: 74 }, finalScore: 79.7,
@@ -8641,7 +8641,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1559", opinionShift: 57, status: "updated", edition: 1,
+  id: "1559", published: true, opinionShift: 57, status: "updated", edition: 1,
   headline: "Labuan Marine Park Coral Cover Falls to 18% from 52% in 2010",
   context: "The Labuan Marine Park Authority's 2025 reef survey recorded 18% live coral cover, down from 52% in 2010, attributed to sedimentation from mainland development and anchoring damage.",
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 71 }, finalScore: 73.4,
@@ -8655,7 +8655,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1560", opinionShift: 80, status: null, edition: 1,
+  id: "1560", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Penan Community Maps 200,000 Hectares of Ancestral Forest",
   context: "Penan communities in Baram, Sarawak completed a 3-year participatory mapping project documenting 200,000 hectares of customary forest, but the maps have no legal recognition.",
   stageScores: { pa: 86, ba: 71, fc: 87, af: 66, ct: 53, sr: 79 }, finalScore: 87.1,
@@ -8669,7 +8669,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1561", opinionShift: 44, status: null, edition: 1,
+  id: "1561", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Taiping Zoo Loses 3 Sun Bears to Enclosure Flooding",
   context: "Three Malayan sun bears at Zoo Taiping died in November 2025 when flash floods inundated enclosures built in a flood-prone zone, prompting PERHILITAN investigation.",
   stageScores: { pa: 80, ba: 62, fc: 79, af: 56, ct: 41, sr: 69 }, finalScore: 69.1,
@@ -8683,7 +8683,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1562", opinionShift: 63, status: "updated", edition: 1,
+  id: "1562", published: true, opinionShift: 63, status: "updated", edition: 1,
   headline: "Kuching Wetlands Ramsar Site Loses 340 Hectares to Encroachment",
   context: "A 2025 SFC aerial survey found 340 hectares of the Kuching Wetlands National Park — a RAMSAR-designated site — cleared for aquaculture and settlement encroachment.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 73.3,
@@ -8697,7 +8697,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1563", opinionShift: 54, status: null, edition: 1,
+  id: "1563", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Penang Undersea Tunnel Project Stalled After RM305M Paid",
   context: "The RM6.3B Penang undersea tunnel project remains at feasibility stage despite RM305M in advance payments to the contractor, with no construction start date confirmed.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 73 }, finalScore: 87.3,
@@ -8711,7 +8711,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1564", opinionShift: 92, status: null, edition: 1,
+  id: "1564", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "DOE Enforcement Officers Cut by 18% Despite Rising Pollution",
   context: "Parliamentary records show DOE's enforcement headcount fell from 892 in 2019 to 732 in 2025, an 18% reduction, while registered pollution sources increased 24% in the same period.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 86 }, finalScore: 76.6,
@@ -8725,7 +8725,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1565", opinionShift: 37, status: null, edition: 1,
+  id: "1565", published: true, opinionShift: 37, status: null, edition: 1,
   headline: "Kelantan Well Water Contamination Affects 45,000 Households",
   context: "SPAN's 2025 survey found 45,000 households in Kelantan rely on untreated well water, with 38% of tested wells exceeding safe limits for coliform bacteria or heavy metals.",
   stageScores: { pa: 79, ba: 61, fc: 78, af: 55, ct: 40, sr: 68 }, finalScore: 72.1,
@@ -8739,7 +8739,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1566", opinionShift: 71, status: null, edition: 1,
+  id: "1566", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Sabah Pygmy Elephant Corridor Blocked by 14 Plantation Leases",
   context: "The proposed Lower Kinabatangan elephant corridor connecting Tabin and Kinabatangan wildlife reserves is blocked by 14 oil palm plantation leases with terms extending to 2060.",
   stageScores: { pa: 85, ba: 70, fc: 86, af: 64, ct: 51, sr: 78 }, finalScore: 88.0,
@@ -8753,7 +8753,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1567", opinionShift: 59, status: null, edition: 1,
+  id: "1567", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Johor Illegal Waste Dumps Number 847 Active Sites",
   context: "Johor's state environment committee revealed in March 2026 that 847 active illegal waste dumping sites have been identified statewide, an increase of 34% from 2022.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 48, sr: 75 }, finalScore: 85.6,
@@ -8767,7 +8767,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1568", opinionShift: 84, status: null, edition: 1,
+  id: "1568", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Orang Asli Lose 4,200 Hectares to Felda Resettlement Scheme",
   context: "A 2025 COAC report documented 4,200 hectares of Orang Asli customary land in Perak and Pahang absorbed into Felda schemes without consent between 1980 and 2015.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 67, ct: 55, sr: 81 }, finalScore: 71.9,
@@ -8781,7 +8781,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1569", opinionShift: 49, status: null, edition: 1,
+  id: "1569", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Taman Negara Visitor Numbers Triple Park's Carrying Capacity",
   context: "DWNP data shows Taman Negara received 420,000 visitors in 2024, approximately three times the ecologically sustainable carrying capacity of 140,000 estimated by a 2020 UKM study.",
   stageScores: { pa: 81, ba: 64, fc: 81, af: 58, ct: 43, sr: 71 }, finalScore: 74.6,
@@ -8795,7 +8795,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1570", opinionShift: 61, status: null, edition: 1,
+  id: "1570", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Sungai Klang Rehabilitation RM4B Plan Shows Mixed Results After 5 Years",
   context: "The River of Life project to rehabilitate Sungai Klang has spent RM4 billion since 2012 but achieved Class III water quality at only 42% of monitoring stations against a 70% target.",
   stageScores: { pa: 84, ba: 69, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 83.6,
@@ -8809,7 +8809,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1571", opinionShift: 79, status: "new", edition: 1,
+  id: "1571", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "Johor Straits Reclamation Threatens 5,400 Hectares of Seagrass",
   context: "Singapore and Johor's competing reclamation projects in the Johor Strait threaten 5,400 hectares of seagrass meadows that support dugong and seahorse populations.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 65, ct: 52, sr: 79 }, finalScore: 69.7,
@@ -8823,7 +8823,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1572", opinionShift: 38, status: null, edition: 1,
+  id: "1572", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Malaysia's Methane Emissions from Landfills Rise 28% Since 2018",
   context: "Climate Watch data shows Malaysia's methane emissions from solid waste landfills rose 28% between 2018 and 2024, driven by increasing waste generation and insufficient sanitary landfill conversion.",
   stageScores: { pa: 78, ba: 60, fc: 79, af: 56, ct: 40, sr: 68 }, finalScore: 83.8,
@@ -8837,7 +8837,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1573", opinionShift: 87, status: null, edition: 1,
+  id: "1573", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "Sarawak Hydropower Exports Bypass Indigenous Communities Without Electricity",
   context: "Sarawak exports 300MW of hydropower to West Kalimantan while 73 longhouse communities within 50km of transmission lines remain without grid electricity.",
   stageScores: { pa: 89, ba: 75, fc: 90, af: 70, ct: 57, sr: 83 }, finalScore: 74.2,
@@ -8851,7 +8851,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1574", opinionShift: 42, status: null, edition: 1,
+  id: "1574", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Melaka River Cleanup Removes 48 Tonnes of Waste Monthly",
   context: "Melaka's river management authority removes an average of 48 tonnes of solid waste from Sungai Melaka monthly in 2025, largely unchanged from 2018 despite RM120M in upstream interventions.",
   stageScores: { pa: 79, ba: 62, fc: 80, af: 57, ct: 42, sr: 70 }, finalScore: 68.9,
@@ -8865,7 +8865,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1575", opinionShift: 76, status: null, edition: 1,
+  id: "1575", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Pahang Bauxite Mining Residue Contaminates 2,800 Hectares of Farmland",
   context: "A 2025 UMP soil study found 2,800 hectares of agricultural land in Kuantan remain contaminated with heavy metals from bauxite mining activities that peaked in 2015.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 75.9,
@@ -8879,7 +8879,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1576", opinionShift: 51, status: null, edition: 1,
+  id: "1576", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Perlis Only State Without a Climate Action Plan",
   context: "As of March 2026, Perlis remains the only Malaysian state without a gazetted climate action plan, despite being the most flood-vulnerable state per capita.",
   stageScores: { pa: 80, ba: 63, fc: 79, af: 56, ct: 41, sr: 69 }, finalScore: 81.4,
@@ -8893,7 +8893,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1577", opinionShift: 90, status: "new", edition: 1,
+  id: "1577", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "8 Rivers Classified as Dead After Industrial Contamination",
   context: "DOE's 2024 National Water Quality Report classified 8 river stretches as Class V — effectively dead — with zero dissolved oxygen, all in industrial zones in Selangor, Johor, and Penang.",
   stageScores: { pa: 89, ba: 77, fc: 91, af: 72, ct: 60, sr: 85 }, finalScore: 85.5,
@@ -8907,7 +8907,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1578", opinionShift: 55, status: null, edition: 1,
+  id: "1578", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Negeri Sembilan Hill Land Development Doubles in 5 Years",
   context: "JPBD data shows approved hill land development in Negeri Sembilan doubled from 1,200 hectares in 2019 to 2,400 hectares in 2024, concentrated around Seremban and Port Dickson.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 60, ct: 45, sr: 73 }, finalScore: 73.0,
@@ -8921,7 +8921,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1579", opinionShift: 36, status: null, edition: 1,
+  id: "1579", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Malaysia Recycles Only 33% of Scheduled Waste Despite 40% Target",
   context: "DOE's 2024 report shows Malaysia recycled 33% of scheduled (hazardous) waste against a 40% national target, with 1.8 million tonnes requiring disposal annually.",
   stageScores: { pa: 78, ba: 60, fc: 78, af: 55, ct: 40, sr: 68 }, finalScore: 79.2,
@@ -8935,7 +8935,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1580", opinionShift: 73, status: "updated", edition: 1,
+  id: "1580", published: true, opinionShift: 73, status: "updated", edition: 1,
   headline: "Kuala Langat Forest Reserve Degazetted for Mixed Development",
   context: "The Selangor state government degazetted 931 hectares of Kuala Langat North Forest Reserve in 2024 for mixed development despite 85,000 petition signatures opposing it.",
   stageScores: { pa: 87, ba: 74, fc: 88, af: 68, ct: 55, sr: 82 }, finalScore: 86.8,
@@ -8949,7 +8949,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1581", opinionShift: 94, status: null, edition: 1,
+  id: "1581", published: true, opinionShift: 94, status: null, edition: 1,
   headline: "Orang Asli Dam Resettlement Leaves 340 Families Without Clean Water",
   context: "340 Orang Asli families resettled for the Kelau Dam project in Pahang have been without reliable clean water since 2019, despite resettlement promises of piped supply.",
   stageScores: { pa: 91, ba: 78, fc: 93, af: 75, ct: 64, sr: 86 }, finalScore: 83.7,
@@ -8963,7 +8963,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1582", opinionShift: 41, status: null, edition: 1,
+  id: "1582", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Air Pollution Costs Malaysia RM12.6B in Healthcare Annually",
   context: "A 2025 Health Ministry-commissioned study estimated the annual healthcare cost of air pollution-related illness in Malaysia at RM12.6 billion, including premature deaths.",
   stageScores: { pa: 80, ba: 62, fc: 80, af: 57, ct: 42, sr: 70 }, finalScore: 77.1,
@@ -8977,7 +8977,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1583", opinionShift: 68, status: "updated", edition: 1,
+  id: "1583", published: true, opinionShift: 68, status: "updated", edition: 1,
   headline: "Sarawak Logging Roads Total 45,000km — Triple the Public Road Network",
   context: "Satellite mapping by Global Witness found 45,000km of logging roads in Sarawak, three times the state's 15,000km public road network, creating unprecedented forest access.",
   stageScores: { pa: 85, ba: 70, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 76.7,
@@ -8991,7 +8991,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1584", opinionShift: 58, status: null, edition: 1,
+  id: "1584", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Pangkor Island Waste Generation Exceeds Disposal Capacity by 40%",
   context: "Manjung Municipal Council data shows Pangkor Island generates 42 tonnes of waste daily against a disposal capacity of 30 tonnes, with excess waste stockpiled on the island.",
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 73.6,
@@ -9005,7 +9005,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1585", opinionShift: 82, status: null, edition: 1,
+  id: "1585", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Temenggor Lake Poaching Ring Seized 312 Protected Animals",
   context: "PERHILITAN's Operation Khazanah in November 2025 dismantled a poaching ring at Temenggor Lake, Perak, seizing 312 protected animals including pangolins, sun bears, and hornbills.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 67, ct: 54, sr: 81 }, finalScore: 85.7,
@@ -9019,7 +9019,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1586", opinionShift: 47, status: null, edition: 1,
+  id: "1586", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Putrajaya Wetlands Lose 35% Bird Species in 15 Years",
   context: "MNS Putrajaya's 2025 bird census recorded 124 species, down from 191 species in 2010, with 67 species no longer present at the constructed wetland park.",
   stageScores: { pa: 79, ba: 63, fc: 80, af: 58, ct: 43, sr: 71 }, finalScore: 81.6,
@@ -9033,7 +9033,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1587", opinionShift: 63, status: null, edition: 1,
+  id: "1587", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Tasik Chini UNESCO Biosphere Reserve Faces Delisting Threat",
   context: "UNESCO warned in January 2026 that Tasik Chini may lose its Biosphere Reserve status following persistent mining encroachment and water quality deterioration.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 74.7,
@@ -9047,7 +9047,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1588", opinionShift: 35, status: null, edition: 1,
+  id: "1588", published: true, opinionShift: 35, status: null, edition: 1,
   headline: "Rainwater Harvesting Mandatory in Only 3 of 13 States",
   context: "Despite federal promotion since 2014, only Selangor, Sabah, and Sarawak require rainwater harvesting systems in new commercial buildings as of 2026.",
   stageScores: { pa: 77, ba: 59, fc: 77, af: 55, ct: 40, sr: 68 }, finalScore: 86.6,
@@ -9061,7 +9061,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1589", opinionShift: 75, status: null, edition: 1,
+  id: "1589", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Endau-Rompin Protected Area Budget Cut 42% Since 2020",
   context: "JNP data shows Endau-Rompin National Park's management budget was cut from RM8.4M in 2020 to RM4.9M in 2025, coinciding with a 3x increase in illegal encroachment incidents.",
   stageScores: { pa: 85, ba: 70, fc: 86, af: 65, ct: 51, sr: 78 }, finalScore: 79.4,
@@ -9075,7 +9075,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1590", opinionShift: 66, status: null, edition: 1,
+  id: "1590", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "KL Flash Floods: 47 Events in 2024 Break 30-Year Record",
   context: "DBKL recorded 47 flash flood events in Kuala Lumpur in 2024, the highest since records began in 1994, caused by intensifying rainfall and drainage systems designed for 1980s capacity.",
   stageScores: { pa: 86, ba: 71, fc: 87, af: 66, ct: 53, sr: 80 }, finalScore: 71.7,
@@ -9089,7 +9089,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1591", opinionShift: 48, status: null, edition: 1,
+  id: "1591", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Tanjung Piai Wetlands Erosion Accelerates to 8 Metres Per Year",
   context: "NAHRIM monitoring shows the coastline at Tanjung Piai National Park — Malaysia's southernmost point — is eroding at 8 metres per year, up from 3 metres in 2015.",
   stageScores: { pa: 81, ba: 65, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 68.6,
@@ -9103,7 +9103,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1592", opinionShift: 70, status: null, edition: 1,
+  id: "1592", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Selangor Groundwater Extraction Exceeds Recharge by 180%",
   context: "JMG Selangor's 2025 hydrogeological study found groundwater extraction in the Klang Valley exceeds natural recharge rates by 180%, causing land subsidence in 4 districts.",
   stageScores: { pa: 84, ba: 69, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 68.4,
@@ -9117,7 +9117,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1593", opinionShift: 56, status: "new", edition: 1,
+  id: "1593", published: true, opinionShift: 56, status: "new", edition: 1,
   headline: "Kenyir Lake Algal Blooms Threaten RM240M Freshwater Fisheries",
   context: "Terengganu state fisheries reported persistent algal blooms in Kenyir Lake since 2023, threatening RM240 million in freshwater fisheries and 12,000 fishing-dependent livelihoods.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 74 }, finalScore: 70.1,
@@ -9131,7 +9131,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1594", opinionShift: 85, status: "new", edition: 1,
+  id: "1594", published: true, opinionShift: 85, status: "new", edition: 1,
   headline: "Sarawak Log Export Ban Exemptions Cover 62% of Timber Volume",
   context: "Despite Sarawak's log export ban enacted in 2019, exemptions granted to 23 companies cover an estimated 62% of total timber volume, effectively nullifying the policy.",
   stageScores: { pa: 88, ba: 74, fc: 90, af: 69, ct: 56, sr: 83 }, finalScore: 71.0,
@@ -9145,7 +9145,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1595", opinionShift: 39, status: null, edition: 1,
+  id: "1595", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Sabah Coral Triangle Initiative Receives Only 18% of Pledged Funding",
   context: "The Coral Triangle Initiative, launched in 2009, has received only 18% of pledged funding from member nations including Malaysia, undermining reef conservation across 6 countries.",
   stageScores: { pa: 78, ba: 61, fc: 79, af: 56, ct: 41, sr: 69 }, finalScore: 71.3,
@@ -9159,7 +9159,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1596", opinionShift: 78, status: null, edition: 1,
+  id: "1596", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Penang Flood Retention Ponds Converted to 6 Housing Projects",
   context: "Penang Island City Council records show 6 designated flood retention ponds were rezoned for housing development between 2018 and 2024, reducing retention capacity by 2.4 million cubic metres.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 83.2,
@@ -9173,7 +9173,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1597", opinionShift: 45, status: null, edition: 1,
+  id: "1597", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Malaysia Has No National Noise Pollution Law Despite 15 Years of Drafting",
   context: "The proposed National Noise Pollution Act has been in drafting since 2011 and has not been tabled in Parliament, leaving Malaysia without comprehensive noise regulation.",
   stageScores: { pa: 79, ba: 62, fc: 79, af: 57, ct: 42, sr: 70 }, finalScore: 71.6,
@@ -9187,7 +9187,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1598", opinionShift: 88, status: null, edition: 1,
+  id: "1598", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Forest City Reclamation Destroys 1,200 Hectares of Seabed in Johor",
   context: "Forest City's Phase 3 reclamation in Johor destroyed an additional 1,200 hectares of seabed in 2024, with cumulative impact on fishing communities now affecting 4,500 households.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 71, ct: 58, sr: 84 }, finalScore: 85.2,
@@ -9201,7 +9201,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1599", opinionShift: 52, status: null, edition: 1,
+  id: "1599", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Kelantan Refuses to Join National Water Commission for 18th Year",
   context: "Kelantan has declined to participate in the National Water Services Commission (SPAN) framework since its establishment in 2008, maintaining independent control with the lowest service quality nationally.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 48, sr: 75 }, finalScore: 72.8,
@@ -9215,7 +9215,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1600", opinionShift: 60, status: null, edition: 1,
+  id: "1600", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Imported Toxic Waste Containers Found at 4 Malaysian Ports",
   context: "Malaysian Customs detected 284 containers of mislabelled toxic waste at Port Klang, Penang Port, Tanjung Pelepas, and Kuantan Port in 2025, a 45% increase from 2023.",
   stageScores: { pa: 84, ba: 69, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 83.9,
@@ -9229,7 +9229,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1601", opinionShift: 87, status: "new", edition: 1,
+  id: "1601", published: true, opinionShift: 87, status: "new", edition: 1,
   headline: "Article 153 Invoked 342 Times in Parliament Since 2008",
   context: "Parliamentary Hansard analysis shows Article 153 of the Federal Constitution — on Malay special position — was cited 342 times between 2008 and 2025, overwhelmingly to shut down policy debate.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 79.9,
@@ -9243,7 +9243,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1602", opinionShift: 79, status: "updated", edition: 1,
+  id: "1602", published: true, opinionShift: 79, status: "updated", edition: 1,
   headline: "NEP Achieved 23% Bumiputera Equity — Target Was 30% by 1990",
   context: "The New Economic Policy's 30% Bumiputera equity target, set for 1990, has never been met. Government figures show 23% in 2025, though methodology is disputed.",
   stageScores: { pa: 87, ba: 74, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 69.3,
@@ -9257,7 +9257,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1603", opinionShift: 91, status: "new", edition: 1,
+  id: "1603", published: true, opinionShift: 91, status: "new", edition: 1,
   headline: "Vernacular Schools Serve 1.3 Million Students Amid Funding Disparity",
   context: "Malaysia's 1,302 Chinese and 529 Tamil vernacular schools serve 1.3 million students but receive 38% less per-student federal funding than national schools.",
   stageScores: { pa: 90, ba: 77, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 70.4,
@@ -9271,7 +9271,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1604", opinionShift: 93, status: null, edition: 1,
+  id: "1604", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "17 Temple Demolitions in Selangor Since 2020 Despite Court Orders",
   context: "The Malaysian Hindu Sangam documented 17 Hindu temple demolitions in Selangor between 2020 and 2025, including 4 where court injunctions were in force at the time of demolition.",
   stageScores: { pa: 91, ba: 78, fc: 93, af: 75, ct: 64, sr: 86 }, finalScore: 75.3,
@@ -9285,7 +9285,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1605", opinionShift: 72, status: null, edition: 1,
+  id: "1605", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Surau Approvals Take 6 Months While Church Permits Average 4 Years",
   context: "A 2025 comparison study by the Malaysian Consultative Council of Christianity found church building permits in Selangor averaged 4 years compared to 6 months for surau and mosques.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 65, ct: 52, sr: 79 }, finalScore: 87.5,
@@ -9299,7 +9299,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1606", opinionShift: 95, status: null, edition: 1,
+  id: "1606", published: true, opinionShift: 95, status: null, edition: 1,
   headline: "Unilateral Child Conversion Remains Unresolved After Indira Gandhi Ruling",
   context: "Despite the Federal Court's 2018 Indira Gandhi ruling requiring both parents' consent for child conversion, at least 14 unilateral conversions have been registered since the decision.",
   stageScores: { pa: 92, ba: 79, fc: 95, af: 76, ct: 65, sr: 88 }, finalScore: 86.5,
@@ -9313,7 +9313,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1607", opinionShift: 68, status: null, edition: 1,
+  id: "1607", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Body-Snatching Disputes: 28 Cases in 5 Years Over Burial Rights",
   context: "MCCBCHST recorded 28 cases between 2020 and 2025 where deceased persons' bodies were claimed by Islamic religious authorities against family wishes, citing alleged conversion.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 81.3,
@@ -9327,7 +9327,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1608", opinionShift: 56, status: null, edition: 1,
+  id: "1608", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Bon Odori Controversy Reveals 67% Support for Multicultural Events",
   context: "Despite the 2022 Jakim advisory against Muslim participation in Bon Odori, a 2025 Merdeka Center survey found 67% of Malaysians — including 54% of Malay-Muslims — support multicultural events.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 61, ct: 47, sr: 74 }, finalScore: 86.1,
@@ -9341,7 +9341,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1609", opinionShift: 50, status: null, edition: 1,
+  id: "1609", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Timah Whisky Name Controversy Cost Distiller RM8.4M in Sales",
   context: "The 2021 controversy over Timah whisky's name and label — alleged by some to reference Muslim imagery — cost the Malaysian distiller RM8.4M in lost sales before the company rebranded.",
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 74.5,
@@ -9355,7 +9355,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1610", opinionShift: 83, status: null, edition: 1,
+  id: "1610", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Halal Certification Disputes Affect 2,400 Non-Muslim Businesses",
   context: "JAKIM's expanded halal certification requirements introduced in 2024 have affected 2,400 non-Muslim-owned food businesses, with 340 losing certification due to supply chain audit failures.",
   stageScores: { pa: 86, ba: 73, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 74.8,
@@ -9369,7 +9369,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1611", opinionShift: 74, status: null, edition: 1,
+  id: "1611", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Interfaith Dialogue Commission Proposed 4 Times, Rejected 4 Times",
   context: "Proposals for a National Interfaith Dialogue Commission were tabled in 2001, 2005, 2013, and 2023, each time withdrawn after opposition from religious conservatives.",
   stageScores: { pa: 84, ba: 69, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 82.7,
@@ -9383,7 +9383,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1612", opinionShift: 65, status: "new", edition: 1,
+  id: "1612", published: true, opinionShift: 65, status: "new", edition: 1,
   headline: "Rukun Negara Recitation Mandatory but Understanding at 34%",
   context: "A 2025 Education Ministry survey found only 34% of secondary school students could explain the meaning of any Rukun Negara principle, despite daily recitation being mandatory.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 60, ct: 46, sr: 73 }, finalScore: 78.5,
@@ -9397,7 +9397,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1613", opinionShift: 88, status: "new", edition: 1,
+  id: "1613", published: true, opinionShift: 88, status: "new", edition: 1,
   headline: "Bangsa Malaysia Concept Mentioned Zero Times in 12th Malaysia Plan",
   context: "The Bangsa Malaysia (Malaysian Nation) concept, introduced by Mahathir in 1991 as Vision 2020's core aspiration, does not appear in the 12th Malaysia Plan (2021-2025).",
   stageScores: { pa: 88, ba: 75, fc: 90, af: 70, ct: 57, sr: 83 }, finalScore: 77.7,
@@ -9411,7 +9411,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1614", opinionShift: 77, status: "new", edition: 1,
+  id: "1614", published: true, opinionShift: 77, status: "new", edition: 1,
   headline: "Orang Asli Land Titles Cover Only 0.14% of Claimed Customary Territory",
   context: "JAKOA data shows registered Orang Asli land titles total 18,940 hectares against estimated customary territory claims of 13.5 million hectares — a coverage rate of 0.14%.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 77.2,
@@ -9425,7 +9425,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1615", opinionShift: 85, status: null, edition: 1,
+  id: "1615", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "East Malaysian Indigenous Rights Under MA63 Still Not Codified",
   context: "57 years after MA63, indigenous peoples of Sabah and Sarawak — Iban, Kadazan-Dusun, Bidayuh, and others — still lack a comprehensive federal framework recognising their distinct rights.",
   stageScores: { pa: 88, ba: 74, fc: 90, af: 69, ct: 56, sr: 83 }, finalScore: 74.3,
@@ -9439,7 +9439,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1616", opinionShift: 70, status: null, edition: 1,
+  id: "1616", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Pendatang Narrative Persists Despite 6 Generations of Citizenship",
   context: "A 2025 UKM study found 42% of Chinese and Indian Malaysians report being called 'pendatang' (immigrant) in the past year, despite families holding citizenship for up to 6 generations.",
   stageScores: { pa: 85, ba: 70, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 71.1,
@@ -9453,7 +9453,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1617", opinionShift: 61, status: null, edition: 1,
+  id: "1617", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Intermarriage Between Ethnic Groups Falls to 2.8% of Marriages",
   context: "Department of Statistics data shows interethnic marriages fell from 4.1% of total marriages in 2010 to 2.8% in 2024, with conversion requirements cited as the primary barrier.",
   stageScores: { pa: 82, ba: 65, fc: 83, af: 61, ct: 46, sr: 73 }, finalScore: 72.2,
@@ -9467,7 +9467,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1618", opinionShift: 90, status: "new", edition: 1,
+  id: "1618", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "Islamic State Debate Returns as PAS Governs 6 States",
   context: "With PAS governing or co-governing 6 states after GE15, the Islamic state debate has re-emerged, with 3 states tabling Shariah-expansion bills in 2025.",
   stageScores: { pa: 90, ba: 77, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 80.6,
@@ -9481,7 +9481,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1619", opinionShift: 76, status: null, edition: 1,
+  id: "1619", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Hudud Bill Attempts Total 7 Since 1993 with Zero Enactments",
   context: "Kelantan and Terengganu have attempted to enact hudud criminal law 7 times since 1993, each time blocked by federal constitutional requirements for concurrent jurisdiction.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 85.0,
@@ -9495,7 +9495,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1620", opinionShift: 64, status: null, edition: 1,
+  id: "1620", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Moral Policing Operations Averaged 4,800 Raids Annually Since 2020",
   context: "State religious enforcement data compiled by Sisters in Islam shows an average of 4,800 moral policing raids per year across Malaysia between 2020 and 2025.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 48, sr: 75 }, finalScore: 82.1,
@@ -9509,7 +9509,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1621", opinionShift: 53, status: null, edition: 1,
+  id: "1621", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Dress Code Enforcement Bars 1,200 Women from Government Offices",
   context: "A 2025 survey by the All Women's Action Society documented 1,200 cases where women were denied entry to government offices for dress code violations including wearing shorts, sleeveless tops, or short skirts.",
   stageScores: { pa: 82, ba: 65, fc: 83, af: 60, ct: 45, sr: 72 }, finalScore: 83.5,
@@ -9523,7 +9523,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1622", opinionShift: 82, status: null, edition: 1,
+  id: "1622", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Gender Identity Criminalised in All 14 State Shariah Enactments",
   context: "All 14 Malaysian state and territory Shariah enactments criminalise 'men posing as women,' with 1,400 arrests of transgender individuals recorded between 2020 and 2025.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 68, ct: 55, sr: 81 }, finalScore: 83.4,
@@ -9537,7 +9537,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1623", opinionShift: 46, status: null, edition: 1,
+  id: "1623", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "Cultural Appropriation Debate Erupts Over 78 Batik Design Patents",
   context: "Malaysian designers filed complaints after 78 traditional batik patterns were patented by foreign companies in 2024, reigniting debates over cultural ownership and intellectual property.",
   stageScores: { pa: 80, ba: 63, fc: 80, af: 57, ct: 42, sr: 70 }, finalScore: 77.0,
@@ -9551,7 +9551,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1624", opinionShift: 71, status: "updated", edition: 1,
+  id: "1624", published: true, opinionShift: 71, status: "updated", edition: 1,
   headline: "National Language Policy Debate Ignores 23% English Proficiency Gap",
   context: "The 2025 English Language Teaching Centre assessment found a 23-percentage-point gap in English proficiency between urban and rural students, cutting across ethnic lines.",
   stageScores: { pa: 83, ba: 68, fc: 85, af: 62, ct: 48, sr: 75 }, finalScore: 77.8,
@@ -9565,7 +9565,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1625", opinionShift: 86, status: "new", edition: 1,
+  id: "1625", published: true, opinionShift: 86, status: "new", edition: 1,
   headline: "Bumiputera Discount on Property Costs Non-Bumiputera Buyers RM4.8B",
   context: "The mandatory 5-15% Bumiputera property discount, required by all state governments, cost non-Bumiputera buyers an estimated RM4.8 billion in higher prices in 2024 as developers cross-subsidised.",
   stageScores: { pa: 88, ba: 75, fc: 90, af: 70, ct: 57, sr: 83 }, finalScore: 70.5,
@@ -9579,7 +9579,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1626", opinionShift: 59, status: null, edition: 1,
+  id: "1626", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Social Contract Concept Has No Single Agreed Definition",
   context: "A 2025 academic review found that the 'social contract' — Malaysia's foundational bargain — has at least 7 competing definitions used by different political actors with contradictory implications.",
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 79.8,
@@ -9593,7 +9593,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1627", opinionShift: 80, status: null, edition: 1,
+  id: "1627", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "NEM Promised Needs-Based Policy in 2010 — Race-Based Criteria Persist",
   context: "The New Economic Model launched in 2010 promised a shift from race-based to needs-based economic policy. In 2026, 94% of federal assistance programmes still use racial eligibility criteria.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 78.8,
@@ -9607,7 +9607,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1628", opinionShift: 43, status: null, edition: 1,
+  id: "1628", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Orang Asli Suicide Rate 3 Times National Average",
   context: "Health Ministry data shows the Orang Asli suicide rate was 18.4 per 100,000 in 2024 — three times the national average of 6.2 — concentrated among youth aged 15-24.",
   stageScores: { pa: 80, ba: 63, fc: 81, af: 58, ct: 43, sr: 71 }, finalScore: 85.4,
@@ -9621,7 +9621,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1629", opinionShift: 69, status: "new", edition: 1,
+  id: "1629", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "MA63 Special Committee Has Met Only 8 Times in 4 Years",
   context: "The Special Cabinet Committee on MA63, formed in 2020 to resolve outstanding federal-state issues, has met only 8 times in 4 years and resolved 6 of 21 identified issues.",
   stageScores: { pa: 84, ba: 69, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 83.0,
@@ -9635,7 +9635,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1630", opinionShift: 55, status: null, edition: 1,
+  id: "1630", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Conversion Out of Islam: Zero Legal Exits in Peninsular Malaysia Since 2018",
   context: "Shariah courts in Peninsular Malaysia have not approved a single application to leave Islam since 2018, despite receiving an estimated 135 applications.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 47, sr: 74 }, finalScore: 74.1,
@@ -9649,7 +9649,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1631", opinionShift: 78, status: null, edition: 1,
+  id: "1631", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "National Identity Card Race Field Determines Access to 47 Programmes",
   context: "Analysis by the Centre for Public Policy Studies found that the race category on the MyKad identity card determines eligibility for 47 government programmes, from housing to business licences.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 65, ct: 52, sr: 79 }, finalScore: 70.7,
@@ -9663,7 +9663,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1632", opinionShift: 84, status: null, edition: 1,
+  id: "1632", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Public University Intake: 89% Bumiputera Despite 68% Population Share",
   context: "Education Ministry data shows public university undergraduate intake in 2024 was 89% Bumiputera, against a 68% Bumiputera population share, with Chinese and Indian representation at historic lows.",
   stageScores: { pa: 88, ba: 76, fc: 91, af: 71, ct: 58, sr: 84 }, finalScore: 69.9,
@@ -9677,7 +9677,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1633", opinionShift: 62, status: null, edition: 1,
+  id: "1633", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Sabah Sulu Claim Exposes 280,000 Undocumented Filipinos' Status",
   context: "The 2024 Sulu heirs arbitration reignited questions about 280,000 undocumented Filipino residents in Sabah, many of whom have lived there for decades without legal status.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 61, ct: 47, sr: 74 }, finalScore: 76.8,
@@ -9691,7 +9691,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1634", opinionShift: 73, status: "new", edition: 1,
+  id: "1634", published: true, opinionShift: 73, status: "new", edition: 1,
   headline: "Kadazan-Dusun Language Speakers Decline 28% in One Generation",
   context: "A 2025 Sabah cultural heritage survey found Kadazan-Dusun language fluency among those aged 15-30 is 28% lower than among those aged 45-60, indicating rapid intergenerational language loss.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 60, ct: 46, sr: 73 }, finalScore: 72.3,
@@ -9705,7 +9705,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1635", opinionShift: 67, status: null, edition: 1,
+  id: "1635", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Iban Customary Court Decisions Overturned 78% of the Time by Civil Courts",
   context: "Legal Aid Foundation data shows civil courts overturned 78% of Iban native customary court decisions in Sarawak between 2018 and 2024, undermining indigenous judicial authority.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 87.9,
@@ -9719,7 +9719,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1636", opinionShift: 89, status: "new", edition: 1,
+  id: "1636", published: true, opinionShift: 89, status: "new", edition: 1,
   headline: "Government Contracts: 98.4% Awarded to Bumiputera Companies in 2024",
   context: "Treasury data shows 98.4% of direct-negotiation government contracts in 2024 were awarded to Bumiputera-owned companies, totalling RM62B out of RM63B.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 86 }, finalScore: 73.9,
@@ -9733,7 +9733,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1637", opinionShift: 57, status: null, edition: 1,
+  id: "1637", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Malay Reservation Land Covers 23% of Peninsular Malaysia",
   context: "Malay Reservation Enactments across Peninsular states designate approximately 23% of total land area as Malay Reservation, restricting transfer and development to Malay owners only.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 73 }, finalScore: 72.7,
@@ -9747,7 +9747,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1638", opinionShift: 81, status: null, edition: 1,
+  id: "1638", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "MARA Education Budget RM5.2B Serves 3% of Students Exclusively",
   context: "MARA's education budget of RM5.2B in 2025 serves exclusively Bumiputera students — approximately 3% of total student population — at a per-student cost 8 times the national average.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 74.0,
@@ -9761,7 +9761,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1639", opinionShift: 44, status: "new", edition: 1,
+  id: "1639", published: true, opinionShift: 44, status: "new", edition: 1,
   headline: "Sikh Community's 78 Gurdwaras Face Same Land Title Issues as Temples",
   context: "The Malaysian Gurdwaras Council reported that 52 of 78 gurdwaras in Malaysia lack formal land titles, facing the same vulnerability to demolition as Hindu temples.",
   stageScores: { pa: 80, ba: 63, fc: 81, af: 58, ct: 43, sr: 71 }, finalScore: 78.7,
@@ -9775,7 +9775,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1640", opinionShift: 75, status: null, edition: 1,
+  id: "1640", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Chinese School Building Fund Raises RM1.8B While Government Allocates RM200M",
   context: "Chinese education associations raised RM1.8B through community donations between 2020 and 2024, while federal government allocation for Chinese school infrastructure totalled RM200M.",
   stageScores: { pa: 85, ba: 70, fc: 86, af: 64, ct: 51, sr: 78 }, finalScore: 72.5,
@@ -9789,7 +9789,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1641", opinionShift: 92, status: null, edition: 1,
+  id: "1641", published: true, opinionShift: 92, status: null, edition: 1,
   headline: "Tamil Schools Receive 2.1% of Education Budget for 5.4% of Students",
   context: "Federal education budget analysis shows Tamil schools (SJKT) receive 2.1% of total allocation while serving 5.4% of the student population, the largest per-student deficit of any school stream.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 76.0,
@@ -9803,7 +9803,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1642", opinionShift: 66, status: "new", edition: 1,
+  id: "1642", published: true, opinionShift: 66, status: "new", edition: 1,
   headline: "Conversion Disputes Leave 340 Children in Legal Limbo",
   context: "Family court records show approximately 340 children are subject to ongoing conversion and custody disputes where parents follow different religions, with cases averaging 8 years to resolve.",
   stageScores: { pa: 84, ba: 69, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 72.4,
@@ -9817,7 +9817,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1643", opinionShift: 58, status: "new", edition: 1,
+  id: "1643", published: true, opinionShift: 58, status: "new", edition: 1,
   headline: "Sabah Bajau Laut Stateless Population Reaches 34,000",
   context: "UNHCR estimates 34,000 Bajau Laut — sea nomads indigenous to the Sulu and Celebes Seas — live as stateless persons in Sabah, denied citizenship by both Malaysia and the Philippines.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 48, sr: 75 }, finalScore: 82.6,
@@ -9831,7 +9831,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1644", opinionShift: 79, status: "new", edition: 1,
+  id: "1644", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "Jakim's RM1.4B Budget Exceeds 6 Federal Ministries Combined",
   context: "JAKIM's 2025 budget of RM1.4 billion exceeds the combined budgets of the ministries of Science, Tourism, Youth, Human Resources, Natural Resources, and Law.",
   stageScores: { pa: 86, ba: 73, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 79.5,
@@ -9845,7 +9845,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1645", opinionShift: 51, status: null, edition: 1,
+  id: "1645", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "East Malaysian Christians Barred from Using 'Allah' Despite Court Ruling",
   context: "Despite the 2021 High Court ruling allowing Jill Ireland's use of 'Allah' in Christian materials, state-level restrictions in Peninsular Malaysia continue to prohibit non-Muslim use of the word.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 74 }, finalScore: 69.8,
@@ -9859,7 +9859,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1646", opinionShift: 72, status: null, edition: 1,
+  id: "1646", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Orang Asli Conversion Disputes Affect 14 Communities in Perak",
   context: "COAC documented 14 Orang Asli communities in Perak where conversion to Islam created internal divisions over land use, burial practices, and community leadership between 2020 and 2025.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 81.5,
@@ -9873,7 +9873,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1647", opinionShift: 38, status: "new", edition: 1,
+  id: "1647", published: true, opinionShift: 38, status: "new", edition: 1,
   headline: "National Service Programme Achieves 23% Racial Integration Target",
   context: "The National Service Training Programme (PLKN), reactivated in 2024, achieved only 23% of its racial integration benchmarks in its first year, according to internal ministry assessment.",
   stageScores: { pa: 79, ba: 62, fc: 79, af: 57, ct: 42, sr: 70 }, finalScore: 84.1,
@@ -9887,7 +9887,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1648", opinionShift: 85, status: null, edition: 1,
+  id: "1648", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Bumiputera Corporate Equity Rule Forces 42% of Startups to Add Partners",
   context: "MDEC data shows 42% of non-Bumiputera tech startups added Bumiputera partners solely to meet equity requirements for government contracts and incentive programmes in 2024.",
   stageScores: { pa: 87, ba: 74, fc: 90, af: 69, ct: 56, sr: 83 }, finalScore: 86.0,
@@ -9901,7 +9901,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1649", opinionShift: 60, status: null, edition: 1,
+  id: "1649", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Peranakan Heritage Unrecognised in National Cultural Framework",
   context: "The Baba-Nyonya Peranakan community — present in Malacca since the 15th century — remains unrecognised in Malaysia's National Cultural Policy, which defines national culture through Malay and Islamic identity.",
   stageScores: { pa: 81, ba: 65, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 87.4,
@@ -9915,7 +9915,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1650", opinionShift: 77, status: null, edition: 1,
+  id: "1650", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Indian Community Bottom 40 Poverty Rate Unchanged at 11.4% for a Decade",
   context: "Department of Statistics data shows the poverty rate among B40 Indian Malaysians has remained at approximately 11.4% since 2014, despite national B40 poverty declining from 8.2% to 5.3%.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 66, ct: 53, sr: 80 }, finalScore: 70.0,
@@ -9929,7 +9929,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1651", opinionShift: 40, status: "updated", edition: 1,
+  id: "1651", published: true, opinionShift: 40, status: "updated", edition: 1,
   headline: "Portuguese Settlement Malacca Faces Demolition for Reclamation Project",
   context: "The 500-year-old Portuguese Settlement in Malacca faces partial demolition under the Melaka Waterfront Economic Zone reclamation project, affecting 1,800 residents of Portuguese-Eurasian descent.",
   stageScores: { pa: 80, ba: 64, fc: 81, af: 58, ct: 43, sr: 71 }, finalScore: 81.7,
@@ -9943,7 +9943,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1652", opinionShift: 70, status: null, edition: 1,
+  id: "1652", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Malay Dignity Congress Resolutions Adopted as Government Policy Within 48 Hours",
   context: "4 resolutions from the 2019 Malay Dignity Congress — including strengthening Bumiputera economic participation — were adopted as government policy within 48 hours, bypassing normal policy review.",
   stageScores: { pa: 85, ba: 70, fc: 87, af: 65, ct: 51, sr: 78 }, finalScore: 79.6,
@@ -9957,7 +9957,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1653", opinionShift: 94, status: "new", edition: 1,
+  id: "1653", published: true, opinionShift: 94, status: "new", edition: 1,
   headline: "Stateless Indian Children Number 12,500 Despite Born-in-Malaysia Status",
   context: "UNHCR estimates 12,500 children of Indian descent born in Malaysia remain stateless due to unregistered births, parental documentation failures, and citizenship application backlogs.",
   stageScores: { pa: 91, ba: 79, fc: 93, af: 76, ct: 64, sr: 87 }, finalScore: 73.8,
@@ -9971,7 +9971,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1654", opinionShift: 63, status: "updated", edition: 1,
+  id: "1654", published: true, opinionShift: 63, status: "updated", edition: 1,
   headline: "Bidayuh Cultural Heritage Sites: 23 Baruk Headhouses Demolished Since 2010",
   context: "The Bidayuh community in Sarawak has lost 23 traditional baruk (headhouses) to development and neglect since 2010, with no federal or state preservation programme in place.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 73 }, finalScore: 84.9,
@@ -9985,7 +9985,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1655", opinionShift: 47, status: null, edition: 1,
+  id: "1655", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "Dual Legal System Creates 147 Jurisdictional Conflicts Annually",
   context: "The Malaysian Bar Council documented an average of 147 jurisdictional conflicts between civil and Shariah courts annually between 2020 and 2024, primarily in family law matters.",
   stageScores: { pa: 81, ba: 65, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 68.0,
@@ -9999,7 +9999,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1656", opinionShift: 83, status: null, edition: 1,
+  id: "1656", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Bumiputera Contractor Class F Licences: 340,000 Issued, 12% Active",
   context: "CIDB data shows 340,000 Class F (small contractor) licences have been issued under Bumiputera reservation, but only 12% are active, suggesting the programme creates licence-holders, not businesses.",
   stageScores: { pa: 87, ba: 73, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 85.8,
@@ -10013,7 +10013,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1657", opinionShift: 54, status: "updated", edition: 1,
+  id: "1657", published: true, opinionShift: 54, status: "updated", edition: 1,
   headline: "Kristang Language Down to 2,150 Speakers Worldwide",
   context: "UNESCO's 2025 Atlas of Endangered Languages counts only 2,150 speakers of Kristang — the Malacca-Portuguese creole — making it one of the world's most critically endangered languages.",
   stageScores: { pa: 80, ba: 63, fc: 80, af: 58, ct: 43, sr: 71 }, finalScore: 69.4,
@@ -10027,7 +10027,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1658", opinionShift: 76, status: "new", edition: 1,
+  id: "1658", published: true, opinionShift: 76, status: "new", edition: 1,
   headline: "Selangor Shariah Enactment Amendments Expand Moral Offences to 23",
   context: "Selangor's 2024 Shariah Criminal Enactment amendments expanded the list of moral offences from 14 to 23, including new provisions on social media content and public association between genders.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 65, ct: 52, sr: 79 }, finalScore: 76.1,
@@ -10041,7 +10041,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1659", opinionShift: 68, status: null, edition: 1,
+  id: "1659", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Non-Muslim Cabinet Representation Falls to 18% from 28% in 2008",
   context: "Non-Muslim representation in the federal Cabinet fell from 28% in 2008 to 18% in the current administration, the lowest since independence.",
   stageScores: { pa: 84, ba: 69, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 73.5,
@@ -10055,7 +10055,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1660", opinionShift: 87, status: null, edition: 1,
+  id: "1660", published: true, opinionShift: 87, status: null, edition: 1,
   headline: "GLC Board Diversity: 94% Malay-Muslim in Top 20 Government Companies",
   context: "Corporate governance data shows 94% of board members in Malaysia's top 20 GLCs are Malay-Muslim, including companies serving multiethnic consumer bases.",
   stageScores: { pa: 88, ba: 75, fc: 90, af: 70, ct: 57, sr: 83 }, finalScore: 80.2,
@@ -10069,7 +10069,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1661", opinionShift: 49, status: null, edition: 1,
+  id: "1661", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Sabah Native Court System Underfunded at RM3.8M for 39 Courts",
   context: "Sabah's 39 Native Courts operate on a combined budget of RM3.8M annually, with native chiefs receiving RM400-800 monthly allowances for adjudicating customary law disputes.",
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 87.2,
@@ -10083,7 +10083,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1662", opinionShift: 91, status: null, edition: 1,
+  id: "1662", published: true, opinionShift: 91, status: null, edition: 1,
   headline: "Wealth Gap: Top 10% Own 58.4% While Bottom 50% Own 7.6%",
   context: "The Credit Suisse Global Wealth Report 2025 shows Malaysia's top 10% own 58.4% of national wealth while the bottom 50% own 7.6%, with the gap widening across all ethnic groups.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 85 }, finalScore: 87.8,
@@ -10097,7 +10097,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1663", opinionShift: 42, status: null, edition: 1,
+  id: "1663", published: true, opinionShift: 42, status: null, edition: 1,
   headline: "Mah Meri Cultural Village Receives Zero Government Heritage Funding",
   context: "The Mah Meri Orang Asli cultural village on Carey Island, Selangor — preserving one of Malaysia's most distinctive indigenous art traditions — operates entirely on self-generated tourism revenue.",
   stageScores: { pa: 79, ba: 62, fc: 79, af: 57, ct: 42, sr: 70 }, finalScore: 86.3,
@@ -10111,7 +10111,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1664", opinionShift: 74, status: null, edition: 1,
+  id: "1664", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Sijil Pelajaran Malaysia Results Gap Between SK and SJKC Widens to 12%",
   context: "SPM 2024 results show the average performance gap between national school (SK) and Chinese school (SJKC) primary graduates widened to 12 percentage points, fuelling renewed school integration debates.",
   stageScores: { pa: 84, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 78.1,
@@ -10125,7 +10125,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1665", opinionShift: 80, status: "updated", edition: 1,
+  id: "1665", published: true, opinionShift: 80, status: "updated", edition: 1,
   headline: "Matriculation Programme 90% Bumiputera Despite Promise of 10% Non-Bumiputera",
   context: "The matriculation programme, which serves as a fast-track to public university, maintains a 90:10 Bumiputera to non-Bumiputera ratio despite pledges in 2019 to increase non-Bumiputera seats.",
   stageScores: { pa: 86, ba: 72, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 79.0,
@@ -10139,7 +10139,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1666", opinionShift: 59, status: "new", edition: 1,
+  id: "1666", published: true, opinionShift: 59, status: "new", edition: 1,
   headline: "Penang Hokkien Listed as Endangered Despite 1.2 Million Speakers",
   context: "UNESCO's 2025 language vitality assessment classified Penang Hokkien as 'vulnerable' after finding intergenerational transmission dropped 34% among families in George Town.",
   stageScores: { pa: 81, ba: 65, fc: 82, af: 60, ct: 45, sr: 73 }, finalScore: 82.0,
@@ -10153,7 +10153,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1667", opinionShift: 86, status: "updated", edition: 1,
+  id: "1667", published: true, opinionShift: 86, status: "updated", edition: 1,
   headline: "Sedition Act Used 148 Times Since 2012 — 72% Against Opposition and Minorities",
   context: "Lawyers for Liberty documented 148 Sedition Act charges between 2012 and 2025, with 72% targeting opposition politicians, journalists, and minority community leaders.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 71, ct: 58, sr: 84 }, finalScore: 71.2,
@@ -10167,7 +10167,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1668", opinionShift: 52, status: "new", edition: 1,
+  id: "1668", published: true, opinionShift: 52, status: "new", edition: 1,
   headline: "Dayak Identity Politics Reshapes Sarawak's 2026 Electoral Landscape",
   context: "A coalition of Dayak political movements is demanding 40% of Sarawak state seats reflect Dayak population share, up from the current 32%, ahead of the 2026 state election.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 47, sr: 74 }, finalScore: 69.2,
@@ -10181,7 +10181,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1669", opinionShift: 71, status: "new", edition: 1,
+  id: "1669", published: true, opinionShift: 71, status: "new", edition: 1,
   headline: "Mandatory Jawi Script in Vernacular Schools Sparks 148,000-Signature Petition",
   context: "The 2019 introduction of Jawi script lessons in SJKC and SJKT Year 4 textbooks prompted a 148,000-signature petition, with implementation still contested in 2026.",
   stageScores: { pa: 85, ba: 70, fc: 87, af: 65, ct: 51, sr: 78 }, finalScore: 76.5,
@@ -10195,7 +10195,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1670", opinionShift: 64, status: null, edition: 1,
+  id: "1670", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Bumiputera Status Denied to 34,000 Orang Asli Despite Constitutional Inclusion",
   context: "Despite Article 153 explicitly including Orang Asli as 'natives of Peninsular Malaysia,' approximately 34,000 Orang Asli report being denied Bumiputera programme access due to administrative classification.",
   stageScores: { pa: 84, ba: 69, fc: 86, af: 64, ct: 50, sr: 77 }, finalScore: 86.7,
@@ -10209,7 +10209,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1671", opinionShift: 88, status: null, edition: 1,
+  id: "1671", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Brain Drain: 1.86 Million Malaysians Abroad with 78% Non-Bumiputera",
   context: "World Bank data shows 1.86 million Malaysians live abroad, 78% non-Bumiputera, with 62% citing 'limited opportunities' and 'unequal treatment' as primary emigration reasons.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 73.2,
@@ -10223,7 +10223,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1672", opinionShift: 45, status: null, edition: 1,
+  id: "1672", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Serani Community Down to 28,000 — No Heritage Preservation Programme",
   context: "The Serani (Eurasian) community of Malacca and Penang has declined to approximately 28,000, with no dedicated heritage programme preserving their unique cuisine, music, and Kristang language.",
   stageScores: { pa: 79, ba: 62, fc: 79, af: 57, ct: 42, sr: 70 }, finalScore: 76.4,
@@ -10237,7 +10237,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1673", opinionShift: 79, status: null, edition: 1,
+  id: "1673", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Quota System in Professional Bodies Limits Non-Bumiputera Licences",
   context: "Investigations by the Malaysian Competition Commission found informal quota systems in 4 professional licensing bodies that limit non-Bumiputera licence issuance for architects, contractors, and customs agents.",
   stageScores: { pa: 86, ba: 73, fc: 89, af: 68, ct: 55, sr: 82 }, finalScore: 71.4,
@@ -10251,7 +10251,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1674", opinionShift: 55, status: null, edition: 1,
+  id: "1674", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "East Malaysian Students Face 34% Higher Living Costs in Peninsular Universities",
   context: "A 2025 student welfare survey found Sabah and Sarawak students studying in Peninsular Malaysia face 34% higher living costs due to travel, cultural adjustment, and food expenses.",
   stageScores: { pa: 82, ba: 66, fc: 83, af: 61, ct: 46, sr: 74 }, finalScore: 69.0,
@@ -10265,7 +10265,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1675", opinionShift: 93, status: null, edition: 1,
+  id: "1675", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "Ethnic Profiling in Police Stops: Indians 5.8 Times More Likely to Be Stopped",
   context: "A 2025 University of Malaya criminology study using observer methodology found Indian Malaysians are 5.8 times more likely to be stopped by police than their population share would predict.",
   stageScores: { pa: 91, ba: 79, fc: 93, af: 76, ct: 64, sr: 87 }, finalScore: 78.6,
@@ -10279,7 +10279,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1676", opinionShift: 67, status: null, edition: 1,
+  id: "1676", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Sabah Filipino-Muslim Community: 180,000 Citizens Without Full Social Acceptance",
   context: "An estimated 180,000 Filipino-Muslim Malaysians — citizens by birth or naturalisation — report persistent discrimination in employment, housing, and social services in Sabah.",
   stageScores: { pa: 83, ba: 67, fc: 84, af: 62, ct: 48, sr: 75 }, finalScore: 85.3,
@@ -10293,7 +10293,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1677", opinionShift: 48, status: "updated", edition: 1,
+  id: "1677", published: true, opinionShift: 48, status: "updated", edition: 1,
   headline: "National Harmony Bill Tabled and Withdrawn 3 Times Since 2014",
   context: "The National Harmony and Reconciliation Bill — designed to replace the Sedition Act with a modern framework — has been tabled and withdrawn from Parliament 3 times since 2014.",
   stageScores: { pa: 80, ba: 64, fc: 81, af: 58, ct: 43, sr: 71 }, finalScore: 80.7,
@@ -10307,7 +10307,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1678", opinionShift: 75, status: null, edition: 1,
+  id: "1678", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Iban Veterans of Malayan Emergency Still Denied Full Benefits After 70 Years",
   context: "Approximately 840 surviving Iban veterans and trackers from the Malayan Emergency (1948-1960) and Confrontation receive lower pensions than Peninsular veterans despite identical service.",
   stageScores: { pa: 85, ba: 71, fc: 87, af: 66, ct: 52, sr: 79 }, finalScore: 84.3,
@@ -10321,7 +10321,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1679", opinionShift: 61, status: null, edition: 1,
+  id: "1679", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Atheism Criminalised in 7 States Despite No Federal Constitutional Prohibition",
   context: "Seven Malaysian state Shariah enactments explicitly criminalise atheism or apostasy among Muslims, with penalties ranging from fines to 3 years imprisonment.",
   stageScores: { pa: 83, ba: 68, fc: 85, af: 63, ct: 49, sr: 76 }, finalScore: 79.1,
@@ -10335,7 +10335,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1680", opinionShift: 84, status: null, edition: 1,
+  id: "1680", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Mixed-Race Malaysians: 420,000 People Without a Policy Category",
   context: "An estimated 420,000 mixed-race Malaysians — 1.3% of the population — fall between racial categories in a policy system that assumes everyone belongs to exactly one group.",
   stageScores: { pa: 86, ba: 73, fc: 88, af: 67, ct: 54, sr: 81 }, finalScore: 76.9,
@@ -10349,7 +10349,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1681", opinionShift: 78, status: null, edition: 1,
+  id: "1681", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "MA63 Review Stalls After 7 Years of Talks",
   context: "The MA63 steering committee formed in 2019 completed only 4 of 21 agenda items by March 2026, frustrating Sabah and Sarawak leaders.",
   stageScores: { pa: 82, ba: 61, fc: 76, af: 64, ct: 42, sr: 73 }, finalScore: 78.0,
@@ -10363,7 +10363,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1682", opinionShift: 85, status: null, edition: 1,
+  id: "1682", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Oil Royalty Dispute Reaches RM300 Billion Mark",
   context: "Sarawak estimates cumulative losses of RM300 billion from the 5% oil royalty cap versus the 20% demanded under MA63 terms.",
   stageScores: { pa: 85, ba: 66, fc: 83, af: 68, ct: 48, sr: 75 }, finalScore: 67.2,
@@ -10377,7 +10377,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1683", opinionShift: 62, status: null, edition: 1,
+  id: "1683", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Cabotage Exemption Saves Sabah Importers RM800 Million",
   context: "The 2024 cabotage policy exemption for Sabah and Sarawak reduced shipping costs by 25-40% for essential goods.",
   stageScores: { pa: 88, ba: 71, fc: 90, af: 72, ct: 54, sr: 77 }, finalScore: 81.1,
@@ -10391,7 +10391,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1684", opinionShift: 88, status: null, edition: 1,
+  id: "1684", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Sarawak Autonomy Bill Passes State Assembly Unanimously",
   context: "Sarawak State Assembly passed the State Rights Enforcement Bill 2026 with all 82 seats voting in favour on March 10.",
   stageScores: { pa: 91, ba: 76, fc: 76, af: 76, ct: 60, sr: 79 }, finalScore: 65.7,
@@ -10405,7 +10405,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1685", opinionShift: 71, status: null, edition: 1,
+  id: "1685", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Pan Borneo Highway 60% Complete After 9 Years",
   context: "The Pan Borneo Highway launched in 2015 reached only 60% completion by early 2026 despite RM35 billion in allocated spending.",
   stageScores: { pa: 76, ba: 81, fc: 83, af: 80, ct: 66, sr: 81 }, finalScore: 67.3,
@@ -10419,7 +10419,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1686", opinionShift: 82, status: null, edition: 1,
+  id: "1686", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Sabah Project IC Survivors Demand Royal Commission",
   context: "Over 3,000 descendants of Project IC recipients rallied in Kota Kinabalu in February 2026 demanding a second Royal Commission of Inquiry.",
   stageScores: { pa: 79, ba: 86, fc: 90, af: 56, ct: 72, sr: 83 }, finalScore: 70.9,
@@ -10433,7 +10433,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1687", opinionShift: 76, status: null, edition: 1,
+  id: "1687", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "NCR Land Disputes Affect 150,000 Sarawak Natives",
   context: "Sarawak Land and Survey recorded 8,200 active Native Customary Rights land disputes affecting 150,000 indigenous residents in 2025.",
   stageScores: { pa: 82, ba: 60, fc: 76, af: 60, ct: 78, sr: 85 }, finalScore: 69.0,
@@ -10447,7 +10447,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1688", opinionShift: 79, status: "new", edition: 1,
+  id: "1688", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "Bakun Dam Resettlement Still Unpaid After 25 Years",
   context: "Some 10,000 indigenous people displaced by the Bakun Dam in 1998-2000 have yet to receive full compensation promised by the federal government.",
   stageScores: { pa: 85, ba: 65, fc: 83, af: 64, ct: 45, sr: 87 }, finalScore: 65.2,
@@ -10461,7 +10461,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1689", opinionShift: 68, status: "new", edition: 1,
+  id: "1689", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "Rural Sarawak Schools Report 42% Teacher Vacancy Rate",
   context: "Sarawak Teachers Union reported 1,850 teaching positions in rural and interior schools remained unfilled as of January 2026.",
   stageScores: { pa: 88, ba: 70, fc: 90, af: 68, ct: 51, sr: 68 }, finalScore: 66.1,
@@ -10475,7 +10475,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1690", opinionShift: 73, status: "updated", edition: 1,
+  id: "1690", published: true, opinionShift: 73, status: "updated", edition: 1,
   headline: "Sabah Healthcare Access Gap Kills 340 Annually",
   context: "Sabah Health Department data shows 340 preventable deaths in 2025 attributed to delayed medical access in remote districts.",
   stageScores: { pa: 91, ba: 75, fc: 76, af: 72, ct: 57, sr: 70 }, finalScore: 66.3,
@@ -10489,7 +10489,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1691", opinionShift: 65, status: null, edition: 1,
+  id: "1691", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "GPS Demands 35% Federal Cabinet Representation",
   context: "Gabungan Parti Sarawak formally requested 12 of 34 federal cabinet positions in January 2026 citing Sarawak 31 parliamentary seats.",
   stageScores: { pa: 76, ba: 80, fc: 83, af: 76, ct: 63, sr: 72 }, finalScore: 69.5,
@@ -10503,7 +10503,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1692", opinionShift: 70, status: null, edition: 1,
+  id: "1692", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Timber Royalty Rates Unchanged Since 1985 in Sabah",
   context: "Sabah timber royalty rates remained at RM15-25 per cubic metre since 1985 despite 400% increase in global hardwood prices.",
   stageScores: { pa: 79, ba: 85, fc: 90, af: 80, ct: 69, sr: 74 }, finalScore: 69.7,
@@ -10517,7 +10517,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1693", opinionShift: 58, status: null, edition: 1,
+  id: "1693", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Kadazan Language Curriculum Reaches Only 180 Schools",
   context: "Despite being Sabah largest indigenous group at 750,000 people Kadazandusun classes offered in only 180 of 1,400 primary schools.",
   stageScores: { pa: 82, ba: 59, fc: 76, af: 56, ct: 75, sr: 76 }, finalScore: 66.6,
@@ -10531,7 +10531,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1694", opinionShift: 55, status: null, edition: 1,
+  id: "1694", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Sarawak Digital Economy Hub Attracts RM6.8 Billion",
   context: "Sarawak SDEC digital economy initiative secured RM6.8 billion in investments from 42 companies establishing data centres and tech operations.",
   stageScores: { pa: 85, ba: 64, fc: 83, af: 60, ct: 42, sr: 78 }, finalScore: 67.7,
@@ -10545,7 +10545,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1695", opinionShift: 72, status: null, edition: 1,
+  id: "1695", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Iban Communities Block 3 Plantation Expansions in Court",
   context: "Three Iban longhouse communities in Sibu obtained court injunctions blocking palm oil expansion onto 12,000 hectares of claimed NCR land.",
   stageScores: { pa: 88, ba: 69, fc: 90, af: 64, ct: 48, sr: 80 }, finalScore: 67.0,
@@ -10559,7 +10559,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1696", opinionShift: 74, status: null, edition: 1,
+  id: "1696", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Sabah Water Crisis Affects 800,000 Residents Daily",
   context: "Persistent water supply disruptions in Kota Kinabalu and surrounding districts affected approximately 800,000 residents throughout 2025.",
   stageScores: { pa: 91, ba: 74, fc: 76, af: 68, ct: 54, sr: 82 }, finalScore: 83.7,
@@ -10573,7 +10573,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1697", opinionShift: 67, status: null, edition: 1,
+  id: "1697", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Bidayuh Villages Lack Road Access After 60 Years",
   context: "Survey found 45 Bidayuh villages in Sarawak Bau and Serian divisions still have no paved road access in 2026.",
   stageScores: { pa: 76, ba: 79, fc: 83, af: 72, ct: 60, sr: 84 }, finalScore: 77.1,
@@ -10587,7 +10587,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1698", opinionShift: 81, status: "new", edition: 1,
+  id: "1698", published: true, opinionShift: 81, status: "new", edition: 1,
   headline: "Sarawak Immigration Control Tests Federal Boundaries",
   context: "Sarawak exercised immigration autonomy to deny entry to 14,000 Peninsula Malaysians in 2025 for failing to meet new state visa requirements.",
   stageScores: { pa: 79, ba: 84, fc: 90, af: 76, ct: 66, sr: 86 }, finalScore: 69.8,
@@ -10601,7 +10601,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1699", opinionShift: 77, status: "new", edition: 1,
+  id: "1699", published: true, opinionShift: 77, status: "new", edition: 1,
   headline: "Bajau Laut Statelessness Crisis Affects 45,000 People",
   context: "An estimated 45,000 Bajau Laut sea nomads in eastern Sabah remain stateless lacking access to education healthcare and legal employment.",
   stageScores: { pa: 82, ba: 58, fc: 76, af: 80, ct: 72, sr: 88 }, finalScore: 74.4,
@@ -10615,7 +10615,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1700", opinionShift: 83, status: "updated", edition: 1,
+  id: "1700", published: true, opinionShift: 83, status: "updated", edition: 1,
   headline: "Petroleum Revenue Sharing Formula Under First Review",
   context: "Federal government convened special committee in February 2026 to review petroleum revenue sharing formula amid pressure from Sabah and Sarawak.",
   stageScores: { pa: 85, ba: 63, fc: 83, af: 56, ct: 78, sr: 69 }, finalScore: 83.9,
@@ -10629,7 +10629,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1701", opinionShift: 60, status: null, edition: 1,
+  id: "1701", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Sabah State Election Called for August 2026",
   context: "Sabah Governor dissolved the state assembly on March 15 triggering elections expected in August with GRS seeking to retain power.",
   stageScores: { pa: 88, ba: 68, fc: 90, af: 60, ct: 45, sr: 71 }, finalScore: 67.9,
@@ -10643,7 +10643,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1702", opinionShift: 75, status: null, edition: 1,
+  id: "1702", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Sarawak Demands Control Over 2,600km Coastline",
   context: "Sarawak submitted formal claim in January 2026 for sovereign management of its 2,600km coastline including fisheries and maritime boundaries.",
   stageScores: { pa: 91, ba: 73, fc: 76, af: 64, ct: 51, sr: 73 }, finalScore: 78.6,
@@ -10657,7 +10657,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1703", opinionShift: 63, status: null, edition: 1,
+  id: "1703", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Rural Broadband Reaches Only 34% of Sabah Households",
   context: "MCMC data shows fixed broadband penetration in rural Sabah reached only 34% by end of 2025 compared to national target of 85%.",
   stageScores: { pa: 76, ba: 78, fc: 83, af: 68, ct: 57, sr: 75 }, finalScore: 72.4,
@@ -10671,7 +10671,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1704", opinionShift: 56, status: null, edition: 1,
+  id: "1704", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Sarawak Hydropower Export Plan Valued at RM15 Billion",
   context: "Sarawak Energy proposed RM15 billion submarine cable project to export 3,000MW of hydropower to Peninsula and Singapore by 2030.",
   stageScores: { pa: 79, ba: 83, fc: 90, af: 72, ct: 63, sr: 77 }, finalScore: 77.6,
@@ -10685,7 +10685,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1705", opinionShift: 69, status: null, edition: 1,
+  id: "1705", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "GRS-GPS Alliance Demands Borneo Affairs Ministry",
   context: "Combined GRS-GPS parliamentary bloc of 49 MPs formally requested creation of a dedicated Ministry of Borneo Affairs in 2026 cabinet.",
   stageScores: { pa: 82, ba: 88, fc: 76, af: 76, ct: 69, sr: 79 }, finalScore: 68.1,
@@ -10699,7 +10699,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1706", opinionShift: 86, status: null, edition: 1,
+  id: "1706", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Sabah Illegal Immigrant Problem Crosses 1.2 Million",
   context: "Sabah state security committee estimated 1.2 million undocumented immigrants reside in the state comprising nearly 30% of total population.",
   stageScores: { pa: 85, ba: 62, fc: 83, af: 80, ct: 75, sr: 81 }, finalScore: 68.3,
@@ -10713,7 +10713,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1707", opinionShift: 72, status: null, edition: 1,
+  id: "1707", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Sarawak Demands Return of Education Autonomy",
   context: "GPS lawmakers introduced motion in March 2026 demanding state control over primary and secondary education curricula under MA63 provisions.",
   stageScores: { pa: 88, ba: 67, fc: 90, af: 56, ct: 42, sr: 83 }, finalScore: 69.4,
@@ -10727,7 +10727,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1708", opinionShift: 53, status: "new", edition: 1,
+  id: "1708", published: true, opinionShift: 53, status: "new", edition: 1,
   headline: "Sabah Tourism Revenue Falls RM2.3 Billion Short of Target",
   context: "Sabah Tourism Board reported 2025 revenue of RM5.7 billion against RM8 billion target with international arrivals 35% below 2019.",
   stageScores: { pa: 91, ba: 72, fc: 76, af: 60, ct: 48, sr: 85 }, finalScore: 66.4,
@@ -10741,7 +10741,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1709", opinionShift: 61, status: "new", edition: 1,
+  id: "1709", published: true, opinionShift: 61, status: "new", edition: 1,
   headline: "Sarawak Launches Own State Shipping Line With 8 Vessels",
   context: "Sarawak launched Sarawak Marine Corporation in November 2025 with 8 cargo vessels to reduce dependency on Peninsula shipping companies.",
   stageScores: { pa: 76, ba: 77, fc: 83, af: 64, ct: 54, sr: 87 }, finalScore: 70.7,
@@ -10755,7 +10755,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1710", opinionShift: 66, status: "updated", edition: 1,
+  id: "1710", published: true, opinionShift: 66, status: "updated", edition: 1,
   headline: "Sabah Native Court Backlog Hits 12,000 Pending Cases",
   context: "Sabah Native Court system reported backlog of 12,000 cases with average resolution times exceeding 7 years for land disputes.",
   stageScores: { pa: 79, ba: 82, fc: 90, af: 68, ct: 60, sr: 68 }, finalScore: 68.4,
@@ -10769,7 +10769,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1711", opinionShift: 52, status: null, edition: 1,
+  id: "1711", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Sarawak Renewable Energy Target Set at 70% by 2030",
   context: "Sarawak Premier announced target of 70% renewable energy generation by 2030 leveraging the state 28,000MW hydropower potential.",
   stageScores: { pa: 82, ba: 87, fc: 76, af: 72, ct: 66, sr: 70 }, finalScore: 71.1,
@@ -10783,7 +10783,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1712", opinionShift: 80, status: null, edition: 1,
+  id: "1712", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "East Malaysia MPs Block 3 Constitutional Amendments",
   context: "A bloc of 49 East Malaysian MPs blocked three proposed constitutional amendments in 2025 that would have reduced state powers over natural resources.",
   stageScores: { pa: 85, ba: 61, fc: 83, af: 76, ct: 72, sr: 72 }, finalScore: 68.9,
@@ -10797,7 +10797,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1713", opinionShift: 48, status: null, edition: 1,
+  id: "1713", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Sabah Railway Revival Plan Estimated at RM18 Billion",
   context: "Federal government announced feasibility study in January 2026 for reviving and expanding Sabah colonial-era railway into modern network.",
   stageScores: { pa: 88, ba: 66, fc: 90, af: 80, ct: 78, sr: 74 }, finalScore: 72.6,
@@ -10811,7 +10811,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1714", opinionShift: 64, status: null, edition: 1,
+  id: "1714", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Sarawak Smallholders Income Falls 40% on Palm Oil Crash",
   context: "Sarawak 85,000 oil palm smallholders saw income drop from RM3,200 to RM1,920 monthly in 2025 following global price declines.",
   stageScores: { pa: 91, ba: 71, fc: 76, af: 56, ct: 45, sr: 76 }, finalScore: 76.6,
@@ -10825,7 +10825,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1715", opinionShift: 71, status: null, edition: 1,
+  id: "1715", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Sabah Wildlife Corridor Loses 28,000 Hectares to Clearing",
   context: "WWF-Malaysia satellite analysis revealed 28,000 hectares of Kinabatangan Wildlife Corridor deforested between 2020 and 2025 despite protected status.",
   stageScores: { pa: 76, ba: 76, fc: 83, af: 60, ct: 51, sr: 78 }, finalScore: 69.1,
@@ -10839,7 +10839,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1716", opinionShift: 84, status: null, edition: 1,
+  id: "1716", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Sarawak Sues Petronas for RM2.6 Billion Gas Royalties",
   context: "Sarawak filed RM2.6 billion claim against Petronas in February 2026 for unpaid gas royalties from LNG operations in Bintulu since 2019.",
   stageScores: { pa: 79, ba: 81, fc: 90, af: 64, ct: 57, sr: 80 }, finalScore: 65.6,
@@ -10853,7 +10853,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1717", opinionShift: 75, status: null, edition: 1,
+  id: "1717", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Sabah Poverty Rate Double National Average at 19.4%",
   context: "Department of Statistics reported Sabah poverty rate at 19.4% in 2025 more than double the national average of 8.2%.",
   stageScores: { pa: 82, ba: 86, fc: 76, af: 68, ct: 63, sr: 82 }, finalScore: 72.3,
@@ -10867,7 +10867,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1718", opinionShift: 57, status: "new", edition: 1,
+  id: "1718", published: true, opinionShift: 57, status: "new", edition: 1,
   headline: "Sarawak Launches State-Owned Airline SkyBorneo",
   context: "Sarawak government-backed SkyBorneo commenced operations in February 2026 with 6 ATR-72 aircraft serving underserved rural routes.",
   stageScores: { pa: 85, ba: 60, fc: 83, af: 72, ct: 69, sr: 84 }, finalScore: 70.6,
@@ -10881,7 +10881,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1719", opinionShift: 87, status: "new", edition: 1,
+  id: "1719", published: true, opinionShift: 87, status: "new", edition: 1,
   headline: "East Malaysia Special Grant Frozen at RM26.7 Million",
   context: "The special grant to Sabah under Article 112C has remained at RM26.7 million since 1969 despite constitutional requirements for periodic review.",
   stageScores: { pa: 88, ba: 65, fc: 90, af: 76, ct: 75, sr: 86 }, finalScore: 70.8,
@@ -10895,7 +10895,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1720", opinionShift: 66, status: "updated", edition: 1,
+  id: "1720", published: true, opinionShift: 66, status: "updated", edition: 1,
   headline: "Sabah Plantation Wage Compliance at Only 52 Percent",
   context: "Sabah Labour Department found only 52% of oil palm plantations paying the RM1,500 minimum wage as of December 2025 audit.",
   stageScores: { pa: 91, ba: 70, fc: 76, af: 80, ct: 42, sr: 88 }, finalScore: 85.8,
@@ -10909,7 +10909,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1721", opinionShift: 74, status: null, edition: 1,
+  id: "1721", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Sarawak Tribal Chiefs Challenge Forest Reclassification",
   context: "Fifteen Penan and Kenyah tribal chiefs filed judicial review in March 2026 against reclassification of 180,000 hectares from permanent forest to state land.",
   stageScores: { pa: 76, ba: 75, fc: 83, af: 56, ct: 48, sr: 69 }, finalScore: 77.2,
@@ -10923,7 +10923,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1722", opinionShift: 59, status: null, edition: 1,
+  id: "1722", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Sabah-Sarawak Budget Unity Talks Collapse Over Priorities",
   context: "Attempts to present unified Borneo budget proposal collapsed in February 2026 when GRS and GPS disagreed on priority allocations worth RM12 billion.",
   stageScores: { pa: 79, ba: 80, fc: 90, af: 60, ct: 54, sr: 71 }, finalScore: 71.9,
@@ -10937,7 +10937,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1723", opinionShift: 68, status: null, edition: 1,
+  id: "1723", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Sarawak River Pollution Index Worsens 5th Straight Year",
   context: "DOE data shows 23 of Sarawak 45 monitored rivers recorded deteriorating water quality for the fifth consecutive year in 2025.",
   stageScores: { pa: 82, ba: 85, fc: 76, af: 64, ct: 60, sr: 73 }, finalScore: 66.7,
@@ -10951,7 +10951,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1724", opinionShift: 55, status: null, edition: 1,
+  id: "1724", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Sabah Heritage Sites Get Zero Federal Funding in 2026",
   context: "None of Sabah 18 gazetted cultural heritage sites received allocation from the federal Heritage Department RM120 million 2026 budget.",
   stageScores: { pa: 85, ba: 59, fc: 83, af: 68, ct: 66, sr: 75 }, finalScore: 81.0,
@@ -10965,7 +10965,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1725", opinionShift: 50, status: null, edition: 1,
+  id: "1725", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Dayak Chamber Reports RM4.5 Billion in Business Revenue",
   context: "Dayak Chamber of Commerce reported 2,800 member businesses generated combined revenue of RM4.5 billion in 2025.",
   stageScores: { pa: 88, ba: 64, fc: 90, af: 72, ct: 72, sr: 77 }, finalScore: 75.2,
@@ -10979,7 +10979,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1726", opinionShift: 73, status: null, edition: 1,
+  id: "1726", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "East Malaysia Flights Cost 3 Times More Per Kilometre",
   context: "Comparative study found average domestic flight costs to East Malaysia are 3 times higher per kilometre than equivalent Peninsula routes.",
   stageScores: { pa: 91, ba: 69, fc: 76, af: 76, ct: 78, sr: 79 }, finalScore: 74.1,
@@ -10993,7 +10993,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1727", opinionShift: 70, status: null, edition: 1,
+  id: "1727", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Sabah Land Reform Proposes 450,000 Title Conversions",
   context: "Sabah Land Reform Commission recommended converting 450,000 native title plots to full freehold potentially unlocking RM28 billion in value.",
   stageScores: { pa: 76, ba: 74, fc: 83, af: 80, ct: 45, sr: 81 }, finalScore: 78.9,
@@ -11007,7 +11007,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1728", opinionShift: 62, status: "new", edition: 1,
+  id: "1728", published: true, opinionShift: 62, status: "new", edition: 1,
   headline: "Sarawak Launches RM2 Billion State Pension Fund",
   context: "Sarawak established State Pension Investment Fund in January 2026 with RM2 billion seed capital separate from federal EPF.",
   stageScores: { pa: 79, ba: 79, fc: 90, af: 56, ct: 51, sr: 83 }, finalScore: 70.3,
@@ -11021,7 +11021,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1729", opinionShift: 76, status: "new", edition: 1,
+  id: "1729", published: true, opinionShift: 76, status: "new", edition: 1,
   headline: "Pan Borneo Sabah Contractor Terminated After 3 Years",
   context: "Government terminated main Sabah Pan Borneo Highway contractor in February 2026 after 3 years of delays on RM12.8 billion package.",
   stageScores: { pa: 82, ba: 84, fc: 76, af: 60, ct: 57, sr: 85 }, finalScore: 72.8,
@@ -11035,7 +11035,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1730", opinionShift: 69, status: "updated", edition: 1,
+  id: "1730", published: true, opinionShift: 69, status: "updated", edition: 1,
   headline: "Sabah Electricity Tariff 38% Higher Than Peninsula Rate",
   context: "SESB charges residential consumers 38% more than TNB Peninsula rates averaging 45 sen per kWh versus 33 sen.",
   stageScores: { pa: 85, ba: 58, fc: 83, af: 64, ct: 63, sr: 87 }, finalScore: 71.5,
@@ -11049,7 +11049,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1731", opinionShift: 58, status: null, edition: 1,
+  id: "1731", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Sarawak Election Polls Show GPS Facing Strongest Challenge",
   context: "With Sarawak elections due by 2027 opposition parties mount strongest challenge since 2016 with 35% support in recent polls.",
   stageScores: { pa: 88, ba: 63, fc: 90, af: 68, ct: 69, sr: 68 }, finalScore: 78.7,
@@ -11063,7 +11063,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1732", opinionShift: 63, status: null, edition: 1,
+  id: "1732", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Sabah Hepatitis B Rate 4 Times National Average",
   context: "Sabah Health Department reported hepatitis B prevalence of 8.2% among adults in 2025 four times the national average of 2.1%.",
   stageScores: { pa: 91, ba: 68, fc: 76, af: 72, ct: 75, sr: 70 }, finalScore: 68.8,
@@ -11077,7 +11077,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1733", opinionShift: 65, status: null, edition: 1,
+  id: "1733", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "East Malaysia SPM Scores Fall 15 Points Below National",
   context: "SPM 2025 results showed Sabah and Sarawak students averaged 15 points below Peninsula counterparts in core subjects.",
   stageScores: { pa: 76, ba: 73, fc: 83, af: 76, ct: 42, sr: 72 }, finalScore: 75.6,
@@ -11091,7 +11091,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1734", opinionShift: 51, status: null, edition: 1,
+  id: "1734", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Sabah-Philippines Crime Ring Busted With 45 Arrests",
   context: "Joint operation dismantled 45-member cross-border crime syndicate operating in Sandakan and Zamboanga in March 2026.",
   stageScores: { pa: 79, ba: 78, fc: 90, af: 80, ct: 48, sr: 74 }, finalScore: 83.4,
@@ -11105,7 +11105,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1735", opinionShift: 72, status: null, edition: 1,
+  id: "1735", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Sarawak Peat Fires Destroy 45,000 Hectares in 3 Months",
   context: "Prolonged dry conditions led to peat fires destroying 45,000 hectares across 8 Sarawak divisions between January and March 2026.",
   stageScores: { pa: 82, ba: 83, fc: 76, af: 56, ct: 54, sr: 76 }, finalScore: 72.9,
@@ -11119,7 +11119,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1736", opinionShift: 61, status: null, edition: 1,
+  id: "1736", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Sabah Fishermen Demand 12 Nautical Mile Exclusive Zone",
   context: "Sabah Fishermen Association representing 28,000 artisanal fishers petitioned for 12-mile exclusive zone banning commercial trawlers near shore.",
   stageScores: { pa: 85, ba: 88, fc: 83, af: 60, ct: 60, sr: 78 }, finalScore: 73.6,
@@ -11133,7 +11133,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1737", opinionShift: 67, status: null, edition: 1,
+  id: "1737", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Sarawak Youth Exodus Reaches 18,000 Leaving Annually",
   context: "DOS data shows net outmigration of 18,000 Sarawak residents aged 20-35 annually to Peninsula Malaysia and Singapore.",
   stageScores: { pa: 88, ba: 62, fc: 90, af: 64, ct: 66, sr: 80 }, finalScore: 76.3,
@@ -11147,7 +11147,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1738", opinionShift: 70, status: "new", edition: 1,
+  id: "1738", published: true, opinionShift: 70, status: "new", edition: 1,
   headline: "Sabah Road Fatalities Highest in Malaysia at 12.8 Rate",
   context: "Sabah recorded 12.8 road fatalities per 100,000 population in 2025 the highest nationally and 60% above Malaysian average.",
   stageScores: { pa: 91, ba: 67, fc: 76, af: 68, ct: 72, sr: 82 }, finalScore: 65.8,
@@ -11161,7 +11161,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1739", opinionShift: 77, status: "new", edition: 1,
+  id: "1739", published: true, opinionShift: 77, status: "new", edition: 1,
   headline: "Sarawak Proposes State Immigration Appeals Tribunal",
   context: "Sarawak proposed establishing state immigration appeals tribunal in January 2026 to adjudicate entry denial cases independently from federal courts.",
   stageScores: { pa: 76, ba: 72, fc: 83, af: 72, ct: 78, sr: 84 }, finalScore: 73.1,
@@ -11175,7 +11175,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1740", opinionShift: 42, status: "updated", edition: 1,
+  id: "1740", published: true, opinionShift: 42, status: "updated", edition: 1,
   headline: "East Malaysia MPs Propose Separate Time Zone for Borneo",
   context: "A group of 18 East Malaysian MPs submitted motion in February 2026 to create separate time zone 30 minutes ahead of Peninsula.",
   stageScores: { pa: 79, ba: 77, fc: 90, af: 76, ct: 45, sr: 86 }, finalScore: 68.0,
@@ -11189,7 +11189,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1741", opinionShift: 73, status: null, edition: 1,
+  id: "1741", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Sabah Squatter Settlements House 380,000 Residents",
   context: "State survey identified 380,000 people in 850 squatter settlements across Sabah predominantly in Kota Kinabalu and Sandakan.",
   stageScores: { pa: 82, ba: 82, fc: 76, af: 80, ct: 51, sr: 88 }, finalScore: 71.8,
@@ -11203,7 +11203,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1742", opinionShift: 49, status: null, edition: 1,
+  id: "1742", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Sarawak Biomass Industry Targets RM8 Billion by 2028",
   context: "Sarawak biomass industry generated RM3.2 billion in 2025 with state targeting RM8 billion by 2028 through waste processing.",
   stageScores: { pa: 85, ba: 87, fc: 83, af: 56, ct: 57, sr: 69 }, finalScore: 86.6,
@@ -11217,7 +11217,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1743", opinionShift: 64, status: null, edition: 1,
+  id: "1743", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Sabah Coral Reef Degradation Reaches Critical 42% Level",
   context: "Marine Research Foundation reported 42% of Sabah coral reefs now classified as degraded or critically damaged based on 2025 surveys.",
   stageScores: { pa: 88, ba: 61, fc: 90, af: 60, ct: 63, sr: 71 }, finalScore: 76.8,
@@ -11231,7 +11231,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1744", opinionShift: 60, status: null, edition: 1,
+  id: "1744", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Sarawak Builds RM580 Million Hospital Without Federal Aid",
   context: "Sarawak completed RM580 million Samarahan Specialist Hospital in December 2025 entirely state-funded without Health Ministry involvement.",
   stageScores: { pa: 91, ba: 66, fc: 76, af: 64, ct: 69, sr: 73 }, finalScore: 72.1,
@@ -11245,7 +11245,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1745", opinionShift: 56, status: null, edition: 1,
+  id: "1745", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "East Malaysia Ports Fall 800,000 TEUs Short of Demand",
   context: "Combined container handling at East Malaysian ports reached only 2.8 million TEUs in 2025 against demand of 3.6 million.",
   stageScores: { pa: 76, ba: 71, fc: 83, af: 68, ct: 75, sr: 75 }, finalScore: 67.5,
@@ -11259,7 +11259,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1746", opinionShift: 78, status: null, edition: 1,
+  id: "1746", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Orang Sungai Community Faces Forced Relocation in Sabah",
   context: "The 4,500-member Orang Sungai community along Kinabatangan River received relocation notices in February 2026 for flood mitigation project.",
   stageScores: { pa: 79, ba: 76, fc: 90, af: 72, ct: 42, sr: 77 }, finalScore: 84.7,
@@ -11273,7 +11273,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1747", opinionShift: 58, status: null, edition: 1,
+  id: "1747", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Sarawak Pepper Industry Revenue Collapses From RM3 Billion",
   context: "Sarawak pepper revenue fell from RM3 billion in 2016 to RM680 million in 2025 as global prices crashed and Vietnam competition grew.",
   stageScores: { pa: 82, ba: 81, fc: 76, af: 76, ct: 48, sr: 79 }, finalScore: 72.5,
@@ -11287,7 +11287,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1748", opinionShift: 47, status: "new", edition: 1,
+  id: "1748", published: true, opinionShift: 47, status: "new", edition: 1,
   headline: "Largest East Malaysia Military Exercise in 15 Years Held",
   context: "Malaysian Armed Forces conducted Exercise Pasukan Borneo deploying 5,000 troops across Sabah and Sarawak in January 2026.",
   stageScores: { pa: 85, ba: 86, fc: 83, af: 80, ct: 54, sr: 81 }, finalScore: 69.6,
@@ -11301,7 +11301,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1749", opinionShift: 66, status: "new", edition: 1,
+  id: "1749", published: true, opinionShift: 66, status: "new", edition: 1,
   headline: "Sarawak Longhouse Electrification Still at 78 Percent",
   context: "Sarawak Energy data shows 22% of longhouse communities totalling 85,000 residents still lack connection to the state electricity grid.",
   stageScores: { pa: 88, ba: 60, fc: 90, af: 56, ct: 60, sr: 83 }, finalScore: 84.5,
@@ -11315,7 +11315,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1750", opinionShift: 82, status: "updated", edition: 1,
+  id: "1750", published: true, opinionShift: 82, status: "updated", edition: 1,
   headline: "Sarawak Land Code Amendment Sparks Indigenous Protests",
   context: "Proposed amendment to Sarawak Land Code would allow compulsory NCR acquisition for infrastructure with only 90 days notice.",
   stageScores: { pa: 91, ba: 65, fc: 76, af: 60, ct: 66, sr: 85 }, finalScore: 75.4,
@@ -11329,7 +11329,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1751", opinionShift: 79, status: null, edition: 1,
+  id: "1751", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "MRT3 Circle Line Budget Balloons to RM45 Billion",
   context: "MRT3 Circle Line cost increased from RM31 billion to RM45 billion in latest revision presented to Cabinet in February 2026.",
   stageScores: { pa: 76, ba: 70, fc: 83, af: 64, ct: 72, sr: 87 }, finalScore: 68.7,
@@ -11343,7 +11343,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1752", opinionShift: 62, status: null, edition: 1,
+  id: "1752", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "LRT3 Shah Alam Line Opens 18 Months Behind Schedule",
   context: "LRT3 Shah Alam Line commenced partial operations in January 2026 eighteen months behind original June 2024 completion target.",
   stageScores: { pa: 79, ba: 75, fc: 90, af: 68, ct: 78, sr: 68 }, finalScore: 85.5,
@@ -11357,7 +11357,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1753", opinionShift: 71, status: null, edition: 1,
+  id: "1753", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "HSR Revival Proposal Sets RM68 Billion Price Tag",
   context: "Malaysia and Singapore resumed KL-Singapore High Speed Rail discussions in March 2026 with updated RM68 billion cost estimate.",
   stageScores: { pa: 82, ba: 80, fc: 76, af: 72, ct: 45, sr: 70 }, finalScore: 74.2,
@@ -11371,7 +11371,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1754", opinionShift: 68, status: null, edition: 1,
+  id: "1754", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Highway Toll Abolition Costs Government RM4.2 Billion",
   context: "Government progressive toll abolition programme cost RM4.2 billion in compensation payments to highway concessionaires in 2025.",
   stageScores: { pa: 85, ba: 85, fc: 83, af: 76, ct: 51, sr: 72 }, finalScore: 85.6,
@@ -11385,7 +11385,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1755", opinionShift: 65, status: null, edition: 1,
+  id: "1755", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "KLIA2 Terminal Exceeds 45 Million Passenger Capacity",
   context: "KLIA Terminal 2 handled 48 million passengers in 2025 against design capacity of 45 million causing chronic congestion.",
   stageScores: { pa: 88, ba: 59, fc: 90, af: 80, ct: 57, sr: 74 }, finalScore: 91.4,
@@ -11399,7 +11399,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1756", opinionShift: 72, status: null, edition: 1,
+  id: "1756", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Public Transport Still Fragmented Across 5 Operators",
   context: "Despite APAD creation KL public transport remains split across 5 operators with incompatible ticketing systems.",
   stageScores: { pa: 91, ba: 64, fc: 76, af: 56, ct: 63, sr: 76 }, finalScore: 78.3,
@@ -11413,7 +11413,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1757", opinionShift: 81, status: null, edition: 1,
+  id: "1757", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "Affordable Housing Shortage Reaches 960,000 Units Nationwide",
   context: "Ministry of Housing reported cumulative affordable housing deficit of 960,000 units nationally in 2025.",
   stageScores: { pa: 76, ba: 69, fc: 83, af: 60, ct: 69, sr: 78 }, finalScore: 88.0,
@@ -11427,7 +11427,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1758", opinionShift: 76, status: "new", edition: 1,
+  id: "1758", published: true, opinionShift: 76, status: "new", edition: 1,
   headline: "KL Flash Floods Cause RM2.8 Billion Damage in 2025",
   context: "Kuala Lumpur experienced 34 flash flood events in 2025 causing RM2.8 billion in cumulative damage.",
   stageScores: { pa: 79, ba: 74, fc: 90, af: 64, ct: 75, sr: 80 }, finalScore: 75.1,
@@ -11441,7 +11441,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1759", opinionShift: 69, status: "new", edition: 1,
+  id: "1759", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "5G Rollout Covers Only 42% After 4 Years of Deployment",
   context: "DNB 5G network reached 42% population coverage by end 2025 far short of 80% target set at 2021 launch.",
   stageScores: { pa: 82, ba: 79, fc: 76, af: 68, ct: 42, sr: 82 }, finalScore: 82.4,
@@ -11455,7 +11455,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1760", opinionShift: 73, status: "updated", edition: 1,
+  id: "1760", published: true, opinionShift: 73, status: "updated", edition: 1,
   headline: "Smart City Programme Spends RM1.2 Billion With Little Result",
   context: "National Smart City Framework spent RM1.2 billion across 28 pilot cities but audit found only 6 have functional smart systems.",
   stageScores: { pa: 85, ba: 84, fc: 83, af: 72, ct: 48, sr: 84 }, finalScore: 80.3,
@@ -11469,7 +11469,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1761", opinionShift: 63, status: null, edition: 1,
+  id: "1761", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Urban Sprawl Consumes 15,000 Hectares of Farmland Yearly",
   context: "Department of Agriculture data shows 15,000 hectares of productive farmland converted to urban development annually in Peninsula.",
   stageScores: { pa: 88, ba: 58, fc: 90, af: 76, ct: 54, sr: 86 }, finalScore: 78.4,
@@ -11483,7 +11483,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1762", opinionShift: 66, status: null, edition: 1,
+  id: "1762", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Heritage Building Demolitions Hit 120 Per Year Record",
   context: "National Heritage Department recorded 120 pre-1957 heritage building demolitions in 2025 the highest annual rate since records began.",
   stageScores: { pa: 91, ba: 63, fc: 76, af: 80, ct: 60, sr: 88 }, finalScore: 81.6,
@@ -11497,7 +11497,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1763", opinionShift: 48, status: null, edition: 1,
+  id: "1763", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Parking Policy Reform Stalls in 8 Major Malaysian Cities",
   context: "Proposed parking reform to introduce dynamic pricing shelved by 8 of 12 targeted city councils since 2023.",
   stageScores: { pa: 76, ba: 68, fc: 83, af: 56, ct: 66, sr: 69 }, finalScore: 75.5,
@@ -11511,7 +11511,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1764", opinionShift: 77, status: null, edition: 1,
+  id: "1764", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Pedestrian Deaths Reach 850 Amid Infrastructure Failures",
   context: "MIROS recorded 850 pedestrian fatalities on Malaysian roads in 2025 with 72% in areas without proper sidewalks.",
   stageScores: { pa: 79, ba: 73, fc: 90, af: 60, ct: 72, sr: 71 }, finalScore: 78.5,
@@ -11525,7 +11525,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1765", opinionShift: 52, status: null, edition: 1,
+  id: "1765", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Cycling Infrastructure Covers Only 480km Across Malaysia",
   context: "Malaysia has only 480km of dedicated cycling lanes nationwide compared to 1,800km in Singapore.",
   stageScores: { pa: 82, ba: 78, fc: 76, af: 64, ct: 78, sr: 73 }, finalScore: 91.0,
@@ -11539,7 +11539,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1766", opinionShift: 74, status: null, edition: 1,
+  id: "1766", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Water Infrastructure Losses Hit RM7.2 Billion Every Year",
   context: "Non-revenue water losses across Malaysia reached 36.4% translating to RM7.2 billion in lost treated water annually.",
   stageScores: { pa: 85, ba: 83, fc: 83, af: 68, ct: 45, sr: 75 }, finalScore: 73.9,
@@ -11553,7 +11553,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1767", opinionShift: 70, status: null, edition: 1,
+  id: "1767", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Sewage Treatment Plants Fail Affecting 2.3 Million People",
   context: "IWK reported 380 of 6,800 sewage treatment plants operated below compliance affecting 2.3 million people in 2025.",
   stageScores: { pa: 88, ba: 88, fc: 90, af: 72, ct: 51, sr: 77 }, finalScore: 88.2,
@@ -11567,7 +11567,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1768", opinionShift: 80, status: "new", edition: 1,
+  id: "1768", published: true, opinionShift: 80, status: "new", edition: 1,
   headline: "Construction Quality Failures Cause 12 Building Collapses",
   context: "CIDB recorded 12 partial or full building collapses involving occupied structures in 2025 up from 5 in 2021.",
   stageScores: { pa: 91, ba: 62, fc: 76, af: 76, ct: 57, sr: 79 }, finalScore: 74.9,
@@ -11581,7 +11581,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1769", opinionShift: 75, status: "new", edition: 1,
+  id: "1769", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Fire Safety Compliance Below 60% in Commercial Buildings",
   context: "BOMBA audit found only 58% of commercial buildings met fire safety compliance standards as of December 2025.",
   stageScores: { pa: 76, ba: 67, fc: 83, af: 80, ct: 63, sr: 81 }, finalScore: 71.7,
@@ -11595,7 +11595,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1770", opinionShift: 71, status: "updated", edition: 1,
+  id: "1770", published: true, opinionShift: 71, status: "updated", edition: 1,
   headline: "Waste Management Crisis as 8 Landfills Approach Capacity",
   context: "Eight of Malaysia 14 operational sanitary landfills projected to reach capacity by 2028 with no new sites approved.",
   stageScores: { pa: 79, ba: 72, fc: 90, af: 56, ct: 69, sr: 83 }, finalScore: 77.4,
@@ -11609,7 +11609,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1771", opinionShift: 58, status: null, edition: 1,
+  id: "1771", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Subang Airport RM8 Billion Redevelopment Plan Proposed",
   context: "Consortium proposed RM8 billion redevelopment of Sultan Abdul Aziz Shah Airport as premium short-haul hub for 25 million passengers.",
   stageScores: { pa: 82, ba: 77, fc: 76, af: 60, ct: 75, sr: 85 }, finalScore: 72.7,
@@ -11623,7 +11623,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1772", opinionShift: 55, status: null, edition: 1,
+  id: "1772", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Port Klang Expansion Needs RM12 Billion to Stay Competitive",
   context: "Port Klang Authority proposed RM12 billion expansion to increase capacity from 13 million to 20 million TEUs by 2030.",
   stageScores: { pa: 85, ba: 82, fc: 83, af: 64, ct: 42, sr: 87 }, finalScore: 83.3,
@@ -11637,7 +11637,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1773", opinionShift: 67, status: null, edition: 1,
+  id: "1773", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Broadband Affordability Gap Affects 4.2 Million Households",
   context: "MCMC data shows 4.2 million households spend more than 5% of income on broadband exceeding ITU affordability benchmark.",
   stageScores: { pa: 88, ba: 87, fc: 90, af: 68, ct: 48, sr: 68 }, finalScore: 87.9,
@@ -11651,7 +11651,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1774", opinionShift: 54, status: null, edition: 1,
+  id: "1774", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "JB-Singapore RTS Link Construction Passes 55% Complete",
   context: "Johor Bahru-Singapore RTS Link reached 55% construction in February 2026 with 4km cross-border line targeting 2027.",
   stageScores: { pa: 91, ba: 61, fc: 76, af: 72, ct: 54, sr: 70 }, finalScore: 74.7,
@@ -11665,7 +11665,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1775", opinionShift: 64, status: null, edition: 1,
+  id: "1775", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "KTM Komuter Reliability Falls to 78% On-Time Performance",
   context: "KTM Komuter on-time performance dropped to 78% in 2025 the lowest since 2018 affecting 120,000 daily commuters.",
   stageScores: { pa: 76, ba: 66, fc: 83, af: 76, ct: 60, sr: 72 }, finalScore: 65.5,
@@ -11679,7 +11679,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1776", opinionShift: 78, status: null, edition: 1,
+  id: "1776", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "PPR Public Housing Maintenance Crisis Affects 280,000",
   context: "PPR complexes housing 280,000 across 120 blocks reported severe maintenance failures including broken lifts and water leaks.",
   stageScores: { pa: 79, ba: 71, fc: 90, af: 80, ct: 66, sr: 74 }, finalScore: 75.7,
@@ -11693,7 +11693,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1777", opinionShift: 70, status: null, edition: 1,
+  id: "1777", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Penang Transport Master Plan Faces RM28 Billion Gap",
   context: "Penang transport master plan including LRT highway and undersea tunnel faces RM28 billion funding gap after federal cuts.",
   stageScores: { pa: 82, ba: 76, fc: 76, af: 56, ct: 72, sr: 76 }, finalScore: 84.3,
@@ -11707,7 +11707,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1778", opinionShift: 72, status: "new", edition: 1,
+  id: "1778", published: true, opinionShift: 72, status: "new", edition: 1,
   headline: "Industrial Building Safety Audit Finds 2,400 Violations",
   context: "DOSH found 2,400 serious safety violations across 850 industrial buildings inspected in 2025 nationwide audit.",
   stageScores: { pa: 85, ba: 81, fc: 83, af: 60, ct: 78, sr: 78 }, finalScore: 79.0,
@@ -11721,7 +11721,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1779", opinionShift: 76, status: "new", edition: 1,
+  id: "1779", published: true, opinionShift: 76, status: "new", edition: 1,
   headline: "Flood Mitigation Programme Covers Only 45% of Risk Zones",
   context: "DID reported RM18 billion flood mitigation programme completed protection for only 45% of identified high-risk areas.",
   stageScores: { pa: 88, ba: 86, fc: 90, af: 64, ct: 45, sr: 80 }, finalScore: 73.7,
@@ -11735,7 +11735,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1780", opinionShift: 60, status: "updated", edition: 1,
+  id: "1780", published: true, opinionShift: 60, status: "updated", edition: 1,
   headline: "Property Overhang Reaches 45,000 Empty Completed Units",
   context: "Malaysia property overhang reached 45,000 unsold completed residential units in mixed developments valued at RM32 billion.",
   stageScores: { pa: 91, ba: 60, fc: 76, af: 68, ct: 51, sr: 82 }, finalScore: 79.8,
@@ -11749,7 +11749,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1781", opinionShift: 57, status: null, edition: 1,
+  id: "1781", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "EV Charging Stations Cover Only 2,800 of 10,000 Needed",
   context: "Malaysia has only 2,800 public EV charging stations as of February 2026 against target of 10,000 needed.",
   stageScores: { pa: 76, ba: 65, fc: 83, af: 72, ct: 57, sr: 84 }, finalScore: 85.1,
@@ -11763,7 +11763,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1782", opinionShift: 68, status: null, edition: 1,
+  id: "1782", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "KL Sinkhole Incidents Triple in 5 Years to 85",
   context: "DBKL recorded 85 sinkhole incidents in 2025 triple the 28 in 2020 linked to aging underground utilities and limestone geology.",
   stageScores: { pa: 79, ba: 70, fc: 90, af: 76, ct: 63, sr: 86 }, finalScore: 79.5,
@@ -11777,7 +11777,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1783", opinionShift: 79, status: null, edition: 1,
+  id: "1783", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "School Buildings at Risk: 1,200 Structures Could Fail",
   context: "Education Ministry audit found 1,200 school buildings classified as high-risk for structural failure affecting 480,000 students.",
   stageScores: { pa: 82, ba: 75, fc: 76, af: 80, ct: 69, sr: 88 }, finalScore: 74.3,
@@ -11791,7 +11791,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1784", opinionShift: 50, status: null, edition: 1,
+  id: "1784", published: true, opinionShift: 50, status: null, edition: 1,
   headline: "Highway Rest Areas Fail Audits at 65% of Locations",
   context: "PLUS and LLM audits found 65% of highway rest and service areas failed cleanliness and facility standards in 2025.",
   stageScores: { pa: 85, ba: 80, fc: 83, af: 56, ct: 75, sr: 69 }, finalScore: 89.5,
@@ -11805,7 +11805,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1785", opinionShift: 47, status: null, edition: 1,
+  id: "1785", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "KL Mandates Stormwater Harvesting for New Developments",
   context: "DBKL mandated stormwater harvesting for all new commercial and residential developments above 1,000 sqm effective January 2026.",
   stageScores: { pa: 88, ba: 85, fc: 90, af: 60, ct: 42, sr: 71 }, finalScore: 85.9,
@@ -11819,7 +11819,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1786", opinionShift: 82, status: null, edition: 1,
+  id: "1786", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Abandoned Projects Leave 18,000 Home Buyers Stranded",
   context: "KPKT recorded 85 abandoned housing projects involving 18,000 buyer units with total losses estimated at RM4.8 billion.",
   stageScores: { pa: 91, ba: 59, fc: 76, af: 64, ct: 48, sr: 73 }, finalScore: 90.4,
@@ -11833,7 +11833,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1787", opinionShift: 63, status: null, edition: 1,
+  id: "1787", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "KL Building Facade Inspections Reveal 3,200 Defects",
   context: "DBKL mandatory facade inspection found 3,200 critical defects across 1,800 high-rise buildings in city centre.",
   stageScores: { pa: 76, ba: 64, fc: 83, af: 68, ct: 54, sr: 75 }, finalScore: 76.2,
@@ -11847,7 +11847,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1788", opinionShift: 61, status: "new", edition: 1,
+  id: "1788", published: true, opinionShift: 61, status: "new", edition: 1,
   headline: "Iskandar Malaysia Falls 40% Short of Investment Target",
   context: "IRDA reported cumulative investment of RM382 billion against original RM638 billion target for 2006-2025 period.",
   stageScores: { pa: 79, ba: 69, fc: 90, af: 72, ct: 60, sr: 77 }, finalScore: 76.1,
@@ -11861,7 +11861,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1789", opinionShift: 56, status: "new", edition: 1,
+  id: "1789", published: true, opinionShift: 56, status: "new", edition: 1,
   headline: "National Expressway Grid Costs RM85 Billion Over 15 Years",
   context: "Government announced 15-year National Expressway Grid costing RM85 billion to add 2,400km of new highway corridors.",
   stageScores: { pa: 82, ba: 74, fc: 76, af: 76, ct: 66, sr: 79 }, finalScore: 76.0,
@@ -11875,7 +11875,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1790", opinionShift: 74, status: "updated", edition: 1,
+  id: "1790", published: true, opinionShift: 74, status: "updated", edition: 1,
   headline: "Apartment Fire Escapes Blocked in 40% of KL Buildings",
   context: "BOMBA found 40% of apartment buildings in KL and Selangor had blocked fire escape routes during 2025 inspections.",
   stageScores: { pa: 85, ba: 79, fc: 83, af: 80, ct: 72, sr: 81 }, finalScore: 84.0,
@@ -11889,7 +11889,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1791", opinionShift: 53, status: null, edition: 1,
+  id: "1791", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Putrajaya Green City Misses 8 of 12 Sustainability Targets",
   context: "Audit of Putrajaya green city commitments found capital missed targets on 8 of 12 sustainability indicators from 2015 plan.",
   stageScores: { pa: 88, ba: 84, fc: 90, af: 56, ct: 78, sr: 83 }, finalScore: 79.7,
@@ -11903,7 +11903,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1792", opinionShift: 59, status: null, edition: 1,
+  id: "1792", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "BRT Systems Underperform in 4 Cities at 35% of Projection",
   context: "BRT systems in Iskandar Putrajaya Sunway and Klang carry only 35% of projected daily ridership four years after launch.",
   stageScores: { pa: 91, ba: 58, fc: 76, af: 60, ct: 45, sr: 85 }, finalScore: 77.5,
@@ -11917,7 +11917,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1793", opinionShift: 73, status: null, edition: 1,
+  id: "1793", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Klang Valley Congestion Costs Economy RM12 Billion Yearly",
   context: "Transport Ministry study found KL traffic congestion costs RM12 billion annually in lost productivity and fuel waste.",
   stageScores: { pa: 76, ba: 63, fc: 83, af: 64, ct: 51, sr: 87 }, finalScore: 86.3,
@@ -11931,7 +11931,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1794", opinionShift: 77, status: null, edition: 1,
+  id: "1794", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Construction Worker Deaths Reach 168 in Single Year",
   context: "DOSH recorded 168 construction worker deaths in 2025 a 15% increase making construction Malaysia deadliest industry.",
   stageScores: { pa: 79, ba: 68, fc: 90, af: 68, ct: 57, sr: 68 }, finalScore: 82.0,
@@ -11945,7 +11945,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1795", opinionShift: 60, status: null, edition: 1,
+  id: "1795", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Urban Heat Island Makes KL 4.2 Degrees Hotter Than Rural",
   context: "MetMalaysia data shows central KL consistently 4.2 degrees Celsius warmer than surrounding rural areas due to heat island effect.",
   stageScores: { pa: 82, ba: 73, fc: 76, af: 72, ct: 63, sr: 70 }, finalScore: 79.4,
@@ -11959,7 +11959,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1796", opinionShift: 66, status: null, edition: 1,
+  id: "1796", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Water Tariff Reform Delayed 12th Consecutive Year",
   context: "SPAN proposal to restructure national water tariffs delayed for 12th consecutive year since original 2014 implementation target.",
   stageScores: { pa: 85, ba: 78, fc: 83, af: 76, ct: 69, sr: 72 }, finalScore: 81.2,
@@ -11973,7 +11973,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1797", opinionShift: 59, status: null, edition: 1,
+  id: "1797", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "TOD Near MRT Stations Delivers Only Luxury Not Affordability",
   context: "Only 12 of 31 MRT Putrajaya Line stations have significant transit-oriented development within 400 metres.",
   stageScores: { pa: 88, ba: 83, fc: 90, af: 80, ct: 75, sr: 74 }, finalScore: 70.1,
@@ -11987,7 +11987,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1798", opinionShift: 64, status: "new", edition: 1,
+  id: "1798", published: true, opinionShift: 64, status: "new", edition: 1,
   headline: "Housing Policy Targets 500,000 Affordable Units by 2030",
   context: "Government launched updated National Housing Policy targeting 500,000 affordable units priced below RM300,000 by 2030.",
   stageScores: { pa: 91, ba: 88, fc: 76, af: 56, ct: 42, sr: 76 }, finalScore: 81.3,
@@ -12001,7 +12001,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1799", opinionShift: 68, status: "new", edition: 1,
+  id: "1799", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "Rail Network Density Lowest Among ASEAN-5 Countries",
   context: "Malaysia has only 2.1km of rail per 100,000 population the lowest among ASEAN-5 behind Thailand at 3.8km.",
   stageScores: { pa: 76, ba: 62, fc: 83, af: 60, ct: 48, sr: 78 }, finalScore: 92.0,
@@ -12015,7 +12015,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1800", opinionShift: 72, status: "updated", edition: 1,
+  id: "1800", published: true, opinionShift: 72, status: "updated", edition: 1,
   headline: "Johor Flood Wall Protects Only 12km of 85km Riverbank",
   context: "The RM2.4 billion Johor flood wall completed protection for only 12km of 85km Sungai Johor riverbank identified as high-risk.",
   stageScores: { pa: 79, ba: 67, fc: 90, af: 64, ct: 54, sr: 80 }, finalScore: 77.3,
@@ -12029,7 +12029,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1801", opinionShift: 45, status: null, edition: 1,
+  id: "1801", published: true, opinionShift: 45, status: null, edition: 1,
   headline: "Smart Traffic Saves KL Commuters 8 Minutes on Average",
   context: "DBKL smart traffic at 850 intersections reduced average KL journey times by 8 minutes during peak hours.",
   stageScores: { pa: 82, ba: 72, fc: 76, af: 68, ct: 60, sr: 82 }, finalScore: 80.9,
@@ -12043,7 +12043,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1802", opinionShift: 67, status: null, edition: 1,
+  id: "1802", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "River of Life Project 35% Complete After 12 Years",
   context: "River of Life project to rehabilitate Sungai Klang through KL is only 35% complete after 12 years and RM4.4 billion spent.",
   stageScores: { pa: 85, ba: 77, fc: 83, af: 72, ct: 66, sr: 84 }, finalScore: 71.4,
@@ -12057,7 +12057,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1803", opinionShift: 54, status: null, edition: 1,
+  id: "1803", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "Building Energy Code Compliance Below 25% Despite Mandate",
   context: "Malaysian Standard for Energy Efficiency achieved only 25% compliance despite being mandatory since 2019.",
   stageScores: { pa: 88, ba: 82, fc: 90, af: 76, ct: 72, sr: 86 }, finalScore: 65.9,
@@ -12071,7 +12071,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1804", opinionShift: 71, status: null, edition: 1,
+  id: "1804", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Rural Road Maintenance Backlog Reaches RM14 Billion",
   context: "JKR estimated maintenance backlog for 65,000km rural road network at RM14 billion as of December 2025.",
   stageScores: { pa: 91, ba: 87, fc: 76, af: 80, ct: 78, sr: 88 }, finalScore: 85.0,
@@ -12085,7 +12085,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1805", opinionShift: 83, status: null, edition: 1,
+  id: "1805", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "Abandoned LCS Programme Wastes RM6.1 Billion on Zero Ships",
   context: "Littoral Combat Ship programme delivered 0 of 6 contracted vessels after RM6.1 billion in payments to Boustead Naval Shipyard.",
   stageScores: { pa: 76, ba: 61, fc: 83, af: 56, ct: 45, sr: 69 }, finalScore: 77.8,
@@ -12099,7 +12099,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1806", opinionShift: 44, status: null, edition: 1,
+  id: "1806", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Putrajaya Autonomous Vehicle Trial Covers 15km Route",
   context: "Putrajaya launched Malaysia first autonomous vehicle trial in January 2026 with 3 vehicles operating on a 15km fixed route.",
   stageScores: { pa: 79, ba: 66, fc: 90, af: 60, ct: 51, sr: 71 }, finalScore: 77.7,
@@ -12113,7 +12113,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1807", opinionShift: 75, status: null, edition: 1,
+  id: "1807", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "National Flood Warning System Covers Only 55% of Rivers",
   context: "DID national flood warning system covers only 55% of monitored river basins with 45% relying on manual gauge reading.",
   stageScores: { pa: 82, ba: 71, fc: 76, af: 64, ct: 57, sr: 73 }, finalScore: 90.3,
@@ -12127,7 +12127,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1808", opinionShift: 51, status: "new", edition: 1,
+  id: "1808", published: true, opinionShift: 51, status: "new", edition: 1,
   headline: "Malaysia Green Building Index Adoption Reaches 12% Only",
   context: "Only 12% of new commercial and residential buildings in Malaysia achieved Green Building Index certification in 2025.",
   stageScores: { pa: 85, ba: 76, fc: 83, af: 68, ct: 63, sr: 75 }, finalScore: 79.3,
@@ -12141,7 +12141,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1809", opinionShift: 69, status: "new", edition: 1,
+  id: "1809", published: true, opinionShift: 69, status: "new", edition: 1,
   headline: "Construction Material Costs Rise 28% Squeezing Developers",
   context: "Construction material costs in Malaysia rose 28% between 2023 and 2025 squeezing developer margins and delaying affordable housing.",
   stageScores: { pa: 88, ba: 81, fc: 90, af: 72, ct: 69, sr: 77 }, finalScore: 79.9,
@@ -12155,7 +12155,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1810", opinionShift: 86, status: "updated", edition: 1,
+  id: "1810", published: true, opinionShift: 86, status: "updated", edition: 1,
   headline: "Johor Bahru Flooding Displaces 85,000 in December Event",
   context: "December 2025 floods in Johor Bahru displaced 85,000 residents across 12 affected neighbourhoods with RM1.2 billion in damages.",
   stageScores: { pa: 91, ba: 86, fc: 76, af: 76, ct: 75, sr: 79 }, finalScore: 80.4,
@@ -12169,7 +12169,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1811", opinionShift: 38, status: null, edition: 1,
+  id: "1811", published: true, opinionShift: 38, status: null, edition: 1,
   headline: "Heritage Railway Restoration Attracts 180,000 Tourists",
   context: "Restored heritage railway section between Gemas and Tumpat attracted 180,000 tourists in 2025 generating RM28 million in local revenue.",
   stageScores: { pa: 76, ba: 60, fc: 83, af: 80, ct: 42, sr: 81 }, finalScore: 65.1,
@@ -12183,7 +12183,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1812", opinionShift: 65, status: null, edition: 1,
+  id: "1812", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "Public Housing Allocation Process Faces Corruption Probe",
   context: "MACC opened investigation into public housing allocation irregularities in 4 states involving 3,200 units potentially misallocated.",
   stageScores: { pa: 79, ba: 65, fc: 90, af: 56, ct: 48, sr: 83 }, finalScore: 70.4,
@@ -12197,7 +12197,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1813", opinionShift: 57, status: null, edition: 1,
+  id: "1813", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Malaysia First Dedicated Cycling Highway Opens in Penang",
   context: "Penang opened Malaysia first dedicated cycling highway in February 2026 a 12km separated path connecting George Town to Batu Ferringhi.",
   stageScores: { pa: 82, ba: 70, fc: 76, af: 60, ct: 54, sr: 85 }, finalScore: 76.9,
@@ -12211,7 +12211,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1814", opinionShift: 78, status: null, edition: 1,
+  id: "1814", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Klang Valley Commuter Rail Integration Plan Announced",
   context: "Transport Ministry announced RM4.8 billion plan to integrate all Klang Valley rail systems under single ticketing and scheduling framework.",
   stageScores: { pa: 85, ba: 75, fc: 83, af: 64, ct: 60, sr: 87 }, finalScore: 91.7,
@@ -12225,7 +12225,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1815", opinionShift: 40, status: null, edition: 1,
+  id: "1815", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Drone Delivery Pilot Serves 12 Rural Clinics in Pahang",
   context: "Health Ministry launched drone delivery pilot in Pahang serving 12 rural clinics with medicine and blood samples in 2025.",
   stageScores: { pa: 88, ba: 80, fc: 90, af: 68, ct: 66, sr: 68 }, finalScore: 88.8,
@@ -12239,7 +12239,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1816", opinionShift: 62, status: null, edition: 1,
+  id: "1816", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "National Building Information Modelling Mandate Takes Effect",
   context: "CIDB mandated Building Information Modelling for all government projects above RM50 million effective January 2026.",
   stageScores: { pa: 91, ba: 85, fc: 76, af: 72, ct: 72, sr: 70 }, finalScore: 80.2,
@@ -12253,7 +12253,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1817", opinionShift: 55, status: null, edition: 1,
+  id: "1817", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Kuala Lumpur Vertical Forest Towers Complete With 40,000 Plants",
   context: "Malaysia first vertical forest towers in Bukit Bintang completed with 40,000 plants across 2 residential towers in December 2025.",
   stageScores: { pa: 76, ba: 59, fc: 83, af: 76, ct: 78, sr: 72 }, finalScore: 73.8,
@@ -12267,7 +12267,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1818", opinionShift: 49, status: "new", edition: 1,
+  id: "1818", published: true, opinionShift: 49, status: "new", edition: 1,
   headline: "Transit Adjacent Development Displaces 4,500 Hawkers",
   context: "Construction of transit-adjacent development near 3 MRT stations displaced 4,500 hawkers and small traders from established locations.",
   stageScores: { pa: 79, ba: 64, fc: 90, af: 80, ct: 45, sr: 74 }, finalScore: 72.2,
@@ -12281,7 +12281,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1819", opinionShift: 81, status: "new", edition: 1,
+  id: "1819", published: true, opinionShift: 81, status: "new", edition: 1,
   headline: "National Infrastructure Audit Reveals RM180 Billion Gap",
   context: "EPU national infrastructure audit identified RM180 billion in deferred maintenance and upgrade needs across all categories by 2030.",
   stageScores: { pa: 82, ba: 69, fc: 76, af: 56, ct: 51, sr: 76 }, finalScore: 82.3,
@@ -12295,7 +12295,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1820", opinionShift: 88, status: "updated", edition: 1,
+  id: "1820", published: true, opinionShift: 88, status: "updated", edition: 1,
   headline: "Penang Undersea Tunnel Project Breaks Ground After 13 Years",
   context: "Penang undersea tunnel project broke ground in March 2026 thirteen years after initial feasibility study with final cost of RM6.3 billion.",
   stageScores: { pa: 85, ba: 74, fc: 83, af: 60, ct: 57, sr: 78 }, finalScore: 72.0,
@@ -12309,7 +12309,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1821", opinionShift: 52, status: null, edition: 1,
+  id: "1821", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "LIMA 2025 Secures RM18.5 Billion in Defence Orders",
   context: "LIMA 2025 recorded RM18.5 billion in defence and aerospace deals a 25% increase from 2023 exhibition.",
   stageScores: { pa: 88, ba: 79, fc: 90, af: 64, ct: 63, sr: 80 }, finalScore: 82.1,
@@ -12323,7 +12323,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1822", opinionShift: 78, status: null, edition: 1,
+  id: "1822", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "Scorpene Submarine Replacement Debate Returns at RM12 Billion",
   context: "TLDM submitted request for 2 new diesel-electric submarines to replace aging Scorpene vessels estimated at RM12 billion.",
   stageScores: { pa: 91, ba: 84, fc: 76, af: 68, ct: 69, sr: 82 }, finalScore: 86.2,
@@ -12337,7 +12337,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1823", opinionShift: 83, status: null, edition: 1,
+  id: "1823", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "South China Sea Chinese Vessel Incursions Rise 45 Percent",
   context: "MMEA recorded 45% increase in Chinese vessel incursions into Malaysian-claimed South China Sea waters in 2025.",
   stageScores: { pa: 76, ba: 58, fc: 83, af: 72, ct: 75, sr: 84 }, finalScore: 82.6,
@@ -12351,7 +12351,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1824", opinionShift: 80, status: null, edition: 1,
+  id: "1824", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Sulu Claim USD14.92 Billion Award Remains Enforceable",
   context: "Despite Malaysia challenge the 2013 arbitral award of USD14.92 billion to Sulu claimants remains enforceable in multiple jurisdictions.",
   stageScores: { pa: 79, ba: 63, fc: 90, af: 76, ct: 42, sr: 86 }, finalScore: 81.7,
@@ -12365,7 +12365,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1825", opinionShift: 71, status: null, edition: 1,
+  id: "1825", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "ESSCOM Border Security Faces RM800 Million Funding Gap",
   context: "ESSCOM reported RM800 million shortfall in 2026-2030 operational plan threatening coastal surveillance capabilities.",
   stageScores: { pa: 82, ba: 68, fc: 76, af: 80, ct: 48, sr: 88 }, finalScore: 74.5,
@@ -12379,7 +12379,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1826", opinionShift: 85, status: null, edition: 1,
+  id: "1826", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "SOSMA Detentions Without Trial Hit Record 480 in 2025",
   context: "Home Ministry confirmed 480 individuals detained under SOSMA in 2025 highest since its 2012 enactment.",
   stageScores: { pa: 85, ba: 73, fc: 83, af: 56, ct: 54, sr: 69 }, finalScore: 86.8,
@@ -12393,7 +12393,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1827", opinionShift: 62, status: null, edition: 1,
+  id: "1827", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Drug Seizures Total RM4.8 Billion With Meth Dominating",
   context: "PDRM narcotics seized drugs valued at RM4.8 billion in 2025 with methamphetamine comprising 68% by value.",
   stageScores: { pa: 88, ba: 78, fc: 90, af: 60, ct: 60, sr: 71 }, finalScore: 73.4,
@@ -12407,7 +12407,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1828", opinionShift: 79, status: "new", edition: 1,
+  id: "1828", published: true, opinionShift: 79, status: "new", edition: 1,
   headline: "PDRM Reform: 70% of 150 Recommendations Still Pending",
   context: "Seven years after 2019 reform report 70% of 150 recommendations remain unimplemented including independent complaints commission.",
   stageScores: { pa: 91, ba: 83, fc: 76, af: 64, ct: 66, sr: 73 }, finalScore: 86.7,
@@ -12421,7 +12421,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1829", opinionShift: 60, status: "new", edition: 1,
+  id: "1829", published: true, opinionShift: 60, status: "new", edition: 1,
   headline: "ASEAN Chair 2025 Yields 12 Deals But Myanmar Stalls",
   context: "Malaysia ASEAN chairmanship produced 12 agreements but failed to advance Five-Point Consensus on Myanmar.",
   stageScores: { pa: 76, ba: 88, fc: 83, af: 68, ct: 72, sr: 75 }, finalScore: 75.9,
@@ -12435,7 +12435,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1830", opinionShift: 72, status: "updated", edition: 1,
+  id: "1830", published: true, opinionShift: 72, status: "updated", edition: 1,
   headline: "China Military Aid to Malaysia Reaches RM1.2 Billion Total",
   context: "China provided RM1.2 billion in military equipment and training to Malaysia between 2020 and 2025 largest from any single country.",
   stageScores: { pa: 79, ba: 62, fc: 90, af: 72, ct: 78, sr: 77 }, finalScore: 86.4,
@@ -12449,7 +12449,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1831", opinionShift: 68, status: null, edition: 1,
+  id: "1831", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Palestine Position Linked to RM3.2 Billion Trade Impact",
   context: "Malaysia strong pro-Palestine stance led to estimated RM3.2 billion trade reduction with Israel-aligned countries in 2025.",
   stageScores: { pa: 82, ba: 67, fc: 76, af: 76, ct: 45, sr: 79 }, finalScore: 66.9,
@@ -12463,7 +12463,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1832", opinionShift: 65, status: null, edition: 1,
+  id: "1832", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "CPTPP Creates 45,000 Jobs But Disrupts 12 Domestic Sectors",
   context: "Malaysia CPTPP membership created 45,000 new jobs but caused significant disruption to 12 protected domestic sectors since 2024.",
   stageScores: { pa: 85, ba: 72, fc: 83, af: 80, ct: 51, sr: 81 }, finalScore: 80.8,
@@ -12477,7 +12477,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1833", opinionShift: 75, status: null, edition: 1,
+  id: "1833", published: true, opinionShift: 75, status: null, edition: 1,
   headline: "Rohingya Policy Shift Tightens Rules on 185,000 Refugees",
   context: "Malaysia implemented stricter enforcement against 185,000 Rohingya refugees in 2025 with raids and detentions increasing sharply.",
   stageScores: { pa: 88, ba: 77, fc: 90, af: 56, ct: 57, sr: 83 }, finalScore: 80.7,
@@ -12491,7 +12491,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1834", opinionShift: 70, status: null, edition: 1,
+  id: "1834", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Cybercrime Losses Exceed RM2.8 Billion With Scams Dominant",
   context: "PDRM Commercial Crime recorded RM2.8 billion cybercrime losses in 2025 with online scams at 65% of total.",
   stageScores: { pa: 91, ba: 82, fc: 76, af: 60, ct: 63, sr: 85 }, finalScore: 82.7,
@@ -12505,7 +12505,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1835", opinionShift: 58, status: null, edition: 1,
+  id: "1835", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Defence Budget Stagnates at 1.1% of GDP for 5 Years",
   context: "Malaysia 2026 defence budget of RM18.2 billion represents 1.1% of GDP unchanged for 5 years and below NATO 2% standard.",
   stageScores: { pa: 76, ba: 87, fc: 83, af: 64, ct: 69, sr: 87 }, finalScore: 80.5,
@@ -12519,7 +12519,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1836", opinionShift: 63, status: null, edition: 1,
+  id: "1836", published: true, opinionShift: 63, status: null, edition: 1,
   headline: "Counter-Terrorism Unit Arrests 120 Suspects in 2025",
   context: "Special Branch arrested 120 terrorism suspects in 2025 including 15 linked to ISIS remnants in Southeast Asia.",
   stageScores: { pa: 79, ba: 61, fc: 90, af: 68, ct: 75, sr: 68 }, finalScore: 83.5,
@@ -12533,7 +12533,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1837", opinionShift: 55, status: null, edition: 1,
+  id: "1837", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Intelligence Oversight Committee Established After 12 Years",
   context: "Parliament established Intelligence and Security Committee in January 2026 ending 12-year campaign for civilian oversight.",
   stageScores: { pa: 82, ba: 66, fc: 76, af: 72, ct: 42, sr: 70 }, finalScore: 74.8,
@@ -12547,7 +12547,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1838", opinionShift: 67, status: "new", edition: 1,
+  id: "1838", published: true, opinionShift: 67, status: "new", edition: 1,
   headline: "Diplomatic Appointments Under Fire for Political Patronage",
   context: "Opposition criticized 18 ambassador appointments in 2025 as political reward for coalition loyalty lacking diplomatic credentials.",
   stageScores: { pa: 85, ba: 71, fc: 83, af: 76, ct: 48, sr: 72 }, finalScore: 90.8,
@@ -12561,7 +12561,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1839", opinionShift: 50, status: "new", edition: 1,
+  id: "1839", published: true, opinionShift: 50, status: "new", edition: 1,
   headline: "RCEP Trade Benefits Reach RM48 Billion for Malaysia",
   context: "RCEP generated RM48 billion in additional trade in its third full year with electronics and palm oil leading benefits.",
   stageScores: { pa: 88, ba: 76, fc: 90, af: 80, ct: 54, sr: 74 }, finalScore: 86.1,
@@ -12575,7 +12575,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1840", opinionShift: 66, status: "updated", edition: 1,
+  id: "1840", published: true, opinionShift: 66, status: "updated", edition: 1,
   headline: "Border Drones Cover Only 35% of Malaysia 2,669km Frontier",
   context: "PDRM and military border drones surveil only 35% of Malaysia 2,669km land border with Thailand and Indonesia.",
   stageScores: { pa: 91, ba: 81, fc: 76, af: 56, ct: 60, sr: 76 }, finalScore: 90.0,
@@ -12589,7 +12589,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1841", opinionShift: 74, status: null, edition: 1,
+  id: "1841", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Navy Surface Fleet Readiness Falls Below 60 Percent",
   context: "TLDM reported only 58% operational readiness across surface fleet with 18 of 44 vessels in maintenance or awaiting repairs.",
   stageScores: { pa: 76, ba: 86, fc: 83, af: 60, ct: 66, sr: 78 }, finalScore: 69.9,
@@ -12603,7 +12603,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1842", opinionShift: 56, status: null, edition: 1,
+  id: "1842", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "FPDA Exercise Tests South China Sea Scenario for First Time",
   context: "Five Power Defence Arrangements conducted Exercise Bersama Shield 2025 with 4,500 personnel including first South China Sea scenario.",
   stageScores: { pa: 79, ba: 60, fc: 90, af: 64, ct: 72, sr: 80 }, finalScore: 89.8,
@@ -12617,7 +12617,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1843", opinionShift: 76, status: null, edition: 1,
+  id: "1843", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Human Trafficking Cases Rise 28% Keeping Tier 2 Status",
   context: "Malaysia recorded 580 human trafficking cases in 2025 a 28% increase remaining on US Tier 2 Watch List.",
   stageScores: { pa: 82, ba: 65, fc: 76, af: 68, ct: 78, sr: 82 }, finalScore: 80.1,
@@ -12631,7 +12631,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1844", opinionShift: 58, status: null, edition: 1,
+  id: "1844", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Malaysia-Indonesia Maritime Boundary Unresolved 15 Years",
   context: "Malaysia and Indonesia failed to finalize maritime boundaries in Celebes Sea and Malacca Strait after 15 years of talks.",
   stageScores: { pa: 85, ba: 70, fc: 83, af: 72, ct: 45, sr: 84 }, finalScore: 85.4,
@@ -12645,7 +12645,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1845", opinionShift: 81, status: null, edition: 1,
+  id: "1845", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "RMAF Fighter Fleet Down to Only 18 Operational Aircraft",
   context: "RMAF has only 18 operational fighter aircraft out of 36 fleet due to maintenance issues and MiG-29 grounding.",
   stageScores: { pa: 88, ba: 75, fc: 90, af: 76, ct: 51, sr: 86 }, finalScore: 77.0,
@@ -12659,7 +12659,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1846", opinionShift: 53, status: null, edition: 1,
+  id: "1846", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "8 Malaysians Extradited From Cambodia Scam Centre",
   context: "Malaysia extradited 8 nationals from Cambodia under new treaty targeting cross-border scam syndicates in February 2026.",
   stageScores: { pa: 91, ba: 80, fc: 76, af: 80, ct: 57, sr: 88 }, finalScore: 68.2,
@@ -12673,7 +12673,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1847", opinionShift: 82, status: null, edition: 1,
+  id: "1847", published: true, opinionShift: 82, status: null, edition: 1,
   headline: "Military Procurement Corruption Probe Targets RM2.4 Billion",
   context: "MACC opened investigations into military procurement irregularities totalling RM2.4 billion across 12 defence contracts.",
   stageScores: { pa: 76, ba: 85, fc: 83, af: 56, ct: 63, sr: 69 }, finalScore: 84.2,
@@ -12687,7 +12687,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1848", opinionShift: 54, status: "new", edition: 1,
+  id: "1848", published: true, opinionShift: 54, status: "new", edition: 1,
   headline: "Malaysia-US Defence Pact Expands to Cybersecurity Domain",
   context: "Malaysia and US signed new defence framework in November 2025 expanding ties to joint cybersecurity operations.",
   stageScores: { pa: 79, ba: 59, fc: 90, af: 60, ct: 69, sr: 71 }, finalScore: 83.8,
@@ -12701,7 +12701,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1849", opinionShift: 49, status: "new", edition: 1,
+  id: "1849", published: true, opinionShift: 49, status: "new", edition: 1,
   headline: "Middle East Trade Surges 35% to RM82 Billion for Malaysia",
   context: "Malaysia trade with Middle East grew 35% to RM82 billion in 2025 driven by energy cooperation and halal exports.",
   stageScores: { pa: 82, ba: 64, fc: 76, af: 64, ct: 75, sr: 73 }, finalScore: 79.2,
@@ -12715,7 +12715,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1850", opinionShift: 64, status: "updated", edition: 1,
+  id: "1850", published: true, opinionShift: 64, status: "updated", edition: 1,
   headline: "Coastguard Modernization Requires RM8.5 Billion Over Decade",
   context: "MMEA submitted 10-year modernization plan requiring RM8.5 billion to upgrade aging fleet and surveillance systems.",
   stageScores: { pa: 85, ba: 69, fc: 83, af: 68, ct: 42, sr: 75 }, finalScore: 73.0,
@@ -12729,7 +12729,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1851", opinionShift: 48, status: null, edition: 1,
+  id: "1851", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Special Forces Expand With 2 New Battalions Added",
   context: "Malaysian Armed Forces announced 2 new special forces battalions in December 2025 increasing capability by 40%.",
   stageScores: { pa: 88, ba: 74, fc: 90, af: 72, ct: 48, sr: 77 }, finalScore: 67.4,
@@ -12743,7 +12743,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1852", opinionShift: 69, status: null, edition: 1,
+  id: "1852", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "Malaysia Reverses UN Vote on Nuclear Weapons Ban",
   context: "Malaysia voted against UN General Assembly resolution on nuclear weapons ban enforcement in October 2025 reversing traditional position.",
   stageScores: { pa: 91, ba: 79, fc: 76, af: 76, ct: 54, sr: 79 }, finalScore: 79.6,
@@ -12757,7 +12757,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1853", opinionShift: 84, status: null, edition: 1,
+  id: "1853", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Immigration Detention Deaths Reach 45 in Single Year",
   context: "SUHAKAM documented 45 deaths in immigration detention centres in 2025 citing overcrowding and inadequate medical care.",
   stageScores: { pa: 76, ba: 84, fc: 83, af: 80, ct: 60, sr: 81 }, finalScore: 75.3,
@@ -12771,7 +12771,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1854", opinionShift: 51, status: null, edition: 1,
+  id: "1854", published: true, opinionShift: 51, status: null, edition: 1,
   headline: "Malaysia-Turkey Defence Industry Partnership Signed",
   context: "Malaysia and Turkey signed comprehensive defence cooperation in February 2026 covering drones armoured vehicles and naval systems.",
   stageScores: { pa: 79, ba: 58, fc: 90, af: 56, ct: 66, sr: 83 }, finalScore: 88.1,
@@ -12785,7 +12785,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1855", opinionShift: 61, status: null, edition: 1,
+  id: "1855", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "MACC Seizes Record RM2.1 Billion in Money Laundering",
   context: "MACC anti-money laundering division seized RM2.1 billion across 18 cross-border investigations in 2025 largest annual haul.",
   stageScores: { pa: 82, ba: 63, fc: 76, af: 60, ct: 72, sr: 85 }, finalScore: 89.4,
@@ -12799,7 +12799,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1856", opinionShift: 66, status: null, edition: 1,
+  id: "1856", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Strait of Malacca Piracy Incidents Rise to 85 in 2025",
   context: "IMB recorded 85 piracy incidents in Strait of Malacca in 2025 highest since 2015.",
   stageScores: { pa: 85, ba: 68, fc: 83, af: 64, ct: 78, sr: 87 }, finalScore: 84.9,
@@ -12813,7 +12813,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1857", opinionShift: 71, status: null, edition: 1,
+  id: "1857", published: true, opinionShift: 71, status: null, edition: 1,
   headline: "Diplomatic Row Over 2,800 Deported Workers From Saudi",
   context: "Saudi Arabia deported 2,800 Malaysian workers in December 2025 over visa violations straining bilateral relations.",
   stageScores: { pa: 88, ba: 73, fc: 90, af: 68, ct: 45, sr: 68 }, finalScore: 83.1,
@@ -12827,7 +12827,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1858", opinionShift: 64, status: "new", edition: 1,
+  id: "1858", published: true, opinionShift: 64, status: "new", edition: 1,
   headline: "Cyber Defence Centre Detects 48,000 Government Attacks",
   context: "NACSA detected 48,000 cyberattacks on government systems in 2025 a 35% increase from previous year.",
   stageScores: { pa: 91, ba: 78, fc: 76, af: 72, ct: 51, sr: 70 }, finalScore: 83.0,
@@ -12841,7 +12841,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1859", opinionShift: 42, status: "new", edition: 1,
+  id: "1859", published: true, opinionShift: 42, status: "new", edition: 1,
   headline: "Malaysia Signs Space Cooperation Pact With Japan",
   context: "Malaysia and Japan signed space cooperation agreement in January 2026 including Malaysian astronaut in 2028 lunar programme.",
   stageScores: { pa: 76, ba: 83, fc: 83, af: 76, ct: 57, sr: 72 }, finalScore: 82.9,
@@ -12855,7 +12855,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1860", opinionShift: 73, status: "updated", edition: 1,
+  id: "1860", published: true, opinionShift: 73, status: "updated", edition: 1,
   headline: "Prison Overcrowding at 236% With 45,000 Above Capacity",
   context: "Malaysian prisons held 78,000 inmates against 33,000 design capacity in 2025 with 15 facilities at over 200% occupancy.",
   stageScores: { pa: 79, ba: 88, fc: 90, af: 80, ct: 63, sr: 74 }, finalScore: 91.9,
@@ -12869,7 +12869,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1861", opinionShift: 70, status: null, edition: 1,
+  id: "1861", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Arms Exports Raise Ethics Questions on RM1.8 Billion Sales",
   context: "Malaysia exported RM1.8 billion in defence equipment in 2025 including to countries flagged for armed conflict involvement.",
   stageScores: { pa: 82, ba: 62, fc: 76, af: 56, ct: 69, sr: 76 }, finalScore: 91.6,
@@ -12883,7 +12883,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1862", opinionShift: 57, status: null, edition: 1,
+  id: "1862", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Malaysia-Philippines Security Pact Targets Abu Sayyaf",
   context: "Malaysia and Philippines signed enhanced security cooperation in February 2026 targeting Abu Sayyaf in Sulu-Celebes Sea.",
   stageScores: { pa: 85, ba: 67, fc: 83, af: 60, ct: 75, sr: 78 }, finalScore: 89.6,
@@ -12897,7 +12897,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1863", opinionShift: 59, status: null, edition: 1,
+  id: "1863", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Foreign Worker Levy Generates RM8.5 Billion Government Revenue",
   context: "Foreign worker levy generated RM8.5 billion in 2025 from 2.2 million documented workers across all sectors.",
   stageScores: { pa: 88, ba: 72, fc: 90, af: 64, ct: 42, sr: 80 }, finalScore: 65.3,
@@ -12911,7 +12911,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1864", opinionShift: 73, status: null, edition: 1,
+  id: "1864", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Malaysia Joins BRICS as Dialogue Partner Signalling Shift",
   context: "Malaysia accepted invitation to join BRICS as dialogue partner in January 2026 joining Brazil Russia India China and South Africa.",
   stageScores: { pa: 91, ba: 77, fc: 76, af: 68, ct: 48, sr: 82 }, finalScore: 91.2,
@@ -12925,7 +12925,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1865", opinionShift: 86, status: null, edition: 1,
+  id: "1865", published: true, opinionShift: 86, status: null, edition: 1,
   headline: "Philippines Reasserts Sabah Claim Triggering Diplomatic Crisis",
   context: "Philippines Congress passed resolution reasserting sovereignty claims over Sabah prompting Malaysia to recall ambassador in March 2026.",
   stageScores: { pa: 76, ba: 82, fc: 83, af: 72, ct: 54, sr: 84 }, finalScore: 70.5,
@@ -12939,7 +12939,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1866", opinionShift: 40, status: null, edition: 1,
+  id: "1866", published: true, opinionShift: 40, status: null, edition: 1,
   headline: "Malaysia Peacekeeping Force Maintains 850 Troops in Lebanon",
   context: "Malaysia maintains 850 peacekeeping troops in UNIFIL Lebanon making it the 12th largest contributor to UN peacekeeping globally.",
   stageScores: { pa: 79, ba: 87, fc: 90, af: 76, ct: 60, sr: 86 }, finalScore: 84.4,
@@ -12953,7 +12953,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1867", opinionShift: 77, status: null, edition: 1,
+  id: "1867", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "MACC Investigation Into 1MDB Asset Recovery Reaches RM12 Billion",
   context: "MACC reported cumulative 1MDB-related asset recovery of RM12 billion by February 2026 against estimated total losses of RM30 billion.",
   stageScores: { pa: 82, ba: 61, fc: 76, af: 80, ct: 66, sr: 88 }, finalScore: 78.1,
@@ -12967,7 +12967,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1868", opinionShift: 90, status: "new", edition: 1,
+  id: "1868", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "Malaysia Detains 12 Foreign Intelligence Operatives in 2025",
   context: "MEIO and Special Branch detained 12 foreign intelligence operatives from 4 countries conducting espionage on Malaysian soil in 2025.",
   stageScores: { pa: 85, ba: 66, fc: 83, af: 56, ct: 72, sr: 69 }, finalScore: 90.6,
@@ -12981,7 +12981,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1869", opinionShift: 46, status: "new", edition: 1,
+  id: "1869", published: true, opinionShift: 46, status: "new", edition: 1,
   headline: "ASEAN Maritime Security Centre Opens in Kuantan",
   context: "Malaysia inaugurated the ASEAN Maritime Security Information Centre in Kuantan in January 2026 with RM180 million investment.",
   stageScores: { pa: 88, ba: 71, fc: 90, af: 60, ct: 78, sr: 71 }, finalScore: 84.1,
@@ -12995,7 +12995,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1870", opinionShift: 65, status: "updated", edition: 1,
+  id: "1870", published: true, opinionShift: 65, status: "updated", edition: 1,
   headline: "Malaysia Cyber Fraud Cooperation With Singapore Recovers RM320 Million",
   context: "Joint Malaysia-Singapore cyber fraud cooperation recovered RM320 million for victims of cross-border scams in 2025.",
   stageScores: { pa: 91, ba: 76, fc: 76, af: 64, ct: 45, sr: 73 }, finalScore: 75.0,
@@ -13009,7 +13009,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1871", opinionShift: 88, status: null, edition: 1,
+  id: "1871", published: true, opinionShift: 88, status: null, edition: 1,
   headline: "Lahad Datu Anniversary Marks 13 Years Without Security Resolution",
   context: "The 13th anniversary of the 2013 Lahad Datu incursion passed with ESSCOM still operating without permanent legal mandate.",
   stageScores: { pa: 76, ba: 81, fc: 83, af: 68, ct: 51, sr: 75 }, finalScore: 91.5,
@@ -13023,7 +13023,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1872", opinionShift: 62, status: null, edition: 1,
+  id: "1872", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Malaysia Coast Guard Intercepts 28 Tonnes of Smuggled Goods",
   context: "MMEA intercepted 28 tonnes of smuggled goods valued at RM180 million in the Strait of Malacca during 2025 operations.",
   stageScores: { pa: 79, ba: 86, fc: 90, af: 72, ct: 57, sr: 77 }, finalScore: 86.5,
@@ -13037,7 +13037,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1873", opinionShift: 43, status: null, edition: 1,
+  id: "1873", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Defence Technology Park Attracts 28 Companies to Nilai",
   context: "Malaysia Defence Technology Park in Nilai attracted 28 defence companies establishing operations generating RM1.2 billion in activity.",
   stageScores: { pa: 82, ba: 60, fc: 76, af: 76, ct: 63, sr: 79 }, finalScore: 76.7,
@@ -13051,7 +13051,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1874", opinionShift: 79, status: null, edition: 1,
+  id: "1874", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "IPCMC Revival Bill Tabled With Stronger Enforcement Powers",
   context: "Government tabled revised Independent Police Conduct Commission bill in March 2026 with stronger enforcement powers than 2020 version.",
   stageScores: { pa: 85, ba: 65, fc: 83, af: 80, ct: 69, sr: 81 }, finalScore: 65.4,
@@ -13065,7 +13065,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1875", opinionShift: 36, status: null, edition: 1,
+  id: "1875", published: true, opinionShift: 36, status: null, edition: 1,
   headline: "Malaysia-Brunei Joint Petroleum Development Zone Produces First Oil",
   context: "Malaysia-Brunei joint petroleum development zone in offshore waters produced first oil in January 2026 ending 16-year negotiation.",
   stageScores: { pa: 88, ba: 70, fc: 90, af: 56, ct: 75, sr: 83 }, finalScore: 85.7,
@@ -13079,7 +13079,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1876", opinionShift: 72, status: null, edition: 1,
+  id: "1876", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Malaysian Peacekeepers Report 28 Safety Incidents Abroad",
   context: "Malaysian armed forces personnel on overseas peacekeeping missions reported 28 safety incidents in 2025 the highest in a decade.",
   stageScores: { pa: 91, ba: 75, fc: 76, af: 60, ct: 42, sr: 85 }, finalScore: 85.2,
@@ -13093,7 +13093,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1877", opinionShift: 55, status: null, edition: 1,
+  id: "1877", published: true, opinionShift: 55, status: null, edition: 1,
   headline: "Malaysia Intelligence Sharing With Five Eyes Under Scrutiny",
   context: "Reports that Malaysia shares intelligence with Five Eyes network through back-channel arrangements sparked parliamentary debate in 2025.",
   stageScores: { pa: 76, ba: 80, fc: 83, af: 64, ct: 48, sr: 87 }, finalScore: 73.3,
@@ -13107,7 +13107,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1878", opinionShift: 68, status: "new", edition: 1,
+  id: "1878", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "Sabah Sea Gypsies Face Eviction From Traditional Waters",
   context: "Immigration enforcement increasingly targets 12,000 sea-based Bajau Laut families living on boats in eastern Sabah waters.",
   stageScores: { pa: 79, ba: 85, fc: 90, af: 68, ct: 54, sr: 68 }, finalScore: 89.3,
@@ -13121,7 +13121,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1879", opinionShift: 91, status: "new", edition: 1,
+  id: "1879", published: true, opinionShift: 91, status: "new", edition: 1,
   headline: "Malaysia Arrests 3 Suspects in Nuclear Material Smuggling",
   context: "PDRM and IAEA cooperation led to arrest of 3 suspects in Penang attempting to sell enriched uranium material in February 2026.",
   stageScores: { pa: 82, ba: 59, fc: 76, af: 72, ct: 60, sr: 70 }, finalScore: 89.2,
@@ -13135,7 +13135,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1880", opinionShift: 75, status: "updated", edition: 1,
+  id: "1880", published: true, opinionShift: 75, status: "updated", edition: 1,
   headline: "Defence White Paper Recommends RM120 Billion 15-Year Plan",
   context: "Malaysia first Defence White Paper since 2020 recommends RM120 billion in spending over 15 years to modernize all three services.",
   stageScores: { pa: 85, ba: 64, fc: 83, af: 76, ct: 66, sr: 72 }, finalScore: 86.9,
@@ -13149,7 +13149,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1881", opinionShift: 83, status: null, edition: 1,
+  id: "1881", published: true, opinionShift: 83, status: null, edition: 1,
   headline: "CMA 1998 Amendment Expands MCMC Takedown Powers",
   context: "Parliament passed CMA amendments granting MCMC authority to order content removal within 24 hours without court order.",
   stageScores: { pa: 88, ba: 69, fc: 90, af: 80, ct: 72, sr: 74 }, finalScore: 77.9,
@@ -13163,7 +13163,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1882", opinionShift: 79, status: null, edition: 1,
+  id: "1882", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Social Media Licensing Regime Covers 28 Platforms",
   context: "MCMC mandatory licensing regime effective January 2026 requires platforms with over 8 million Malaysian users to obtain licences.",
   stageScores: { pa: 91, ba: 74, fc: 76, af: 56, ct: 78, sr: 76 }, finalScore: 70.2,
@@ -13177,7 +13177,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1883", opinionShift: 76, status: null, edition: 1,
+  id: "1883", published: true, opinionShift: 76, status: null, edition: 1,
   headline: "Fake News Prosecutions Under Section 233 Hit 480 Cases",
   context: "MCMC prosecuted 480 individuals under Section 233 CMA for allegedly spreading false information in 2025.",
   stageScores: { pa: 76, ba: 79, fc: 83, af: 60, ct: 45, sr: 78 }, finalScore: 88.7,
@@ -13191,7 +13191,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1884", opinionShift: 77, status: null, edition: 1,
+  id: "1884", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "PDPA Reform Stalls Despite 32 Million Records Exposed",
   context: "Reform of Personal Data Protection Act stalled despite 12 major breaches affecting 32 million citizen records since 2022.",
   stageScores: { pa: 79, ba: 84, fc: 90, af: 64, ct: 51, sr: 80 }, finalScore: 88.6,
@@ -13205,7 +13205,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1885", opinionShift: 65, status: null, edition: 1,
+  id: "1885", published: true, opinionShift: 65, status: null, edition: 1,
   headline: "MyDigital ID Reaches 18 Million Users With Security Concerns",
   context: "MyDigital ID programme reached 18 million registered users by February 2026 covering 72% of Malaysian adults.",
   stageScores: { pa: 82, ba: 58, fc: 76, af: 68, ct: 57, sr: 82 }, finalScore: 88.5,
@@ -13219,7 +13219,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1886", opinionShift: 61, status: null, edition: 1,
+  id: "1886", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "E-Government Services Cover Only 45% of Citizen Interactions",
   context: "Despite RM4.2 billion investment only 45% of government-citizen interactions available through digital channels in 2025.",
   stageScores: { pa: 85, ba: 63, fc: 83, af: 72, ct: 63, sr: 84 }, finalScore: 84.6,
@@ -13233,7 +13233,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1887", opinionShift: 48, status: null, edition: 1,
+  id: "1887", published: true, opinionShift: 48, status: null, edition: 1,
   headline: "Cashless Payments Reach 68% of Malaysian Transactions",
   context: "Bank Negara reported 68% of retail transactions were cashless in 2025 up from 42% in 2020 led by DuitNow QR.",
   stageScores: { pa: 88, ba: 68, fc: 90, af: 76, ct: 69, sr: 86 }, finalScore: 79.1,
@@ -13247,7 +13247,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1888", opinionShift: 56, status: "new", edition: 1,
+  id: "1888", published: true, opinionShift: 56, status: "new", edition: 1,
   headline: "Fintech Lending Serves 2.8 Million Unbanked Malaysians",
   context: "Licensed P2P lending platforms disbursed RM18.5 billion in 2025 serving 2.8 million Malaysians lacking traditional bank access.",
   stageScores: { pa: 91, ba: 73, fc: 76, af: 80, ct: 75, sr: 88 }, finalScore: 91.8,
@@ -13261,7 +13261,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1889", opinionShift: 55, status: "new", edition: 1,
+  id: "1889", published: true, opinionShift: 55, status: "new", edition: 1,
   headline: "Cryptocurrency Trading Volumes Hit RM28 Billion in Malaysia",
   context: "SC data shows Malaysian cryptocurrency trading reached RM28 billion in 2025 across 4 licensed exchanges.",
   stageScores: { pa: 76, ba: 78, fc: 83, af: 56, ct: 42, sr: 69 }, finalScore: 69.3,
@@ -13275,7 +13275,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1890", opinionShift: 68, status: "updated", edition: 1,
+  id: "1890", published: true, opinionShift: 68, status: "updated", edition: 1,
   headline: "Data Centre Boom Consumes 2,400MW of Malaysian Electricity",
   context: "Malaysia 85 operational data centres consumed 2,400MW in 2025 equivalent to 8% of Peninsula power demand.",
   stageScores: { pa: 79, ba: 83, fc: 90, af: 60, ct: 48, sr: 71 }, finalScore: 65.0,
@@ -13289,7 +13289,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1891", opinionShift: 59, status: null, edition: 1,
+  id: "1891", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Starlink Reaches 180,000 Malaysian Subscribers in Rural Areas",
   context: "SpaceX Starlink reached 180,000 subscribers in Malaysia by February 2026 primarily in rural and underserved areas.",
   stageScores: { pa: 82, ba: 88, fc: 76, af: 64, ct: 54, sr: 73 }, finalScore: 87.8,
@@ -13303,7 +13303,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1892", opinionShift: 78, status: null, edition: 1,
+  id: "1892", published: true, opinionShift: 78, status: null, edition: 1,
   headline: "6 Corporate Groups Control 85% of Malaysian Media Market",
   context: "Press freedom analysis found 6 politically-affiliated groups control 85% of media market across print broadcast and digital.",
   stageScores: { pa: 85, ba: 62, fc: 83, af: 68, ct: 60, sr: 75 }, finalScore: 87.7,
@@ -13317,7 +13317,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1893", opinionShift: 80, status: null, edition: 1,
+  id: "1893", published: true, opinionShift: 80, status: null, edition: 1,
   headline: "Press Freedom Ranking Falls 8 Places to 115th Globally",
   context: "RSF dropped Malaysia 8 places to 115th in 2025 World Press Freedom Index citing prosecutions and media licensing.",
   stageScores: { pa: 88, ba: 67, fc: 90, af: 72, ct: 66, sr: 77 }, finalScore: 87.6,
@@ -13331,7 +13331,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1894", opinionShift: 74, status: null, edition: 1,
+  id: "1894", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Defamation Suits Against Media Total RM580 Million in 2025",
   context: "Politicians and business figures filed defamation suits totalling RM580 million against media organizations in 2025.",
   stageScores: { pa: 91, ba: 72, fc: 76, af: 76, ct: 72, sr: 79 }, finalScore: 88.4,
@@ -13345,7 +13345,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1895", opinionShift: 66, status: null, edition: 1,
+  id: "1895", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Content Moderation Failures Leave 45,000 Harmful Posts Monthly",
   context: "MCMC monitoring found platforms failed to remove 45,000 harmful posts per month in Malaysia during 2025.",
   stageScores: { pa: 76, ba: 77, fc: 83, af: 80, ct: 78, sr: 81 }, finalScore: 87.4,
@@ -13359,7 +13359,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1896", opinionShift: 69, status: null, edition: 1,
+  id: "1896", published: true, opinionShift: 69, status: null, edition: 1,
   headline: "Online Gambling Revenue Reaches RM12 Billion Despite Bans",
   context: "PDRM estimates illegal online gambling generates RM12 billion annual revenue with operations primarily hosted overseas.",
   stageScores: { pa: 79, ba: 82, fc: 90, af: 56, ct: 45, sr: 83 }, finalScore: 87.3,
@@ -13373,7 +13373,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1897", opinionShift: 72, status: null, edition: 1,
+  id: "1897", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Scam Call Losses Hit RM1.8 Billion Despite Blocking Systems",
   context: "Despite MCMC blocking 1.2 billion scam calls Malaysians still lost RM1.8 billion to telephone and messaging scams.",
   stageScores: { pa: 82, ba: 87, fc: 76, af: 60, ct: 51, sr: 85 }, finalScore: 87.2,
@@ -13387,7 +13387,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1898", opinionShift: 75, status: "new", edition: 1,
+  id: "1898", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Cyberbullying Cases Involving Minors Rise 55% to 4,800",
   context: "MCMC recorded 4,800 cyberbullying complaints involving victims under 18 in 2025 with 3 linked to youth suicides.",
   stageScores: { pa: 85, ba: 61, fc: 83, af: 64, ct: 57, sr: 87 }, finalScore: 87.1,
@@ -13401,7 +13401,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1899", opinionShift: 50, status: "new", edition: 1,
+  id: "1899", published: true, opinionShift: 50, status: "new", edition: 1,
   headline: "Startup Ecosystem Raises RM4.5 Billion in Venture Capital",
   context: "Malaysian startups raised RM4.5 billion in VC and PE funding in 2025 a 28% increase driven by fintech and e-commerce.",
   stageScores: { pa: 88, ba: 66, fc: 90, af: 68, ct: 63, sr: 68 }, finalScore: 87.0,
@@ -13415,7 +13415,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1900", opinionShift: 71, status: "updated", edition: 1,
+  id: "1900", published: true, opinionShift: 71, status: "updated", edition: 1,
   headline: "Digital Divide Leaves 8.5 Million Without Reliable Internet",
   context: "MCMC estimates 8.5 million Malaysians lack reliable internet access sufficient for basic digital services.",
   stageScores: { pa: 91, ba: 71, fc: 76, af: 72, ct: 69, sr: 70 }, finalScore: 89.1,
@@ -13429,7 +13429,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1901", opinionShift: 58, status: null, edition: 1,
+  id: "1901", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "TikTok Shop Hits RM18 Billion Disrupting Malaysian E-Commerce",
   context: "TikTok Shop generated RM18 billion in gross merchandise value in Malaysia in 2025 disrupting traditional e-commerce.",
   stageScores: { pa: 76, ba: 76, fc: 83, af: 76, ct: 75, sr: 72 }, finalScore: 66.2,
@@ -13443,7 +13443,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1902", opinionShift: 60, status: null, edition: 1,
+  id: "1902", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "Government Cloud Migration Only 38% Complete After 4 Years",
   context: "MyGovCloud programme reached only 38% completion by February 2026 four years after its 2022 launch.",
   stageScores: { pa: 79, ba: 81, fc: 90, af: 80, ct: 42, sr: 74 }, finalScore: 66.8,
@@ -13457,7 +13457,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1903", opinionShift: 64, status: null, edition: 1,
+  id: "1903", published: true, opinionShift: 64, status: null, edition: 1,
   headline: "Semiconductor Industry Faces 12,000 Engineer Shortage",
   context: "Malaysia semiconductor industry reported 12,000 engineer shortage in 2025 threatening position as 6th largest chip packaging hub.",
   stageScores: { pa: 82, ba: 86, fc: 76, af: 56, ct: 48, sr: 76 }, finalScore: 67.8,
@@ -13471,7 +13471,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1904", opinionShift: 73, status: null, edition: 1,
+  id: "1904", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "Deepfake Scams Cost Malaysians RM280 Million in 2025",
   context: "PDRM cybercrime unit attributed RM280 million in losses to deepfake-enabled scams in 2025 a category barely existing in 2022.",
   stageScores: { pa: 85, ba: 60, fc: 83, af: 60, ct: 54, sr: 78 }, finalScore: 90.1,
@@ -13485,7 +13485,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1905", opinionShift: 62, status: null, edition: 1,
+  id: "1905", published: true, opinionShift: 62, status: null, edition: 1,
   headline: "Public Wi-Fi Audit Finds 72% of Hotspots Vulnerable",
   context: "NACSA audit of 4,500 public Wi-Fi hotspots found 72% had security vulnerabilities exposing users to data theft.",
   stageScores: { pa: 88, ba: 65, fc: 90, af: 64, ct: 60, sr: 80 }, finalScore: 89.9,
@@ -13499,7 +13499,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1906", opinionShift: 52, status: null, edition: 1,
+  id: "1906", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Digital Banks Serve 4.5 Million Customers After 18 Months",
   context: "Malaysia 5 licensed digital banks serve 4.5 million customers with RM8.2 billion in deposits after 18 months.",
   stageScores: { pa: 91, ba: 70, fc: 76, af: 68, ct: 66, sr: 82 }, finalScore: 73.2,
@@ -13513,7 +13513,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1907", opinionShift: 67, status: null, edition: 1,
+  id: "1907", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Malaysia Cybersecurity Ranking Plunges From 8th to 48th",
   context: "ITU Global Cybersecurity Index 2025 ranked Malaysia 48th down from 8th in 2020 reflecting relative decline.",
   stageScores: { pa: 76, ba: 75, fc: 83, af: 72, ct: 72, sr: 84 }, finalScore: 75.8,
@@ -13527,7 +13527,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1908", opinionShift: 76, status: "new", edition: 1,
+  id: "1908", published: true, opinionShift: 76, status: "new", edition: 1,
   headline: "Journalist Safety Incidents Reach 28 Including Assaults",
   context: "NUJ Malaysia documented 28 safety incidents affecting journalists in 2025 including physical assaults threats and surveillance.",
   stageScores: { pa: 79, ba: 80, fc: 90, af: 76, ct: 78, sr: 86 }, finalScore: 78.8,
@@ -13541,7 +13541,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1909", opinionShift: 63, status: "new", edition: 1,
+  id: "1909", published: true, opinionShift: 63, status: "new", edition: 1,
   headline: "E-Commerce Fraud Reports Surge 45% to 85,000 Cases",
   context: "KPDNHEP received 85,000 e-commerce fraud reports in 2025 with non-delivery and counterfeits as top complaints.",
   stageScores: { pa: 82, ba: 85, fc: 76, af: 80, ct: 45, sr: 88 }, finalScore: 82.2,
@@ -13555,7 +13555,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1910", opinionShift: 55, status: "updated", edition: 1,
+  id: "1910", published: true, opinionShift: 55, status: "updated", edition: 1,
   headline: "Open Data Portal Has Only 18% of Government Datasets",
   context: "Malaysia open data portal data.gov.my contains only 18% of identified government datasets limiting transparency.",
   stageScores: { pa: 85, ba: 59, fc: 83, af: 56, ct: 51, sr: 69 }, finalScore: 86.0,
@@ -13569,7 +13569,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1911", opinionShift: 47, status: null, edition: 1,
+  id: "1911", published: true, opinionShift: 47, status: null, edition: 1,
   headline: "VC Tax Incentives Attract RM2.8 Billion in New Commitments",
   context: "Tax incentives introduced in 2024 attracted RM2.8 billion in new venture capital fund commitments to Malaysian startups.",
   stageScores: { pa: 88, ba: 64, fc: 90, af: 60, ct: 57, sr: 71 }, finalScore: 67.1,
@@ -13583,7 +13583,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1912", opinionShift: 57, status: null, edition: 1,
+  id: "1912", published: true, opinionShift: 57, status: null, edition: 1,
   headline: "Scam Response Centre Recovers RM520 Million for Victims",
   context: "Bank Negara National Scam Response Centre recovered RM520 million through rapid account-freezing in 2025.",
   stageScores: { pa: 91, ba: 69, fc: 76, af: 64, ct: 63, sr: 73 }, finalScore: 71.6,
@@ -13597,7 +13597,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1913", opinionShift: 70, status: null, edition: 1,
+  id: "1913", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "Gig Economy Workers Lack Protections for 2.5 Million People",
   context: "Estimated 2.5 million Malaysians work in gig economy without EPF SOCSO or minimum wage coverage.",
   stageScores: { pa: 76, ba: 74, fc: 83, af: 68, ct: 69, sr: 75 }, finalScore: 76.5,
@@ -13611,7 +13611,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1914", opinionShift: 46, status: null, edition: 1,
+  id: "1914", published: true, opinionShift: 46, status: null, edition: 1,
   headline: "TV Viewership Falls Below 50% for First Time in History",
   context: "Nielsen data shows traditional television viewership fell below 50% of population for first time in 2025.",
   stageScores: { pa: 79, ba: 79, fc: 90, af: 72, ct: 75, sr: 77 }, finalScore: 81.8,
@@ -13625,7 +13625,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1915", opinionShift: 73, status: null, edition: 1,
+  id: "1915", published: true, opinionShift: 73, status: null, edition: 1,
   headline: "MyKad Biometric Data Can Be Cloned From Contactless Scans",
   context: "Security researcher demonstrated MyKad biometric data cloneable from contactless scans raising identity theft concerns.",
   stageScores: { pa: 82, ba: 84, fc: 76, af: 76, ct: 42, sr: 79 }, finalScore: 87.5,
@@ -13639,7 +13639,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1916", opinionShift: 49, status: null, edition: 1,
+  id: "1916", published: true, opinionShift: 49, status: null, edition: 1,
   headline: "Local Language Content Industry Worth RM4.8 Billion",
   context: "Malaysia local language digital content creation industry valued at RM4.8 billion in 2025 across Malay Chinese and Tamil.",
   stageScores: { pa: 85, ba: 58, fc: 83, af: 80, ct: 48, sr: 81 }, finalScore: 70.0,
@@ -13653,7 +13653,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1917", opinionShift: 60, status: null, edition: 1,
+  id: "1917", published: true, opinionShift: 60, status: null, edition: 1,
   headline: "142% Phone Penetration But Only 58% Digital Literacy",
   context: "Malaysia smartphone penetration reached 142% in 2025 but digital literacy shows only 58% of adults proficient.",
   stageScores: { pa: 88, ba: 63, fc: 90, af: 56, ct: 54, sr: 83 }, finalScore: 76.4,
@@ -13667,7 +13667,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1918", opinionShift: 71, status: "new", edition: 1,
+  id: "1918", published: true, opinionShift: 71, status: "new", edition: 1,
   headline: "Foreign Disinformation Operations From 12 Countries Detected",
   context: "Intelligence agencies detected election disinformation from 12 countries targeting Malaysian social media users in 2025.",
   stageScores: { pa: 91, ba: 68, fc: 76, af: 60, ct: 60, sr: 85 }, finalScore: 83.2,
@@ -13681,7 +13681,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1919", opinionShift: 48, status: "new", edition: 1,
+  id: "1919", published: true, opinionShift: 48, status: "new", edition: 1,
   headline: "Cybersecurity Insurance Market Grows 85% to RM680 Million",
   context: "Malaysia cybersecurity insurance market grew 85% to RM680 million in premiums as businesses respond to threats.",
   stageScores: { pa: 76, ba: 73, fc: 83, af: 64, ct: 66, sr: 87 }, finalScore: 66.5,
@@ -13695,7 +13695,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1920", opinionShift: 82, status: "updated", edition: 1,
+  id: "1920", published: true, opinionShift: 82, status: "updated", edition: 1,
   headline: "MCMC Orders Internet Shutdowns 4 Times During 2025",
   context: "MCMC ordered internet throttling or shutdowns 4 times in 2025 including during Sabah by-election and protests.",
   stageScores: { pa: 79, ba: 78, fc: 90, af: 68, ct: 72, sr: 68 }, finalScore: 89.7,
@@ -13709,7 +13709,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1921", opinionShift: 54, status: null, edition: 1,
+  id: "1921", published: true, opinionShift: 54, status: null, edition: 1,
   headline: "EdTech Sector Reaches RM2.8 Billion But Quality Questioned",
   context: "Malaysia education technology generated RM2.8 billion but consumer survey found only 38% satisfied with outcomes.",
   stageScores: { pa: 82, ba: 83, fc: 76, af: 72, ct: 78, sr: 70 }, finalScore: 81.9,
@@ -13723,7 +13723,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1922", opinionShift: 43, status: null, edition: 1,
+  id: "1922", published: true, opinionShift: 43, status: null, edition: 1,
   headline: "Malaysia Launches First Homegrown Satellite MYSA-1",
   context: "MEASAT and MYSA launched first fully domestically-designed microsatellite in October 2025 aboard Indian rocket.",
   stageScores: { pa: 85, ba: 88, fc: 83, af: 76, ct: 45, sr: 72 }, finalScore: 66.0,
@@ -13737,7 +13737,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1923", opinionShift: 85, status: null, edition: 1,
+  id: "1923", published: true, opinionShift: 85, status: null, edition: 1,
   headline: "Online Child Exploitation Takedowns Reach 48,000 Items",
   context: "PDRM and MCMC removed 48,000 pieces of child sexual exploitation material from Malaysian-accessible platforms in 2025.",
   stageScores: { pa: 88, ba: 62, fc: 90, af: 80, ct: 51, sr: 74 }, finalScore: 74.6,
@@ -13751,7 +13751,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1924", opinionShift: 70, status: null, edition: 1,
+  id: "1924", published: true, opinionShift: 70, status: null, edition: 1,
   headline: "DNS Blocking List Expands to 12,000 Malaysian Websites",
   context: "MCMC DNS blocking reached 12,000 websites covering gambling pornography political content and public order threats.",
   stageScores: { pa: 91, ba: 67, fc: 76, af: 56, ct: 57, sr: 76 }, finalScore: 91.3,
@@ -13765,7 +13765,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1925", opinionShift: 44, status: null, edition: 1,
+  id: "1925", published: true, opinionShift: 44, status: null, edition: 1,
   headline: "Telecom Tower Sharing Saves Industry RM2.4 Billion Annually",
   context: "Malaysia mandatory tower sharing policy saved telecom industry RM2.4 billion by preventing duplicate construction in 2025.",
   stageScores: { pa: 76, ba: 72, fc: 83, af: 60, ct: 63, sr: 78 }, finalScore: 68.5,
@@ -13779,7 +13779,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1926", opinionShift: 67, status: null, edition: 1,
+  id: "1926", published: true, opinionShift: 67, status: null, edition: 1,
   headline: "Tech Worker Emigration Reaches 18,000 Leaving Malaysia",
   context: "Estimated 18,000 technology professionals relocated overseas in 2025 primarily to Singapore Australia and the US.",
   stageScores: { pa: 79, ba: 77, fc: 90, af: 64, ct: 69, sr: 80 }, finalScore: 91.1,
@@ -13793,7 +13793,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1927", opinionShift: 53, status: null, edition: 1,
+  id: "1927", published: true, opinionShift: 53, status: null, edition: 1,
   headline: "Government Launches 380 Apps With Most Having Low Adoption",
   context: "Malaysian government agencies launched 380 mobile apps but 72% show fewer than 10,000 active users.",
   stageScores: { pa: 82, ba: 82, fc: 76, af: 68, ct: 75, sr: 82 }, finalScore: 88.3,
@@ -13807,7 +13807,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1928", opinionShift: 65, status: "new", edition: 1,
+  id: "1928", published: true, opinionShift: 65, status: "new", edition: 1,
   headline: "Submarine Cable Vulnerability Threatens Malaysian Internet",
   context: "Risk assessment found 95% of international internet traffic passes through just 4 vulnerable cable landing points.",
   stageScores: { pa: 85, ba: 87, fc: 83, af: 72, ct: 42, sr: 84 }, finalScore: 90.9,
@@ -13821,7 +13821,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1929", opinionShift: 51, status: "new", edition: 1,
+  id: "1929", published: true, opinionShift: 51, status: "new", edition: 1,
   headline: "Digital Court System Handles 280,000 Cases Online",
   context: "Malaysia e-Court processed 280,000 cases through digital filing and virtual hearings representing 35% of total proceedings.",
   stageScores: { pa: 88, ba: 61, fc: 90, af: 76, ct: 48, sr: 86 }, finalScore: 84.8,
@@ -13835,7 +13835,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1930", opinionShift: 49, status: "updated", edition: 1,
+  id: "1930", published: true, opinionShift: 49, status: "updated", edition: 1,
   headline: "Digital Free Trade Zone Facilitates RM28 Billion in Trade",
   context: "Malaysia DFTZ facilitated RM28 billion in cross-border e-commerce in 2025 through KLIA Aeropolis hub.",
   stageScores: { pa: 91, ba: 66, fc: 76, af: 80, ct: 54, sr: 88 }, finalScore: 90.7,
@@ -13849,7 +13849,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1931", opinionShift: 77, status: null, edition: 1,
+  id: "1931", published: true, opinionShift: 77, status: null, edition: 1,
   headline: "Malaysia Data Sovereignty Law Requires Local Storage by 2027",
   context: "Parliament passed Data Sovereignty Act requiring all Malaysian citizen data stored within national borders by January 2027.",
   stageScores: { pa: 76, ba: 71, fc: 83, af: 56, ct: 60, sr: 69 }, finalScore: 82.5,
@@ -13863,7 +13863,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1932", opinionShift: 84, status: null, edition: 1,
+  id: "1932", published: true, opinionShift: 84, status: null, edition: 1,
   headline: "Whistleblower Platform Receives 12,000 Reports in First Year",
   context: "The protected digital whistleblower platform launched in March 2025 received 12,000 reports in its first year of operation.",
   stageScores: { pa: 79, ba: 76, fc: 90, af: 60, ct: 66, sr: 71 }, finalScore: 90.5,
@@ -13877,7 +13877,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1933", opinionShift: 39, status: null, edition: 1,
+  id: "1933", published: true, opinionShift: 39, status: null, edition: 1,
   headline: "Malaysia Digital Nomad Visa Attracts 4,200 Remote Workers",
   context: "DE Rantau digital nomad visa attracted 4,200 foreign remote workers to Malaysia in 2025 generating RM380 million in spending.",
   stageScores: { pa: 82, ba: 81, fc: 76, af: 64, ct: 72, sr: 73 }, finalScore: 81.4,
@@ -13891,7 +13891,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1934", opinionShift: 72, status: null, edition: 1,
+  id: "1934", published: true, opinionShift: 72, status: null, edition: 1,
   headline: "Social Media Age Verification Law Takes Effect for Under-16s",
   context: "Parliament mandated social media platforms verify user age with accounts for those under 16 requiring parental consent.",
   stageScores: { pa: 85, ba: 86, fc: 83, af: 68, ct: 78, sr: 75 }, finalScore: 68.6,
@@ -13905,7 +13905,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1935", opinionShift: 66, status: null, edition: 1,
+  id: "1935", published: true, opinionShift: 66, status: null, edition: 1,
   headline: "Algorithmic Transparency Bill Requires Platform Disclosure",
   context: "Parliament introduced Algorithmic Transparency Bill requiring social media platforms to disclose content recommendation systems.",
   stageScores: { pa: 88, ba: 60, fc: 90, af: 72, ct: 45, sr: 77 }, finalScore: 81.5,
@@ -13919,7 +13919,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1936", opinionShift: 58, status: null, edition: 1,
+  id: "1936", published: true, opinionShift: 58, status: null, edition: 1,
   headline: "Online Marketplace Counterfeit Goods Worth RM1.8 Billion Seized",
   context: "KPDNHEP and Customs seized RM1.8 billion in counterfeit goods sold through online marketplaces in 2025.",
   stageScores: { pa: 91, ba: 65, fc: 76, af: 76, ct: 51, sr: 79 }, finalScore: 69.2,
@@ -13933,7 +13933,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1937", opinionShift: 81, status: null, edition: 1,
+  id: "1937", published: true, opinionShift: 81, status: null, edition: 1,
   headline: "National Cybersecurity Act Passed With Mandatory Reporting",
   context: "Parliament passed National Cybersecurity Act in January 2026 mandating breach reporting within 72 hours for all critical sectors.",
   stageScores: { pa: 76, ba: 70, fc: 83, af: 80, ct: 57, sr: 81 }, finalScore: 82.8,
@@ -13947,7 +13947,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1938", opinionShift: 45, status: "new", edition: 1,
+  id: "1938", published: true, opinionShift: 45, status: "new", edition: 1,
   headline: "Malaysian Podcast Industry Reaches 8.5 Million Listeners",
   context: "Malaysian podcast listenership reached 8.5 million in 2025 with Malay-language content driving 65% of consumption.",
   stageScores: { pa: 79, ba: 75, fc: 90, af: 56, ct: 63, sr: 83 }, finalScore: 71.0,
@@ -13961,7 +13961,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1939", opinionShift: 63, status: "new", edition: 1,
+  id: "1939", published: true, opinionShift: 63, status: "new", edition: 1,
   headline: "Digital Health Records System Covers Only 35% of Hospitals",
   context: "Malaysia national digital health records system MyHEALTH covers only 35% of public hospitals as of February 2026.",
   stageScores: { pa: 82, ba: 80, fc: 76, af: 60, ct: 69, sr: 85 }, finalScore: 85.3,
@@ -13975,7 +13975,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1940", opinionShift: 87, status: "updated", edition: 1,
+  id: "1940", published: true, opinionShift: 87, status: "updated", edition: 1,
   headline: "Government Surveillance Powers Expanded Without Judicial Oversight",
   context: "Amendments to Official Secrets Act and CMA expanded government electronic surveillance powers without requiring judicial warrants.",
   stageScores: { pa: 85, ba: 85, fc: 83, af: 64, ct: 75, sr: 87 }, finalScore: 74.0,
@@ -13989,7 +13989,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1941", opinionShift: 41, status: null, edition: 1,
+  id: "1941", published: true, opinionShift: 41, status: null, edition: 1,
   headline: "Malaysia Blockchain Trade Platform Processes RM8.5 Billion",
   context: "National blockchain-based trade finance platform processed RM8.5 billion in cross-border transactions in its first full year.",
   stageScores: { pa: 88, ba: 59, fc: 90, af: 68, ct: 42, sr: 68 }, finalScore: 89.0,
@@ -14003,7 +14003,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1942", opinionShift: 74, status: null, edition: 1,
+  id: "1942", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Online Hate Speech Reports Rise 65% to 28,000 Cases",
   context: "MCMC received 28,000 online hate speech reports in 2025 a 65% increase driven by racial and religious content.",
   stageScores: { pa: 91, ba: 64, fc: 76, af: 72, ct: 48, sr: 70 }, finalScore: 78.2,
@@ -14017,7 +14017,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1943", opinionShift: 56, status: null, edition: 1,
+  id: "1943", published: true, opinionShift: 56, status: null, edition: 1,
   headline: "Digital Agriculture Platform Covers 120,000 Farmers",
   context: "Government MyAgro digital platform serves 120,000 Malaysian farmers with market access weather data and input pricing.",
   stageScores: { pa: 76, ba: 69, fc: 83, af: 76, ct: 54, sr: 72 }, finalScore: 67.6,
@@ -14031,7 +14031,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1944", opinionShift: 68, status: null, edition: 1,
+  id: "1944", published: true, opinionShift: 68, status: null, edition: 1,
   headline: "Malaysian Gaming Industry Revenue Hits RM4.2 Billion",
   context: "Malaysia gaming industry including mobile PC and console generated RM4.2 billion in 2025 with 18 million active gamers.",
   stageScores: { pa: 79, ba: 74, fc: 90, af: 80, ct: 60, sr: 74 }, finalScore: 83.6,
@@ -14045,7 +14045,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1945", opinionShift: 79, status: null, edition: 1,
+  id: "1945", published: true, opinionShift: 79, status: null, edition: 1,
   headline: "Mandatory Content Filtering on School Networks Blocks 40% of Education",
   context: "Ministry-mandated content filtering on school networks inadvertently blocked 40% of legitimate educational websites in 2025.",
   stageScores: { pa: 82, ba: 79, fc: 76, af: 56, ct: 66, sr: 76 }, finalScore: 73.5,
@@ -14059,7 +14059,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1946", opinionShift: 52, status: null, edition: 1,
+  id: "1946", published: true, opinionShift: 52, status: null, edition: 1,
   headline: "Malaysian Sign Language App Reaches 85,000 Deaf Users",
   context: "Government-backed Malaysian Sign Language digital platform reached 85,000 registered users among the estimated 300,000 deaf community.",
   stageScores: { pa: 85, ba: 84, fc: 83, af: 60, ct: 72, sr: 78 }, finalScore: 90.2,
@@ -14073,7 +14073,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1947", opinionShift: 61, status: null, edition: 1,
+  id: "1947", published: true, opinionShift: 61, status: null, edition: 1,
   headline: "Malaysia Ranks 32nd in Global Innovation Index Rising 5 Spots",
   context: "WIPO Global Innovation Index 2025 ranked Malaysia 32nd up 5 places from 2024 driven by patent filings and R&D spending.",
   stageScores: { pa: 88, ba: 58, fc: 90, af: 64, ct: 78, sr: 80 }, finalScore: 80.6,
@@ -14087,7 +14087,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1948", opinionShift: 75, status: "new", edition: 1,
+  id: "1948", published: true, opinionShift: 75, status: "new", edition: 1,
   headline: "Revenge Porn Criminalization Law Takes Effect With 85 Cases",
   context: "Malaysia first specific revenge porn law effective from 2025 resulted in 85 prosecutions in its first year of enforcement.",
   stageScores: { pa: 91, ba: 63, fc: 76, af: 68, ct: 45, sr: 82 }, finalScore: 71.2,
@@ -14101,7 +14101,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1949", opinionShift: 88, status: "new", edition: 1,
+  id: "1949", published: true, opinionShift: 88, status: "new", edition: 1,
   headline: "National Digital Infrastructure Audit Reveals 450 Vulnerabilities",
   context: "Comprehensive audit of Malaysia digital infrastructure identified 450 critical vulnerabilities across government and essential services.",
   stageScores: { pa: 76, ba: 68, fc: 83, af: 72, ct: 51, sr: 84 }, finalScore: 88.9,
@@ -14115,7 +14115,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1950", opinionShift: 92, status: "updated", edition: 1,
+  id: "1950", published: true, opinionShift: 92, status: "updated", edition: 1,
   headline: "Malaysia Passes Comprehensive Online Safety Act 2026",
   context: "Parliament passed landmark Online Safety Act consolidating 8 existing laws into single framework for digital regulation.",
   stageScores: { pa: 79, ba: 73, fc: 90, af: 76, ct: 57, sr: 86 }, finalScore: 80.0,
