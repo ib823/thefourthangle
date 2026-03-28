@@ -66,8 +66,8 @@
     <div class="brand-container" style="display:flex;align-items:center;gap:10px;">
       <Logo size={28} />
       <span class="brand-text" style="font-size:14px;font-weight:700;color:var(--text-primary);letter-spacing:-0.01em;">The Fourth Angle</span>
-      <span class="tagline-divider" style="width:1px;height:16px;background:var(--border-divider);margin:0 12px;"></span>
-      <span class="tagline-text" style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Bite-size clarity for smarter thinking and better questions.</span>
+      <span class="tagline-divider" style="width:1px;height:16px;background:var(--border-divider);margin:0 10px;"></span>
+      <span class="tagline-text" style="font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--text-tertiary);letter-spacing:-0.005em;">Bite-size clarity for smarter thinking and better questions.</span>
     </div>
     <div style="display:flex;align-items:center;gap:0;">
       {#if onSearchToggle}
