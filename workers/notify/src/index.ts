@@ -21,15 +21,21 @@ interface Subscription {
 
 type IssueFeed = Array<{ id: string; headline: string; opinionShift: number; finalScore: number; context: string }>;
 
-// ── CORS — restrict to production origin ──
-const ALLOWED_ORIGINS = [
-  'https://thefourthangle.pages.dev',
-  'http://localhost:4321', // dev only
-];
+// ── CORS — restrict to production + preview origins ──
+const PRODUCTION_ORIGIN = 'https://thefourthangle.pages.dev';
+
+function isAllowedOrigin(origin: string): boolean {
+  if (!origin) return false;
+  if (origin === PRODUCTION_ORIGIN) return true;
+  if (origin === 'http://localhost:4321') return true;
+  // Allow Cloudflare Pages preview deployments (*.thefourthangle.pages.dev)
+  if (/^https:\/\/[a-f0-9]+\.thefourthangle\.pages\.dev$/.test(origin)) return true;
+  return false;
+}
 
 function getCorsHeaders(request: Request): Record<string, string> {
   const origin = request.headers.get('Origin') || '';
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const allowed = isAllowedOrigin(origin) ? origin : PRODUCTION_ORIGIN;
   return {
     'Access-Control-Allow-Origin': allowed,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -496,7 +502,7 @@ export default {
     // Origin validation for POST requests
     if (request.method === 'POST') {
       const origin = request.headers.get('Origin') || '';
-      if (!ALLOWED_ORIGINS.includes(origin)) {
+      if (!isAllowedOrigin(origin)) {
         return json({ error: 'Forbidden' }, 403, request);
       }
       if (url.pathname === '/api/subscribe') return handleSubscribe(request, env);
