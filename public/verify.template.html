@@ -6,40 +6,61 @@
 <title>Verify Content — The Fourth Angle</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;background:#F8F9FA;color:#212529;min-height:100vh;-webkit-font-smoothing:antialiased}
-.container{max-width:600px;margin:0 auto;padding:32px 20px 60px}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#868E96;text-decoration:none;margin-bottom:24px;min-height:44px}
-.back:hover{color:#495057}
+
+:root{
+  --bg:#F8F9FA;--bg-card:#FFFFFF;--bg-sunken:#F1F3F5;
+  --text-primary:#212529;--text-secondary:#495057;--text-tertiary:#5C636A;--text-muted:#868E96;
+  --border:#E9ECEF;--border-light:rgba(0,0,0,0.04);
+  --focus:#1971C2;
+  --green:#2B8A3E;--green-bg:#EBFBEE;--green-border:#B2F2BB;
+  --red:#E03131;--red-bg:#FFF5F5;--red-border:#FFC9C9;
+  --amber-bg:rgba(122,90,18,0.04);--amber-border:rgba(139,101,8,0.12)
+}
+
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1A1A1A;--bg-card:#242420;--bg-sunken:#1F1C18;
+    --text-primary:#E8E4DF;--text-secondary:#B5AFA6;--text-tertiary:#A5A098;--text-muted:#7A7368;
+    --border:#3D3830;--border-light:rgba(255,255,255,0.06);
+    --focus:#60A5FA;
+    --green:#4ADE80;--green-bg:rgba(74,222,128,0.1);--green-border:rgba(74,222,128,0.3);
+    --red:#F87171;--red-bg:rgba(248,113,113,0.1);--red-border:rgba(248,113,113,0.3);
+    --amber-bg:rgba(200,150,58,0.08);--amber-border:rgba(200,150,58,0.2)
+  }
+}
+
+body{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:560px;margin:0 auto;padding:32px 20px 60px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text-muted);text-decoration:none;margin-bottom:24px;min-height:44px}
+.back:hover{color:var(--text-secondary)}
 .back svg{width:16px;height:16px}
-h1{font-size:24px;font-weight:800;color:#212529;letter-spacing:-0.02em;margin-bottom:8px}
-.intro{font-size:15px;color:#495057;line-height:1.6;margin-bottom:24px}
-.warning{font-size:13px;color:#E03131;background:#FFF5F5;border:1px solid #FFC9C9;border-radius:8px;padding:12px 16px;line-height:1.5;margin-bottom:24px}
-.card{background:#FFFFFF;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid #F1F3F5}
-.card h2{font-size:14px;font-weight:700;margin-bottom:4px;color:#212529}
-.card .desc{font-size:13px;color:#495057;line-height:1.5;margin-bottom:16px}
-label{display:block;font-size:12px;font-weight:600;color:#868E96;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
-textarea{width:100%;border:1px solid #E9ECEF;border-radius:8px;padding:12px;font-family:inherit;font-size:13px;background:#F8F9FA;color:#212529;resize:vertical;min-height:200px;line-height:1.6;transition:border-color 0.15s ease}
-textarea:focus{outline:none;border-color:#1971C2}
-button.primary{background:#212529;color:#FFFFFF;border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;margin-top:12px;transition:background 0.15s ease;min-height:44px}
-button.primary:hover{background:#343A40}
+h1{font-family:'Manrope',system-ui,sans-serif;font-size:22px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:6px}
+.subtitle{font-size:14px;color:var(--text-tertiary);line-height:1.6;margin-bottom:28px}
+.card{background:var(--bg-card);border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+.card h2{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text-primary)}
+.card .desc{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:16px}
+label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:12px;font-family:inherit;font-size:13px;background:var(--bg-sunken);color:var(--text-primary);resize:vertical;min-height:180px;line-height:1.6;transition:border-color 0.15s ease}
+textarea:focus{outline:none;border-color:var(--focus)}
+button.primary{background:var(--text-primary);color:var(--bg);border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;margin-top:12px;transition:opacity 0.15s ease;min-height:44px}
+button.primary:hover{opacity:0.85}
 .result{margin-top:16px;padding:16px;border-radius:12px;font-size:14px;line-height:1.5}
-.result.ok{background:#EBFBEE;color:#2B8A3E;border:1px solid #B2F2BB}
-.result.ok strong{color:#1B5E20}
-.result.fail{background:#FFF5F5;color:#E03131;border:1px solid #FFC9C9}
-.result.fail strong{color:#B71C1C}
+.result.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.result.ok strong{font-weight:700}
+.result.fail{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.result.fail strong{font-weight:700}
 .result.hidden{display:none}
 .steps{margin-bottom:24px}
-.step{display:flex;gap:12px;margin-bottom:12px}
-.step:last-child{margin-bottom:0}
-.step-num{width:24px;height:24px;border-radius:50%;background:#212529;color:#FFFFFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.step-text{font-size:13px;color:#495057;line-height:1.5}
-.step-text strong{color:#212529}
-hr{border:none;border-top:1px solid #F1F3F5;margin:20px 0}
-.note{font-size:12px;color:#868E96;line-height:1.5}
-a{color:#1971C2;text-decoration:none}
+.step{display:flex;gap:12px;margin-bottom:10px}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--text-primary);color:var(--bg);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.step-text strong{color:var(--text-primary)}
+hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+.note{font-size:12px;color:var(--text-muted);line-height:1.5}
+a{color:var(--focus);text-decoration:none}
 a:hover{text-decoration:underline}
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 8px;border-radius:4px;margin-bottom:16px}
-.badge-green{color:#2B8A3E;background:#EBFBEE}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;color:var(--green);background:var(--green-bg)}
+.legal-note{font-size:12px;color:var(--text-muted);line-height:1.6;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:10px;padding:14px 16px;margin-top:16px}
 </style>
 </head>
 <body>
@@ -49,34 +70,30 @@ a:hover{text-decoration:underline}
     Back
   </a>
 
-  <h1>Is this content real?</h1>
-  <p class="intro">If you are reading content that claims to be from The Fourth Angle — on any website — you can verify it here.</p>
-
-  <div class="warning">
-    <strong>Why this matters:</strong> Anyone can copy our design and publish biased content under our name. This tool is the only way to prove whether content genuinely came from us. A fake site cannot forge our cryptographic signature.
-  </div>
+  <h1>Verify content</h1>
+  <p class="subtitle">Check whether content originated from The Fourth Angle.</p>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-text"><strong>On the desktop reader,</strong> click the "Copy for verification" button at the bottom of any issue. This copies the full content.</div>
+      <div class="step-text"><strong>Copy</strong> the full issue content using the "Copy for verification" button in the reader.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-text"><strong>Paste it below.</strong> The tool computes a unique fingerprint from the content and checks it against our published signatures.</div>
+      <div class="step-text"><strong>Paste</strong> below. A cryptographic fingerprint is computed locally on your device.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-text"><strong>If it says AUTHENTIC,</strong> the content was published by The Fourth Angle and has not been modified. If it fails, the content is fake or tampered with.</div>
+      <div class="step-text"><strong>Result:</strong> AUTHENTIC confirms the content is unmodified and published by TFA.</div>
     </div>
   </div>
 
   <div class="card">
-    <h2>Verify content</h2>
-    <p class="desc">Paste the full content of an issue. Use the "Copy for verification" button on the desktop reader, or select all visible text from headline through the final card.</p>
-    <label for="content-input">Issue content</label>
-    <textarea id="content-input" placeholder="Paste the full issue content here..."></textarea>
-    <button class="primary" onclick="verifyContent()">Verify this content</button>
+    <h2>Issue content</h2>
+    <p class="desc">Paste the full text from headline through the final card.</p>
+    <label for="content-input">Content to verify</label>
+    <textarea id="content-input" placeholder="Paste issue content here..."></textarea>
+    <button class="primary" onclick="verifyContent()">Verify</button>
     <div class="result hidden" id="result"></div>
   </div>
 
@@ -84,10 +101,14 @@ a:hover{text-decoration:underline}
 
   <div class="card">
     <h2>How it works</h2>
-    <p class="note" style="margin-bottom:0">Every issue is signed with an Ed25519 private key that only The Fourth Angle holds. The signature is mathematically tied to the exact content — if even one word changes, verification fails. A fake site cannot produce a valid signature because they do not have our private key. This page works entirely offline. You can save it and verify content without an internet connection.</p>
+    <p class="note" style="margin-bottom:0">Every published issue carries an Ed25519 cryptographic signature tied to its exact content. If any text has been altered, the signature will not match. Verification runs entirely on your device.</p>
   </div>
 
-  <div class="badge badge-green">Works offline — no data leaves your device</div>
+  <div class="badge">Runs locally — nothing leaves your device</div>
+
+  <div class="legal-note">
+    If verification does not return AUTHENTIC, The Fourth Angle cannot confirm the content originated from this platform. Content may have been modified or may not be a TFA publication. See our <a href="/disclaimer">Disclaimer & Legal Notice</a> for full terms.
+  </div>
 </div>
 
 <script>
@@ -142,10 +163,10 @@ async function verifyContent() {
 
       if (valid) {
         resultEl.className = 'result ok';
-        resultEl.innerHTML = '<strong>AUTHENTIC</strong> — This content was published by The Fourth Angle.';
+        resultEl.innerHTML = '<strong>AUTHENTIC</strong> — This content was published by The Fourth Angle and has not been modified.';
       } else {
         resultEl.className = 'result fail';
-        resultEl.innerHTML = '<strong>SIGNATURE INVALID</strong> — Fingerprint matches but signature failed.';
+        resultEl.innerHTML = '<strong>SIGNATURE INVALID</strong> — Fingerprint matched but the cryptographic signature could not be verified.';
       }
     } catch (e) {
       resultEl.className = 'result fail';
@@ -153,7 +174,7 @@ async function verifyContent() {
     }
   } else {
     resultEl.className = 'result fail';
-    resultEl.innerHTML = '<strong>NOT FOUND</strong> — This content does not match any issue published by The Fourth Angle.';
+    resultEl.innerHTML = '<strong>NOT VERIFIED</strong> — This content does not match any issue published by The Fourth Angle. The content may have been modified or may not originate from this platform.';
   }
 }
 </script>
