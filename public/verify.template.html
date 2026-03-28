@@ -65,7 +65,7 @@ a:hover{text-decoration:underline}
 </head>
 <body>
 <div class="container">
-  <a href="/" class="back">
+  <a href="/" onclick="event.preventDefault();history.back();" class="back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     Back
   </a>

@@ -77,7 +77,7 @@
       {/if}
       <NotificationBell />
       <InstallPrompt />
-      <a href="/about" style="font-size:11px;font-weight:600;color:var(--text-tertiary);text-decoration:none;padding:8px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>About</a>
+      <a href="/about" aria-label="About" style="text-decoration:none;padding:8px;border-radius:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary, #6C757D)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></a>
     </div>
   {/if}
   <div style="position:absolute;bottom:0;left:0;right:0;display:flex;gap:1px;height:1.5px;">
