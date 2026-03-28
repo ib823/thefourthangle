@@ -90,42 +90,44 @@ const FONT_FACE = satoshiB64 ? `<style>@font-face { font-family: 'SB'; font-weig
 function buildSvg(issue) {
   const W = 1200;
   const H = 630;
+  const CX = W / 2; // center x
 
-  // ── Layout constants (safe zone: 120px inset) ──
-  const SL = 100;   // safe left
-  const SR = 1100;  // safe right
+  // ── Layout: center-aligned for crop resilience ──
+  // Social platforms crop OG images to different ratios (1:1, 4:3, 1.91:1).
+  // Center-aligned content survives all crop ratios.
   const ST = 72;    // safe top
-  const SB = 560;   // safe bottom (above platform overlays)
+  const SB = 540;   // safe bottom
 
-  // ── Headline ──
-  const headlineLines = wrapText(issue.headline, 32, 2);
-  const headlineY = 220;
-  const headlineLineHeight = 52;
+  // ── Headline (centered) ──
+  const headlineLines = wrapText(issue.headline, 34, 2);
+  const headlineY = 210;
+  const headlineLineHeight = 54;
 
   const headlineTspans = headlineLines.map((line, i) =>
-    `<tspan x="${SL}" dy="${i === 0 ? 0 : headlineLineHeight}">${escapeXml(line)}</tspan>`
+    `<tspan x="${CX}" dy="${i === 0 ? 0 : headlineLineHeight}">${escapeXml(line)}</tspan>`
   ).join('');
 
-  // ── Context ──
-  const contextLines = wrapText(issue.context, 60, 2);
-  const contextY = headlineY + (headlineLines.length - 1) * headlineLineHeight + 48;
+  // ── Context (centered) ──
+  const contextLines = wrapText(issue.context, 65, 2);
+  const contextY = headlineY + (headlineLines.length - 1) * headlineLineHeight + 44;
   const contextLineHeight = 24;
 
   const contextTspans = contextLines.map((line, i) =>
-    `<tspan x="${SL}" dy="${i === 0 ? 0 : contextLineHeight}">${escapeXml(line)}</tspan>`
+    `<tspan x="${CX}" dy="${i === 0 ? 0 : contextLineHeight}">${escapeXml(line)}</tspan>`
   ).join('');
 
-  // ── Verdict dots (bottom-left) ──
+  // ── Verdict dots (centered at bottom) ──
   const stageKeys = ['pa', 'ba', 'fc', 'af', 'ct', 'sr'];
   const stageLabels = ['PA', 'BA', 'FC', 'AF', 'CT', 'SR'];
   const scores = issue.stageScores || { pa: 50, ba: 50, fc: 50, af: 50, ct: 50, sr: 50 };
-  const dotY = SB - 30;
-  const dotStartX = SL;
+  const dotY = SB;
   const dotGap = 36;
   const dotR = 7;
+  const dotsWidth = (stageKeys.length - 1) * dotGap;
+  const dotStartX = CX - dotsWidth / 2;
 
   const dots = stageKeys.map((key, i) => {
-    const x = dotStartX + i * dotGap + dotR;
+    const x = dotStartX + i * dotGap;
     const color = stageColor(scores[key] || 50);
     return `
       <circle cx="${x}" cy="${dotY}" r="${dotR}" fill="${color}"/>
@@ -133,49 +135,49 @@ function buildSvg(issue) {
     `;
   }).join('');
 
-  // ── Dual scores (bottom-right) ──
+  // ── Dual scores (below headline, centered) ──
   const os = issue.opinionShift ?? 0;
   const ns = issue.finalScore ?? 0;
   const nsRounded = Math.round(ns);
   const osColor = opinionShiftColor(os);
   const nsColor = neutralityColor(ns);
 
-  // ── Score bar (full safe-zone width) ──
-  const barY = SB + 2;
-  const barW = SR - SL;
+  const scoresY = SB + 46;
+
+  // ── Score bar (centered, 400px wide) ──
+  const barW = 400;
+  const barX = CX - barW / 2;
+  const barY = SB + 60;
   const barFill = Math.max(1, Math.round((ns / 100) * barW));
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>${FONT_FACE}</defs>
   <rect width="${W}" height="${H}" fill="#0f0f23"/>
 
-  <!-- Brand mark: Satoshi "4" + wordmark -->
-  <text x="${SL}" y="${ST + 2}" font-family="${satoshiB64 ? 'SB' : 'sans-serif'}" font-weight="900" font-size="32" fill="#3B82F6">4</text>
-  <text x="${SL + 28}" y="${ST}" font-family="sans-serif" font-size="13" font-weight="700" fill="#3B82F6" letter-spacing="2">THE FOURTH ANGLE</text>
+  <!-- Brand mark (centered top) -->
+  <text x="${CX}" y="${ST + 2}" font-family="${satoshiB64 ? 'SB' : 'sans-serif'}" font-weight="900" font-size="28" fill="#3B82F6" text-anchor="middle">4<tspan font-family="sans-serif" font-size="12" font-weight="700" fill="#3B82F6" letter-spacing="2" dx="6">THE FOURTH ANGLE</tspan></text>
 
-  <!-- Headline -->
-  <text x="${SL}" y="${headlineY}" font-family="sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">${headlineTspans}</text>
+  <!-- Headline (centered) -->
+  <text x="${CX}" y="${headlineY}" font-family="sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5" text-anchor="middle">${headlineTspans}</text>
 
-  <!-- Context -->
-  <text x="${SL}" y="${contextY}" font-family="sans-serif" font-size="16" font-weight="400" fill="#94A3B8">${contextTspans}</text>
+  <!-- Context (centered) -->
+  <text x="${CX}" y="${contextY}" font-family="sans-serif" font-size="16" font-weight="400" fill="#94A3B8" text-anchor="middle">${contextTspans}</text>
 
-  <!-- Verdict dots -->
+  <!-- Verdict dots (centered) -->
   ${dots}
 
-  <!-- Opinion Shift (bottom-right area) -->
-  <text x="${SR - 260}" y="${dotY - 12}" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1">OPINION SHIFT</text>
-  <text x="${SR - 260}" y="${dotY + 12}" font-family="sans-serif" font-size="30" font-weight="800" fill="${osColor}">${os}<tspan font-size="16" fill="${osColor}">%</tspan></text>
+  <!-- Scores row (centered) -->
+  <text x="${CX - 30}" y="${scoresY - 16}" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1" text-anchor="end">OPINION SHIFT</text>
+  <text x="${CX - 30}" y="${scoresY + 8}" font-family="sans-serif" font-size="24" font-weight="800" fill="${osColor}" text-anchor="end">${os}<tspan font-size="14" fill="${osColor}">%</tspan></text>
 
-  <!-- Separator -->
-  <text x="${SR - 140}" y="${dotY + 8}" font-family="sans-serif" font-size="24" fill="#334155">·</text>
+  <text x="${CX}" y="${scoresY}" font-family="sans-serif" font-size="18" fill="#334155" text-anchor="middle">·</text>
 
-  <!-- Neutrality Score -->
-  <text x="${SR - 112}" y="${dotY - 12}" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1">NEUTRALITY</text>
-  <text x="${SR - 112}" y="${dotY + 12}" font-family="sans-serif" font-size="30" font-weight="800" fill="${nsColor}">${nsRounded}<tspan font-size="15" fill="#64748B">/100</tspan></text>
+  <text x="${CX + 30}" y="${scoresY - 16}" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1" text-anchor="start">NEUTRALITY</text>
+  <text x="${CX + 30}" y="${scoresY + 8}" font-family="sans-serif" font-size="24" font-weight="800" fill="${nsColor}" text-anchor="start">${nsRounded}<tspan font-size="13" fill="#64748B">/100</tspan></text>
 
-  <!-- Score bar -->
-  <rect x="${SL}" y="${barY}" width="${barW}" height="3" rx="1.5" fill="#1E293B"/>
-  <rect x="${SL}" y="${barY}" width="${barFill}" height="3" rx="1.5" fill="${nsColor}"/>
+  <!-- Score bar (centered) -->
+  <rect x="${barX}" y="${barY}" width="${barW}" height="3" rx="1.5" fill="#1E293B"/>
+  <rect x="${barX}" y="${barY}" width="${barFill}" height="3" rx="1.5" fill="${nsColor}"/>
 </svg>`;
 }
 
