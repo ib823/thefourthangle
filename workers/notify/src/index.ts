@@ -539,24 +539,26 @@ export default {
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
     try {
-      const minute = new Date(event.scheduledTime).getUTCMinutes();
       const hour = new Date(event.scheduledTime).getUTCHours();
       const day = new Date(event.scheduledTime).getUTCDay();
 
-      // Monday midnight UTC = Monday 8am MYT → weekly digest
-      if (day === 1 && hour === 0 && minute === 0) {
+      // Saturday 1am UTC = Saturday 9am MYT → weekly digest
+      if (day === 6 && hour === 1) {
         ctx.waitUntil(sendWeeklyDigest(env));
         return;
       }
 
-      // Daily 1am UTC = 9am MYT → re-engagement check
-      if (hour === 1 && minute === 0) {
-        ctx.waitUntil(checkReEngagement(env));
+      // Tuesday/Thursday midnight UTC = 8am MYT → new issue alert
+      if ((day === 2 || day === 4) && hour === 0) {
+        ctx.waitUntil(checkNewIssues(env));
         return;
       }
 
-      // Every 15 min → check for new issues
-      ctx.waitUntil(checkNewIssues(env));
+      // Daily 1am UTC = 9am MYT → re-engagement check (max once per 30 days per user)
+      if (hour === 1) {
+        ctx.waitUntil(checkReEngagement(env));
+        return;
+      }
     } catch (e: any) {
       console.error('Scheduled task failed:', e?.message || e);
     }
