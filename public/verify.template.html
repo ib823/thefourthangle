@@ -168,9 +168,9 @@ async function verifyContent() {
         resultEl.className = 'result fail';
         resultEl.innerHTML = '<strong>SIGNATURE INVALID</strong> — Fingerprint matched but the cryptographic signature could not be verified.';
       }
-    } catch (e) {
+    } catch {
       resultEl.className = 'result fail';
-      resultEl.innerHTML = '<strong>VERIFICATION ERROR</strong> — ' + e.message;
+      resultEl.innerHTML = '<strong>VERIFICATION ERROR</strong> — Cryptographic verification could not be completed. Try a different browser.';
     }
   } else {
     resultEl.className = 'result fail';

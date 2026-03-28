@@ -21,18 +21,46 @@ interface Subscription {
 
 type IssueFeed = Array<{ id: string; headline: string; opinionShift: number; finalScore: number; context: string }>;
 
-// ── CORS headers ──
-const CORS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+// ── CORS — restrict to production origin ──
+const ALLOWED_ORIGINS = [
+  'https://thefourthangle.pages.dev',
+  'http://localhost:4321', // dev only
+];
 
-function json(data: unknown, status = 200) {
+function getCorsHeaders(request: Request): Record<string, string> {
+  const origin = request.headers.get('Origin') || '';
+  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+function json(data: unknown, status = 200, request?: Request) {
+  const cors = request ? getCorsHeaders(request) : { 'Access-Control-Allow-Origin': ALLOWED_ORIGINS[0] };
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'Content-Type': 'application/json', ...CORS },
+    headers: { 'Content-Type': 'application/json', ...cors },
   });
+}
+
+// ── Rate limiting (per-IP, in-memory per isolate) ──
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 10;     // max requests per window
+const RATE_WINDOW = 60000; // 1 minute
+
+function checkRateLimit(request: Request): boolean {
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= RATE_LIMIT;
 }
 
 // ── Web Push (RFC 8291 / RFC 8188) ──
@@ -156,9 +184,23 @@ function reEngagementPayload(count: number): string {
 
 async function handleSubscribe(request: Request, env: Env): Promise<Response> {
   try {
+    if (!checkRateLimit(request)) {
+      return json({ error: 'Too many requests' }, 429, request);
+    }
+
     const body = await request.json() as { endpoint: string; keys: { p256dh: string; auth: string } };
     if (!body.endpoint || !body.keys?.p256dh || !body.keys?.auth) {
-      return json({ error: 'Invalid subscription' }, 400);
+      return json({ error: 'Invalid subscription' }, 400, request);
+    }
+
+    // Validate endpoint is a valid HTTPS URL pointing to a known push service
+    try {
+      const epUrl = new URL(body.endpoint);
+      if (epUrl.protocol !== 'https:') {
+        return json({ error: 'Invalid endpoint' }, 400, request);
+      }
+    } catch {
+      return json({ error: 'Invalid endpoint' }, 400, request);
     }
 
     const sub: Subscription = {
@@ -168,22 +210,24 @@ async function handleSubscribe(request: Request, env: Env): Promise<Response> {
       lastSeen: Date.now(),
     };
 
-    // Simple key from endpoint — take last 20 chars of URL for uniqueness
     const key = `sub:${Date.now()}_${body.endpoint.slice(-20).replace(/[^a-zA-Z0-9]/g, '')}`;
     await env.SUBS.put(key, JSON.stringify(sub));
 
-    return json({ success: true, key });
-  } catch (e: any) {
-    return json({ error: e.message || 'Subscribe failed' }, 500);
+    return json({ success: true }, 200, request);
+  } catch {
+    return json({ error: 'Subscribe failed' }, 500, request);
   }
 }
 
 async function handleUnsubscribe(request: Request, env: Env): Promise<Response> {
   try {
-    const body = await request.json() as { endpoint: string };
-    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
+    if (!checkRateLimit(request)) {
+      return json({ error: 'Too many requests' }, 429, request);
+    }
 
-    // Find and delete by scanning for matching endpoint
+    const body = await request.json() as { endpoint: string };
+    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400, request);
+
     const subs = await getAllSubscriptions(env);
     for (const { key, sub } of subs) {
       if (sub.endpoint === body.endpoint) {
@@ -191,16 +235,20 @@ async function handleUnsubscribe(request: Request, env: Env): Promise<Response> 
         break;
       }
     }
-    return json({ success: true });
-  } catch (e: any) {
-    return json({ error: e.message }, 500);
+    return json({ success: true }, 200, request);
+  } catch {
+    return json({ error: 'Unsubscribe failed' }, 500, request);
   }
 }
 
 async function handleHeartbeat(request: Request, env: Env): Promise<Response> {
   try {
+    if (!checkRateLimit(request)) {
+      return json({ error: 'Too many requests' }, 429, request);
+    }
+
     const body = await request.json() as { endpoint: string };
-    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400);
+    if (!body.endpoint) return json({ error: 'Missing endpoint' }, 400, request);
 
     const subs = await getAllSubscriptions(env);
     for (const { key, sub } of subs) {
@@ -210,9 +258,9 @@ async function handleHeartbeat(request: Request, env: Env): Promise<Response> {
         break;
       }
     }
-    return json({ success: true });
-  } catch (e: any) {
-    return json({ error: e.message }, 500);
+    return json({ success: true }, 200, request);
+  } catch {
+    return json({ error: 'Heartbeat failed' }, 500, request);
   }
 }
 
@@ -324,10 +372,15 @@ export default {
 
     // CORS preflight
     if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: CORS });
+      return new Response(null, { headers: getCorsHeaders(request) });
     }
 
+    // Origin validation for POST requests
     if (request.method === 'POST') {
+      const origin = request.headers.get('Origin') || '';
+      if (!ALLOWED_ORIGINS.includes(origin)) {
+        return json({ error: 'Forbidden' }, 403, request);
+      }
       if (url.pathname === '/api/subscribe') return handleSubscribe(request, env);
       if (url.pathname === '/api/unsubscribe') return handleUnsubscribe(request, env);
       if (url.pathname === '/api/heartbeat') return handleHeartbeat(request, env);
@@ -335,10 +388,10 @@ export default {
 
     // Health check
     if (url.pathname === '/api/health') {
-      return json({ status: 'ok', time: new Date().toISOString() });
+      return json({ status: 'ok' }, 200, request);
     }
 
-    return json({ error: 'Not found' }, 404);
+    return json({ error: 'Not found' }, 404, request);
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {

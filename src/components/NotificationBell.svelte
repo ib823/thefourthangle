@@ -55,7 +55,18 @@
     open = false;
     refresh();
     if (item.url) {
-      window.location.href = item.url;
+      // Validate URL: only allow same-origin relative paths or matching origin
+      const url = item.url;
+      if (url.startsWith('/')) {
+        window.location.href = url;
+      } else {
+        try {
+          const parsed = new URL(url, window.location.origin);
+          if (parsed.origin === window.location.origin) {
+            window.location.href = parsed.href;
+          }
+        } catch { /* invalid URL — ignore */ }
+      }
     }
   }
 
