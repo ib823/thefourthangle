@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 <Base title="How This Works — The Fourth Angle">
   <div style="max-width:640px;margin:0 auto;">
     <header style="padding:16px 18px;display:flex;align-items:center;gap:12px;">
-      <a href="/" onclick="event.preventDefault();history.back();" style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
+      <a href="/" onclick="event.preventDefault();history.length>1?history.back():location.href='/';" style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Back
       </a>
