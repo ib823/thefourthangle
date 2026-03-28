@@ -36,9 +36,16 @@ addendum-no-ai-references.md
 
 # temporary images / screenshots
 *.png
+*.jpg
+*.jpeg
 !public/**/*.png
-!Logo/**/*.png
 !logo-concepts/**/*.png
+
+# OG prompts (generated, not needed in deploy)
+public/og/prompts.json
+
+# audit reports (one-time, work is done)
+audit/
 
 # jetbrains setting folder
 .idea/
