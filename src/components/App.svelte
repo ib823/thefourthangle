@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import type { Issue } from '../data/issues';
   import { issueCategory, CARD_TYPES } from '../data/issues';
+  import { addNotification } from '../stores/notifications';
   import { loadFeedIssues, loadFullIssue, loadFactGraph, getConnections, getConnectionCount, isFactGraphLoaded } from '../lib/issues-loader';
   import Header from './Header.svelte';
   import DesktopCard from './DesktopCard.svelte';
@@ -193,7 +194,21 @@
       loadAndOpenIssue(activeIssue.id);
     }
 
-    // Push notification: heartbeat + clear notifications on app open
+    // Push notification: heartbeat + clear notifications on app open + inbox sync
+    if ('serviceWorker' in navigator) {
+      // Listen for incoming notifications to add to inbox
+      navigator.serviceWorker.addEventListener('message', (e) => {
+        if (e.data?.type === 'NOTIFICATION_RECEIVED') {
+          addNotification({
+            title: e.data.title,
+            body: e.data.body,
+            issueId: e.data.issueId,
+            url: e.data.url,
+            timestamp: e.data.timestamp,
+          });
+        }
+      });
+    }
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
       const sw = navigator.serviceWorker.controller;
       const endpoint = localStorage.getItem('tfa-push-endpoint');

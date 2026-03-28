@@ -84,7 +84,21 @@ self.addEventListener('push', (event) => {
       requireInteraction: false,
     };
     event.waitUntil(
-      self.registration.showNotification(data.title || 'The Fourth Angle', options)
+      self.registration.showNotification(data.title || 'The Fourth Angle', options).then(() => {
+        // Notify all open clients to update their notification inbox
+        return clients.matchAll({ type: 'window' }).then((windowClients) => {
+          windowClients.forEach((client) => {
+            client.postMessage({
+              type: 'NOTIFICATION_RECEIVED',
+              title: data.title,
+              body: data.body,
+              issueId: data.data?.url?.match(/issue\/(\w+)/)?.[1] || '',
+              url: data.data?.url || '/',
+              timestamp: Date.now(),
+            });
+          });
+        });
+      })
     );
   } catch {
     event.waitUntil(

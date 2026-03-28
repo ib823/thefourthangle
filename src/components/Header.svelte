@@ -1,5 +1,7 @@
 <script lang="ts">
   import Logo from './Logo.svelte';
+  import NotificationBell from './NotificationBell.svelte';
+  import InstallPrompt from './InstallPrompt.svelte';
   import { readIssues } from '../stores/reader';
   import { loadSearchIndex, search as doSearch } from '../lib/search';
 
@@ -67,12 +69,14 @@
       <span class="tagline-divider" style="width:1px;height:16px;background:var(--border-divider);margin:0 12px;"></span>
       <span class="tagline-text" style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Bite-size clarity for smarter thinking and better questions.</span>
     </div>
-    <div style="display:flex;align-items:center;gap:4px;">
+    <div style="display:flex;align-items:center;gap:0;">
       {#if onSearchToggle}
         <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:8px;transition:background 0.15s ease;" aria-label="Search">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
       {/if}
+      <NotificationBell />
+      <InstallPrompt />
       <a href="/about" style="font-size:11px;font-weight:600;color:var(--text-tertiary);text-decoration:none;padding:8px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center;transition:background 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>About</a>
     </div>
   {/if}
