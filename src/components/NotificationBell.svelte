@@ -2,9 +2,18 @@
   import { onMount, onDestroy } from 'svelte';
   import { getNotifications, getUnreadCount, markAsRead, markAllAsRead, type NotificationItem } from '../stores/notifications';
 
+  const VAPID_PUBLIC_KEY = 'BM2IpaheS2aS1-Fs6_EBmsWuSUZ09aYkndax5C9XKTd0qJzKUKRz1cYFb78yjtM8d_sEf0koC2wrUbOTSaY7GK4';
+  const NOTIFY_API = 'https://tfa-notify.4thangle.workers.dev';
+
   let open = $state(false);
   let items = $state<NotificationItem[]>([]);
   let unread = $state(0);
+
+  // Push subscription state
+  let pushSupported = $state(false);
+  let pushSubscribed = $state(false);
+  let pushDenied = $state(false);
+  let pushLoading = $state(false);
 
   // Cleanup references
   let swListener: ((e: MessageEvent) => void) | null = null;
@@ -12,6 +21,7 @@
 
   onMount(() => {
     refresh();
+    checkPushStatus();
 
     // Listen for new notifications from Service Worker
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -37,6 +47,95 @@
     }
   });
 
+  function checkPushStatus() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
+      pushSupported = false;
+      return;
+    }
+    // iOS Safari doesn't support Web Push
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS) { pushSupported = false; return; }
+
+    pushSupported = true;
+    if (Notification.permission === 'denied') { pushDenied = true; return; }
+    if (Notification.permission === 'granted' || localStorage.getItem('tfa-push-subscribed') === 'true') {
+      pushSubscribed = true;
+    }
+  }
+
+  function urlBase64ToUint8Array(base64String: string): Uint8Array {
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    const arr = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; i++) arr[i] = rawData.charCodeAt(i);
+    return arr;
+  }
+
+  async function subscribePush() {
+    if (pushLoading) return;
+    pushLoading = true;
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission === 'denied') { pushDenied = true; pushLoading = false; return; }
+      if (permission !== 'granted') { pushLoading = false; return; }
+
+      const reg = await navigator.serviceWorker.ready;
+      if (!reg.pushManager) { pushSupported = false; pushLoading = false; return; }
+
+      const subscription = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+      });
+
+      const resp = await fetch(NOTIFY_API + '/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(subscription.toJSON()),
+      });
+      if (!resp.ok) throw new Error('Subscribe failed');
+
+      pushSubscribed = true;
+      try {
+        localStorage.setItem('tfa-push-subscribed', 'true');
+        localStorage.setItem('tfa-push-endpoint', subscription.endpoint);
+      } catch {}
+    } catch {
+      // Silent failure — user can retry
+    }
+    pushLoading = false;
+  }
+
+  async function unsubscribePush() {
+    if (pushLoading) return;
+    pushLoading = true;
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      const subscription = await reg.pushManager.getSubscription();
+      if (subscription) {
+        const endpoint = subscription.endpoint;
+        await subscription.unsubscribe();
+
+        // Notify server
+        await fetch(NOTIFY_API + '/api/unsubscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ endpoint }),
+        }).catch(() => {});
+      }
+
+      pushSubscribed = false;
+      try {
+        localStorage.removeItem('tfa-push-subscribed');
+        localStorage.removeItem('tfa-push-endpoint');
+      } catch {}
+    } catch {
+      // Silent failure
+    }
+    pushLoading = false;
+  }
+
   function refresh() {
     items = getNotifications();
     unread = getUnreadCount();
@@ -55,7 +154,6 @@
     open = false;
     refresh();
     if (item.url) {
-      // Validate URL: only allow same-origin relative paths or matching origin
       const url = item.url;
       if (url.startsWith('/')) {
         window.location.href = url;
@@ -122,8 +220,24 @@
       </div>
 
       {#if items.length === 0}
-        <div style="padding:32px 16px;text-align:center;">
-          <p style="font-family:var(--font-body, sans-serif);font-size:13px;color:var(--text-tertiary, #6C757D);margin:0;">No notifications yet</p>
+        <div style="padding:24px 16px;text-align:center;">
+          {#if pushSupported && !pushSubscribed && !pushDenied}
+            <!-- Empty state with subscribe prompt -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint, #ADB5BD)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <p style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:600;color:var(--text-primary, #212529);margin:0 0 4px 0;">Get notified</p>
+            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0 0 12px 0;line-height:1.4;">New issues delivered to your device. Max 3/week.</p>
+            <button
+              onclick={subscribePush}
+              disabled={pushLoading}
+              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius:8px;font-family:var(--font-display, sans-serif);font-size:12px;font-weight:600;cursor:pointer;min-height:36px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
+            >{pushLoading ? 'Enabling...' : 'Enable notifications'}</button>
+          {:else if pushDenied}
+            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-muted, #868E96);margin:0;line-height:1.4;">Notifications blocked. Enable in browser settings.</p>
+          {:else}
+            <p style="font-family:var(--font-body, sans-serif);font-size:13px;color:var(--text-tertiary, #5C636A);margin:0;">No notifications yet</p>
+          {/if}
         </div>
       {:else}
         {#each items.slice(0, 20) as item}
@@ -138,9 +252,35 @@
               <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{item.title}</span>
               <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
             </div>
-            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #6C757D);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
+            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
           </button>
         {/each}
+      {/if}
+
+      <!-- Footer: subscription status -->
+      {#if pushSupported}
+        <div style="padding:10px 16px;border-top:1px solid var(--border-subtle, #E9ECEF);display:flex;align-items:center;justify-content:space-between;">
+          {#if pushSubscribed}
+            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--status-green, #2B8A3E);display:flex;align-items:center;gap:4px;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Notifications on
+            </span>
+            <button
+              onclick={unsubscribePush}
+              disabled={pushLoading}
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);padding:6px 8px;min-height:32px;transition:color 0.15s ease;"
+            >Turn off</button>
+          {:else if !pushDenied}
+            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Notifications off</span>
+            <button
+              onclick={subscribePush}
+              disabled={pushLoading}
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--focus, #1971C2);padding:6px 8px;min-height:32px;font-weight:600;"
+            >{pushLoading ? 'Enabling...' : 'Turn on'}</button>
+          {:else}
+            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Blocked in browser settings</span>
+          {/if}
+        </div>
       {/if}
     </div>
   {/if}
