@@ -273,34 +273,6 @@ async function sendPush(sub: Subscription, payload: string, env: Env): Promise<b
   }
 }
 
-// Diagnostic version of sendPush that returns full details
-async function sendPushDiag(sub: Subscription, payload: string, env: Env): Promise<{ ok: boolean; status?: number; statusText?: string; body?: string; error?: string }> {
-  try {
-    const url = new URL(sub.endpoint);
-    const audience = `${url.protocol}//${url.host}`;
-    const jwt = await createJWT(audience, env.VAPID_SUBJECT, env.VAPID_PRIVATE_KEY, env.VAPID_PUBLIC_KEY);
-    const plaintext = new TextEncoder().encode(payload);
-    const { ciphertext } = await encryptPayload(plaintext, sub.keys.p256dh, sub.keys.auth);
-
-    const response = await fetch(sub.endpoint, {
-      method: 'POST',
-      headers: {
-        'Authorization': `vapid t=${jwt}, k=${env.VAPID_PUBLIC_KEY}`,
-        'Content-Type': 'application/octet-stream',
-        'Content-Encoding': 'aes128gcm',
-        'Content-Length': String(ciphertext.length),
-        'TTL': '86400',
-      },
-      body: ciphertext,
-    });
-
-    const body = await response.text().catch(() => '');
-    return { ok: response.ok, status: response.status, statusText: response.statusText, body: body.slice(0, 200) };
-  } catch (e: any) {
-    return { ok: false, error: e?.message || String(e) };
-  }
-}
-
 // ── Notification payloads ──
 
 function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number }): string {
@@ -462,18 +434,13 @@ async function checkNewIssues(env: Env): Promise<void> {
   const newIssues = feed.slice(0, currentCount - lastCount);
   const subs = await getAllSubscriptions(env);
 
-  console.log(`checkNewIssues: ${currentCount} current, ${lastCount} last, ${newIssues.length} new, ${subs.length} subscribers`);
-
   // Send notification for the most recent new issue only (avoid spam)
   if (newIssues.length > 0 && subs.length > 0) {
     const payload = newIssuePayload(newIssues[0]);
-    console.log(`Sending push for: ${newIssues[0].headline?.slice(0, 50)}`);
     const expired: string[] = [];
 
     for (const { key, sub } of subs) {
-      console.log(`Pushing to: ${sub.endpoint.slice(0, 60)}...`);
       const ok = await sendPush(sub, payload, env);
-      console.log(`Push result: ${ok}`);
       if (!ok) expired.push(key);
     }
 
@@ -557,34 +524,13 @@ export default {
       return json({ status: 'ok' }, 200, request);
     }
 
-    // Manual trigger for testing — fires the new-issue check with diagnostics
+    // Manual trigger — fires the new-issue check immediately
     if (url.pathname === '/api/trigger-check' && request.method === 'POST') {
       try {
-        const resp = await fetch(`${env.SITE_URL}/issues-feed.json`);
-        if (!resp.ok) return json({ error: 'Feed fetch failed', status: resp.status }, 500, request);
-        const data = await resp.json();
-        const feed = (Array.isArray(data) ? data : []) as any[];
-        const lastCount = parseInt(await env.SUBS.get('meta:issueCount') || '0', 10);
-        const subs = await getAllSubscriptions(env);
-
-        const diag: any = { feedCount: feed.length, lastCount, subCount: subs.length, results: [] };
-
-        if (feed.length > lastCount && subs.length > 0) {
-          const newIssues = feed.slice(0, feed.length - lastCount);
-          const payload = newIssuePayload(newIssues[0]);
-          diag.issue = newIssues[0]?.headline?.slice(0, 60);
-          diag.payloadLength = payload.length;
-
-          for (const { key, sub } of subs) {
-            const pushResult = await sendPushDiag(sub, payload, env);
-            diag.results.push({ key: key.slice(0, 30), ...pushResult, endpoint: sub.endpoint.slice(0, 60) });
-          }
-          await env.SUBS.put('meta:issueCount', String(feed.length));
-        }
-
-        return json(diag, 200, request);
-      } catch (e: any) {
-        return json({ error: e?.message || 'Check failed' }, 500, request);
+        await checkNewIssues(env);
+        return json({ triggered: true }, 200, request);
+      } catch {
+        return json({ error: 'Check failed' }, 500, request);
       }
     }
 
