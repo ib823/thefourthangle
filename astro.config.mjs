@@ -12,6 +12,9 @@ export default defineConfig({
     assets: '_a',
   },
   vite: {
+    define: {
+      __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
+    },
     plugins: [],
     build: {
       sourcemap: false,

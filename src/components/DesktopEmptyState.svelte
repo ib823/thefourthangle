@@ -18,23 +18,41 @@
     return unsub;
   });
 
-  let remaining = $derived((issueCount - readCount) * 2);
+  let remaining = $derived(Math.max(0, (issueCount - readCount) * 2));
+  let hasIssues = $derived(issueCount > 0);
+
+  // Build date injected at build time via Vite define
+  const buildDate = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '';
+
+  function formatDate(iso: string): string {
+    if (!iso) return '';
+    try {
+      const d = new Date(iso + 'T00:00:00Z');
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+    } catch {
+      return iso;
+    }
+  }
 </script>
 
 <div style="flex:1;display:flex;flex-direction:column;position:relative;">
   <div style="flex:1;display:flex;align-items:center;padding-left:40px;">
     <div style="max-width:480px;">
-      <div style="font-family:var(--font-display);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-tertiary);letter-spacing:1px;">Edition — March 2026</div>
-      <div style="height:12px;"></div>
-      <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">The real minority is anyone still reading past the headline.</div>
-      <div style="height:8px;"></div>
-      <div style="font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--text-tertiary);">Bite-size clarity for smarter thinking and better questions.</div>
-      <div style="height:24px;"></div>
-      <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">~{remaining} min of reading remaining</div>
-      <div style="height:24px;"></div>
-      <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">Select an issue from the feed</div>
-      <div style="height:20px;"></div>
-      <a href="/about" style="font-family:var(--font-body);font-size:13px;color:var(--text-tertiary);text-decoration:none;">About</a>
+      {#if hasIssues}
+        <div style="font-family:var(--font-display);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-tertiary);letter-spacing:1px;">Last updated {formatDate(buildDate)}</div>
+        <div style="height:12px;"></div>
+        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">The real minority is anyone still reading past the headline.</div>
+        <div style="height:24px;"></div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">~{remaining} min of reading remaining</div>
+        <div style="height:24px;"></div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">Select an issue from the feed</div>
+      {:else}
+        <div style="font-family:var(--font-display);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-tertiary);letter-spacing:1px;">Coming soon</div>
+        <div style="height:12px;"></div>
+        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">The real minority is anyone still reading past the headline.</div>
+        <div style="height:24px;"></div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">New issues published three times a week.</div>
+      {/if}
     </div>
   </div>
 </div>
