@@ -25,7 +25,19 @@ function load(): NotificationItem[] {
 }
 
 function save(items: NotificationItem[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(items.slice(0, MAX_ITEMS)));
+  const trimmed = items.slice(0, MAX_ITEMS);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+  } catch (e) {
+    // Quota exceeded — drop oldest half and retry
+    try {
+      const half = trimmed.slice(0, Math.floor(trimmed.length / 2));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(half));
+    } catch {
+      // Still fails — clear entirely
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    }
+  }
 }
 
 export function getNotifications(): NotificationItem[] {
@@ -37,14 +49,16 @@ export function getUnreadCount(): number {
 }
 
 export function addNotification(item: Omit<NotificationItem, 'id' | 'read'>) {
+  // Reject empty/invalid
+  if (!item.issueId || !item.title) return;
   const items = load();
-  // Deduplicate by issueId
+  // Deduplicate by issueId within 24h
   if (items.some(n => n.issueId === item.issueId && Date.now() - n.timestamp < 24 * 60 * 60 * 1000)) {
     return;
   }
   items.unshift({
     ...item,
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
     read: false,
   });
   save(items);

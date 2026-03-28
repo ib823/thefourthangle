@@ -236,7 +236,9 @@ async function checkNewIssues(env: Env): Promise<void> {
   // Fetch current issue feed
   const resp = await fetch(`${env.SITE_URL}/issues-feed.json`);
   if (!resp.ok) return;
-  const feed = await resp.json() as IssueFeed;
+  const data = await resp.json();
+  const feed = (Array.isArray(data) ? data : data?.issues || []) as IssueFeed;
+  if (!Array.isArray(feed) || feed.length === 0) return;
 
   // Get last known issue count
   const lastCount = parseInt(await env.SUBS.get('meta:issueCount') || '0', 10);
@@ -271,9 +273,13 @@ async function checkNewIssues(env: Env): Promise<void> {
 }
 
 async function sendWeeklyDigest(env: Env): Promise<void> {
+  const subs = await getAllSubscriptions(env);
+  if (subs.length === 0) return; // No subscribers, skip fetch
   const resp = await fetch(`${env.SITE_URL}/issues-feed.json`);
   if (!resp.ok) return;
-  const feed = await resp.json() as IssueFeed;
+  const data = await resp.json();
+  const feed = (Array.isArray(data) ? data : data?.issues || []) as IssueFeed;
+  if (!Array.isArray(feed) || feed.length === 0) return;
 
   // Count issues published this week (approximation: use last 7 issues)
   const recentIssues = feed.slice(0, 7);
@@ -281,7 +287,6 @@ async function sendWeeklyDigest(env: Env): Promise<void> {
 
   const topIssue = recentIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
   const payload = digestPayload(recentIssues.length, topIssue);
-  const subs = await getAllSubscriptions(env);
 
   for (const { key, sub } of subs) {
     await sendPush(sub, payload, env);
@@ -295,7 +300,8 @@ async function checkReEngagement(env: Env): Promise<void> {
 
   const resp = await fetch(`${env.SITE_URL}/issues-feed.json`);
   if (!resp.ok) return;
-  const feed = await resp.json() as IssueFeed;
+  const data = await resp.json();
+  const feed = (Array.isArray(data) ? data : data?.issues || []) as IssueFeed;
 
   for (const { key, sub } of subs) {
     if (now - sub.lastSeen > fourteenDays) {
@@ -336,23 +342,27 @@ export default {
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
-    const minute = new Date(event.scheduledTime).getUTCMinutes();
-    const hour = new Date(event.scheduledTime).getUTCHours();
-    const day = new Date(event.scheduledTime).getUTCDay();
+    try {
+      const minute = new Date(event.scheduledTime).getUTCMinutes();
+      const hour = new Date(event.scheduledTime).getUTCHours();
+      const day = new Date(event.scheduledTime).getUTCDay();
 
-    // Monday midnight UTC = Monday 8am MYT → weekly digest
-    if (day === 1 && hour === 0 && minute === 0) {
-      ctx.waitUntil(sendWeeklyDigest(env));
-      return;
+      // Monday midnight UTC = Monday 8am MYT → weekly digest
+      if (day === 1 && hour === 0 && minute === 0) {
+        ctx.waitUntil(sendWeeklyDigest(env));
+        return;
+      }
+
+      // Daily 1am UTC = 9am MYT → re-engagement check
+      if (hour === 1 && minute === 0) {
+        ctx.waitUntil(checkReEngagement(env));
+        return;
+      }
+
+      // Every 15 min → check for new issues
+      ctx.waitUntil(checkNewIssues(env));
+    } catch (e: any) {
+      console.error('Scheduled task failed:', e?.message || e);
     }
-
-    // Daily 1am UTC = 9am MYT → re-engagement check
-    if (hour === 1 && minute === 0) {
-      ctx.waitUntil(checkReEngagement(env));
-      return;
-    }
-
-    // Every 15 min → check for new issues
-    ctx.waitUntil(checkNewIssues(env));
   },
 };

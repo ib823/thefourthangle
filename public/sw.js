@@ -118,9 +118,16 @@ self.addEventListener('notificationclick', (event) => {
 
   if (action === 'dismiss') return;
 
-  const targetUrl = data.url
-    ? new URL(data.url, self.location.origin).href
-    : self.location.origin;
+  // Validate URL — only allow same-origin links (prevent XSS)
+  var targetUrl = self.location.origin;
+  if (data.url) {
+    try {
+      var parsed = new URL(data.url, self.location.origin);
+      if (parsed.origin === new URL(self.location.origin).origin) {
+        targetUrl = parsed.href;
+      }
+    } catch (e) {}
+  }
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
@@ -165,10 +172,15 @@ self.addEventListener('message', (event) => {
   }
 
   if (event.data.type === 'ISSUE_OPENED') {
-    // Clear only the notification for the specific issue
-    self.registration.getNotifications().then((notifications) => {
-      notifications.forEach((n) => {
-        if (n.data && n.data.url && n.data.url.includes(event.data.issueId)) {
+    var issueId = event.data.issueId;
+    if (!issueId) return;
+    // Clear only the exact notification for this issue (not partial matches)
+    self.registration.getNotifications().then(function(notifications) {
+      notifications.forEach(function(n) {
+        if (n.data && n.data.url && (
+          n.data.url === '/issue/' + issueId ||
+          n.data.url.startsWith('/issue/' + issueId + '?')
+        )) {
           n.close();
         }
       });

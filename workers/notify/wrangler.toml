@@ -15,8 +15,8 @@ id = "99220d7437ec4b69b89b98e67a4b3cc3"
 [vars]
 SITE_URL = "https://thefourthangle.pages.dev"
 VAPID_SUBJECT = "mailto:thefourthangle@proton.me"
-VAPID_PUBLIC_KEY = "BC4OHktzXFQlu1GclVNzYvWJhPUSiBsUVivd2r0bG2CUf6clO1WZoIfHsl_ScIvtqH1tzb5YwuHeD66O1TofboM"
+VAPID_PUBLIC_KEY = "BM2IpaheS2aS1-Fs6_EBmsWuSUZ09aYkndax5C9XKTd0qJzKUKRz1cYFb78yjtM8d_sEf0koC2wrUbOTSaY7GK4"
 
-# VAPID_PRIVATE_KEY must be set as a secret:
-# npx wrangler secret put VAPID_PRIVATE_KEY --config workers/notify/wrangler.toml
-# Then paste: PSw9DPEUPXldJlU-sAm0T0ohOD7pft6k9K3AYnQs26o
+# VAPID_PRIVATE_KEY must be set as a secret via:
+# npx wrangler secret put VAPID_PRIVATE_KEY
+# Never commit the private key to git.

@@ -194,35 +194,45 @@
       loadAndOpenIssue(activeIssue.id);
     }
 
-    // Push notification: heartbeat + clear notifications on app open + inbox sync
-    if ('serviceWorker' in navigator) {
+    // Push notification: inbox sync + heartbeat + clear on focus
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
       // Listen for incoming notifications to add to inbox
-      navigator.serviceWorker.addEventListener('message', (e) => {
+      navigator.serviceWorker.addEventListener('message', (e: MessageEvent) => {
         if (e.data?.type === 'NOTIFICATION_RECEIVED') {
           addNotification({
-            title: e.data.title,
-            body: e.data.body,
-            issueId: e.data.issueId,
-            url: e.data.url,
-            timestamp: e.data.timestamp,
+            title: e.data.title || '',
+            body: e.data.body || '',
+            issueId: e.data.issueId || '',
+            url: e.data.url || '/',
+            timestamp: e.data.timestamp || Date.now(),
           });
         }
       });
-    }
-    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-      const sw = navigator.serviceWorker.controller;
-      const endpoint = localStorage.getItem('tfa-push-endpoint');
-      if (endpoint) {
-        sw.postMessage({ type: 'HEARTBEAT', endpoint });
-      }
-      // Clear all notifications when app opens
-      sw.postMessage({ type: 'APP_VISIBLE' });
-      // Also clear on tab refocus
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && navigator.serviceWorker.controller) {
-          navigator.serviceWorker.controller.postMessage({ type: 'APP_VISIBLE' });
-        }
+
+      // Wait for SW to be ready before sending messages
+      navigator.serviceWorker.ready.then((reg) => {
+        const sw = reg.active;
+        if (!sw) return;
+
+        // Heartbeat
+        try {
+          const endpoint = localStorage.getItem('tfa-push-endpoint');
+          if (endpoint) sw.postMessage({ type: 'HEARTBEAT', endpoint });
+        } catch {}
+
+        // Clear notifications on app open
+        sw.postMessage({ type: 'APP_VISIBLE' });
       });
+
+      // Clear on tab refocus (with cleanup reference)
+      const visHandler = () => {
+        if (document.visibilityState === 'visible') {
+          navigator.serviceWorker.ready.then((reg) => {
+            reg.active?.postMessage({ type: 'APP_VISIBLE' });
+          });
+        }
+      };
+      document.addEventListener('visibilitychange', visHandler);
     }
 
     // Back-button support: close reader on popstate
