@@ -123,8 +123,12 @@ self.addEventListener('notificationclick', (event) => {
 });
 
 // Heartbeat: update lastSeen on the notification server
+// Clear notifications when app becomes visible
+// Clear specific notification when its issue is opened
 self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'HEARTBEAT') {
+  if (!event.data) return;
+
+  if (event.data.type === 'HEARTBEAT') {
     const endpoint = event.data.endpoint;
     if (endpoint) {
       fetch(NOTIFY_API + '/api/heartbeat', {
@@ -133,5 +137,27 @@ self.addEventListener('message', (event) => {
         body: JSON.stringify({ endpoint }),
       }).catch(() => {});
     }
+  }
+
+  if (event.data.type === 'APP_VISIBLE') {
+    // Clear all TFA notifications when app is opened
+    self.registration.getNotifications().then((notifications) => {
+      notifications.forEach((n) => n.close());
+    });
+    // Clear badge count
+    if ('clearAppBadge' in navigator) {
+      navigator.clearAppBadge().catch(() => {});
+    }
+  }
+
+  if (event.data.type === 'ISSUE_OPENED') {
+    // Clear only the notification for the specific issue
+    self.registration.getNotifications().then((notifications) => {
+      notifications.forEach((n) => {
+        if (n.data && n.data.url && n.data.url.includes(event.data.issueId)) {
+          n.close();
+        }
+      });
+    });
   }
 });

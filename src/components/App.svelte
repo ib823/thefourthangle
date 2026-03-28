@@ -193,12 +193,21 @@
       loadAndOpenIssue(activeIssue.id);
     }
 
-    // Push notification heartbeat — update lastSeen for re-engagement tracking
+    // Push notification: heartbeat + clear notifications on app open
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      const sw = navigator.serviceWorker.controller;
       const endpoint = localStorage.getItem('tfa-push-endpoint');
       if (endpoint) {
-        navigator.serviceWorker.controller.postMessage({ type: 'HEARTBEAT', endpoint });
+        sw.postMessage({ type: 'HEARTBEAT', endpoint });
       }
+      // Clear all notifications when app opens
+      sw.postMessage({ type: 'APP_VISIBLE' });
+      // Also clear on tab refocus
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.postMessage({ type: 'APP_VISIBLE' });
+        }
+      });
     }
 
     // Back-button support: close reader on popstate

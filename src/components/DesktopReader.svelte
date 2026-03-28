@@ -6,6 +6,7 @@
   import { markStarted, markCompleted } from '../stores/reader';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
+  import PushPrompt from './PushPrompt.svelte';
 
   import type { Issue } from '../data/issues';
 
@@ -256,6 +257,8 @@
       </button>
 
     </div>
+
+    <PushPrompt />
 
     <div style="height:60px;"></div>
   </div>
