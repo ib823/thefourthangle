@@ -108,9 +108,25 @@ async function createJWT(audience: string, subject: string, vapidPrivateKey: str
   const payloadB64 = uint8ArrayToBase64url(new TextEncoder().encode(JSON.stringify(payload)));
   const unsigned = `${headerB64}.${payloadB64}`;
 
-  const keyData = base64urlToUint8Array(vapidPrivateKey);
+  // Import VAPID private key via JWK — 'raw' format doesn't support ECDSA private keys
+  // in Cloudflare Workers. The private key is a 32-byte base64url scalar (d),
+  // the public key is a 65-byte uncompressed point (04 || x || y).
+  const pubKeyRaw = base64urlToUint8Array(vapidPublicKey);
+  // Extract x and y from uncompressed public key (skip the 0x04 prefix byte)
+  const x = uint8ArrayToBase64url(pubKeyRaw.slice(1, 33));
+  const y = uint8ArrayToBase64url(pubKeyRaw.slice(33, 65));
+
+  const jwk: JsonWebKey = {
+    kty: 'EC',
+    crv: 'P-256',
+    x,
+    y,
+    d: vapidPrivateKey, // already base64url
+    ext: true,
+  };
+
   const key = await crypto.subtle.importKey(
-    'raw', keyData, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']
+    'jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']
   );
 
   const sig = await crypto.subtle.sign(
@@ -131,24 +147,11 @@ async function hkdf(salt: Uint8Array, ikm: Uint8Array, info: Uint8Array, length:
   return new Uint8Array(bits);
 }
 
-// Build info parameter per RFC 8291 Section 3.4
-function buildInfo(type: string, clientPublicKey: Uint8Array, serverPublicKey: Uint8Array): Uint8Array {
-  const encoder = new TextEncoder();
-  const typeBytes = encoder.encode(`Content-Encoding: ${type}\0`);
-  const label = encoder.encode('P-256\0');
-
-  // info = "Content-Encoding: <type>\0" || "P-256\0"
-  //        || len(recipient_public) || recipient_public
-  //        || len(sender_public)    || sender_public
-  const clientLen = new Uint8Array(2);
-  clientLen[0] = (clientPublicKey.length >> 8) & 0xff;
-  clientLen[1] = clientPublicKey.length & 0xff;
-
-  const serverLen = new Uint8Array(2);
-  serverLen[0] = (serverPublicKey.length >> 8) & 0xff;
-  serverLen[1] = serverPublicKey.length & 0xff;
-
-  return concatUint8(typeBytes, label, clientLen, clientPublicKey, serverLen, serverPublicKey);
+// Build CEK/nonce info for aes128gcm (RFC 8188 Section 2.2)
+// For aes128gcm, the info is simply: "Content-Encoding: <type>\0"
+// The public keys are NOT included (unlike the older aesgcm encoding).
+function buildCekInfo(type: string): Uint8Array {
+  return new TextEncoder().encode(`Content-Encoding: ${type}\0`);
 }
 
 // RFC 8291 + RFC 8188: encrypt push payload
@@ -199,8 +202,9 @@ async function encryptPayload(
   const ikm = await hkdf(subscriberAuth, sharedSecret, ikmInfo, 32);
 
   // 8. Derive content encryption key (CEK) and nonce from IKM
-  const cekInfo = buildInfo('aes128gcm', subscriberPublicKeyRaw, serverPublicKey);
-  const nonceInfo = buildInfo('nonce', subscriberPublicKeyRaw, serverPublicKey);
+  // RFC 8188: for aes128gcm, info is just "Content-Encoding: <type>\0" — no keys
+  const cekInfo = buildCekInfo('aes128gcm');
+  const nonceInfo = buildCekInfo('nonce');
   const cek = await hkdf(salt, ikm, cekInfo, 16);
   const nonce = await hkdf(salt, ikm, nonceInfo, 12);
 
@@ -255,12 +259,45 @@ async function sendPush(sub: Subscription, payload: string, env: Env): Promise<b
       body: ciphertext,
     });
 
+    if (!response.ok) {
+      const body = await response.text().catch(() => '');
+      console.error(`Push failed: ${response.status} ${response.statusText} — ${body}`);
+    }
     if (response.status === 410 || response.status === 404) {
       return false; // Subscription expired — should be removed
     }
     return response.ok;
-  } catch {
+  } catch (e: any) {
+    console.error(`Push exception: ${e?.message || e}`);
     return false;
+  }
+}
+
+// Diagnostic version of sendPush that returns full details
+async function sendPushDiag(sub: Subscription, payload: string, env: Env): Promise<{ ok: boolean; status?: number; statusText?: string; body?: string; error?: string }> {
+  try {
+    const url = new URL(sub.endpoint);
+    const audience = `${url.protocol}//${url.host}`;
+    const jwt = await createJWT(audience, env.VAPID_SUBJECT, env.VAPID_PRIVATE_KEY, env.VAPID_PUBLIC_KEY);
+    const plaintext = new TextEncoder().encode(payload);
+    const { ciphertext } = await encryptPayload(plaintext, sub.keys.p256dh, sub.keys.auth);
+
+    const response = await fetch(sub.endpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `vapid t=${jwt}, k=${env.VAPID_PUBLIC_KEY}`,
+        'Content-Type': 'application/octet-stream',
+        'Content-Encoding': 'aes128gcm',
+        'Content-Length': String(ciphertext.length),
+        'TTL': '86400',
+      },
+      body: ciphertext,
+    });
+
+    const body = await response.text().catch(() => '');
+    return { ok: response.ok, status: response.status, statusText: response.statusText, body: body.slice(0, 200) };
+  } catch (e: any) {
+    return { ok: false, error: e?.message || String(e) };
   }
 }
 
@@ -271,7 +308,7 @@ function newIssuePayload(issue: { id: string; headline: string; opinionShift: nu
     title: issue.headline,
     body: `${issue.opinionShift}% Opinion Shift · Neutrality: ${Math.round(issue.finalScore)}/100 — 10-second read. What every side left out.`,
     icon: '/icons/icon-192.png',
-    badge: '/icons/icon-192.png',
+    badge: '/icons/badge-96.png',
     image: `/og/issue-${issue.id}.png`,
     tag: `issue-${issue.id}`,
     data: { url: `/issue/${issue.id}?from=notification`, type: 'new-issue' },
@@ -425,13 +462,18 @@ async function checkNewIssues(env: Env): Promise<void> {
   const newIssues = feed.slice(0, currentCount - lastCount);
   const subs = await getAllSubscriptions(env);
 
+  console.log(`checkNewIssues: ${currentCount} current, ${lastCount} last, ${newIssues.length} new, ${subs.length} subscribers`);
+
   // Send notification for the most recent new issue only (avoid spam)
   if (newIssues.length > 0 && subs.length > 0) {
     const payload = newIssuePayload(newIssues[0]);
+    console.log(`Sending push for: ${newIssues[0].headline?.slice(0, 50)}`);
     const expired: string[] = [];
 
     for (const { key, sub } of subs) {
+      console.log(`Pushing to: ${sub.endpoint.slice(0, 60)}...`);
       const ok = await sendPush(sub, payload, env);
+      console.log(`Push result: ${ok}`);
       if (!ok) expired.push(key);
     }
 
@@ -513,6 +555,37 @@ export default {
     // Health check
     if (url.pathname === '/api/health') {
       return json({ status: 'ok' }, 200, request);
+    }
+
+    // Manual trigger for testing — fires the new-issue check with diagnostics
+    if (url.pathname === '/api/trigger-check' && request.method === 'POST') {
+      try {
+        const resp = await fetch(`${env.SITE_URL}/issues-feed.json`);
+        if (!resp.ok) return json({ error: 'Feed fetch failed', status: resp.status }, 500, request);
+        const data = await resp.json();
+        const feed = (Array.isArray(data) ? data : []) as any[];
+        const lastCount = parseInt(await env.SUBS.get('meta:issueCount') || '0', 10);
+        const subs = await getAllSubscriptions(env);
+
+        const diag: any = { feedCount: feed.length, lastCount, subCount: subs.length, results: [] };
+
+        if (feed.length > lastCount && subs.length > 0) {
+          const newIssues = feed.slice(0, feed.length - lastCount);
+          const payload = newIssuePayload(newIssues[0]);
+          diag.issue = newIssues[0]?.headline?.slice(0, 60);
+          diag.payloadLength = payload.length;
+
+          for (const { key, sub } of subs) {
+            const pushResult = await sendPushDiag(sub, payload, env);
+            diag.results.push({ key: key.slice(0, 30), ...pushResult, endpoint: sub.endpoint.slice(0, 60) });
+          }
+          await env.SUBS.put('meta:issueCount', String(feed.length));
+        }
+
+        return json(diag, 200, request);
+      } catch (e: any) {
+        return json({ error: e?.message || 'Check failed' }, 500, request);
+      }
     }
 
     return json({ error: 'Not found' }, 404, request);
