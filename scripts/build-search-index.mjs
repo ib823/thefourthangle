@@ -21,8 +21,12 @@ try {
   issues = eval('(' + arr + ')');
 } catch (e) { console.error('Parse error:', e.message); process.exit(1); }
 
+// Filter to published issues only
+const publishedIssues = issues.filter(i => i.published === true);
+console.log(`  Issues: ${issues.length} total, ${publishedIssues.length} published (searchable)`);
+
 // Build searchable documents
-const docs = issues.map(issue => {
+const docs = publishedIssues.map(issue => {
   const cardBigs = issue.cards.map(c => c.big).join(' ');
   const cardSubs = issue.cards.map(c => c.sub || '').join(' ');
   const lenses = issue.cards.filter(c => c.lens).map(c => c.lens).join(' ');

@@ -21,8 +21,12 @@ try {
   issues = eval('(' + arr + ')');
 } catch (e) { console.error('Parse error:', e.message); process.exit(1); }
 
+// --- Filter to published issues only for the feed ---
+const publishedIssues = issues.filter(i => i.published === true);
+console.log(`Issues: ${issues.length} total, ${publishedIssues.length} published`);
+
 // --- Feed summaries: strip card big/sub text ---
-const feedSummaries = issues.map(issue => ({
+const feedSummaries = publishedIssues.map(issue => ({
   id: issue.id,
   opinionShift: issue.opinionShift,
   status: issue.status,

@@ -26,6 +26,7 @@ export interface Issue {
   finalScore?: number;
   related?: string[];    // manually curated related issue IDs
   sourceDate?: string;   // ISO date when source information was retrieved
+  published?: boolean;   // only published issues appear in the feed (default: false)
 }
 
 export const CARD_TYPES: Record<string, { label: string; color: string; bg: string }> = {
@@ -14128,3 +14129,5 @@ export const ISSUES: Issue[] = [
   ]
 }
 ];
+/** Published issues only — shown in the feed. Unpublished issues still accessible by direct URL. */
+export const PUBLISHED_ISSUES: Issue[] = ISSUES.filter(i => i.published === true);
