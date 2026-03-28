@@ -158,7 +158,7 @@ async function main() {
   try { await unlink(join(DIST, 'favicon.ico')); } catch {}
   try { await unlink(join(DIST, 'favicon.svg')); } catch {}
 
-  // ── PHASE 7: Strip PNG metadata from icons ──
+  // ── PHASE 7: Strip image metadata (PNG chunks + JPEG EXIF) ──
   const pngFiles = files.filter(f => f.endsWith('.png'));
   for (const f of pngFiles) {
     try {
@@ -170,15 +170,67 @@ async function main() {
     } catch {}
   }
 
+  // Strip JPEG EXIF (if any user-uploaded JPEGs exist)
+  const jpgFiles = files.filter(f => f.endsWith('.jpg') || f.endsWith('.jpeg'));
+  for (const f of jpgFiles) {
+    try {
+      const buf = await readFile(f);
+      // JPEG EXIF starts with FF D8 FF E1 — strip APP1 segment
+      if (buf[0] === 0xFF && buf[1] === 0xD8) {
+        let offset = 2;
+        const cleaned = [buf.subarray(0, 2)]; // keep SOI marker
+        while (offset < buf.length - 1) {
+          if (buf[offset] !== 0xFF) break;
+          const marker = buf[offset + 1];
+          if (marker === 0xDA) { // Start of scan — rest is pixel data, keep all
+            cleaned.push(buf.subarray(offset));
+            break;
+          }
+          const segLen = buf.readUInt16BE(offset + 2);
+          // Strip APP1 (EXIF), APP2 (ICC profile metadata), APP13 (IPTC)
+          if (marker === 0xE1 || marker === 0xE2 || marker === 0xED) {
+            // Skip this segment (strip it)
+          } else {
+            cleaned.push(buf.subarray(offset, offset + 2 + segLen));
+          }
+          offset += 2 + segLen;
+        }
+        const result = Buffer.concat(cleaned);
+        if (result.length < buf.length) {
+          await writeFile(f, result);
+        }
+      }
+    } catch {}
+  }
+
   // ── PHASE 8: Verification scan ──
   // Word-boundary patterns to avoid false positives like "astronaut"
   const DANGEROUS = [
+    // Framework identifiers
     { term: 'astro', regex: /\bastro\b(?!naut|nom|logy|phys)/gi },
     { term: 'svelte', regex: /\bsvelte\b/gi },
     { term: 'vercel', regex: /\bvercel\b/gi },
+    { term: 'thefourthangle.vercel', regex: /thefourthangle\.vercel/gi },
+    // Identity traces
     { term: 'github', regex: /\bgithub\b/gi },
     { term: 'codespace', regex: /\bcodespace\b/gi },
-    { term: 'thefourthangle.vercel', regex: /thefourthangle\.vercel/gi },
+    { term: 'ib823', regex: /ib823/gi },
+    { term: 'fa-ops', regex: /fa-ops/gi },
+    { term: 'fa-ops@proton', regex: /fa-ops@proton/gi },
+    // AI/model references (editorial policy)
+    { term: 'claude', regex: /\bclaude\b(?!\.md)/gi },
+    { term: 'openai', regex: /\bopenai\b/gi },
+    { term: 'chatgpt', regex: /\bchatgpt\b/gi },
+    { term: 'gpt-4', regex: /\bgpt-4\b/gi },
+    { term: 'anthropic', regex: /\banthropic\b/gi },
+    { term: 'deepseek', regex: /\bdeepseek\b/gi },
+    { term: 'gemini', regex: /\bgemini\b/gi },
+    { term: 'language model', regex: /language model/gi },
+    { term: 'LLM', regex: /\bLLM\b/g },
+    // Local paths
+    { term: '/workspaces/', regex: /\/workspaces\//gi },
+    { term: '/home/codespace', regex: /\/home\/codespace/gi },
+    { term: 'node_modules', regex: /node_modules/gi },
   ];
   const allFiles = await walk(DIST);
   let violations = 0;
