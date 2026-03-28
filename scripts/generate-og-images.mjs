@@ -82,15 +82,10 @@ function stageColor(score) {
   return '#EF4444';
 }
 
-// ── The "4" brand mark as SVG path ──
-// Traced from public/logo.png — angular geometric "4" with diagonal slash
-const LOGO_4_PATH = `
-  M 19.5 0 L 8.5 22 L 0 22 L 0 17 L 13.5 17 L 13.5 15.5
-  L 4.5 15.5 L 15.5 0 Z
-  M 19.5 0 L 19.5 27 L 13.5 27 L 13.5 22 L 8.5 22 L 19.5 0 Z
-  M 19.5 17 L 25 17 L 25 22 L 19.5 22 Z
-  M 19.5 22 L 19.5 27 L 16.5 27 L 16.5 25 L 17.5 22 Z
-`;
+// ── Brand mark font (Satoshi Black) ──
+const satoshiPath = join(root, 'logo-concepts', 'satoshi_fonts', 'Satoshi_Complete', 'Fonts', 'OTF', 'Satoshi-Black.otf');
+const satoshiB64 = existsSync(satoshiPath) ? readFileSync(satoshiPath).toString('base64') : '';
+const FONT_FACE = satoshiB64 ? `<style>@font-face { font-family: 'SB'; font-weight: 900; src: url(data:font/otf;base64,${satoshiB64}) format('opentype'); }</style>` : '';
 
 function buildSvg(issue) {
   const W = 1200;
@@ -151,13 +146,12 @@ function buildSvg(issue) {
   const barFill = Math.max(1, Math.round((ns / 100) * barW));
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <defs>${FONT_FACE}</defs>
   <rect width="${W}" height="${H}" fill="#0f0f23"/>
 
-  <!-- Brand mark: "4" logo -->
-  <g transform="translate(${SL}, ${ST - 18}) scale(1.1)">
-    <path d="${LOGO_4_PATH}" fill="#3B82F6"/>
-  </g>
-  <text x="${SL + 36}" y="${ST}" font-family="sans-serif" font-size="14" font-weight="700" fill="#3B82F6" letter-spacing="2">THE FOURTH ANGLE</text>
+  <!-- Brand mark: Satoshi "4" + wordmark -->
+  <text x="${SL}" y="${ST + 2}" font-family="${satoshiB64 ? 'SB' : 'sans-serif'}" font-weight="900" font-size="32" fill="#3B82F6">4</text>
+  <text x="${SL + 28}" y="${ST}" font-family="sans-serif" font-size="13" font-weight="700" fill="#3B82F6" letter-spacing="2">THE FOURTH ANGLE</text>
 
   <!-- Headline -->
   <text x="${SL}" y="${headlineY}" font-family="sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">${headlineTspans}</text>
