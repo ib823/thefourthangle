@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { Issue } from '../data/issues';
   import { issueCategory, CARD_TYPES } from '../data/issues';
-  import { loadFeedIssues, loadFullIssue, loadFactGraph, getConnections } from '../lib/issues-loader';
+  import { loadFeedIssues, loadFullIssue, loadFactGraph, getConnections, getConnectionCount, isFactGraphLoaded } from '../lib/issues-loader';
   import Header from './Header.svelte';
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
@@ -181,7 +181,7 @@
     }
 
     // Load fact graph lazily (non-blocking, low priority)
-    loadFactGraph();
+    loadFactGraph().then(() => { graphLoaded = true; });
 
     // If deep link, fetch full issue data for reader
     if (initialIssueId && activeIssue) {
@@ -233,6 +233,14 @@
 
   // Origin rect for shared-element transition
   let readerOriginRect: DOMRect | null = $state(null);
+
+  // Fact graph loaded flag — triggers re-render of connection dots on feed cards
+  let graphLoaded = $state(false);
+
+  function issueHasConnections(id: string): boolean {
+    if (!graphLoaded) return false;
+    return getConnectionCount(id) >= 2;
+  }
 
   // Connections for the active issue — derived from fact graph
   let activeConnections = $derived.by(() => {
@@ -363,7 +371,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} />
+    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} />
   </main>
 
   {#if activeFullIssue}
@@ -387,7 +395,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
         {#each sortedIssues as issue, i}
-          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} />
+          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
         {/each}
       </div>
     </div>
@@ -413,6 +421,7 @@
         onSearchInput={(q) => { searchQuery = q; }}
         {onSearchFocus}
         {onSearchClear}
+        {issueHasConnections}
       />
 
       {#if activeFullIssue}

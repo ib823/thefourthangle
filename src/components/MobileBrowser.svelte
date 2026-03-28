@@ -10,9 +10,10 @@
     issues: IssueSummary[];
     onOpenIssue: (issue: IssueSummary, originRect?: DOMRect) => void;
     onPrefetch?: (issue: IssueSummary) => void;
+    issueHasConnections?: (id: string) => boolean;
     initialFeedIndex?: number;
   }
-  let { issues, onOpenIssue, onPrefetch, initialFeedIndex = 0 }: Props = $props();
+  let { issues, onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0 }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
@@ -148,6 +149,7 @@
         onOpen={() => handleOpenIssue(issue)}
         onPrefetch={() => onPrefetch?.(issue)}
         hasReaction={hasReaction(issue.id)}
+        hasConnections={issueHasConnections?.(issue.id) ?? false}
       />
     </div>
   {/each}

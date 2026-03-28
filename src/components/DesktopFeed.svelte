@@ -15,8 +15,9 @@
     onSearchInput?: (query: string) => void;
     onSearchFocus?: () => void;
     onSearchClear?: () => void;
+    issueHasConnections?: (id: string) => boolean;
   }
-  let { issues, activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear }: Props = $props();
+  let { issues, activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections }: Props = $props();
 
   function issueReadState(id: string): { state: string; progress: number } | null {
     const raw = readMap[id];
@@ -275,7 +276,7 @@
           <span style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.5px;">{category}</span>
         </div>
         {#each groupIssues as issue}
-          <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} />
+          <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} />
         {/each}
       {/each}
     {:else}
@@ -290,7 +291,7 @@
             aria-selected={activeId === issue.id}
             tabindex={focusedIndex === idx ? 0 : -1}
           >
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} />
           </div>
         {/each}
       </div>

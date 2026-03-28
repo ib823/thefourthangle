@@ -13,8 +13,9 @@
     onOpen: () => void;
     onPrefetch?: () => void;
     hasReaction?: boolean;
+    hasConnections?: boolean;
   }
-  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false }: Props = $props();
+  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false, hasConnections = false }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -115,7 +116,12 @@
 
   <!-- Headline -->
   <h3 style="font-size:15px;font-weight:{headlineWeight};color:{headlineColor};margin:10px 0 0;line-height:1.35;overflow-wrap:break-word;word-break:break-word;">{issue.headline}</h3>
-  <span style="font-size:10px;font-weight:500;color:var(--text-muted);margin-top:2px;display:block;">{issueCategory(issue)}</span>
+  <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+    <span style="font-size:10px;font-weight:500;color:var(--text-muted);">{issueCategory(issue)}</span>
+    {#if hasConnections}
+      <div style="width:5px;height:5px;border-radius:50%;background:var(--score-info);opacity:0.5;flex-shrink:0;"></div>
+    {/if}
+  </div>
 
   <!-- Context -->
   <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
