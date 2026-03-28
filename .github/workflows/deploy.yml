@@ -34,7 +34,7 @@ jobs:
       - name: Restore signing key
         run: |
           mkdir -p .keys
-          echo "${{ secrets.SIGNING_PRIVATE_KEY }}" > .keys/private.pem
+          printf '%s\n' '-----BEGIN PRIVATE KEY-----' '${{ secrets.SIGNING_KEY_BASE64 }}' '-----END PRIVATE KEY-----' > .keys/private.pem
 
       - name: Build
         run: npm run build
