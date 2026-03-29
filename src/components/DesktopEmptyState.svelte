@@ -1,10 +1,14 @@
 <script lang="ts">
   import { readIssues } from '../stores/reader';
+  import { QUOTES } from '../data/quotes';
 
   interface Props {
     issueCount?: number;
   }
   let { issueCount = 0 }: Props = $props();
+
+  // Pick a random quote on each mount — different every page load
+  const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
   let readCount = $state(0);
   $effect(() => {
@@ -41,7 +45,7 @@
       {#if hasIssues}
         <div style="font-family:var(--font-display);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-tertiary);letter-spacing:1px;">Last updated {formatDate(buildDate)}</div>
         <div style="height:12px;"></div>
-        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">The real minority is anyone still reading past the headline.</div>
+        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">{quote}</div>
         <div style="height:24px;"></div>
         <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">~{remaining} min of reading remaining</div>
         <div style="height:24px;"></div>
@@ -49,7 +53,7 @@
       {:else}
         <div style="font-family:var(--font-display);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--text-tertiary);letter-spacing:1px;">Coming soon</div>
         <div style="height:12px;"></div>
-        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">The real minority is anyone still reading past the headline.</div>
+        <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">{quote}</div>
         <div style="height:24px;"></div>
         <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">New issues published three times a week.</div>
       {/if}
