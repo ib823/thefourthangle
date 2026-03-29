@@ -1,14 +1,14 @@
 [
   {
-    "issue_id": "TFA-2026-15396",
+    "issue_id": "TFA-2026-15901",
     "title": "malay",
-    "controversy_score": 0.7668,
+    "controversy_score": 0.7701,
     "confidence": 1.0,
     "stream_signals": {
       "volume": {
         "alert": true,
         "severity": 1.0,
-        "z_score": 13.2
+        "z_score": 13.0
       },
       "cascade": {
         "n_star": 0.9,
@@ -19,14 +19,14 @@
       "ethnic"
     ],
     "detection_type": "attention_spike",
-    "timestamp": "2026-03-29T00:40:22.088692+00:00",
+    "timestamp": "2026-03-29T03:09:58.213604+00:00",
     "priority": "high",
     "priority_rank": 1
   },
   {
-    "issue_id": "TFA-2026-15397",
+    "issue_id": "TFA-2026-15902",
     "title": "parliament budget session session opens",
-    "controversy_score": 0.7078,
+    "controversy_score": 0.7115,
     "confidence": 1.0,
     "stream_signals": {
       "silence": {
@@ -42,14 +42,14 @@
       "political"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089010+00:00",
+    "timestamp": "2026-03-29T03:09:58.213927+00:00",
     "priority": "high",
     "priority_rank": 2
   },
   {
-    "issue_id": "TFA-2026-15398",
+    "issue_id": "TFA-2026-15903",
     "title": "budget 2027 presentation",
-    "controversy_score": 0.7078,
+    "controversy_score": 0.7115,
     "confidence": 1.0,
     "stream_signals": {
       "silence": {
@@ -65,7 +65,7 @@
       "political"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089013+00:00",
+    "timestamp": "2026-03-29T03:09:58.213930+00:00",
     "priority": "high",
     "priority_rank": 3
   },
@@ -101,16 +101,16 @@
     "priority_rank": 4
   },
   {
-    "issue_id": "TFA-2026-15400",
+    "issue_id": "TFA-2026-15905",
     "title": "parliament second session session opens",
-    "controversy_score": 0.5588,
-    "confidence": 0.52,
+    "controversy_score": 0.5631,
+    "confidence": 0.53,
     "stream_signals": {
       "silence": {
-        "silence_score": 0.9978,
+        "silence_score": 1.0,
         "structural_importance": 0.465,
-        "suppression_pattern": "PUBLIC_BLIND_SPOT",
-        "news_mentions": 1,
+        "suppression_pattern": "HIDDEN_STORY",
+        "news_mentions": 0,
         "social_mentions": 0
       }
     },
@@ -118,23 +118,23 @@
       "political"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089006+00:00",
+    "timestamp": "2026-03-29T03:09:58.213923+00:00",
     "priority": "medium",
     "priority_rank": 5
   },
   {
-    "issue_id": "TFA-2026-15401",
+    "issue_id": "TFA-2026-15906",
     "title": "budget",
-    "controversy_score": 0.5148,
+    "controversy_score": 0.5151,
     "confidence": 1.0,
     "stream_signals": {
       "volume": {
         "alert": false,
-        "severity": 0.15,
-        "z_score": 0.6
+        "severity": 0.1,
+        "z_score": 0.4
       },
       "cascade": {
-        "n_star": 0.1,
+        "n_star": 0.06666666666666667,
         "alert_level": "normal"
       },
       "silence": {
@@ -150,7 +150,7 @@
       "political"
     ],
     "detection_type": "both",
-    "timestamp": "2026-03-29T00:40:22.089319+00:00",
+    "timestamp": "2026-03-29T03:09:58.214238+00:00",
     "priority": "medium",
     "priority_rank": 6
   },
@@ -322,6 +322,30 @@
     "priority_rank": 13
   },
   {
+    "issue_id": "TFA-2026-15908",
+    "title": "price",
+    "controversy_score": 0.3923,
+    "confidence": 0.9275,
+    "stream_signals": {
+      "volume": {
+        "alert": true,
+        "severity": 0.75,
+        "z_score": 3.0
+      },
+      "cascade": {
+        "n_star": 0.5,
+        "alert_level": "normal"
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "economic"
+    ],
+    "detection_type": "attention_spike",
+    "timestamp": "2026-03-29T03:09:58.213626+00:00",
+    "priority": "low",
+    "priority_rank": 14
+  },
+  {
     "issue_id": "TFA-2026-1263",
     "title": "anwar: malaysia\u2019s local currency trade with china, thailand and indonesia surges to rm82b, cutting reliance on us dollar. kuala lumpur, march 24 &mdash; malaysia recorded rm82.1 billion in trade and i",
     "controversy_score": 0.3919,
@@ -343,7 +367,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652111+00:00",
     "priority": "low",
-    "priority_rank": 14
+    "priority_rank": 15
   },
   {
     "issue_id": "TFA-2026-1264",
@@ -367,7 +391,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652614+00:00",
     "priority": "low",
-    "priority_rank": 15
+    "priority_rank": 16
   },
   {
     "issue_id": "TFA-2026-11506",
@@ -390,30 +414,6 @@
     ],
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176093+00:00",
-    "priority": "low",
-    "priority_rank": 16
-  },
-  {
-    "issue_id": "TFA-2026-15403",
-    "title": "price",
-    "controversy_score": 0.3918,
-    "confidence": 0.91,
-    "stream_signals": {
-      "volume": {
-        "alert": true,
-        "severity": 0.85,
-        "z_score": 3.4
-      },
-      "cascade": {
-        "n_star": 0.5666666666666667,
-        "alert_level": "normal"
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "economic"
-    ],
-    "detection_type": "attention_spike",
-    "timestamp": "2026-03-29T00:40:22.088734+00:00",
     "priority": "low",
     "priority_rank": 17
   },
@@ -752,6 +752,30 @@
     "priority_rank": 31
   },
   {
+    "issue_id": "TFA-2026-15910",
+    "title": "government",
+    "controversy_score": 0.338,
+    "confidence": 0.9275,
+    "stream_signals": {
+      "volume": {
+        "alert": true,
+        "severity": 0.6,
+        "z_score": 2.4
+      },
+      "cascade": {
+        "n_star": 0.4,
+        "alert_level": "normal"
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "attention_spike",
+    "timestamp": "2026-03-29T03:09:58.213681+00:00",
+    "priority": "low",
+    "priority_rank": 32
+  },
+  {
     "issue_id": "TFA-2026-1849",
     "title": "malaysia",
     "controversy_score": 0.3373,
@@ -774,30 +798,6 @@
     ],
     "detection_type": "both",
     "timestamp": "2026-03-25T14:32:20.352381+00:00",
-    "priority": "low",
-    "priority_rank": 32
-  },
-  {
-    "issue_id": "TFA-2026-15405",
-    "title": "government",
-    "controversy_score": 0.3369,
-    "confidence": 0.91,
-    "stream_signals": {
-      "volume": {
-        "alert": true,
-        "severity": 0.65,
-        "z_score": 2.6
-      },
-      "cascade": {
-        "n_star": 0.43333333333333335,
-        "alert_level": "normal"
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "attention_spike",
-    "timestamp": "2026-03-29T00:40:22.088687+00:00",
     "priority": "low",
     "priority_rank": 33
   },
@@ -2172,6 +2172,182 @@
     "priority_rank": 94
   },
   {
+    "issue_id": "TFA-2026-15915",
+    "title": "pair",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.8652,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 50,
+        "social_mentions": 12
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "legal"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214273+00:00",
+    "priority": "low",
+    "priority_rank": 95
+  },
+  {
+    "issue_id": "TFA-2026-15916",
+    "title": "hajiji: sabah not up for debate, issue just a political tactic in philippines. kota kinabalu, march 28 &mdash; chief minister datuk seri hajiji noor said the sabah claim is often turned into a polemi.",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.7154,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 56,
+        "social_mentions": 18
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213968+00:00",
+    "priority": "low",
+    "priority_rank": 96
+  },
+  {
+    "issue_id": "TFA-2026-15917",
+    "title": "are hishammuddin, khairy set to rejoin umno? party to discuss applications on april 17. kota tinggi, march 28 &mdash; the applications of several former umno leaders, including sembrong member of parl",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.8739,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 51,
+        "social_mentions": 7
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213971+00:00",
+    "priority": "low",
+    "priority_rank": 97
+  },
+  {
+    "issue_id": "TFA-2026-15918",
+    "title": "pair convicted of indecent act at cemetery seeks review of 12-month jail term. george town, march 28 &mdash; a couple sentenced to 12 months&rsquo; imprisonment by the magistrate&rsquo;s court here f.",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.8652,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 50,
+        "social_mentions": 12
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "legal"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213973+00:00",
+    "priority": "low",
+    "priority_rank": 98
+  },
+  {
+    "issue_id": "TFA-2026-15919",
+    "title": "socso plan to cover cross-border workers commuting to singapore in final stage, says hr minister. kuala lumpur, march 28 &mdash; the ministry of human resources is in the final stages of submitting a ",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.75,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 52,
+        "social_mentions": 13
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213978+00:00",
+    "priority": "low",
+    "priority_rank": 99
+  },
+  {
+    "issue_id": "TFA-2026-15920",
+    "title": "are",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.8739,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 51,
+        "social_mentions": 7
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214263+00:00",
+    "priority": "low",
+    "priority_rank": 100
+  },
+  {
+    "issue_id": "TFA-2026-15921",
+    "title": "socso",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.75,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 52,
+        "social_mentions": 13
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214296+00:00",
+    "priority": "low",
+    "priority_rank": 101
+  },
+  {
+    "issue_id": "TFA-2026-15922",
+    "title": "hajiji:",
+    "controversy_score": 0.2373,
+    "confidence": 0.09,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.7154,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 56,
+        "social_mentions": 18
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214299+00:00",
+    "priority": "low",
+    "priority_rank": 102
+  },
+  {
     "issue_id": "TFA-2026-15410",
     "title": "macc",
     "controversy_score": 0.2367,
@@ -2205,7 +2381,7 @@
     "detection_type": "both",
     "timestamp": "2026-03-29T00:40:22.089379+00:00",
     "priority": "low",
-    "priority_rank": 95
+    "priority_rank": 103
   },
   {
     "issue_id": "TFA-2026-0682",
@@ -2227,7 +2403,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.154994+00:00",
     "priority": "low",
-    "priority_rank": 96
+    "priority_rank": 104
   },
   {
     "issue_id": "TFA-2026-0685",
@@ -2249,7 +2425,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155005+00:00",
     "priority": "low",
-    "priority_rank": 97
+    "priority_rank": 105
   },
   {
     "issue_id": "TFA-2026-0686",
@@ -2271,7 +2447,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155007+00:00",
     "priority": "low",
-    "priority_rank": 98
+    "priority_rank": 106
   },
   {
     "issue_id": "TFA-2026-0687",
@@ -2293,7 +2469,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155319+00:00",
     "priority": "low",
-    "priority_rank": 99
+    "priority_rank": 107
   },
   {
     "issue_id": "TFA-2026-0690",
@@ -2315,7 +2491,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155348+00:00",
     "priority": "low",
-    "priority_rank": 100
+    "priority_rank": 108
   },
   {
     "issue_id": "TFA-2026-0691",
@@ -2337,7 +2513,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155351+00:00",
     "priority": "low",
-    "priority_rank": 101
+    "priority_rank": 109
   },
   {
     "issue_id": "TFA-2026-2737",
@@ -2360,7 +2536,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402433+00:00",
     "priority": "low",
-    "priority_rank": 102
+    "priority_rank": 110
   },
   {
     "issue_id": "TFA-2026-2738",
@@ -2382,182 +2558,6 @@
     ],
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402636+00:00",
-    "priority": "low",
-    "priority_rank": 103
-  },
-  {
-    "issue_id": "TFA-2026-15411",
-    "title": "pair",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.8587,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 50,
-        "social_mentions": 15
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "legal"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089357+00:00",
-    "priority": "low",
-    "priority_rank": 104
-  },
-  {
-    "issue_id": "TFA-2026-15412",
-    "title": "hajiji: sabah not up for debate, issue just a political tactic in philippines. kota kinabalu, march 28 &mdash; chief minister datuk seri hajiji noor said the sabah claim is often turned into a polemi.",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.7,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 57,
-        "social_mentions": 21
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089040+00:00",
-    "priority": "low",
-    "priority_rank": 105
-  },
-  {
-    "issue_id": "TFA-2026-15413",
-    "title": "are hishammuddin, khairy set to rejoin umno? party to discuss applications on april 17. kota tinggi, march 28 &mdash; the applications of several former umno leaders, including sembrong member of parl",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.8652,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 52,
-        "social_mentions": 10
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089043+00:00",
-    "priority": "low",
-    "priority_rank": 106
-  },
-  {
-    "issue_id": "TFA-2026-15414",
-    "title": "pair convicted of indecent act at cemetery seeks review of 12-month jail term. george town, march 28 &mdash; a couple sentenced to 12 months&rsquo; imprisonment by the magistrate&rsquo;s court here f.",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.8587,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 50,
-        "social_mentions": 15
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "legal"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089046+00:00",
-    "priority": "low",
-    "priority_rank": 107
-  },
-  {
-    "issue_id": "TFA-2026-15415",
-    "title": "socso plan to cover cross-border workers commuting to singapore in final stage, says hr minister. kuala lumpur, march 28 &mdash; the ministry of human resources is in the final stages of submitting a ",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.7423,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 52,
-        "social_mentions": 15
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089050+00:00",
-    "priority": "low",
-    "priority_rank": 108
-  },
-  {
-    "issue_id": "TFA-2026-15416",
-    "title": "are",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.8652,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 52,
-        "social_mentions": 10
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089350+00:00",
-    "priority": "low",
-    "priority_rank": 109
-  },
-  {
-    "issue_id": "TFA-2026-15417",
-    "title": "socso",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.7423,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 52,
-        "social_mentions": 15
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "general"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089382+00:00",
-    "priority": "low",
-    "priority_rank": 110
-  },
-  {
-    "issue_id": "TFA-2026-15418",
-    "title": "hajiji:",
-    "controversy_score": 0.2241,
-    "confidence": 0.08,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.7,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 57,
-        "social_mentions": 21
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "general"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089385+00:00",
     "priority": "low",
     "priority_rank": 111
   },
@@ -2861,6 +2861,28 @@
     "priority_rank": 124
   },
   {
+    "issue_id": "TFA-2026-15924",
+    "title": "icao",
+    "controversy_score": 0.2105,
+    "confidence": 0.07,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9731,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 2,
+        "social_mentions": 5
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214270+00:00",
+    "priority": "low",
+    "priority_rank": 125
+  },
+  {
     "issue_id": "TFA-2026-1467",
     "title": "us",
     "controversy_score": 0.2062,
@@ -2880,7 +2902,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T10:22:09.632353+00:00",
     "priority": "low",
-    "priority_rank": 125
+    "priority_rank": 126
   },
   {
     "issue_id": "TFA-2026-11526",
@@ -2916,7 +2938,7 @@
     "detection_type": "both",
     "timestamp": "2026-03-28T00:35:19.176395+00:00",
     "priority": "low",
-    "priority_rank": 126
+    "priority_rank": 127
   },
   {
     "issue_id": "TFA-2026-0176",
@@ -2939,7 +2961,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T15:12:39.884445+00:00",
     "priority": "low",
-    "priority_rank": 127
+    "priority_rank": 128
   },
   {
     "issue_id": "TFA-2026-0180",
@@ -2962,7 +2984,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T15:12:39.884687+00:00",
     "priority": "low",
-    "priority_rank": 128
+    "priority_rank": 129
   },
   {
     "issue_id": "TFA-2026-0359",
@@ -2984,7 +3006,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T18:25:35.531492+00:00",
     "priority": "low",
-    "priority_rank": 129
+    "priority_rank": 130
   },
   {
     "issue_id": "TFA-2026-0360",
@@ -3006,7 +3028,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T18:25:35.531919+00:00",
     "priority": "low",
-    "priority_rank": 130
+    "priority_rank": 131
   },
   {
     "issue_id": "TFA-2026-0467",
@@ -3028,7 +3050,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356609+00:00",
     "priority": "low",
-    "priority_rank": 131
+    "priority_rank": 132
   },
   {
     "issue_id": "TFA-2026-0468",
@@ -3050,7 +3072,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356612+00:00",
     "priority": "low",
-    "priority_rank": 132
+    "priority_rank": 133
   },
   {
     "issue_id": "TFA-2026-0469",
@@ -3072,7 +3094,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356615+00:00",
     "priority": "low",
-    "priority_rank": 133
+    "priority_rank": 134
   },
   {
     "issue_id": "TFA-2026-0470",
@@ -3094,7 +3116,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356617+00:00",
     "priority": "low",
-    "priority_rank": 134
+    "priority_rank": 135
   },
   {
     "issue_id": "TFA-2026-0476",
@@ -3116,7 +3138,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356954+00:00",
     "priority": "low",
-    "priority_rank": 135
+    "priority_rank": 136
   },
   {
     "issue_id": "TFA-2026-0477",
@@ -3138,7 +3160,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356962+00:00",
     "priority": "low",
-    "priority_rank": 136
+    "priority_rank": 137
   },
   {
     "issue_id": "TFA-2026-0484",
@@ -3160,7 +3182,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356984+00:00",
     "priority": "low",
-    "priority_rank": 137
+    "priority_rank": 138
   },
   {
     "issue_id": "TFA-2026-1288",
@@ -3183,7 +3205,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652094+00:00",
     "priority": "low",
-    "priority_rank": 138
+    "priority_rank": 139
   },
   {
     "issue_id": "TFA-2026-1289",
@@ -3206,7 +3228,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652624+00:00",
     "priority": "low",
-    "priority_rank": 139
+    "priority_rank": 140
   },
   {
     "issue_id": "TFA-2026-2748",
@@ -3228,7 +3250,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402442+00:00",
     "priority": "low",
-    "priority_rank": 140
+    "priority_rank": 141
   },
   {
     "issue_id": "TFA-2026-2749",
@@ -3250,7 +3272,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402647+00:00",
     "priority": "low",
-    "priority_rank": 141
+    "priority_rank": 142
   },
   {
     "issue_id": "TFA-2026-4262",
@@ -3273,7 +3295,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T10:24:46.831211+00:00",
     "priority": "low",
-    "priority_rank": 142
+    "priority_rank": 143
   },
   {
     "issue_id": "TFA-2026-4564",
@@ -3297,7 +3319,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T12:26:13.670636+00:00",
     "priority": "low",
-    "priority_rank": 143
+    "priority_rank": 144
   },
   {
     "issue_id": "TFA-2026-4565",
@@ -3320,7 +3342,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T12:26:13.670939+00:00",
     "priority": "low",
-    "priority_rank": 144
+    "priority_rank": 145
   },
   {
     "issue_id": "TFA-2026-5877",
@@ -3342,7 +3364,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T20:14:11.394457+00:00",
     "priority": "low",
-    "priority_rank": 145
+    "priority_rank": 146
   },
   {
     "issue_id": "TFA-2026-5878",
@@ -3364,7 +3386,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T20:14:11.394464+00:00",
     "priority": "low",
-    "priority_rank": 146
+    "priority_rank": 147
   },
   {
     "issue_id": "TFA-2026-5879",
@@ -3386,7 +3408,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T20:14:11.395295+00:00",
     "priority": "low",
-    "priority_rank": 147
+    "priority_rank": 148
   },
   {
     "issue_id": "TFA-2026-5881",
@@ -3408,7 +3430,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T20:14:11.395309+00:00",
     "priority": "low",
-    "priority_rank": 148
+    "priority_rank": 149
   },
   {
     "issue_id": "TFA-2026-8443",
@@ -3432,7 +3454,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.258722+00:00",
     "priority": "low",
-    "priority_rank": 149
+    "priority_rank": 150
   },
   {
     "issue_id": "TFA-2026-8444",
@@ -3455,7 +3477,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.258725+00:00",
     "priority": "low",
-    "priority_rank": 150
+    "priority_rank": 151
   },
   {
     "issue_id": "TFA-2026-8445",
@@ -3479,7 +3501,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.259464+00:00",
     "priority": "low",
-    "priority_rank": 151
+    "priority_rank": 152
   },
   {
     "issue_id": "TFA-2026-8446",
@@ -3502,7 +3524,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.259480+00:00",
     "priority": "low",
-    "priority_rank": 152
+    "priority_rank": 153
   },
   {
     "issue_id": "TFA-2026-11074",
@@ -3524,7 +3546,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680933+00:00",
     "priority": "low",
-    "priority_rank": 153
+    "priority_rank": 154
   },
   {
     "issue_id": "TFA-2026-11076",
@@ -3546,7 +3568,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680641+00:00",
     "priority": "low",
-    "priority_rank": 154
+    "priority_rank": 155
   },
   {
     "issue_id": "TFA-2026-11077",
@@ -3569,7 +3591,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680643+00:00",
     "priority": "low",
-    "priority_rank": 155
+    "priority_rank": 156
   },
   {
     "issue_id": "TFA-2026-11078",
@@ -3591,7 +3613,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680916+00:00",
     "priority": "low",
-    "priority_rank": 156
+    "priority_rank": 157
   },
   {
     "issue_id": "TFA-2026-11527",
@@ -3613,7 +3635,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176108+00:00",
     "priority": "low",
-    "priority_rank": 157
+    "priority_rank": 158
   },
   {
     "issue_id": "TFA-2026-11528",
@@ -3635,7 +3657,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176402+00:00",
     "priority": "low",
-    "priority_rank": 158
+    "priority_rank": 159
   },
   {
     "issue_id": "TFA-2026-14927",
@@ -3657,7 +3679,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T22:09:41.243476+00:00",
     "priority": "low",
-    "priority_rank": 159
+    "priority_rank": 160
   },
   {
     "issue_id": "TFA-2026-14928",
@@ -3680,7 +3702,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T22:09:41.243478+00:00",
     "priority": "low",
-    "priority_rank": 160
+    "priority_rank": 161
   },
   {
     "issue_id": "TFA-2026-14929",
@@ -3702,29 +3724,29 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T22:09:41.243731+00:00",
     "priority": "low",
-    "priority_rank": 161
+    "priority_rank": 162
   },
   {
-    "issue_id": "TFA-2026-15423",
-    "title": "icao",
+    "issue_id": "TFA-2026-15928",
+    "title": "icao sets new limit of 2 power banks per airline passenger. no recharging will be allowed during flights under regulations announced by the international civil aviation organization which take effect ",
     "controversy_score": 0.1964,
     "confidence": 0.06,
     "stream_signals": {
       "silence": {
-        "silence_score": 0.9615,
+        "silence_score": 0.9731,
         "structural_importance": 0.415,
         "suppression_pattern": "NORMAL",
         "news_mentions": 2,
-        "social_mentions": 8
+        "social_mentions": 5
       }
     },
     "bias_dimensions_at_risk": [
-      "general"
+      "political"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089366+00:00",
+    "timestamp": "2026-03-29T03:09:58.213976+00:00",
     "priority": "low",
-    "priority_rank": 162
+    "priority_rank": 163
   },
   {
     "issue_id": "TFA-2026-6555",
@@ -3746,7 +3768,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.270183+00:00",
     "priority": "low",
-    "priority_rank": 163
+    "priority_rank": 164
   },
   {
     "issue_id": "TFA-2026-2977",
@@ -3770,7 +3792,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T00:38:22.422242+00:00",
     "priority": "low",
-    "priority_rank": 164
+    "priority_rank": 165
   },
   {
     "issue_id": "TFA-2026-0705",
@@ -3792,7 +3814,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.154986+00:00",
     "priority": "low",
-    "priority_rank": 165
+    "priority_rank": 166
   },
   {
     "issue_id": "TFA-2026-0706",
@@ -3814,7 +3836,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.154989+00:00",
     "priority": "low",
-    "priority_rank": 166
+    "priority_rank": 167
   },
   {
     "issue_id": "TFA-2026-2978",
@@ -3836,7 +3858,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422537+00:00",
     "priority": "low",
-    "priority_rank": 167
+    "priority_rank": 168
   },
   {
     "issue_id": "TFA-2026-2979",
@@ -3859,7 +3881,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422539+00:00",
     "priority": "low",
-    "priority_rank": 168
+    "priority_rank": 169
   },
   {
     "issue_id": "TFA-2026-2980",
@@ -3881,7 +3903,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422543+00:00",
     "priority": "low",
-    "priority_rank": 169
+    "priority_rank": 170
   },
   {
     "issue_id": "TFA-2026-10625",
@@ -3903,7 +3925,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T20:14:44.904399+00:00",
     "priority": "low",
-    "priority_rank": 170
+    "priority_rank": 171
   },
   {
     "issue_id": "TFA-2026-2982",
@@ -3925,7 +3947,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422853+00:00",
     "priority": "low",
-    "priority_rank": 171
+    "priority_rank": 172
   },
   {
     "issue_id": "TFA-2026-2983",
@@ -3947,7 +3969,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422884+00:00",
     "priority": "low",
-    "priority_rank": 172
+    "priority_rank": 173
   },
   {
     "issue_id": "TFA-2026-6556",
@@ -3969,7 +3991,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.269868+00:00",
     "priority": "low",
-    "priority_rank": 173
+    "priority_rank": 174
   },
   {
     "issue_id": "TFA-2026-7657",
@@ -3991,7 +4013,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T06:33:06.304939+00:00",
     "priority": "low",
-    "priority_rank": 174
+    "priority_rank": 175
   },
   {
     "issue_id": "TFA-2026-10630",
@@ -4013,7 +4035,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T20:14:44.904143+00:00",
     "priority": "low",
-    "priority_rank": 175
+    "priority_rank": 176
   },
   {
     "issue_id": "TFA-2026-11082",
@@ -4035,7 +4057,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680635+00:00",
     "priority": "low",
-    "priority_rank": 176
+    "priority_rank": 177
   },
   {
     "issue_id": "TFA-2026-11084",
@@ -4057,7 +4079,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T22:11:55.680906+00:00",
     "priority": "low",
-    "priority_rank": 177
+    "priority_rank": 178
   },
   {
     "issue_id": "TFA-2026-11534",
@@ -4078,28 +4100,6 @@
     ],
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176099+00:00",
-    "priority": "low",
-    "priority_rank": 178
-  },
-  {
-    "issue_id": "TFA-2026-15428",
-    "title": "icao sets new limit of 2 power banks per airline passenger. no recharging will be allowed during flights under regulations announced by the international civil aviation organization which take effect ",
-    "controversy_score": 0.1818,
-    "confidence": 0.05,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9615,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 2,
-        "social_mentions": 8
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089048+00:00",
     "priority": "low",
     "priority_rank": 179
   },
@@ -7277,25 +7277,24 @@
     "priority_rank": 320
   },
   {
-    "issue_id": "TFA-2026-7293",
+    "issue_id": "TFA-2026-15937",
     "title": "the",
     "controversy_score": 0.1346,
     "confidence": 0.02,
     "stream_signals": {
       "silence": {
-        "silence_score": 0.9625,
-        "structural_importance": 0.41,
+        "silence_score": 0.95,
+        "structural_importance": 0.415,
         "suppression_pattern": "NORMAL",
-        "news_mentions": 1,
-        "social_mentions": 8
+        "news_mentions": 3,
+        "social_mentions": 10
       }
     },
     "bias_dimensions_at_risk": [
-      "ethnic",
-      "legal"
+      "general"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-27T04:52:10.648835+00:00",
+    "timestamp": "2026-03-29T03:09:58.214281+00:00",
     "priority": "low",
     "priority_rank": 321
   },
@@ -7749,6 +7748,229 @@
     "priority_rank": 341
   },
   {
+    "issue_id": "TFA-2026-15938",
+    "title": "balancing foreign defence purchases amid geopolitical shifts. experts say the south china sea dispute has deterred malaysia from procuring arms from china, while the iran war may also impact purchases",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9283,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 10,
+        "social_mentions": 23
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "ethnic"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213953+00:00",
+    "priority": "low",
+    "priority_rank": 342
+  },
+  {
+    "issue_id": "TFA-2026-15939",
+    "title": "the importance of staying active as you grow older. keeping up with physical activity can slow muscle loss and protect one's independence, according to an expert.",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.95,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 3,
+        "social_mentions": 10
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213956+00:00",
+    "priority": "low",
+    "priority_rank": 343
+  },
+  {
+    "issue_id": "TFA-2026-15940",
+    "title": "17 areas record moderate api readings in sarawak. board says this is likely due to localised open burning and transboundary haze.",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9462,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 3,
+        "social_mentions": 11
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213958+00:00",
+    "priority": "low",
+    "priority_rank": 344
+  },
+  {
+    "issue_id": "TFA-2026-15941",
+    "title": "iran siap sedia tindak balas susulan serangan as-israel terhadap syarikat keluli. serangan ke atas dua syarikat keluli terbesar itu menyebabkan sekurang-kurangnya seorang pekerja maut dan mencederakan",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9804,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 4,
+        "social_mentions": 5
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213961+00:00",
+    "priority": "low",
+    "priority_rank": 345
+  },
+  {
+    "issue_id": "TFA-2026-15942",
+    "title": "tuchel plays down maguire\u2019s world cup hopes. while thomas tuchel acknowledged harry maguire's ability, he hinted the 33-year-old was behind ezri konsa, marc guehi, john stones and trevoh chalobah in h",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9423,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 10,
+        "social_mentions": 5
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213965+00:00",
+    "priority": "low",
+    "priority_rank": 346
+  },
+  {
+    "issue_id": "TFA-2026-15943",
+    "title": "balancing",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9283,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 10,
+        "social_mentions": 23
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "ethnic"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214260+00:00",
+    "priority": "low",
+    "priority_rank": 347
+  },
+  {
+    "issue_id": "TFA-2026-15944",
+    "title": "17",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9462,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 3,
+        "social_mentions": 11
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214284+00:00",
+    "priority": "low",
+    "priority_rank": 348
+  },
+  {
+    "issue_id": "TFA-2026-15945",
+    "title": "tuchel",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9423,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 10,
+        "social_mentions": 5
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214287+00:00",
+    "priority": "low",
+    "priority_rank": 349
+  },
+  {
+    "issue_id": "TFA-2026-15946",
+    "title": "pesawah bimbang kos operasi melonjak susulan kenaikan harga diesel. pertubuhan persaudaraan pesawah malaysia cadang kerajaan melakukan reformasi menyeluruh terhadap industri padi.",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9879,
+        "structural_importance": 0.515,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 4,
+        "social_mentions": 4
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "economic",
+      "ethnic",
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213944+00:00",
+    "priority": "low",
+    "priority_rank": 350
+  },
+  {
+    "issue_id": "TFA-2026-15947",
+    "title": "pesawah",
+    "controversy_score": 0.1346,
+    "confidence": 0.02,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9879,
+        "structural_importance": 0.515,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 4,
+        "social_mentions": 4
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "ethnic",
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214248+00:00",
+    "priority": "low",
+    "priority_rank": 351
+  },
+  {
     "issue_id": "TFA-2026-14941",
     "title": "kerajaan",
     "controversy_score": 0.1285,
@@ -7781,7 +8003,7 @@
     "detection_type": "both",
     "timestamp": "2026-03-28T22:09:41.243720+00:00",
     "priority": "low",
-    "priority_rank": 342
+    "priority_rank": 352
   },
   {
     "issue_id": "TFA-2026-6933",
@@ -7804,7 +8026,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T03:09:51.354532+00:00",
     "priority": "low",
-    "priority_rank": 343
+    "priority_rank": 353
   },
   {
     "issue_id": "TFA-2026-0509",
@@ -7826,7 +8048,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356531+00:00",
     "priority": "low",
-    "priority_rank": 344
+    "priority_rank": 354
   },
   {
     "issue_id": "TFA-2026-0511",
@@ -7848,7 +8070,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-24T20:20:17.356974+00:00",
     "priority": "low",
-    "priority_rank": 345
+    "priority_rank": 355
   },
   {
     "issue_id": "TFA-2026-0744",
@@ -7870,7 +8092,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.154937+00:00",
     "priority": "low",
-    "priority_rank": 346
+    "priority_rank": 356
   },
   {
     "issue_id": "TFA-2026-0753",
@@ -7892,7 +8114,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T00:35:44.155357+00:00",
     "priority": "low",
-    "priority_rank": 347
+    "priority_rank": 357
   },
   {
     "issue_id": "TFA-2026-1024",
@@ -7914,7 +8136,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T04:43:09.347843+00:00",
     "priority": "low",
-    "priority_rank": 348
+    "priority_rank": 358
   },
   {
     "issue_id": "TFA-2026-1025",
@@ -7936,7 +8158,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T04:43:09.347846+00:00",
     "priority": "low",
-    "priority_rank": 349
+    "priority_rank": 359
   },
   {
     "issue_id": "TFA-2026-1031",
@@ -7958,7 +8180,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T04:43:09.348199+00:00",
     "priority": "low",
-    "priority_rank": 350
+    "priority_rank": 360
   },
   {
     "issue_id": "TFA-2026-1188",
@@ -7980,7 +8202,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T06:29:19.749606+00:00",
     "priority": "low",
-    "priority_rank": 351
+    "priority_rank": 361
   },
   {
     "issue_id": "TFA-2026-1195",
@@ -8002,7 +8224,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T06:29:19.750552+00:00",
     "priority": "low",
-    "priority_rank": 352
+    "priority_rank": 362
   },
   {
     "issue_id": "TFA-2026-1350",
@@ -8024,7 +8246,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652023+00:00",
     "priority": "low",
-    "priority_rank": 353
+    "priority_rank": 363
   },
   {
     "issue_id": "TFA-2026-1351",
@@ -8046,7 +8268,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652026+00:00",
     "priority": "low",
-    "priority_rank": 354
+    "priority_rank": 364
   },
   {
     "issue_id": "TFA-2026-1356",
@@ -8068,7 +8290,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T08:20:34.652649+00:00",
     "priority": "low",
-    "priority_rank": 355
+    "priority_rank": 365
   },
   {
     "issue_id": "TFA-2026-1528",
@@ -8090,7 +8312,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T10:22:09.631994+00:00",
     "priority": "low",
-    "priority_rank": 356
+    "priority_rank": 366
   },
   {
     "issue_id": "TFA-2026-1530",
@@ -8112,7 +8334,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T10:22:09.631999+00:00",
     "priority": "low",
-    "priority_rank": 357
+    "priority_rank": 367
   },
   {
     "issue_id": "TFA-2026-1535",
@@ -8134,7 +8356,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T10:22:09.632358+00:00",
     "priority": "low",
-    "priority_rank": 358
+    "priority_rank": 368
   },
   {
     "issue_id": "TFA-2026-1722",
@@ -8156,7 +8378,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T12:22:20.605783+00:00",
     "priority": "low",
-    "priority_rank": 359
+    "priority_rank": 369
   },
   {
     "issue_id": "TFA-2026-1726",
@@ -8178,7 +8400,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T12:22:20.606171+00:00",
     "priority": "low",
-    "priority_rank": 360
+    "priority_rank": 370
   },
   {
     "issue_id": "TFA-2026-2132",
@@ -8200,7 +8422,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T16:31:46.890145+00:00",
     "priority": "low",
-    "priority_rank": 361
+    "priority_rank": 371
   },
   {
     "issue_id": "TFA-2026-2133",
@@ -8222,7 +8444,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T16:31:46.890148+00:00",
     "priority": "low",
-    "priority_rank": 362
+    "priority_rank": 372
   },
   {
     "issue_id": "TFA-2026-2139",
@@ -8244,7 +8466,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T16:31:46.890429+00:00",
     "priority": "low",
-    "priority_rank": 363
+    "priority_rank": 373
   },
   {
     "issue_id": "TFA-2026-2353",
@@ -8266,7 +8488,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T18:25:20.602524+00:00",
     "priority": "low",
-    "priority_rank": 364
+    "priority_rank": 374
   },
   {
     "issue_id": "TFA-2026-2354",
@@ -8288,7 +8510,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T18:25:20.603397+00:00",
     "priority": "low",
-    "priority_rank": 365
+    "priority_rank": 375
   },
   {
     "issue_id": "TFA-2026-2772",
@@ -8310,7 +8532,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402401+00:00",
     "priority": "low",
-    "priority_rank": 366
+    "priority_rank": 376
   },
   {
     "issue_id": "TFA-2026-2773",
@@ -8332,7 +8554,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-25T22:15:30.402651+00:00",
     "priority": "low",
-    "priority_rank": 367
+    "priority_rank": 377
   },
   {
     "issue_id": "TFA-2026-2996",
@@ -8354,7 +8576,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T00:38:22.422511+00:00",
     "priority": "low",
-    "priority_rank": 368
+    "priority_rank": 378
   },
   {
     "issue_id": "TFA-2026-3228",
@@ -8376,7 +8598,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T03:09:51.148163+00:00",
     "priority": "low",
-    "priority_rank": 369
+    "priority_rank": 379
   },
   {
     "issue_id": "TFA-2026-3236",
@@ -8398,7 +8620,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T03:09:51.148551+00:00",
     "priority": "low",
-    "priority_rank": 370
+    "priority_rank": 380
   },
   {
     "issue_id": "TFA-2026-3481",
@@ -8420,7 +8642,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T04:51:50.494782+00:00",
     "priority": "low",
-    "priority_rank": 371
+    "priority_rank": 381
   },
   {
     "issue_id": "TFA-2026-3482",
@@ -8442,7 +8664,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T04:51:50.494788+00:00",
     "priority": "low",
-    "priority_rank": 372
+    "priority_rank": 382
   },
   {
     "issue_id": "TFA-2026-4326",
@@ -8464,7 +8686,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T10:24:46.831153+00:00",
     "priority": "low",
-    "priority_rank": 373
+    "priority_rank": 383
   },
   {
     "issue_id": "TFA-2026-4327",
@@ -8486,7 +8708,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T10:24:46.831156+00:00",
     "priority": "low",
-    "priority_rank": 374
+    "priority_rank": 384
   },
   {
     "issue_id": "TFA-2026-4332",
@@ -8508,7 +8730,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T10:24:46.831505+00:00",
     "priority": "low",
-    "priority_rank": 375
+    "priority_rank": 385
   },
   {
     "issue_id": "TFA-2026-4333",
@@ -8530,7 +8752,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T10:24:46.831521+00:00",
     "priority": "low",
-    "priority_rank": 376
+    "priority_rank": 386
   },
   {
     "issue_id": "TFA-2026-4627",
@@ -8552,7 +8774,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T12:26:13.670584+00:00",
     "priority": "low",
-    "priority_rank": 377
+    "priority_rank": 387
   },
   {
     "issue_id": "TFA-2026-4630",
@@ -8574,7 +8796,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T12:26:13.670963+00:00",
     "priority": "low",
-    "priority_rank": 378
+    "priority_rank": 388
   },
   {
     "issue_id": "TFA-2026-4949",
@@ -8596,7 +8818,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T14:38:08.351441+00:00",
     "priority": "low",
-    "priority_rank": 379
+    "priority_rank": 389
   },
   {
     "issue_id": "TFA-2026-4950",
@@ -8618,7 +8840,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T14:38:08.353158+00:00",
     "priority": "low",
-    "priority_rank": 380
+    "priority_rank": 390
   },
   {
     "issue_id": "TFA-2026-5266",
@@ -8640,7 +8862,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.460147+00:00",
     "priority": "low",
-    "priority_rank": 381
+    "priority_rank": 391
   },
   {
     "issue_id": "TFA-2026-5267",
@@ -8662,7 +8884,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.460151+00:00",
     "priority": "low",
-    "priority_rank": 382
+    "priority_rank": 392
   },
   {
     "issue_id": "TFA-2026-5268",
@@ -8684,7 +8906,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.460157+00:00",
     "priority": "low",
-    "priority_rank": 383
+    "priority_rank": 393
   },
   {
     "issue_id": "TFA-2026-5269",
@@ -8706,7 +8928,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.460162+00:00",
     "priority": "low",
-    "priority_rank": 384
+    "priority_rank": 394
   },
   {
     "issue_id": "TFA-2026-5271",
@@ -8728,7 +8950,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.461171+00:00",
     "priority": "low",
-    "priority_rank": 385
+    "priority_rank": 395
   },
   {
     "issue_id": "TFA-2026-5273",
@@ -8750,7 +8972,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.461189+00:00",
     "priority": "low",
-    "priority_rank": 386
+    "priority_rank": 396
   },
   {
     "issue_id": "TFA-2026-5274",
@@ -8772,7 +8994,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T16:31:19.461198+00:00",
     "priority": "low",
-    "priority_rank": 387
+    "priority_rank": 397
   },
   {
     "issue_id": "TFA-2026-5592",
@@ -8794,7 +9016,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T18:27:24.730573+00:00",
     "priority": "low",
-    "priority_rank": 388
+    "priority_rank": 398
   },
   {
     "issue_id": "TFA-2026-5594",
@@ -8816,7 +9038,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-26T18:27:24.731084+00:00",
     "priority": "low",
-    "priority_rank": 389
+    "priority_rank": 399
   },
   {
     "issue_id": "TFA-2026-6565",
@@ -8838,7 +9060,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.269809+00:00",
     "priority": "low",
-    "priority_rank": 390
+    "priority_rank": 400
   },
   {
     "issue_id": "TFA-2026-6572",
@@ -8860,7 +9082,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.269838+00:00",
     "priority": "low",
-    "priority_rank": 391
+    "priority_rank": 401
   },
   {
     "issue_id": "TFA-2026-6573",
@@ -8882,7 +9104,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.269841+00:00",
     "priority": "low",
-    "priority_rank": 392
+    "priority_rank": 402
   },
   {
     "issue_id": "TFA-2026-6576",
@@ -8904,7 +9126,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.270196+00:00",
     "priority": "low",
-    "priority_rank": 393
+    "priority_rank": 403
   },
   {
     "issue_id": "TFA-2026-6578",
@@ -8926,7 +9148,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.270206+00:00",
     "priority": "low",
-    "priority_rank": 394
+    "priority_rank": 404
   },
   {
     "issue_id": "TFA-2026-6581",
@@ -8948,7 +9170,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T00:38:51.270223+00:00",
     "priority": "low",
-    "priority_rank": 395
+    "priority_rank": 405
   },
   {
     "issue_id": "TFA-2026-6935",
@@ -8971,7 +9193,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T03:09:51.354145+00:00",
     "priority": "low",
-    "priority_rank": 396
+    "priority_rank": 406
   },
   {
     "issue_id": "TFA-2026-6938",
@@ -8993,7 +9215,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T03:09:51.354159+00:00",
     "priority": "low",
-    "priority_rank": 397
+    "priority_rank": 407
   },
   {
     "issue_id": "TFA-2026-6941",
@@ -9016,7 +9238,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T03:09:51.354172+00:00",
     "priority": "low",
-    "priority_rank": 398
+    "priority_rank": 408
   },
   {
     "issue_id": "TFA-2026-6943",
@@ -9038,7 +9260,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T03:09:51.354512+00:00",
     "priority": "low",
-    "priority_rank": 399
+    "priority_rank": 409
   },
   {
     "issue_id": "TFA-2026-7313",
@@ -9060,7 +9282,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T04:52:10.648525+00:00",
     "priority": "low",
-    "priority_rank": 400
+    "priority_rank": 410
   },
   {
     "issue_id": "TFA-2026-7318",
@@ -9083,7 +9305,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T04:52:10.648560+00:00",
     "priority": "low",
-    "priority_rank": 401
+    "priority_rank": 411
   },
   {
     "issue_id": "TFA-2026-7322",
@@ -9105,7 +9327,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T04:52:10.648845+00:00",
     "priority": "low",
-    "priority_rank": 402
+    "priority_rank": 412
   },
   {
     "issue_id": "TFA-2026-7705",
@@ -9127,7 +9349,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T06:33:06.303992+00:00",
     "priority": "low",
-    "priority_rank": 403
+    "priority_rank": 413
   },
   {
     "issue_id": "TFA-2026-7706",
@@ -9150,7 +9372,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T06:33:06.304012+00:00",
     "priority": "low",
-    "priority_rank": 404
+    "priority_rank": 414
   },
   {
     "issue_id": "TFA-2026-7707",
@@ -9172,7 +9394,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T06:33:06.304926+00:00",
     "priority": "low",
-    "priority_rank": 405
+    "priority_rank": 415
   },
   {
     "issue_id": "TFA-2026-8095",
@@ -9195,7 +9417,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T08:21:17.586394+00:00",
     "priority": "low",
-    "priority_rank": 406
+    "priority_rank": 416
   },
   {
     "issue_id": "TFA-2026-8096",
@@ -9217,7 +9439,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T08:21:17.586398+00:00",
     "priority": "low",
-    "priority_rank": 407
+    "priority_rank": 417
   },
   {
     "issue_id": "TFA-2026-8105",
@@ -9239,7 +9461,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T08:21:17.587024+00:00",
     "priority": "low",
-    "priority_rank": 408
+    "priority_rank": 418
   },
   {
     "issue_id": "TFA-2026-8506",
@@ -9261,7 +9483,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.258653+00:00",
     "priority": "low",
-    "priority_rank": 409
+    "priority_rank": 419
   },
   {
     "issue_id": "TFA-2026-8507",
@@ -9285,7 +9507,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.258660+00:00",
     "priority": "low",
-    "priority_rank": 410
+    "priority_rank": 420
   },
   {
     "issue_id": "TFA-2026-8510",
@@ -9309,7 +9531,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T10:20:34.259505+00:00",
     "priority": "low",
-    "priority_rank": 411
+    "priority_rank": 421
   },
   {
     "issue_id": "TFA-2026-8930",
@@ -9331,7 +9553,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T12:20:36.553277+00:00",
     "priority": "low",
-    "priority_rank": 412
+    "priority_rank": 422
   },
   {
     "issue_id": "TFA-2026-8931",
@@ -9353,7 +9575,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T12:20:36.553282+00:00",
     "priority": "low",
-    "priority_rank": 413
+    "priority_rank": 423
   },
   {
     "issue_id": "TFA-2026-8937",
@@ -9375,7 +9597,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T12:20:36.553633+00:00",
     "priority": "low",
-    "priority_rank": 414
+    "priority_rank": 424
   },
   {
     "issue_id": "TFA-2026-8938",
@@ -9397,7 +9619,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T12:20:36.553643+00:00",
     "priority": "low",
-    "priority_rank": 415
+    "priority_rank": 425
   },
   {
     "issue_id": "TFA-2026-9793",
@@ -9419,7 +9641,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T16:22:35.971222+00:00",
     "priority": "low",
-    "priority_rank": 416
+    "priority_rank": 426
   },
   {
     "issue_id": "TFA-2026-9796",
@@ -9441,7 +9663,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T16:22:35.971536+00:00",
     "priority": "low",
-    "priority_rank": 417
+    "priority_rank": 427
   },
   {
     "issue_id": "TFA-2026-10224",
@@ -9463,7 +9685,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T18:24:03.537951+00:00",
     "priority": "low",
-    "priority_rank": 418
+    "priority_rank": 428
   },
   {
     "issue_id": "TFA-2026-10226",
@@ -9485,7 +9707,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-27T18:24:03.538327+00:00",
     "priority": "low",
-    "priority_rank": 419
+    "priority_rank": 429
   },
   {
     "issue_id": "TFA-2026-11551",
@@ -9507,7 +9729,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176067+00:00",
     "priority": "low",
-    "priority_rank": 420
+    "priority_rank": 430
   },
   {
     "issue_id": "TFA-2026-11552",
@@ -9529,7 +9751,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176074+00:00",
     "priority": "low",
-    "priority_rank": 421
+    "priority_rank": 431
   },
   {
     "issue_id": "TFA-2026-11553",
@@ -9551,7 +9773,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176077+00:00",
     "priority": "low",
-    "priority_rank": 422
+    "priority_rank": 432
   },
   {
     "issue_id": "TFA-2026-11554",
@@ -9573,7 +9795,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T00:35:19.176425+00:00",
     "priority": "low",
-    "priority_rank": 423
+    "priority_rank": 433
   },
   {
     "issue_id": "TFA-2026-12009",
@@ -9595,7 +9817,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546239+00:00",
     "priority": "low",
-    "priority_rank": 424
+    "priority_rank": 434
   },
   {
     "issue_id": "TFA-2026-12010",
@@ -9617,7 +9839,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546246+00:00",
     "priority": "low",
-    "priority_rank": 425
+    "priority_rank": 435
   },
   {
     "issue_id": "TFA-2026-12011",
@@ -9639,7 +9861,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546249+00:00",
     "priority": "low",
-    "priority_rank": 426
+    "priority_rank": 436
   },
   {
     "issue_id": "TFA-2026-12019",
@@ -9661,7 +9883,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546271+00:00",
     "priority": "low",
-    "priority_rank": 427
+    "priority_rank": 437
   },
   {
     "issue_id": "TFA-2026-12020",
@@ -9683,7 +9905,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546273+00:00",
     "priority": "low",
-    "priority_rank": 428
+    "priority_rank": 438
   },
   {
     "issue_id": "TFA-2026-12021",
@@ -9705,7 +9927,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546276+00:00",
     "priority": "low",
-    "priority_rank": 429
+    "priority_rank": 439
   },
   {
     "issue_id": "TFA-2026-12022",
@@ -9727,7 +9949,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546523+00:00",
     "priority": "low",
-    "priority_rank": 430
+    "priority_rank": 440
   },
   {
     "issue_id": "TFA-2026-12024",
@@ -9749,7 +9971,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546533+00:00",
     "priority": "low",
-    "priority_rank": 431
+    "priority_rank": 441
   },
   {
     "issue_id": "TFA-2026-12025",
@@ -9771,7 +9993,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546536+00:00",
     "priority": "low",
-    "priority_rank": 432
+    "priority_rank": 442
   },
   {
     "issue_id": "TFA-2026-12026",
@@ -9793,7 +10015,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546539+00:00",
     "priority": "low",
-    "priority_rank": 433
+    "priority_rank": 443
   },
   {
     "issue_id": "TFA-2026-12028",
@@ -9815,7 +10037,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T10:12:53.546564+00:00",
     "priority": "low",
-    "priority_rank": 434
+    "priority_rank": 444
   },
   {
     "issue_id": "TFA-2026-12496",
@@ -9837,7 +10059,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T12:16:23.317161+00:00",
     "priority": "low",
-    "priority_rank": 435
+    "priority_rank": 445
   },
   {
     "issue_id": "TFA-2026-12497",
@@ -9859,7 +10081,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T12:16:23.317166+00:00",
     "priority": "low",
-    "priority_rank": 436
+    "priority_rank": 446
   },
   {
     "issue_id": "TFA-2026-12501",
@@ -9881,7 +10103,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T12:16:23.317457+00:00",
     "priority": "low",
-    "priority_rank": 437
+    "priority_rank": 447
   },
   {
     "issue_id": "TFA-2026-12503",
@@ -9903,7 +10125,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T12:16:23.317475+00:00",
     "priority": "low",
-    "priority_rank": 438
+    "priority_rank": 448
   },
   {
     "issue_id": "TFA-2026-12982",
@@ -9925,7 +10147,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-28T14:14:49.304293+00:00",
     "priority": "low",
-    "priority_rank": 439
+    "priority_rank": 449
   },
   {
     "issue_id": "TFA-2026-15441",
@@ -9947,139 +10169,7 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-29T00:40:22.089019+00:00",
     "priority": "low",
-    "priority_rank": 440
-  },
-  {
-    "issue_id": "TFA-2026-15442",
-    "title": "balancing foreign defence purchases amid geopolitical shifts. experts say the south china sea dispute has deterred malaysia from procuring arms from china, while the iran war may also impact purchases",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9348,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 9,
-        "social_mentions": 21
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "ethnic"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089025+00:00",
-    "priority": "low",
-    "priority_rank": 441
-  },
-  {
-    "issue_id": "TFA-2026-15443",
-    "title": "the importance of staying active as you grow older. keeping up with physical activity can slow muscle loss and protect one's independence, according to an expert.",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9538,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 2,
-        "social_mentions": 10
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "general"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089028+00:00",
-    "priority": "low",
-    "priority_rank": 442
-  },
-  {
-    "issue_id": "TFA-2026-15444",
-    "title": "17 areas record moderate api readings in sarawak. board says this is likely due to localised open burning and transboundary haze.",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9615,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 3,
-        "social_mentions": 7
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "general"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089031+00:00",
-    "priority": "low",
-    "priority_rank": 443
-  },
-  {
-    "issue_id": "TFA-2026-15445",
-    "title": "iran siap sedia tindak balas susulan serangan as-israel terhadap syarikat keluli. serangan ke atas dua syarikat keluli terbesar itu menyebabkan sekurang-kurangnya seorang pekerja maut dan mencederakan",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9935,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 1,
-        "social_mentions": 2
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "political"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089033+00:00",
-    "priority": "low",
-    "priority_rank": 444
-  },
-  {
-    "issue_id": "TFA-2026-15446",
-    "title": "tuchel plays down maguire\u2019s world cup hopes. while thomas tuchel acknowledged harry maguire's ability, he hinted the 33-year-old was behind ezri konsa, marc guehi, john stones and trevoh chalobah in h",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9231,
-        "structural_importance": 0.415,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 13,
-        "social_mentions": 7
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "general"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089038+00:00",
-    "priority": "low",
-    "priority_rank": 445
-  },
-  {
-    "issue_id": "TFA-2026-15447",
-    "title": "balancing",
-    "controversy_score": 0.1176,
-    "confidence": 0.01,
-    "stream_signals": {
-      "silence": {
-        "silence_score": 0.9348,
-        "structural_importance": 0.465,
-        "suppression_pattern": "NORMAL",
-        "news_mentions": 9,
-        "social_mentions": 21
-      }
-    },
-    "bias_dimensions_at_risk": [
-      "ethnic"
-    ],
-    "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089344+00:00",
-    "priority": "low",
-    "priority_rank": 446
+    "priority_rank": 450
   },
   {
     "issue_id": "TFA-2026-15448",
@@ -10101,51 +10191,205 @@
     "detection_type": "silence_anomaly",
     "timestamp": "2026-03-29T00:40:22.089348+00:00",
     "priority": "low",
-    "priority_rank": 447
+    "priority_rank": 451
   },
   {
-    "issue_id": "TFA-2026-15449",
-    "title": "17",
+    "issue_id": "TFA-2026-15955",
+    "title": "low workplace safety compliance among smes a serious concern, says lee. kuala lumpur: low compliance with occupational safety and health (osh) standards across industries, particularly among small and",
     "controversy_score": 0.1176,
     "confidence": 0.01,
     "stream_signals": {
       "silence": {
-        "silence_score": 0.9615,
+        "silence_score": 0.9385,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 7,
+        "social_mentions": 9
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213935+00:00",
+    "priority": "low",
+    "priority_rank": 452
+  },
+  {
+    "issue_id": "TFA-2026-15956",
+    "title": "pilot waste disposal programme shows sabah water villages can be active partners in conservation. kota kinabalu: for years, water villages in semporna have struggled with solid waste, often making hea",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9077,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 8,
+        "social_mentions": 16
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213939+00:00",
+    "priority": "low",
+    "priority_rank": 453
+  },
+  {
+    "issue_id": "TFA-2026-15957",
+    "title": "raising the bar for other guys: syed saddiq praised for &#039;forward-thinking&#039; engagement gifts. petaling jaya: the engagement ceremony between muar mp syed saddiq syed abdul rahman and actress-",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9769,
         "structural_importance": 0.415,
         "suppression_pattern": "NORMAL",
         "news_mentions": 3,
-        "social_mentions": 7
+        "social_mentions": 3
       }
     },
     "bias_dimensions_at_risk": [
       "general"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089362+00:00",
+    "timestamp": "2026-03-29T03:09:58.213941+00:00",
     "priority": "low",
-    "priority_rank": 448
+    "priority_rank": 454
   },
   {
-    "issue_id": "TFA-2026-15450",
-    "title": "tuchel",
+    "issue_id": "TFA-2026-15958",
+    "title": "social media ban for under-16s provides crucial support for parents, says academic. galvin lee of taylor\u2019s college says it is unrealistic to expect parents to constantly monitor their children\u2019s inter",
     "controversy_score": 0.1176,
     "confidence": 0.01,
     "stream_signals": {
       "silence": {
-        "silence_score": 0.9231,
+        "silence_score": 0.9538,
         "structural_importance": 0.415,
         "suppression_pattern": "NORMAL",
-        "news_mentions": 13,
-        "social_mentions": 7
+        "news_mentions": 7,
+        "social_mentions": 5
       }
     },
     "bias_dimensions_at_risk": [
       "general"
     ],
     "detection_type": "silence_anomaly",
-    "timestamp": "2026-03-29T00:40:22.089377+00:00",
+    "timestamp": "2026-03-29T03:09:58.213948+00:00",
     "priority": "low",
-    "priority_rank": 449
+    "priority_rank": 455
+  },
+  {
+    "issue_id": "TFA-2026-15959",
+    "title": "mic perlukan masa, persiapan pn tak terjejas, kata pemimpin pas. bendahari iskandar samad kata keputusan mic untuk menilai semula keadaan susulan perubahan dalam pn perkara biasa dalam politik.",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9696,
+        "structural_importance": 0.465,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 8,
+        "social_mentions": 6
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "political"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.213951+00:00",
+    "priority": "low",
+    "priority_rank": 456
+  },
+  {
+    "issue_id": "TFA-2026-15960",
+    "title": "raising",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9769,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 3,
+        "social_mentions": 3
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214268+00:00",
+    "priority": "low",
+    "priority_rank": 457
+  },
+  {
+    "issue_id": "TFA-2026-15961",
+    "title": "social",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9538,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 7,
+        "social_mentions": 5
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214278+00:00",
+    "priority": "low",
+    "priority_rank": 458
+  },
+  {
+    "issue_id": "TFA-2026-15962",
+    "title": "low",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9385,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 7,
+        "social_mentions": 9
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214291+00:00",
+    "priority": "low",
+    "priority_rank": 459
+  },
+  {
+    "issue_id": "TFA-2026-15963",
+    "title": "pilot",
+    "controversy_score": 0.1176,
+    "confidence": 0.01,
+    "stream_signals": {
+      "silence": {
+        "silence_score": 0.9077,
+        "structural_importance": 0.415,
+        "suppression_pattern": "NORMAL",
+        "news_mentions": 8,
+        "social_mentions": 16
+      }
+    },
+    "bias_dimensions_at_risk": [
+      "general"
+    ],
+    "detection_type": "silence_anomaly",
+    "timestamp": "2026-03-29T03:09:58.214294+00:00",
+    "priority": "low",
+    "priority_rank": 460
   },
   {
     "issue_id": "TFA-2026-12990",
@@ -10169,7 +10413,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-28T14:14:49.304007+00:00",
     "priority": "low",
-    "priority_rank": 450
+    "priority_rank": 461
   },
   {
     "issue_id": "TFA-2026-7718",
@@ -10193,7 +10437,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T06:33:06.303562+00:00",
     "priority": "low",
-    "priority_rank": 451
+    "priority_rank": 462
   },
   {
     "issue_id": "TFA-2026-11619",
@@ -10224,7 +10468,7 @@
     "detection_type": "both",
     "timestamp": "2026-03-28T00:35:19.176426+00:00",
     "priority": "low",
-    "priority_rank": 452
+    "priority_rank": 463
   },
   {
     "issue_id": "TFA-2026-14376",
@@ -10248,7 +10492,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T12:20:36.552945+00:00",
     "priority": "low",
-    "priority_rank": 453
+    "priority_rank": 464
   },
   {
     "issue_id": "TFA-2026-9594",
@@ -10272,7 +10516,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T18:25:35.531037+00:00",
     "priority": "low",
-    "priority_rank": 454
+    "priority_rank": 465
   },
   {
     "issue_id": "TFA-2026-15871",
@@ -10296,7 +10540,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T14:25:47.515497+00:00",
     "priority": "low",
-    "priority_rank": 455
+    "priority_rank": 466
   },
   {
     "issue_id": "TFA-2026-3378",
@@ -10320,7 +10564,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T00:35:44.154451+00:00",
     "priority": "low",
-    "priority_rank": 456
+    "priority_rank": 467
   },
   {
     "issue_id": "TFA-2026-11913",
@@ -10344,10 +10588,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T08:23:22.031789+00:00",
     "priority": "low",
-    "priority_rank": 457
+    "priority_rank": 468
   },
   {
-    "issue_id": "TFA-2026-15869",
+    "issue_id": "TFA-2026-16383",
     "title": "sprm",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10368,7 +10612,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T14:25:47.515451+00:00",
     "priority": "low",
-    "priority_rank": 458
+    "priority_rank": 469
   },
   {
     "issue_id": "TFA-2026-2906",
@@ -10392,10 +10636,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T22:12:15.508284+00:00",
     "priority": "low",
-    "priority_rank": 459
+    "priority_rank": 470
   },
   {
-    "issue_id": "TFA-2026-15634",
+    "issue_id": "TFA-2026-16139",
     "title": "rasuah",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10416,10 +10660,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T00:35:44.154546+00:00",
     "priority": "low",
-    "priority_rank": 460
+    "priority_rank": 471
   },
   {
-    "issue_id": "TFA-2026-15635",
+    "issue_id": "TFA-2026-16140",
     "title": "inam",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10440,10 +10684,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T00:35:44.154482+00:00",
     "priority": "low",
-    "priority_rank": 461
+    "priority_rank": 472
   },
   {
-    "issue_id": "TFA-2026-15633",
+    "issue_id": "TFA-2026-16138",
     "title": "skandal",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10464,10 +10708,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T00:35:44.154514+00:00",
     "priority": "low",
-    "priority_rank": 462
+    "priority_rank": 473
   },
   {
-    "issue_id": "TFA-2026-15705",
+    "issue_id": "TFA-2026-16210",
     "title": "undang-undang",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10488,10 +10732,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T04:43:09.347438+00:00",
     "priority": "low",
-    "priority_rank": 463
+    "priority_rank": 474
   },
   {
-    "issue_id": "TFA-2026-15872",
+    "issue_id": "TFA-2026-16385",
     "title": "perdana menteri",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10512,10 +10756,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T14:25:47.515411+00:00",
     "priority": "low",
-    "priority_rank": 464
+    "priority_rank": 475
   },
   {
-    "issue_id": "TFA-2026-15751",
+    "issue_id": "TFA-2026-16257",
     "title": "epf",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10536,7 +10780,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T14:38:08.348425+00:00",
     "priority": "low",
-    "priority_rank": 465
+    "priority_rank": 476
   },
   {
     "issue_id": "TFA-2026-5127",
@@ -10560,7 +10804,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T10:22:09.631642+00:00",
     "priority": "low",
-    "priority_rank": 466
+    "priority_rank": 477
   },
   {
     "issue_id": "TFA-2026-15773",
@@ -10584,7 +10828,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T14:32:20.351764+00:00",
     "priority": "low",
-    "priority_rank": 467
+    "priority_rank": 478
   },
   {
     "issue_id": "TFA-2026-6468",
@@ -10608,10 +10852,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T14:32:20.351705+00:00",
     "priority": "low",
-    "priority_rank": 468
+    "priority_rank": 479
   },
   {
-    "issue_id": "TFA-2026-15862",
+    "issue_id": "TFA-2026-16376",
     "title": "bangsa",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10632,7 +10876,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T04:52:10.648113+00:00",
     "priority": "low",
-    "priority_rank": 469
+    "priority_rank": 480
   },
   {
     "issue_id": "TFA-2026-13279",
@@ -10656,10 +10900,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T16:31:46.889899+00:00",
     "priority": "low",
-    "priority_rank": 470
+    "priority_rank": 481
   },
   {
-    "issue_id": "TFA-2026-15800",
+    "issue_id": "TFA-2026-16305",
     "title": "allah",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10680,10 +10924,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T00:38:22.422170+00:00",
     "priority": "low",
-    "priority_rank": 471
+    "priority_rank": 482
   },
   {
-    "issue_id": "TFA-2026-15783",
+    "issue_id": "TFA-2026-16288",
     "title": "agama",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10704,10 +10948,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T22:15:30.402169+00:00",
     "priority": "low",
-    "priority_rank": 472
+    "priority_rank": 483
   },
   {
-    "issue_id": "TFA-2026-15796",
+    "issue_id": "TFA-2026-16301",
     "title": "accountability",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10728,7 +10972,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T00:38:22.422166+00:00",
     "priority": "low",
-    "priority_rank": 473
+    "priority_rank": 484
   },
   {
     "issue_id": "TFA-2026-11908",
@@ -10752,10 +10996,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T03:09:51.147781+00:00",
     "priority": "low",
-    "priority_rank": 474
+    "priority_rank": 485
   },
   {
-    "issue_id": "TFA-2026-15799",
+    "issue_id": "TFA-2026-16304",
     "title": "gst",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10776,10 +11020,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T03:09:51.147758+00:00",
     "priority": "low",
-    "priority_rank": 475
+    "priority_rank": 486
   },
   {
-    "issue_id": "TFA-2026-15774",
+    "issue_id": "TFA-2026-16279",
     "title": "kos sara hidup",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10800,10 +11044,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T03:09:51.147794+00:00",
     "priority": "low",
-    "priority_rank": 476
+    "priority_rank": 487
   },
   {
-    "issue_id": "TFA-2026-15843",
+    "issue_id": "TFA-2026-16349",
     "title": "1mdb",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10824,10 +11068,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T10:24:46.830811+00:00",
     "priority": "low",
-    "priority_rank": 477
+    "priority_rank": 488
   },
   {
-    "issue_id": "TFA-2026-15815",
+    "issue_id": "TFA-2026-16319",
     "title": "kaum",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10848,10 +11092,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T08:23:22.031812+00:00",
     "priority": "low",
-    "priority_rank": 478
+    "priority_rank": 489
   },
   {
-    "issue_id": "TFA-2026-15863",
+    "issue_id": "TFA-2026-16377",
     "title": "melayu",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10872,10 +11116,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T06:33:06.303592+00:00",
     "priority": "low",
-    "priority_rank": 479
+    "priority_rank": 490
   },
   {
-    "issue_id": "TFA-2026-15636",
+    "issue_id": "TFA-2026-16141",
     "title": "inflation",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10896,10 +11140,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T06:31:53.550136+00:00",
     "priority": "low",
-    "priority_rank": 480
+    "priority_rank": 491
   },
   {
-    "issue_id": "TFA-2026-15854",
+    "issue_id": "TFA-2026-16362",
     "title": "freedom of speech",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10920,10 +11164,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T14:38:08.348407+00:00",
     "priority": "low",
-    "priority_rank": 481
+    "priority_rank": 492
   },
   {
-    "issue_id": "TFA-2026-15859",
+    "issue_id": "TFA-2026-16374",
     "title": "governance",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10944,10 +11188,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T00:38:51.269500+00:00",
     "priority": "low",
-    "priority_rank": 482
+    "priority_rank": 493
   },
   {
-    "issue_id": "TFA-2026-15861",
+    "issue_id": "TFA-2026-16375",
     "title": "racism",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -10968,7 +11212,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T04:52:10.648190+00:00",
     "priority": "low",
-    "priority_rank": 483
+    "priority_rank": 494
   },
   {
     "issue_id": "TFA-2026-15860",
@@ -10992,10 +11236,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T00:38:51.269519+00:00",
     "priority": "low",
-    "priority_rank": 484
+    "priority_rank": 495
   },
   {
-    "issue_id": "TFA-2026-15864",
+    "issue_id": "TFA-2026-16378",
     "title": "undi",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11016,10 +11260,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T06:33:06.303475+00:00",
     "priority": "low",
-    "priority_rank": 485
+    "priority_rank": 496
   },
   {
-    "issue_id": "TFA-2026-15865",
+    "issue_id": "TFA-2026-16379",
     "title": "economy",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11040,10 +11284,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T04:52:10.648143+00:00",
     "priority": "low",
-    "priority_rank": 486
+    "priority_rank": 497
   },
   {
-    "issue_id": "TFA-2026-15867",
+    "issue_id": "TFA-2026-16381",
     "title": "scandal",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11064,10 +11308,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T10:20:34.258284+00:00",
     "priority": "low",
-    "priority_rank": 487
+    "priority_rank": 498
   },
   {
-    "issue_id": "TFA-2026-15866",
+    "issue_id": "TFA-2026-16380",
     "title": "quota",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11088,10 +11332,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T06:33:06.303572+00:00",
     "priority": "low",
-    "priority_rank": 488
+    "priority_rank": 499
   },
   {
-    "issue_id": "TFA-2026-15868",
+    "issue_id": "TFA-2026-16382",
     "title": "vote",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11112,10 +11356,10 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T10:20:34.258186+00:00",
     "priority": "low",
-    "priority_rank": 489
+    "priority_rank": 500
   },
   {
-    "issue_id": "TFA-2026-15870",
+    "issue_id": "TFA-2026-16384",
     "title": "ringgit",
     "controversy_score": 0.1,
     "confidence": 0.0,
@@ -11136,7 +11380,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T12:20:36.552938+00:00",
     "priority": "low",
-    "priority_rank": 490
+    "priority_rank": 501
   },
   {
     "issue_id": "TFA-2026-15873",
@@ -11160,13 +11404,13 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T22:11:55.680228+00:00",
     "priority": "low",
-    "priority_rank": 491
+    "priority_rank": 502
   },
   {
-    "issue_id": "TFA-2026-15874",
+    "issue_id": "TFA-2026-16386",
     "title": "mahkamah",
     "controversy_score": 0.1,
-    "confidence": 0.0001,
+    "confidence": 0.0,
     "stream_signals": {
       "volume": {
         "alert": false,
@@ -11191,13 +11435,13 @@
     "detection_type": "both",
     "timestamp": "2026-03-28T00:35:19.176404+00:00",
     "priority": "low",
-    "priority_rank": 492
+    "priority_rank": 503
   },
   {
-    "issue_id": "TFA-2026-15876",
+    "issue_id": "TFA-2026-16388",
     "title": "mosque",
     "controversy_score": 0.1,
-    "confidence": 0.0001,
+    "confidence": 0.0,
     "stream_signals": {
       "volume": {
         "alert": false,
@@ -11215,13 +11459,13 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-28T00:35:19.175763+00:00",
     "priority": "low",
-    "priority_rank": 493
+    "priority_rank": 504
   },
   {
-    "issue_id": "TFA-2026-15877",
+    "issue_id": "TFA-2026-16389",
     "title": "conversion",
     "controversy_score": 0.1,
-    "confidence": 0.0001,
+    "confidence": 0.0,
     "stream_signals": {
       "volume": {
         "alert": false,
@@ -11239,13 +11483,13 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-28T00:35:19.175779+00:00",
     "priority": "low",
-    "priority_rank": 494
+    "priority_rank": 505
   },
   {
-    "issue_id": "TFA-2026-15875",
+    "issue_id": "TFA-2026-16387",
     "title": "assembly",
     "controversy_score": 0.1,
-    "confidence": 0.0001,
+    "confidence": 0.0,
     "stream_signals": {
       "volume": {
         "alert": false,
@@ -11263,7 +11507,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T22:11:55.680255+00:00",
     "priority": "low",
-    "priority_rank": 495
+    "priority_rank": 506
   },
   {
     "issue_id": "TFA-2026-3143",
@@ -11287,7 +11531,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-25T08:20:34.651542+00:00",
     "priority": "low",
-    "priority_rank": 496
+    "priority_rank": 507
   },
   {
     "issue_id": "TFA-2026-1401",
@@ -11311,7 +11555,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T18:25:35.530994+00:00",
     "priority": "low",
-    "priority_rank": 497
+    "priority_rank": 508
   },
   {
     "issue_id": "TFA-2026-6838",
@@ -11335,7 +11579,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T08:23:22.031829+00:00",
     "priority": "low",
-    "priority_rank": 498
+    "priority_rank": 509
   },
   {
     "issue_id": "TFA-2026-7591",
@@ -11359,7 +11603,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-26T16:31:19.459519+00:00",
     "priority": "low",
-    "priority_rank": 499
+    "priority_rank": 510
   },
   {
     "issue_id": "TFA-2026-11932",
@@ -11383,7 +11627,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T10:20:34.258241+00:00",
     "priority": "low",
-    "priority_rank": 500
+    "priority_rank": 511
   },
   {
     "issue_id": "TFA-2026-7214",
@@ -11407,7 +11651,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T03:09:51.353759+00:00",
     "priority": "low",
-    "priority_rank": 501
+    "priority_rank": 512
   },
   {
     "issue_id": "TFA-2026-0067",
@@ -11431,7 +11675,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T14:39:16.811943+00:00",
     "priority": "low",
-    "priority_rank": 502
+    "priority_rank": 513
   },
   {
     "issue_id": "TFA-2026-0081",
@@ -11455,7 +11699,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T14:39:16.812059+00:00",
     "priority": "low",
-    "priority_rank": 503
+    "priority_rank": 514
   },
   {
     "issue_id": "TFA-2026-0082",
@@ -11479,7 +11723,7 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-24T14:39:16.812066+00:00",
     "priority": "low",
-    "priority_rank": 504
+    "priority_rank": 515
   },
   {
     "issue_id": "TFA-2026-10120",
@@ -11503,6 +11747,6 @@
     "detection_type": "attention_spike",
     "timestamp": "2026-03-27T16:22:35.970921+00:00",
     "priority": "low",
-    "priority_rank": 505
+    "priority_rank": 516
   }
 ]
