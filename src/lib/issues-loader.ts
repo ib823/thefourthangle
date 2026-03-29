@@ -15,6 +15,7 @@ export interface IssueSummary {
   context: string;
   stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
   finalScore?: number;
+  hasImage?: boolean;
   cards: Array<{ t: string; lens?: string }>;
 }
 

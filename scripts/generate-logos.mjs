@@ -36,7 +36,7 @@ const T = 'T4A';
 const CAP_HEIGHT_RATIO = 0.72;
 const TEXT_WIDTH_RATIO = 2.05; // width / font-size for "T4A" in Satoshi Black
 
-function buildSvg({ fontSize, color, bgColor, width, height, rounded = 0 }) {
+function buildSvg({ fontSize, color, bgColor, width, height, rounded = 0, text = T }) {
   const bg = bgColor
     ? (rounded > 0
       ? `<rect width="${width}" height="${height}" rx="${rounded}" fill="${bgColor}"/>`
@@ -60,7 +60,7 @@ function buildSvg({ fontSize, color, bgColor, width, height, rounded = 0 }) {
       fill="${color}"
       text-anchor="middle"
       letter-spacing="${fontSize * 0.02}"
-    >${T}</text>
+    >${text}</text>
   </svg>`;
 }
 
@@ -116,10 +116,10 @@ async function main() {
     join(root, 'public', 'logo.png')
   );
 
-  // 2. Favicon — 32x32, ~90% height fill
-  const favFs = fontSizeForHeight(32, 0.90);
+  // 2. Favicon — 32x32, "TFA" sized by width so all 3 chars fit
+  const favFs = fontSizeForWidth(32, 0.92);
   await generate(
-    buildSvg({ fontSize: favFs, color: DARK, bgColor: null, width: 32, height: 32 }),
+    buildSvg({ fontSize: favFs, color: DARK, bgColor: null, width: 32, height: 32, text: 'TFA' }),
     join(root, 'public', 'favicon.png')
   );
 

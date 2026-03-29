@@ -11793,7 +11793,7 @@ export const ISSUES: Issue[] = [
 {
   id: "1784", opinionShift: 50, status: null, edition: 1,
   headline: "Highway Rest Areas Fail Audits at 65% of Locations",
-  context: "PLUS and LLM audits found 65% of highway rest and service areas failed cleanliness and facility standards in 2025.",
+  context: "PLUS and Lembaga Lebuhraya Malaysia audits found 65% of highway rest and service areas failed cleanliness and facility standards in 2025.",
   stageScores: { pa: 85, ba: 80, fc: 83, af: 56, ct: 75, sr: 69 }, finalScore: 89.5,
   cards: [
     { t: "hook", big: "65% of highway rest areas failed cleanliness audits in 2025", sub: "Toilet conditions and food hygiene most common failure categories" },
@@ -13355,7 +13355,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average response time for removal was 72 hours across platforms", sub: "TikTok responded fastest at 48 hours while Twitter/X averaged 120 hours", lens: "Critical" },
     { t: "fact", big: "Platforms employed only 280 Malay language moderators combined", sub: "Insufficient local capacity means most moderation relies on automated systems", lens: "Regional" },
     { t: "reframe", big: "Content moderation tests whether platform responsibility matches their reach in Malaysia", sub: "" },
-    { t: "view", big: "45,000 harmful posts monthly despite moderation. Platform scale makes human review insufficient; AI review is unaccountable.", sub: "" },
+    { t: "view", big: "45,000 harmful posts monthly despite moderation. Platform scale makes human review insufficient; automated review is unaccountable.", sub: "" },
   ]
 },
 {

@@ -7,6 +7,7 @@
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
+  import IssueImage from './IssueImage.svelte';
 
   import type { Issue } from '../data/issues';
 
@@ -150,6 +151,14 @@
       </button>
     </div>
     <p style="font-size:16px;color:var(--text-secondary);font-weight:450;line-height:1.6;margin:16px 0 0;">{issue.context}</p>
+
+    <!-- Hero image -->
+    <div style="margin:20px 0 0;border-radius:12px;overflow:hidden;background:#0f0f23;">
+      <picture>
+        <source srcset={`/images/issues/${issue.id}-hero.avif`} type="image/avif" />
+        <img src={`/images/issues/${issue.id}-hero.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
+      </picture>
+    </div>
 
     <!-- Opinion Shift -->
     <div style="display:flex;align-items:center;gap:12px;margin:20px 0 0;">

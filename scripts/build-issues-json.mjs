@@ -3,7 +3,7 @@
  * - public/issues-feed.json  — feed summaries (no card text)
  * - public/issues/[id].json  — full issue per file
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,6 +26,7 @@ const publishedIssues = issues.filter(i => i.published === true);
 console.log(`Issues: ${issues.length} total, ${publishedIssues.length} published`);
 
 // --- Feed summaries: strip card big/sub text ---
+const bgDir = join(root, 'public', 'og', 'backgrounds');
 const feedSummaries = publishedIssues.map(issue => ({
   id: issue.id,
   opinionShift: issue.opinionShift,
@@ -35,6 +36,7 @@ const feedSummaries = publishedIssues.map(issue => ({
   context: issue.context,
   stageScores: issue.stageScores,
   finalScore: issue.finalScore,
+  hasImage: existsSync(join(bgDir, `issue-${issue.id}-bg.jpg`)) || existsSync(join(bgDir, `issue-${issue.id}-bg.png`)),
   // Keep card structure for category derivation and card count, but strip body text
   cards: issue.cards.map(c => ({ t: c.t, lens: c.lens })),
 }));

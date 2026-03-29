@@ -6,6 +6,7 @@
   import { pressAction } from '../lib/actions/press';
   import { tween, countUp, ease } from '../lib/animation';
 
+  import IssueImage from './IssueImage.svelte';
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';
 
@@ -147,6 +148,13 @@
       <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
     {/if}
   </div>
+
+  <!-- Issue art -->
+  {#if issue.hasImage}
+    <div style="margin:12px -24px 0;max-height:200px;overflow:hidden;">
+      <IssueImage issueId={issue.id} size="card" aspectRatio="1/1" borderRadius="0" />
+    </div>
+  {/if}
 
   <!-- Headline -->
   <h2 class="headline" style="color:{isCompleted ? 'var(--text-secondary)' : 'var(--text-primary)'};">{issue.headline}</h2>

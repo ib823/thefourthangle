@@ -1,6 +1,7 @@
 <script lang="ts">
   import { opinionLabel, issueCategory } from '../data/issues';
   import VerdictBar from './VerdictBar.svelte';
+  import IssueImage from './IssueImage.svelte';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';
@@ -48,6 +49,12 @@
     display:flex;align-items:flex-start;gap:12px;
   "
 >
+  <!-- Thumbnail -->
+  {#if issue.hasImage}
+    <div style="width:48px;height:48px;flex-shrink:0;border-radius:8px;overflow:hidden;background:#0f0f23;">
+      <IssueImage issueId={issue.id} size="thumb" aspectRatio="1/1" borderRadius="8px" />
+    </div>
+  {/if}
   <div style="flex:1;min-width:0;">
     <!-- Leading indicator + headline -->
     <div style="display:flex;align-items:center;gap:6px;">

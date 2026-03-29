@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import VerdictBar from './VerdictBar.svelte';
+  import IssueImage from './IssueImage.svelte';
   import { opinionLabel, issueCategory } from '../data/issues';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -113,6 +114,13 @@
       </div>
     {/if}
   </div>
+
+  <!-- Issue art -->
+  {#if issue.hasImage}
+    <div style="margin:8px -18px 0;height:100px;overflow:hidden;">
+      <IssueImage issueId={issue.id} size="card" aspectRatio="auto" borderRadius="0" />
+    </div>
+  {/if}
 
   <!-- Headline -->
   <h3 style="font-size:15px;font-weight:{headlineWeight};color:{headlineColor};margin:10px 0 0;line-height:1.35;overflow-wrap:break-word;word-break:break-word;">{issue.headline}</h3>
