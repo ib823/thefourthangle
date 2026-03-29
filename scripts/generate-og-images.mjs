@@ -83,9 +83,11 @@ function stageColor(score) {
 }
 
 // ── Brand mark font (Satoshi Black) ──
-const satoshiPath = join(root, 'logo-concepts', 'satoshi_fonts', 'Satoshi_Complete', 'Fonts', 'OTF', 'Satoshi-Black.otf');
+const satoshiPath = join(root, 'fonts', 'satoshi', 'Satoshi-Black.ttf');
 const satoshiB64 = existsSync(satoshiPath) ? readFileSync(satoshiPath).toString('base64') : '';
-const FONT_FACE = satoshiB64 ? `<style>@font-face { font-family: 'SB'; font-weight: 900; src: url(data:font/otf;base64,${satoshiB64}) format('opentype'); }</style>` : '';
+const FONT_FACE = satoshiB64
+  ? `<style>@font-face { font-family: 'SB'; font-weight: 900; src: url(data:font/ttf;base64,${satoshiB64}) format('truetype'); }</style>`
+  : '';
 
 function buildSvg(issue) {
   const W = 1200;
@@ -155,7 +157,7 @@ function buildSvg(issue) {
   <rect width="${W}" height="${H}" fill="#0f0f23"/>
 
   <!-- Brand mark (centered top) -->
-  <text x="${CX}" y="${ST + 2}" font-family="${satoshiB64 ? 'SB' : 'sans-serif'}" font-weight="900" font-size="28" fill="#3B82F6" text-anchor="middle">4<tspan font-family="sans-serif" font-size="12" font-weight="700" fill="#3B82F6" letter-spacing="2" dx="6">THE FOURTH ANGLE</tspan></text>
+  <text x="${CX}" y="${ST + 4}" font-family="${satoshiB64 ? 'SB' : 'sans-serif'}" font-weight="900" font-size="24" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">T4A</text>
 
   <!-- Headline (centered) -->
   <text x="${CX}" y="${headlineY}" font-family="sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5" text-anchor="middle">${headlineTspans}</text>
@@ -194,9 +196,11 @@ for (const issue of issues) {
   try {
     const svg = buildSvg(issue);
     const outPath = join(outDir, `issue-${issue.id}.png`);
-    const bgPath = join(bgDir, `issue-${issue.id}-bg.png`);
+    const bgPathPng = join(bgDir, `issue-${issue.id}-bg.png`);
+    const bgPathJpg = join(bgDir, `issue-${issue.id}-bg.jpg`);
+    const bgPath = existsSync(bgPathPng) ? bgPathPng : existsSync(bgPathJpg) ? bgPathJpg : null;
 
-    if (existsSync(bgPath)) {
+    if (bgPath) {
       // Composite: AI background + dark gradient overlay + SVG data layer
       const bg = await sharp(bgPath).resize(1200, 630, { fit: 'cover' }).toBuffer();
       const gradient = Buffer.from(
