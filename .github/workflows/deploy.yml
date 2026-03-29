@@ -39,9 +39,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Extract commit subject
+        id: msg
+        run: echo "subject=$(echo '${{ github.event.head_commit.message }}' | head -1 | tr -d '"')" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=thefourthangle --branch=main --commit-message="${{ github.event.head_commit.message }}"
+          command: pages deploy dist --project-name=thefourthangle --branch=main --commit-message="${{ steps.msg.outputs.subject }}"
