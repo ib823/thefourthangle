@@ -151,8 +151,8 @@
 
   <!-- Issue art -->
   {#if issue.hasImage}
-    <div style="margin:12px -24px 0;max-height:200px;overflow:hidden;">
-      <IssueImage issueId={issue.id} size="card" aspectRatio="1/1" borderRadius="0" />
+    <div style="margin:12px -24px 0;border-radius:0;overflow:hidden;">
+      <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" />
     </div>
   {/if}
 
