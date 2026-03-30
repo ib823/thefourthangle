@@ -4,6 +4,7 @@
   import VerdictBar from './VerdictBar.svelte';
   import { CARD_TYPES, opinionLabel } from '../data/issues';
   import { markStarted, markCompleted } from '../stores/reader';
+  import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
@@ -102,6 +103,10 @@
     return card.t === 'fact' && card.lens ? `${m.label} \u00B7 ${card.lens}` : m.label;
   }
 
+  // C1: Animated opinion shift count-up
+  let displayOS = $state(issue.opinionShift);
+  let countUpCancel: (() => void) | null = null;
+
   // F13: Content fade+slide on article switch
   let transitioning = $state(false);
   let lastId = $state(issue.id);
@@ -110,9 +115,16 @@
       lastId = issue.id;
       transitioning = true;
       requestAnimationFrame(() => {
-        scrollEl?.scrollTo({ top: 0, behavior: 'instant' });
+        // C2: Smooth scroll to top
+        scrollEl?.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => { transitioning = false; }, 50);
       });
+      // C1: Count-up animation on issue switch
+      countUpCancel?.();
+      displayOS = 0;
+      setTimeout(() => {
+        countUpCancel = countUp(0, issue.opinionShift, 600, (v) => { displayOS = v; });
+      }, 100);
     }
     markStarted(issue.id);
   });
@@ -152,8 +164,8 @@
     </div>
     <p style="font-size:18px;color:var(--text-secondary);font-weight:450;line-height:1.65;margin:16px 0 0;max-width:65ch;">{issue.context}</p>
 
-    <!-- Hero image -->
-    <div style="margin:20px 0 0;border-radius:12px;overflow:hidden;background:#0f0f23;">
+    <!-- Hero image (edge-to-edge) -->
+    <div style="margin:20px -24px 0;overflow:hidden;background:var(--bg-sunken);">
       <picture>
         <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
         <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
@@ -163,7 +175,7 @@
     <!-- Opinion Shift -->
     <div style="display:flex;align-items:center;gap:12px;margin:20px 0 0;">
       <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={6} showLabel={false} /></div>
-      <span style="font-size:14px;font-weight:700;color:{barColor};">{issue.opinionShift}</span>
+      <span style="font-size:14px;font-weight:700;color:{barColor};font-variant-numeric:tabular-nums;">{displayOS}</span>
       <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
     </div>
     <p style="font-size:12px;color:var(--text-muted);margin:6px 0 0;">How much you'd miss by reading only the headline.</p>
@@ -268,6 +280,13 @@
       </button>
 
     </div>
+
+    <!-- Closing quote -->
+    {#if viewCard}
+      <blockquote style="font-size:15px;font-style:italic;color:var(--text-secondary);line-height:1.6;margin:24px 0 0;padding-left:16px;border-left:2px solid var(--border-subtle);max-width:65ch;">
+        {viewCard.big}
+      </blockquote>
+    {/if}
 
     <PushPrompt />
 

@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
-  import { opinionLabel, issueCategory } from '../data/issues';
+  import { opinionLabel, issueCategory, CARD_TYPES } from '../data/issues';
   import { pressAction } from '../lib/actions/press';
   import { tween, countUp, ease } from '../lib/animation';
 
@@ -178,7 +178,8 @@
   <div style="flex-shrink:0;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
       {#if isStarted}
-        <span style="font-size:12px;color:var(--score-warning);font-weight:500;">Continue reading</span>
+        {@const nextCard = issue.cards[readState?.progress ?? 0]}
+        <span style="font-size:12px;color:var(--score-warning);font-weight:500;">Next: {CARD_TYPES[nextCard?.t]?.label ?? 'Continue'}</span>
       {:else if isCompleted}
         <span style="font-size:12px;color:var(--text-muted);font-weight:500;">Read again</span>
       {/if}

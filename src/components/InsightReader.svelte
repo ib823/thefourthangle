@@ -60,6 +60,9 @@
   let shareOpen = $state(false);
   let shareCardIndex: number | null = $state(null);
   let showSwipeHint = $state(false);
+  let bigTextVisible = $state(true);
+  let subTextVisible = $state(true);
+  let subRevealTimer: ReturnType<typeof setTimeout> | null = null;
   let swipeHintFaded = $state(false);
   let completionVisible = $state(false);
   let completionButtonsVisible = $state<boolean[]>([]);
@@ -270,6 +273,12 @@
 
     animating = true;
     cancelAnimation?.();
+    // A1: Hide text for stagger reveal
+    if (!prefersReducedMotion) {
+      bigTextVisible = false;
+      subTextVisible = false;
+      if (subRevealTimer) clearTimeout(subRevealTimer);
+    }
 
     const width = getCardWidth();
     const exitTarget = direction === 'right' ? -width * 1.2 : width * 1.2;
@@ -333,6 +342,11 @@
           }
           animating = false;
           cancelAnimation = null;
+          // A1: Stagger text reveal — big first, sub 400ms later
+          bigTextVisible = true;
+          subRevealTimer = setTimeout(() => { subTextVisible = true; }, 400);
+          // A8: Haptic pulse on settle
+          haptic(3);
           announceCard();
         });
       } else {
@@ -381,6 +395,13 @@
     if (!cardEl) return;
     animating = true;
 
+    // A3: Edge glow flash
+    if (!prefersReducedMotion && cardEl) {
+      const glowSide = dragDeltaX > 0 ? 'inset -12px 0 20px -12px rgba(25,113,194,0.1)' : 'inset 12px 0 20px -12px rgba(25,113,194,0.1)';
+      cardEl.style.boxShadow = glowSide;
+      setTimeout(() => { if (cardEl) cardEl.style.boxShadow = ''; }, 300);
+    }
+
     const startPos = dragDeltaX;
     // Use SPRING_RUBBER with omega=18 equivalent
     const spring = createSpring(startPos, {
@@ -411,7 +432,12 @@
       showCompletion();
       return;
     }
-    goTo(current + 1, 'right');
+    // A2: Micro-pause before final card (reframe → view transition)
+    if (current === totalCards - 2 && !prefersReducedMotion) {
+      setTimeout(() => goTo(current + 1, 'right'), 600);
+    } else {
+      goTo(current + 1, 'right');
+    }
   }
 
   function prev() {
@@ -971,7 +997,6 @@
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
-            <SaveButton issueId={issue.id} cardIndex={current} />
             <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
@@ -980,9 +1005,9 @@
 
         <!-- Card center -->
         <div class="card-center" bind:this={cardContentEl} class:has-overflow={contentOverflows}>
-          <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;">{card.big}</p>
+          <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;opacity:{bigTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.big}</p>
           {#if card.sub}
-            <p class="sub-text">{card.sub}</p>
+            <p class="sub-text" style="opacity:{subTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.sub}</p>
           {/if}
           {#if contentOverflows}
             <div class="scroll-indicator" class:scroll-indicator-visible={scrollIndicatorVisible} style="top:{scrollState.scrollProgress * 100}%;"></div>
@@ -990,7 +1015,9 @@
         </div>
 
         <!-- Card bottom -->
-        <div class="card-bottom">
+        <div class="card-bottom" style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="touch-action:manipulation;"><SaveButton issueId={issue.id} cardIndex={current} /></div>
+          <div>
           {#if showSwipeHint && current === 0}
             <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe or tap arrows</span>
           {:else if card.t === 'fact' && connections.length > 0}
@@ -1000,6 +1027,7 @@
           {:else if current === totalCards - 1 && !completed}
             <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Last one</span>
           {/if}
+          </div>
         </div>
       </div>
 
@@ -1576,8 +1604,8 @@
     position: absolute;
     top: 55%;
     transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
+    width: 48px;
+    height: 48px;
     border: none;
     background: var(--bg-elevated);
     border-radius: 50%;
