@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { getNotifications, getUnreadCount, markAsRead, markAllAsRead, type NotificationItem } from '../stores/notifications';
+  import { getNotifications, getUnreadCount, markAsRead, markAllAsRead, removeNotification, clearAll, type NotificationItem } from '../stores/notifications';
 
   const VAPID_PUBLIC_KEY = 'BM2IpaheS2aS1-Fs6_EBmsWuSUZ09aYkndax5C9XKTd0qJzKUKRz1cYFb78yjtM8d_sEf0koC2wrUbOTSaY7GK4';
   const NOTIFY_API = 'https://tfa-notify.4thangle.workers.dev';
@@ -154,22 +154,30 @@
     open = false;
     refresh();
     if (item.url) {
-      const url = item.url;
-      if (url.startsWith('/')) {
-        window.location.href = url;
+      // Extract issue ID from URL and use SPA navigation
+      const issueMatch = item.url.match(/\/issue\/(\w+)/);
+      if (issueMatch) {
+        // Dispatch custom event so App.svelte can open the issue in-app
+        window.dispatchEvent(new CustomEvent('t4a-open-issue', { detail: { issueId: issueMatch[1] } }));
       } else {
-        try {
-          const parsed = new URL(url, window.location.origin);
-          if (parsed.origin === window.location.origin) {
-            window.location.href = parsed.href;
-          }
-        } catch { /* invalid URL — ignore */ }
+        window.location.href = item.url;
       }
     }
   }
 
+  function handleRemoveItem(e: MouseEvent, item: NotificationItem) {
+    e.stopPropagation();
+    removeNotification(item.id);
+    refresh();
+  }
+
   function handleMarkAllRead() {
     markAllAsRead();
+    refresh();
+  }
+
+  function handleClearAll() {
+    clearAll();
     refresh();
   }
 
@@ -214,9 +222,14 @@
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle, #E9ECEF);">
         <span style="font-family:var(--font-display, sans-serif);font-size:14px;font-weight:700;color:var(--text-primary, #212529);">Notifications</span>
-        {#if unread > 0}
-          <button onclick={handleMarkAllRead} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:12px;color:var(--focus, #1971C2);padding:8px;min-height:44px;display:flex;align-items:center;">Mark all read</button>
-        {/if}
+        <div style="display:flex;align-items:center;gap:4px;">
+          {#if unread > 0}
+            <button onclick={handleMarkAllRead} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:12px;color:var(--focus, #1971C2);padding:8px;min-height:44px;display:flex;align-items:center;">Mark all read</button>
+          {/if}
+          {#if items.length > 0}
+            <button onclick={handleClearAll} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-muted, #868E96);padding:8px;min-height:44px;display:flex;align-items:center;">Clear all</button>
+          {/if}
+        </div>
       </div>
 
       {#if items.length === 0}
@@ -251,6 +264,9 @@
               {/if}
               <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{item.title}</span>
               <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <!-- svelte-ignore a11y_no_static_element_interactions -->
+              <span onclick={(e) => handleRemoveItem(e, item)} style="flex-shrink:0;padding:4px;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;" title="Remove">&times;</span>
             </div>
             <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
           </button>

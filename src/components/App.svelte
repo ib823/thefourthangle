@@ -391,7 +391,28 @@
       }
     }
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+
+    // Listen for notification clicks to open specific issues
+    function onNotifOpen(e: Event) {
+      const id = (e as CustomEvent).detail?.issueId;
+      if (id) loadAndOpenIssue(id);
+    }
+    window.addEventListener('t4a-open-issue', onNotifOpen);
+
+    // Listen for SW navigate messages (notification click when app already open)
+    function onSwMessage(e: MessageEvent) {
+      if (e.data?.type === 'NAVIGATE_TO' && e.data.url) {
+        const match = e.data.url.match(/\/issue\/(\w+)/);
+        if (match) loadAndOpenIssue(match[1]);
+      }
+    }
+    navigator.serviceWorker?.addEventListener('message', onSwMessage);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('t4a-open-issue', onNotifOpen);
+      navigator.serviceWorker?.removeEventListener('message', onSwMessage);
+    };
   });
 </script>
 

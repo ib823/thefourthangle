@@ -131,13 +131,14 @@ self.addEventListener('notificationclick', (event) => {
 
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
-      // Focus existing tab if open
+      // If app is already open, focus it and navigate in-app
       for (const client of windowClients) {
-        if (client.url === targetUrl && 'focus' in client) {
+        if (new URL(client.url).origin === self.location.origin && 'focus' in client) {
+          client.postMessage({ type: 'NAVIGATE_TO', url: data.url || '/' });
           return client.focus();
         }
       }
-      // Open new tab
+      // No open tab — open new window
       return clients.openWindow(targetUrl);
     })
   );

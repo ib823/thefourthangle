@@ -79,6 +79,11 @@ export function markAllAsRead() {
   save(items);
 }
 
+export function removeNotification(id: string) {
+  const items = load().filter(n => n.id !== id);
+  save(items);
+}
+
 export function clearAll() {
   save([]);
 }
