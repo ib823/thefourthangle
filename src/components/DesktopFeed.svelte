@@ -26,7 +26,7 @@
     try { return JSON.parse(raw); } catch { return null; }
   }
 
-  let isSearching = $derived(searchQuery.trim().length > 0);
+  let isSearching = $derived(searchQuery.trim().length >= 2);
 
   // Filter state
   let filterMode = $state<'all' | 'new' | 'reading' | 'done'>('all');

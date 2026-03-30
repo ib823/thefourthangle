@@ -12,8 +12,9 @@
     onPrefetch?: (issue: IssueSummary) => void;
     issueHasConnections?: (id: string) => boolean;
     initialFeedIndex?: number;
+    searchQuery?: string;
   }
-  let { issues, onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0 }: Props = $props();
+  let { issues, onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '' }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
@@ -138,6 +139,9 @@
   class="feed-scroll"
   style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.15s ease;"
 >
+  {#if issues.length === 0 && searchQuery}
+    <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
+  {/if}
   {#each issues as issue, i (issue.id)}
     <div
       class="feed-card-slot"

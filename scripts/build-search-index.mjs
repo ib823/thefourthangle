@@ -36,16 +36,17 @@ const docs = publishedIssues.map(issue => {
     headline: issue.headline,
     context: issue.context,
     cardBigs,
+    cardSubs,
     lenses,
   };
 });
 
 // Create index
 const miniSearch = new MiniSearch({
-  fields: ['headline', 'context', 'cardBigs', 'lenses'],
+  fields: ['headline', 'context', 'cardBigs', 'cardSubs', 'lenses'],
   storeFields: ['id'],
   searchOptions: {
-    boost: { headline: 3, context: 2, cardBigs: 1, lenses: 1 },
+    boost: { headline: 3, context: 2, cardBigs: 1.5, cardSubs: 1, lenses: 1 },
     fuzzy: 0.2,
     prefix: true,
   },

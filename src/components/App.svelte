@@ -12,7 +12,7 @@
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
   import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
-  import { loadSearchIndex, search as doSearch, isLoaded as searchReady } from '../lib/search';
+  import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
 
   interface FeedIssue {
@@ -43,13 +43,15 @@
   // Full issue for the reader (has card text)
   let activeFullIssue = $state<Issue | null>(null);
 
+  let isSearching = $derived(searchQuery.trim().length >= 2);
   let filteredIssues = $derived.by(() => {
-    if (!searchQuery.trim()) return issues;
+    if (!searchQuery.trim() || !isSearching) return issues;
     const ids = doSearch(searchQuery);
     if (ids.length === 0) return [];
     const idSet = new Set(ids);
     return issues.filter(i => idSet.has(i.id));
   });
+  let searchResultCount = $derived(isSearching ? filteredIssues.length : -1);
 
   function onSearchFocus() {
     loadSearchIndex();
@@ -426,7 +428,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} />
+    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} />
   </main>
 
   {#if activeFullIssue}
@@ -448,11 +450,19 @@
           style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
         />
       </div>
+      {#if isSearching}
+        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
+          {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
+        </div>
+      {/if}
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
         {#each sortedIssues as issue, i}
           <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
         {/each}
       </div>
+      {#if isSearching && searchResultCount === 0}
+        <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery.trim()}"</div>
+      {/if}
     </div>
   </main>
 
