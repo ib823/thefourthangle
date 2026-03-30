@@ -262,6 +262,12 @@
                 onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }}
                 onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
               >
+                <div style="width:36px;height:36px;flex-shrink:0;border-radius:6px;overflow:hidden;background:var(--bg-sunken);">
+                  <picture>
+                    <source srcset={`/og/backgrounds/issue-${conn.id}-thumb.avif`} type="image/avif" />
+                    <img src={`/og/backgrounds/issue-${conn.id}-thumb.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" onerror={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }} />
+                  </picture>
+                </div>
                 <div style="flex:1;min-width:0;">
                   <div style="display:flex;align-items:center;gap:6px;">
                     {#if conn.readState === 'completed'}

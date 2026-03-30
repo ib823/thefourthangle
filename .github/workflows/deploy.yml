@@ -41,7 +41,11 @@ jobs:
 
       - name: Extract commit subject
         id: msg
-        run: echo "subject=$(echo '${{ github.event.head_commit.message }}' | head -1 | tr -d '"')" >> "$GITHUB_OUTPUT"
+        run: |
+          SUBJECT=$(echo "$COMMIT_MSG" | head -1 | tr -d '"')
+          echo "subject=$SUBJECT" >> "$GITHUB_OUTPUT"
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
