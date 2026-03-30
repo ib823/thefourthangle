@@ -161,7 +161,7 @@ self.addEventListener('message', (event) => {
   }
 
   if (event.data.type === 'APP_VISIBLE') {
-    // Clear all TFA notifications when app is opened
+    // Clear all T4A notifications when app is opened
     self.registration.getNotifications().then((notifications) => {
       notifications.forEach((n) => n.close());
     });

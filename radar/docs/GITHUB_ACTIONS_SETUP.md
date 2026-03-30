@@ -1,4 +1,4 @@
-# TFA Radar — GitHub Actions Setup
+# T4A Radar — GitHub Actions Setup
 
 Runs the radar automatically every 2 hours using GitHub Actions free tier. No server needed.
 
@@ -18,7 +18,7 @@ Runs the radar automatically every 2 hours using GitHub Actions free tier. No se
 
 ## 3. Verify first run
 
-- Go to **Actions** tab → **"TFA Radar Scan"** workflow
+- Go to **Actions** tab → **"T4A Radar Scan"** workflow
 - Click **"Run workflow"** button (manual trigger)
 - Watch the run complete (~3-5 minutes)
 - Check that `radar/output/issue-queue.json` was updated in the repo

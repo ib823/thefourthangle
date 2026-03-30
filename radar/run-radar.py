@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TFA Radar — Controversy Detection & Prediction Engine.
+"""T4A Radar — Controversy Detection & Prediction Engine.
 
 Main entry point. Orchestrates data source connectors, detection streams,
 and Bayesian fusion to produce a ranked issue queue.
@@ -439,7 +439,7 @@ def print_status():
         print("Issue queue is empty.")
         return
     print(f"\n{'='*70}")
-    print(f"TFA RADAR — Issue Queue ({len(issues)} active topics)")
+    print(f"T4A RADAR — Issue Queue ({len(issues)} active topics)")
     print(f"{'='*70}")
     for issue in issues:
         priority = issue.get("priority", "low").upper()
@@ -463,7 +463,7 @@ def print_topic_detail(topic_id):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="TFA Radar — Controversy Detection Engine")
+    parser = argparse.ArgumentParser(description="T4A Radar — Controversy Detection Engine")
     parser.add_argument("--once", action="store_true", help="Run single cycle and exit")
     parser.add_argument("--status", action="store_true", help="Print current issue queue")
     parser.add_argument("--history", action="store_true", help="Print 24-hour alert history")
@@ -473,7 +473,7 @@ def main():
     load_dotenv()
     config = load_config()
     log = setup_logging(config)
-    log.info("TFA Radar starting")
+    log.info("T4A Radar starting")
 
     # Query-only modes
     if args.status:

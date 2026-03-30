@@ -7,7 +7,7 @@
  * - The gap between what's said and what's real
  * - Accountability and patterns
  * - The reader's role
- * - What TFA does
+ * - What T4A does
  * - Malaysian context (without naming specific parties)
  * - Media and information
  * - Democracy and governance
@@ -143,7 +143,7 @@ export const QUOTES: string[] = [
   "Your vote is only as good as your understanding.",
   "Read like your rights depend on it. They do.",
 
-  // ── What TFA does ──
+  // ── What T4A does ──
   "What every side left out — in one read.",
   "We don't tell you what to think. We show you what was hidden.",
   "The fourth angle is the one nobody profits from showing you.",

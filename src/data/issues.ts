@@ -77,7 +77,7 @@ export function issueCategory(issue: Issue): string {
 
 export const ISSUES: Issue[] = [
 {
-    id: "0142", published: true, opinionShift: 91, status: "new", edition: 1,
+    id: "0142", opinionShift: 91, status: "new", edition: 1,
     headline: "The Clause Nobody Mentioned in the Amendment",
     context: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content.",
     stageScores: { pa: 88, ba: 74, fc: 91, af: 62, ct: 45, sr: 79 },
@@ -407,7 +407,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0154", published: true, opinionShift: 93, status: "updated", edition: 3,
+    id: "0154", opinionShift: 93, status: "updated", edition: 3,
     headline: "RM9 Billion for Ships That Do Not Exist",
     context: "The PAC's eighth report on the Littoral Combat Ship programme confirmed RM6.08B spent with zero vessels delivered, while Boustead Naval Shipyard's accounts remain qualified.",
     stageScores: { pa: 85, ba: 64, fc: 87, af: 56, ct: 40, sr: 72 },
@@ -885,7 +885,7 @@ export const ISSUES: Issue[] = [
 {
   id: "1005", opinionShift: 71, status: null, edition: 2,
   headline: "Only 3 of 13 state assemblies publish hansard online",
-  context: "A TFA audit found that only Selangor, Penang, and Sarawak publish complete state assembly proceedings online, leaving 10 states with no accessible legislative record.",
+  context: "A T4A audit found that only Selangor, Penang, and Sarawak publish complete state assembly proceedings online, leaving 10 states with no accessible legislative record.",
   stageScores: { pa: 79, ba: 64, fc: 82, af: 60, ct: 48, sr: 72 }, finalScore: 70.4,
   cards: [
     { t: "hook", big: "10 out of 13 Malaysian states keep assembly debates secret", sub: "Citizens cannot read what their elected representatives said or voted on" },
@@ -1065,7 +1065,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1018", published: true, opinionShift: 91, status: null, edition: 1,
+  id: "1018", opinionShift: 91, status: null, edition: 1,
   headline: "1MDB asset recovery reached only 38% after 9 years",
   context: "As of March 2026, Malaysia has recovered only RM16.3 billion of the estimated RM42.8 billion in 1MDB-related losses, nine years after investigations began.",
   stageScores: { pa: 92, ba: 86, fc: 94, af: 80, ct: 75, sr: 87 }, finalScore: 87.8,
@@ -2423,7 +2423,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1115", published: true, opinionShift: 74, status: null, edition: 1,
+  id: "1115", opinionShift: 74, status: null, edition: 1,
   headline: "Cabinet committees bypass parliament on 23 policy decisions",
   context: "Twenty-three major policy decisions in 2025 were made through cabinet committees rather than parliamentary debate, including changes affecting taxation, education, and environmental standards.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 76.4,
@@ -3193,7 +3193,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1170", published: true, opinionShift: 93, status: "new", edition: 1,
+  id: "1170", opinionShift: 93, status: "new", edition: 1,
   headline: "Bumiputera Contract Quota System Loses RM12B to Rent-Seeking",
   context: "A MACC investigation revealed that an estimated RM12 billion annually in government procurement value is lost to Ali Baba arrangements where Bumiputera quota holders sell contracts to non-Bumiputera operators for 5-15% commissions.",
   stageScores: { pa: 90, ba: 85, fc: 92, af: 79, ct: 74, sr: 87 }, finalScore: 84.5,
@@ -4481,7 +4481,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1262", published: true, opinionShift: 93, status: null, edition: 1,
+  id: "1262", opinionShift: 93, status: null, edition: 1,
   headline: "Syariah-civil jurisdiction clash affects 4,200 families",
   context: "Unilateral child conversion disputes and custody battles between syariah and civil courts affected over 4,200 families as of 2025.",
   stageScores: { pa: 90, ba: 81, fc: 92, af: 76, ct: 71, sr: 85 }, finalScore: 85.9,
@@ -5393,7 +5393,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1327", published: true, opinionShift: 91, status: "updated", edition: 1,
+  id: "1327", opinionShift: 91, status: "updated", edition: 1,
   headline: "Sosma Section 4 challenged in Federal Court test case",
   context: "A landmark Federal Court case in 2025 challenges the constitutionality of SOSMA Section 4's 28-day detention without judicial review.",
   stageScores: { pa: 88, ba: 78, fc: 91, af: 74, ct: 67, sr: 84 }, finalScore: 84.9,
@@ -5911,7 +5911,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1364", published: true, opinionShift: 91, status: "updated", edition: 1,
+  id: "1364", opinionShift: 91, status: "updated", edition: 1,
   headline: "Youth Unemployment Rate Doubles National Average at 10.8%",
   context: "DOSM reported 10.8% unemployment among 15-24 year olds in Q4 2025, compared to 5.2% nationally.",
   stageScores: { pa: 91, ba: 61, fc: 92, af: 56, ct: 41, sr: 69 }, finalScore: 69.2,
@@ -10083,7 +10083,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1662", published: true, opinionShift: 91, status: null, edition: 1,
+  id: "1662", opinionShift: 91, status: null, edition: 1,
   headline: "Wealth Gap: Top 10% Own 58.4% While Bottom 50% Own 7.6%",
   context: "The Credit Suisse Global Wealth Report 2025 shows Malaysia's top 10% own 58.4% of national wealth while the bottom 50% own 7.6%, with the gap widening across all ethnic groups.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 85 }, finalScore: 87.8,
@@ -13121,7 +13121,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1879", published: true, opinionShift: 91, status: "new", edition: 1,
+  id: "1879", opinionShift: 91, status: "new", edition: 1,
   headline: "Malaysia Arrests 3 Suspects in Nuclear Material Smuggling",
   context: "PDRM and IAEA cooperation led to arrest of 3 suspects in Penang attempting to sell enriched uranium material in February 2026.",
   stageScores: { pa: 82, ba: 59, fc: 76, af: 72, ct: 60, sr: 70 }, finalScore: 89.2,

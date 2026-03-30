@@ -64,7 +64,7 @@ function buildSvg({ fontSize, color, bgColor, width, height, rounded = 0, text =
   </svg>`;
 }
 
-function buildCircleSvg({ fontSize, color, bgColor, size }) {
+function buildCircleSvg({ fontSize, color, bgColor, size, text = T }) {
   const capHeight = fontSize * CAP_HEIGHT_RATIO;
   const baseline = size / 2 + capHeight / 2;
 
@@ -80,7 +80,7 @@ function buildCircleSvg({ fontSize, color, bgColor, size }) {
       fill="${color}"
       text-anchor="middle"
       letter-spacing="${fontSize * 0.02}"
-    >${T}</text>
+    >${text}</text>
   </svg>`;
 }
 
@@ -116,12 +116,19 @@ async function main() {
     join(root, 'public', 'logo.png')
   );
 
-  // 2. Favicon — 32x32, "TFA" sized by width so all 3 chars fit
-  const favFs = fontSizeForWidth(32, 0.92);
+  // 2. Favicon — 32x32 with navy background for tab visibility
+  // Best practice: bold symbol on solid bg, not transparent text lost in tab bar
+  const favFs = fontSizeForWidth(32, 0.82);
   await generate(
-    buildSvg({ fontSize: favFs, color: DARK, bgColor: null, width: 32, height: 32, text: 'TFA' }),
+    buildSvg({ fontSize: favFs, color: WHITE, bgColor: NAVY, width: 32, height: 32, rounded: 6 }),
     join(root, 'public', 'favicon.png')
   );
+
+  // 2b. SVG favicon — scales perfectly at any tab/bookmark size
+  const svgFavicon = buildSvg({ fontSize: 24, color: WHITE, bgColor: NAVY, width: 32, height: 32, rounded: 6 });
+  const { writeFileSync } = await import('node:fs');
+  writeFileSync(join(root, 'public', 'favicon.svg'), svgFavicon);
+  console.log(`  ✓ public/favicon.svg`);
 
   // 3. App icons — 78% WIDTH fill (width is the constraining dimension for "T4A" in a square)
   for (const size of [192, 512]) {
@@ -166,7 +173,15 @@ async function main() {
     );
   }
 
-  console.log('\nDone. 13 logo files generated (optimized fill ratios).');
+  // 8. Twitter/X profile — 400x400 circle, T4A 62% width fill
+  mkdirSync(join(root, 'logo-concepts'), { recursive: true });
+  const twitterFs = fontSizeForWidth(400, 0.62);
+  await generate(
+    buildCircleSvg({ fontSize: twitterFs, color: WHITE, bgColor: NAVY, size: 400 }),
+    join(root, 'logo-concepts', 'twitter-profile-400x400.png')
+  );
+
+  console.log('\nDone. 14 logo files generated (optimized fill ratios).');
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

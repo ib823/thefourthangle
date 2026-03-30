@@ -11,7 +11,7 @@
 
 # FOUNDATIONAL PRINCIPLE
 
-TFA is neutral in analysis but NOT neutral in presentation energy.
+T4A is neutral in analysis but NOT neutral in presentation energy.
 
 Neutral ≠ boring. Neutral = no political lean.
 The content must be ALIVE, URGENT, COMPELLING — while taking no side.
@@ -138,14 +138,14 @@ signal what kind of stakes are involved.
 brain and creates a FEELING before the headline creates a THOUGHT.
 
 **What it is NOT:**
-- Not a news photo (TFA doesn't do photojournalism)
+- Not a news photo (T4A doesn't do photojournalism)
 - Not realistic imagery (uncanny, untrustworthy)
 - Not a stock illustration (generic, forgettable)
 
 **What it IS:**
 A purpose-built conceptual sketch — minimal, symbolic, hand-drawn aesthetic.
 Think editorial illustration in The Economist or courtroom sketches.
-Bold lines. Limited palette (2-3 colours from TFA brand palette).
+Bold lines. Limited palette (2-3 colours from T4A brand palette).
 Abstract enough to not editorialise. Concrete enough to be recognisable.
 
 **Visual styles available (the pipeline selects the appropriate one):**
@@ -186,7 +186,7 @@ Example: Missing accountability in a scandal →
 - Generated at Step 6, AFTER full analysis is complete
 - Must not favour any political reading of the issue
 - Must not include real faces, flags, or party symbols
-- Must use only TFA brand colours (red, blue, slate, silver on white/dark)
+- Must use only T4A brand colours (red, blue, slate, silver on white/dark)
 - Must work at 80×80px (card thumbnail) AND 400×300px (featured)
 - Style is selected by the synthesis review based on which visual
   metaphor best represents the STRUCTURE of the issue, not its conclusion
@@ -203,7 +203,7 @@ Example: Missing accountability in a scandal →
 **Purpose:** The intellectual hook. Makes the reader feel "I need to
 know more about this" without telling them what to think.
 
-**This is the hardest content element in TFA.** It must be:
+**This is the hardest content element in T4A.** It must be:
 - Exciting (creates urgency or curiosity)
 - Neutral (does not telegraph the verdict)
 - Accurate (does not distort the issue)
@@ -311,7 +311,7 @@ the summary must make the reader feel the exchange is worth it.
 ```
 [SENTENCE 1: The situation in one line — what happened or what exists]
 [SENTENCE 2: The tension — what makes this complicated or contested]
-[SENTENCE 3: The TFA value-add — what the 6-stage analysis found]
+[SENTENCE 3: The T4A value-add — what the 6-stage analysis found]
 ```
 
 **Example:**
@@ -326,7 +326,7 @@ spending figures. Our 6-stage adversarial review traces every ringgit."
 
 Sentence 1: RM8B allocated (the fact)
 Sentence 2: Different figures reported (the tension)
-Sentence 3: 6-stage review traces it (the TFA promise)
+Sentence 3: 6-stage review traces it (the T4A promise)
 ```
 
 **Another example:**
@@ -342,10 +342,10 @@ independent review stages reached split conclusions."
 
 Sentence 1: Amendment passed (the fact)
 Sentence 2: Hidden clause redefines liability (the tension)
-Sentence 3: Six review stages split on implications (the TFA promise)
+Sentence 3: Six review stages split on implications (the T4A promise)
 ```
 
-**Approved phrasings for Sentence 3 (the TFA promise):**
+**Approved phrasings for Sentence 3 (the T4A promise):**
 ```
 "Our 6-stage adversarial review found..."
 "Six independent editorial stages [agree/disagree/reveal]..."
@@ -380,7 +380,7 @@ SENTENCE 2 (the tension):
   - Maximum 15 words
   - Tone: investigative, leaning forward
 
-SENTENCE 3 (the TFA promise):
+SENTENCE 3 (the T4A promise):
   - Must reference the multi-stage editorial process
   - Use ONLY approved phrasings (see above)
   - This sentence is WHY they click — it promises
@@ -435,7 +435,7 @@ SCORE BAR:
   Visual bar, filled proportionally.
   Gradient: red (0) → yellow (50) → blue (100)
   NOT green for high scores — green implies "good."
-  Blue implies "analytical depth" — TFA's brand colour for trust.
+  Blue implies "analytical depth" — T4A's brand colour for trust.
 ```
 
 **Per-stage dot scoring:**
@@ -449,9 +449,9 @@ SR dot: Based on final composite audit score
 ```
 
 **Why show this on the card (not just the article):**
-The verdict bar is TFA's signature. It is the visual proof that this
+The verdict bar is T4A's signature. It is the visual proof that this
 is not opinion journalism. Every card carries the evidence of process.
-It differentiates TFA from every other news source in the feed.
+It differentiates T4A from every other news source in the feed.
 
 **Word count:** Zero prose words. Pure data visualisation.
 Labels only: stage abbreviations (2 chars each) + score (max 3 digits).
@@ -527,7 +527,7 @@ Only ONE story is featured at a time. Selected by:
 PRIORITY 1: BREAKING + highest Dempster-Shafer conflict score
   (stages disagree the most = most analytically interesting)
 PRIORITY 2: BREAKING + highest omission detection count
-  (mainstream missed the most = highest TFA value-add)
+  (mainstream missed the most = highest T4A value-add)
 PRIORITY 3: Most recent + highest reader engagement signal
   (if available from push notification click-through data)
 ```
@@ -584,7 +584,7 @@ The reader must finish feeling SMARTER, not just INFORMED.
   - "Substantially balanced with moderate gaps in economic context."
   - "Significant framing bias detected across all mainstream sources."
   - "Factually accurate but systematically omits opposition perspective."
-- This sentence is the ONLY place where TFA makes a direct evaluative statement
+- This sentence is the ONLY place where T4A makes a direct evaluative statement
 - It must be precise enough to be falsifiable (a reader could disagree
   specifically with "moderate gaps in economic context")
 
@@ -627,14 +627,14 @@ SECTION 3: THE CONTESTED GROUND
   Structure: Position A says X because Y.
              Position B says X because Z.
              Position C (if exists) says...
-  Does NOT contain: any signal of which position TFA favours
+  Does NOT contain: any signal of which position T4A favours
 
   Why third: Now the reader has facts (Section 1), understands
   why it matters (Section 2), and can see the full landscape of
   disagreement (Section 3). They are equipped for the analysis.
 
 SECTION 4: WHAT THE REVIEW FOUND
-  Purpose: The TFA differentiator — multi-stage analytical findings
+  Purpose: The T4A differentiator — multi-stage analytical findings
   Tone: Forensic. Scientific report energy.
   Word count: 200–300 words (synthesis), expandable per stage
   Contains: synthesised findings from all 6 stages, areas of
@@ -645,12 +645,12 @@ SECTION 4: WHAT THE REVIEW FOUND
     - Key finding (the single most important analytical insight)
 
   Why fourth: This is the payoff. The reader has been equipped
-  with facts, context, and the disagreement landscape. Now TFA
+  with facts, context, and the disagreement landscape. Now T4A
   delivers what no other source can — six independent analytical
   perspectives synthesised into actionable understanding.
 
 SECTION 5: WHAT'S MISSING
-  Purpose: Omission detection — the most valuable thing TFA does
+  Purpose: Omission detection — the most valuable thing T4A does
   Tone: Investigative. Quiet alarm.
   Word count: 100–200 words
   Contains: specific facts, data points, or perspectives that
@@ -663,7 +663,7 @@ SECTION 5: WHAT'S MISSING
 
   Why last: This is the mic drop. After reading everything,
   the reader learns what NOBODY ELSE TOLD THEM. This is what
-  brings them back. This is TFA's addiction mechanism — and
+  brings them back. This is T4A's addiction mechanism — and
   it's an ethical one, because the addiction is to completeness.
 ```
 
@@ -728,7 +728,7 @@ Examples:
 ## 3D. BIAS VECTOR VISUALISATION
 
 **Purpose:** Make the mathematical framework VISIBLE and INTUITIVE.
-The 12-axis radar chart is the visual signature of TFA's rigour.
+The 12-axis radar chart is the visual signature of T4A's rigour.
 
 **The 12 axes, with reader-friendly labels:**
 
@@ -776,7 +776,7 @@ Geographic          Religious
 ```
 
 **Why 12 axes and not 8:**
-No major media outlet measures bias quantitatively. TFA's competitive
+No major media outlet measures bias quantitatively. T4A's competitive
 advantage is comprehensiveness. The 4 additional dimensions (Sources,
 Geographic, Economic, Gender) are universally recognised in academic
 media studies. Launching without them invites immediate criticism.
@@ -787,7 +787,7 @@ dimensionality as a clock face, which every reader already understands.
 
 ## 3E. THE OMISSION PANEL
 
-**Purpose:** The single most valuable output of TFA.
+**Purpose:** The single most valuable output of T4A.
 This is what justifies the platform's existence.
 
 **Display format:**
@@ -878,7 +878,7 @@ TITLE: max 50 characters including category prefix
 
 BODY: max 80 characters
   Format: "78/100 — Six review stages split on the key claim"
-  ALWAYS starts with the score — it's TFA's signature.
+  ALWAYS starts with the score — it's T4A's signature.
   Followed by the single most clickable fact about the analysis.
 
 COMBINED: must make sense as a standalone micro-story.
@@ -901,9 +901,9 @@ COMBINED: must make sense as a standalone micro-story.
 # "The system health dashboard."
 # ═══════════════════════════════════════════════════════════
 
-This is not an article view. This is TFA's transparency page —
+This is not an article view. This is T4A's transparency page —
 showing the overall health of Malaysian media coverage as measured
-by TFA's analysis pipeline.
+by T4A's analysis pipeline.
 
 **Content elements:**
 
@@ -922,7 +922,7 @@ Alert badges        Categories with coverage < 40%      2-3 words each
 
 **The insight sentence:**
 Generated daily, one sentence that captures the most significant
-pattern in TFA's aggregate analysis.
+pattern in T4A's aggregate analysis.
 
 ```
 Examples:
@@ -936,7 +936,7 @@ since the amendment passed."
 announcement, returning to baseline by Thursday."
 ```
 
-**This sentence is the editorial voice of TFA's DATA, not of TFA's TEAM.**
+**This sentence is the editorial voice of T4A's DATA, not of T4A's TEAM.**
 It describes what the numbers show. It does not interpret what
 the numbers mean. The reader draws their own conclusion.
 
@@ -957,7 +957,7 @@ RESULTS:
   Sorted by relevance, then recency
   Each result shows matching text highlighted
   "No results" state: "No analysis found for '[query]'.
-  TFA covers issues as they emerge in Malaysian discourse."
+  T4A covers issues as they emerge in Malaysian discourse."
 ```
 
 ---
@@ -967,7 +967,7 @@ RESULTS:
 # "How the platform grows without marketing."
 # ═══════════════════════════════════════════════════════════
 
-When a reader shares a TFA article, the shared preview must
+When a reader shares a T4A article, the shared preview must
 work as hard as the card in the feed.
 
 **Open Graph / Social share preview:**
@@ -1001,7 +1001,7 @@ Read the 6-stage analysis: [URL]"
 ```
 
 Short. Intriguing. The score is always there.
-It's TFA's version of a Rotten Tomatoes percentage.
+It's T4A's version of a Rotten Tomatoes percentage.
 
 ---
 
@@ -1011,7 +1011,7 @@ It's TFA's version of a Rotten Tomatoes percentage.
 # ═══════════════════════════════════════════════════════════
 
 Every article ends with an audit footer that publishes all
-process metadata. This is TFA's ultimate trust signal.
+process metadata. This is T4A's ultimate trust signal.
 
 **Audit footer contents:**
 

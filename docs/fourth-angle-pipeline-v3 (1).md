@@ -302,7 +302,7 @@ Score = 100 × (1 - α₁·‖β*‖ - α₂·NDS - α₃·EMS - α₄·(1-SF) -
 Score = 78 ± 7 (95% CI, adjusted for source correlation)
 ```
 
-Unadjusted CI ≈ ±4. Widened by √(n/n_eff) to account for inter-stage correlation. Consistent with TFA's own Confidence Inflation dimension (dimension 8).
+Unadjusted CI ≈ ±4. Widened by √(n/n_eff) to account for inter-stage correlation. Consistent with T4A's own Confidence Inflation dimension (dimension 8).
 
 ---
 

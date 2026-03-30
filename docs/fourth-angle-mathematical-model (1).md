@@ -793,7 +793,7 @@ The uncertainty comes from:
 - Report the 2.5th and 97.5th percentile as the confidence interval
 - **Widened by √(n/n_eff) to account for inter-stage correlation** (see §7.3)
 
-Note: The unadjusted CI before correlation correction is approximately ±4. The widened interval reflects measured inter-stage correlation, consistent with TFA's own anti-overclaiming standards (dimension 8: Confidence inflation).
+Note: The unadjusted CI before correlation correction is approximately ±4. The widened interval reflects measured inter-stage correlation, consistent with T4A's own anti-overclaiming standards (dimension 8: Confidence inflation).
 
 ---
 
@@ -875,7 +875,7 @@ Published on every output: "Independence Index: I = [value]. Target: I > 0.6."
 
 6. **Language and cultural nuance.** Malaysian political discourse involves code-switching (Malay/English/Chinese/Tamil), cultural references, and sensitivity hierarchies (Malay rulers, religious institutions) that generic NLP analysis may not capture accurately.
 
-7. **Neutrality is undefined.** There is no objective, universal definition of "neutral." TFA claims "measurably balanced against a published standard" — not "neutral." This distinction is fundamental.
+7. **Neutrality is undefined.** There is no objective, universal definition of "neutral." T4A claims "measurably balanced against a published standard" — not "neutral." This distinction is fundamental.
 
 8. **Legal immunity is not conferred by mathematics.** The math demonstrates editorial care, which supports but does not replace legal compliance. Content involving 3R (race, religion, royalty) requires human legal review regardless of composite score.
 

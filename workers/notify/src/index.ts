@@ -1,5 +1,5 @@
 /**
- * TFA Push Notification Worker
+ * T4A Push Notification Worker
  * - API: /api/subscribe, /api/unsubscribe, /api/heartbeat
  * - CRON: new issue detection (15min), weekly digest (Mon), re-engagement (daily)
  */

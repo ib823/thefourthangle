@@ -26,14 +26,14 @@ import numpy as np
 from loguru import logger
 
 
-# TFA bias dimensions
-TFA_DIMENSIONS = {
+# T4A bias dimensions
+T4A_DIMENSIONS = {
     "ethnic", "religious", "political", "economic", "legal",
     "gender", "urban_rural", "generational", "class", "environmental",
     "institutional", "cultural",
 }
 
-# Keywords mapping institutional events to TFA dimensions
+# Keywords mapping institutional events to T4A dimensions
 DIMENSION_KEYWORDS = {
     "ethnic": {"malay", "melayu", "chinese", "cina", "indian", "india", "bumiputera",
                "race", "kaum", "bangsa", "vernacular", "hak istimewa", "special rights",
@@ -114,7 +114,7 @@ def _extract_fiscal_magnitude(text: str) -> float:
 
 
 def _detect_dimensions(text: str) -> set[str]:
-    """Detect which TFA bias dimensions an event touches."""
+    """Detect which T4A bias dimensions an event touches."""
     text_lower = text.lower()
     dims = set()
     for dim, keywords in DIMENSION_KEYWORDS.items():

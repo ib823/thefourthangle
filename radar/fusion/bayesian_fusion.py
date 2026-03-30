@@ -237,7 +237,7 @@ class BayesianFusion:
             reverse=True,
         ):
             self._issue_counter += 1
-            issue_id = f"TFA-2026-{self._issue_counter:04d}"
+            issue_id = f"T4A-2026-{self._issue_counter:04d}"
 
             # Determine bias dimensions at risk
             dimensions = self._map_bias_dimensions(topic_id, topic.stream_signals)
@@ -356,7 +356,7 @@ class BayesianFusion:
         return formatted
 
     def _map_bias_dimensions(self, topic_id: str, signals: dict) -> list[str]:
-        """Map stream signals to TFA bias dimensions at risk."""
+        """Map stream signals to T4A bias dimensions at risk."""
         dimensions = set()
         topic_lower = topic_id.lower()
 

@@ -13,7 +13,7 @@
  *   1 = errors found (build should not proceed)
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -278,6 +278,15 @@ for (const issue of issues) {
   const uniqueLenses = new Set(factLenses);
   if (uniqueLenses.size < factLenses.length) {
     warn(id, 'cards', `Duplicate lens across fact cards: ${factLenses.join(', ')}`);
+  }
+
+  // ── Published issues MUST have a background image ──
+  if (issue.published) {
+    const bgDir = join(root, 'public', 'og', 'backgrounds');
+    const hasBg = existsSync(join(bgDir, `issue-${id}-bg.jpg`)) || existsSync(join(bgDir, `issue-${id}-bg.png`));
+    if (!hasBg) {
+      err(id, 'published', `BLOCKED: Published issue has no background image. Add public/og/backgrounds/issue-${id}-bg.{jpg,png} before publishing.`);
+    }
   }
 
   // ── Optional fields: related, sourceDate ──

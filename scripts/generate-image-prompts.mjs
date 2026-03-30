@@ -1,7 +1,7 @@
 /**
  * Generates AI image prompts for each issue.
  * Maps issue headlines/context to symbolic visual concepts,
- * then wraps them in a consistent TFA brand style prompt.
+ * then wraps them in a consistent T4A brand style prompt.
  * Output: public/og/prompts.json — feed to AI image generator.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -21,7 +21,7 @@ try {
   issues = eval('(' + arr + ')');
 } catch (e) { console.error('Parse error:', e.message); process.exit(1); }
 
-// ── Master style prompt (TFA trademark) ──
+// ── Master style prompt (T4A trademark) ──
 const MASTER_STYLE = `Abstract minimalist editorial illustration. Deep dark navy background (#0f0f23). Single symbolic object as the focal point, centered-left in frame. Muted warm color palette: amber highlights, steel blue accents, earth brown tones. Soft photographic grain texture throughout. Subtle dark vignette at edges. Dramatic single-source low-key lighting from upper left, amber-tinted. No text, no words, no letters, no logos, no watermarks. No human faces. Clean negative space on the right 60% of the frame. Atmospheric, contemplative, journalistic mood. Slight bird's-eye perspective. Ultra-high quality, 8K detail. Aspect ratio exactly 1.91:1 wide landscape format.`;
 
 // ── Theme-to-visual mapping ──

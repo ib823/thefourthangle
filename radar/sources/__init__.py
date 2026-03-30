@@ -1,4 +1,4 @@
-"""Data source connectors for TFA Radar."""
+"""Data source connectors for T4A Radar."""
 
 from datetime import datetime, timezone
 from typing import Any

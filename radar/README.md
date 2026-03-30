@@ -1,4 +1,4 @@
-# TFA Radar — Controversy Detection & Prediction Engine
+# T4A Radar — Controversy Detection & Prediction Engine
 
 Stage 0 of The Fourth Angle editorial pipeline. Scans Malaysian discourse to detect and predict controversies across ethnic, religious, political, and economic dimensions.
 
@@ -37,7 +37,7 @@ Based on the mathematical framework in `fourth-angle-controversy-radar-framework
                             │
                    ┌────────▼────────┐
                    │  ISSUE QUEUE    │
-                   │  Ranked output  │──→ TFA Pipeline Stage 1
+                   │  Ranked output  │──→ T4A Pipeline Stage 1
                    └─────────────────┘
 ```
 
@@ -81,7 +81,7 @@ The radar produces `output/issue-queue.json`:
 ```json
 [
   {
-    "issue_id": "TFA-2026-0142",
+    "issue_id": "T4A-2026-0142",
     "title": "keyword",
     "controversy_score": 0.82,
     "confidence": 0.75,
