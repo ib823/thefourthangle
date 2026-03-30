@@ -7,7 +7,7 @@
   }
   let { issueId, size, aspectRatio = '1/1', borderRadius = '8px' }: Props = $props();
 
-  let basePath = $derived(`/images/issues/${issueId}-${size}`);
+  let basePath = $derived(`/og/backgrounds/issue-${issueId}-${size}`);
 </script>
 
 <div class="issue-image-wrap" style="aspect-ratio:{aspectRatio};border-radius:{borderRadius};overflow:hidden;background:#0f0f23;">

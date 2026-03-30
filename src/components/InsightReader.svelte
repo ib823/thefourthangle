@@ -890,8 +890,8 @@
     <div style="padding:0 20px;margin-bottom:8px;">
       <div style="border-radius:10px;overflow:hidden;background:#0f0f23;max-width:440px;margin:0 auto;">
         <picture>
-          <source srcset={`/images/issues/${issue.id}-hero.avif`} type="image/avif" />
-          <img src={`/images/issues/${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
+          <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
+          <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
         </picture>
       </div>
     </div>

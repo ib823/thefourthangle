@@ -155,8 +155,8 @@
     <!-- Hero image -->
     <div style="margin:20px 0 0;border-radius:12px;overflow:hidden;background:#0f0f23;">
       <picture>
-        <source srcset={`/images/issues/${issue.id}-hero.avif`} type="image/avif" />
-        <img src={`/images/issues/${issue.id}-hero.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
+        <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
+        <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
       </picture>
     </div>
 
