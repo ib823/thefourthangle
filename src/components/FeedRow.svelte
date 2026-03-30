@@ -13,8 +13,17 @@
     onClick: () => void;
     hasReaction?: boolean;
     hasConnections?: boolean;
+    searchTerms?: string;
   }
-  let { issue, readState, isActive, onClick, hasReaction = false, hasConnections = false }: Props = $props();
+  let { issue, readState, isActive, onClick, hasReaction = false, hasConnections = false, searchTerms = '' }: Props = $props();
+
+  // L3: Highlight matching search terms in headline
+  function highlightText(text: string, terms: string): string {
+    if (!terms || terms.length < 2) return text;
+    const escaped = terms.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    return text.replace(regex, '<mark style="background:var(--amber-light);color:inherit;border-radius:2px;padding:0 1px;">$1</mark>');
+  }
 
   let hovered = $state(false);
   let scoreColor = $derived(
@@ -78,7 +87,7 @@
       {:else if issue.status === 'updated' && !readState}
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:2px 6px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
-      <span style="font-size:15px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{issue.headline}</span>
+      <span style="font-size:15px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>
     </div>
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
