@@ -22,7 +22,8 @@
     return unsub;
   });
 
-  let remaining = $derived(Math.max(0, (issueCount - readCount) * 2));
+  let unread = $derived(Math.max(0, issueCount - readCount));
+  let remaining = $derived(unread * 2);
   let hasIssues = $derived(issueCount > 0);
 
   // Build date injected at build time via Vite define
@@ -47,7 +48,7 @@
         <div style="height:12px;"></div>
         <div style="font-family:var(--font-body);font-size:20px;font-weight:400;color:var(--text-primary);font-style:italic;line-height:1.5;">{quote}</div>
         <div style="height:24px;"></div>
-        <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">~{remaining} min of reading remaining</div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">{#if unread > 0}{unread} unread · ~{remaining} min{:else}All caught up{/if}</div>
         <div style="height:24px;"></div>
         <div style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);">Select an issue from the feed</div>
       {:else}
