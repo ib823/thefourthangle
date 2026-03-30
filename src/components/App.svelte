@@ -45,6 +45,7 @@
   let activeFullIssue = $state<Issue | null>(null);
   let issueLoadError = $state(false);
   let issueLoading = $state(false);
+  let isOffline = $state(typeof navigator !== 'undefined' ? !navigator.onLine : false);
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
   let filteredIssues = $derived.by(() => {
@@ -216,6 +217,12 @@
   onMount(() => {
     checkViewport();
     window.addEventListener('resize', debouncedResize);
+
+    // K2: Offline detection
+    const goOffline = () => { isOffline = true; };
+    const goOnline = () => { isOffline = false; };
+    window.addEventListener('offline', goOffline);
+    window.addEventListener('online', goOnline);
 
     const tier = getAnimationTier();
     document.documentElement.classList.add('anim-tier-' + tier);
@@ -472,10 +479,16 @@
     return () => {
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('t4a-open-issue', onNotifOpen);
+      window.removeEventListener('offline', goOffline);
+      window.removeEventListener('online', goOnline);
       navigator.serviceWorker?.removeEventListener('message', onSwMessage);
     };
   });
 </script>
+
+{#if isOffline}
+  <div style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:fixed;top:0;left:0;right:0;z-index:9999;">You're offline — reading cached content</div>
+{/if}
 
 {#if viewMode === 'mobile'}
   <main style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">

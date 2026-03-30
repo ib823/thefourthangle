@@ -92,6 +92,9 @@
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
 
+    {#if hasConnections}
+      <span style="font-size:10px;color:var(--score-info);font-weight:600;margin-top:2px;display:inline-block;">Connected</span>
+    {/if}
 
     {#if issue.stageScores && issue.finalScore}
       <div style="margin-top:4px;">
