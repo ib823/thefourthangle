@@ -45,6 +45,13 @@ const INSTITUTIONS = [
   'Attorney General', 'Chief Justice', 'YDPA', 'Agong',
   'PAS', 'DAP', 'UMNO', 'PKR', 'Bersatu', 'Amanah', 'Warisan', 'GPS',
   'Perikatan Nasional', 'Pakatan Harapan', 'Barisan Nasional',
+  // Key programmes and bodies
+  '1MDB', 'LCS', 'MRT3', 'ECRL', 'HSR', 'JASA',
+  'Boustead', 'FGV', 'Sapura', 'Prasarana', 'PLUS',
+  'JPA', 'SPA', 'NADMA', 'CIDB', 'SPAN', 'DOE', 'JKR',
+  // Geographic
+  'Sabah', 'Sarawak', 'Penang', 'Johor', 'Kelantan', 'Terengganu',
+  'East Malaysia', 'Borneo',
 ];
 
 // Legislation and policies
@@ -180,10 +187,15 @@ for (const issue of issues) {
     }
   }
 
-  // Only keep connections with weight >= 2 (at least 2 shared entities)
-  // Sort by weight descending, limit to top 10
+  // Only keep connections with weight >= 2 AND at least 1 non-money entity shared
+  // Money-only connections are false positives (coincidental RM amounts)
   const strong = [...neighborWeights.entries()]
-    .filter(([, v]) => v.weight >= 2)
+    .filter(([, v]) => {
+      if (v.weight < 2) return false;
+      // Require at least 1 institution or law — not just money amounts
+      const hasNonMoney = v.entities.some(e => !e.startsWith('RM'));
+      return hasNonMoney;
+    })
     .sort((a, b) => b[1].weight - a[1].weight)
     .slice(0, 10)
     .map(([id, v]) => ({ id, weight: v.weight, sharedEntities: v.entities }));
