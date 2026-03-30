@@ -160,6 +160,36 @@
     announcement = `All ${totalCards} perspectives read.`;
   }
 
+  /**
+   * Auto-fit: reduce font size if card content overflows its container.
+   * Runs after card transition. No scroll needed — text always fits.
+   */
+  function autoFitCardText() {
+    if (!cardContentEl) return;
+    const bigEl = cardContentEl.querySelector('.big-text') as HTMLElement;
+    const subEl = cardContentEl.querySelector('.sub-text') as HTMLElement;
+    if (!bigEl) return;
+
+    // Reset to base sizes
+    const baseBig = card?.sub ? 24 : 22;
+    bigEl.style.fontSize = baseBig + 'px';
+    if (subEl) subEl.style.fontSize = '17px';
+
+    // Shrink until it fits (min 14px for big, 13px for sub)
+    let currentBig = baseBig;
+    let currentSub = 17;
+    const MIN_BIG = 14;
+    const MIN_SUB = 13;
+
+    for (let i = 0; i < 8; i++) {
+      if (cardContentEl.scrollHeight <= cardContentEl.clientHeight + 2) break;
+      currentBig = Math.max(MIN_BIG, currentBig - 1.5);
+      currentSub = Math.max(MIN_SUB, currentSub - 1);
+      bigEl.style.fontSize = currentBig + 'px';
+      if (subEl) subEl.style.fontSize = currentSub + 'px';
+    }
+  }
+
   // Find takeaway text (last view card)
   let takeaway = $derived.by(() => {
     for (let i = issue.cards.length - 1; i >= 0; i--) {
@@ -327,6 +357,7 @@
           animating = false;
           cancelAnimation = null;
           announceCard();
+          autoFitCardText();
           return;
         }
 
@@ -350,7 +381,7 @@
           cancelAnimation = null;
           // A1: Stagger text reveal — big first, sub 400ms later
           bigTextVisible = true;
-          subRevealTimer = setTimeout(() => { subTextVisible = true; }, 400);
+          subRevealTimer = setTimeout(() => { subTextVisible = true; autoFitCardText(); }, 400);
           // A8: Haptic pulse on settle
           haptic(3);
           announceCard();
@@ -530,15 +561,7 @@
     if (e.button !== 0) return;
     if ((e.target as HTMLElement)?.closest('button, a, input')) return;
 
-    // If content area is scrollable and touch landed there, let browser handle it
-    const target = e.target as HTMLElement;
-    if (target.closest('.card-center') && cardContentEl) {
-      const { scrollHeight, clientHeight } = cardContentEl;
-      if (scrollHeight > clientHeight + 2) return; // let browser scroll natively
-    }
-
-    // Block swipe initiation when user is mid-scroll in card content
-    if (cardContentEl && shouldBlockSwipe(cardContentEl)) return;
+    // No scroll blocking — card content auto-fits, never scrolls
 
     // Allow interruption of ongoing animation
     if (animating) {
@@ -833,6 +856,9 @@
     // Announce initial card for screen readers
     requestAnimationFrame(announceCard);
 
+    // Auto-fit initial card text
+    requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
+
     // Cache dot elements for perf
     requestAnimationFrame(cacheDotElements);
 
@@ -1042,13 +1068,10 @@
         </div>
 
         <!-- Card center -->
-        <div class="card-center" bind:this={cardContentEl} class:has-overflow={contentOverflows}>
+        <div class="card-center" bind:this={cardContentEl}>
           <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;opacity:{bigTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.big}</p>
           {#if card.sub}
             <p class="sub-text" style="opacity:{subTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.sub}</p>
-          {/if}
-          {#if contentOverflows}
-            <div class="scroll-indicator" class:scroll-indicator-visible={scrollIndicatorVisible} style="top:{scrollState.scrollProgress * 100}%;"></div>
           {/if}
         </div>
 
@@ -1371,10 +1394,8 @@
     justify-content: center;
     gap: 14px;
     min-height: 0;
-    overflow-y: auto;
-    overscroll-behavior-y: contain;
+    overflow: hidden;
     position: relative;
-    touch-action: pan-y; /* Allow native vertical scroll within card content */
   }
 
   .scroll-indicator {

@@ -305,13 +305,6 @@
 
     </div>
 
-    <!-- Closing quote -->
-    {#if viewCard}
-      <blockquote style="font-size:15px;font-style:italic;color:var(--text-secondary);line-height:1.6;margin:24px 0 0;padding-left:16px;border-left:2px solid var(--border-subtle);max-width:65ch;">
-        {viewCard.big}
-      </blockquote>
-    {/if}
-
     <PushPrompt />
 
     <div style="height:60px;"></div>
