@@ -43,6 +43,8 @@
 
   // Full issue for the reader (has card text)
   let activeFullIssue = $state<Issue | null>(null);
+  let issueLoadError = $state(false);
+  let issueLoading = $state(false);
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
   let filteredIssues = $derived.by(() => {
@@ -304,10 +306,20 @@
   let readerHistoryPushed = false;
 
   async function loadAndOpenIssue(id: string) {
-    const full = await loadFullIssue(id);
-    if (full) {
-      activeFullIssue = full;
+    issueLoading = true;
+    issueLoadError = false;
+    try {
+      const full = await loadFullIssue(id);
+      if (full) {
+        activeFullIssue = full;
+        issueLoadError = false;
+      } else {
+        issueLoadError = true;
+      }
+    } catch {
+      issueLoadError = true;
     }
+    issueLoading = false;
     if (!readerHistoryPushed) {
       history.pushState({ reader: true }, '');
       readerHistoryPushed = true;
@@ -537,7 +549,27 @@
         {issueHasConnections}
       />
 
-      {#if activeFullIssue}
+      {#if issueLoadError}
+        <!-- I1: Error state -->
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;max-width:300px;">
+            <p style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin:0 0 8px;">Couldn't load this issue</p>
+            <p style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);margin:0 0 16px;">Check your connection and try again.</p>
+            <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
+          </div>
+        </div>
+      {:else if issueLoading}
+        <!-- I2: Skeleton loader -->
+        <div style="flex:1;padding:40px 24px;max-width:640px;margin:0 auto;">
+          <div style="height:28px;width:70%;background:var(--bg-sunken);border-radius:6px;margin-bottom:16px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:16px;width:100%;background:var(--bg-sunken);border-radius:4px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:16px;width:85%;background:var(--bg-sunken);border-radius:4px;margin-bottom:24px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:6px;width:100%;background:var(--bg-sunken);border-radius:3px;margin-bottom:32px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:20px;width:50%;background:var(--bg-sunken);border-radius:4px;margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;width:90%;background:var(--bg-sunken);border-radius:4px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;width:75%;background:var(--bg-sunken);border-radius:4px;animation:shimmer 1.5s infinite;"></div>
+        </div>
+      {:else if activeFullIssue}
         <DesktopReader
           issue={activeFullIssue}
           onNext={isLastIssue ? undefined : openNextIssue}

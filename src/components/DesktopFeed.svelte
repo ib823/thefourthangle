@@ -202,7 +202,11 @@
     {#if isSearching}
       <div style="padding:6px 0;">
         <span style="font-size:11px;color:var(--text-tertiary);">
-          {issues.length} result{issues.length !== 1 ? 's' : ''}
+          {#if issues.length === 0 && searchQuery.trim().length >= 2}
+            No results for "{searchQuery.trim()}"
+          {:else}
+            {issues.length} result{issues.length !== 1 ? 's' : ''} for "{searchQuery.trim()}"
+          {/if}
         </span>
       </div>
     {:else if sections.length === 0}
