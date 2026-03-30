@@ -17,6 +17,7 @@ const bgDir = join(root, 'public', 'og', 'backgrounds');
 const outDir = join(root, 'public', 'images', 'issues');
 
 mkdirSync(outDir, { recursive: true });
+mkdirSync(bgDir, { recursive: true });
 
 const files = readdirSync(bgDir).filter(f => /^issue-\d+-bg\.(jpg|jpeg|png)$/i.test(f));
 const ids = files.map(f => f.match(/^issue-(\d+)-bg/)[1]);
