@@ -82,7 +82,13 @@ interface AffinityIssue {
 }
 
 // Affinity-based feed personalization
+let _affinityCache: { key: string; result: Record<string, number> } | null = null;
+
 export function computeAffinity(readMap: Record<string, string>, reactionMap: Record<string, number[]>, issues: AffinityIssue[]): Record<string, number> {
+  // G2: Memoize — only recompute if inputs changed
+  const key = JSON.stringify(readMap) + JSON.stringify(reactionMap);
+  if (_affinityCache?.key === key) return _affinityCache.result;
+
   const lensScores: Record<string, number> = {};
   for (const issue of issues) {
     const read = readMap[issue.id];
@@ -96,6 +102,8 @@ export function computeAffinity(readMap: Record<string, string>, reactionMap: Re
       lensScores[lens] += reacted * 0.5;
     }
   }
+
+  _affinityCache = { key, result: lensScores };
   return lensScores;
 }
 

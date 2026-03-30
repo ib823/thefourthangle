@@ -4,8 +4,9 @@
     size: 'thumb' | 'card' | 'hero';
     aspectRatio?: string;
     borderRadius?: string;
+    eager?: boolean;
   }
-  let { issueId, size, aspectRatio = '1/1', borderRadius = '8px' }: Props = $props();
+  let { issueId, size, aspectRatio = '1/1', borderRadius = '8px', eager = false }: Props = $props();
 
   let basePath = $derived(`/og/backgrounds/issue-${issueId}-${size}`);
 </script>
@@ -16,8 +17,9 @@
     <img
       src="{basePath}.jpg"
       alt=""
-      loading="lazy"
-      decoding="async"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding={eager ? 'sync' : 'async'}
+      fetchpriority={eager ? 'high' : undefined}
       style="width:100%;height:100%;object-fit:cover;display:block;"
     />
   </picture>

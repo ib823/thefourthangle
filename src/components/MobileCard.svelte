@@ -17,8 +17,9 @@
     onPrefetch?: () => void;
     hasReaction?: boolean;
     hasConnections?: boolean;
+    eager?: boolean;
   }
-  let { issue, readState, onOpen, onPrefetch, hasReaction = false, hasConnections = false }: Props = $props();
+  let { issue, readState, onOpen, onPrefetch, hasReaction = false, hasConnections = false, eager = false }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -151,7 +152,7 @@
   <!-- Issue art -->
   {#if issue.hasImage}
     <div style="margin:12px -24px 0;border-radius:0;overflow:hidden;">
-      <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" />
+      <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" {eager} />
     </div>
   {/if}
 

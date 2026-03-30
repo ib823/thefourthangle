@@ -82,7 +82,7 @@
 
     observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
           const slot = entry.target as HTMLElement;
           if (slot.dataset.divider) continue; // skip section dividers
           const idx = Number(slot.dataset.idx);
@@ -97,7 +97,7 @@
           }
         }
       }
-    }, { threshold: 0.5, root: containerEl });
+    }, { threshold: 0.4, root: containerEl });
 
     const slots = containerEl.querySelectorAll('.feed-card-slot');
     slots.forEach(s => observer!.observe(s));
@@ -191,6 +191,7 @@
           onPrefetch={() => onPrefetch?.(item.issue)}
           hasReaction={hasReaction(item.issue.id)}
           hasConnections={issueHasConnections?.(item.issue.id) ?? false}
+          eager={i === 0 || i === 1}
         />
       </div>
     {/if}
