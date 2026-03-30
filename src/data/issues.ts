@@ -14127,6 +14127,108 @@ export const ISSUES: Issue[] = [
     { t: "reframe", big: "Online Safety Act tests whether comprehensive regulation can balance protection with fundamental freedoms", sub: "" },
     { t: "view", big: "Comprehensive Online Safety Act 2026. Good regulation balances safety enforcement with expression rights through judicial review.", sub: "" },
   ]
+},
+{
+  id: "1951", published: true, opinionShift: 82, status: "new", edition: 1,
+  headline: "Seven Ships, One Phone Call, Zero Leverage",
+  context: "Seven Malaysian tankers including Petronas and MISC vessels were stranded in the Strait of Hormuz after Iran blocked the waterway on 28 February 2026. PM Anwar secured passage through a direct call to Iran's president — but Malaysia was not on Iran's original safe-passage list.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 88, ba: 72, fc: 85, af: 65, ct: 52, sr: 78 },
+  finalScore: 74.2,
+  related: ["1952", "1953"],
+  cards: [
+    { t: "hook", big: "Seven Malaysian tankers cleared to pass Hormuz after PM Anwar's call to Iran's president.", sub: "Three Petronas, two MISC, one Sapura, one Sepadu vessel were awaiting clearance. Iran initially granted blanket passage only to China, Russia, India, Iraq and Pakistan. Malaysia was not on the list." },
+    { t: "fact", big: "Malaysia is a CMF member on paper but has no deployed naval assets in the Gulf — and was still left off Iran's safe list.", sub: "Japan runs a hybrid SDF information-gathering mission near Hormuz without joining the US-led coalition. South Korea maintains a permanent Cheonghae Unit in the Gulf of Aden. Malaysia contributes nothing operational to Gulf maritime security.", lens: "Security" },
+    { t: "fact", big: "Brent crude hit $126 per barrel. The subsidy bill jumped to RM4 billion per month. Working households absorb the cost first.", sub: "Higher crude boosts Petronas revenue for federal coffers. But the RM4B monthly fuel subsidy, rising food transport costs, and fertiliser-driven grocery inflation land on B40 households, hawkers, fishers, and rural commuters — not on Petronas shareholders.", lens: "Economic" },
+    { t: "fact", big: "Malaysia banned US warships from its ports while seeking Iran's goodwill — a non-alignment stance that delivered passage but no structural security.", sub: "Non-alignment preserves diplomatic flexibility. But when ~2,000 ships are blocked globally and maritime traffic drops 90%, flexibility without capability means waiting for a phone call to be answered.", lens: "Political" },
+    { t: "reframe", big: "The question is not whether the ships got through. It is whether a trade-dependent nation can keep relying on personal calls when the next strait closes.", sub: "" },
+    { t: "view", big: "Diplomacy works until it doesn't. Japan and South Korea built institutional Gulf presence without abandoning independent foreign policy. Malaysia chose neither alliance nor capability — and the gap showed.", sub: "" },
+  ]
+},
+{
+  id: "1952", published: true, opinionShift: 71, status: "new", edition: 1,
+  headline: "Fuel Quota Cut Hits April 1 — Who Absorbs the 68% Price Jump",
+  context: "The monthly subsidised RON95 quota under BUDI95 drops from 300 to 200 litres on 1 April 2026. Government says 90% of users consume under 200 litres. Subsidised price stays at RM1.99/litre; above-quota purchases cost market rate. The subsidy bill has reached RM4 billion per month.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 86, ba: 68, fc: 82, af: 62, ct: 55, sr: 76 },
+  finalScore: 72.8,
+  related: ["1951", "1953", "1954"],
+  cards: [
+    { t: "hook", big: "RON95 stays at RM1.99. The government says 90% of users won't notice.", sub: "The quota drops from 300 to 200 litres per month on 1 April. The 90% figure has no published methodology, sample period, or source — it is a government assertion, not a verified statistic." },
+    { t: "fact", big: "Above-quota fuel costs 68% more. The burden falls on those who drive farthest with the fewest alternatives.", sub: "Rural B40 commuters, plantation workers, smallholders, and unregistered gig riders have no public transport fallback. But the strongest fiscal case exists too: universal fuel subsidies are regressive — T20 households with larger cars benefit most from cheap fuel. The quota cut is milder than full price liberalisation.", lens: "Economic" },
+    { t: "fact", big: "Indonesia paired identical subsidy cuts with direct cash transfers. Malaysia's policy offers no transitional support and no timeline for review.", sub: "India targeted LPG subsidies through beneficiary identification and direct benefit transfers. Thailand used diesel price stabilisation to manage transport-sector inflation. Malaysia's quota cut arrives two days after Hari Raya price controls end — compounding household cost pressure with no cushion.", lens: "Governance" },
+    { t: "fact", big: "Sixty years of car-centric planning left rural Malaysia and East Malaysia with zero public transport. The quota cut punishes the result, not the cause.", sub: "Outside the Klang Valley, there are no buses, no trains, and no alternatives. Women managing household budgets — school runs, clinic trips, elder care — absorb fuel cost shocks through trip rationing that never shows up in consumption data.", lens: "Social" },
+    { t: "reframe", big: "The policy question is not whether 90% are unaffected. It is whether a country with no rural public transport can cut fuel access without first building alternatives.", sub: "" },
+    { t: "view", big: "Subsidy reform is necessary. But reform without compensation, without transport alternatives, and without even a published basis for the '90% unaffected' claim is not reform — it is cost-shifting to those with the least voice.", sub: "" },
+  ]
+},
+{
+  id: "1953", published: true, opinionShift: 77, status: "new", edition: 1,
+  headline: "Vegetable Prices May Jump 50% in April — The Fertiliser Link Nobody Explains",
+  context: "One-third of global fertiliser shipments transit the Strait of Hormuz. With the waterway blocked since February 2026, fertiliser raw materials surged 100-150%. Hari Raya price controls on 12 vegetables ended 28 March. Farmers warn 30-50% price hikes in April.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 87, ba: 82, fc: 84, af: 68, ct: 55, sr: 79 },
+  finalScore: 76.8,
+  related: ["1951", "1952"],
+  cards: [
+    { t: "hook", big: "Food prices are rising because of the Middle East conflict. That is the convenient headline.", sub: "The real chain runs from the Strait of Hormuz through fertiliser ships to Cameron Highlands farms to your pasar malam stall — but it also runs through decades of agricultural policy failure that left Malaysia with no fertiliser stockpile and no domestic production." },
+    { t: "fact", big: "23 fertiliser vessels were blocked at Hormuz. A 25kg bag of nitrogen fertiliser jumped from RM240 to RM305 in two weeks — projected RM350 by mid-April.", sub: "But the Hormuz blockade is only half the story. Wholesaler-to-wet-market margins already extract 30-50% between farmgate and consumer. When a farmer sells kangkung at 30 sen per kg and you pay RM3 at pasar, the supply chain was broken long before any strait closed.", lens: "Economic" },
+    { t: "fact", big: "B40 households spend over 40% of income on food. T20 spend about 15%. A 50% vegetable price hike is a rounding error for one group and a meal skipped for the other.", sub: "Women manage 80% of household food purchasing. They absorb price shocks through smaller portions, cheaper substitutes, and fewer meals — adjustments that never appear in inflation statistics but show up in children's nutrition.", lens: "Social" },
+    { t: "fact", big: "Indonesia stockpiles fertiliser through Pupuk Indonesia and stabilises food prices through Bulog. Vietnam's price law covers fertilisers. Malaysia has neither mechanism.", sub: "Thailand declared fertiliser a controlled good with months of monitored reserves. Malaysia imports nearly all its fertiliser, holds no strategic stock, and has no price-stabilisation framework. FAMA and MARDI exist but have not delivered input-cost resilience in six decades.", lens: "Governance" },
+    { t: "reframe", big: "The question is not why prices are rising. It is why a country that knew Hormuz was a chokepoint for fertiliser never stockpiled a single bag.", sub: "" },
+    { t: "view", big: "Hormuz exposed the fragility. But the fragility was built at home — by palm-oil monoculture priorities, absent fertiliser reserves, and a supply chain where middlemen take more than farmers. The war made it visible. The policy failure made it inevitable.", sub: "" },
+  ]
+},
+{
+  id: "1954", published: true, opinionShift: 74, status: "new", edition: 1,
+  headline: "WFH for Civil Servants — Fuel Rationing, Workplace Reform, or Both",
+  context: "The government announced phased work-from-home for non-critical civil servants on 26 March 2026, the same day as the RON95 quota cut. Frontline services are excluded. No implementation details, timelines, or productivity metrics have been published.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 84, ba: 70, fc: 83, af: 64, ct: 58, sr: 78 },
+  finalScore: 74.0,
+  related: ["1951", "1952", "1955"],
+  cards: [
+    { t: "hook", big: "Civil servant WFH announced on the same day as the fuel quota cut, bundled with Hari Raya open house cancellations and minister travel bans.", sub: "The trigger is fuel conservation amid the Hormuz crisis. But a crisis-born policy can still produce lasting reform — if it comes with targets, infrastructure, and honesty about why it exists." },
+    { t: "fact", big: "Frontline workers excluded: nurses, teachers, police. These are disproportionately female, rural, and the longest commuters — denied the commute-reduction policy.", sub: "Teaching and nursing are female-heavy sectors. The exclusion means women in frontline roles commute daily without relief, while Grade 41+ administrative officers — more likely urban, male-dominated at senior levels — gain flexibility. The policy's fuel-saving logic is undermined by its own targeting.", lens: "Social" },
+    { t: "fact", big: "Malaysia has 1.7 million civil servants for 33 million people — one of the world's highest ratios. The COVID WFH experiment was abandoned because supervisors could not manage remotely.", sub: "Annual civil service wage bill exceeds RM41 billion with RM23 billion in pensions. Digital infrastructure outside Putrajaya remains patchy. Without productivity metrics, management training, or monitoring tools, WFH risks repeating the COVID pattern: announced with fanfare, quietly shelved within months.", lens: "Governance" },
+    { t: "fact", big: "The UK civil service runs a mature hybrid model with explicit attendance expectations. Singapore mandates flexible work request rights. Malaysia has published no guidelines, no eligibility criteria, no timeline.", sub: "Melaka, Penang, and Sarawak want to act but have no federal framework. Sarawak's geography and Penang's density need different approaches. A blanket guideline that fits Putrajaya will not fit Kapit.", lens: "Political" },
+    { t: "reframe", big: "The real question is not whether this is about fuel or flexibility. It is whether a civil service that could not sustain WFH during COVID can sustain it now — and whether anyone will measure.", sub: "" },
+    { t: "view", big: "Crisis can catalyse overdue reform. But reform requires targets, infrastructure, and honest communication. What Malaysia announced is none of these — it is a crisis response wearing reform's clothes. If it survives Hari Raya with real implementation details, it could become genuine progress. The prediction: it will not.", sub: "" },
+  ]
+},
+{
+  id: "1955", published: true, opinionShift: 68, status: "new", edition: 1,
+  headline: "No Raya Open Houses — Symbolic Savings, Real Losses, Honest Questions",
+  context: "Cabinet banned all government and GLC Hari Raya open houses and restricted ministers' overseas travel as a cost-saving measure. The savings are a fraction of the RM4 billion monthly fuel subsidy bill. The tradition is simultaneously Malaysia's most cross-racial political event and a patronage vehicle.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 82, ba: 72, fc: 82, af: 66, ct: 60, sr: 77 },
+  finalScore: 74.0,
+  related: ["1954", "1952"],
+  cards: [
+    { t: "hook", big: "Government cancels all Raya open houses to demonstrate fiscal discipline. The savings fund 1.8 minutes of the daily fuel subsidy.", sub: "The arithmetic makes the fiscal case untenable. But austerity signalling is not about arithmetic — it is about whether leaders tighten first before asking the public to tighten. That question is legitimate even if the savings are not." },
+    { t: "fact", big: "Open houses are simultaneously Malaysia's most cross-racial political tradition and a taxpayer-funded patronage vehicle.", sub: "A Malay MP hosting Chinese, Indian, and other guests is real muhibbah. It is also contract signalling — connected caterers, tent suppliers, and event firms receive government bookings worth an estimated RM15-25M across all levels. Both things are true. The analysis that mourns only the unity and ignores the patronage is incomplete.", lens: "Political" },
+    { t: "fact", big: "Female caterers and women-led food SMEs lose real income. Rural constituents lose their one annual face-to-face access to their YB.", sub: "Catering is 50-60% of open house budgets and female-dominated. The kampung auntie who walks to the MB's open house loses her one day of direct access. Meanwhile, T20 networkers and businessmen who attend for contract visibility lose a convenience, not a lifeline.", lens: "Social" },
+    { t: "fact", big: "A simpler open house — smaller tent, no VIP buffet, community potluck — could have preserved the tradition at near-zero cost. The government chose a total ban.", sub: "Other Muslim-majority governments during economic stress have scaled down festive hospitality rather than eliminated it. Malaysia's all-or-nothing approach signals that the goal was optics, not optimisation. Individual politicians may still host privately — the ban is on public funds, not on the tradition itself.", lens: "Governance" },
+    { t: "reframe", big: "The honest question is not whether open houses matter. It is whether Malaysia can distinguish between the tradition worth preserving and the patronage worth cutting — and whether any party in power would make that distinction.", sub: "" },
+    { t: "view", big: "Every party plays this game when in power, and mourns it when out. The ban will return the moment oil prices drop or an election approaches. What would be genuinely new is a government that kept the community gathering and cut the patronage — nobody has tried that yet.", sub: "" },
+  ]
+},
+{
+  id: "1956", published: true, opinionShift: 65, status: "new", edition: 1,
+  headline: "Expat Salary Floor Doubles to RM20K — The Talent Equation Nobody Solves",
+  context: "From 1 June 2026, Employment Pass Category I minimum rises from RM10,000 to RM20,000. Category III capped at 5 years with mandatory succession planning. The policy aims to prioritise local talent, but the talent pipeline, brain drain, and enforcement gaps remain unaddressed.",
+  sourceDate: "2026-03-30",
+  stageScores: { pa: 85, ba: 72, fc: 85, af: 66, ct: 58, sr: 77 },
+  finalScore: 74.8,
+  related: [],
+  cards: [
+    { t: "hook", big: "Malaysia doubles the expat salary floor to RM20,000. The message: hire Malaysians first.", sub: "The strongest case for this policy exists: RM10,000 was too low, attracted low-value placements, and undercut local professionals. A higher floor can attract higher-quality investment and force genuine knowledge transfer. The question is whether the rest of the system is ready." },
+    { t: "fact", big: "The semiconductor workforce target is 60,000 by 2030. The pipeline produces 3,000 relevant graduates per year — and many leave for Singapore within five years of graduating.", sub: "Brain drain is the talent equation nobody in Putrajaya wants to name. Malaysia loses thousands of skilled professionals annually to neighbours offering higher pay, clearer meritocracy, and fewer structural barriers. Raising the price of foreign replacements does not fix why Malaysians leave.", lens: "Economic" },
+    { t: "fact", big: "GLCs and large MNCs absorb the RM20K floor easily. SMEs and startups — the actual growth engine — cannot.", sub: "A Penang semiconductor startup needing a foreign process engineer now faces double the salary floor. A KL fintech founder needing a foreign CTO may simply not hire. Succession planning is mandatory on paper but rarely enforced beyond documentation. The compliance burden falls hardest on firms least able to bear it.", lens: "Governance" },
+    { t: "fact", big: "Malaysia's new Category I floor of RM20,000 exceeds Singapore's EP minimum of SGD5,000 (~RM16,600). Johor employers now face a bizarre inversion.", sub: "A multinational choosing between Penang and Batam, or between Johor and Singapore, now sees Malaysia as the more expensive jurisdiction for senior expat placements at headline level. Thailand's BOI smart visa and Vietnam's growing semiconductor incentives offer alternatives with lower barriers.", lens: "Regional" },
+    { t: "reframe", big: "The real talent equation has three variables: pipeline quality, brain drain, and enforcement. This policy addresses none of them — it adjusts the price tag on a problem that is not about price.", sub: "" },
+    { t: "view", big: "Protecting Malaysian jobs is the right instinct. But protection without pipeline investment produces paper compliance and offshore workarounds — not Malaysian specialists. The ladder must come before the bar, or the bar just redirects traffic to neighbours who built theirs first.", sub: "" },
+  ]
 }
 ];
 /** Published issues only — shown in the feed. Unpublished issues still accessible by direct URL. */
