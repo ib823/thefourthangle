@@ -77,7 +77,7 @@ export function issueCategory(issue: Issue): string {
 
 export const ISSUES: Issue[] = [
 {
-    id: "0142", opinionShift: 91, status: "new", edition: 1,
+    id: "0142", published: true, opinionShift: 91, status: "new", edition: 1,
     headline: "The Clause Nobody Mentioned in the Amendment",
     context: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content.",
     stageScores: { pa: 88, ba: 74, fc: 91, af: 62, ct: 45, sr: 79 },
@@ -407,7 +407,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0154", opinionShift: 93, status: "updated", edition: 3,
+    id: "0154", published: true, opinionShift: 93, status: "updated", edition: 3,
     headline: "RM9 Billion for Ships That Do Not Exist",
     context: "The PAC's eighth report on the Littoral Combat Ship programme confirmed RM6.08B spent with zero vessels delivered, while Boustead Naval Shipyard's accounts remain qualified.",
     stageScores: { pa: 85, ba: 64, fc: 87, af: 56, ct: 40, sr: 72 },
@@ -2423,7 +2423,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1115", opinionShift: 74, status: null, edition: 1,
+  id: "1115", published: true, opinionShift: 74, status: null, edition: 1,
   headline: "Cabinet committees bypass parliament on 23 policy decisions",
   context: "Twenty-three major policy decisions in 2025 were made through cabinet committees rather than parliamentary debate, including changes affecting taxation, education, and environmental standards.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 76.4,
@@ -3193,7 +3193,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1170", opinionShift: 93, status: "new", edition: 1,
+  id: "1170", published: true, opinionShift: 93, status: "new", edition: 1,
   headline: "Bumiputera Contract Quota System Loses RM12B to Rent-Seeking",
   context: "A MACC investigation revealed that an estimated RM12 billion annually in government procurement value is lost to Ali Baba arrangements where Bumiputera quota holders sell contracts to non-Bumiputera operators for 5-15% commissions.",
   stageScores: { pa: 90, ba: 85, fc: 92, af: 79, ct: 74, sr: 87 }, finalScore: 84.5,
@@ -4481,7 +4481,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1262", opinionShift: 93, status: null, edition: 1,
+  id: "1262", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "Syariah-civil jurisdiction clash affects 4,200 families",
   context: "Unilateral child conversion disputes and custody battles between syariah and civil courts affected over 4,200 families as of 2025.",
   stageScores: { pa: 90, ba: 81, fc: 92, af: 76, ct: 71, sr: 85 }, finalScore: 85.9,
@@ -5393,7 +5393,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1327", opinionShift: 91, status: "updated", edition: 1,
+  id: "1327", published: true, opinionShift: 91, status: "updated", edition: 1,
   headline: "Sosma Section 4 challenged in Federal Court test case",
   context: "A landmark Federal Court case in 2025 challenges the constitutionality of SOSMA Section 4's 28-day detention without judicial review.",
   stageScores: { pa: 88, ba: 78, fc: 91, af: 74, ct: 67, sr: 84 }, finalScore: 84.9,
@@ -5911,7 +5911,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1364", opinionShift: 91, status: "updated", edition: 1,
+  id: "1364", published: true, opinionShift: 91, status: "updated", edition: 1,
   headline: "Youth Unemployment Rate Doubles National Average at 10.8%",
   context: "DOSM reported 10.8% unemployment among 15-24 year olds in Q4 2025, compared to 5.2% nationally.",
   stageScores: { pa: 91, ba: 61, fc: 92, af: 56, ct: 41, sr: 69 }, finalScore: 69.2,
