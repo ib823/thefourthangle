@@ -88,9 +88,6 @@
     {:else if issue.status === 'updated' && !readState}
       <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:0.04em;">Updated</span>
     {/if}
-    {#if issue.edition > 1}
-      <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
-    {/if}
     <div style="flex:1;"></div>
     {#if hasReaction}
       <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;">
@@ -124,13 +121,6 @@
 
   <!-- Headline -->
   <h3 style="font-size:15px;font-weight:{headlineWeight};color:{headlineColor};margin:10px 0 0;line-height:1.35;overflow-wrap:break-word;word-break:break-word;">{issue.headline}</h3>
-  <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
-    <span style="font-size:10px;font-weight:500;color:var(--text-muted);">{issueCategory(issue)}</span>
-    {#if hasConnections}
-      <div style="width:5px;height:5px;border-radius:50%;background:var(--score-info);opacity:0.5;flex-shrink:0;"></div>
-    {/if}
-  </div>
-
   <!-- Context -->
   <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
 
@@ -145,10 +135,6 @@
       <span style="font-size:10px;font-weight:500;color:var(--text-tertiary);white-space:nowrap;">{label}</span>
     </div>
 
-    <!-- Verdict bar (neutrality) -->
-    {#if issue.stageScores && issue.finalScore}
-      <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} compact={true} />
-    {/if}
   </div>
 
   <!-- Reading progress bar -->

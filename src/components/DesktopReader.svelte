@@ -150,7 +150,7 @@
         <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Share</span>
       </button>
     </div>
-    <p style="font-size:16px;color:var(--text-secondary);font-weight:450;line-height:1.6;margin:16px 0 0;">{issue.context}</p>
+    <p style="font-size:18px;color:var(--text-secondary);font-weight:450;line-height:1.65;margin:16px 0 0;max-width:65ch;">{issue.context}</p>
 
     <!-- Hero image -->
     <div style="margin:20px 0 0;border-radius:12px;overflow:hidden;background:#0f0f23;">
@@ -166,6 +166,8 @@
       <span style="font-size:14px;font-weight:700;color:{barColor};">{issue.opinionShift}</span>
       <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
     </div>
+    <p style="font-size:12px;color:var(--text-muted);margin:6px 0 0;">How much you'd miss by reading only the headline.</p>
+
     <!-- Verdict bar -->
     {#if issue.stageScores && issue.finalScore}
       <div style="margin:16px 0 0;">
@@ -197,9 +199,9 @@
           </div>
           <SaveButton issueId={issue.id} cardIndex={i} />
         </div>
-        <p style="font-size:24px;font-weight:700;color:var(--text-primary);line-height:1.35;margin:0;">{card.big}</p>
+        <p style="font-size:24px;font-weight:700;color:var(--text-primary);line-height:1.45;margin:0;font-optical-sizing:auto;max-width:65ch;">{card.big}</p>
         {#if card.sub}
-          <p style="font-size:15px;color:var(--text-secondary);line-height:1.6;margin:12px 0 0;">{card.sub}</p>
+          <p style="font-size:17px;color:var(--text-secondary);line-height:1.65;margin:12px 0 0;max-width:65ch;">{card.sub}</p>
         {/if}
         {#if card.t === 'fact' && connections.length > 0}
           <span style="font-size:11px;color:var(--text-muted);margin-top:8px;display:block;">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>

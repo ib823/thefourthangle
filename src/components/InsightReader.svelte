@@ -1331,18 +1331,21 @@
   .big-text {
     font-weight: 700;
     color: var(--text-primary);
-    line-height: 1.35;
+    line-height: 1.45;
     margin: 0;
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+    font-optical-sizing: auto;
+    max-width: 65ch;
   }
 
   .sub-text {
-    font-size: 15px;
+    font-size: 17px;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.65;
     margin: 0;
+    max-width: 65ch;
   }
 
   .card-bottom {

@@ -83,13 +83,6 @@
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
 
-    <!-- Metadata row: category + connection dot -->
-    <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
-      <span style="font-size:10px;font-weight:500;color:var(--text-muted);">{issueCategory(issue)}</span>
-      {#if hasConnections}
-        <div style="width:4px;height:4px;border-radius:50%;background:var(--score-info);opacity:0.5;flex-shrink:0;"></div>
-      {/if}
-    </div>
 
     {#if issue.stageScores && issue.finalScore}
       <div style="margin-top:4px;">

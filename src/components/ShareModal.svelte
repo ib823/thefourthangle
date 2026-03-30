@@ -92,10 +92,10 @@
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
 
-  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
-  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read beyond the headline.`);
-  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nWhat every side left out.`);
-  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\n10-second read. What every side left out:\n${fullUrl}`);
+  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis:\n${fullUrl}`);
+  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis.`);
+  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the full analysis.`);
+  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis:\n${fullUrl}`);
 
   let canNativeShare = $state(false);
   onMount(() => { canNativeShare = !!navigator.share; });
@@ -131,22 +131,16 @@
   }
 
   async function copyLink() {
-    if (copyPhase !== 'idle') return;
+    if (copiedId === 'link') return;
     try {
       await navigator.clipboard.writeText(fullUrl);
       haptic(5);
       copiedId = 'link';
       copyBgFlash = true;
-
-      copyPhase = 'out';
-      copyRevertTimer = sequence([
-        [100, () => { copyPhase = 'check'; }],
-        [200, () => { copyPhase = 'in'; }],
-        [300, () => { copyBgFlash = false; }],
-        [2000, () => { copyPhase = 'revert-out'; }],
-        [100, () => { copyPhase = 'revert-in'; copiedId = null; }],
-        [100, () => { copyPhase = 'idle'; }],
-      ]);
+      copyRevertTimer = setTimeout(() => {
+        copiedId = null;
+        copyBgFlash = false;
+      }, 2000) as unknown as ReturnType<typeof setTimeout>;
     } catch {}
   }
 
@@ -154,7 +148,7 @@
     try {
       await navigator.share({
         title: shareText,
-        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — 10-second read. What every side left out.`,
+        text: `${os}% Opinion Shift · Neutrality: ${ns}/100 — Read the full analysis.`,
         url: fullUrl,
       });
     } catch {}
@@ -315,21 +309,12 @@
       class="copy-btn"
       style="background:{copyBg};border-color:{copyBorder};"
     >
-      <span class="copy-label" class:copy-label--hidden={copyPhase === 'out' || copyPhase === 'check' || copyPhase === 'in'}>
+      <span class="copy-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         Copy link
       </span>
       <span class="copy-right">
-        {#if copyPhase === 'check' || copyPhase === 'in'}
-          <span class="copy-check" class:copy-check--visible={copyPhase === 'check' || copyPhase === 'in'}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </span>
-          <span class="copy-copied" class:copy-copied--visible={copyPhase === 'in'}>Copied!</span>
-        {:else if copyPhase === 'revert-out'}
-          <span style="opacity:0;transition:opacity 100ms ease;">Copied!</span>
-        {:else if copyPhase === 'revert-in'}
-          <span style="opacity:1;transition:opacity 100ms ease;">Copy</span>
-        {:else if copiedId === 'link'}
+        {#if copiedId === 'link'}
           <span style="color:var(--status-green);">Copied!</span>
         {:else}
           <span>Copy</span>

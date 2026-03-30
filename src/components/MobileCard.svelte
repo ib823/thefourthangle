@@ -144,9 +144,6 @@
         <span class="badge-pill status-badge" style="transform:scale({badgeScale});font-size:11px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
     {/if}
-    {#if issue.edition > 1}
-      <span style="font-size:10px;color:var(--text-tertiary);">Ed.{issue.edition}</span>
-    {/if}
   </div>
 
   <!-- Issue art -->
@@ -158,12 +155,6 @@
 
   <!-- Headline -->
   <h2 class="headline" style="color:{isCompleted ? 'var(--text-secondary)' : 'var(--text-primary)'};">{issue.headline}</h2>
-  <div style="display:flex;align-items:center;gap:5px;margin-top:4px;">
-    <span style="font-size:10px;font-weight:500;color:var(--text-tertiary);">{category}</span>
-    {#if hasConnections}
-      <div style="width:5px;height:5px;border-radius:50%;background:var(--score-info);opacity:0.6;flex-shrink:0;"></div>
-    {/if}
-  </div>
 
   <!-- Score row -->
   <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
@@ -179,13 +170,6 @@
     <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
   </div>
 
-  <!-- Verdict bar -->
-  {#if issue.stageScores && issue.finalScore}
-    <div style="margin-top:12px;">
-      <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} compact={false} />
-    </div>
-  {/if}
-
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
 
@@ -193,9 +177,7 @@
   <div style="flex:1;min-height:16px;"></div>
   <div style="flex-shrink:0;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
-      {#if !readState}
-        <span style="font-size:12px;color:var(--text-tertiary);font-weight:500;">Tap to read</span>
-      {:else if isStarted}
+      {#if isStarted}
         <span style="font-size:12px;color:var(--score-warning);font-weight:500;">Continue reading</span>
       {:else if isCompleted}
         <span style="font-size:12px;color:var(--text-muted);font-weight:500;">Read again</span>
