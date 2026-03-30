@@ -1,13 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
+  import SectionHeader from './SectionHeader.svelte';
   import { getReadCount, reactions } from '../stores/reader';
   import { issueCategory } from '../data/issues';
 
   import type { IssueSummary } from '../lib/issues-loader';
+  import type { FeedSection, SectionKind } from '../lib/feed-sections';
 
   interface Props {
     issues: IssueSummary[];
+    sections?: FeedSection[];
     activeId: string | null;
     readMap: Record<string, string>;
     onSelectIssue: (issue: IssueSummary) => void;
@@ -17,7 +20,9 @@
     onSearchClear?: () => void;
     issueHasConnections?: (id: string) => boolean;
   }
-  let { issues, activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections }: Props = $props();
+  let { issues, sections = [], activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections }: Props = $props();
+
+  let collapsedSections = $state<Record<string, boolean>>({});
 
   function issueReadState(id: string): { state: string; progress: number } | null {
     const raw = readMap[id];
@@ -193,8 +198,15 @@
       {/if}
     </div>
 
-    <!-- Filter bar -->
-    {#if !isSearching}
+    <!-- Section headers or filter bar -->
+    {#if isSearching}
+      <div style="padding:6px 0;">
+        <span style="font-size:11px;color:var(--text-tertiary);">
+          {issues.length} result{issues.length !== 1 ? 's' : ''}
+        </span>
+      </div>
+    {:else if sections.length === 0}
+      <!-- Fallback: filter tabs when no sections computed -->
       <div style="display:flex;gap:0;margin-top:8px;border-bottom:1px solid var(--bg-sunken);" role="tablist" aria-label="Filter issues">
         {#each [
           { key: 'all', label: 'All', count: counts.all },
@@ -221,26 +233,8 @@
           </button>
         {/each}
       </div>
-
-      <!-- Sort (secondary) -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;">
-        <span style="font-size:10px;color:var(--text-muted);">
-          {#if filterMode === 'all'}
-            {issues.length} issues
-          {:else}
-            {flatIssues.length} of {issues.length}
-          {/if}
-        </span>
-        <div style="display:flex;gap:4px;font-size:10px;" role="radiogroup" aria-label="Sort order">
-          <button onclick={() => sortMode = 'editorial'} role="radio" aria-checked={sortMode === 'editorial'} style="background:none;border:none;cursor:pointer;padding:6px 8px;border-radius:4px;min-height:32px;color:{sortMode === 'editorial' ? 'var(--text-primary)' : 'var(--text-faint)'};font-weight:{sortMode === 'editorial' ? '600' : '400'};transition:color 0.15s ease;">Editorial</button>
-          <button onclick={() => sortMode = 'topic'} role="radio" aria-checked={sortMode === 'topic'} style="background:none;border:none;cursor:pointer;padding:6px 8px;border-radius:4px;min-height:32px;color:{sortMode === 'topic' ? 'var(--text-primary)' : 'var(--text-faint)'};font-weight:{sortMode === 'topic' ? '600' : '400'};transition:color 0.15s ease;">By topic</button>
-        </div>
-      </div>
-    {:else}
-      <div style="padding:6px 0;">
-        <span style="font-size:11px;color:var(--text-tertiary);">
-          {issues.length} result{issues.length !== 1 ? 's' : ''}
-        </span>
+        <span style="font-size:10px;color:var(--text-muted);">{issues.length} issues</span>
       </div>
     {/if}
   </div>
@@ -254,33 +248,34 @@
     aria-label="Issues"
     style="flex:1;overflow-y:auto;"
   >
-    {#if flatIssues.length === 0 && (isSearching || filterMode !== 'all')}
+    {#if sections.length > 0 && !isSearching}
+      <!-- Section-based feed -->
+      {#each sections as section}
+        <SectionHeader
+          label={section.label}
+          count={section.count}
+          kind={section.kind}
+          collapsed={collapsedSections[section.kind] ?? (section.kind === 'completed')}
+          onToggle={() => { collapsedSections[section.kind] = !(collapsedSections[section.kind] ?? (section.kind === 'completed')); }}
+        />
+        {#if !(collapsedSections[section.kind] ?? (section.kind === 'completed'))}
+          {#each section.issues as issue}
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} />
+          {/each}
+        {/if}
+      {/each}
+    {:else if flatIssues.length === 0 && (isSearching || filterMode !== 'all')}
       <div style="padding:40px 20px;text-align:center;">
         <p style="font-size:13px;color:var(--text-muted);">
           {#if isSearching}
             No issues match "{searchQuery}"
-          {:else if filterMode === 'reading'}
-            No issues in progress
-          {:else if filterMode === 'done'}
-            No completed issues yet
-          {:else if filterMode === 'new'}
-            All caught up
           {:else}
             No issues found
           {/if}
         </p>
       </div>
-    {:else if sortMode === 'topic' && !isSearching}
-      {#each [...(displayIssues as { grouped: Map<string, IssueSummary[]> }).grouped.entries()] as [category, groupIssues]}
-        <div style="padding:12px 20px 4px;border-top:1px solid var(--bg-sunken);">
-          <span style="font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text-muted);letter-spacing:0.5px;">{category}</span>
-        </div>
-        {#each groupIssues as issue}
-          <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} />
-        {/each}
-      {/each}
     {:else}
-      <!-- Virtual windowed list -->
+      <!-- Virtual windowed list (fallback / search results) -->
       <div style="height:{totalHeight}px;position:relative;">
         {#each flatIssues.slice(visibleStart, visibleEnd) as issue, i}
           {@const idx = visibleStart + i}

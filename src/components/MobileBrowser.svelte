@@ -1,24 +1,47 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
+  import MobileSectionDivider from './MobileSectionDivider.svelte';
   import { readIssues, savePosition, reactions } from '../stores/reader';
   import { haptic } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
+  import type { FeedSection } from '../lib/feed-sections';
+
+  type DisplayItem =
+    | { type: 'issue'; issue: IssueSummary }
+    | { type: 'divider'; label: string; count: number; kind: FeedSection['kind'] };
 
   interface Props {
     issues: IssueSummary[];
+    sections?: FeedSection[];
     onOpenIssue: (issue: IssueSummary, originRect?: DOMRect) => void;
     onPrefetch?: (issue: IssueSummary) => void;
     issueHasConnections?: (id: string) => boolean;
     initialFeedIndex?: number;
     searchQuery?: string;
   }
-  let { issues, onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '' }: Props = $props();
+  let { issues, sections = [], onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '' }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
   let readMap: Record<string, string> = $state({});
+
+  // Build display list: interleave section dividers with issues
+  // When searching (sections empty), use flat issue list
+  let displayList = $derived.by((): DisplayItem[] => {
+    if (sections.length === 0) {
+      return issues.map(issue => ({ type: 'issue' as const, issue }));
+    }
+    const items: DisplayItem[] = [];
+    for (const section of sections) {
+      items.push({ type: 'divider', label: section.label, count: section.count, kind: section.kind });
+      for (const issue of section.issues) {
+        items.push({ type: 'issue', issue });
+      }
+    }
+    return items;
+  });
 
   // Reactions — subscribe to the atom for real-time updates
   let reactionRaw = $state('{}');
@@ -61,13 +84,15 @@
       for (const entry of entries) {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const slot = entry.target as HTMLElement;
+          if (slot.dataset.divider) continue; // skip section dividers
           const idx = Number(slot.dataset.idx);
           if (!isNaN(idx) && idx !== lastSnappedIndex) {
             lastSnappedIndex = idx;
             current = idx;
             haptic(5);
-            if (issues[idx]) {
-              savePosition(issues[idx].id, 0);
+            const item = displayList[idx];
+            if (item?.type === 'issue') {
+              savePosition(item.issue.id, 0);
             }
           }
         }
@@ -106,17 +131,27 @@
     // Keyboard navigation
     function onKeyDown(e: KeyboardEvent) {
       if (!containerEl) return;
-      if (e.key === 'ArrowDown' && current < issues.length - 1) {
+      if (e.key === 'ArrowDown' && current < displayList.length - 1) {
         e.preventDefault();
-        const next = containerEl.querySelector(`[data-idx="${current + 1}"]`) as HTMLElement;
-        next?.scrollIntoView({ behavior: 'smooth' });
+        // Skip dividers
+        let next = current + 1;
+        while (next < displayList.length && displayList[next].type === 'divider') next++;
+        if (next < displayList.length) {
+          const el = containerEl.querySelector(`[data-idx="${next}"]`) as HTMLElement;
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }
       } else if (e.key === 'ArrowUp' && current > 0) {
         e.preventDefault();
-        const prev = containerEl.querySelector(`[data-idx="${current - 1}"]`) as HTMLElement;
-        prev?.scrollIntoView({ behavior: 'smooth' });
+        let prev = current - 1;
+        while (prev >= 0 && displayList[prev].type === 'divider') prev--;
+        if (prev >= 0) {
+          const el = containerEl.querySelector(`[data-idx="${prev}"]`) as HTMLElement;
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }
       } else if (e.key === 'Enter') {
         e.preventDefault();
-        handleOpenIssue(issues[current]);
+        const item = displayList[current];
+        if (item?.type === 'issue') handleOpenIssue(item.issue);
       }
     }
     window.addEventListener('keydown', onKeyDown);
@@ -127,9 +162,9 @@
     };
   });
 
-  // Re-setup observer when issues change
+  // Re-setup observer when display list changes
   $effect(() => {
-    void issues.length;
+    void displayList.length;
     requestAnimationFrame(setupObserver);
   });
 </script>
@@ -139,23 +174,26 @@
   class="feed-scroll"
   style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.15s ease;"
 >
-  {#if issues.length === 0 && searchQuery}
+  {#if displayList.length === 0 && searchQuery}
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
   {/if}
-  {#each issues as issue, i (issue.id)}
-    <div
-      class="feed-card-slot"
-      data-idx={i}
-    >
-      <MobileCard
-        issue={issue}
-        readState={getState(issue.id)}
-        onOpen={() => handleOpenIssue(issue)}
-        onPrefetch={() => onPrefetch?.(issue)}
-        hasReaction={hasReaction(issue.id)}
-        hasConnections={issueHasConnections?.(issue.id) ?? false}
-      />
-    </div>
+  {#each displayList as item, i}
+    {#if item.type === 'divider'}
+      <div class="feed-card-slot" data-idx={i} data-divider="true">
+        <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} />
+      </div>
+    {:else}
+      <div class="feed-card-slot" data-idx={i}>
+        <MobileCard
+          issue={item.issue}
+          readState={getState(item.issue.id)}
+          onOpen={() => handleOpenIssue(item.issue)}
+          onPrefetch={() => onPrefetch?.(item.issue)}
+          hasReaction={hasReaction(item.issue.id)}
+          hasConnections={issueHasConnections?.(item.issue.id) ?? false}
+        />
+      </div>
+    {/if}
   {/each}
 </div>
 

@@ -14,6 +14,7 @@
   import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
+  import { buildFeedSections, type FeedSection } from '../lib/feed-sections';
 
   interface FeedIssue {
     id: string;
@@ -155,6 +156,12 @@
     if (!stableSortOrder) return base;
     const orderMap = new Map(stableSortOrder.map((id, idx) => [id, idx]));
     return [...base].sort((a, b) => (orderMap.get(a.id) ?? 999) - (orderMap.get(b.id) ?? 999));
+  });
+
+  // Feed sections: computed from sorted issues + read state
+  let feedSections = $derived.by(() => {
+    if (isSearching) return []; // search bypasses sections
+    return buildFeedSections(sortedIssues, readMap);
   });
 
   function checkViewport() {
@@ -428,7 +435,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={sortedIssues} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} />
+    <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} />
   </main>
 
   {#if activeFullIssue}
@@ -479,6 +486,7 @@
     <div style="flex:1;display:flex;overflow:hidden;">
       <DesktopFeed
         issues={sortedIssues}
+        sections={feedSections}
         activeId={activeIssue?.id ?? null}
         {readMap}
         onSelectIssue={openIssue}
