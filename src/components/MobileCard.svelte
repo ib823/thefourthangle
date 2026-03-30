@@ -130,6 +130,8 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
         <span style="font-size:10px;font-weight:600;color:var(--score-warning);">Exploring</span>
       </div>
+    {:else if isCompleted && issue.status === 'updated'}
+      <span class="badge-pill" style="transform:scale({badgeScale});font-size:10px;font-weight:600;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;">Updated since you read</span>
     {:else if isCompleted}
       <div class="badge-pill" style="transform:scale({badgeScale});display:flex;align-items:center;gap:4px;">
         <div style="width:16px;height:16px;border-radius:50%;background:var(--status-green-bg);display:flex;align-items:center;justify-content:center;">

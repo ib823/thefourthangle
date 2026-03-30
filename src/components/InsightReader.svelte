@@ -47,9 +47,15 @@
     initialCardIndex?: number;
     originRect?: DOMRect;
     connections?: Connection[];
+    threadNextId?: string | null;
+    threadNextHeadline?: string;
+    threadName?: string;
+    threadPosition?: number | null;
+    threadTotal?: number | null;
+    nextIssueHeadline?: string;
   }
 
-  let { issue, onClose, onNext, onNavigateToIssue, initialCardIndex = 0, originRect, connections = [] }: Props = $props();
+  let { issue, onClose, onNext, onNavigateToIssue, initialCardIndex = 0, originRect, connections = [], threadNextId = null, threadNextHeadline = '', threadName = '', threadPosition = null, threadTotal = null, nextIssueHeadline = '' }: Props = $props();
 
   let patternSheetOpen = $state(false);
 
@@ -908,6 +914,9 @@
 
   <!-- Headline -->
   <div class="headline-area">
+    {#if threadName && threadPosition !== null && threadTotal}
+      <div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">Part {threadPosition + 1} of {threadTotal} · {threadName}</div>
+    {/if}
     <h2 class="headline">{issue.headline}</h2>
   </div>
 
@@ -951,12 +960,31 @@
             {/if}
           </div>
 
+          <!-- Thread navigation: "Next in thread" -->
+          {#if threadNextId && threadNextHeadline}
+            <button
+              onclick={() => onNavigateToIssue?.(threadNextId)}
+              style="width:100%;max-width:300px;text-align:left;padding:12px 14px;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;margin:4px 0;"
+            >
+              <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">Next in thread{threadTotal ? ` · ${(threadPosition ?? 0) + 2} of ${threadTotal}` : ''}</div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.35;margin-top:4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{threadNextHeadline}</div>
+            </button>
+          {/if}
+
           {#if connections.length >= 2}
             <button class="connection-nudge" onclick={() => { patternSheetOpen = true; }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
               {connections.length} connected {connections.length === 1 ? 'issue' : 'issues'}
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
+          {/if}
+
+          <!-- C6: Next issue preview -->
+          {#if nextIssueHeadline && !threadNextId}
+            <div style="width:100%;max-width:300px;padding:10px 14px;background:var(--bg-sunken);border-radius:8px;margin:4px 0;">
+              <div style="font-size:10px;font-weight:600;color:var(--text-faint);text-transform:uppercase;">Up next</div>
+              <div style="font-size:12px;font-weight:600;color:var(--text-secondary);line-height:1.35;margin-top:2px;">{nextIssueHeadline}</div>
+            </div>
           {/if}
 
           <div class="completion-buttons">

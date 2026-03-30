@@ -79,6 +79,9 @@
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:2px 6px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
       <span style="font-size:15px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{issue.headline}</span>
+      {#if isStarted && progress > 0}
+        <span style="font-size:10px;font-weight:600;color:var(--score-warning);flex-shrink:0;margin-left:4px;">{progress}/6</span>
+      {/if}
     </div>
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>

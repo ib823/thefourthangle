@@ -164,6 +164,39 @@
     return buildFeedSections(sortedIssues, readMap);
   });
 
+  // #63: Highest-impact unread issue for empty state hero card
+  let topUnreadIssue = $derived.by(() => {
+    const unread = sortedIssues.filter(i => !readMap[i.id]);
+    if (unread.length === 0) return null;
+    return unread.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
+  });
+
+  // Thread props for active issue
+  let activeThreadNextId = $derived.by(() => {
+    if (!activeIssue) return null;
+    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
+    return (feed as any)?.threadNextId ?? null;
+  });
+  let activeThreadNextHeadline = $derived.by(() => {
+    if (!activeThreadNextId) return '';
+    return sortedIssues.find(i => i.id === activeThreadNextId)?.headline ?? '';
+  });
+  let activeThreadName = $derived.by(() => {
+    if (!activeIssue) return '';
+    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
+    return (feed as any)?.threadName ?? '';
+  });
+  let activeThreadPosition = $derived.by(() => {
+    if (!activeIssue) return null;
+    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
+    return (feed as any)?.threadPosition ?? null;
+  });
+  let activeThreadTotal = $derived.by(() => {
+    if (!activeIssue) return null;
+    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
+    return (feed as any)?.threadTotal ?? null;
+  });
+
   function checkViewport() {
     const w = window.innerWidth;
     if (w < 768) viewMode = 'mobile';
@@ -439,7 +472,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} threadNextId={activeThreadNextId} threadNextHeadline={activeThreadNextHeadline} threadName={activeThreadName} threadPosition={activeThreadPosition} threadTotal={activeThreadTotal} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -474,7 +507,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} threadNextId={activeThreadNextId} threadNextHeadline={activeThreadNextHeadline} threadName={activeThreadName} threadPosition={activeThreadPosition} threadTotal={activeThreadTotal} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else}
@@ -504,9 +537,14 @@
           {nextHeadline}
           connections={resolvedConnections}
           onNavigateToIssue={navigateToIssue}
+          threadNextId={activeThreadNextId}
+          threadNextHeadline={activeThreadNextHeadline}
+          threadName={activeThreadName}
+          threadPosition={activeThreadPosition}
+          threadTotal={activeThreadTotal}
         />
       {:else}
-        <DesktopEmptyState issueCount={issues.length} />
+        <DesktopEmptyState issueCount={issues.length} topIssue={topUnreadIssue} onOpenIssue={openIssue} />
       {/if}
     </div>
   </main>
