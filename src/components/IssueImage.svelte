@@ -10,7 +10,7 @@
   let basePath = $derived(`/og/backgrounds/issue-${issueId}-${size}`);
 </script>
 
-<div class="issue-image-wrap" style="aspect-ratio:{aspectRatio};border-radius:{borderRadius};overflow:hidden;background:#0f0f23;">
+<div class="issue-image-wrap" style="aspect-ratio:{aspectRatio};border-radius:{borderRadius};overflow:hidden;background:var(--bg-sunken);">
   <picture>
     <source srcset="{basePath}.avif" type="image/avif" />
     <img

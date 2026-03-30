@@ -36,7 +36,7 @@
     cursor:pointer;
     transform:scale({scale});
     transition:transform 0.25s cubic-bezier(.175,.885,.32,1.275), background 0.15s ease, border-color 0.15s ease;
-    min-height:44px;
+    min-height:44px;min-width:44px;
   "
   aria-label={reacted ? 'You reacted to this insight' : 'React to this insight'}
 >

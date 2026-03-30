@@ -255,7 +255,7 @@
         <div style="margin-bottom:16px;">
           <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">{connections.length} connected issues</div>
           <div style="display:flex;flex-direction:column;gap:6px;">
-            {#each connections.slice(0, 4) as conn}
+            {#each connections as conn}
               <button
                 onclick={() => onNavigateToIssue?.(conn.id)}
                 style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--bg-elevated);border:1px solid var(--border-subtle);cursor:pointer;text-align:left;width:100%;transition:background var(--duration-fast, 150ms) ease;"

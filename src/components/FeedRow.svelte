@@ -51,7 +51,7 @@
 >
   <!-- Thumbnail -->
   {#if issue.hasImage}
-    <div style="width:48px;height:48px;flex-shrink:0;border-radius:8px;overflow:hidden;background:#0f0f23;">
+    <div style="width:48px;height:48px;flex-shrink:0;border-radius:8px;overflow:hidden;background:var(--bg-sunken);">
       <IssueImage issueId={issue.id} size="thumb" aspectRatio="1/1" borderRadius="8px" />
     </div>
   {/if}

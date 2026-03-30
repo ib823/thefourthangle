@@ -751,6 +751,16 @@
   // Keyboard handler
   function onKeyDown(e: KeyboardEvent) {
     if (shareOpen) return;
+    // H5: Focus trap — Tab cycles within the reader overlay
+    if (e.key === 'Tab' && overlayEl) {
+      const focusable = overlayEl.querySelectorAll<HTMLElement>('button, [href], input, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length > 0) {
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
     if (e.key === 'ArrowRight') {
       e.preventDefault();
       next();
@@ -896,7 +906,7 @@
   aria-label="Reading: {issue.headline}"
 >
   <!-- Screen reader announcements for card transitions -->
-  <div class="sr-announce" aria-live="polite" aria-atomic="true">{announcement}</div>
+  <div class="sr-announce" role="status" aria-live="polite" aria-atomic="true">{announcement}</div>
 
   <!-- Progress bar -->
   <div class="progress-track">
@@ -923,7 +933,7 @@
   <!-- Hero image -->
   {#if current === 0 && !completed}
     <div style="padding:0 20px;margin-bottom:8px;">
-      <div style="border-radius:10px;overflow:hidden;background:#0f0f23;max-width:440px;margin:0 auto;">
+      <div style="border-radius:10px;overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
         <picture>
           <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
           <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
@@ -1116,7 +1126,7 @@
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:8px;">
-        {#each connections.slice(0, 5) as conn}
+        {#each connections as conn}
           <button
             class="pattern-issue-card"
             onclick={() => {
