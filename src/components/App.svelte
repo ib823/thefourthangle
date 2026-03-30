@@ -204,9 +204,16 @@
     else viewMode = 'desktop';
   }
 
+  // G1: Debounced resize handler
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  function debouncedResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(checkViewport, 150);
+  }
+
   onMount(() => {
     checkViewport();
-    window.addEventListener('resize', checkViewport);
+    window.addEventListener('resize', debouncedResize);
 
     const tier = getAnimationTier();
     document.documentElement.classList.add('anim-tier-' + tier);
@@ -288,7 +295,7 @@
     window.addEventListener('popstate', onPopState);
 
     return () => {
-      window.removeEventListener('resize', checkViewport);
+      window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('popstate', onPopState);
     };
   });

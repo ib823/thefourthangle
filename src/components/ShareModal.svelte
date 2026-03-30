@@ -194,7 +194,7 @@
   function onTouchEnd() {
     if (!isDragging) return;
     isDragging = false;
-    if (dragOffsetY > 150 || dragVelocity > 500) {
+    if (dragOffsetY > 200 || dragVelocity > 500) {
       haptic(5);
       closeWithAnimation();
     } else {

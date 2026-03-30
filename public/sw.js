@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v4';
+const CACHE_NAME = 'v5';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -55,6 +55,20 @@ self.addEventListener('fetch', (event) => {
           return res;
         });
       })
+    );
+    return;
+  }
+
+  // K1: Issue data + feed: network-first with cache fallback (for offline reading)
+  if (url.pathname === '/issues-feed.json' || url.pathname.startsWith('/issues/') || url.pathname === '/fact-graph.json') {
+    event.respondWith(
+      fetch(event.request).then((res) => {
+        if (res.ok) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+        }
+        return res;
+      }).catch(() => caches.match(event.request))
     );
     return;
   }

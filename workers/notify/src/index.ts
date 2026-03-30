@@ -278,10 +278,10 @@ async function sendPush(sub: Subscription, payload: string, env: Env): Promise<b
 function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number }): string {
   return JSON.stringify({
     title: issue.headline,
-    body: `${issue.opinionShift}% Opinion Shift · Neutrality: ${Math.round(issue.finalScore)}/100 — 10-second read. What every side left out.`,
+    body: `${issue.opinionShift}% Opinion Shift · Neutrality: ${Math.round(issue.finalScore)}/100 — Read the full analysis.`,
     icon: '/icons/icon-192.png',
     badge: '/icons/badge-96.png',
-    image: `/og/issue-${issue.id}.png`,
+    image: `/og/issue-${issue.id}.png?v=${Date.now()}`,
     tag: `issue-${issue.id}`,
     data: { url: `/issue/${issue.id}?from=notification`, type: 'new-issue' },
     actions: [
@@ -430,13 +430,14 @@ async function checkNewIssues(env: Env): Promise<void> {
     return; // No new issues
   }
 
-  // New issues found — the newest are at the start of the array
+  // New issues found — pick the highest opinion shift (most impactful)
   const newIssues = feed.slice(0, currentCount - lastCount);
   const subs = await getAllSubscriptions(env);
 
-  // Send notification for the most recent new issue only (avoid spam)
+  // Send notification for the highest-impact new issue (avoid spam)
   if (newIssues.length > 0 && subs.length > 0) {
-    const payload = newIssuePayload(newIssues[0]);
+    const topIssue = newIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
+    const payload = newIssuePayload(topIssue);
     const expired: string[] = [];
 
     for (const { key, sub } of subs) {

@@ -143,6 +143,26 @@ export function getAnimationTier(): AnimationTier {
 }
 
 /**
+ * A5: Tier-adaptive spring config — stiffer springs on low-end devices.
+ */
+export function tierAdjustedDamping(baseDamping: number, tier: AnimationTier = getAnimationTier()): number {
+  if (tier >= 4) return baseDamping * 10; // effectively instant
+  if (tier === 3) return baseDamping * 2;  // critically damped
+  if (tier === 2) return baseDamping * 1.3;
+  return baseDamping;
+}
+
+/**
+ * A6: Tier-adaptive duration — shorter animations on low-end devices.
+ */
+export function tierDuration(baseMs: number, tier: AnimationTier = getAnimationTier()): number {
+  if (tier >= 4) return 0;
+  if (tier === 3) return baseMs * 0.3;
+  if (tier === 2) return baseMs * 0.7;
+  return baseMs;
+}
+
+/**
  * Check if reduced motion is preferred.
  */
 export function prefersReducedMotion(): boolean {

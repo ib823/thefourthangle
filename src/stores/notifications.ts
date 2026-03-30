@@ -18,7 +18,10 @@ const MAX_ITEMS = 50;
 
 function load(): NotificationItem[] {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const items: NotificationItem[] = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    // E5: Auto-clear notifications older than 30 days
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    return items.filter(n => n.timestamp > thirtyDaysAgo);
   } catch {
     return [];
   }

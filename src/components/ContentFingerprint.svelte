@@ -35,7 +35,9 @@
 </script>
 
 {#if loaded}
-  <div style="margin-top:12px;padding:12px 14px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+  <div style="margin-top:12px;padding:12px 14px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius:10px;">
+    <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;">Content integrity — verify this issue hasn't been altered</div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);flex-shrink:0;">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     </svg>
@@ -54,5 +56,6 @@
     >
       Verify
     </a>
+    </div>
   </div>
 {/if}

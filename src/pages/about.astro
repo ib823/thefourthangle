@@ -39,29 +39,35 @@ import Base from '../layouts/Base.astro';
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
         <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">The Verdict Bar</h2>
         <p style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-secondary);margin:0 0 16px 0;">Every issue shows how each editorial stage assessed it.</p>
-        <!-- Example -->
+        <!-- Example: PA=85(green/circle), BA=62(amber/triangle), FC=88(green/circle), AF=76(green/circle), CT=52(amber/triangle), SR=78(green/circle) -->
         <div style="display:flex;align-items:center;gap:0;padding:12px 16px;background:var(--amber-bg);border:1px solid rgba(44,34,21,0.05);border-radius:10px;margin-bottom:16px;">
           <div style="display:flex;align-items:center;gap:8px;flex:1;">
+            <!-- PA: 85 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">PA</span>
             </div>
+            <!-- BA: 62 → triangle (amber) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:var(--score-warning);box-shadow:0 0 0 2px var(--verdict-amber-bg);"></div>
+              <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid var(--score-warning);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">BA</span>
             </div>
+            <!-- FC: 88 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">FC</span>
             </div>
+            <!-- AF: 76 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">AF</span>
             </div>
+            <!-- CT: 52 → triangle (amber) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
-              <div style="width:10px;height:10px;border-radius:50%;background:var(--score-warning);box-shadow:0 0 0 2px var(--verdict-amber-bg);"></div>
+              <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid var(--score-warning);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">CT</span>
             </div>
+            <!-- SR: 78 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
               <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">SR</span>
@@ -72,19 +78,19 @@ import Base from '../layouts/Base.astro';
             <span style="font-family:var(--font-display);font-size:10px;font-weight:500;color:var(--text-tertiary);">/100</span>
           </div>
         </div>
-        <!-- Legend -->
+        <!-- Legend: shapes match VerdictBar.svelte -->
         <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--font-body);font-size:14px;color:var(--text-secondary);line-height:1.5;">
           <div style="display:flex;align-items:center;gap:8px;">
             <div style="width:8px;height:8px;border-radius:50%;background:var(--status-green);flex-shrink:0;"></div>
-            Balanced — stage found no significant issues
+            <strong style="font-weight:600;">Circle</strong> — Balanced (75+) — stage found no significant issues
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--score-warning);flex-shrink:0;"></div>
-            Flagged — stage found moderate concerns
+            <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:8px solid var(--score-warning);flex-shrink:0;"></div>
+            <strong style="font-weight:600;">Triangle</strong> — Flagged (50–74) — stage found moderate concerns
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--score-critical);flex-shrink:0;"></div>
-            Alert — stage found significant issues
+            <div style="width:7px;height:7px;background:var(--score-critical);transform:rotate(45deg);flex-shrink:0;"></div>
+            <strong style="font-weight:600;">Diamond</strong> — Alert (&lt;50) — stage found significant issues
           </div>
         </div>
       </div>

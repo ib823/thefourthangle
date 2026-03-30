@@ -16,7 +16,7 @@ export interface VelocityTracker {
   getAngle(): number; // degrees from horizontal
 }
 
-const BUFFER_SIZE = 8;
+const BUFFER_SIZE = 16;
 const MAX_AGE_MS = 100; // only use samples from last 100ms
 
 export function createVelocityTracker(): VelocityTracker {
