@@ -202,10 +202,11 @@
 <div style="position:relative;">
   <button
     onclick={toggle}
-    style="background:none;border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:8px;transition:background 0.15s ease;"
+    style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:8px;transition:background 0.15s ease;"
     aria-label={unread > 0 ? `${unread} unread notifications` : 'Notifications'}
+    aria-expanded={open}
   >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary, #6C757D)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill={open ? 'var(--text-primary, #212529)' : 'none'} stroke={open ? 'var(--text-primary, #212529)' : 'var(--text-tertiary, #6C757D)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:fill 0.15s ease,stroke 0.15s ease;">
       <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
       <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
     </svg>
