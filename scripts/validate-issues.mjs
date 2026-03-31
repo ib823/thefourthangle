@@ -51,8 +51,9 @@ const STAGE_KEYS = ['pa', 'ba', 'fc', 'af', 'ct', 'sr'];
 const LIMITS = {
   headline: { min: 10, max: 120 },
   context: { min: 20, max: 350 },
-  cardBig: { min: 5, max: 300 },
-  cardSub: { max: 400 },
+  cardBig: { min: 5, max: 200 },
+  cardSub: { max: 250 },
+  cardTotal: { max: 350 },  // big + sub combined — must fit mobile screen at readable font
   opinionShift: { min: 0, max: 100 },
   stageScore: { min: 0, max: 100 },
   finalScore: { min: 0, max: 100 },
@@ -247,6 +248,12 @@ for (const issue of issues) {
     }
     if (card.sub && card.sub.length > LIMITS.cardSub.max) {
       warn(id, `${cardLabel}.sub`, `Long: ${card.sub.length} chars (recommended max ${LIMITS.cardSub.max})`);
+    }
+
+    // Combined big+sub length — must fit mobile card at readable font size
+    const totalLen = (card.big?.length ?? 0) + (card.sub?.length ?? 0);
+    if (totalLen > LIMITS.cardTotal.max) {
+      err(id, `${cardLabel}`, `Card text too long for mobile: ${totalLen} chars (max ${LIMITS.cardTotal.max}). Trim big+sub to fit.`);
     }
 
     // Lens required on fact cards
