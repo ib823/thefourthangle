@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title = 'The Fourth Angle — Non-Partisan Malaysian Issues Analysis', description = 'On every Malaysian issue there are three angles. We provide the fourth — fact-checked, bias-measured across 12 dimensions, and published with the full audit.' } = Astro.props;
+const { title = 'The Fourth Angle — Non-Partisan Malaysian Issues Analysis', description = 'What satisfying headlines leave out. Independent Malaysian policy analysis — scored for neutrality, verified for accuracy, published with full transparency.' } = Astro.props;
 const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
 const canonicalUrl = `${siteUrl}${Astro.url.pathname === '/' ? '/' : Astro.url.pathname}`;
 const ogImage = `${siteUrl}/og-image.png`;
