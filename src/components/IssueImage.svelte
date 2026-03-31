@@ -5,8 +5,9 @@
     aspectRatio?: string;
     borderRadius?: string;
     eager?: boolean;
+    alt?: string;
   }
-  let { issueId, size, aspectRatio = '1/1', borderRadius = '8px', eager = false }: Props = $props();
+  let { issueId, size, aspectRatio = '1/1', borderRadius = '8px', eager = false, alt = '' }: Props = $props();
 
   let basePath = $derived(`/og/backgrounds/issue-${issueId}-${size}`);
 </script>
@@ -16,7 +17,7 @@
     <source srcset="{basePath}.avif" type="image/avif" />
     <img
       src="{basePath}.jpg"
-      alt=""
+      alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding={eager ? 'sync' : 'async'}
       fetchpriority={eager ? 'high' : undefined}

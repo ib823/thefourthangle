@@ -231,10 +231,13 @@
     if (issues.length === 0) {
       loadFeedIssues().then(data => {
         issues = data;
-        // Restore position/selection from feed data
+        // Deep link: find issue in feed and open reader immediately
         if (initialIssueId) {
           const found = data.find(i => i.id === initialIssueId);
-          if (found) activeIssue = found;
+          if (found) {
+            activeIssue = found;
+            loadAndOpenIssue(found.id);
+          }
         }
       });
     }
@@ -242,7 +245,7 @@
     // Load fact graph lazily (non-blocking, low priority)
     loadFactGraph().then(() => { graphLoaded = true; });
 
-    // If deep link, fetch full issue data for reader
+    // If feedData was SSR-provided (homepage), deep link is already resolved
     if (initialIssueId && activeIssue) {
       loadAndOpenIssue(activeIssue.id);
     }
@@ -299,6 +302,8 @@
         readerHistoryPushed = false;
         activeIssue = null;
         activeFullIssue = null;
+        // Restore base URL when reader closes via back button
+        history.replaceState(null, '', '/');
       }
     }
     window.addEventListener('popstate', onPopState);
@@ -327,9 +332,13 @@
       issueLoadError = true;
     }
     issueLoading = false;
+    // Sync URL to reflect the active issue
+    const issuePath = `/issue/${id}`;
     if (!readerHistoryPushed) {
-      history.pushState({ reader: true }, '');
+      history.pushState({ reader: true, issueId: id }, '', issuePath);
       readerHistoryPushed = true;
+    } else {
+      history.replaceState({ reader: true, issueId: id }, '', issuePath);
     }
   }
 

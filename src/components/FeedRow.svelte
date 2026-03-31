@@ -61,7 +61,7 @@
   <!-- Thumbnail -->
   {#if issue.hasImage}
     <div style="width:48px;height:48px;flex-shrink:0;border-radius:8px;overflow:hidden;background:var(--bg-sunken);">
-      <IssueImage issueId={issue.id} size="thumb" aspectRatio="1/1" borderRadius="8px" />
+      <IssueImage issueId={issue.id} size="thumb" aspectRatio="1/1" borderRadius="8px" alt="Illustration for {issue.headline}" />
     </div>
   {/if}
   <div style="flex:1;min-width:0;">
@@ -93,7 +93,7 @@
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
 
     {#if hasConnections}
-      <span style="font-size:10px;color:var(--score-info);font-weight:600;margin-top:2px;display:inline-block;">Connected</span>
+      <span style="font-size:11px;color:#1864AB;font-weight:600;margin-top:2px;display:inline-block;">Connected</span>
     {/if}
 
     {#if issue.stageScores && issue.finalScore}

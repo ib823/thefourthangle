@@ -292,7 +292,7 @@
       {/if}
 
       <!-- Share -->
-      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
+      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
         onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
         onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
@@ -300,7 +300,7 @@
       </button>
 
       <!-- Copy for verification -->
-      <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:{copied ? 'var(--status-green)' : 'var(--text-tertiary)'};border:1px solid {copied ? 'var(--status-green)' : 'var(--border-subtle)'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
+      <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:{copied ? 'var(--status-green)' : 'var(--text-tertiary)'};border:1px solid {copied ? 'var(--status-green)' : 'var(--border-subtle)'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
         onmouseenter={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
         onmouseleave={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
         {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}

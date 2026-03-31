@@ -152,7 +152,7 @@
   <!-- Issue art -->
   {#if issue.hasImage}
     <div style="margin:12px -24px 0;border-radius:0;overflow:hidden;">
-      <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" {eager} />
+      <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" {eager} alt="Illustration for {issue.headline}" />
     </div>
   {/if}
 
