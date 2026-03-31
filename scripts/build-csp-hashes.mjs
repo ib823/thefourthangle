@@ -26,7 +26,7 @@ function findHtmlFiles(dir) {
 const hashes = new Set();
 for (const file of findHtmlFiles(distDir)) {
   const html = readFileSync(file, 'utf8');
-  for (const m of html.matchAll(/<script>(.+?)<\/script>/gs)) {
+  for (const m of html.matchAll(/<script(?:\s[^>]*)?>(.+?)<\/script>/gs)) {
     hashes.add(`'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
   }
 }
