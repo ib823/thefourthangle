@@ -1,6 +1,6 @@
 /**
  * Compute SHA-256 hashes for all inline <script> blocks in built HTML.
- * Updates both public/_headers (source) and dist/_headers (deployed).
+ * Replaces CSP_SCRIPT_HASHES placeholder (or existing hashes) in dist/_headers.
  * Must run AFTER stealth.mjs (which modifies inline scripts).
  */
 
@@ -31,25 +31,37 @@ for (const file of findHtmlFiles(distDir)) {
   }
 }
 
-if (hashes.size === 0) {
-  console.log('  ✓ No inline scripts — CSP needs no script hashes');
-  process.exit(0);
-}
+const hashDirective = hashes.size > 0
+  ? [...hashes].join(' ')
+  : "'unsafe-inline'";
 
-const hashDirective = [...hashes].join(' ');
 console.log(`  ✓ ${hashes.size} inline script hash(es)`);
 
-function updateHeaders(path) {
-  if (!existsSync(path)) return;
-  let content = readFileSync(path, 'utf8');
-  content = content.replace(
-    /script-src\s+'self'[^;]*/,
-    `script-src 'self' ${hashDirective}`
-  );
-  writeFileSync(path, content);
+// Update dist/_headers — handles both placeholder and hardcoded hashes
+const distHeaders = join(distDir, '_headers');
+if (!existsSync(distHeaders)) {
+  console.error('  ✗ dist/_headers not found');
+  process.exit(1);
 }
 
-// Update both source and dist copies
-updateHeaders(join(root, 'public', '_headers'));
-updateHeaders(join(distDir, '_headers'));
-console.log('  ✓ Updated _headers (public + dist)');
+let content = readFileSync(distHeaders, 'utf8');
+const original = content;
+
+// Try placeholder first, then fall back to regex for existing hashes
+if (content.includes('CSP_SCRIPT_HASHES')) {
+  content = content.replace('CSP_SCRIPT_HASHES', hashDirective);
+} else {
+  // Replace existing script-src hashes (handles stale hardcoded hashes from git)
+  content = content.replace(
+    /script-src\s+'self'\s+[^;]+/,
+    `script-src 'self' ${hashDirective}`
+  );
+}
+
+if (content === original) {
+  console.error('  ✗ ERROR: Could not update CSP in dist/_headers — no placeholder or script-src found');
+  process.exit(1);
+}
+
+writeFileSync(distHeaders, content);
+console.log('  ✓ Updated dist/_headers');

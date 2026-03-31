@@ -173,6 +173,13 @@
     <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
   </div>
 
+  <!-- Neutrality score -->
+  {#if issue.stageScores && issue.finalScore}
+    <div style="margin-top:8px;">
+      <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} compact={true} />
+    </div>
+  {/if}
+
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
 

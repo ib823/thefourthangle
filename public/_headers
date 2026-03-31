@@ -4,7 +4,7 @@
   X-XSS-Protection: 0
   Referrer-Policy: no-referrer
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-bkQb3XLq4o8D/BtYhaBUJgoRztzKqY4RSReeoaV0/rI=' 'sha256-HhYm6lM3WYnADLHybnBzSfpNWfFN/0gOwGVm0Rv0Ipw=' 'sha256-c3ErX0xgcRIexQlMvMpa1TnPbyLfkiP5oimI+xnFI+o=' 'sha256-diHec1cT/3DxHyoH59Sdg3C8FBUpTN16hKo04wVkENA=' 'sha256-0G5IveushzrbhK/svWSI19t6EXJyHbLRUPYojr8gCFc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://tfa-notify.4thangle.workers.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' CSP_SCRIPT_HASHES; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://tfa-notify.4thangle.workers.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin

@@ -496,7 +496,7 @@
 </script>
 
 {#if isOffline}
-  <div style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:fixed;top:0;left:0;right:0;z-index:9999;">You're offline — reading cached content</div>
+  <div style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
 {/if}
 
 {#if viewMode === 'mobile'}

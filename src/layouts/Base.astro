@@ -55,6 +55,11 @@ const ogImage = `${siteUrl}/og-image.png`;
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
+    // Back link: go back if history exists, otherwise go home
+    document.querySelector('.back-link')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      history.length > 1 ? history.back() : location.href = '/';
+    });
     // F02/F03: Crossfade route transition using View Transitions API
     // Progressive enhancement — falls back to instant navigation on unsupported browsers
     if ('startViewTransition' in document) {

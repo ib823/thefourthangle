@@ -99,14 +99,20 @@ export function countUp(
 /**
  * Trigger haptic feedback if available.
  */
+let userHasInteracted = false;
+if (typeof document !== 'undefined') {
+  const markInteracted = () => { userHasInteracted = true; };
+  document.addEventListener('pointerdown', markInteracted, { once: true, capture: true });
+  document.addEventListener('keydown', markInteracted, { once: true, capture: true });
+}
+
 export function haptic(pattern: number | number[] = 5): void {
+  if (!userHasInteracted) return;
   try {
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(pattern);
     }
-  } catch {
-    // Silently fail — not all devices support vibration
-  }
+  } catch {}
 }
 
 /**

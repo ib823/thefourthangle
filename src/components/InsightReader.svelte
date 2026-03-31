@@ -295,6 +295,8 @@
   }
 
   // --- Navigation with spring physics ---
+  let textRevealSafety: ReturnType<typeof setTimeout> | null = null;
+
   function goTo(index: number, direction: 'left' | 'right', initialVelocity = 0) {
     if (index < 0 || index >= totalCards) return;
     // Allow interruption of ongoing animation
@@ -317,6 +319,12 @@
       subTextVisible = false;
       if (subRevealTimer) clearTimeout(subRevealTimer);
     }
+
+    // Safety: guarantee text becomes visible even if animation callback fails
+    if (textRevealSafety) clearTimeout(textRevealSafety);
+    textRevealSafety = setTimeout(() => {
+      if (!bigTextVisible) { bigTextVisible = true; subTextVisible = true; autoFitCardText(); }
+    }, 800);
 
     const width = getCardWidth();
     const exitTarget = direction === 'right' ? -width * 1.2 : width * 1.2;
@@ -1235,9 +1243,9 @@
   }
 
   .counter {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
   }
 
   .close-btn {

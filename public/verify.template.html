@@ -65,7 +65,7 @@ a:hover{text-decoration:underline}
 </head>
 <body>
 <div class="container">
-  <a href="/" onclick="event.preventDefault();history.length>1?history.back():location.href='/';" class="back">
+  <a href="/" class="back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     Back
   </a>
@@ -93,7 +93,7 @@ a:hover{text-decoration:underline}
     <p class="desc">Paste the full text from headline through the final card.</p>
     <label for="content-input">Content to verify</label>
     <textarea id="content-input" placeholder="Paste issue content here..."></textarea>
-    <button class="primary" onclick="verifyContent()">Verify</button>
+    <button class="primary">Verify</button>
     <div class="result hidden" id="result"></div>
   </div>
 
@@ -177,6 +177,8 @@ async function verifyContent() {
     resultEl.innerHTML = '<strong>NOT VERIFIED</strong> — This content does not match any issue published by The Fourth Angle. The content may have been modified or may not originate from this platform.';
   }
 }
+document.querySelector(".back").addEventListener("click",function(e){e.preventDefault();history.length>1?history.back():location.href="/";});
+document.querySelector("button.primary").addEventListener("click",verifyContent);
 </script>
 </body>
 </html>
