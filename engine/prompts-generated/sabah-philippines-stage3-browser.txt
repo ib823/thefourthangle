@@ -1,0 +1,58 @@
+STAGE 3: FACT VERIFICATION — sabah-philippines-claim
+
+You are an independent fact-checker. Verify EVERY factual claim in the Stage 1 analysis below. Use web search for each claim. Apply Dempster-Shafer belief mass scoring.
+
+For each claim, provide:
+- claim: exact text
+- status: VERIFIED | UNVERIFIED | INCORRECT | MISLEADING
+- m_true: 0.0-1.0 (belief mass for true)
+- m_false: 0.0-1.0 (belief mass for false)
+- m_unknown: 0.0-1.0 (belief mass for unknown)
+- source: primary source with URL
+- correction: if needed
+
+CLAIMS TO VERIFY:
+
+1. "In February 2026, the Philippines' national mapping agency published a map showing Sabah as Philippine territory."
+
+2. "On 20 February 2026, DFA maritime affairs spokesperson Rogelio Villanueva formally reaffirmed the Philippine government's sovereignty claim over Sabah."
+
+3. "The English text of the 1878 agreement says 'ceded.' The Malay/Sulu text uses 'pajakkan' which the Philippines translates as 'leased.'"
+
+4. "The 1878 agreement was signed on 22 January 1878 between Sultan Jamal ul-Azam of Sulu and British merchants Gustavus Baron von Overbeck and Alfred Dent."
+
+5. "The Cobbold Commission (1962) concluded roughly two-thirds of North Borneo's population supported joining Malaysia."
+
+6. "Malaysia was formed on 16 September 1963 with Sabah as a founding state under the Malaysia Agreement (MA63)."
+
+7. "Republic Act 5446 (Philippines, 1968) defines Philippine baselines to include Sabah and has never been repealed."
+
+8. "The Philippine Maritime Zones Act of 2024 (Republic Act 12064) did NOT repeal Section 2 of RA5446."
+
+9. "In February 2013, approximately 200 armed followers of Jamalul Kiram III landed in Lahad Datu, eastern Sabah. 68 people were killed — 56 militants, 6 civilians, 6 Malaysian security personnel."
+
+10. "Malaysia paid annual 'cession money' of approximately RM5,300 to Sulu heirs from 1963 until 2013."
+
+11. "On 9 December 2025, the Paris Court of Appeal annulled the US$14.92 billion arbitral award against Malaysia in favor of Sulu heirs."
+
+12. "The Paris Court found the arbitration agreement in the 1878 document was 'inapplicable' because the reference to the British Consul General had disappeared."
+
+13. "The Paris Court ordered the claimants to pay €200,000 to Malaysia."
+
+14. "The Hague Court of Appeal dismissed the Sulu heirs' enforcement attempt in June 2023."
+
+15. "The Supreme Court of the Netherlands upheld the Hague dismissal in September 2024."
+
+16. "Sabah's special grant under Article 112C has been frozen at RM26.7 million since 1969."
+
+17. "Malaysia has never consented to ICJ jurisdiction on the Sabah sovereignty question."
+
+OUTPUT FORMAT (JSON):
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0-1.0,
+  "claims": [ { "claim": "...", "status": "...", "m_true": 0.0-1.0, "m_false": 0.0-1.0, "m_unknown": 0.0-1.0, "source": "...", "correction": "..." } ],
+  "omitted_facts": [],
+  "source_assessment": "paragraph",
+  "overall_assessment": "paragraph"
+}

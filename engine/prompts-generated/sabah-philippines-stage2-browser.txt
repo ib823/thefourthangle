@@ -1,0 +1,62 @@
+STAGE 2: BIAS AUDIT — sabah-philippines-claim
+
+You are an independent bias auditor for a non-partisan Malaysian issues analysis platform. Your job is to find every bias in the following Stage 1 analysis — political, ethnic, religious, economic, gender, geographic, omission, and evasion. Be ruthless. No diplomatic hedging.
+
+CONTEXT: The Philippines renewed its claim over Sabah in February 2026 via a NAMRIA map and DFA reaffirmation. Malaysia has won every international court case (Hague 2023, Netherlands 2024, Paris 2025). But no court has ruled on the underlying sovereignty question. The 1878 agreement's "ceded" vs "leased" translation dispute remains unresolved by any court of competent jurisdiction.
+
+STAGE 1 OUTPUT (the analysis you are auditing):
+
+Card 1 (Hook): "The Philippines still claims Sabah. Malaysia has won every court case. The underlying question has never been answered by any court."
+Sub: NAMRIA map Feb 2026, DFA reaffirmation, $14.9B annulment in Paris Dec 2025, but no court has ruled on cession vs lease because Malaysia never consented to ICJ.
+
+Card 2 (Fact — Legal): "One word in one 1878 document — 'ceded' or 'leased' — has generated 148 years of dispute. No court of competent jurisdiction has ever ruled on which translation is correct."
+Sub: English text says "ceded," Malay/Sulu text uses "pajakkan" (lease). All Malaysia court wins were about arbitration procedure, not sovereignty merits. Paris annulment was because arbitration clause was "inapplicable," not because Philippines' claim is invalid.
+
+Card 3 (Fact — Security): "This is not an abstract legal dispute. In 2013, armed followers of a Sulu claimant invaded eastern Sabah. 68 people died."
+Sub: Lahad Datu standoff. ESSZONE created. Malaysia stopped annual RM5,300 payments. Cross-border corridor remains porous. Philippines distanced itself but never renounced the underlying claim.
+
+Card 4 (Fact — Regional): "Sabah unanimously rejects the Philippine claim. But Sabah also has unresolved grievances with Kuala Lumpur that the external threat conveniently obscures."
+Sub: Special grant frozen at RM26.7M since 1969. MA63 disputes. External sovereignty crisis makes it harder for Sabah to negotiate internal position because raising grievances during a sovereignty crisis can be framed as disloyalty.
+
+Card 5 (Reframe): "The question is not whether Malaysia owns Sabah. The question is why, after winning every court case, Malaysia still won't let the ICJ rule on the merits — and why the Philippines can't drop a claim enshrined in a 1968 law no president dares repeal."
+
+Card 6 (View): "Malaysia wins on law. The Philippines loses on law. Neither has resolved the dispute. And the people who live in the space between bear the cost."
+Sub: RA5446 is law in Philippines, no president will repeal. Malaysia won't submit to ICJ. Sabah's own priorities get less airtime every time Manila publishes a new map.
+
+YOUR TASK:
+
+Check across these 9 bias types and provide numerical estimates:
+
+1. Partisan language — Does it favor government or opposition? Score: political_lean_estimate (-1.0 opposition to +1.0 government)
+2. Racial framing — Does it disproportionately center one ethnic group? Score: ethnic_framing_estimate (0.0 equal to 1.0 one group dominates). Pay special attention to Sulu-origin communities in Sabah — are they treated as subjects or objects?
+3. Religious bias — Score: religious_sensitivity_estimate (-1.0 dismissive to +1.0 uncritically amplifying)
+4. Omission bias — Who is missing? (Sulu-origin Sabahans, Filipino workers in Sabah, Sabah indigenous groups, Philippine civil society, ASEAN perspective)
+5. Emotional manipulation — Is the Lahad Datu reference deployed for shock value or analytical purpose?
+6. Diplomatic evasion — Where does it hedge when it should be direct?
+7. Geographic bias — Is it KL-centric or does it center Sabah? Score: geographic_bias_estimate (-1.0 unusual peripheral to +1.0 strongly KL-centric)
+8. Economic masking — Is the economic dimension of the dispute (oil, gas, palm oil revenues) hidden? Score: economic_framing_estimate
+9. Gender erasure — Score: gender_agency_estimate (0.0 equal to 1.0 highly unequal)
+
+SHOE TEST: If Malaysia were making the claim on Philippine territory, would the framing be the same?
+
+OUTPUT FORMAT (JSON):
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0 to 1.0,
+  "ethnic_framing_estimate": 0.0 to 1.0,
+  "religious_sensitivity_estimate": -1.0 to 1.0,
+  "narrative_framing_estimate": -1.0 to 1.0,
+  "geographic_bias_estimate": -1.0 to 1.0,
+  "economic_framing_estimate": -1.0 to 1.0,
+  "gender_agency_estimate": 0.0 to 1.0,
+  "partisan_flags": [],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [],
+  "economic_flags": [],
+  "gender_flags": [],
+  "omission_flags": [],
+  "evasion_flags": [],
+  "shoe_test_failures": [],
+  "overall_assessment": "one blunt paragraph"
+}
