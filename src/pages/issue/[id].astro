@@ -15,11 +15,11 @@ const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
 const issueUrl = `${siteUrl}/issue/${issue.id}`;
 const ogImage = `${siteUrl}/og/issue-${issue.id}.png`;
 
-// Dual-score og:description — both scores within first 80 chars for WhatsApp
+// OG description: context + scores, optimized for social platforms (110-160 chars)
 const os = issue.opinionShift;
 const ns = Math.round(issue.finalScore ?? 0);
-const suffix = ` ${os}% Opinion Shift · Neutrality: ${ns}/100`;
-const maxCtx = 80 - suffix.length - 1;
+const suffix = ` — ${os}% Opinion Shift · Neutrality: ${ns}/100`;
+const maxCtx = 155 - suffix.length;
 let ctxTrunc = issue.context;
 if (ctxTrunc.length > maxCtx) {
   ctxTrunc = ctxTrunc.substring(0, maxCtx).replace(/\s+\S*$/, '') + '...';
@@ -33,7 +33,8 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#F8F9FA" />
+  <meta name="theme-color" content="#F8F9FA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
   <title>{title}</title>
   <meta name="description" content={description} />
 
