@@ -972,7 +972,7 @@
       <div style="border-radius:10px;overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
         <picture>
           <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
-          <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { (e.currentTarget as HTMLElement).parentElement!.parentElement!.style.display = 'none'; }} />
+          <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
         </picture>
       </div>
     </div>
