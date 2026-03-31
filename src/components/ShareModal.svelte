@@ -92,10 +92,12 @@
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
 
-  let waText = $derived(`*${shareText}*\n${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis:\n${fullUrl}`);
-  let tgText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis.`);
-  let tweetText = $derived(`${shareText}\n\n${os}% Opinion Shift · Neutrality: ${ns}/100\nRead the full analysis.`);
-  let threadsText = $derived(`${shareText} — ${os}% Opinion Shift · Neutrality: ${ns}/100\n\nRead the full analysis:\n${fullUrl}`);
+  let waShort = $derived(shareText.length > 120 ? shareText.slice(0, 117) + '...' : shareText);
+  let waText = $derived(`*${waShort}*\n${os}% goes unreported.\n${fullUrl}`);
+  let tgText = $derived(`${shareText} — ${os}% of the story goes unreported.\n\nFull analysis.`);
+  let tweetShort = $derived(shareText.length > 180 ? shareText.slice(0, 177) + '...' : shareText);
+  let tweetText = $derived(`${tweetShort}\n\n${os}% goes unreported.\nRead the full analysis.`);
+  let threadsText = $derived(`${shareText} — ${os}% goes unreported.\n\n${fullUrl}`);
 
   let canNativeShare = $state(false);
   onMount(() => { canNativeShare = !!navigator.share; });

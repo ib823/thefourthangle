@@ -52,10 +52,12 @@
       pushSupported = false;
       return;
     }
-    // iOS Safari doesn't support Web Push
+    // iOS Safari (non-PWA) doesn't support Web Push
+    // iOS PWA (standalone mode) supports Web Push since Safari 16.4+
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isIOS) { pushSupported = false; return; }
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    if (isIOS && !isStandalone) { pushSupported = false; return; }
 
     pushSupported = true;
     if (Notification.permission === 'denied') { pushDenied = true; return; }
@@ -265,9 +267,8 @@
               {/if}
               <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{item.title}</span>
               <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
-              <!-- svelte-ignore a11y_click_events_have_key_events -->
               <!-- svelte-ignore a11y_no_static_element_interactions -->
-              <span onclick={(e) => handleRemoveItem(e, item)} style="flex-shrink:0;padding:4px;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;" title="Remove">&times;</span>
+              <span role="button" tabindex="0" onclick={(e) => handleRemoveItem(e, item)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleRemoveItem(e, item); } }} style="flex-shrink:0;padding:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;" aria-label="Remove notification">&times;</span>
             </div>
             <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
           </button>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline — The Fourth Angle</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+      background: #F8F9FA; color: #212529;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1A1A1A; color: #E9ECEF; }
+      .card { background: #2A2A2A; border-color: rgba(255,255,255,0.08); }
+      .retry { background: #E9ECEF; color: #1A1A1A; }
+    }
+    .card {
+      max-width: 360px; text-align: center; padding: 40px 24px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px;
+    }
+    h1 { font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+    p { font-size: 15px; line-height: 1.6; opacity: 0.7; margin-bottom: 24px; }
+    .retry {
+      display: inline-block; padding: 12px 28px;
+      background: #212529; color: #fff; border: none; border-radius: 10px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      min-height: 44px; min-width: 44px;
+    }
+    .logo { opacity: 0.3; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="176 350 607 258" width="60" height="24" aria-label="The Fourth Angle"><path d="M 773 363 L 691 363 L 680 366 L 666 378 L 590 542 L 567 595 L 616 595 L 624 574 L 637 547 L 728 547 L 729 595 L 773 595 Z M 727 399 L 729 401 L 729 506 L 656 507 L 655 506 L 698 411 L 703 405 L 709 401 Z M 482 363 L 378 509 L 378 547 L 499 547 L 500 595 L 545 595 L 545 549 L 576 507 L 545 506 L 545 364 Z M 499 412 L 500 506 L 432 507 L 431 506 Z M 186 363 L 186 408 L 273 409 L 273 595 L 318 595 L 318 409 L 391 408 L 422 363 Z" fill="currentColor" fill-rule="evenodd"/></svg>
+    <h1>You're offline</h1>
+    <p>Check your connection and try again. Previously read issues may still be available.</p>
+    <button class="retry" onclick="location.reload()">Try again</button>
+  </div>
+</body>
+</html>

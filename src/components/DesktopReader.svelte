@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
   import { CARD_TYPES, opinionLabel } from '../data/issues';
@@ -107,6 +107,37 @@
     const m = CARD_TYPES[card.t] ?? CARD_TYPES.hook;
     return card.t === 'fact' && card.lens ? `${m.label} \u00B7 ${card.lens}` : m.label;
   }
+
+  // Screen Wake Lock: keep screen on while reading
+  let wakeLock: WakeLockSentinel | null = null;
+  let visCleanup: (() => void) | null = null;
+
+  onMount(async () => {
+    // Acquire wake lock
+    if ('wakeLock' in navigator) {
+      try { wakeLock = await navigator.wakeLock.request('screen'); } catch {}
+    }
+    // Re-acquire on visibility change (released when tab goes background)
+    const onVis = async () => {
+      if (document.visibilityState === 'visible' && !wakeLock) {
+        try { wakeLock = await navigator.wakeLock.request('screen'); } catch {}
+      }
+    };
+    document.addEventListener('visibilitychange', onVis);
+    visCleanup = () => document.removeEventListener('visibilitychange', onVis);
+
+    // Clear notification for this issue
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'ISSUE_OPENED', issueId: issue.id });
+    }
+  });
+
+  onDestroy(() => {
+    wakeLock?.release().catch(() => {});
+    wakeLock = null;
+    visCleanup?.();
+    countUpCancel?.();
+  });
 
   // C1: Animated opinion shift count-up
   let displayOS = $state(issue.opinionShift);

@@ -850,11 +850,33 @@
   // Accessibility: store focus origin for restoration on close
   let focusOrigin: Element | null = null;
 
+  // Screen Wake Lock: keep screen on while reading
+  let wakeLock: WakeLockSentinel | null = null;
+  let wakeLockVisCleanup: (() => void) | null = null;
+
   onMount(() => {
     focusOrigin = document.activeElement;
     overlayEl?.focus();
     markStarted(issue.id);
     lockScroll();
+
+    // Acquire wake lock
+    if ('wakeLock' in navigator) {
+      navigator.wakeLock.request('screen').then(wl => { wakeLock = wl; }).catch(() => {});
+    }
+    // Re-acquire on visibility change (released when tab goes background)
+    const onVis = () => {
+      if (document.visibilityState === 'visible' && !wakeLock && 'wakeLock' in navigator) {
+        navigator.wakeLock.request('screen').then(wl => { wakeLock = wl; }).catch(() => {});
+      }
+    };
+    document.addEventListener('visibilitychange', onVis);
+    wakeLockVisCleanup = () => document.removeEventListener('visibilitychange', onVis);
+
+    // Clear notification for this issue
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'ISSUE_OPENED', issueId: issue.id });
+    }
 
     // Check reduced motion preference
     if (typeof window !== 'undefined') {
@@ -911,6 +933,10 @@
     cancelAnimation?.();
     cleanupScrollObserver?.();
     if (scrollIndicatorTimer) clearTimeout(scrollIndicatorTimer);
+    // Release wake lock
+    wakeLock?.release().catch(() => {});
+    wakeLock = null;
+    wakeLockVisCleanup?.();
     // Restore focus to the element that opened the reader
     if (focusOrigin && 'focus' in focusOrigin) {
       (focusOrigin as HTMLElement).focus();

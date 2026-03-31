@@ -164,3 +164,42 @@
     --card-view-bg: rgba(167,139,250,0.1);
   }
 }
+
+/* High contrast mode — progressive enhancement */
+@media (prefers-contrast: more) {
+  :root {
+    --text-primary: #000;
+    --text-secondary: #1a1a1a;
+    --text-tertiary: #333;
+    --text-muted: #444;
+    --text-faint: #555;
+    --border-subtle: #666;
+    --border-light: #999;
+    --border-divider: #666;
+    --card: #fff;
+    --bg: #fff;
+    --bg-elevated: #f5f5f5;
+    --bg-sunken: #eee;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 2px 12px rgba(0,0,0,0.16);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+  :root {
+    --text-primary: #fff;
+    --text-secondary: #e0e0e0;
+    --text-tertiary: #ccc;
+    --text-muted: #bbb;
+    --text-faint: #999;
+    --border-subtle: #888;
+    --border-light: #666;
+    --border-divider: #888;
+    --card: #000;
+    --bg: #000;
+    --bg-elevated: #111;
+    --bg-sunken: #0a0a0a;
+    --shadow-sm: 0 1px 3px rgba(255,255,255,0.08);
+    --shadow-md: 0 2px 12px rgba(255,255,255,0.1);
+  }
+}

@@ -496,7 +496,7 @@
 </script>
 
 {#if isOffline}
-  <div style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
+  <div role="status" aria-live="polite" style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
 {/if}
 
 {#if viewMode === 'mobile'}
@@ -572,11 +572,11 @@
       />
 
       {#if issueLoadError}
-        <!-- I1: Error state -->
+        <!-- I1: Error state with offline differentiation -->
         <div style="flex:1;display:flex;align-items:center;justify-content:center;">
           <div style="text-align:center;max-width:300px;">
-            <p style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin:0 0 8px;">Couldn't load this issue</p>
-            <p style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);margin:0 0 16px;">Check your connection and try again.</p>
+            <p style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin:0 0 8px;">{isOffline ? "You're offline" : "Couldn't load this issue"}</p>
+            <p style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);margin:0 0 16px;">{isOffline ? "This issue hasn't been cached yet. Connect to the internet to read it." : "Something went wrong. Try again."}</p>
             <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
           </div>
         </div>

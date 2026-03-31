@@ -17,6 +17,14 @@ interface Subscription {
   keys: { p256dh: string; auth: string };
   subscribedAt: number;
   lastSeen: number;
+  platform: 'chrome' | 'firefox' | 'safari' | 'unknown';
+}
+
+function detectPlatform(endpoint: string): Subscription['platform'] {
+  if (endpoint.includes('fcm.googleapis.com')) return 'chrome';
+  if (endpoint.includes('push.services.mozilla.com')) return 'firefox';
+  if (endpoint.includes('web.push.apple.com')) return 'safari';
+  return 'unknown';
 }
 
 type IssueFeed = Array<{ id: string; headline: string; opinionShift: number; finalScore: number; context: string }>;
@@ -234,8 +242,8 @@ async function encryptPayload(
   return { ciphertext, serverPublicKey, salt };
 }
 
-// Send encrypted push notification
-async function sendPush(sub: Subscription, payload: string, env: Env): Promise<boolean> {
+// Send encrypted push notification with RFC 8030 Urgency + Topic headers
+async function sendPush(sub: Subscription, payload: string, env: Env, urgency: string = 'normal', topic?: string): Promise<boolean> {
   try {
     const url = new URL(sub.endpoint);
     const audience = `${url.protocol}//${url.host}`;
@@ -247,15 +255,19 @@ async function sendPush(sub: Subscription, payload: string, env: Env): Promise<b
     const plaintext = new TextEncoder().encode(payload);
     const { ciphertext } = await encryptPayload(plaintext, sub.keys.p256dh, sub.keys.auth);
 
+    const headers: Record<string, string> = {
+      'Authorization': `vapid t=${jwt}, k=${env.VAPID_PUBLIC_KEY}`,
+      'Content-Type': 'application/octet-stream',
+      'Content-Encoding': 'aes128gcm',
+      'Content-Length': String(ciphertext.length),
+      'TTL': '86400',
+      'Urgency': urgency,
+    };
+    if (topic) headers['Topic'] = topic;
+
     const response = await fetch(sub.endpoint, {
       method: 'POST',
-      headers: {
-        'Authorization': `vapid t=${jwt}, k=${env.VAPID_PUBLIC_KEY}`,
-        'Content-Type': 'application/octet-stream',
-        'Content-Encoding': 'aes128gcm',
-        'Content-Length': String(ciphertext.length),
-        'TTL': '86400',
-      },
+      headers,
       body: ciphertext,
     });
 
@@ -275,41 +287,53 @@ async function sendPush(sub: Subscription, payload: string, env: Env): Promise<b
 
 // ── Notification payloads ──
 
-function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number }): string {
-  return JSON.stringify({
+function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number }, platform: Subscription['platform'] = 'unknown'): string {
+  const base: Record<string, unknown> = {
     title: issue.headline,
-    body: `${issue.opinionShift}% Opinion Shift · Neutrality: ${Math.round(issue.finalScore)}/100 — Read the full analysis.`,
+    body: `What the headline leaves out. ${issue.opinionShift}% goes unreported.`,
     icon: '/icons/icon-192.png',
-    badge: '/icons/badge-96.png',
-    image: `/og/issue-${issue.id}.png?v=${Date.now()}`,
     tag: `issue-${issue.id}`,
     data: { url: `/issue/${issue.id}?from=notification`, type: 'new-issue' },
-    actions: [
+  };
+
+  if (platform === 'chrome' || platform === 'unknown') {
+    // Chrome: full payload with image, actions, badge
+    base.badge = '/icons/badge-96.png';
+    base.image = `/og/issue-${issue.id}.png?v=${Date.now()}`;
+    base.actions = [
       { action: 'read', title: 'Read' },
       { action: 'dismiss', title: 'Dismiss' },
-    ],
-  });
+    ];
+  } else if (platform === 'firefox') {
+    // Firefox: no image (not rendered), keep actions
+    base.badge = '/icons/badge-96.png';
+    base.actions = [
+      { action: 'read', title: 'Read' },
+      { action: 'dismiss', title: 'Dismiss' },
+    ];
+  }
+  // Safari: no actions, no image, no badge (unsupported)
+
+  return JSON.stringify(base);
 }
 
-function digestPayload(count: number, topIssue: { headline: string; opinionShift: number }): string {
+function digestPayload(count: number): string {
   return JSON.stringify({
-    title: `Your Weekly Digest — ${count} New Issue${count > 1 ? 's' : ''}`,
-    body: `Highest shift this week: ${topIssue.opinionShift}% on "${topIssue.headline.slice(0, 60)}${topIssue.headline.length > 60 ? '...' : ''}"`,
+    title: `Weekly Digest — ${count} New Issue${count > 1 ? 's' : ''}`,
+    body: `This week: ${count} new issue${count > 1 ? 's' : ''} analysed.`,
     icon: '/icons/icon-192.png',
     tag: 'weekly-digest',
     data: { url: '/?from=digest', type: 'digest' },
-    actions: [{ action: 'read', title: 'Open Digest' }],
   });
 }
 
 function reEngagementPayload(count: number): string {
   return JSON.stringify({
-    title: `${count} Issue${count > 1 ? 's' : ''} Since Your Last Visit`,
-    body: `What every side left out. Catch up on the latest analysis.`,
+    title: 'New Analyses Published',
+    body: `${count} new analyse${count > 1 ? 's' : ''} published since your last visit.`,
     icon: '/icons/icon-192.png',
     tag: 're-engagement',
     data: { url: '/?from=re-engage', type: 're-engagement' },
-    actions: [{ action: 'read', title: 'Catch Up' }],
   });
 }
 
@@ -341,6 +365,7 @@ async function handleSubscribe(request: Request, env: Env): Promise<Response> {
       keys: body.keys,
       subscribedAt: Date.now(),
       lastSeen: Date.now(),
+      platform: detectPlatform(body.endpoint),
     };
 
     const key = `sub:${Date.now()}_${body.endpoint.slice(-20).replace(/[^a-zA-Z0-9]/g, '')}`;
@@ -437,11 +462,11 @@ async function checkNewIssues(env: Env): Promise<void> {
   // Send notification for the highest-impact new issue (avoid spam)
   if (newIssues.length > 0 && subs.length > 0) {
     const topIssue = newIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
-    const payload = newIssuePayload(topIssue);
     const expired: string[] = [];
 
     for (const { key, sub } of subs) {
-      const ok = await sendPush(sub, payload, env);
+      const payload = newIssuePayload(topIssue, sub.platform || 'unknown');
+      const ok = await sendPush(sub, payload, env, 'normal', `issue-${topIssue.id}`);
       if (!ok) expired.push(key);
     }
 
@@ -467,11 +492,10 @@ async function sendWeeklyDigest(env: Env): Promise<void> {
   const recentIssues = feed.slice(0, 7);
   if (recentIssues.length === 0) return;
 
-  const topIssue = recentIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
-  const payload = digestPayload(recentIssues.length, topIssue);
+  const payload = digestPayload(recentIssues.length);
 
   for (const { key, sub } of subs) {
-    await sendPush(sub, payload, env);
+    await sendPush(sub, payload, env, 'low', 'weekly-digest');
   }
 }
 
@@ -492,7 +516,7 @@ async function checkReEngagement(env: Env): Promise<void> {
       if (now - lastReEngage < 30 * 24 * 60 * 60 * 1000) continue; // Max once per 30 days
 
       const payload = reEngagementPayload(feed.length);
-      await sendPush(sub, payload, env);
+      await sendPush(sub, payload, env, 'low', 're-engagement');
       await env.SUBS.put(`reengaged:${key}`, String(now));
     }
   }

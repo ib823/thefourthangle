@@ -16,10 +16,12 @@
       return;
     }
 
-    // iOS Safari PWA does not support Web Push — skip
+    // iOS Safari (non-PWA) does not support Web Push — skip
+    // iOS PWA (standalone mode) supports Web Push since Safari 16.4+
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isIOS) {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    if (isIOS && !isStandalone) {
       unsupported = true;
       return;
     }
