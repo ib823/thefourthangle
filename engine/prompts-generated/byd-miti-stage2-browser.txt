@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "\"MITI protects 700,000 auto jobs\" vs \"Government blocks affordable EVs for millions\" — the two framings dominating Malaysia's biggest EV dispute",
+      "sub": "Both framings flatten a genuine industrial policy dilemma into a binary. The 80% export rule and RM200K price floor are real constraints with real trade-offs — not a simple win for either jobs or consumers."
+    },
+    {
+      "t": "fact",
+      "lens": "economic",
+      "h": "BYD's affordable EVs are exactly what MITI won't allow on Malaysian roads",
+      "s": "BYD's Atto 3 and Dolphin currently sell as CBU imports at RM130K-170K — well below MITI's RM200K floor price for CKD production. The 80% export requirement means only 20% of Tanjung Malim output could be sold domestically, and only at premium prices. BYD's competitive advantage — affordable mass-market EVs — is precisely what the conditions eliminate.",
+      "d": "The economics are stark. BYD is the world's largest EV maker by volume (4.2M+ vehicles in 2025) built on a strategy of affordable electrification. The MITI conditions force BYD to either: (a) become a premium-only brand in Malaysia, competing with Mercedes and BMW instead of Proton and Perodua; or (b) build a 150-acre factory primarily to export cars to countries that already have their own incentive structures. Neither makes commercial sense. Meanwhile, Proton sells ~150,000 units/year and Perodua ~350,000 — both with 50% local content. The fear is that BYD at RM130K would devastate this ecosystem. But the question is whether protecting producers at the expense of consumers is sustainable when Thailand and Indonesia are courting the same investment without such restrictions."
+    },
+    {
+      "t": "fact",
+      "lens": "political",
+      "h": "Proton is 49.9% owned by Geely — another Chinese company already inside the wall",
+      "s": "The irony: MITI's protectionist wall shields Proton, which is itself 49.9% owned by Chinese automaker Geely. Perodua is 25.2% owned by Japan's Daihatsu. Neither national car company is wholly Malaysian-owned. The policy protects foreign-invested incumbents from a foreign newcomer.",
+      "d": "Minister Johari Ghani framed the conditions as protecting 700,000 Malaysian automotive jobs and the vendor ecosystem — a legitimate concern. Proton's 130+ local vendors and Perodua's 11,500 direct employees (70,000 in ecosystem) would face disruption from cheap BYD competition. But the framing obscures a structural reality: Malaysia's 'national' car industry already depends on foreign capital and technology. Geely owns half of Proton. Daihatsu owns a quarter of Perodua. The policy doesn't protect Malaysian ownership — it protects incumbent market share. Meanwhile, Zeekr (owned by Geely, same parent as Proton) is proceeding with CKD assembly at AHTV Tanjung Malim, and Xpeng is assembling at EPMB Pegoh, Melaka. The question is whether BYD's specific sin is being too affordable, too popular, or too independent of existing political relationships."
+    },
+    {
+      "t": "fact",
+      "lens": "technology",
+      "h": "Thailand and Indonesia are rolling out the red carpet BYD can't get in Malaysia",
+      "s": "Thailand approved BYD's Rayong factory with no export quotas and no price floors — production started in 2024. Indonesia's Subang plant is proceeding on similar terms. Vietnam courted BYD with tax holidays. Malaysia's conditions make it the only ASEAN country trying to attract Chinese EV investment while simultaneously restricting what it can sell domestically.",
+      "d": "The regional competition for EV manufacturing is real. Thailand's Board of Investment offered BYD 8-year corporate tax holidays, zero import duties on components, and no restrictions on domestic pricing. BYD's Rayong plant already produces the Atto 3 and Dolphin for the Thai market at competitive prices. Indonesia offered land in Subang at subsidised rates with no export quotas. If BYD withdraws from Tanjung Malim, the 150-acre site, the KLK TechPark's RM3.5 billion GDV projection, and Perak's economic transformation plans all take a hit. The B40/M40 consumer also loses: without locally assembled affordable EVs, the green transition remains a luxury. CKD EVs enjoy 100% sales and excise tax exemption until 2027 — but only if there are affordable CKD EVs to buy."
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether to protect jobs. It's who pays the cost of protection.",
+      "text": "MITI frames this as protecting 700,000 automotive workers. Critics frame it as blocking affordable EVs for 33 million consumers. Both are right — and that's the actual dilemma. Protectionism has a cost, and that cost is paid by consumers through higher prices and by the country through slower EV adoption. But deregulation also has a cost — paid by workers through job losses and by vendors through collapsed supply chains. The honest question is not whether protection is needed but how long it should last, who bears the cost in the interim, and whether Proton and Perodua have a credible plan to compete on their own merits by the time the walls come down. Nobody in this debate is answering that."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Johari Ghani's conditions are not irrational — they reflect a real fear that BYD at RM130K would gut Proton and Perodua's market share within 3 years. But the policy creates its own damage: Malaysia becomes the only ASEAN country where the world's largest EV maker can't sell affordable cars. Thailand and Indonesia win the factories, the jobs, and the consumer benefit. The 700,000 jobs MITI cites are worth protecting — but not with a policy that prices B40 Malaysians out of the EV transition while protecting incumbents that are themselves 25-50% foreign-owned. A time-bound transition with declining restrictions, mandatory technology transfer, and vendor development milestones would serve all sides better than an indefinite wall."
+    }
+  ],
+  "sources": "Paultan.org, FMT, Malay Mail, The Rakyat Post, Piston.my, AutoBuzz.my, The Edge Malaysia, MIDA, KLK Land, CarSifu, TechNode Global, Wikipedia (Automotive industry in Malaysia)",
+  "confidence": "High — MITI conditions confirmed by Minister Johari directly. BYD's stalled status reported across 7+ outlets simultaneously on Mar 30. Proton/Perodua sales and ownership figures verifiable from annual reports. Regional competition data from BOI Thailand, BKPM Indonesia. CKD tax exemptions confirmed by MITI.",
+  "lenses_used": ["economic", "political", "technology"],
+  "lenses_applicable_but_unused": ["social", "critical", "historical", "regional"]
+}

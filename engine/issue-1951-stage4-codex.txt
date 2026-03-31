@@ -1,0 +1,428 @@
+OpenAI Codex v0.117.0 (research preview)
+--------
+workdir: /workspaces/thefourthangle
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/codespace/.codex/memories]
+reasoning effort: none
+reasoning summaries: none
+session id: 019d3e1c-f6d3-7250-82e5-927bb36eb7b1
+--------
+user
+Read the file engine/issue-1951-brief.md. You identify missing perspectives in this Malaysian public issue analysis. Find what voices, framings, and facts are absent. Check for: missing community perspectives (B40, East Malaysia, women, youth, rural), alternative causal framings, international comparisons (how other trade-dependent nations handle Gulf maritime security - Singapore, Japan, South Korea), counter-arguments, gender dimensions, economic class dimensions, geographic dimensions. Output a structured analysis with completeness_score 0-100, missing_perspectives, alternative_framings, international_parallels, counter_arguments, missing_facts, gender_gaps, economic_gaps, geographic_gaps, and overall_assessment.
+warning: Codex could not find system bubblewrap at /usr/bin/bwrap. Please install bubblewrap with your package manager. Codex will use the vendored bubblewrap in the meantime.
+2026-03-30T09:39:39.676729Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\"" })
+2026-03-30T09:39:40.082171Z ERROR codex_core::shell_snapshot: Shell snapshot validation failed: Snapshot command exited with status exit status: 2: /home/codespace/.codex/shell_snapshots/019d3e1c-f6d3-7250-82e5-927bb36eb7b1.tmp-1774863579264645069: line 2547: syntax error near unexpected token `('
+
+codex
+I’m reading `engine/issue-1951-brief.md` first, then I’ll assess what perspectives, framings, and factual anchors are missing against the dimensions you listed.
+exec
+/bin/bash -lc "sed -n '1,260p' engine/issue-1951-brief.md" in /workspaces/thefourthangle
+exec
+/bin/bash -lc 'wc -l engine/issue-1951-brief.md' in /workspaces/thefourthangle
+ succeeded in 665ms:
+71 engine/issue-1951-brief.md
+
+ succeeded in 723ms:
+# ISSUE BRIEF: 1951
+
+## Headline
+Seven Ships, One Phone Call, Zero Leverage
+
+## Context
+Seven Malaysian tankers (3 Petronas, 2 MISC, 1 Sapura, 1 Sepadu) were stranded in the Strait of Hormuz after Iran blocked the waterway on 28 February 2026 following US-Israel military strikes. PM Anwar secured passage via a direct call to Iran's President Pezeshkian. Malaysia was NOT on Iran's original 5-nation safe-passage list (China, Russia, India, Iraq, Pakistan). Nearly 2,000 ships from other nations remain blocked. Brent crude peaked at $126/barrel. Maritime traffic through Hormuz dropped 90%.
+
+## Source Date
+2026-03-30
+
+## Key Facts
+- Crisis began 28 Feb 2026 after US-Israel strikes on Iran (killing supreme leader Khamenei)
+- Iran's IRGC declared strait closed, threatening to attack any vessels
+- 7 Malaysian vessels stranded: 3 Petronas, 2 MISC, 1 Sapura, 1 Sepadu
+- Iran initially allowed only 5 nations: China, Russia, India, Iraq, Pakistan
+- Malaysia secured passage after Anwar's direct call to Pezeshkian on 26 March
+- FM Mohamad Hasan confirmed 7 ships awaiting "safe window" on 28 March
+- ~2,000 ships blocked globally, maritime traffic down 90%
+- Brent peaked at $126/barrel on 8 March (highest since 2022)
+- 20% of global daily oil supply transits Hormuz
+- One-third of global fertiliser shipments transit Hormuz
+- Malaysia has no naval assets in the Gulf, no membership in Combined Maritime Forces
+- Insurance premiums for Gulf-bound vessels surged significantly
+
+## Stage 1 Analysis (Primary — produced by Claude)
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysian ships cleared to pass Hormuz after PM's diplomatic call to Iran.",
+      "sub": "Seven tankers — three Petronas, two MISC, one Sapura, one Sepadu — were awaiting clearance after Iran shut the strait on 28 February 2026."
+    },
+    {
+      "t": "fact",
+      "lens": "Security",
+      "h": "Malaysia was not on Iran's original 5-nation safe-passage list.",
+      "s": "China, Russia, India, Iraq and Pakistan received blanket clearance. Malaysia needed a separate bilateral call. Nearly 2,000 ships from other nations remain blocked.",
+      "d": "Iran's Foreign Minister Abbas Araghchi announced safe passage for five nations on 26 March. Malaysia was conspicuously absent. PM Anwar's direct call to President Pezeshkian secured Malaysian clearance separately — a diplomatic win, but one that exposed Malaysia's lack of standing leverage in Gulf security architecture."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Malaysia has zero naval assets in the Gulf and no membership in Combined Maritime Forces.",
+      "s": "Singapore contributes vessels to multinational naval taskforces. Malaysia's maritime security depends entirely on diplomatic goodwill, not operational capability.",
+      "d": "The Combined Maritime Forces (CMF) includes 44 nations. Singapore, Thailand, and the Philippines participate. Malaysia does not. Malaysia's Royal Navy operates primarily in the South China Sea and Malacca Strait. In the Gulf, Malaysia has no patrol vessels, no logistics base, and no intelligence-sharing arrangement with any coalition."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Brent crude peaked at $126 per barrel — the highest since 2022. Maritime traffic through Hormuz dropped 90%.",
+      "s": "20% of global daily oil supply and one-third of fertiliser shipments transit through the 33km-wide strait. Insurance premiums for Gulf-bound vessels surged significantly.",
+      "d": "The Hormuz blockade disrupted not only crude oil flows but also LNG, fertiliser raw materials (urea, sulphur, phosphates), and containerised goods. For Malaysia, the dual impact is paradoxical: higher crude prices boost Petronas revenue but increase the government's subsidy obligation for domestic fuel consumption."
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether the ships got through. It is what happens next time Malaysia needs a favour from a country it cannot leverage.",
+      "text": "Malaysia resolved this crisis through personal diplomacy — a phone call between two leaders. But personal diplomacy is not a security architecture. It cannot be scaled, replicated, or guaranteed. The next crisis may not involve a leader willing to take the call."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Diplomacy resolved the immediate crisis. But a trade-dependent nation with no naval reach, no seat at Gulf security tables, and no standing arrangement with Iran or any Gulf coalition is one phone call away from paralysis. The question for Malaysia is whether this near-miss triggers a strategic review or becomes another crisis quickly forgotten."
+    }
+  ],
+  "sources": "Al Jazeera, Bloomberg, Malay Mail, The Star, Bernama, Wikipedia (2026 Strait of Hormuz crisis), Free Malaysia Today, Borneo Post, Marine Insight",
+  "confidence": "High — all key facts verified across multiple primary sources",
+  "lenses_used": ["Security", "Political", "Economic"],
+  "lenses_applicable_but_unused": ["Regional", "Historical", "Social"]
+}
+
+codex
+The brief is narrowly state-centric: elite diplomacy, naval capability, and macroeconomics. I’m checking comparable trade-dependent countries now so the gap analysis on Singapore, Japan, and South Korea is anchored to current institutional practice rather than memory.
+web search: 
+web search: Singapore Gulf maritime security Combined Maritime Forces official
+web search: 
+web search: Republic of Korea Cheonghae Unit Strait of Hormuz official
+web search: 
+web search: Japan dispatch Middle East information gathering mission official Strait of Hormuz MOD
+codex
+```json
+{
+  "completeness_score": 38,
+  "missing_perspectives": [
+    {
+      "group": "B40 and lower-middle-income households",
+      "missing": "The brief discusses crude prices and subsidy burden at state level but not household-level exposure.",
+      "why_it_matters": "B40 households feel shipping disruption through fuel, food, fertiliser-linked food prices, transport fares, and job insecurity before they feel any Petronas upside."
+    },
+    {
+      "group": "East Malaysia",
+      "missing": "Sabah and Sarawak are absent as distinct stakeholder regions.",
+      "why_it_matters": "East Malaysia is more exposed to logistics costs, import dependence for some essentials, and offshore energy-sector implications; national averages can hide sharper regional pain."
+    },
+    {
+      "group": "Women",
+      "missing": "No gendered reading of price shocks, care work, household budgeting, or women-dominated sectors.",
+      "why_it_matters": "Women often absorb inflation through unpaid care, food management, and precarious service-sector work."
+    },
+    {
+      "group": "Youth",
+      "missing": "No treatment of graduate employment, wage stagnation, or cost-of-living anxiety among younger Malaysians.",
+      "why_it_matters": "Youth are more exposed to pass-through effects in transport, food, and entry-level labour markets, and may read the issue less as geopolitics than as affordability."
+    },
+    {
+      "group": "Rural communities",
+      "missing": "No rural lens on diesel dependence, farm input costs, fertiliser exposure, or weaker transport alternatives.",
+      "why_it_matters": "Rural households and small producers are hit differently from urban consumers, especially where logistics costs compound inflation."
+    },
+    {
+      "group": "Workers and SMEs",
+      "missing": "No voices from hauliers, fishers, farmers, manufacturers, or small import/export firms.",
+      "why_it_matters": "The brief treats the economy as Petronas plus the state, overlooking the firms and workers that actually absorb shipping delays and insurance spikes."
+    }
+  ],
+  "alternative_framings": [
+    {
+      "framing": "Resilience gap, not leverage gap",
+      "explanation": "The current brief frames the event mainly as Malaysian weakness versus Iran. An alternative is that the real issue is supply-chain resilience, contingency planning, routing diversity, insurance readiness, and stockpile policy."
+    },
+    {
+      "framing": "Commercial risk management failure",
+      "explanation": "Instead of focusing on Anwar's phone call, the story could ask whether Malaysian firms and agencies had adequate war-risk planning, chartering flexibility, and crisis protocols for Gulf chokepoints."
+    },
+    {
+      "framing": "Overdependence on personalised diplomacy",
+      "explanation": "The brief says this, but only as a rhetorical flourish. It does not fully explore whether Malaysia has institutional, bureaucratic, and industry-level crisis channels beyond leader-to-leader intervention."
+    },
+    {
+      "framing": "Non-alignment tradeoff",
+      "explanation": "Malaysia's distance from formal Gulf security structures can also be read as a deliberate foreign-policy choice to preserve autonomy and avoid entanglement, not simply as neglect."
+    },
+    {
+      "framing": "Domestic political economy",
+      "explanation": "The more consequential question may be subsidy design, food-price pass-through, and who bears adjustment costs inside Malaysia, not only whether Malaysia has Gulf naval reach."
+    },
+    {
+      "framing": "Systemic chokepoint vulnerability",
+      "explanation": "Hormuz is one example of a broader Malaysian vulnerability to maritime chokepoints, alongside the Red Sea and other trade corridors."
+    }
+  ],
+  "international_parallels": [
+    {
+      "country": "Singapore",
+      "parallel": "Singapore's approach is broader than naval presence: a whole-of-government maritime security system, Maritime Security Task Force/Command, and the Information Fusion Centre support threat monitoring and coordination.",
+      "contrast_with_brief": "The brief mentions Singapore only as a country that contributes vessels, but misses the institutional lesson: trade-dependent states can build coordination, intelligence sharing, and multinational interoperability without framing everything as raw naval power.",
+      "sources": [
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/29jun20_fs3",
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/30jun17_fs4",
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/2013jun06-news-releases-00048"
+      ]
+    },
+    {
+      "country": "Japan",
+      "parallel": "Japan has combined diplomacy, industry coordination, and an independent SDF information-gathering mission for Japan-related vessels in the Middle East since 2019, while avoiding direct participation in the U.S.-led framework.",
+      "contrast_with_brief": "This is important because it shows a trade-dependent Asian state balancing alliance politics, ties with Iran, and shipping protection through a hybrid model, not a simple join-or-don't-join binary.",
+      "sources": [
+        "https://www.mod.go.jp/en/d_architecture/m_east/index.html",
+        "https://www.mofa.go.jp/policy/piracy/index.html",
+        "https://combinedmaritimeforces.com/2020/02/23/japan-takes-command-of-combined-task-force-151/"
+      ]
+    },
+    {
+      "country": "South Korea",
+      "parallel": "South Korea has sustained long-running Gulf of Aden deployments through the Cheonghae Unit and has repeatedly commanded CTF 151.",
+      "contrast_with_brief": "The missing lesson is that a trade-dependent middle power can maintain a limited but continuous expeditionary maritime role tied to shipping security without becoming a great power.",
+      "sources": [
+        "https://combinedmaritimeforces.com/2023/02/17/republic-of-korea-assumes-command-of-anti-piracy-task-force/",
+        "https://combinedmaritimeforces.com/2025/03/20/ctf-151-eunavfor-ops-atalanta-units-undertake-combined-counter-piracy-exercise-iron-trident-off-gulf-of-aden/",
+        "https://www.korea.net/NewsFocus/Korea_in_photos/view?articleId=234485"
+      ]
+    }
+  ],
+  "counter_arguments": [
+    {
+      "argument": "Malaysia does not need Gulf naval assets to protect its interests.",
+      "why_missing": "The brief assumes absence of deployable force equals strategic failure. A counter-view is that for Malaysia, diplomacy, commercial rerouting, insurance, and coalition information-sharing may be more cost-effective than expeditionary naval posture."
+    },
+    {
+      "argument": "Staying outside some security structures may preserve access.",
+      "why_missing": "A less militarised posture may make Malaysia more acceptable to multiple sides, including Iran, which can be useful in crises."
+    },
+    {
+      "argument": "A phone call can still reflect diplomatic capital, not only weakness.",
+      "why_missing": "The brief treats the call mainly as proof of fragility. It could also be read as evidence that bilateral political relationships still matter for middle powers."
+    },
+    {
+      "argument": "The opportunity cost of Gulf deployment is real.",
+      "why_missing": "Malaysia already faces maritime demands closer to home. A stronger Gulf role may divert attention from the South China Sea, Sulu-Sulawesi waters, and Malacca Strait."
+    },
+    {
+      "argument": "Trade security is not just a military problem.",
+      "why_missing": "The brief underweights strategic reserves, procurement diversification, supply contracts, port planning, and domestic inflation management."
+    }
+  ],
+  "missing_facts": [
+    {
+      "fact": "The brief says Malaysia has no membership in Combined Maritime Forces, but CMF's official member list includes Malaysia.",
+      "importance": "This weakens a central claim in the analysis and should be corrected before publication.",
+      "source": "https://combinedmaritimeforces.com/about/"
+    },
+    {
+      "fact": "There is no quantification of Malaysia's dependence on Gulf energy, fertiliser feedstocks, shipping routes, or sectors most exposed to Hormuz disruption.",
+      "importance": "Without exposure metrics, the argument stays rhetorical."
+    },
+    {
+      "fact": "No estimate of likely domestic pass-through to fuel, food, fertiliser, logistics, or inflation.",
+      "importance": "This is the missing bridge between maritime disruption and public impact."
+    },
+    {
+      "fact": "No distinction between impacts on government finances, corporate earnings, and household welfare.",
+      "importance": "Those effects can move in opposite directions."
+    },
+    {
+      "fact": "No history of Malaysia's prior maritime-security participation, liaison arrangements, or crisis-response mechanisms.",
+      "importance": "The analysis implies a blank slate without establishing the baseline."
+    }
+  ],
+  "gender_gaps": [
+    "No analysis of how inflation shocks shift unpaid care burdens onto women.",
+    "No attention to women workers in retail, food services, healthcare support, or informal trade who are vulnerable to cost spikes.",
+    "No recognition that household food budgeting and consumption smoothing are often gendered responsibilities.",
+    "No women, peace and security lens despite maritime insecurity having downstream civilian effects."
+  ],
+  "economic_gaps": [
+    "The brief is macro-heavy and elite-heavy: Petronas, subsidies, and state leverage dominate.",
+    "It omits class-differentiated effects on B40, M40, gig workers, small farmers, fishers, and SMEs.",
+    "It does not separate winners from losers: energy-linked revenues may rise while consumers and non-oil businesses lose.",
+    "It does not ask who ultimately pays for higher insurance, freight, and input costs."
+  ],
+  "geographic_gaps": [
+    "No Sabah/Sarawak lens despite East Malaysian logistics and energy relevance.",
+    "No rural-urban differentiation in diesel dependence, transport alternatives, and input costs.",
+    "No port-specific lens such as impacts on Klang, Johor, Bintulu, or regional shipping corridors.",
+    "No distinction between Peninsula-centric policymaking and East Malaysian lived effects."
+  ],
+  "overall_assessment": "The brief is sharp but incomplete. Its core frame is elite strategic vulnerability: Malaysia lacked leverage, lacked Gulf reach, and escaped through leader-level diplomacy. That is a valid frame, but it is too narrow for a public issue analysis. It underrepresents social, class, gender, and geographic consequences; it lacks serious counter-arguments; and it misses the more instructive comparison that other trade-dependent Asian states use mixed models of diplomacy, information-sharing, coalition participation, and limited deployments rather than pure hard-power leverage. Most importantly, one of its key claims appears factually wrong: CMF officially lists Malaysia as a member. As written, the brief reads more like a statecraft critique than a complete public-impact analysis."
+}
+```
+tokens used
+42,777
+```json
+{
+  "completeness_score": 38,
+  "missing_perspectives": [
+    {
+      "group": "B40 and lower-middle-income households",
+      "missing": "The brief discusses crude prices and subsidy burden at state level but not household-level exposure.",
+      "why_it_matters": "B40 households feel shipping disruption through fuel, food, fertiliser-linked food prices, transport fares, and job insecurity before they feel any Petronas upside."
+    },
+    {
+      "group": "East Malaysia",
+      "missing": "Sabah and Sarawak are absent as distinct stakeholder regions.",
+      "why_it_matters": "East Malaysia is more exposed to logistics costs, import dependence for some essentials, and offshore energy-sector implications; national averages can hide sharper regional pain."
+    },
+    {
+      "group": "Women",
+      "missing": "No gendered reading of price shocks, care work, household budgeting, or women-dominated sectors.",
+      "why_it_matters": "Women often absorb inflation through unpaid care, food management, and precarious service-sector work."
+    },
+    {
+      "group": "Youth",
+      "missing": "No treatment of graduate employment, wage stagnation, or cost-of-living anxiety among younger Malaysians.",
+      "why_it_matters": "Youth are more exposed to pass-through effects in transport, food, and entry-level labour markets, and may read the issue less as geopolitics than as affordability."
+    },
+    {
+      "group": "Rural communities",
+      "missing": "No rural lens on diesel dependence, farm input costs, fertiliser exposure, or weaker transport alternatives.",
+      "why_it_matters": "Rural households and small producers are hit differently from urban consumers, especially where logistics costs compound inflation."
+    },
+    {
+      "group": "Workers and SMEs",
+      "missing": "No voices from hauliers, fishers, farmers, manufacturers, or small import/export firms.",
+      "why_it_matters": "The brief treats the economy as Petronas plus the state, overlooking the firms and workers that actually absorb shipping delays and insurance spikes."
+    }
+  ],
+  "alternative_framings": [
+    {
+      "framing": "Resilience gap, not leverage gap",
+      "explanation": "The current brief frames the event mainly as Malaysian weakness versus Iran. An alternative is that the real issue is supply-chain resilience, contingency planning, routing diversity, insurance readiness, and stockpile policy."
+    },
+    {
+      "framing": "Commercial risk management failure",
+      "explanation": "Instead of focusing on Anwar's phone call, the story could ask whether Malaysian firms and agencies had adequate war-risk planning, chartering flexibility, and crisis protocols for Gulf chokepoints."
+    },
+    {
+      "framing": "Overdependence on personalised diplomacy",
+      "explanation": "The brief says this, but only as a rhetorical flourish. It does not fully explore whether Malaysia has institutional, bureaucratic, and industry-level crisis channels beyond leader-to-leader intervention."
+    },
+    {
+      "framing": "Non-alignment tradeoff",
+      "explanation": "Malaysia's distance from formal Gulf security structures can also be read as a deliberate foreign-policy choice to preserve autonomy and avoid entanglement, not simply as neglect."
+    },
+    {
+      "framing": "Domestic political economy",
+      "explanation": "The more consequential question may be subsidy design, food-price pass-through, and who bears adjustment costs inside Malaysia, not only whether Malaysia has Gulf naval reach."
+    },
+    {
+      "framing": "Systemic chokepoint vulnerability",
+      "explanation": "Hormuz is one example of a broader Malaysian vulnerability to maritime chokepoints, alongside the Red Sea and other trade corridors."
+    }
+  ],
+  "international_parallels": [
+    {
+      "country": "Singapore",
+      "parallel": "Singapore's approach is broader than naval presence: a whole-of-government maritime security system, Maritime Security Task Force/Command, and the Information Fusion Centre support threat monitoring and coordination.",
+      "contrast_with_brief": "The brief mentions Singapore only as a country that contributes vessels, but misses the institutional lesson: trade-dependent states can build coordination, intelligence sharing, and multinational interoperability without framing everything as raw naval power.",
+      "sources": [
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/29jun20_fs3",
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/30jun17_fs4",
+        "https://www.mindef.gov.sg/news-and-events/latest-releases/2013jun06-news-releases-00048"
+      ]
+    },
+    {
+      "country": "Japan",
+      "parallel": "Japan has combined diplomacy, industry coordination, and an independent SDF information-gathering mission for Japan-related vessels in the Middle East since 2019, while avoiding direct participation in the U.S.-led framework.",
+      "contrast_with_brief": "This is important because it shows a trade-dependent Asian state balancing alliance politics, ties with Iran, and shipping protection through a hybrid model, not a simple join-or-don't-join binary.",
+      "sources": [
+        "https://www.mod.go.jp/en/d_architecture/m_east/index.html",
+        "https://www.mofa.go.jp/policy/piracy/index.html",
+        "https://combinedmaritimeforces.com/2020/02/23/japan-takes-command-of-combined-task-force-151/"
+      ]
+    },
+    {
+      "country": "South Korea",
+      "parallel": "South Korea has sustained long-running Gulf of Aden deployments through the Cheonghae Unit and has repeatedly commanded CTF 151.",
+      "contrast_with_brief": "The missing lesson is that a trade-dependent middle power can maintain a limited but continuous expeditionary maritime role tied to shipping security without becoming a great power.",
+      "sources": [
+        "https://combinedmaritimeforces.com/2023/02/17/republic-of-korea-assumes-command-of-anti-piracy-task-force/",
+        "https://combinedmaritimeforces.com/2025/03/20/ctf-151-eunavfor-ops-atalanta-units-undertake-combined-counter-piracy-exercise-iron-trident-off-gulf-of-aden/",
+        "https://www.korea.net/NewsFocus/Korea_in_photos/view?articleId=234485"
+      ]
+    }
+  ],
+  "counter_arguments": [
+    {
+      "argument": "Malaysia does not need Gulf naval assets to protect its interests.",
+      "why_missing": "The brief assumes absence of deployable force equals strategic failure. A counter-view is that for Malaysia, diplomacy, commercial rerouting, insurance, and coalition information-sharing may be more cost-effective than expeditionary naval posture."
+    },
+    {
+      "argument": "Staying outside some security structures may preserve access.",
+      "why_missing": "A less militarised posture may make Malaysia more acceptable to multiple sides, including Iran, which can be useful in crises."
+    },
+    {
+      "argument": "A phone call can still reflect diplomatic capital, not only weakness.",
+      "why_missing": "The brief treats the call mainly as proof of fragility. It could also be read as evidence that bilateral political relationships still matter for middle powers."
+    },
+    {
+      "argument": "The opportunity cost of Gulf deployment is real.",
+      "why_missing": "Malaysia already faces maritime demands closer to home. A stronger Gulf role may divert attention from the South China Sea, Sulu-Sulawesi waters, and Malacca Strait."
+    },
+    {
+      "argument": "Trade security is not just a military problem.",
+      "why_missing": "The brief underweights strategic reserves, procurement diversification, supply contracts, port planning, and domestic inflation management."
+    }
+  ],
+  "missing_facts": [
+    {
+      "fact": "The brief says Malaysia has no membership in Combined Maritime Forces, but CMF's official member list includes Malaysia.",
+      "importance": "This weakens a central claim in the analysis and should be corrected before publication.",
+      "source": "https://combinedmaritimeforces.com/about/"
+    },
+    {
+      "fact": "There is no quantification of Malaysia's dependence on Gulf energy, fertiliser feedstocks, shipping routes, or sectors most exposed to Hormuz disruption.",
+      "importance": "Without exposure metrics, the argument stays rhetorical."
+    },
+    {
+      "fact": "No estimate of likely domestic pass-through to fuel, food, fertiliser, logistics, or inflation.",
+      "importance": "This is the missing bridge between maritime disruption and public impact."
+    },
+    {
+      "fact": "No distinction between impacts on government finances, corporate earnings, and household welfare.",
+      "importance": "Those effects can move in opposite directions."
+    },
+    {
+      "fact": "No history of Malaysia's prior maritime-security participation, liaison arrangements, or crisis-response mechanisms.",
+      "importance": "The analysis implies a blank slate without establishing the baseline."
+    }
+  ],
+  "gender_gaps": [
+    "No analysis of how inflation shocks shift unpaid care burdens onto women.",
+    "No attention to women workers in retail, food services, healthcare support, or informal trade who are vulnerable to cost spikes.",
+    "No recognition that household food budgeting and consumption smoothing are often gendered responsibilities.",
+    "No women, peace and security lens despite maritime insecurity having downstream civilian effects."
+  ],
+  "economic_gaps": [
+    "The brief is macro-heavy and elite-heavy: Petronas, subsidies, and state leverage dominate.",
+    "It omits class-differentiated effects on B40, M40, gig workers, small farmers, fishers, and SMEs.",
+    "It does not separate winners from losers: energy-linked revenues may rise while consumers and non-oil businesses lose.",
+    "It does not ask who ultimately pays for higher insurance, freight, and input costs."
+  ],
+  "geographic_gaps": [
+    "No Sabah/Sarawak lens despite East Malaysian logistics and energy relevance.",
+    "No rural-urban differentiation in diesel dependence, transport alternatives, and input costs.",
+    "No port-specific lens such as impacts on Klang, Johor, Bintulu, or regional shipping corridors.",
+    "No distinction between Peninsula-centric policymaking and East Malaysian lived effects."
+  ],
+  "overall_assessment": "The brief is sharp but incomplete. Its core frame is elite strategic vulnerability: Malaysia lacked leverage, lacked Gulf reach, and escaped through leader-level diplomacy. That is a valid frame, but it is too narrow for a public issue analysis. It underrepresents social, class, gender, and geographic consequences; it lacks serious counter-arguments; and it misses the more instructive comparison that other trade-dependent Asian states use mixed models of diplomacy, information-sharing, coalition participation, and limited deployments rather than pure hard-power leverage. Most importantly, one of its key claims appears factually wrong: CMF officially lists Malaysia as a member. As written, the brief reads more like a statecraft critique than a complete public-impact analysis."
+}
+```

@@ -1,0 +1,596 @@
+OpenAI Codex v0.117.0 (research preview)
+--------
+workdir: /workspaces/thefourthangle
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/codespace/.codex/memories]
+reasoning effort: none
+reasoning summaries: none
+session id: 019d3e41-150f-7d90-856f-8d0a62a18df5
+--------
+user
+Read the file engine/issue-1956-brief.md. Identify missing perspectives in this Malaysian public issue analysis about Employment Pass salary changes. Find absent voices and framings. Check for: missing community perspectives (Malaysian workers who compete with expats, SMEs that cannot afford RM20K for needed specialists, Penang factory workers worried about investment leaving, young Malaysian graduates who benefit from succession planning, foreign workers already in Malaysia facing renewal shock, spouses and families of expat workers, East Malaysian employers with different talent markets), alternative causal framings (is this about protecting local jobs or about economic nationalism? Is the real problem brain drain of Malaysians to Singapore rather than expats taking jobs? Could this accelerate automation rather than localisation? Is this a hidden protectionism measure dressed as talent development?), international comparisons (Singapore COMPASS framework, Thailand BOI smart visa, Indonesia golden visa, how do competing ASEAN nations attract talent?), counter-arguments (higher salary floors attract higher quality expats, succession planning genuinely builds local capacity, RM10K was too low and attracted low-value placements), gender dimensions (women in tech talent pipeline, expat spouse work rights), economic class dimensions (who benefits from expat presence - landlords, international schools, services vs who competes - local mid-level professionals), geographic dimensions (Penang vs KL vs Johor vs East Malaysia talent dynamics). Output structured JSON.
+warning: Codex could not find system bubblewrap at /usr/bin/bwrap. Please install bubblewrap with your package manager. Codex will use the vendored bubblewrap in the meantime.
+2026-03-30T10:19:06.895911Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\"" })
+2026-03-30T10:19:07.640006Z ERROR codex_core::shell_snapshot: Shell snapshot validation failed: Snapshot command exited with status exit status: 2: /home/codespace/.codex/shell_snapshots/019d3e41-150f-7d90-856f-8d0a62a18df5.tmp-1774865946307457324: line 2547: syntax error near unexpected token `('
+
+codex
+I’m reading the brief first, then I’ll map what perspectives and framings it already covers against the gaps you listed and return the result as structured JSON.
+exec
+/bin/bash -lc "sed -n '1,260p' engine/issue-1956-brief.md" in /workspaces/thefourthangle
+exec
+/bin/bash -lc 'wc -l engine/issue-1956-brief.md' in /workspaces/thefourthangle
+ succeeded in 536ms:
+# ISSUE BRIEF: 1956
+
+## Headline
+Expat Salary Floor Doubles to RM20K — The Talent Equation
+
+## Context
+From 1 June 2026, Employment Pass Category I minimum salary rises from RM10,000 to RM20,000 per month. Category III capped at 5 years with mandatory succession planning. The policy aims to prioritise local talent under the 13th Malaysia Plan, but critical sectors face talent shortages no domestic pipeline can fill by June.
+
+## Source Date
+2026-03-30
+
+## Key Facts
+- Revised Employment Pass salary policy effective 1 June 2026
+- Cabinet approved 17 October 2025
+- Category I: RM10,000 → RM20,000/month minimum (valid up to 10 years)
+- Category II: RM10,000-RM19,999/month range
+- Category III: RM5,000-RM9,999 (RM7,000 minimum in manufacturing); capped at 5 years
+- 10-year max duration tied to employer, not individual
+- Succession planning mandatory for EP II and III — structured approach to transition roles to Malaysians
+- Aligns with 13th Malaysia Plan (RMK-13) to reduce foreign labour reliance
+- Singapore EP minimum: SGD5,000 (~RM16,600) — Malaysia's new Cat I floor exceeds this
+- Industries affected: technology, manufacturing, professional services, digital economy, O&G, semiconductors
+- Malaysia semiconductor workforce target: 60,000 by 2030
+- Current pipeline: ~3,000 relevant graduates per year
+- Penang E&E cluster flagged concerns about 5-year cap losing institutional memory
+- Knowledge transfer sounds reasonable but 5-year cap affects longer-timeline projects
+- Multinationals allocating headcount between Penang and Singapore now face higher Malaysia threshold
+- All new and renewal applications from 1 June must comply
+- Several law firms (Baker McKenzie, KPMG, Fragomen, Shearman & Sterling) published advisories
+- One commentary called it "one of the most consequential labour policy shifts in over a decade"
+
+## Stage 1 Analysis (Primary — produced by Claude)
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia doubles the minimum salary for top-tier expat workers. The message: hire Malaysians first.",
+      "sub": "Category I Employment Pass now requires RM20,000 per month, up from RM10,000. Category III capped at 5 years with mandatory succession plan."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "The policy aligns with the 13th Malaysia Plan to reduce reliance on foreign labour. But tech, O&G, and semiconductor sectors report domestic talent gaps of 15,000-20,000 specialists.",
+      "s": "Malaysia's semiconductor workforce target is 60,000 by 2030. Current pipeline produces roughly 3,000 graduates per year in relevant fields.",
+      "d": "The gap between aspiration and pipeline is stark. At 3,000 graduates per year, Malaysia would need 20 years to fill the semiconductor workforce target domestically — assuming zero attrition and perfect job matching. The RM20,000 floor makes it more expensive to bring in foreign specialists to bridge the gap while the pipeline matures."
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "Category III roles — the entry point for mid-level technical expats — are now capped at 5 years with succession requirements.",
+      "s": "Knowledge transfer sounds reasonable in theory. In practice, a 5-year cap means projects with longer timelines lose institutional memory. Penang's E&E cluster has flagged this concern.",
+      "d": "Semiconductor fabrication facilities take 3-5 years to build and commission. A process engineer brought in at year one hits the 5-year cap just as the facility reaches full production. The succession plan requirement assumes a Malaysian replacement exists — but if the pipeline produces only 3,000 graduates per year, the replacement may not be available."
+    },
+    {
+      "t": "fact",
+      "lens": "Regional",
+      "h": "Singapore's Employment Pass minimum is SGD5,000 (RM16,600). Malaysia's new Category I floor of RM20,000 exceeds Singapore's threshold.",
+      "s": "For multinational firms allocating headcount between Penang and Singapore, Malaysia just became the more expensive jurisdiction for senior expat placements.",
+      "d": "This comparison is not straightforward — Singapore's cost of living is higher, and its EP framework has additional qualifying salary requirements for older workers. But at the headline level, a multinational HR team comparing placement costs now sees Malaysia's top tier as more expensive than Singapore's. The signalling effect matters for investment decisions even if the full cost calculus is more nuanced."
+    },
+    {
+      "t": "reframe",
+      "h": "Protecting local talent requires a local talent pipeline. Raising the salary floor without accelerating the pipeline does not create Malaysian specialists — it relocates foreign ones.",
+      "text": "The policy treats the symptom (foreign workers filling roles) rather than the cause (insufficient domestic talent production). If Malaysia cannot produce enough semiconductor engineers, data scientists, or process specialists, raising the price of foreign ones does not solve the shortage — it moves the shortage to a competitor."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The instinct to protect Malaysian jobs is right. The sequencing — raising the bar before building the ladder — risks pushing investment to neighbours who got the order right."
+    }
+  ],
+  "sources": "KPMG, Baker McKenzie, Fragomen, Immigration Department (esd.imi.gov.my), ASEAN Briefing, Shearman & Sterling, Rödl & Partner, Acclime, Slasify, South East Asia Business Post",
+  "confidence": "High — salary thresholds verified from official Immigration Department announcement and multiple law firm advisories",
+  "lenses_used": ["Economic", "Technology", "Regional"],
+  "lenses_applicable_but_unused": ["Social", "Governance", "Political"]
+}
+
+ succeeded in 556ms:
+77 engine/issue-1956-brief.md
+
+codex
+{
+  "issue_id": 1956,
+  "source_file": "engine/issue-1956-brief.md",
+  "analysis_date": "2026-03-30",
+  "output_type": "missing_perspectives_audit",
+  "summary": {
+    "overall_assessment": "The brief is strong on employer-cost, talent-pipeline, and investment-competitiveness framing, but narrow in whose interests are foregrounded. It primarily reflects multinational/employer and sectoral competitiveness concerns, with limited attention to distributional effects, lived experience, geography beyond Penang-vs-Singapore, or alternative interpretations of state intent.",
+    "current_lenses_present": [
+      "Economic",
+      "Technology",
+      "Regional"
+    ],
+    "clearly_underdeveloped_or_absent": [
+      "Social",
+      "Political",
+      "Governance",
+      "Gender",
+      "Class",
+      "Family/household",
+      "Subnational geography"
+    ]
+  },
+  "existing_voices_detected": [
+    {
+      "voice": "Multinational employers and HR decision-makers",
+      "strength": "strong",
+      "evidence": "Headcount allocation, placement cost, investment decisions, Penang/Singapore comparison"
+    },
+    {
+      "voice": "Talent-short sectors",
+      "strength": "strong",
+      "evidence": "Tech, O&G, semiconductors, domestic specialist shortage"
+    },
+    {
+      "voice": "Penang E&E cluster",
+      "strength": "moderate",
+      "evidence": "Concern about 5-year cap and institutional memory"
+    },
+    {
+      "voice": "Policy designers focused on localisation",
+      "strength": "moderate",
+      "evidence": "13th Malaysia Plan, reduce reliance on foreign labour, succession planning"
+    }
+  ],
+  "missing_community_perspectives": [
+    {
+      "community": "Malaysian mid-level professionals competing with expats",
+      "status": "missing",
+      "why_missing": "The brief mentions 'protecting Malaysian jobs' abstractly but does not include workers who may feel salary suppression, blocked promotion paths, or unfair competition from imported mid-level talent.",
+      "what_this_voice_would_add": "A labour-market fairness framing: some Malaysians may support stricter EP rules because they believe firms over-import talent instead of training and promoting locals."
+    },
+    {
+      "community": "SMEs that cannot afford RM20K for niche specialists",
+      "status": "missing",
+      "why_missing": "The brief focuses on multinationals and large sectors, not smaller firms with genuine specialist needs but weaker compensation budgets.",
+      "what_this_voice_would_add": "A differentiated-firm-size framing: the policy may be manageable for MNCs but disproportionately painful for local SMEs trying to upgrade technologically."
+    },
+    {
+      "community": "Penang factory workers worried investment may leave",
+      "status": "partially_missing",
+      "why_missing": "Penang appears only through institutional memory and cluster concerns, not through worker anxiety about plant expansion, overtime, job security, or spillover employment.",
+      "what_this_voice_would_add": "A shop-floor political economy framing: not only engineers but operators, technicians, and support workers may be affected if expansion shifts elsewhere."
+    },
+    {
+      "community": "Young Malaysian graduates who could benefit from succession planning",
+      "status": "missing",
+      "why_missing": "Succession planning is treated mainly as a burden or unrealistic assumption, not as a mechanism that could create mentorship, structured transfer, and faster promotion for locals.",
+      "what_this_voice_would_add": "A developmental framing: if implemented well, the rule could force firms to build clearer training ladders for Malaysians."
+    },
+    {
+      "community": "Foreign workers already in Malaysia facing renewal shock",
+      "status": "missing",
+      "why_missing": "The brief notes renewals must comply from 1 June, but does not explore the disruption to people already settled in-country whose existing compensation packages now fall below the new threshold.",
+      "what_this_voice_would_add": "A transitional justice framing: families may face abrupt relocation, broken schooling continuity, and career interruption despite prior compliance."
+    },
+    {
+      "community": "Spouses and families of expat workers",
+      "status": "missing",
+      "why_missing": "The analysis is entirely employer- and policy-centric, with no household perspective.",
+      "what_this_voice_would_add": "A family-welfare framing: visa renewal shocks affect spouse careers, children’s education, housing decisions, and Malaysia’s attractiveness as a long-term base."
+    },
+    {
+      "community": "East Malaysian employers",
+      "status": "missing",
+      "why_missing": "The geography is West Malaysia-centric, especially Penang and Singapore comparisons.",
+      "what_this_voice_would_add": "A regional asymmetry framing: Sabah and Sarawak may face different labour pools, sector mixes, and specialist scarcity than KL/Penang."
+    }
+  ],
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "Local job protection vs economic nationalism",
+      "status": "missing",
+      "note": "The brief assumes a rational sequencing problem, but does not test whether the policy is also symbolic nation-first politics or bureaucratic signalling."
+    },
+    {
+      "framing": "The core talent problem may be Malaysian brain drain, especially to Singapore",
+      "status": "underdeveloped",
+      "note": "Singapore appears only as a competing host for expats, not as a destination for Malaysians whose exit may be more consequential than inward expat hiring."
+    },
+    {
+      "framing": "The policy could accelerate automation rather than localisation",
+      "status": "missing",
+      "note": "Firms facing higher specialist labour costs may automate, consolidate, or offshore instead of training Malaysians."
+    },
+    {
+      "framing": "Hidden protectionism dressed as talent development",
+      "status": "missing",
+      "note": "The brief treats the policy as mis-sequenced but sincere; it does not consider whether localisation language may mask a protectionist or populist industrial move."
+    },
+    {
+      "framing": "State capacity and implementation quality may matter more than the salary number",
+      "status": "missing",
+      "note": "The brief critiques policy design, but not administrative discretion, sector exemptions, enforcement consistency, or how succession plans will actually be evaluated."
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "comparison": "Singapore COMPASS framework",
+      "status": "missing",
+      "why_it_matters": "Singapore is reduced to a salary-floor comparison only. COMPASS would introduce a more nuanced comparison around points-based quality filters, diversity, and local workforce outcomes rather than a blunt pay threshold."
+    },
+    {
+      "comparison": "Thailand BOI / Smart Visa pathways",
+      "status": "missing",
+      "why_it_matters": "Would show how another ASEAN competitor targets skilled foreign talent through strategic-sector facilitation rather than only pay barriers."
+    },
+    {
+      "comparison": "Indonesia Golden Visa and talent-attraction posture",
+      "status": "missing",
+      "why_it_matters": "Would broaden the frame from Malaysia-vs-Singapore to ASEAN competition for capital, founders, specialists, and long-stay professionals."
+    },
+    {
+      "comparison": "Broader ASEAN talent-attraction competition",
+      "status": "missing",
+      "why_it_matters": "The brief currently implies a bilateral Malaysia-Singapore choice, which is too narrow for regional investment and talent mobility decisions."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Higher salary floors may improve expat quality",
+      "status": "missing",
+      "why_it_matters": "Without this, the brief reads one-sided. Policymakers may argue RM10K allowed too many middling or low-value placements."
+    },
+    {
+      "counter_argument": "Succession planning can genuinely build local capability",
+      "status": "partially_missing",
+      "why_it_matters": "The brief acknowledges the theory but mostly dismisses it as unrealistic, without testing conditions under which it could work."
+    },
+    {
+      "counter_argument": "RM10K may have been too low for a top-tier pass",
+      "status": "missing",
+      "why_it_matters": "A more balanced analysis would ask whether the old threshold misclassified ordinary roles as premium talent roles."
+    }
+  ],
+  "missing_gender_dimensions": [
+    {
+      "dimension": "Women in the Malaysian tech and specialist talent pipeline",
+      "status": "missing",
+      "why_missing": "The pipeline is treated as a volume problem, not a composition problem. No discussion of whether stronger local capacity depends on improving female participation and retention."
+    },
+    {
+      "dimension": "Expat spouse work rights and dual-career household decisions",
+      "status": "missing",
+      "why_missing": "Family migration decisions often depend on whether spouses can work or sustain careers; the brief ignores this attractiveness factor."
+    }
+  ],
+  "missing_economic_class_dimensions": [
+    {
+      "dimension": "Who benefits economically from expat presence",
+      "status": "missing",
+      "examples": [
+        "Landlords",
+        "International schools",
+        "Private healthcare",
+        "Retail and hospitality services"
+      ],
+      "why_it_matters": "The local economy effects are not limited to employers and direct labour competition."
+    },
+    {
+      "dimension": "Who competes most directly with expats",
+      "status": "missing",
+      "examples": [
+        "Local mid-level managers",
+        "Engineers",
+        "Finance and professional services staff"
+      ],
+      "why_it_matters": "The brief treats 'Malaysians' as a single bloc, when gains and losses are class- and occupation-specific."
+    }
+  ],
+  "missing_geographic_dimensions": [
+    {
+      "dimension": "KL vs Penang",
+      "status": "underdeveloped",
+      "note": "Penang is discussed, but not systematically contrasted with KL’s service-heavy labour market and salary structure."
+    },
+    {
+      "dimension": "Johor",
+      "status": "missing",
+      "note": "No treatment of Johor’s proximity to Singapore, which changes both employer options and Malaysian worker mobility."
+    },
+    {
+      "dimension": "East Malaysia",
+      "status": "missing",
+      "note": "No Sabah/Sarawak differentiation despite distinct sector mix and talent-market realities."
+    }
+  ],
+  "important_absences_by_type": {
+    "human_impact": [
+      "renewal shock for incumbents",
+      "family disruption",
+      "graduate opportunity upside"
+    ],
+    "political_interpretation": [
+      "economic nationalism",
+      "symbolic protectionism",
+      "hidden industrial policy"
+    ],
+    "distributional_analysis": [
+      "SMEs vs MNCs",
+      "mid-level locals vs specialist firms",
+      "consumer-service beneficiaries vs labour-market competitors"
+    ],
+    "territorial_analysis": [
+      "Johor-Singapore dynamic",
+      "East Malaysia",
+      "KL-Penang differences"
+    ]
+  },
+  "recommended_json_fields_to_add_to_the_brief": [
+    "missing_voices",
+    "counterarguments",
+    "distributional_effects",
+    "gender_dimensions",
+    "family_household_impacts",
+    "subnational_geography",
+    "asean_comparisons",
+    "alternative_causal_framings"
+  ],
+  "bottom_line": {
+    "current_bias": "Employer-competitiveness and talent-shortage framing",
+    "main_gap": "The brief does not sufficiently ask who inside Malaysia wins, who loses, and whether the policy is being interpreted too narrowly as a technical labour-market fix rather than a political-economic choice.",
+    "editorial_risk": "As written, the analysis can be read as implicitly pro-employer and anti-restriction without fully engaging the strongest case for the policy or the social coalitions that may support it."
+  }
+}
+tokens used
+63,085
+{
+  "issue_id": 1956,
+  "source_file": "engine/issue-1956-brief.md",
+  "analysis_date": "2026-03-30",
+  "output_type": "missing_perspectives_audit",
+  "summary": {
+    "overall_assessment": "The brief is strong on employer-cost, talent-pipeline, and investment-competitiveness framing, but narrow in whose interests are foregrounded. It primarily reflects multinational/employer and sectoral competitiveness concerns, with limited attention to distributional effects, lived experience, geography beyond Penang-vs-Singapore, or alternative interpretations of state intent.",
+    "current_lenses_present": [
+      "Economic",
+      "Technology",
+      "Regional"
+    ],
+    "clearly_underdeveloped_or_absent": [
+      "Social",
+      "Political",
+      "Governance",
+      "Gender",
+      "Class",
+      "Family/household",
+      "Subnational geography"
+    ]
+  },
+  "existing_voices_detected": [
+    {
+      "voice": "Multinational employers and HR decision-makers",
+      "strength": "strong",
+      "evidence": "Headcount allocation, placement cost, investment decisions, Penang/Singapore comparison"
+    },
+    {
+      "voice": "Talent-short sectors",
+      "strength": "strong",
+      "evidence": "Tech, O&G, semiconductors, domestic specialist shortage"
+    },
+    {
+      "voice": "Penang E&E cluster",
+      "strength": "moderate",
+      "evidence": "Concern about 5-year cap and institutional memory"
+    },
+    {
+      "voice": "Policy designers focused on localisation",
+      "strength": "moderate",
+      "evidence": "13th Malaysia Plan, reduce reliance on foreign labour, succession planning"
+    }
+  ],
+  "missing_community_perspectives": [
+    {
+      "community": "Malaysian mid-level professionals competing with expats",
+      "status": "missing",
+      "why_missing": "The brief mentions 'protecting Malaysian jobs' abstractly but does not include workers who may feel salary suppression, blocked promotion paths, or unfair competition from imported mid-level talent.",
+      "what_this_voice_would_add": "A labour-market fairness framing: some Malaysians may support stricter EP rules because they believe firms over-import talent instead of training and promoting locals."
+    },
+    {
+      "community": "SMEs that cannot afford RM20K for niche specialists",
+      "status": "missing",
+      "why_missing": "The brief focuses on multinationals and large sectors, not smaller firms with genuine specialist needs but weaker compensation budgets.",
+      "what_this_voice_would_add": "A differentiated-firm-size framing: the policy may be manageable for MNCs but disproportionately painful for local SMEs trying to upgrade technologically."
+    },
+    {
+      "community": "Penang factory workers worried investment may leave",
+      "status": "partially_missing",
+      "why_missing": "Penang appears only through institutional memory and cluster concerns, not through worker anxiety about plant expansion, overtime, job security, or spillover employment.",
+      "what_this_voice_would_add": "A shop-floor political economy framing: not only engineers but operators, technicians, and support workers may be affected if expansion shifts elsewhere."
+    },
+    {
+      "community": "Young Malaysian graduates who could benefit from succession planning",
+      "status": "missing",
+      "why_missing": "Succession planning is treated mainly as a burden or unrealistic assumption, not as a mechanism that could create mentorship, structured transfer, and faster promotion for locals.",
+      "what_this_voice_would_add": "A developmental framing: if implemented well, the rule could force firms to build clearer training ladders for Malaysians."
+    },
+    {
+      "community": "Foreign workers already in Malaysia facing renewal shock",
+      "status": "missing",
+      "why_missing": "The brief notes renewals must comply from 1 June, but does not explore the disruption to people already settled in-country whose existing compensation packages now fall below the new threshold.",
+      "what_this_voice_would_add": "A transitional justice framing: families may face abrupt relocation, broken schooling continuity, and career interruption despite prior compliance."
+    },
+    {
+      "community": "Spouses and families of expat workers",
+      "status": "missing",
+      "why_missing": "The analysis is entirely employer- and policy-centric, with no household perspective.",
+      "what_this_voice_would_add": "A family-welfare framing: visa renewal shocks affect spouse careers, children’s education, housing decisions, and Malaysia’s attractiveness as a long-term base."
+    },
+    {
+      "community": "East Malaysian employers",
+      "status": "missing",
+      "why_missing": "The geography is West Malaysia-centric, especially Penang and Singapore comparisons.",
+      "what_this_voice_would_add": "A regional asymmetry framing: Sabah and Sarawak may face different labour pools, sector mixes, and specialist scarcity than KL/Penang."
+    }
+  ],
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "Local job protection vs economic nationalism",
+      "status": "missing",
+      "note": "The brief assumes a rational sequencing problem, but does not test whether the policy is also symbolic nation-first politics or bureaucratic signalling."
+    },
+    {
+      "framing": "The core talent problem may be Malaysian brain drain, especially to Singapore",
+      "status": "underdeveloped",
+      "note": "Singapore appears only as a competing host for expats, not as a destination for Malaysians whose exit may be more consequential than inward expat hiring."
+    },
+    {
+      "framing": "The policy could accelerate automation rather than localisation",
+      "status": "missing",
+      "note": "Firms facing higher specialist labour costs may automate, consolidate, or offshore instead of training Malaysians."
+    },
+    {
+      "framing": "Hidden protectionism dressed as talent development",
+      "status": "missing",
+      "note": "The brief treats the policy as mis-sequenced but sincere; it does not consider whether localisation language may mask a protectionist or populist industrial move."
+    },
+    {
+      "framing": "State capacity and implementation quality may matter more than the salary number",
+      "status": "missing",
+      "note": "The brief critiques policy design, but not administrative discretion, sector exemptions, enforcement consistency, or how succession plans will actually be evaluated."
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "comparison": "Singapore COMPASS framework",
+      "status": "missing",
+      "why_it_matters": "Singapore is reduced to a salary-floor comparison only. COMPASS would introduce a more nuanced comparison around points-based quality filters, diversity, and local workforce outcomes rather than a blunt pay threshold."
+    },
+    {
+      "comparison": "Thailand BOI / Smart Visa pathways",
+      "status": "missing",
+      "why_it_matters": "Would show how another ASEAN competitor targets skilled foreign talent through strategic-sector facilitation rather than only pay barriers."
+    },
+    {
+      "comparison": "Indonesia Golden Visa and talent-attraction posture",
+      "status": "missing",
+      "why_it_matters": "Would broaden the frame from Malaysia-vs-Singapore to ASEAN competition for capital, founders, specialists, and long-stay professionals."
+    },
+    {
+      "comparison": "Broader ASEAN talent-attraction competition",
+      "status": "missing",
+      "why_it_matters": "The brief currently implies a bilateral Malaysia-Singapore choice, which is too narrow for regional investment and talent mobility decisions."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Higher salary floors may improve expat quality",
+      "status": "missing",
+      "why_it_matters": "Without this, the brief reads one-sided. Policymakers may argue RM10K allowed too many middling or low-value placements."
+    },
+    {
+      "counter_argument": "Succession planning can genuinely build local capability",
+      "status": "partially_missing",
+      "why_it_matters": "The brief acknowledges the theory but mostly dismisses it as unrealistic, without testing conditions under which it could work."
+    },
+    {
+      "counter_argument": "RM10K may have been too low for a top-tier pass",
+      "status": "missing",
+      "why_it_matters": "A more balanced analysis would ask whether the old threshold misclassified ordinary roles as premium talent roles."
+    }
+  ],
+  "missing_gender_dimensions": [
+    {
+      "dimension": "Women in the Malaysian tech and specialist talent pipeline",
+      "status": "missing",
+      "why_missing": "The pipeline is treated as a volume problem, not a composition problem. No discussion of whether stronger local capacity depends on improving female participation and retention."
+    },
+    {
+      "dimension": "Expat spouse work rights and dual-career household decisions",
+      "status": "missing",
+      "why_missing": "Family migration decisions often depend on whether spouses can work or sustain careers; the brief ignores this attractiveness factor."
+    }
+  ],
+  "missing_economic_class_dimensions": [
+    {
+      "dimension": "Who benefits economically from expat presence",
+      "status": "missing",
+      "examples": [
+        "Landlords",
+        "International schools",
+        "Private healthcare",
+        "Retail and hospitality services"
+      ],
+      "why_it_matters": "The local economy effects are not limited to employers and direct labour competition."
+    },
+    {
+      "dimension": "Who competes most directly with expats",
+      "status": "missing",
+      "examples": [
+        "Local mid-level managers",
+        "Engineers",
+        "Finance and professional services staff"
+      ],
+      "why_it_matters": "The brief treats 'Malaysians' as a single bloc, when gains and losses are class- and occupation-specific."
+    }
+  ],
+  "missing_geographic_dimensions": [
+    {
+      "dimension": "KL vs Penang",
+      "status": "underdeveloped",
+      "note": "Penang is discussed, but not systematically contrasted with KL’s service-heavy labour market and salary structure."
+    },
+    {
+      "dimension": "Johor",
+      "status": "missing",
+      "note": "No treatment of Johor’s proximity to Singapore, which changes both employer options and Malaysian worker mobility."
+    },
+    {
+      "dimension": "East Malaysia",
+      "status": "missing",
+      "note": "No Sabah/Sarawak differentiation despite distinct sector mix and talent-market realities."
+    }
+  ],
+  "important_absences_by_type": {
+    "human_impact": [
+      "renewal shock for incumbents",
+      "family disruption",
+      "graduate opportunity upside"
+    ],
+    "political_interpretation": [
+      "economic nationalism",
+      "symbolic protectionism",
+      "hidden industrial policy"
+    ],
+    "distributional_analysis": [
+      "SMEs vs MNCs",
+      "mid-level locals vs specialist firms",
+      "consumer-service beneficiaries vs labour-market competitors"
+    ],
+    "territorial_analysis": [
+      "Johor-Singapore dynamic",
+      "East Malaysia",
+      "KL-Penang differences"
+    ]
+  },
+  "recommended_json_fields_to_add_to_the_brief": [
+    "missing_voices",
+    "counterarguments",
+    "distributional_effects",
+    "gender_dimensions",
+    "family_household_impacts",
+    "subnational_geography",
+    "asean_comparisons",
+    "alternative_causal_framings"
+  ],
+  "bottom_line": {
+    "current_bias": "Employer-competitiveness and talent-shortage framing",
+    "main_gap": "The brief does not sufficiently ask who inside Malaysia wins, who loses, and whether the policy is being interpreted too narrowly as a technical labour-market fix rather than a political-economic choice.",
+    "editorial_risk": "As written, the analysis can be read as implicitly pro-employer and anti-restriction without fully engaging the strongest case for the policy or the social coalitions that may support it."
+  }
+}

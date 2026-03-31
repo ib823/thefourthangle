@@ -1,0 +1,609 @@
+OpenAI Codex v0.117.0 (research preview)
+--------
+workdir: /workspaces/thefourthangle
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/codespace/.codex/memories]
+reasoning effort: none
+reasoning summaries: none
+session id: 019d3e3d-1520-7510-9e1c-c04e52314e3d
+--------
+user
+Read the file engine/issue-1955-brief.md. Identify missing perspectives in this Malaysian public issue analysis about the Hari Raya open house ban. Find absent voices and framings. Check for: missing community perspectives (opposition politicians who also host open houses, GLC employees who organised events, caterers and event vendors who lose business, kampung communities who attend, non-Muslim communities who attend Raya open houses as guests, rural constituents who rely on open houses for access to their YB), alternative causal framings (is this genuinely about fiscal discipline or about controlling political networking? Could this reduce corruption/patronage at open houses? Is this about solidarity with Palestinians during Raya?), international comparisons (do other Muslim-majority countries cancel festive government events during crises?), counter-arguments (symbolic gestures DO build political capital for harder reforms, the money saved is irrelevant because the signal matters, open houses can be wasteful performative politics, austerity should start at the top), gender dimensions (women as primary organisers of open house food/logistics, female caterers losing income), economic dimensions (event industry impact, catering SMEs, food vendors), geographic dimensions (rural vs urban open house traditions). Output structured JSON.
+warning: Codex could not find system bubblewrap at /usr/bin/bwrap. Please install bubblewrap with your package manager. Codex will use the vendored bubblewrap in the meantime.
+2026-03-30T10:14:44.735130Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\"" })
+2026-03-30T10:14:45.314598Z ERROR codex_core::shell_snapshot: Shell snapshot validation failed: Snapshot command exited with status exit status: 2: /home/codespace/.codex/shell_snapshots/019d3e3d-1520-7510-9e1c-c04e52314e3d.tmp-1774865684106674848: line 2547: syntax error near unexpected token `('
+
+codex
+I’m reading `engine/issue-1955-brief.md` first, then I’ll map what perspectives and framings it already covers against the gaps you listed and return the result as structured JSON.
+exec
+/bin/bash -lc "sed -n '1,260p' engine/issue-1955-brief.md" in /workspaces/thefourthangle
+exec
+/bin/bash -lc 'wc -l engine/issue-1955-brief.md' in /workspaces/thefourthangle
+ succeeded in 715ms:
+76 engine/issue-1955-brief.md
+
+ succeeded in 787ms:
+# ISSUE BRIEF: 1955
+
+## Headline
+No Raya Open Houses — Austerity Worth 0.01% of the Subsidy Bill
+
+## Context
+Cabinet banned all government and GLC Hari Raya open houses and restricted ministers' overseas travel as a cost-saving measure amid the Hormuz crisis. The annual cost of official open houses is a fraction of the RM4 billion monthly fuel subsidy bill. States followed suit. The Raya open house is Malaysia's most inclusive political tradition — crossing racial and religious lines.
+
+## Source Date
+2026-03-30
+
+## Key Facts
+- Cabinet decision announced ~11 March 2026 by PM Anwar Ibrahim
+- All ministries, agencies, GLCs and GLICs banned from hosting Hari Raya open houses
+- Ministers' overseas travel restricted to pre-scheduled or compulsory engagements
+- Framed as fiscal discipline and early precautionary measure
+- Anwar: "preferred to take early precautionary measures rather than risk being caught unprepared"
+- State governments followed: Negeri Sembilan, Melaka cancelled state-level open houses
+- Official Raya open houses typically cost RM2-5 million across all ministries combined (estimated)
+- Monthly fuel subsidy bill: RM4 billion (RM48B annualised at current crude)
+- Savings represent approximately 0.001% of monthly subsidy expenditure
+- Open houses are Malaysia's most cross-racial, cross-religious political tradition
+- Backbenchers and state assemblymen use Raya open houses as primary constituent engagement events
+- Private citizens and businesses can still host their own open houses
+- The ban covers government events only, not private celebrations
+- Hari Raya Aidilfitri 2026 falls on 30-31 March
+- Decision came alongside WFH announcement and fuel quota cut signals
+- GLCs and GLICs received same directive (no open houses)
+- Austerity optics: government signalling willingness to restrain at the top before asking public to tighten belts
+
+## Stage 1 Analysis (Primary — produced by Claude)
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Government cancels all Hari Raya open houses to save money during the Middle East crisis.",
+      "sub": "The decision was announced alongside WFH for civil servants, fuel quota cuts, and travel restrictions for ministers. The signal: everyone must tighten their belt."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Official Hari Raya open houses typically cost RM2-5 million across all ministries combined. The monthly fuel subsidy bill is RM4 billion.",
+      "s": "The savings represent approximately 0.001% of the government's monthly subsidy expenditure. This is a symbolic gesture, not a fiscal measure.",
+      "d": "The arithmetic makes the fiscal argument untenable. Even at the upper estimate of RM5 million, the savings from cancelling all official open houses would fund approximately 1.8 minutes of the daily fuel subsidy bill. The policy is designed to communicate restraint, not to achieve it."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "State governments have followed suit — Negeri Sembilan, Melaka and others cancelled their celebrations. GLCs and GLICs received the same directive.",
+      "s": "The ban covers an entire tier of political networking and constituent engagement. For backbenchers and state assemblymen, Raya open houses are their primary visibility event.",
+      "d": "Raya open houses are not just celebrations — they are the primary mechanism through which elected representatives maintain personal relationships with constituents across racial and religious lines. A Malay MP hosting Chinese, Indian, and other guests at their Raya open house is one of the few remaining cross-communal political traditions. The ban removes this channel for an entire political cycle."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "Anwar said the government preferred 'early precautionary measures rather than risk being caught unprepared should the global situation worsen.'",
+      "s": "The language is crisis preparedness, not cultural sensitivity. The open house — Malaysia's most inclusive political tradition crossing racial and religious lines — is the casualty.",
+      "d": "The Raya open house tradition is unique in Malaysian political culture. It is one of the few institutions where politicians of all races gather in a Muslim celebration without it being coded as exclusionary. Chinese New Year and Deepavali open houses serve similar functions but at smaller scale. Cancelling the largest of these traditions sends a cultural signal that extends beyond fiscal policy."
+    },
+    {
+      "t": "reframe",
+      "h": "When the savings are symbolic but the sacrifice is cultural, the question is whether the government is practising discipline or performing it.",
+      "text": "Austerity that costs nothing financially but cancels the one tradition that brings Malaysians of all backgrounds together deserves scrutiny, not applause. The government is asking the public to accept fuel quota cuts and food price hikes while demonstrating its own sacrifice through a gesture that saves less than two minutes of subsidy spending."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Austerity that costs nothing financially but cancels the one tradition that brings Malaysians of all backgrounds together deserves scrutiny, not applause. The question is whether symbolic gestures build the political capital needed for harder reforms — or whether they substitute for them."
+    }
+  ],
+  "sources": "Malay Mail, The Star, Bernama, Free Malaysia Today, Sinar Daily, New Straits Times, Daily Express",
+  "confidence": "High — Cabinet decision verified across all major outlets; cost estimates are editorial estimates, not government figures",
+  "lenses_used": ["Economic", "Political", "Social"],
+  "lenses_applicable_but_unused": ["Governance", "Historical", "Regional"]
+}
+
+codex
+{
+  "file": "engine/issue-1955-brief.md",
+  "issue_id": 1955,
+  "headline": "No Raya Open Houses — Austerity Worth 0.01% of the Subsidy Bill",
+  "assessment_date": "2026-03-30",
+  "overall_assessment": {
+    "summary": "The brief is strong on elite political optics and fiscal symbolism, but narrow in who it treats as affected. It frames the ban mainly as a cultural and political loss plus weak austerity arithmetic, while leaving out several constituencies, alternative motives, and tradeoffs.",
+    "dominant_current_framing": [
+      "Fiscal savings are trivial",
+      "The move is symbolic rather than materially economic",
+      "Raya open houses are cross-racial and cross-religious civic rituals",
+      "The ban removes a political engagement channel",
+      "The government may be performing restraint rather than practising meaningful austerity"
+    ],
+    "main_gap": "The analysis is disproportionately politician-centric and underdeveloped on labour, gender, class, geographic, opposition, and governance/corruption angles."
+  },
+  "present_in_brief": {
+    "community_perspectives": [
+      "Government leaders and Cabinet",
+      "Backbenchers and state assemblymen as organisers",
+      "Constituents in a general sense",
+      "Private citizens and businesses in a general sense"
+    ],
+    "framings": [
+      "Economic symbolism versus real savings",
+      "Political networking and constituent engagement",
+      "Cross-communal cultural tradition",
+      "Austerity optics"
+    ],
+    "unused_lenses_noted_in_file": [
+      "Governance",
+      "Historical",
+      "Regional"
+    ]
+  },
+  "missing_perspectives": {
+    "community_perspectives": [
+      {
+        "voice": "Opposition politicians who also host Raya open houses",
+        "status": "Absent",
+        "why_missing_matters": "The brief treats open houses mainly as a government-side political ritual, but opposition YBs also use them for visibility, access, and cross-community outreach.",
+        "possible_framing_to_add": "The ban may flatten political competition by constraining all official officeholders' retail politics, not just reducing state spending."
+      },
+      {
+        "voice": "GLC and GLIC employees who organised events internally",
+        "status": "Absent",
+        "why_missing_matters": "The brief mentions GLCs and GLICs were covered but does not explore how staff view these events as employer-hosted rituals, stakeholder management, or morale-building exercises.",
+        "possible_framing_to_add": "For GLC staff, the cancellation is not just about politics but about internal culture, staff-host relations, and institutional identity."
+      },
+      {
+        "voice": "Caterers, decorators, canopies, sound crews, cleaners, drivers, and other event vendors",
+        "status": "Absent",
+        "why_missing_matters": "The brief argues savings are fiscally tiny, but does not consider that the same spending is meaningful income for SMEs and informal workers during the festive period.",
+        "possible_framing_to_add": "Austerity at the top can immediately contract festive-season demand for small businesses."
+      },
+      {
+        "voice": "Kampung communities who attend open houses as a social ritual",
+        "status": "Absent",
+        "why_missing_matters": "The brief describes inclusivity abstractly but does not show how attendance works on the ground as a communal tradition, especially outside cities.",
+        "possible_framing_to_add": "Open houses are not only optics; in many localities they are one of the few routine, face-to-face public gatherings that feel socially legitimate and accessible."
+      },
+      {
+        "voice": "Non-Muslim communities attending Raya open houses as guests",
+        "status": "Underdeveloped",
+        "why_missing_matters": "The brief mentions cross-racial and cross-religious inclusivity, but only at a high level. It does not foreground the guest perspective of Chinese, Indian, Sabah/Sarawak Christian, Sikh, and other attendees.",
+        "possible_framing_to_add": "For non-Muslim guests, open houses are a lived expression of Malaysian pluralism, not just a political networking device."
+      },
+      {
+        "voice": "Rural constituents who rely on open houses for direct access to their YB",
+        "status": "Absent",
+        "why_missing_matters": "The brief mentions constituent engagement, but not that rural voters may have fewer channels to meet elected representatives compared with urban constituents who can use offices, social media, or town halls.",
+        "possible_framing_to_add": "The ban may disproportionately reduce low-friction access for rural and older constituents."
+      },
+      {
+        "voice": "Civil servants and agency staff involved in protocol and event management",
+        "status": "Absent",
+        "why_missing_matters": "These workers absorb the administrative burden of both running and cancelling events, and may have views on whether the ban saves waste or simply shifts work elsewhere.",
+        "possible_framing_to_add": "The policy may be welcomed internally as relief from ceremonial workload, or criticised as top-down disruption."
+      },
+      {
+        "voice": "Women organisers inside families, parties, agencies, and community networks",
+        "status": "Absent",
+        "why_missing_matters": "Open house logistics are often feminised labour, formal and informal. Excluding this hides who does the planning, food coordination, and social hosting.",
+        "possible_framing_to_add": "The ban removes not only a public event but a layer of gendered organisational labour and income."
+      }
+    ],
+    "gender_dimensions": [
+      {
+        "gap": "Women as primary organisers of food, guest management, hospitality, and logistics are not discussed.",
+        "why_it_matters": "Much of the invisible labour behind festive hosting is gendered, whether performed by wives, women staff, women party workers, or women business owners."
+      },
+      {
+        "gap": "Female caterers, kuih makers, small food entrepreneurs, florists, and service vendors are not discussed.",
+        "why_it_matters": "A cancellation framed as symbolic fiscal discipline can have concentrated effects on women-led microbusinesses."
+      },
+      {
+        "gap": "The brief does not ask whether women politicians and spouses are differently affected by the loss of a high-touch, relational political event format.",
+        "why_it_matters": "Open houses can be one of the few culturally legible spaces where women in politics build soft networks and local trust."
+      }
+    ],
+    "economic_dimensions": [
+      {
+        "gap": "No treatment of event-industry spillovers",
+        "why_it_matters": "The brief only compares state savings with subsidy spending, ignoring second-order effects on festive-season commerce."
+      },
+      {
+        "gap": "No treatment of catering SMEs and informal food suppliers",
+        "why_it_matters": "The cancelled spending may be macro-trivial but micro-significant for cash flow, inventory, and seasonal hiring."
+      },
+      {
+        "gap": "No treatment of multiplier effects in local economies",
+        "why_it_matters": "Government event cuts can ripple into wholesalers, wet markets, transport, rentals, and casual labour."
+      },
+      {
+        "gap": "No distinction between wasteful elite spectacle and locally distributed procurement",
+        "why_it_matters": "An economically serious critique would separate overpriced VIP events from community-linked spending that supports local vendors."
+      }
+    ],
+    "geographic_dimensions": [
+      {
+        "gap": "Rural versus urban differences are missing",
+        "why_it_matters": "Open houses may function more as civic access points in rural seats than in urban constituencies with more alternative channels."
+      },
+      {
+        "gap": "No Sabah/Sarawak or East Malaysia angle",
+        "why_it_matters": "Interfaith attendance and community protocol may look different there, making the inclusivity argument richer and less Peninsular-centric."
+      },
+      {
+        "gap": "No distinction between federal, state, district, and village-level event cultures",
+        "why_it_matters": "Not all open houses are equivalent; some are elite showcases, others are embedded local obligations."
+      }
+    ]
+  },
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "Political control rather than fiscal discipline",
+      "status": "Absent",
+      "description": "The brief hints at lost networking but does not explicitly ask whether the policy curbs political patronage, retail campaigning, or leader-centric mobilisation under a crisis pretext."
+    },
+    {
+      "framing": "Anti-corruption or anti-patronage logic",
+      "status": "Absent",
+      "description": "Open houses can be venues for favour-seeking, contractor visibility, soft lobbying, and relationship maintenance. The brief does not test whether banning them could reduce informal influence channels."
+    },
+    {
+      "framing": "Solidarity politics with Palestinians or with global Muslim suffering during crisis",
+      "status": "Absent",
+      "description": "The brief treats the move as austerity/crisis management only, without considering whether restraint during Raya may also be framed as moral or geopolitical solidarity."
+    },
+    {
+      "framing": "Administrative consistency during broader emergency posture",
+      "status": "Underdeveloped",
+      "description": "The move came with WFH and travel restrictions, but the analysis does not explore whether the ban fits a broader doctrine of visible precaution rather than event-specific hostility."
+    },
+    {
+      "framing": "Class signalling and anti-elite optics",
+      "status": "Underdeveloped",
+      "description": "The brief says it signals restraint at the top, but it does not examine whether cancelling highly visible receptions is meant to dampen resentment toward elite celebration during public belt-tightening."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Symbolic gestures can build political capital for harder reforms",
+      "status": "Only briefly hinted",
+      "note": "The mature card mentions this as a question, but the argument is not developed."
+    },
+    {
+      "counter_argument": "The money saved is irrelevant; the signal is the point",
+      "status": "Underdeveloped",
+      "note": "The current brief treats symbolic action as suspect, but a defender would argue that legitimacy for austerity depends on visible self-restraint."
+    },
+    {
+      "counter_argument": "Open houses can be wasteful, performative politics",
+      "status": "Absent",
+      "note": "The analysis assumes these events are normatively positive and does not acknowledge criticisms of spectacle, VIP culture, or public-relations excess."
+    },
+    {
+      "counter_argument": "Austerity should start at the top, especially with visible discretionary spending",
+      "status": "Present but not fully argued",
+      "note": "This appears in 'austerity optics' but is not presented as the strongest pro-ban case."
+    },
+    {
+      "counter_argument": "Cutting ceremonial spending may be one of the least socially harmful places to start",
+      "status": "Absent",
+      "note": "A pro-ban argument would say better to cut receptions than subsidies, salaries, or welfare."
+    },
+    {
+      "counter_argument": "Reducing open houses may curb soft patronage and access inequality",
+      "status": "Absent",
+      "note": "This would complicate the assumption that all lost engagement is democratically valuable."
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "gap": "No comparison with other Muslim-majority countries during wartime, economic shocks, or periods of mourning",
+      "why_it_matters": "This would test whether cancelling or scaling back state festive functions is unusual, prudent, or politically standard."
+    },
+    {
+      "gap": "No distinction between cancelling public receptions versus merely simplifying them",
+      "why_it_matters": "Other governments may reduce lavishness rather than ban gatherings outright, offering a better comparator."
+    },
+    {
+      "gap": "No comparison with how other states handle Ramadan/Eid state hospitality during austerity",
+      "why_it_matters": "Without this, the brief cannot show whether Malaysia is an outlier."
+    }
+  ],
+  "important_absent_questions": [
+    "Are opposition-held state governments or opposition MPs also affected in practice, and how do they characterise the ban?",
+    "Who actually loses income immediately from cancelled bookings?",
+    "Were contracts already awarded, and if so, are there cancellation penalties or sunk costs?",
+    "Do rural voters lose more access than urban voters?",
+    "Do non-Muslim attendees view the cancellation primarily as fiscal prudence, cultural loss, or normal crisis etiquette?",
+    "Would a cap or simplified open house have achieved the same signal with less social and economic disruption?",
+    "Are open houses genuinely sites of democratic access, or often sites of patronage and elite choreography?",
+    "Is the government invoking a specifically Muslim ethic of restraint and solidarity during crisis?"
+  ],
+  "recommended_new_lenses": [
+    "Governance",
+    "Gender",
+    "Class",
+    "Labour",
+    "Regional",
+    "Rural-urban",
+    "Patronage and corruption",
+    "Comparative international"
+  ],
+  "recommended_additions": {
+    "new_interview_or_quote_targets": [
+      "Opposition MP or ADUN who usually hosts a Raya open house",
+      "GLC or ministry staff member involved in annual event planning",
+      "Female caterer or women-led SME affected by cancellations",
+      "Canopy/decorator/vendor association representative",
+      "Rural constituent or village head who treats the event as annual access to their YB",
+      "Non-Muslim regular attendee of local Raya open houses",
+      "Governance scholar on patronage and symbolic austerity",
+      "Political anthropologist or sociologist on open-house civic culture"
+    ],
+    "new_angles_to_write": [
+      "Who loses when symbolic cuts hit festive-season SMEs",
+      "Retail politics or public waste: what open houses really do",
+      "Why rural Malaysia may feel this ban differently",
+      "The hidden gendered labour behind open houses",
+      "Could banning open houses reduce patronage, or just displace it?",
+      "If the point is solidarity and restraint, why not downgrade rather than ban?"
+    ]
+  },
+  "bottom_line": {
+    "editorial_risk_if_unfixed": "The brief currently reads as a sharp but partial elite-opposition-to-austerity argument. Without broader voices, it risks sounding like a defense of political ceremony rather than a rounded public-interest analysis.",
+    "best_single_fix": "Broaden the piece from 'the savings are trivial and the tradition matters' to 'the ban redistributes costs and benefits across politicians, constituents, workers, women, rural communities, and local businesses, while also raising serious questions about patronage, symbolism, and crisis ethics.'"
+  }
+}
+tokens used
+32,150
+{
+  "file": "engine/issue-1955-brief.md",
+  "issue_id": 1955,
+  "headline": "No Raya Open Houses — Austerity Worth 0.01% of the Subsidy Bill",
+  "assessment_date": "2026-03-30",
+  "overall_assessment": {
+    "summary": "The brief is strong on elite political optics and fiscal symbolism, but narrow in who it treats as affected. It frames the ban mainly as a cultural and political loss plus weak austerity arithmetic, while leaving out several constituencies, alternative motives, and tradeoffs.",
+    "dominant_current_framing": [
+      "Fiscal savings are trivial",
+      "The move is symbolic rather than materially economic",
+      "Raya open houses are cross-racial and cross-religious civic rituals",
+      "The ban removes a political engagement channel",
+      "The government may be performing restraint rather than practising meaningful austerity"
+    ],
+    "main_gap": "The analysis is disproportionately politician-centric and underdeveloped on labour, gender, class, geographic, opposition, and governance/corruption angles."
+  },
+  "present_in_brief": {
+    "community_perspectives": [
+      "Government leaders and Cabinet",
+      "Backbenchers and state assemblymen as organisers",
+      "Constituents in a general sense",
+      "Private citizens and businesses in a general sense"
+    ],
+    "framings": [
+      "Economic symbolism versus real savings",
+      "Political networking and constituent engagement",
+      "Cross-communal cultural tradition",
+      "Austerity optics"
+    ],
+    "unused_lenses_noted_in_file": [
+      "Governance",
+      "Historical",
+      "Regional"
+    ]
+  },
+  "missing_perspectives": {
+    "community_perspectives": [
+      {
+        "voice": "Opposition politicians who also host Raya open houses",
+        "status": "Absent",
+        "why_missing_matters": "The brief treats open houses mainly as a government-side political ritual, but opposition YBs also use them for visibility, access, and cross-community outreach.",
+        "possible_framing_to_add": "The ban may flatten political competition by constraining all official officeholders' retail politics, not just reducing state spending."
+      },
+      {
+        "voice": "GLC and GLIC employees who organised events internally",
+        "status": "Absent",
+        "why_missing_matters": "The brief mentions GLCs and GLICs were covered but does not explore how staff view these events as employer-hosted rituals, stakeholder management, or morale-building exercises.",
+        "possible_framing_to_add": "For GLC staff, the cancellation is not just about politics but about internal culture, staff-host relations, and institutional identity."
+      },
+      {
+        "voice": "Caterers, decorators, canopies, sound crews, cleaners, drivers, and other event vendors",
+        "status": "Absent",
+        "why_missing_matters": "The brief argues savings are fiscally tiny, but does not consider that the same spending is meaningful income for SMEs and informal workers during the festive period.",
+        "possible_framing_to_add": "Austerity at the top can immediately contract festive-season demand for small businesses."
+      },
+      {
+        "voice": "Kampung communities who attend open houses as a social ritual",
+        "status": "Absent",
+        "why_missing_matters": "The brief describes inclusivity abstractly but does not show how attendance works on the ground as a communal tradition, especially outside cities.",
+        "possible_framing_to_add": "Open houses are not only optics; in many localities they are one of the few routine, face-to-face public gatherings that feel socially legitimate and accessible."
+      },
+      {
+        "voice": "Non-Muslim communities attending Raya open houses as guests",
+        "status": "Underdeveloped",
+        "why_missing_matters": "The brief mentions cross-racial and cross-religious inclusivity, but only at a high level. It does not foreground the guest perspective of Chinese, Indian, Sabah/Sarawak Christian, Sikh, and other attendees.",
+        "possible_framing_to_add": "For non-Muslim guests, open houses are a lived expression of Malaysian pluralism, not just a political networking device."
+      },
+      {
+        "voice": "Rural constituents who rely on open houses for direct access to their YB",
+        "status": "Absent",
+        "why_missing_matters": "The brief mentions constituent engagement, but not that rural voters may have fewer channels to meet elected representatives compared with urban constituents who can use offices, social media, or town halls.",
+        "possible_framing_to_add": "The ban may disproportionately reduce low-friction access for rural and older constituents."
+      },
+      {
+        "voice": "Civil servants and agency staff involved in protocol and event management",
+        "status": "Absent",
+        "why_missing_matters": "These workers absorb the administrative burden of both running and cancelling events, and may have views on whether the ban saves waste or simply shifts work elsewhere.",
+        "possible_framing_to_add": "The policy may be welcomed internally as relief from ceremonial workload, or criticised as top-down disruption."
+      },
+      {
+        "voice": "Women organisers inside families, parties, agencies, and community networks",
+        "status": "Absent",
+        "why_missing_matters": "Open house logistics are often feminised labour, formal and informal. Excluding this hides who does the planning, food coordination, and social hosting.",
+        "possible_framing_to_add": "The ban removes not only a public event but a layer of gendered organisational labour and income."
+      }
+    ],
+    "gender_dimensions": [
+      {
+        "gap": "Women as primary organisers of food, guest management, hospitality, and logistics are not discussed.",
+        "why_it_matters": "Much of the invisible labour behind festive hosting is gendered, whether performed by wives, women staff, women party workers, or women business owners."
+      },
+      {
+        "gap": "Female caterers, kuih makers, small food entrepreneurs, florists, and service vendors are not discussed.",
+        "why_it_matters": "A cancellation framed as symbolic fiscal discipline can have concentrated effects on women-led microbusinesses."
+      },
+      {
+        "gap": "The brief does not ask whether women politicians and spouses are differently affected by the loss of a high-touch, relational political event format.",
+        "why_it_matters": "Open houses can be one of the few culturally legible spaces where women in politics build soft networks and local trust."
+      }
+    ],
+    "economic_dimensions": [
+      {
+        "gap": "No treatment of event-industry spillovers",
+        "why_it_matters": "The brief only compares state savings with subsidy spending, ignoring second-order effects on festive-season commerce."
+      },
+      {
+        "gap": "No treatment of catering SMEs and informal food suppliers",
+        "why_it_matters": "The cancelled spending may be macro-trivial but micro-significant for cash flow, inventory, and seasonal hiring."
+      },
+      {
+        "gap": "No treatment of multiplier effects in local economies",
+        "why_it_matters": "Government event cuts can ripple into wholesalers, wet markets, transport, rentals, and casual labour."
+      },
+      {
+        "gap": "No distinction between wasteful elite spectacle and locally distributed procurement",
+        "why_it_matters": "An economically serious critique would separate overpriced VIP events from community-linked spending that supports local vendors."
+      }
+    ],
+    "geographic_dimensions": [
+      {
+        "gap": "Rural versus urban differences are missing",
+        "why_it_matters": "Open houses may function more as civic access points in rural seats than in urban constituencies with more alternative channels."
+      },
+      {
+        "gap": "No Sabah/Sarawak or East Malaysia angle",
+        "why_it_matters": "Interfaith attendance and community protocol may look different there, making the inclusivity argument richer and less Peninsular-centric."
+      },
+      {
+        "gap": "No distinction between federal, state, district, and village-level event cultures",
+        "why_it_matters": "Not all open houses are equivalent; some are elite showcases, others are embedded local obligations."
+      }
+    ]
+  },
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "Political control rather than fiscal discipline",
+      "status": "Absent",
+      "description": "The brief hints at lost networking but does not explicitly ask whether the policy curbs political patronage, retail campaigning, or leader-centric mobilisation under a crisis pretext."
+    },
+    {
+      "framing": "Anti-corruption or anti-patronage logic",
+      "status": "Absent",
+      "description": "Open houses can be venues for favour-seeking, contractor visibility, soft lobbying, and relationship maintenance. The brief does not test whether banning them could reduce informal influence channels."
+    },
+    {
+      "framing": "Solidarity politics with Palestinians or with global Muslim suffering during crisis",
+      "status": "Absent",
+      "description": "The brief treats the move as austerity/crisis management only, without considering whether restraint during Raya may also be framed as moral or geopolitical solidarity."
+    },
+    {
+      "framing": "Administrative consistency during broader emergency posture",
+      "status": "Underdeveloped",
+      "description": "The move came with WFH and travel restrictions, but the analysis does not explore whether the ban fits a broader doctrine of visible precaution rather than event-specific hostility."
+    },
+    {
+      "framing": "Class signalling and anti-elite optics",
+      "status": "Underdeveloped",
+      "description": "The brief says it signals restraint at the top, but it does not examine whether cancelling highly visible receptions is meant to dampen resentment toward elite celebration during public belt-tightening."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Symbolic gestures can build political capital for harder reforms",
+      "status": "Only briefly hinted",
+      "note": "The mature card mentions this as a question, but the argument is not developed."
+    },
+    {
+      "counter_argument": "The money saved is irrelevant; the signal is the point",
+      "status": "Underdeveloped",
+      "note": "The current brief treats symbolic action as suspect, but a defender would argue that legitimacy for austerity depends on visible self-restraint."
+    },
+    {
+      "counter_argument": "Open houses can be wasteful, performative politics",
+      "status": "Absent",
+      "note": "The analysis assumes these events are normatively positive and does not acknowledge criticisms of spectacle, VIP culture, or public-relations excess."
+    },
+    {
+      "counter_argument": "Austerity should start at the top, especially with visible discretionary spending",
+      "status": "Present but not fully argued",
+      "note": "This appears in 'austerity optics' but is not presented as the strongest pro-ban case."
+    },
+    {
+      "counter_argument": "Cutting ceremonial spending may be one of the least socially harmful places to start",
+      "status": "Absent",
+      "note": "A pro-ban argument would say better to cut receptions than subsidies, salaries, or welfare."
+    },
+    {
+      "counter_argument": "Reducing open houses may curb soft patronage and access inequality",
+      "status": "Absent",
+      "note": "This would complicate the assumption that all lost engagement is democratically valuable."
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "gap": "No comparison with other Muslim-majority countries during wartime, economic shocks, or periods of mourning",
+      "why_it_matters": "This would test whether cancelling or scaling back state festive functions is unusual, prudent, or politically standard."
+    },
+    {
+      "gap": "No distinction between cancelling public receptions versus merely simplifying them",
+      "why_it_matters": "Other governments may reduce lavishness rather than ban gatherings outright, offering a better comparator."
+    },
+    {
+      "gap": "No comparison with how other states handle Ramadan/Eid state hospitality during austerity",
+      "why_it_matters": "Without this, the brief cannot show whether Malaysia is an outlier."
+    }
+  ],
+  "important_absent_questions": [
+    "Are opposition-held state governments or opposition MPs also affected in practice, and how do they characterise the ban?",
+    "Who actually loses income immediately from cancelled bookings?",
+    "Were contracts already awarded, and if so, are there cancellation penalties or sunk costs?",
+    "Do rural voters lose more access than urban voters?",
+    "Do non-Muslim attendees view the cancellation primarily as fiscal prudence, cultural loss, or normal crisis etiquette?",
+    "Would a cap or simplified open house have achieved the same signal with less social and economic disruption?",
+    "Are open houses genuinely sites of democratic access, or often sites of patronage and elite choreography?",
+    "Is the government invoking a specifically Muslim ethic of restraint and solidarity during crisis?"
+  ],
+  "recommended_new_lenses": [
+    "Governance",
+    "Gender",
+    "Class",
+    "Labour",
+    "Regional",
+    "Rural-urban",
+    "Patronage and corruption",
+    "Comparative international"
+  ],
+  "recommended_additions": {
+    "new_interview_or_quote_targets": [
+      "Opposition MP or ADUN who usually hosts a Raya open house",
+      "GLC or ministry staff member involved in annual event planning",
+      "Female caterer or women-led SME affected by cancellations",
+      "Canopy/decorator/vendor association representative",
+      "Rural constituent or village head who treats the event as annual access to their YB",
+      "Non-Muslim regular attendee of local Raya open houses",
+      "Governance scholar on patronage and symbolic austerity",
+      "Political anthropologist or sociologist on open-house civic culture"
+    ],
+    "new_angles_to_write": [
+      "Who loses when symbolic cuts hit festive-season SMEs",
+      "Retail politics or public waste: what open houses really do",
+      "Why rural Malaysia may feel this ban differently",
+      "The hidden gendered labour behind open houses",
+      "Could banning open houses reduce patronage, or just displace it?",
+      "If the point is solidarity and restraint, why not downgrade rather than ban?"
+    ]
+  },
+  "bottom_line": {
+    "editorial_risk_if_unfixed": "The brief currently reads as a sharp but partial elite-opposition-to-austerity argument. Without broader voices, it risks sounding like a defense of political ceremony rather than a rounded public-interest analysis.",
+    "best_single_fix": "Broaden the piece from 'the savings are trivial and the tradition matters' to 'the ban redistributes costs and benefits across politicians, constituents, workers, women, rural communities, and local businesses, while also raising serious questions about patronage, symbolism, and crisis ethics.'"
+  }
+}

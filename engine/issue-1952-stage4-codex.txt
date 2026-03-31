@@ -1,0 +1,497 @@
+OpenAI Codex v0.117.0 (research preview)
+--------
+workdir: /workspaces/thefourthangle
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/codespace/.codex/memories]
+reasoning effort: none
+reasoning summaries: none
+session id: 019d3e26-8a32-7813-a321-a7d755e3c336
+--------
+user
+Read the file engine/issue-1952-brief.md. You identify missing perspectives in this Malaysian public issue analysis about RON95 fuel quota cuts. Find what voices, framings, and facts are absent. Check for: missing community perspectives (B40, East Malaysia, women, youth, rural, Orang Asli), alternative causal framings (is this really about fiscal discipline or political calculation?), international comparisons (Indonesia fuel subsidy reform, India LPG targeting, Thailand diesel subsidies), counter-arguments, gender dimensions (women managing household budgets, female gig workers), economic class dimensions, geographic dimensions (Sabah/Sarawak diesel, rural Peninsular). Output structured JSON with completeness_score 0-100, missing_perspectives, alternative_framings, international_parallels, counter_arguments, missing_facts, gender_gaps, economic_gaps, geographic_gaps, overall_assessment.
+warning: Codex could not find system bubblewrap at /usr/bin/bwrap. Please install bubblewrap with your package manager. Codex will use the vendored bubblewrap in the meantime.
+2026-03-30T09:50:07.246762Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\"" })
+2026-03-30T09:50:07.995727Z ERROR codex_core::shell_snapshot: Shell snapshot validation failed: Snapshot command exited with status exit status: 2: /home/codespace/.codex/shell_snapshots/019d3e26-8a32-7813-a321-a7d755e3c336.tmp-1774864206732407379: line 2547: syntax error near unexpected token `('
+
+codex
+I’m reading the brief first and then I’ll map the missing voices, framings, and factual gaps against the categories you listed.
+exec
+/bin/bash -lc "sed -n '1,260p' engine/issue-1952-brief.md" in /workspaces/thefourthangle
+ succeeded in 537ms:
+# ISSUE BRIEF: 1952
+
+## Headline
+Fuel Quota Cut Hits April 1 — Who Actually Loses
+
+## Context
+The monthly subsidised RON95 quota under BUDI95 drops from 300 litres to 200 litres effective 1 April 2026. The government says 90% of users consume under 200 litres. The subsidy bill has reached RM4 billion per month with crude above $110/barrel. E-hailing drivers retain 800L quota. Market price for RON95 above quota is RM3.35/litre vs subsidised RM1.99/litre.
+
+## Source Date
+2026-03-30
+
+## Key Facts
+- BUDI95 quota cut from 300L to 200L per month, effective 1 April 2026
+- Subsidised price stays at RM1.99/litre; market price ~RM3.35/litre (68% more)
+- PM Anwar says 90% of RON95 users consume under 200L/month
+- E-hailing/gig workers retain 800L/month quota
+- Industry group says 800L still insufficient for high-mileage drivers (4,000-5,000km/month)
+- Monthly subsidy bill reached RM4 billion (crude above $100/barrel)
+- Annual bill could hit RM24 billion if crude stays above $110/barrel
+- Malaysia is simultaneously a net oil exporter and net refined fuel importer
+- Temporary measure "until global energy markets stabilise"
+- Long-distance rural commuters, delivery riders, plantation workers most affected
+- East Malaysia has limited public transport alternatives
+- No timeline given for when/if quota returns to 300L
+- Diesel also facing temporary limits in East Malaysia
+- Hari Raya price controls on essentials ended 28 March
+
+## Stage 1 Analysis (Primary — produced by Claude)
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "RON95 stays at RM1.99 per litre. Most Malaysians won't notice any change.",
+      "sub": "The government says 90% of RON95 users consume under 200 litres per month. The quota reduction from 300L to 200L is framed as a non-event."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "The 10% who exceed 200 litres will pay market price — currently RM3.35 per litre for every additional litre.",
+      "s": "That is a 68% price jump above the subsidised rate. Long-distance rural commuters, delivery riders, and plantation workers absorb the full cost.",
+      "d": "The 10% figure translates to roughly 1.5-2 million vehicle owners who regularly exceed 200L. These are not wealthy drivers — they are disproportionately rural B40 households with no public transport alternative, gig economy delivery riders who don't qualify for the e-hailing exemption, and agricultural workers commuting to estates and plantations."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "E-hailing drivers keep their 800-litre quota. But one industry group says it is still insufficient for high-mileage drivers.",
+      "s": "A full-time Grab driver in KL logs 4,000-5,000 km per month. At 10 km/litre, that is 400-500 litres — within the 800L ceiling but with no margin for inefficiency.",
+      "d": "The 800L exemption protects registered e-hailing drivers but excludes delivery riders on motorcycles (Foodpanda, Lalamove), informal taxi operators, and part-time gig workers who may not be registered with e-hailing platforms. The exemption creates a two-tier gig economy: those registered with recognised platforms get protection, those outside the system do not."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The subsidy bill has reached RM4 billion per month. At $110/barrel, the annual cost could hit RM24 billion.",
+      "s": "Malaysia is simultaneously a net oil exporter and a net refined fuel importer. Higher crude prices boost Petronas revenue while increasing the government's subsidy obligation.",
+      "d": "The fiscal paradox: Petronas pays higher dividends to the government from elevated crude prices, but the government simultaneously spends more on fuel subsidies. The net fiscal position depends on whether Petronas dividends outpace subsidy growth — and with crude above $110, they do not. The subsidy bill is now consuming resources that were earmarked for development spending."
+    },
+    {
+      "t": "reframe",
+      "h": "The 90% number disguises a policy that concentrates pain on those with the fewest alternatives — rural B40 households, informal workers, and East Malaysians with no public transport.",
+      "text": "When a government uses averages to justify a policy, ask who is below the average. The 10% who exceed 200L are not a statistical footnote — they are the people whose daily reality depends on driving distances that urban policymakers do not experience."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The quota cut is fiscally rational. But using averages to justify targeted hardship is the oldest trick in subsidy politics. The right question is not how many are affected — it is who they are, what alternatives they have, and what transitional support exists. On all three counts, the policy is silent."
+    }
+  ],
+  "sources": "Bloomberg, The Edge Malaysia, Malay Mail, The Star, Bernama, paultan.org, Business Today, Borneo Post, CodeBlue",
+  "confidence": "High — subsidy figures from MOF, quota from PM's official announcement",
+  "lenses_used": ["Economic", "Social", "Governance"],
+  "lenses_applicable_but_unused": ["Regional", "Political", "Rights"]
+}
+
+codex
+{
+  "completeness_score": 58,
+  "missing_perspectives": [
+    {
+      "group": "B40 households",
+      "missing": "The brief mentions 'rural B40 households' but does not separate B40 from M40, dual-car suburban households, or low-wage urban workers who may also exceed 200L because of job location, shift work, or weak transit links.",
+      "why_it_matters": "It treats class mainly as rural hardship and misses how fuel use can be structurally high even among lower-income households outside classic rural categories."
+    },
+    {
+      "group": "East Malaysians",
+      "missing": "East Malaysia is mentioned as lacking public transport, but Sabah and Sarawak are not disaggregated by geography, road conditions, income levels, inter-district travel needs, or dependence on diesel/petrol for mixed transport modes.",
+      "why_it_matters": "The political and distributional stakes in Sabah and Sarawak are distinct and often sharper than in Peninsular urban policy debates."
+    },
+    {
+      "group": "Women",
+      "missing": "There is no account of women as household budget managers, caregivers making multi-stop trips, or female gig and informal workers bearing fuel-cost volatility.",
+      "why_it_matters": "Fuel policy effects are often filtered through unpaid care work, school runs, elder care, and household provisioning."
+    },
+    {
+      "group": "Youth",
+      "missing": "Young workers, students, apprentices, and first-job commuters are absent.",
+      "why_it_matters": "Youth are especially exposed to transport cost shocks because wages are low, job security is weak, and housing near work is often unaffordable."
+    },
+    {
+      "group": "Rural communities",
+      "missing": "Rural people are described mainly as commuters and plantation workers, without coverage of smallholders, fishermen, petty traders, teachers, nurses, or public-sector workers posted far from service centres.",
+      "why_it-matters": "That narrows rural impact to a few occupational archetypes and understates the breadth of dependency on private transport."
+    },
+    {
+      "group": "Orang Asli and indigenous communities",
+      "missing": "No explicit mention of Orang Asli in Peninsular Malaysia or indigenous communities in Sabah and Sarawak whose transport access is already structurally weak.",
+      "why_it_matters": "These communities often face the highest travel burdens, weakest service access, and lowest policy visibility."
+    },
+    {
+      "group": "Non-platform informal workers",
+      "missing": "The brief notes informal workers generally, but does not distinguish between registered and unregistered drivers, care workers, home-based sellers, itinerant traders, and other workers who cannot easily claim exemptions.",
+      "why_it_matters": "Eligibility design is as important as headline subsidy levels."
+    }
+  ],
+  "alternative_framings": [
+    {
+      "frame": "Political calculation rather than pure fiscal discipline",
+      "missing": "The brief calls the policy fiscally rational but does not test whether the 90% framing is politically designed to isolate a minority, minimise backlash, and protect urban median voters while claiming reform credentials."
+    },
+    {
+      "frame": "Administrative targeting problem",
+      "missing": "The core issue may be less subsidy size than weak targeting architecture: who is recognised, how exemptions are verified, and how fast appeals or corrections happen."
+    },
+    {
+      "frame": "Revenue management and state-capacity problem",
+      "missing": "The analysis does not ask whether the stress comes from poor medium-term fiscal planning, overreliance on broad subsidies, or inconsistent use of Petronas windfalls."
+    },
+    {
+      "frame": "Centre-periphery bargain",
+      "missing": "This can be read as a federal political issue where burdens fall on geographically peripheral populations with less transport infrastructure and weaker representation in policy design."
+    },
+    {
+      "frame": "Cost-of-living sequencing failure",
+      "missing": "The timing, just after festive-season controls end, could be framed as part of cumulative household pressure rather than a standalone fuel policy."
+    },
+    {
+      "frame": "Urban policy bias",
+      "missing": "The brief implies urban-rural asymmetry but does not explicitly frame the policy as being calibrated around urban commuting norms and average consumption patterns."
+    }
+  ],
+  "international_parallels": [
+    {
+      "country": "Indonesia",
+      "relevance": "Indonesia has repeatedly tightened fuel subsidies and paired reforms with cash transfers or targeted compensation.",
+      "missing_comparison": "The brief does not compare whether Malaysia has equivalent cushioning mechanisms, communication strategy, or credibility on compensating affected households."
+    },
+    {
+      "country": "India",
+      "relevance": "India's LPG targeting and direct-benefit approach shows how subsidy reform can be paired with beneficiary identification and cash support.",
+      "missing_comparison": "The brief does not ask whether Malaysia's quota approach is a weaker form of targeting than direct transfers, especially for mixed-use or irregular-income households."
+    },
+    {
+      "country": "Thailand",
+      "relevance": "Thailand has used diesel subsidy and price-stabilisation measures to manage transport-sensitive inflation.",
+      "missing_comparison": "The brief does not compare how neighbouring governments balance inflation control, transport-sector protection, and fiscal strain."
+    },
+    {
+      "country": "General comparative lesson",
+      "relevance": "Successful subsidy reform usually depends on sequencing, transparency, compensation, and public trust.",
+      "missing_comparison": "The brief does not benchmark Malaysia against these reform principles."
+    }
+  ],
+  "counter_arguments": [
+    {
+      "argument": "Universal fuel subsidies are regressive",
+      "missing": "The brief does not fully articulate the strongest government-side case that broad fuel subsidies disproportionately benefit higher-consumption households and should be narrowed."
+    },
+    {
+      "argument": "Quota reduction is milder than price liberalisation",
+      "missing": "It does not acknowledge that a quota cut preserves a subsidised base level for most users, which may be politically and socially less disruptive than removing subsidies altogether."
+    },
+    {
+      "argument": "Leakage, smuggling, and misuse",
+      "missing": "There is no discussion of whether tighter quotas are partly aimed at reducing arbitrage, diversion, or non-household misuse."
+    },
+    {
+      "argument": "Environmental and congestion considerations",
+      "missing": "The brief omits the argument that cheaper fuel distorts transport choices, encourages car dependence, and undermines longer-term climate and mobility goals."
+    },
+    {
+      "argument": "Targeted exemptions already exist",
+      "missing": "It critiques the e-hailing carve-out but does not fairly test whether more precise targeting is administratively feasible or preferable to maintaining universal subsidy levels."
+    }
+  ],
+  "missing_facts": [
+    {
+      "fact": "Definition and mechanics of BUDI95 eligibility",
+      "gap": "The brief assumes reader familiarity with BUDI95 but does not explain who qualifies, how quotas are administered, and whether vehicle count, household count, or income status matters."
+    },
+    {
+      "fact": "Evidence for the 90% claim",
+      "gap": "No source basis, sample period, or consumption distribution is provided for the government's assertion that 90% consume under 200L."
+    },
+    {
+      "fact": "Size and profile of affected population",
+      "gap": "The estimate of 1.5-2 million vehicle owners appears in analysis but is not anchored in an official denominator or dataset."
+    },
+    {
+      "fact": "Household-level cost impact examples",
+      "gap": "There are no concrete monthly cost scenarios for commuters driving different distances in urban, semi-rural, or rural settings."
+    },
+    {
+      "fact": "Pass-through effects",
+      "gap": "The brief does not estimate likely second-round effects on food delivery, logistics, farmgate-to-market transport, or rural consumer prices."
+    },
+    {
+      "fact": "Appeals, transition support, or review mechanism",
+      "gap": "It notes policy silence but does not state whether any appeals process, hardship category, or review timetable exists."
+    },
+    {
+      "fact": "Interaction with diesel policy",
+      "gap": "Diesel limits in East Malaysia are mentioned but not explained, even though petrol and diesel policy may interact for households and businesses."
+    }
+  ],
+  "gender_gaps": [
+    {
+      "gap": "Women as household financial shock absorbers are missing.",
+      "importance": "Fuel-price increases often show up first in grocery planning, school transport budgeting, and care-related trip decisions managed by women."
+    },
+    {
+      "gap": "Female gig workers and informal earners are absent.",
+      "importance": "Women in delivery support, petty trade, home-based business logistics, and care work may face real transport costs without fitting formal exemption categories."
+    },
+    {
+      "gap": "Care-mobility is ignored.",
+      "importance": "Trip patterns involving children, elderly relatives, clinics, and schools are not well captured by simple commute framing."
+    },
+    {
+      "gap": "Intra-household effects are absent.",
+      "importance": "When fuel costs rise, women and children may absorb the adjustment through reduced mobility, deferred purchases, or time burdens."
+    }
+  ],
+  "economic_gaps": [
+    {
+      "gap": "Insufficient class differentiation within 'ordinary people'.",
+      "importance": "The brief collapses affected groups into rural B40 and informal workers, missing precarious M40 households, peri-urban commuters, and debt-burdened lower-middle-income families."
+    },
+    {
+      "gap": "No treatment of asset-poor households with older, less fuel-efficient vehicles.",
+      "importance": "Fuel burden depends not just on distance but on vehicle quality, which is class-linked."
+    },
+    {
+      "gap": "No analysis of job-type exposure.",
+      "importance": "Shift workers, site-based workers, healthcare staff, teachers, and service workers may face high mileage without exemption eligibility."
+    },
+    {
+      "gap": "No inflation distribution analysis.",
+      "importance": "Even households under 200L can be indirectly hit through higher service and goods prices."
+    }
+  ],
+  "geographic_gaps": [
+    {
+      "gap": "Sabah and Sarawak are under-specified.",
+      "importance": "The brief mentions East Malaysia generally but not the very different transport realities across interior, coastal, and urban areas."
+    },
+    {
+      "gap": "Rural Peninsular Malaysia is thinly covered.",
+      "importance": "States with weak rail and bus alternatives, dispersed jobs, and long service-access distances may face burdens similar to East Malaysia."
+    },
+    {
+      "gap": "Peri-urban commuter belts are missing.",
+      "importance": "Many households outside major city cores rely heavily on cars because housing is cheaper far from work."
+    },
+    {
+      "gap": "No geography of alternatives.",
+      "importance": "The analysis says public transport is limited, but does not map where substitutes actually exist and where they do not."
+    },
+    {
+      "gap": "No federal-regional equity framing.",
+      "importance": "The distribution of costs across centre and periphery is politically salient and absent."
+    }
+  ],
+  "overall_assessment": "The brief is directionally strong on distributive harm, but it is incomplete. It captures the main economic and social critique while underdeveloping political, gendered, geographic, and comparative policy dimensions. Its strongest omission is that it accepts the government's fiscal rationale too readily and does not robustly test whether the policy is also a politically calibrated targeting move. It also lacks concrete household impact examples, weakens its class analysis by focusing narrowly on a few worker categories, and treats East Malaysia and rural hardship too generically. Overall, it is a solid first-pass critique, but not yet a fully rounded public issue analysis."
+}
+tokens used
+31,254
+{
+  "completeness_score": 58,
+  "missing_perspectives": [
+    {
+      "group": "B40 households",
+      "missing": "The brief mentions 'rural B40 households' but does not separate B40 from M40, dual-car suburban households, or low-wage urban workers who may also exceed 200L because of job location, shift work, or weak transit links.",
+      "why_it_matters": "It treats class mainly as rural hardship and misses how fuel use can be structurally high even among lower-income households outside classic rural categories."
+    },
+    {
+      "group": "East Malaysians",
+      "missing": "East Malaysia is mentioned as lacking public transport, but Sabah and Sarawak are not disaggregated by geography, road conditions, income levels, inter-district travel needs, or dependence on diesel/petrol for mixed transport modes.",
+      "why_it_matters": "The political and distributional stakes in Sabah and Sarawak are distinct and often sharper than in Peninsular urban policy debates."
+    },
+    {
+      "group": "Women",
+      "missing": "There is no account of women as household budget managers, caregivers making multi-stop trips, or female gig and informal workers bearing fuel-cost volatility.",
+      "why_it_matters": "Fuel policy effects are often filtered through unpaid care work, school runs, elder care, and household provisioning."
+    },
+    {
+      "group": "Youth",
+      "missing": "Young workers, students, apprentices, and first-job commuters are absent.",
+      "why_it_matters": "Youth are especially exposed to transport cost shocks because wages are low, job security is weak, and housing near work is often unaffordable."
+    },
+    {
+      "group": "Rural communities",
+      "missing": "Rural people are described mainly as commuters and plantation workers, without coverage of smallholders, fishermen, petty traders, teachers, nurses, or public-sector workers posted far from service centres.",
+      "why_it-matters": "That narrows rural impact to a few occupational archetypes and understates the breadth of dependency on private transport."
+    },
+    {
+      "group": "Orang Asli and indigenous communities",
+      "missing": "No explicit mention of Orang Asli in Peninsular Malaysia or indigenous communities in Sabah and Sarawak whose transport access is already structurally weak.",
+      "why_it_matters": "These communities often face the highest travel burdens, weakest service access, and lowest policy visibility."
+    },
+    {
+      "group": "Non-platform informal workers",
+      "missing": "The brief notes informal workers generally, but does not distinguish between registered and unregistered drivers, care workers, home-based sellers, itinerant traders, and other workers who cannot easily claim exemptions.",
+      "why_it_matters": "Eligibility design is as important as headline subsidy levels."
+    }
+  ],
+  "alternative_framings": [
+    {
+      "frame": "Political calculation rather than pure fiscal discipline",
+      "missing": "The brief calls the policy fiscally rational but does not test whether the 90% framing is politically designed to isolate a minority, minimise backlash, and protect urban median voters while claiming reform credentials."
+    },
+    {
+      "frame": "Administrative targeting problem",
+      "missing": "The core issue may be less subsidy size than weak targeting architecture: who is recognised, how exemptions are verified, and how fast appeals or corrections happen."
+    },
+    {
+      "frame": "Revenue management and state-capacity problem",
+      "missing": "The analysis does not ask whether the stress comes from poor medium-term fiscal planning, overreliance on broad subsidies, or inconsistent use of Petronas windfalls."
+    },
+    {
+      "frame": "Centre-periphery bargain",
+      "missing": "This can be read as a federal political issue where burdens fall on geographically peripheral populations with less transport infrastructure and weaker representation in policy design."
+    },
+    {
+      "frame": "Cost-of-living sequencing failure",
+      "missing": "The timing, just after festive-season controls end, could be framed as part of cumulative household pressure rather than a standalone fuel policy."
+    },
+    {
+      "frame": "Urban policy bias",
+      "missing": "The brief implies urban-rural asymmetry but does not explicitly frame the policy as being calibrated around urban commuting norms and average consumption patterns."
+    }
+  ],
+  "international_parallels": [
+    {
+      "country": "Indonesia",
+      "relevance": "Indonesia has repeatedly tightened fuel subsidies and paired reforms with cash transfers or targeted compensation.",
+      "missing_comparison": "The brief does not compare whether Malaysia has equivalent cushioning mechanisms, communication strategy, or credibility on compensating affected households."
+    },
+    {
+      "country": "India",
+      "relevance": "India's LPG targeting and direct-benefit approach shows how subsidy reform can be paired with beneficiary identification and cash support.",
+      "missing_comparison": "The brief does not ask whether Malaysia's quota approach is a weaker form of targeting than direct transfers, especially for mixed-use or irregular-income households."
+    },
+    {
+      "country": "Thailand",
+      "relevance": "Thailand has used diesel subsidy and price-stabilisation measures to manage transport-sensitive inflation.",
+      "missing_comparison": "The brief does not compare how neighbouring governments balance inflation control, transport-sector protection, and fiscal strain."
+    },
+    {
+      "country": "General comparative lesson",
+      "relevance": "Successful subsidy reform usually depends on sequencing, transparency, compensation, and public trust.",
+      "missing_comparison": "The brief does not benchmark Malaysia against these reform principles."
+    }
+  ],
+  "counter_arguments": [
+    {
+      "argument": "Universal fuel subsidies are regressive",
+      "missing": "The brief does not fully articulate the strongest government-side case that broad fuel subsidies disproportionately benefit higher-consumption households and should be narrowed."
+    },
+    {
+      "argument": "Quota reduction is milder than price liberalisation",
+      "missing": "It does not acknowledge that a quota cut preserves a subsidised base level for most users, which may be politically and socially less disruptive than removing subsidies altogether."
+    },
+    {
+      "argument": "Leakage, smuggling, and misuse",
+      "missing": "There is no discussion of whether tighter quotas are partly aimed at reducing arbitrage, diversion, or non-household misuse."
+    },
+    {
+      "argument": "Environmental and congestion considerations",
+      "missing": "The brief omits the argument that cheaper fuel distorts transport choices, encourages car dependence, and undermines longer-term climate and mobility goals."
+    },
+    {
+      "argument": "Targeted exemptions already exist",
+      "missing": "It critiques the e-hailing carve-out but does not fairly test whether more precise targeting is administratively feasible or preferable to maintaining universal subsidy levels."
+    }
+  ],
+  "missing_facts": [
+    {
+      "fact": "Definition and mechanics of BUDI95 eligibility",
+      "gap": "The brief assumes reader familiarity with BUDI95 but does not explain who qualifies, how quotas are administered, and whether vehicle count, household count, or income status matters."
+    },
+    {
+      "fact": "Evidence for the 90% claim",
+      "gap": "No source basis, sample period, or consumption distribution is provided for the government's assertion that 90% consume under 200L."
+    },
+    {
+      "fact": "Size and profile of affected population",
+      "gap": "The estimate of 1.5-2 million vehicle owners appears in analysis but is not anchored in an official denominator or dataset."
+    },
+    {
+      "fact": "Household-level cost impact examples",
+      "gap": "There are no concrete monthly cost scenarios for commuters driving different distances in urban, semi-rural, or rural settings."
+    },
+    {
+      "fact": "Pass-through effects",
+      "gap": "The brief does not estimate likely second-round effects on food delivery, logistics, farmgate-to-market transport, or rural consumer prices."
+    },
+    {
+      "fact": "Appeals, transition support, or review mechanism",
+      "gap": "It notes policy silence but does not state whether any appeals process, hardship category, or review timetable exists."
+    },
+    {
+      "fact": "Interaction with diesel policy",
+      "gap": "Diesel limits in East Malaysia are mentioned but not explained, even though petrol and diesel policy may interact for households and businesses."
+    }
+  ],
+  "gender_gaps": [
+    {
+      "gap": "Women as household financial shock absorbers are missing.",
+      "importance": "Fuel-price increases often show up first in grocery planning, school transport budgeting, and care-related trip decisions managed by women."
+    },
+    {
+      "gap": "Female gig workers and informal earners are absent.",
+      "importance": "Women in delivery support, petty trade, home-based business logistics, and care work may face real transport costs without fitting formal exemption categories."
+    },
+    {
+      "gap": "Care-mobility is ignored.",
+      "importance": "Trip patterns involving children, elderly relatives, clinics, and schools are not well captured by simple commute framing."
+    },
+    {
+      "gap": "Intra-household effects are absent.",
+      "importance": "When fuel costs rise, women and children may absorb the adjustment through reduced mobility, deferred purchases, or time burdens."
+    }
+  ],
+  "economic_gaps": [
+    {
+      "gap": "Insufficient class differentiation within 'ordinary people'.",
+      "importance": "The brief collapses affected groups into rural B40 and informal workers, missing precarious M40 households, peri-urban commuters, and debt-burdened lower-middle-income families."
+    },
+    {
+      "gap": "No treatment of asset-poor households with older, less fuel-efficient vehicles.",
+      "importance": "Fuel burden depends not just on distance but on vehicle quality, which is class-linked."
+    },
+    {
+      "gap": "No analysis of job-type exposure.",
+      "importance": "Shift workers, site-based workers, healthcare staff, teachers, and service workers may face high mileage without exemption eligibility."
+    },
+    {
+      "gap": "No inflation distribution analysis.",
+      "importance": "Even households under 200L can be indirectly hit through higher service and goods prices."
+    }
+  ],
+  "geographic_gaps": [
+    {
+      "gap": "Sabah and Sarawak are under-specified.",
+      "importance": "The brief mentions East Malaysia generally but not the very different transport realities across interior, coastal, and urban areas."
+    },
+    {
+      "gap": "Rural Peninsular Malaysia is thinly covered.",
+      "importance": "States with weak rail and bus alternatives, dispersed jobs, and long service-access distances may face burdens similar to East Malaysia."
+    },
+    {
+      "gap": "Peri-urban commuter belts are missing.",
+      "importance": "Many households outside major city cores rely heavily on cars because housing is cheaper far from work."
+    },
+    {
+      "gap": "No geography of alternatives.",
+      "importance": "The analysis says public transport is limited, but does not map where substitutes actually exist and where they do not."
+    },
+    {
+      "gap": "No federal-regional equity framing.",
+      "importance": "The distribution of costs across centre and periphery is politically salient and absent."
+    }
+  ],
+  "overall_assessment": "The brief is directionally strong on distributive harm, but it is incomplete. It captures the main economic and social critique while underdeveloping political, gendered, geographic, and comparative policy dimensions. Its strongest omission is that it accepts the government's fiscal rationale too readily and does not robustly test whether the policy is also a politically calibrated targeting move. It also lacks concrete household impact examples, weakens its class analysis by focusing narrowly on a few worker categories, and treats East Malaysia and rural hardship too generically. Overall, it is a solid first-pass critique, but not yet a fully rounded public issue analysis."
+}

@@ -1,0 +1,108 @@
+Keychain initialization encountered an error: Cannot autolaunch D-Bus without X11 $DISPLAY
+Using FileKeychain fallback for secure storage.
+Loaded cached credentials.
+I will begin by researching the current status of fuel subsidies in Malaysia, specifically looking for any announcements regarding "BUDI95," quota reductions for RON95, and statements from Prime Minister Anwar Ibrahim concerning fuel consumption statistics.
+
+I will now verify the specific monthly subsidy bill of RM4 billion, the end date of Hari Raya price controls, and the inclusion/exclusion of delivery riders from the 800L quota. I will also clarify the market price discrepancy between the reported RM3.35 and RM3.87.
+
+I will now investigate the "800L insufficiency" claim by searching for comments from e-hailing groups regarding high-mileage drivers and the 800-litre quota. I will also clarify whether delivery riders from platforms like Foodpanda and Lalamove are included in the 800L quota or are restricted to the 200L limit. Finally, I will confirm the end date of Hari Raya price controls and Malaysia's status as a net oil exporter and net refined fuel importer.
+
+I will now verify the end date of the Hari Raya price controls, specifically checking if they ended on March 28, 2026. I will also investigate whether delivery riders (p-hailing) are excluded from the 800L quota, as suggested by Stage 1, or if they are included as my previous search indicated. Finally, I will confirm Malaysia's status as a net oil exporter and a net refined fuel importer in the context of early 2026.
+
+I will now verify whether the 800L quota is restricted to e-hailing cars or if it also applies to p-hailing motorcycles. I will specifically search for the "BUDI95" 800-litre quota details for motorcycles and delivery riders to determine if they are indeed limited to the standard 200L quota.
+
+```json
+{
+  "factual_accuracy_score": 88,
+  "source_diversity_estimate": 0.95,
+  "claims": [
+    {
+      "claim": "BUDI95 quota cut from 300L to 200L per month, effective 1 April 2026.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 1.0,
+        "m_false": 0.0,
+        "m_unknown": 0.0
+      },
+      "source": "Ministry of Finance / PM Announcement (Bernama, The Star, Malay Mail, March 2026)"
+    },
+    {
+      "claim": "PM Anwar says 90% of RON95 users consume under 200L/month.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 1.0,
+        "m_false": 0.0,
+        "m_unknown": 0.0
+      },
+      "source": "Official statement (Bernama, The Vibes, March 2026)"
+    },
+    {
+      "claim": "The market price for RON95 above quota is RM3.35/litre.",
+      "status": "MISLEADING",
+      "belief_masses": {
+        "m_true": 0.2,
+        "m_false": 0.6,
+        "m_unknown": 0.2
+      },
+      "source": "Multiple reports (SoyaCincau, Carz.com.my) cite the floating market price as approximately RM3.87/litre as of late March 2026 due to the Middle East energy crisis."
+    },
+    {
+      "claim": "E-hailing drivers retain their 800L quota.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 0.9,
+        "m_false": 0.0,
+        "m_unknown": 0.1
+      },
+      "source": "Official BUDI95 program details (March 2026)"
+    },
+    {
+      "claim": "Delivery riders (Foodpanda, Lalamove) are excluded from the 800L quota and limited to 200L.",
+      "status": "INCORRECT",
+      "belief_masses": {
+        "m_true": 0.0,
+        "m_false": 0.95,
+        "m_unknown": 0.05
+      },
+      "source": "BUDI95 guidelines explicitly include 'p-hailing' (delivery) riders in the tiered quota system. Active riders exceeding 5,000 km per month are eligible for the full 800L ceiling, while those between 2,000-5,000 km receive 600L."
+    },
+    {
+      "claim": "The monthly subsidy bill has reached RM4 billion.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 0.95,
+        "m_false": 0.0,
+        "m_unknown": 0.05
+      },
+      "source": "Ministry of Finance fiscal update (March 2026), citing Brent crude prices exceeding US$100-110/barrel."
+    },
+    {
+      "claim": "Malaysia is a net oil exporter and a net refined fuel importer.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 1.0,
+        "m_false": 0.0,
+        "m_unknown": 0.0
+      },
+      "source": "Standard structural fact of Malaysian energy trade, re-confirmed by analysts in March 2026 context."
+    },
+    {
+      "claim": "Hari Raya price controls on essentials ended 28 March.",
+      "status": "VERIFIED",
+      "belief_masses": {
+        "m_true": 1.0,
+        "m_false": 0.0,
+        "m_unknown": 0.0
+      },
+      "source": "Ministry of Domestic Trade and Cost of Living (KPDN) SHMMP schedule for Hari Raya Aidilfitri 2026."
+    }
+  ],
+  "omitted_facts": [
+    "The 800L quota is not a flat entitlement; it is tiered based on verified mileage (EHO data). Drivers doing under 2,000 km get 300L (the previous basic amount), while only those above 5,000 km get the 800L maximum.",
+    "Diesel in Peninsular Malaysia hit a record high of RM5.52/litre (unsubsidized) by March 25, 2026, which significantly impacts delivery logistics costs not covered by the RON95-focused analysis.",
+    "The 10% of users who exceed 200L/month is estimated to include roughly 1.5-2 million vehicle owners, aligning with national vehicle registration data."
+  ],
+  "source_assessment": "The analysis correctly identifies the core policy shift and the macroeconomic pressures (Middle East conflict, Strait of Hormuz blockade). It relies on accurate MoF/PM figures for the general quota and subsidy costs.",
+  "overall_assessment": "The analysis is highly accurate regarding government figures and the economic rationale. However, it incorrectly characterizes p-hailing (delivery) riders as 'excluded' from the higher quota tiers. In reality, delivery riders are covered under the same mileage-based system as e-hailing drivers. The market price estimate of RM3.35 is also conservative compared to the RM3.87 rate seen in late March 2026."
+}
+```

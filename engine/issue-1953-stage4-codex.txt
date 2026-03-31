@@ -1,0 +1,800 @@
+OpenAI Codex v0.117.0 (research preview)
+--------
+workdir: /workspaces/thefourthangle
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /home/codespace/.codex/memories]
+reasoning effort: none
+reasoning summaries: none
+session id: 019d3e2b-b0ba-79f0-bb1f-4c98fe817277
+--------
+user
+Read the file engine/issue-1953-brief.md. You identify missing perspectives in this Malaysian public issue analysis about vegetable prices and fertiliser supply disruption. Find what voices, framings, and facts are absent. Check for: missing community perspectives (B40 households buying vegetables, wet market traders, Cameron Highlands Orang Asli farm workers, East Malaysian farmers using different fertiliser, women as primary food purchasers and budget managers, hawkers and food operators facing input cost spikes), alternative causal framings (is this really about Hormuz or about long-term failure to build domestic fertiliser capacity? Is it about import dependence or about agricultural policy neglect? Could organic/alternative farming reduce vulnerability?), international comparisons (how do Indonesia, Thailand, Vietnam handle fertiliser stockpiling and food price shocks?), counter-arguments (price controls cause their own distortions, market correction is healthy, Malaysian farmers could diversify inputs), gender dimensions (women as primary grocery buyers absorbing price shocks), economic class dimensions (B40 spend 40%+ of income on food vs T20 at 15%), geographic dimensions (East Malaysia food logistics, Cameron Highlands vs lowland farming, urban vs rural food access). Output structured JSON.
+warning: Codex could not find system bubblewrap at /usr/bin/bwrap. Please install bubblewrap with your package manager. Codex will use the vendored bubblewrap in the meantime.
+2026-03-30T09:55:44.724747Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer error=\"invalid_token\", error_description=\"No authorization provided\", resource_metadata=\"https://mcp.vercel.com/.well-known/oauth-protected-resource\"" })
+2026-03-30T09:55:45.449769Z ERROR codex_core::shell_snapshot: Shell snapshot validation failed: Snapshot command exited with status exit status: 2: /home/codespace/.codex/shell_snapshots/019d3e2b-b0ba-79f0-bb1f-4c98fe817277.tmp-1774864544275260825: line 2547: syntax error near unexpected token `('
+
+codex
+I’m reading the brief first to see what it already covers, then I’ll map the missing voices, framings, and facts against the dimensions you listed and return structured JSON.
+exec
+/bin/bash -lc 'wc -l engine/issue-1953-brief.md' in /workspaces/thefourthangle
+exec
+/bin/bash -lc "sed -n '1,260p' engine/issue-1953-brief.md" in /workspaces/thefourthangle
+ succeeded in 581ms:
+77 engine/issue-1953-brief.md
+
+ succeeded in 720ms:
+# ISSUE BRIEF: 1953
+
+## Headline
+Vegetable Prices May Jump 50% in April — The Fertiliser Link
+
+## Context
+One-third of global fertiliser shipments transit the Strait of Hormuz. With the waterway disrupted since 28 February 2026, Malaysian farmers face fertiliser costs up 100-150% and are bracing for vegetable price hikes of 30-50% once Hari Raya price controls ended on 28 March. 23 vessels carrying urea, sulphur and phosphates were blocked at Hormuz in early March. China has also curbed fertiliser exports, compounding the shortage.
+
+## Source Date
+2026-03-30
+
+## Key Facts
+- 23 fertiliser-laden vessels blocked at Hormuz in early March 2026
+- One-third of global fertiliser shipments transit Hormuz
+- Fertiliser raw material prices surged 100-150% in two weeks
+- 25kg bag of nitrogen fertiliser: RM240 → RM305, projected RM350 in April
+- Some Malaysian fertiliser suppliers suspended new orders since mid-March
+- Cameron Highlands farms rely on imported NPK fertilisers from Germany (NPK 15-15-15, 16-16-16)
+- Tomato production costs up 15-20% due to fertigation system disruption
+- Leafy vegetables (cabbage, lettuce, sawi) heavily dependent on imported fertiliser
+- Cameron Highlands ginger rose RM2/kg in one week
+- Farmers warn 30-50% vegetable price hike in April
+- Hari Raya price controls on 12 essential vegetables ended 28 March 2026
+- Post-controls, accumulated cost pressure passes to consumers immediately
+- China curbed fertiliser exports, compounding Hormuz disruption
+- Malaysia imports ~60% of its food
+- CNBC reported fertiliser disruption as separate from oil story
+- Malay Mail published detailed Hormuz-to-kitchen explainer
+- CodeBlue reported expert warnings on food price hikes
+- FAO data shows Malaysia heavily dependent on imported fertilisers
+
+## Stage 1 Analysis (Primary — produced by Claude)
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Food prices are rising because of the Middle East conflict. That is the headline.",
+      "sub": "But the chain from the Strait of Hormuz to your dinner table runs through fertiliser, not fuel — and almost nobody is explaining how."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "23 vessels carrying urea, sulphur and phosphates were blocked at Hormuz in early March. Fertiliser raw material prices surged 100-150% in two weeks.",
+      "s": "A 25kg bag of nitrogen fertiliser rose from RM240 to RM305 and is projected to hit RM350 in April. Some Malaysian suppliers have suspended new orders since mid-March.",
+      "d": "The fertiliser supply chain runs through the Strait of Hormuz because major urea and phosphate producers are in the Gulf states. When Iran blocked the strait, 23 vessels carrying these raw materials could not transit. Malaysian importers who depend on this route faced immediate spot-price surges. Suppliers who had contracted at pre-crisis prices are now refusing to sell existing stock at old rates, anticipating further increases."
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "Cameron Highlands farms rely on imported NPK fertilisers from Germany. Tomato production costs have risen 15-20% due to fertigation system disruption.",
+      "s": "Leafy vegetables such as cabbage, lettuce and sawi depend on NPK 15-15-15 and 16-16-16 blends. China has also curbed fertiliser exports, compounding the shortage.",
+      "d": "Cameron Highlands produces approximately 40% of Malaysia's temperate vegetables. The farms use precision fertigation — liquid fertiliser delivery through irrigation systems — that requires specific water-soluble NPK formulations. These cannot be substituted with generic fertilisers. The China export curb, unrelated to the Hormuz crisis, creates a second supply shock on a different route, leaving Malaysian farmers squeezed from two directions simultaneously."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "Hari Raya price controls ended on 28 March. Farmers say market prices will correct upward by 30-50% in the first two weeks of April.",
+      "s": "Government controlled prices for 12 essential vegetables during festive season. With controls lifted, the accumulated cost pressure will be passed to consumers immediately.",
+      "d": "Price controls during Hari Raya created an artificial cap that forced farmers and traders to absorb rising input costs temporarily. Once controls expire, the market corrects — and the correction overshoots because suppressed costs are released all at once. The 30-50% estimate comes from farmer associations and wholesale market traders, not government projections. The government has not published an estimate of expected post-control price increases."
+    },
+    {
+      "t": "reframe",
+      "h": "Malaysia imports 60% of its food. When the world's most important shipping lane closes, the cost arrives on your plate within six weeks — and no price control can stop it.",
+      "text": "The food security conversation in Malaysia focuses on rice self-sufficiency and import dependence for protein. It rarely includes fertiliser, the invisible input that determines whether locally grown vegetables are affordable. Malaysia grows most of its own vegetables — but it cannot grow them without imported fertiliser."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The fertiliser-to-food pipeline is invisible until it breaks. Malaysia's food security is as fragile as its most distant supply chain. The question is not whether prices will rise — they will. The question is whether this crisis finally forces a serious conversation about fertiliser stockpiling, alternative sourcing, and domestic production capacity."
+    }
+  ],
+  "sources": "CNBC, Malay Mail, CodeBlue, The Rakyat Post, Business Today, FAO, paultan.org, Borneo Post",
+  "confidence": "High — fertiliser prices verified across multiple sources, farmer estimates from associations and wholesale traders",
+  "lenses_used": ["Economic", "Environmental", "Social"],
+  "lenses_applicable_but_unused": ["Regional", "Governance", "Health"]
+}
+
+codex
+The brief is narrow: it centers Cameron Highlands growers, Hormuz, and short-run retail prices. I’m verifying a few class, gender, and regional comparison facts so the missing-facts section is defensible rather than speculative.
+web search: 
+web search: Malaysia B40 food expenditure share household income DOSM food expenditure percentage B40 T20 women grocery purchasing Malaysia East Malaysia fertiliser Sabah Sarawak Indonesia Thailand Vietnam fertiliser stockpile food price shock policy
+web search: 
+web search: site:dosm.gov.my household expenditure survey B40 food and beverages percent 2022 pdf
+web search: 
+web search: Malaysia women primary grocery shoppers survey food purchasing women household budget manager
+web search: 
+web search: Indonesia fertiliser subsidy stockpile food price shocks 2024 official
+web search: 
+web search: Vietnam fertiliser reserve stock state management 2024 official
+web search: 
+web search: 'female'
+codex
+{
+  "issue_id": 1953,
+  "file_analyzed": "/workspaces/thefourthangle/engine/issue-1953-brief.md",
+  "source_date_in_brief": "2026-03-30",
+  "overall_assessment": {
+    "summary": "The brief is tightly framed around a single upstream shock: Hormuz disruption causing fertiliser scarcity, which then raises Cameron Highlands vegetable prices. It is strongest on short-run supply-chain explanation and weakest on distributional impact, regional variation, labor/community voices, and policy alternatives.",
+    "main_problem": "It treats 'Malaysians' as a generic consumer and 'farmers' as a generic producer, which flattens who gets hit first, who absorbs the shock most, and which policy failures predate Hormuz.",
+    "missing_dimensions_count": 7
+  },
+  "existing_focus_in_brief": {
+    "voices_present": [
+      "Farmer associations",
+      "Wholesale market traders",
+      "General national consumer framing"
+    ],
+    "framings_present": [
+      "Hormuz disruption as trigger",
+      "Imported fertiliser dependence",
+      "Festive price controls delaying pass-through",
+      "Food-security vulnerability"
+    ],
+    "facts_present": [
+      "23 fertiliser vessels blocked",
+      "One-third of global fertiliser shipments transit Hormuz",
+      "Input price spikes of 100-150%",
+      "Cameron Highlands dependence on imported NPK",
+      "Estimated 30-50% retail vegetable price increase"
+    ]
+  },
+  "missing_community_perspectives": [
+    {
+      "voice": "B40 households buying vegetables",
+      "status": "missing",
+      "why_it_matters": "The brief explains price transmission but not who suffers most. Lower-income households have less room to substitute or absorb repeated weekly vegetable price spikes.",
+      "what_is_missing": [
+        "Household budgeting reality at wet markets and discount grocers",
+        "Trade-offs between vegetables and cheaper calories",
+        "Whether households reduce dietary quality, meal frequency, or fresh produce intake"
+      ],
+      "recommended_addition": "Add a paragraph or card showing that the same RM5-RM10 weekly increase is marginal for higher-income households but material for B40 households already stretched on essentials."
+    },
+    {
+      "voice": "Wet market traders and small retailers",
+      "status": "missing",
+      "why_it_matters": "The brief jumps from farmers to consumers and skips the middle actors who absorb losses, adjust margins, reduce assortment, and manage perishability risk.",
+      "what_is_missing": [
+        "How traders handle price volatility when stock is perishable",
+        "Whether traders are blamed for increases they did not cause",
+        "How supply shortages change grading, size, and quality sold"
+      ],
+      "recommended_addition": "Include trader testimony on thinner margins, spoilage risk, and customer backlash."
+    },
+    {
+      "voice": "Cameron Highlands Orang Asli workers and nearby indigenous communities",
+      "status": "missing",
+      "why_it_matters": "The brief discusses Cameron Highlands as a production zone but not the labor and indigenous communities around that system. They may be affected both as workers and as low-income food buyers.",
+      "what_is_missing": [
+        "Whether Orang Asli workers face reduced workdays or wages if farms cut application rates or planting cycles",
+        "Whether nearby communities rely on low-cost access to surplus vegetables",
+        "Labor precarity within highland agriculture"
+      ],
+      "recommended_addition": "Add a labor/community lens, not just a farm-owner lens."
+    },
+    {
+      "voice": "East Malaysian farmers",
+      "status": "missing",
+      "why_it_matters": "The brief is effectively Peninsular- and Cameron-centric. Sabah and Sarawak face different crop mixes, logistics, and input chains.",
+      "what_is_missing": [
+        "Different fertiliser use patterns by crop and soil conditions",
+        "Whether East Malaysia is more exposed to freight cost and port delays than to the exact Cameron Highlands NPK story",
+        "How logistics amplify retail prices in Sabah and Sarawak"
+      ],
+      "recommended_addition": "Add a regional comparison card: Cameron Highlands vegetables are not the whole national farm story."
+    },
+    {
+      "voice": "Women as primary food purchasers and household budget managers",
+      "status": "missing",
+      "why_it_matters": "The brief treats food inflation as neutral, but in practice women often do the day-to-day coping work: switching items, shrinking portions, hunting bargains, and managing household stress.",
+      "what_is_missing": [
+        "Gendered unpaid labor of price adaptation",
+        "Nutritional sacrifices made for children or elders",
+        "Extra time cost of comparing prices across outlets"
+      ],
+      "recommended_addition": "Add a gender card showing that food inflation creates hidden labor and emotional burden, not just higher receipts."
+    },
+    {
+      "voice": "Hawkers, canteens, and small food operators",
+      "status": "missing",
+      "why_it_matters": "Vegetable inflation does not stop at grocery baskets. It hits cooked-food operators who face menu-price resistance and shrinking portions.",
+      "what_is_missing": [
+        "Input-cost pressure on noodle stalls, economy rice sellers, and small restaurants",
+        "Whether operators shrink portions instead of raising prices",
+        "How repeated fresh-produce volatility feeds broader cost-of-living anger"
+      ],
+      "recommended_addition": "Include downstream food-service effects, especially for low-cost prepared meals."
+    }
+  ],
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "This is not only a Hormuz story; it is also a domestic resilience failure.",
+      "status": "missing",
+      "why_it_matters": "The brief risks implying an unavoidable external shock, when part of the vulnerability may come from years of limited domestic fertiliser capacity, low strategic stocks, and weak diversification planning.",
+      "questions_to_add": [
+        "What domestic fertiliser manufacturing capacity does Malaysia have and why is it insufficient for this segment?",
+        "Were there strategic stockpiles or contingency procurement plans before 28 February 2026?",
+        "Why were farmers and suppliers so exposed to spot-market movements?"
+      ]
+    },
+    {
+      "framing": "This may reflect agricultural policy neglect, not just import dependence.",
+      "status": "missing",
+      "why_it_matters": "Import dependence is a description; policy neglect is a political explanation. The brief stops at dependence without asking which policy choices produced it.",
+      "questions_to_add": [
+        "Did past policy over-focus on rice self-sufficiency at the expense of vegetable system resilience?",
+        "Were extension services, input cooperatives, or storage mechanisms underdeveloped?",
+        "Was fertiliser resilience considered part of food security planning?"
+      ]
+    },
+    {
+      "framing": "High-input farming model vulnerability",
+      "status": "missing",
+      "why_it_matters": "The brief assumes specialised imported NPK dependence as a fixed fact rather than asking whether agronomic practices increased vulnerability.",
+      "questions_to_add": [
+        "Could partial substitution, composting, organic matter recovery, or formula diversification reduce exposure over time?",
+        "Are current fertigation-dependent systems efficient but brittle?",
+        "Which crops are truly non-substitutable versus just accustomed to a preferred formula?"
+      ]
+    },
+    {
+      "framing": "Supply shock plus logistics and market power, not just supply shock",
+      "status": "missing",
+      "why_it_matters": "Retail spikes may also reflect stock hoarding, speculative withholding, freight markups, and uneven pass-through.",
+      "questions_to_add": [
+        "How much of the increase is input cost, how much is distribution, and how much is opportunistic margin expansion?",
+        "Did order suspensions create panic behavior in downstream markets?"
+      ]
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "country": "Indonesia",
+      "status": "missing",
+      "relevance": "Useful contrast because Indonesia combines heavy fertiliser subsidy architecture with active food buffer-stock operations.",
+      "comparison_points": [
+        "Indonesia allocates subsidised fertiliser at national scale through PT Pupuk Indonesia.",
+        "It also uses Bulog rice buffer-stock and SPHP market operations to stabilise staple food prices.",
+        "This shows one model where state intervention is more institutionalised, even if imperfect and fiscally costly."
+      ],
+      "why_this_should_be_included": "It would let readers ask why Malaysia has less visible buffer capacity for both inputs and food-price management."
+    },
+    {
+      "country": "Thailand",
+      "status": "missing",
+      "relevance": "Thailand provides a near-real-time comparator for the same 2026 Middle East shock.",
+      "comparison_points": [
+        "Thai authorities publicly treated fertiliser as a controlled-good issue in March 2026.",
+        "Officials said stock was sufficient for months and required monitoring/reporting from producers and importers.",
+        "Thailand also pushed formula adjustment and encouraged organic fertiliser use as a coping strategy."
+      ],
+      "why_this_should_be_included": "It contrasts Malaysia's tone of pass-through inevitability with a more active state-monitoring and mitigation posture."
+    },
+    {
+      "country": "Vietnam",
+      "status": "missing",
+      "relevance": "Vietnam is a useful contrast because it has stronger domestic fertiliser production in some segments and formal price-stabilisation mechanisms.",
+      "comparison_points": [
+        "Vietnam's 2023 Price Law, effective 1 July 2024, includes fertilisers such as nitrogen, DAP, and NPK in the price-stabilisation framework.",
+        "Vietnam also has domestic urea capacity exceeding domestic demand in some periods, making it less exposed than pure import-dependent systems."
+      ],
+      "why_this_should_be_included": "It demonstrates that ASEAN countries face the same global market but enter the shock with different institutional and industrial capacity."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Price controls can create distortions and delayed shocks",
+      "status": "underdeveloped",
+      "note": "The brief mentions Hari Raya controls only as a delayed pass-through mechanism, but does not grapple with the argument that controls can worsen shortages, reduce transparency, or punish compliant traders."
+    },
+    {
+      "counter_argument": "Market correction may be healthy if it restores proper price signals",
+      "status": "missing",
+      "note": "A fuller analysis would acknowledge the view that temporarily higher prices can force efficiency, substitution, and better allocation, even if they are politically painful."
+    },
+    {
+      "counter_argument": "Farmers can diversify inputs and formulas",
+      "status": "missing",
+      "note": "The brief leans toward technical non-substitutability in Cameron Highlands without testing whether some farmers can shift blends, reduce application intensity, or adopt mixed-input strategies."
+    },
+    {
+      "counter_argument": "Not all vegetable inflation should be blamed on geopolitics",
+      "status": "missing",
+      "note": "Weather, labor costs, freight, trader behavior, and weak domestic planning may explain part of the increase."
+    }
+  ],
+  "missing_gender_dimensions": {
+    "status": "missing",
+    "main_gap": "The analysis has no gendered household-economy lens.",
+    "absent_points": [
+      "Women often manage day-to-day grocery purchasing and substitution decisions.",
+      "Price shocks increase unpaid labor: more outlet comparison, more meal planning, more rationing.",
+      "Women may absorb the shock silently by cutting their own consumption first."
+    ],
+    "recommended_addition": "Add one explicit card connecting food inflation to unpaid care work, household nutrition management, and emotional labor."
+  },
+  "missing_economic_class_dimensions": {
+    "status": "missing",
+    "main_gap": "The brief does not disaggregate impact by household class.",
+    "absent_points": [
+      "B40 households are much more exposed to food-price shocks because essentials take a larger share of spending.",
+      "Official DOSM material shows B40 households devote 71.6% of expenditure to basic necessities overall, versus 64.0% for T20 households.",
+      "A commonly cited Malaysian expert estimate says B40 households spend more than 40% of income on food; if used, that figure should be explicitly sourced and caveated."
+    ],
+    "recommended_addition": "Add a class-impact comparison showing why the same vegetable inflation rate is socially unequal in effect."
+  },
+  "missing_geographic_dimensions": {
+    "status": "missing",
+    "main_gap": "The brief over-relies on Cameron Highlands as the national proxy.",
+    "absent_points": [
+      "East Malaysia faces additional freight and last-mile cost layers, making retail food access a logistics story as much as an input story.",
+      "Highland temperate-vegetable farming differs from lowland and East Malaysian cropping systems.",
+      "Urban consumers can sometimes shop across multiple outlets; rural consumers may have fewer substitution options and higher transport costs."
+    ],
+    "recommended_addition": "Split geographic analysis into at least three zones: Cameron Highlands/highland production, East Malaysia logistics, and urban versus rural consumer access."
+  },
+  "missing_governance_policy_questions": [
+    {
+      "question": "Did Malaysia maintain any strategic fertiliser reserve before the disruption beginning 28 February 2026?",
+      "status": "not asked"
+    },
+    {
+      "question": "What contingency procurement or supplier diversification existed before March 2026?",
+      "status": "not asked"
+    },
+    {
+      "question": "Why is the conversation still centered on rice self-sufficiency when vegetable-system resilience is visibly weaker?",
+      "status": "not asked"
+    },
+    {
+      "question": "What role should FAMA, the Agriculture Ministry, state governments, or cooperatives play in buffering vegetable-market volatility?",
+      "status": "not asked"
+    }
+  ],
+  "missing_facts_or_data_points": [
+    {
+      "fact": "Distributional impact on lower-income households",
+      "status": "missing",
+      "candidate_detail": "DOSM 2022 data: B40 households spend 71.6% on basic necessities overall, versus 64.0% for T20 households.",
+      "confidence": "high"
+    },
+    {
+      "fact": "B40 food-spending burden",
+      "status": "missing",
+      "candidate_detail": "A Malaysian expert cited by The Star said B40 families spend more than 40% of income on food.",
+      "confidence": "medium",
+      "note": "Use only with explicit attribution; do not present as official DOSM figure without verification."
+    },
+    {
+      "fact": "Thailand's active fertiliser monitoring during the 2026 shock",
+      "status": "missing",
+      "candidate_detail": "Thai authorities said in March 2026 that fertiliser was a controlled-good issue, with stocks sufficient for months and monitoring of price gouging.",
+      "confidence": "medium-high"
+    },
+    {
+      "fact": "Vietnam's price-stabilisation law includes fertilisers",
+      "status": "missing",
+      "candidate_detail": "Vietnam's 2023 Price Law, effective 1 July 2024, places key fertilisers inside the price-stabilisation framework.",
+      "confidence": "high"
+    },
+    {
+      "fact": "Indonesia's institutionalised buffer-and-subsidy model",
+      "status": "missing",
+      "candidate_detail": "Indonesia uses large fertiliser subsidy allocation and Bulog stock operations to stabilise food prices.",
+      "confidence": "medium-high"
+    }
+  ],
+  "priority_gaps": [
+    {
+      "priority": 1,
+      "gap": "No class-distribution lens",
+      "reason": "Without B40 versus T20 framing, the analysis understates the social severity of vegetable inflation."
+    },
+    {
+      "priority": 2,
+      "gap": "No regional lens beyond Cameron Highlands",
+      "reason": "This risks a Peninsular highland case study being mistaken for the whole Malaysian food system."
+    },
+    {
+      "priority": 3,
+      "gap": "No governance accountability framing",
+      "reason": "The brief presents vulnerability as fate rather than as a product of policy choices."
+    },
+    {
+      "priority": 4,
+      "gap": "No downstream trader/hawker/food-operator voices",
+      "reason": "This obscures how cost shocks are actually transmitted and who absorbs them."
+    },
+    {
+      "priority": 5,
+      "gap": "No gender lens",
+      "reason": "The household work of coping with food inflation disappears from view."
+    }
+  ],
+  "suggested_rewrite_direction": {
+    "summary": "Keep the Hormuz-fertiliser explanation, but widen the brief from a supply-chain explainer into a distribution-and-governance analysis.",
+    "add_cards_on": [
+      "Who gets hurt first: B40 households and women managing food budgets",
+      "Who absorbs the shock in the middle: wet market traders and hawkers",
+      "Why Malaysia is exposed: policy neglect, not only foreign conflict",
+      "Why Cameron Highlands is not the whole story: East Malaysia and logistics",
+      "How neighbors respond: Indonesia, Thailand, Vietnam"
+    ]
+  },
+  "sources_used_for_gap_validation": [
+    {
+      "source": "Department of Statistics Malaysia, Household Expenditure Survey Report 2022 and 2024",
+      "use": "Validated household expenditure and basic-necessities burden context"
+    },
+    {
+      "source": "DOSM PDF excerpt on household group expenditure shares",
+      "use": "Validated B40 71.6% versus T20 64.0% spending on basic necessities"
+    },
+    {
+      "source": "The Star, 19 August 2022",
+      "use": "Attributed expert claim that B40 households spend more than 40% of income on food"
+    },
+    {
+      "source": "Thailand government and local reporting, March 2026",
+      "use": "Validated Thailand's monitoring, stock-sufficiency, and controlled-goods framing"
+    },
+    {
+      "source": "Vietnam price-stabilisation legal summaries and fertiliser-industry reporting",
+      "use": "Validated that fertilisers are inside Vietnam's stabilisation framework and that domestic urea capacity can exceed demand"
+    },
+    {
+      "source": "Indonesia reporting on Pupuk Indonesia and Bulog",
+      "use": "Validated subsidy and stock-buffer comparison points"
+    }
+  ]
+}
+tokens used
+58,739
+{
+  "issue_id": 1953,
+  "file_analyzed": "/workspaces/thefourthangle/engine/issue-1953-brief.md",
+  "source_date_in_brief": "2026-03-30",
+  "overall_assessment": {
+    "summary": "The brief is tightly framed around a single upstream shock: Hormuz disruption causing fertiliser scarcity, which then raises Cameron Highlands vegetable prices. It is strongest on short-run supply-chain explanation and weakest on distributional impact, regional variation, labor/community voices, and policy alternatives.",
+    "main_problem": "It treats 'Malaysians' as a generic consumer and 'farmers' as a generic producer, which flattens who gets hit first, who absorbs the shock most, and which policy failures predate Hormuz.",
+    "missing_dimensions_count": 7
+  },
+  "existing_focus_in_brief": {
+    "voices_present": [
+      "Farmer associations",
+      "Wholesale market traders",
+      "General national consumer framing"
+    ],
+    "framings_present": [
+      "Hormuz disruption as trigger",
+      "Imported fertiliser dependence",
+      "Festive price controls delaying pass-through",
+      "Food-security vulnerability"
+    ],
+    "facts_present": [
+      "23 fertiliser vessels blocked",
+      "One-third of global fertiliser shipments transit Hormuz",
+      "Input price spikes of 100-150%",
+      "Cameron Highlands dependence on imported NPK",
+      "Estimated 30-50% retail vegetable price increase"
+    ]
+  },
+  "missing_community_perspectives": [
+    {
+      "voice": "B40 households buying vegetables",
+      "status": "missing",
+      "why_it_matters": "The brief explains price transmission but not who suffers most. Lower-income households have less room to substitute or absorb repeated weekly vegetable price spikes.",
+      "what_is_missing": [
+        "Household budgeting reality at wet markets and discount grocers",
+        "Trade-offs between vegetables and cheaper calories",
+        "Whether households reduce dietary quality, meal frequency, or fresh produce intake"
+      ],
+      "recommended_addition": "Add a paragraph or card showing that the same RM5-RM10 weekly increase is marginal for higher-income households but material for B40 households already stretched on essentials."
+    },
+    {
+      "voice": "Wet market traders and small retailers",
+      "status": "missing",
+      "why_it_matters": "The brief jumps from farmers to consumers and skips the middle actors who absorb losses, adjust margins, reduce assortment, and manage perishability risk.",
+      "what_is_missing": [
+        "How traders handle price volatility when stock is perishable",
+        "Whether traders are blamed for increases they did not cause",
+        "How supply shortages change grading, size, and quality sold"
+      ],
+      "recommended_addition": "Include trader testimony on thinner margins, spoilage risk, and customer backlash."
+    },
+    {
+      "voice": "Cameron Highlands Orang Asli workers and nearby indigenous communities",
+      "status": "missing",
+      "why_it_matters": "The brief discusses Cameron Highlands as a production zone but not the labor and indigenous communities around that system. They may be affected both as workers and as low-income food buyers.",
+      "what_is_missing": [
+        "Whether Orang Asli workers face reduced workdays or wages if farms cut application rates or planting cycles",
+        "Whether nearby communities rely on low-cost access to surplus vegetables",
+        "Labor precarity within highland agriculture"
+      ],
+      "recommended_addition": "Add a labor/community lens, not just a farm-owner lens."
+    },
+    {
+      "voice": "East Malaysian farmers",
+      "status": "missing",
+      "why_it_matters": "The brief is effectively Peninsular- and Cameron-centric. Sabah and Sarawak face different crop mixes, logistics, and input chains.",
+      "what_is_missing": [
+        "Different fertiliser use patterns by crop and soil conditions",
+        "Whether East Malaysia is more exposed to freight cost and port delays than to the exact Cameron Highlands NPK story",
+        "How logistics amplify retail prices in Sabah and Sarawak"
+      ],
+      "recommended_addition": "Add a regional comparison card: Cameron Highlands vegetables are not the whole national farm story."
+    },
+    {
+      "voice": "Women as primary food purchasers and household budget managers",
+      "status": "missing",
+      "why_it_matters": "The brief treats food inflation as neutral, but in practice women often do the day-to-day coping work: switching items, shrinking portions, hunting bargains, and managing household stress.",
+      "what_is_missing": [
+        "Gendered unpaid labor of price adaptation",
+        "Nutritional sacrifices made for children or elders",
+        "Extra time cost of comparing prices across outlets"
+      ],
+      "recommended_addition": "Add a gender card showing that food inflation creates hidden labor and emotional burden, not just higher receipts."
+    },
+    {
+      "voice": "Hawkers, canteens, and small food operators",
+      "status": "missing",
+      "why_it_matters": "Vegetable inflation does not stop at grocery baskets. It hits cooked-food operators who face menu-price resistance and shrinking portions.",
+      "what_is_missing": [
+        "Input-cost pressure on noodle stalls, economy rice sellers, and small restaurants",
+        "Whether operators shrink portions instead of raising prices",
+        "How repeated fresh-produce volatility feeds broader cost-of-living anger"
+      ],
+      "recommended_addition": "Include downstream food-service effects, especially for low-cost prepared meals."
+    }
+  ],
+  "missing_alternative_causal_framings": [
+    {
+      "framing": "This is not only a Hormuz story; it is also a domestic resilience failure.",
+      "status": "missing",
+      "why_it_matters": "The brief risks implying an unavoidable external shock, when part of the vulnerability may come from years of limited domestic fertiliser capacity, low strategic stocks, and weak diversification planning.",
+      "questions_to_add": [
+        "What domestic fertiliser manufacturing capacity does Malaysia have and why is it insufficient for this segment?",
+        "Were there strategic stockpiles or contingency procurement plans before 28 February 2026?",
+        "Why were farmers and suppliers so exposed to spot-market movements?"
+      ]
+    },
+    {
+      "framing": "This may reflect agricultural policy neglect, not just import dependence.",
+      "status": "missing",
+      "why_it_matters": "Import dependence is a description; policy neglect is a political explanation. The brief stops at dependence without asking which policy choices produced it.",
+      "questions_to_add": [
+        "Did past policy over-focus on rice self-sufficiency at the expense of vegetable system resilience?",
+        "Were extension services, input cooperatives, or storage mechanisms underdeveloped?",
+        "Was fertiliser resilience considered part of food security planning?"
+      ]
+    },
+    {
+      "framing": "High-input farming model vulnerability",
+      "status": "missing",
+      "why_it_matters": "The brief assumes specialised imported NPK dependence as a fixed fact rather than asking whether agronomic practices increased vulnerability.",
+      "questions_to_add": [
+        "Could partial substitution, composting, organic matter recovery, or formula diversification reduce exposure over time?",
+        "Are current fertigation-dependent systems efficient but brittle?",
+        "Which crops are truly non-substitutable versus just accustomed to a preferred formula?"
+      ]
+    },
+    {
+      "framing": "Supply shock plus logistics and market power, not just supply shock",
+      "status": "missing",
+      "why_it_matters": "Retail spikes may also reflect stock hoarding, speculative withholding, freight markups, and uneven pass-through.",
+      "questions_to_add": [
+        "How much of the increase is input cost, how much is distribution, and how much is opportunistic margin expansion?",
+        "Did order suspensions create panic behavior in downstream markets?"
+      ]
+    }
+  ],
+  "missing_international_comparisons": [
+    {
+      "country": "Indonesia",
+      "status": "missing",
+      "relevance": "Useful contrast because Indonesia combines heavy fertiliser subsidy architecture with active food buffer-stock operations.",
+      "comparison_points": [
+        "Indonesia allocates subsidised fertiliser at national scale through PT Pupuk Indonesia.",
+        "It also uses Bulog rice buffer-stock and SPHP market operations to stabilise staple food prices.",
+        "This shows one model where state intervention is more institutionalised, even if imperfect and fiscally costly."
+      ],
+      "why_this_should_be_included": "It would let readers ask why Malaysia has less visible buffer capacity for both inputs and food-price management."
+    },
+    {
+      "country": "Thailand",
+      "status": "missing",
+      "relevance": "Thailand provides a near-real-time comparator for the same 2026 Middle East shock.",
+      "comparison_points": [
+        "Thai authorities publicly treated fertiliser as a controlled-good issue in March 2026.",
+        "Officials said stock was sufficient for months and required monitoring/reporting from producers and importers.",
+        "Thailand also pushed formula adjustment and encouraged organic fertiliser use as a coping strategy."
+      ],
+      "why_this_should_be_included": "It contrasts Malaysia's tone of pass-through inevitability with a more active state-monitoring and mitigation posture."
+    },
+    {
+      "country": "Vietnam",
+      "status": "missing",
+      "relevance": "Vietnam is a useful contrast because it has stronger domestic fertiliser production in some segments and formal price-stabilisation mechanisms.",
+      "comparison_points": [
+        "Vietnam's 2023 Price Law, effective 1 July 2024, includes fertilisers such as nitrogen, DAP, and NPK in the price-stabilisation framework.",
+        "Vietnam also has domestic urea capacity exceeding domestic demand in some periods, making it less exposed than pure import-dependent systems."
+      ],
+      "why_this_should_be_included": "It demonstrates that ASEAN countries face the same global market but enter the shock with different institutional and industrial capacity."
+    }
+  ],
+  "missing_counter_arguments": [
+    {
+      "counter_argument": "Price controls can create distortions and delayed shocks",
+      "status": "underdeveloped",
+      "note": "The brief mentions Hari Raya controls only as a delayed pass-through mechanism, but does not grapple with the argument that controls can worsen shortages, reduce transparency, or punish compliant traders."
+    },
+    {
+      "counter_argument": "Market correction may be healthy if it restores proper price signals",
+      "status": "missing",
+      "note": "A fuller analysis would acknowledge the view that temporarily higher prices can force efficiency, substitution, and better allocation, even if they are politically painful."
+    },
+    {
+      "counter_argument": "Farmers can diversify inputs and formulas",
+      "status": "missing",
+      "note": "The brief leans toward technical non-substitutability in Cameron Highlands without testing whether some farmers can shift blends, reduce application intensity, or adopt mixed-input strategies."
+    },
+    {
+      "counter_argument": "Not all vegetable inflation should be blamed on geopolitics",
+      "status": "missing",
+      "note": "Weather, labor costs, freight, trader behavior, and weak domestic planning may explain part of the increase."
+    }
+  ],
+  "missing_gender_dimensions": {
+    "status": "missing",
+    "main_gap": "The analysis has no gendered household-economy lens.",
+    "absent_points": [
+      "Women often manage day-to-day grocery purchasing and substitution decisions.",
+      "Price shocks increase unpaid labor: more outlet comparison, more meal planning, more rationing.",
+      "Women may absorb the shock silently by cutting their own consumption first."
+    ],
+    "recommended_addition": "Add one explicit card connecting food inflation to unpaid care work, household nutrition management, and emotional labor."
+  },
+  "missing_economic_class_dimensions": {
+    "status": "missing",
+    "main_gap": "The brief does not disaggregate impact by household class.",
+    "absent_points": [
+      "B40 households are much more exposed to food-price shocks because essentials take a larger share of spending.",
+      "Official DOSM material shows B40 households devote 71.6% of expenditure to basic necessities overall, versus 64.0% for T20 households.",
+      "A commonly cited Malaysian expert estimate says B40 households spend more than 40% of income on food; if used, that figure should be explicitly sourced and caveated."
+    ],
+    "recommended_addition": "Add a class-impact comparison showing why the same vegetable inflation rate is socially unequal in effect."
+  },
+  "missing_geographic_dimensions": {
+    "status": "missing",
+    "main_gap": "The brief over-relies on Cameron Highlands as the national proxy.",
+    "absent_points": [
+      "East Malaysia faces additional freight and last-mile cost layers, making retail food access a logistics story as much as an input story.",
+      "Highland temperate-vegetable farming differs from lowland and East Malaysian cropping systems.",
+      "Urban consumers can sometimes shop across multiple outlets; rural consumers may have fewer substitution options and higher transport costs."
+    ],
+    "recommended_addition": "Split geographic analysis into at least three zones: Cameron Highlands/highland production, East Malaysia logistics, and urban versus rural consumer access."
+  },
+  "missing_governance_policy_questions": [
+    {
+      "question": "Did Malaysia maintain any strategic fertiliser reserve before the disruption beginning 28 February 2026?",
+      "status": "not asked"
+    },
+    {
+      "question": "What contingency procurement or supplier diversification existed before March 2026?",
+      "status": "not asked"
+    },
+    {
+      "question": "Why is the conversation still centered on rice self-sufficiency when vegetable-system resilience is visibly weaker?",
+      "status": "not asked"
+    },
+    {
+      "question": "What role should FAMA, the Agriculture Ministry, state governments, or cooperatives play in buffering vegetable-market volatility?",
+      "status": "not asked"
+    }
+  ],
+  "missing_facts_or_data_points": [
+    {
+      "fact": "Distributional impact on lower-income households",
+      "status": "missing",
+      "candidate_detail": "DOSM 2022 data: B40 households spend 71.6% on basic necessities overall, versus 64.0% for T20 households.",
+      "confidence": "high"
+    },
+    {
+      "fact": "B40 food-spending burden",
+      "status": "missing",
+      "candidate_detail": "A Malaysian expert cited by The Star said B40 families spend more than 40% of income on food.",
+      "confidence": "medium",
+      "note": "Use only with explicit attribution; do not present as official DOSM figure without verification."
+    },
+    {
+      "fact": "Thailand's active fertiliser monitoring during the 2026 shock",
+      "status": "missing",
+      "candidate_detail": "Thai authorities said in March 2026 that fertiliser was a controlled-good issue, with stocks sufficient for months and monitoring of price gouging.",
+      "confidence": "medium-high"
+    },
+    {
+      "fact": "Vietnam's price-stabilisation law includes fertilisers",
+      "status": "missing",
+      "candidate_detail": "Vietnam's 2023 Price Law, effective 1 July 2024, places key fertilisers inside the price-stabilisation framework.",
+      "confidence": "high"
+    },
+    {
+      "fact": "Indonesia's institutionalised buffer-and-subsidy model",
+      "status": "missing",
+      "candidate_detail": "Indonesia uses large fertiliser subsidy allocation and Bulog stock operations to stabilise food prices.",
+      "confidence": "medium-high"
+    }
+  ],
+  "priority_gaps": [
+    {
+      "priority": 1,
+      "gap": "No class-distribution lens",
+      "reason": "Without B40 versus T20 framing, the analysis understates the social severity of vegetable inflation."
+    },
+    {
+      "priority": 2,
+      "gap": "No regional lens beyond Cameron Highlands",
+      "reason": "This risks a Peninsular highland case study being mistaken for the whole Malaysian food system."
+    },
+    {
+      "priority": 3,
+      "gap": "No governance accountability framing",
+      "reason": "The brief presents vulnerability as fate rather than as a product of policy choices."
+    },
+    {
+      "priority": 4,
+      "gap": "No downstream trader/hawker/food-operator voices",
+      "reason": "This obscures how cost shocks are actually transmitted and who absorbs them."
+    },
+    {
+      "priority": 5,
+      "gap": "No gender lens",
+      "reason": "The household work of coping with food inflation disappears from view."
+    }
+  ],
+  "suggested_rewrite_direction": {
+    "summary": "Keep the Hormuz-fertiliser explanation, but widen the brief from a supply-chain explainer into a distribution-and-governance analysis.",
+    "add_cards_on": [
+      "Who gets hurt first: B40 households and women managing food budgets",
+      "Who absorbs the shock in the middle: wet market traders and hawkers",
+      "Why Malaysia is exposed: policy neglect, not only foreign conflict",
+      "Why Cameron Highlands is not the whole story: East Malaysia and logistics",
+      "How neighbors respond: Indonesia, Thailand, Vietnam"
+    ]
+  },
+  "sources_used_for_gap_validation": [
+    {
+      "source": "Department of Statistics Malaysia, Household Expenditure Survey Report 2022 and 2024",
+      "use": "Validated household expenditure and basic-necessities burden context"
+    },
+    {
+      "source": "DOSM PDF excerpt on household group expenditure shares",
+      "use": "Validated B40 71.6% versus T20 64.0% spending on basic necessities"
+    },
+    {
+      "source": "The Star, 19 August 2022",
+      "use": "Attributed expert claim that B40 households spend more than 40% of income on food"
+    },
+    {
+      "source": "Thailand government and local reporting, March 2026",
+      "use": "Validated Thailand's monitoring, stock-sufficiency, and controlled-goods framing"
+    },
+    {
+      "source": "Vietnam price-stabilisation legal summaries and fertiliser-industry reporting",
+      "use": "Validated that fertilisers are inside Vietnam's stabilisation framework and that domestic urea capacity can exceed demand"
+    },
+    {
+      "source": "Indonesia reporting on Pupuk Indonesia and Bulog",
+      "use": "Validated subsidy and stock-buffer comparison points"
+    }
+  ]
+}
