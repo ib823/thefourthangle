@@ -596,7 +596,7 @@
     cachedCardWidth = 0; // Reset width cache for this drag session
 
     // Determine if this touch can trigger vertical dismiss (only from header zones)
-    canDismissFromHere = !!(target.closest('.card-top, .headline-area, .progress-track, .header'));
+    canDismissFromHere = !!((e.target as HTMLElement)?.closest('.card-top, .headline-area, .progress-track, .header'));
 
     tracker.reset();
     tracker.push(e.clientX, e.clientY);
