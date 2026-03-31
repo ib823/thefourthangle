@@ -588,7 +588,7 @@
     cachedCardWidth = 0; // Reset width cache for this drag session
 
     // Determine if this touch can trigger vertical dismiss (only from header zones)
-    canDismissFromHere = !!(target.closest('.card-top, .headline-area, .progress-track, .header, .dots'));
+    canDismissFromHere = !!(target.closest('.card-top, .headline-area, .progress-track, .header'));
 
     tracker.reset();
     tracker.push(e.clientX, e.clientY);
@@ -1108,16 +1108,8 @@
     {/if}
   </div>
 
-  <!-- Progress dots — 6px circles, opacity-only, not tappable -->
-  <div class="dots" bind:this={dotsContainerEl}>
-    {#each issue.cards as _, i}
-      <div
-        class="dot"
-        class:dot--active={i === current && !completed}
-        class:dot--read={readCards.has(i) && i !== current}
-      ></div>
-    {/each}
-  </div>
+  <!-- Bottom safe area spacing (dots removed — 2/6 counter + card type pill + ghost cards are sufficient) -->
+  <div style="height:calc(12px + env(safe-area-inset-bottom, 0));flex-shrink:0;"></div>
 </div>
 
 {#if shareOpen}
@@ -1448,32 +1440,6 @@
     50% { transform: translateX(12px); }
   }
 
-  .dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 20px calc(16px + env(safe-area-inset-bottom, 0));
-    flex-shrink: 0;
-    pointer-events: none;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-faint);
-    opacity: 0.25;
-    transition: opacity 200ms ease-out;
-  }
-
-  .dot--active {
-    opacity: 0.9;
-  }
-
-  .dot--read {
-    opacity: 0.5;
-  }
 
   /* Completion card */
   .completion-card {
