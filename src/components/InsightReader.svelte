@@ -161,7 +161,7 @@
   }
 
   /**
-   * Auto-fit: reduce font size if card content overflows its container.
+   * Auto-fit: reduce font size + line-height + gap if card content overflows.
    * Runs after card transition. No scroll needed — text always fits.
    */
   function autoFitCardText() {
@@ -172,21 +172,43 @@
 
     // Reset to base sizes
     const baseBig = card?.sub ? 24 : 22;
+    const baseBigLH = 1.45;
+    const baseSubLH = 1.65;
+    const baseGap = 14;
     bigEl.style.fontSize = baseBig + 'px';
-    if (subEl) subEl.style.fontSize = '17px';
+    bigEl.style.lineHeight = String(baseBigLH);
+    if (subEl) { subEl.style.fontSize = '17px'; subEl.style.lineHeight = String(baseSubLH); }
+    cardContentEl.style.gap = baseGap + 'px';
 
-    // Shrink until it fits (min 14px for big, 13px for sub)
+    // Already fits — done
+    if (cardContentEl.scrollHeight <= cardContentEl.clientHeight + 2) return;
+
+    // Shrink until it fits (min 14px big / 12px sub, tighter line-height)
     let currentBig = baseBig;
     let currentSub = 17;
+    let currentBigLH = baseBigLH;
+    let currentSubLH = baseSubLH;
+    let currentGap = baseGap;
     const MIN_BIG = 14;
-    const MIN_SUB = 13;
+    const MIN_SUB = 12;
+    const MIN_BIG_LH = 1.25;
+    const MIN_SUB_LH = 1.4;
+    const MIN_GAP = 6;
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 16; i++) {
       if (cardContentEl.scrollHeight <= cardContentEl.clientHeight + 2) break;
-      currentBig = Math.max(MIN_BIG, currentBig - 1.5);
-      currentSub = Math.max(MIN_SUB, currentSub - 1);
+      currentBig = Math.max(MIN_BIG, currentBig - 1);
+      currentSub = Math.max(MIN_SUB, currentSub - 0.8);
+      currentBigLH = Math.max(MIN_BIG_LH, currentBigLH - 0.025);
+      currentSubLH = Math.max(MIN_SUB_LH, currentSubLH - 0.03);
+      currentGap = Math.max(MIN_GAP, currentGap - 1);
       bigEl.style.fontSize = currentBig + 'px';
-      if (subEl) subEl.style.fontSize = currentSub + 'px';
+      bigEl.style.lineHeight = String(currentBigLH);
+      cardContentEl.style.gap = currentGap + 'px';
+      if (subEl) {
+        subEl.style.fontSize = currentSub + 'px';
+        subEl.style.lineHeight = String(currentSubLH);
+      }
     }
   }
 
@@ -256,35 +278,15 @@
   }
 
   function cacheDotElements() {
-    if (dotsContainerEl) {
-      cachedDots = Array.from(dotsContainerEl.querySelectorAll('.dot')) as HTMLElement[];
-    }
+    // Dots are now non-interactive — no caching needed for animation
   }
 
-  function interpolateDots(dx: number) {
-    if (cachedDots.length === 0 || completed) return;
-    const width = getCardWidth();
-    const progressFrac = Math.min(Math.abs(dx) / (width * 0.3), 1);
-
-    const nextIndex = dx < 0 ? current + 1 : current - 1;
-    if (nextIndex < 0 || nextIndex >= totalCards) return;
-
-    for (let i = 0; i < cachedDots.length; i++) {
-      const el = cachedDots[i];
-      if (i === current) {
-        const w = 20 - progressFrac * 14;
-        el.style.width = `${w}px`;
-      } else if (i === nextIndex) {
-        const w = 6 + progressFrac * 14;
-        el.style.width = `${w}px`;
-      }
-    }
+  function interpolateDots(_dx: number) {
+    // Dots use opacity only — no width interpolation during drag
   }
 
   function resetDotStyles() {
-    for (const dot of cachedDots) {
-      dot.style.width = '';
-    }
+    // No inline styles to reset — dots use CSS classes only
   }
 
   function resetGhostStyles() {
@@ -1106,27 +1108,14 @@
     {/if}
   </div>
 
-  <!-- Dot navigation -->
+  <!-- Progress dots — 6px circles, opacity-only, not tappable -->
   <div class="dots" bind:this={dotsContainerEl}>
     {#each issue.cards as _, i}
-      <button
+      <div
         class="dot"
-        class:active={i === current && !completed}
-        class:read={readCards.has(i) && i !== current}
-        style="
-          {i === current && !completed
-            ? `width:20px;background:${CARD_TYPES[issue.cards[i].t]?.color ?? 'var(--text-faint)'};`
-            : readCards.has(i)
-              ? `background:${CARD_TYPES[issue.cards[i].t]?.color ?? 'var(--text-faint)'};opacity:0.44;`
-              : 'background:var(--border-subtle);'}
-        "
-        onclick={() => {
-          if (completed) completed = false;
-          const dir = i > current ? 'right' : 'left';
-          goTo(i, dir);
-        }}
-        aria-label="Go to card {i + 1}"
-      ></button>
+        class:dot--active={i === current && !completed}
+        class:dot--read={readCards.has(i) && i !== current}
+      ></div>
     {/each}
   </div>
 </div>
@@ -1463,27 +1452,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     padding: 12px 20px calc(16px + env(safe-area-inset-bottom, 0));
     flex-shrink: 0;
+    pointer-events: none;
   }
 
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    border: none;
-    padding: 20px 6px;
-    min-height: 44px;
-    min-width: 20px;
-    cursor: pointer;
-    background-clip: content-box;
-    transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+    background: var(--text-faint);
+    opacity: 0.25;
+    transition: opacity 200ms ease-out;
   }
 
-  .dot.active {
-    height: 8px;
-    border-radius: 100px;
+  .dot--active {
+    opacity: 0.9;
+  }
+
+  .dot--read {
+    opacity: 0.5;
   }
 
   /* Completion card */
