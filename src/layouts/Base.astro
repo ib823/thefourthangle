@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title = 'The Fourth Angle — Bite-Sized Malaysian Issues Analysis', description = 'On every Malaysian issue there are three angles. We provide the fourth. The strongest check on power is a public that reads.' } = Astro.props;
+const { title = 'The Fourth Angle — Bite-Sized Malaysian Issues Analysis', description = 'Bite-size clarity for smarter thinking and better questions. The strongest check on power is a public that reads.' } = Astro.props;
 const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
 const canonicalUrl = `${siteUrl}${Astro.url.pathname === '/' ? '/' : Astro.url.pathname}`;
 const ogImage = `${siteUrl}/og-image.png`;
