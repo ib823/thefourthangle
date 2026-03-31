@@ -1,0 +1,71 @@
+STAGE 3: FACT VERIFICATION — klang-dui-amirul-hafiz
+
+You are an independent fact-checker. Verify EVERY factual claim in the Stage 1 analysis below. Use web search for each claim. Apply Dempster-Shafer belief mass scoring.
+
+For each claim, provide:
+- claim: exact text
+- status: VERIFIED | UNVERIFIED | INCORRECT | MISLEADING
+- m_true: 0.0-1.0 (belief mass for true)
+- m_false: 0.0-1.0 (belief mass for false)
+- m_unknown: 0.0-1.0 (belief mass for unknown)
+- source: primary source with URL
+- correction: if needed
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true ≥ 0.8
+- 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify: m_unknown ≥ 0.7
+- Contradicted by primary source: m_false ≥ 0.7
+- Technically true but misleading: m_true 0.3-0.5 with note
+
+CLAIMS TO VERIFY:
+
+1. "On 29 March 2026 at 11:40am in Klang, a 20-year-old driving a Honda City — positive for both alcohol and drugs — crossed into oncoming traffic and struck motorcyclist Amirul Hafiz Omar head-on."
+
+2. "He was 34, worked two jobs to support three children, and had left home to buy a maths book for his child."
+
+3. "Within 24 hours, at least four MPs called for capital punishment."
+
+4. "The Home Affairs Minister told Parliament in November 2024 that just 149 drunk driving cases had been charged in court since January 2021."
+
+5. "Transport Minister Anthony Loke reported 1,261 convictions for driving under the influence in 2025 alone."
+
+6. "Police statistics show alcohol-impaired driving caused 0.2% of fatal crashes in 2023-2024 — roughly 12-13 deaths per year out of 6,400+."
+
+7. "Unlike Australia, where mandatory post-crash blood testing of all fatal crash drivers reveals alcohol involvement in 25-30% of cases, Malaysia tests only when officers suspect intoxication or the driver refuses a breathalyser."
+
+8. "10-15 years for fatal DUI since the 2020 amendment, BAC limit lowered from 80mg to 50mg per 100ml."
+
+9. "Motorcyclists account for 59% of Malaysia's 6,000+ annual road deaths — rising to 66.4% in 2025 data."
+
+10. "Only 3% of road infrastructure has a 3-star or better safety rating for motorcycles."
+
+11. "The Gig Workers Bill 2025 mandates SOCSO registration by platform operators."
+
+12. "Over 1.2 million gig workers ride Malaysia's roads daily."
+
+13. "Religious Affairs Minister Zulkifli Hasan proposed diyat as a mechanism for victim families."
+
+14. "Malaysia abolished mandatory death penalty in 2023."
+
+15. "Road crashes cost ~RM25.6 billion annually (~4% of GDP)."
+
+OUTPUT FORMAT (JSON):
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0-1.0,
+  "claims": [
+    {
+      "claim": "exact text",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0-1.0,
+      "m_false": 0.0-1.0,
+      "m_unknown": 0.0-1.0,
+      "source": "primary source",
+      "correction": "if needed"
+    }
+  ],
+  "omitted_facts": [],
+  "source_assessment": "paragraph",
+  "overall_assessment": "paragraph"
+}

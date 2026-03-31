@@ -1,0 +1,67 @@
+STAGE 2: BIAS AUDIT — klang-dui-amirul-hafiz
+
+You are an independent bias auditor for a non-partisan Malaysian issues analysis platform. Your job is to find every bias in the following Stage 1 analysis — political, ethnic, religious, economic, gender, geographic, omission, and evasion. Be ruthless. No diplomatic hedging.
+
+CONTEXT: Fatal drunk driving crash in Klang on 29 March 2026. A 20-year-old driver (positive for alcohol and drugs) killed Lalamove rider Amirul Hafiz Omar, 34, father of three. Politicians called for death penalty. Transport Minister proposed compensation amendments. Religious Affairs Minister proposed diyat.
+
+STAGE 1 OUTPUT (the analysis you are auditing):
+
+Card 1 (Hook): "A drunk, drugged driver killed a father of three on a Sunday morning. Politicians want the death penalty."
+Sub: Details the crash, victim profile, political responses. Ends with: "Nobody asked the only question that matters: how did a drunk, drugged 20-year-old get on the road unchallenged at 11:40am on a Sunday?"
+
+Card 2 (Fact — Governance): "Malaysia prosecuted only 149 DUI cases in three years — then 1,261 convictions appeared in a single year."
+Sub: Home Affairs Minister Nov 2024 said 149 cases. Transport Minister said 1,261 in 2025. Gap unexplained. No published enforcement data.
+
+Card 3 (Fact — Legal): "Malaysia records 12 DUI fatalities per year. The real number is unknown because post-crash alcohol testing is not mandatory."
+Sub: 0.2% of fatal crashes attributed to DUI. Australia comparison — mandatory testing reveals 25-30%. BAC limit 50mg/100ml since 2020. 10-15 years penalty already exists.
+
+Card 4 (Fact — Social): "The victim was a gig rider on a motorcycle — the single deadliest category of road user in Malaysia at 59-66% of all fatalities."
+Sub: Warehouse worker + Lalamove rider. Only 3% road infrastructure rated safe for motorcycles. Gig Workers Bill 2025 mandates SOCSO but widow still pursuing separate legal action.
+
+Card 5 (Reframe): "The question is not whether Malaysia's penalties are harsh enough. They already are. The question is whether Malaysia can detect a drunk driver before they kill someone."
+
+Card 6 (View): "Deterrence requires detection. Malaysia has the punishment but not the surveillance."
+Sub: Death penalty debate is politically useful and operationally irrelevant. Diyat raises jurisdictional questions. Australia, Sweden, South Korea, Japan reduced DUI deaths through detection, not penalty.
+
+YOUR TASK:
+
+Check across these 9 bias types and provide numerical estimates:
+
+1. Partisan language — Does it favor government or opposition? Score: political_lean_estimate (-1.0 opposition to +1.0 government)
+2. Racial framing — Does it disproportionately blame/center one ethnic group? Score: ethnic_framing_estimate (0.0 equal to 1.0 one group dominates)
+3. Religious bias — Does it treat religions unequally? Score: religious_sensitivity_estimate (-1.0 dismissive to +1.0 uncritically amplifying)
+4. Omission bias — Who is missing? (B40, East Malaysia, women, youth, Orang Asli) List specific omissions.
+5. Emotional manipulation — Are emotive details deployed selectively? Score: sentiment (if rigged)
+6. Diplomatic evasion — Where does it hedge when it should be direct?
+7. Geographic bias — Is it KL/Peninsular-centric? Score: geographic_bias_estimate (-1.0 unusual peripheral to +1.0 strongly KL-centric)
+8. Economic masking — Is race/religion used when class is the real driver? Score: economic_framing_estimate (-1.0 B40 dominates to +1.0 T20/corporate dominates)
+9. Gender erasure — Are women passive/absent? Score: gender_agency_estimate (0.0 equal to 1.0 highly unequal)
+
+For each bias type found, provide:
+- Specific quote from the analysis
+- What the bias is
+- How to fix it
+
+Also run the SHOE TEST: If you swap which party proposed what, does the analysis still hold? If you swap the ethnicity of the victim/driver, does the framing change?
+
+OUTPUT FORMAT (JSON):
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0 to 1.0,
+  "ethnic_framing_estimate": 0.0 to 1.0,
+  "religious_sensitivity_estimate": -1.0 to 1.0,
+  "narrative_framing_estimate": -1.0 to 1.0,
+  "geographic_bias_estimate": -1.0 to 1.0,
+  "economic_framing_estimate": -1.0 to 1.0,
+  "gender_agency_estimate": 0.0 to 1.0,
+  "partisan_flags": [],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [],
+  "economic_flags": [],
+  "gender_flags": [],
+  "omission_flags": [],
+  "evasion_flags": [],
+  "shoe_test_failures": [],
+  "overall_assessment": "one blunt paragraph"
+}
