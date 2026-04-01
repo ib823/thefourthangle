@@ -17,11 +17,6 @@ export interface IssueSummary {
   finalScore?: number;
   hasImage?: boolean;
   sourceDate?: string;
-  threadId?: string | null;
-  threadName?: string | null;
-  threadPosition?: number | null;
-  threadTotal?: number | null;
-  threadNextId?: string | null;
   cards: Array<{ t: string; lens?: string }>;
 }
 

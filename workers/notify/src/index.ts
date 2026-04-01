@@ -287,10 +287,10 @@ async function sendPush(sub: Subscription, payload: string, env: Env, urgency: s
 
 // ── Notification payloads ──
 
-function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number }, platform: Subscription['platform'] = 'unknown'): string {
+function newIssuePayload(issue: { id: string; headline: string; opinionShift: number; finalScore: number; context: string }, platform: Subscription['platform'] = 'unknown'): string {
   const base: Record<string, unknown> = {
     title: issue.headline,
-    body: `What the headline leaves out. ${issue.opinionShift}% goes unreported.`,
+    body: issue.context,
     icon: '/icons/icon-192.png',
     tag: `issue-${issue.id}`,
     data: { url: `/issue/${issue.id}?from=notification`, type: 'new-issue' },
@@ -317,20 +317,22 @@ function newIssuePayload(issue: { id: string; headline: string; opinionShift: nu
   return JSON.stringify(base);
 }
 
-function digestPayload(count: number): string {
+function digestPayload(topHeadline: string, remaining: number): string {
+  const body = remaining > 0 ? `${topHeadline} + ${remaining} more` : topHeadline;
   return JSON.stringify({
-    title: `Weekly Digest — ${count} New Issue${count > 1 ? 's' : ''}`,
-    body: `This week: ${count} new issue${count > 1 ? 's' : ''} analysed.`,
+    title: 'This Week on The Fourth Angle',
+    body,
     icon: '/icons/icon-192.png',
     tag: 'weekly-digest',
     data: { url: '/?from=digest', type: 'digest' },
   });
 }
 
-function reEngagementPayload(count: number): string {
+function reEngagementPayload(topHeadline: string, remaining: number): string {
+  const body = remaining > 0 ? `${topHeadline} + ${remaining} more since your last visit` : topHeadline;
   return JSON.stringify({
-    title: 'New Analyses Published',
-    body: `${count} new analyse${count > 1 ? 's' : ''} published since your last visit.`,
+    title: 'You Missed This',
+    body,
     icon: '/icons/icon-192.png',
     tag: 're-engagement',
     data: { url: '/?from=re-engage', type: 're-engagement' },
@@ -488,11 +490,12 @@ async function sendWeeklyDigest(env: Env): Promise<void> {
   const feed = (Array.isArray(data) ? data : data?.issues || []) as IssueFeed;
   if (!Array.isArray(feed) || feed.length === 0) return;
 
-  // Count issues published this week (approximation: use last 7 issues)
+  // Recent issues this week (approximation: use last 7 issues)
   const recentIssues = feed.slice(0, 7);
   if (recentIssues.length === 0) return;
 
-  const payload = digestPayload(recentIssues.length);
+  const topIssue = recentIssues.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
+  const payload = digestPayload(topIssue.headline, recentIssues.length - 1);
 
   for (const { key, sub } of subs) {
     await sendPush(sub, payload, env, 'low', 'weekly-digest');
@@ -508,6 +511,9 @@ async function checkReEngagement(env: Env): Promise<void> {
   if (!resp.ok) return;
   const data = await resp.json();
   const feed = (Array.isArray(data) ? data : data?.issues || []) as IssueFeed;
+  if (!Array.isArray(feed) || feed.length === 0) return;
+
+  const topIssue = feed.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
 
   for (const { key, sub } of subs) {
     if (now - sub.lastSeen > fourteenDays) {
@@ -515,7 +521,7 @@ async function checkReEngagement(env: Env): Promise<void> {
       const lastReEngage = parseInt(await env.SUBS.get(`reengaged:${key}`) || '0', 10);
       if (now - lastReEngage < 30 * 24 * 60 * 60 * 1000) continue; // Max once per 30 days
 
-      const payload = reEngagementPayload(feed.length);
+      const payload = reEngagementPayload(topIssue.headline, feed.length - 1);
       await sendPush(sub, payload, env, 'low', 're-engagement');
       await env.SUBS.put(`reengaged:${key}`, String(now));
     }

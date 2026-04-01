@@ -28,13 +28,8 @@
     nextHeadline?: string;
     connections?: Connection[];
     onNavigateToIssue?: (issueId: string) => void;
-    threadNextId?: string | null;
-    threadNextHeadline?: string;
-    threadName?: string;
-    threadPosition?: number | null;
-    threadTotal?: number | null;
   }
-  let { issue, onNext, nextHeadline, connections = [], onNavigateToIssue, threadNextId = null, threadNextHeadline = '', threadName = '', threadPosition = null, threadTotal = null }: Props = $props();
+  let { issue, onNext, nextHeadline, connections = [], onNavigateToIssue }: Props = $props();
 
   // Reactions handled by SaveButton component
   let scrollEl: HTMLDivElement | undefined = $state(undefined);
@@ -193,9 +188,6 @@
     <!-- Reader header -->
     <div style="display:flex;align-items:flex-start;gap:16px;">
       <div style="flex:1;">
-        {#if threadName && threadPosition !== null && threadTotal}
-          <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:6px;">Part {threadPosition + 1} of {threadTotal} · {threadName}</div>
-        {/if}
         <h1 style="font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1.15;margin:0;">{issue.headline}</h1>
       </div>
       <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
@@ -260,19 +252,6 @@
     <!-- Completion -->
     <div style="margin-top:16px;">
       <div style="height:1px;background:var(--status-green);margin-bottom:24px;border-radius:1px;width:50%;margin:0 auto 24px;"></div>
-
-      <!-- Thread navigation -->
-      {#if threadNextId && threadNextHeadline}
-        <button
-          onclick={() => onNavigateToIssue?.(threadNextId)}
-          style="width:100%;text-align:left;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:12px;cursor:pointer;transition:border-color 0.15s ease;margin-bottom:16px;"
-          onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
-          onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
-        >
-          <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">Next in thread{threadTotal ? ` · ${(threadPosition ?? 0) + 2} of ${threadTotal}` : ''}</div>
-          <div style="font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.35;margin-top:4px;">{threadNextHeadline}</div>
-        </button>
-      {/if}
 
       <!-- Connected issues -->
       {#if connections.length >= 2}

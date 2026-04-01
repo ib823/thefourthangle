@@ -175,31 +175,6 @@
     return unread.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
   });
 
-  // Thread props for active issue
-  let activeThreadNextId = $derived.by(() => {
-    if (!activeIssue) return null;
-    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
-    return (feed as any)?.threadNextId ?? null;
-  });
-  let activeThreadNextHeadline = $derived.by(() => {
-    if (!activeThreadNextId) return '';
-    return sortedIssues.find(i => i.id === activeThreadNextId)?.headline ?? '';
-  });
-  let activeThreadName = $derived.by(() => {
-    if (!activeIssue) return '';
-    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
-    return (feed as any)?.threadName ?? '';
-  });
-  let activeThreadPosition = $derived.by(() => {
-    if (!activeIssue) return null;
-    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
-    return (feed as any)?.threadPosition ?? null;
-  });
-  let activeThreadTotal = $derived.by(() => {
-    if (!activeIssue) return null;
-    const feed = sortedIssues.find(i => i.id === activeIssue!.id);
-    return (feed as any)?.threadTotal ?? null;
-  });
 
   function checkViewport() {
     const w = window.innerWidth;
@@ -315,6 +290,55 @@
     };
   });
 
+  // --- Keep browser tab & meta tags in sync with active issue ---
+  const defaultTitle = 'The Fourth Angle — Bite-Sized Malaysian Issues Analysis';
+  const defaultDesc = 'Bite-size clarity for smarter thinking and better questions. The strongest check on power is a public that reads.';
+  const siteUrl = 'https://thefourthangle.pages.dev';
+
+  function setMeta(attr: string, value: string, content: string) {
+    const el = document.querySelector(`meta[${attr}="${value}"]`);
+    if (el) el.setAttribute('content', content);
+  }
+  function setCanonical(href: string) {
+    const el = document.querySelector('link[rel="canonical"]');
+    if (el) el.setAttribute('href', href);
+  }
+
+  $effect(() => {
+    if (activeFullIssue) {
+      const i = activeFullIssue;
+      const title = `${i.headline} — The Fourth Angle`;
+      const desc = i.context;
+      const url = `${siteUrl}/issue/${i.id}`;
+      const image = `${siteUrl}/og/issue-${i.id}.png`;
+      document.title = title;
+      setMeta('name', 'description', desc);
+      setMeta('property', 'og:title', title);
+      setMeta('property', 'og:description', desc);
+      setMeta('property', 'og:url', url);
+      setMeta('property', 'og:image', image);
+      setMeta('property', 'og:image:alt', `${i.headline} — Independent Malaysian issues analysis`);
+      setMeta('name', 'twitter:title', title);
+      setMeta('name', 'twitter:description', desc);
+      setMeta('name', 'twitter:image', image);
+      setMeta('name', 'twitter:image:alt', `${i.headline} — Independent Malaysian issues analysis`);
+      setCanonical(url);
+    } else {
+      document.title = defaultTitle;
+      setMeta('name', 'description', defaultDesc);
+      setMeta('property', 'og:title', defaultTitle);
+      setMeta('property', 'og:description', defaultDesc);
+      setMeta('property', 'og:url', siteUrl);
+      setMeta('property', 'og:image', `${siteUrl}/og-image.png`);
+      setMeta('property', 'og:image:alt', `${defaultTitle} — Independent Malaysian issues analysis`);
+      setMeta('name', 'twitter:title', defaultTitle);
+      setMeta('name', 'twitter:description', defaultDesc);
+      setMeta('name', 'twitter:image', `${siteUrl}/og-image.png`);
+      setMeta('name', 'twitter:image:alt', `${defaultTitle} — Independent Malaysian issues analysis`);
+      setCanonical(siteUrl);
+    }
+  });
+
   // --- History state for reader back-button support ---
   let readerHistoryPushed = false;
 
@@ -409,7 +433,6 @@
     activeFullIssue = null;
     if (readerHistoryPushed) {
       readerHistoryPushed = false;
-      // Replace current URL back to home without triggering popstate
       history.replaceState(null, '', '/');
     }
   }
@@ -521,7 +544,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} threadNextId={activeThreadNextId} threadNextHeadline={activeThreadNextHeadline} threadName={activeThreadName} threadPosition={activeThreadPosition} threadTotal={activeThreadTotal} nextIssueHeadline={nextHeadline} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else if viewMode === 'tablet'}
@@ -578,7 +601,7 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} threadNextId={activeThreadNextId} threadNextHeadline={activeThreadNextHeadline} threadName={activeThreadName} threadPosition={activeThreadPosition} threadTotal={activeThreadTotal} nextIssueHeadline={nextHeadline} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else}
@@ -630,11 +653,6 @@
           {nextHeadline}
           connections={resolvedConnections}
           onNavigateToIssue={navigateToIssue}
-          threadNextId={activeThreadNextId}
-          threadNextHeadline={activeThreadNextHeadline}
-          threadName={activeThreadName}
-          threadPosition={activeThreadPosition}
-          threadTotal={activeThreadTotal}
         />
       {:else}
         <DesktopEmptyState issueCount={issues.length} topIssue={topUnreadIssue} onOpenIssue={openIssue} />
