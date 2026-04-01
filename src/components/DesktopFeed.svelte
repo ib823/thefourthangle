@@ -78,8 +78,9 @@
     });
   });
 
-  // Apply topic grouping
+  // Apply topic grouping (skip when searching — display flat results)
   let displayIssues = $derived.by(() => {
+    if (isSearching) return filteredByState;
     if (sortMode === 'editorial') return filteredByState;
     const grouped = new Map<string, IssueSummary[]>();
     for (const issue of filteredByState) {
