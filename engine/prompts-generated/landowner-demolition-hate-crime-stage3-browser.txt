@@ -1,0 +1,111 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "A landowner demolished a Hindu temple on his own property. Police investigated him for a religious hate crime. Both sides cite the law.",
+      "sub": "On 25 February 2026, Yayasan Kubra sent a backhoe to the Sri Uchimalai Muniswaran Temple in Rawang at midnight and razed it. The temple had stood since 1995. The landowner bought the land in 2021. Police opened investigations under four Penal Code sections, including Section 295 — injuring a place of worship. The landowner invoked the National Land Code, which states squatters acquire no rights regardless of occupation duration. A crowdfunding group called Tanah Malaya raised RM131,000 in a single month to fund the demolition, framing it as property rights enforcement. The magistrates' court barred further demolition on 13 March. The High Court overturned that order on 31 March, without providing grounds. The same act — demolishing a structure on your own land — is simultaneously lawful under property law and potentially criminal under religious protection law. Malaysia has no mechanism to resolve this contradiction."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Malaysian law simultaneously protects a landowner's absolute right to clear their property and criminalises the destruction of any place of worship.",
+      "s": "The National Land Code 1965, Section 48, is unambiguous: no title to land is acquired by possession or unlawful occupation for any period whatsoever. The Federal Court confirmed in Sidek v Government of Perak (1982) that squatters have no rights in law or equity. A landowner may evict and demolish at any time, regardless of how long the occupant has been there. But Penal Code Section 295 makes it an offence — up to two years imprisonment — to destroy or damage any place of worship with intent to insult, or knowledge that a religious community would likely consider it an insult. Section 298A escalates to two-to-five years for causing religious disharmony. No Malaysian court has ruled definitively on which framework prevails when a place of worship is also an unauthorized structure on private land. The Rawang case — where police investigated the landowner under Section 295 while the High Court upheld his property rights — exposes this legal vacuum.",
+      "d": "Sources: National Land Code 1965 Sections 48, 341; Federal Court Sidek Bin Haji Muhamad v Government of Perak [1982]; Penal Code Sections 295, 298A; FMT (court rulings 13 and 31 March 2026); Mahwengkwai & Partners (squatter eviction legal analysis). The Street, Drainage and Building Act 1974, Section 72 provides for demolition of unauthorized buildings but requires written notice — a step the Rawang landowner did not follow. The Emergency (Clearance of Squatters) Regulations 1969 also require 7 days written notice. In the Rawang case, the midnight demolition without notice or court order is the procedural weakness, not the substantive right to the land."
+    },
+    {
+      "t": "fact",
+      "lens": "Rights",
+      "h": "An estimated 2,500 Hindu temples in Malaysia have no legal registration — a gap created by colonial-era dispossession that no post-independence government has closed.",
+      "s": "British colonial administrators brought Indian labourers to work rubber plantations and railways from the 19th century onward. Workers built temples on plantation land with informal permission from estate managers. When the National Land Code was enacted in 1965, it adopted the Torrens system — only registered ownership counts. Temples that had existed for decades were retroactively rendered illegal because nobody had ever formalised their land rights. The Malaysian Hindu Sangam estimates 2,500 temples are unregistered. Selangor alone has 773 temples, all reportedly built without formal permission. Only Penang has a legally empowered Hindu endowments board. The Pakatan Harapan coalition pledged to establish similar boards in six other states — that promise remains unfulfilled. Meanwhile, Federal Constitution Article 11 guarantees freedom of religion including the right to practise at places of worship, and Article 13 protects property rights. The constitution protects both the landowner and the worshipper — but provides no framework when their rights collide on the same piece of land.",
+      "d": "Sources: Malaysian Hindu Sangam (temple registration data, digital registration proposal); SCMP (temples to discuss land issues, March 2026); FMT (KL temple relocation explained, March 2025); SEDAR Institute (strengthening legal frameworks for religious sites, 2025); Malay Mail (land ownership laws explainer, February 2026); Federal Constitution Articles 3, 11, 13. The Hindu American Foundation estimated 10,000 temples including estate shrines demolished since independence — though this figure is advocacy-sourced and not independently verified. HINDRAF documented 79 demolitions or demolition notices in a single 16-month period (Feb 2006 – Jun 2007)."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "The Rawang demolition was not a private property dispute — it was crowdfunded by a group that raised RM131,000 in one month and framed temple clearance as a movement.",
+      "s": "Tanah Malaya, a social media group, raised over RM131,000 through online fundraising and merchandise sales in a single month. RM45,000 was spent purchasing the backhoe used in the Rawang demolition. The group framed the act as enforcing justice against illegal structures on Malay-owned land. Separately, fugitive activist Tamim Dahri Abdul Razak — believed to be in Saudi Arabia and wanted by police — publicly offered to surrender if authorities would demolish four specific Hindu temples. This is no longer a legal dispute between landowner and occupier. It is an organised campaign with funding infrastructure, social media reach, and explicit religious targeting. The 2018 Seafield Sri Maha Mariamman Temple case — where developer One City's lawyers hired men to take control of the temple, triggering a riot that killed firefighter Muhammad Adib Mohd Kassim — ended with all 17 charged men acquitted in June 2023. Zero convictions. The precedent is clear: organising or financing temple demolitions carries no legal consequence in practice.",
+      "d": "Sources: News USA Today (Tanah Malaya fundraising details); Malay Mail (Tamim Dahri surrender offer, 19 March 2026); Malay Mail (Home Minister directs police, 12 February 2026); Wikipedia (Seafield temple riot — riot timeline, firefighter death, acquittal); Harapan Daily (lawyers deny Yayasan Kubra claims, 25 February 2026). The acquittal of all Seafield defendants despite 28 prosecution witnesses and 4 years of trial is significant: it demonstrates the practical difficulty of prosecuting religious site violence even when political will exists."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether landowners can demolish temples. It is why Malaysia has spent 69 years without creating a registration pathway for the temples its colonial economy built.",
+      "text": "Every debate about temple demolition recycles the same binary: property rights versus religious rights. Politicians take sides. Courts issue contradictory rulings. Social media groups raise money for backhoes. But the underlying question never gets asked: why do 2,500 temples exist without legal status in the first place? They were built by workers whom British administrators imported to generate wealth for the colonial economy. Those workers were never given land titles. When the National Land Code formalised property rights in 1965, it did not create a transitional mechanism for existing religious structures. Every government since — BN and PH alike — has inherited this gap and left it open. PM Anwar's position captures the contradiction: he says the government will no longer allow temples that do not comply with existing laws, while also saying he cannot imagine himself demolishing any temple. Both statements are simultaneously true and mutually exclusive. Until Malaysia creates a registration, endowment, or relocation framework with legal force, every temple on private land is one property transaction away from another midnight backhoe."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view: Malaysia needs a Temple Regularisation Act — not more court battles between property owners and worshippers who are both right under different laws.",
+      "text": "The landowner's right is real. The National Land Code is clear. Squatters have no legal claim. But the worshipper's right is also real. Article 11 guarantees freedom of religion, and a temple that has served a community for decades is not an abstract legal concept — it is the infrastructure of faith. The solution is not to pick a winner. It is to create a legal framework that did not exist in 1965 and still does not exist in 2026. Penang's Hindu Endowments Board offers a model: a statutory body with legal authority to register, manage, and negotiate on behalf of temples. The Malaysian Hindu Sangam has proposed a digital registration system and a national regulatory body. Neither has been implemented. What is needed is a Temple Regularisation Act that audits all unregistered temples, creates a pathway to legal status through registration or relocation with state-allocated land, establishes compensation mechanisms for landowners, and criminalises crowdfunded demolition campaigns that use property law as cover for religious targeting. The Rawang backhoe was legal under one law and criminal under another. That is not a dispute between two parties. It is a failure of the state to reconcile its own legal system."
+    }
+  ],
+  "sources": "FMT, Malay Mail, SCMP, Harapan Daily, MalaysiaNow, TRP, News USA Today, Malaysiakini, Mahwengkwai & Partners, USCIRF, SEDAR Institute, ARTICLE 19, GK Legal, BurgieLaw (Penal Code), Malaysian Hindu Sangam, HINDRAF, Hindu American Foundation, Wikipedia (Seafield riot, Federal Constitution), National Land Code 1965, Federal Court (Sidek v Perak 1982)",
+  "confidence": "High on Rawang incident facts (multiple corroborating news sources, court records). High on legal framework (gazetted legislation, established case law). Medium on temple count statistics (MHS and HAF estimates vary widely, not independently audited). High on Tanah Malaya fundraising (multiple news reports with specific figures). High on Seafield acquittal (court records, news coverage). Medium on PM Anwar policy direction (statements from multiple outlets but final policy framework not yet published).",
+  "lenses_used": ["Legal", "Rights", "Social"],
+  "lenses_applicable_but_unused": ["Political", "Historical", "Economic", "Governance"]
+}

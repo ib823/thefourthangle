@@ -4484,6 +4484,7 @@ export const ISSUES: Issue[] = [
   id: "1262", published: true, opinionShift: 93, status: null, edition: 1,
   headline: "Syariah-civil jurisdiction clash affects 4,200 families",
   context: "Unilateral child conversion disputes and custody battles between syariah and civil courts affected over 4,200 families as of 2025.",
+  related: ["1960"],
   stageScores: { pa: 90, ba: 81, fc: 92, af: 76, ct: 71, sr: 85 }, finalScore: 85.9,
   cards: [
     { t: "hook", big: "4,200 Malaysian families caught between syariah and civil court jurisdictions", sub: "Conflicting rulings leave children and spouses without clear legal resolution" },
@@ -4933,6 +4934,7 @@ export const ISSUES: Issue[] = [
   id: "1294", published: true, opinionShift: 78, status: "new", edition: 1,
   headline: "Unilateral child conversion ban enforcement lacking in 6 states",
   context: "Despite the 2018 Federal Court ruling requiring both parents' consent for child conversion, 6 states had not amended their enactments by 2025.",
+  related: ["1960"],
   stageScores: { pa: 85, ba: 73, fc: 87, af: 70, ct: 61, sr: 80 }, finalScore: 79.7,
   cards: [
     { t: "hook", big: "6 states have not amended laws to comply with 2018 Indira Gandhi ruling", sub: "Unilateral child conversion still possible in states that ignore Federal Court" },
@@ -9470,6 +9472,7 @@ export const ISSUES: Issue[] = [
   id: "1618", published: true, opinionShift: 90, status: "new", edition: 1,
   headline: "Islamic State Debate Returns as PAS Governs 6 States",
   context: "With PAS governing or co-governing 6 states after GE15, the Islamic state debate has re-emerged, with 3 states tabling Shariah-expansion bills in 2025.",
+  related: ["1960"],
   stageScores: { pa: 90, ba: 77, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 80.6,
   cards: [
     { t: "hook", big: "PAS governs or co-governs 6 Malaysian states.", sub: "3 states tabled bills in 2025 expanding Shariah court jurisdiction beyond current constitutional limits." },
@@ -9579,9 +9582,10 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1626", opinionShift: 59, status: null, edition: 1,
+  id: "1626", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Social Contract Concept Has No Single Agreed Definition",
   context: "A 2025 academic review found that the 'social contract' — Malaysia's foundational bargain — has at least 7 competing definitions used by different political actors with contradictory implications.",
+  related: ["1960"],
   stageScores: { pa: 81, ba: 64, fc: 82, af: 59, ct: 44, sr: 72 }, finalScore: 79.8,
   cards: [
     { t: "hook", big: "Everyone invokes the 'social contract.' Nobody agrees on what it is.", sub: "7 competing definitions circulate in political discourse — from 'citizenship for loyalty' to 'equal partnership.'" },
@@ -14261,7 +14265,23 @@ export const ISSUES: Issue[] = [
       { t: "view", big: "Deterrence requires detection. Compensation requires architecture. And 4,340 motorcyclists died in 2025 — most of them sober, on roads not built for them, riding because they had no other way to earn.", sub: "" },
     ]
   },
-  {"id":"1959","published":true,"opinionShift":82,"status":"new","edition":1,"headline":"The Sabah Claim That Won't Die — What the Philippines Wants, What Malaysia Won, and What Nobody Settled","context":"The Philippines reaffirmed its sovereignty claim over Sabah in February 2026. Malaysia has won every court case — Paris, The Hague, Netherlands — but all on procedure. No court has ruled on the 1878 'ceded vs leased' question because Malaysia has never consented to ICJ jurisdiction.","sourceDate":"2026-03-31","stageScores":{"pa":85,"ba":70,"fc":86,"af":78,"ct":58,"sr":80},"finalScore":76.2,"cards":[{"t":"hook","big":"The Philippines still claims Sabah. Malaysia has won every court case. No court has ruled on the core question: sale or lease?","sub":"In February 2026, the DFA reaffirmed sovereignty after a NAMRIA map depicted Sabah as Philippine territory. Malaysia won in Paris (2025), The Hague (2023), Netherlands (2024). All procedural. The ICJ has never heard it."},{"t":"fact","big":"One word — 'ceded' or 'leased' — in an 1878 document has generated 148 years of dispute. Malaysia's position is overwhelmingly stronger. But no court has been asked to rule.","sub":"English says cede. Sulu text says pajakkan (lease). Every Malaysian win was procedural. RA5446 (1968) preserves the claim. No Philippine president dares repeal it.","lens":"Legal"},{"t":"fact","big":"In 2013, armed Sulu followers invaded eastern Sabah. 78 casualties. The claim has produced armed incursion within living memory.","sub":"Lahad Datu killed 68 militants and 10 Malaysian security personnel. ESSZONE created. Malaysia stopped cession payments maintained since 1963. The Philippines never renounced the underlying claim.","lens":"Security"},{"t":"fact","big":"Sabah unanimously rejects the claim. But 810,000 foreigners — 23.7% of the population — live in the space between two nations' arguments.","sub":"Census 2020: 810,443 foreigners in 3.4 million. Statelessness, birth barriers, and healthcare exclusion affect Filipino-descent families. Bajau Laut homes demolished in Semporna, 2024.","lens":"Regional"},{"t":"reframe","big":"The real question is not who owns Sabah — self-determination and 63 years of statehood answer that. The question is why two nations keep a 148-year dispute alive when both know neither will settle it.","sub":""},{"t":"view","big":"Malaysia wins on law. The Philippines loses on law. Neither has closed the dispute. And the people who pay — stateless families, border communities, a state whose priorities get buried every time Manila publishes a map — have no seat at either table.","sub":""}]}
+  {"id":"1959","published":true,"opinionShift":82,"status":"new","edition":1,"headline":"The Sabah Claim That Won't Die — What the Philippines Wants, What Malaysia Won, and What Nobody Settled","context":"The Philippines reaffirmed its sovereignty claim over Sabah in February 2026. Malaysia has won every court case — Paris, The Hague, Netherlands — but all on procedure. No court has ruled on the 1878 'ceded vs leased' question because Malaysia has never consented to ICJ jurisdiction.","sourceDate":"2026-03-31","stageScores":{"pa":85,"ba":70,"fc":86,"af":78,"ct":58,"sr":80},"finalScore":76.2,"cards":[{"t":"hook","big":"The Philippines still claims Sabah. Malaysia has won every court case. No court has ruled on the core question: sale or lease?","sub":"In February 2026, the DFA reaffirmed sovereignty after a NAMRIA map depicted Sabah as Philippine territory. Malaysia won in Paris (2025), The Hague (2023), Netherlands (2024). All procedural. The ICJ has never heard it."},{"t":"fact","big":"One word — 'ceded' or 'leased' — in an 1878 document has generated 148 years of dispute. Malaysia's position is overwhelmingly stronger. But no court has been asked to rule.","sub":"English says cede. Sulu text says pajakkan (lease). Every Malaysian win was procedural. RA5446 (1968) preserves the claim. No Philippine president dares repeal it.","lens":"Legal"},{"t":"fact","big":"In 2013, armed Sulu followers invaded eastern Sabah. 78 casualties. The claim has produced armed incursion within living memory.","sub":"Lahad Datu killed 68 militants and 10 Malaysian security personnel. ESSZONE created. Malaysia stopped cession payments maintained since 1963. The Philippines never renounced the underlying claim.","lens":"Security"},{"t":"fact","big":"Sabah unanimously rejects the claim. But 810,000 foreigners — 23.7% of the population — live in the space between two nations' arguments.","sub":"Census 2020: 810,443 foreigners in 3.4 million. Statelessness, birth barriers, and healthcare exclusion affect Filipino-descent families. Bajau Laut homes demolished in Semporna, 2024.","lens":"Regional"},{"t":"reframe","big":"The real question is not who owns Sabah — self-determination and 63 years of statehood answer that. The question is why two nations keep a 148-year dispute alive when both know neither will settle it.","sub":""},{"t":"view","big":"Malaysia wins on law. The Philippines loses on law. Neither has closed the dispute. And the people who pay — stateless families, border communities, a state whose priorities get buried every time Manila publishes a map — have no seat at either table.","sub":""}]},
+  {
+    id: "1960", published: true, opinionShift: 84, status: "new", edition: 1,
+    headline: "Temple Demolished on Private Land — Property Right or Religious Hate Crime?",
+    context: "On 25 February 2026, men acting for Yayasan Kubra demolished the Sri Uchimalai Muniswaran Temple in Rawang on private land under police watch. A crowdfunding group raised RM131,000 to fund demolition campaigns. The High Court sided with the landowner on 31 March.",
+    sourceDate: "2026-04-01",
+    related: ["1262", "1294", "1618", "1626"],
+    stageScores: { pa: 87, ba: 72, fc: 61, af: 68, ct: 37, sr: 81 }, finalScore: 67.7,
+    cards: [
+      { t: "hook", big: "A foundation razed a Hindu temple on its own land. Police investigated. The High Court sided with the landowner.", sub: "Yayasan Kubra demolished the Sri Uchimalai Muniswaran Temple in Rawang on 25 Feb 2026 under police watch. The temple stood since 1995; the land was bought in 2021. Police opened four Penal Code investigations." },
+      { t: "fact", big: "Land title is enforceable — but demolishing a temple without court process is not the same as exercising that right properly.", sub: "Section 341 bars adverse possession on private land. Penal Code Section 295 requires proven intent to insult religion — not mere removal of an illegal structure. No court has ruled on this intersection.", lens: "Legal" },
+      { t: "fact", big: "An estimated 2,500 temples lack registration — but the figure is unaudited and Selangor's official 2026 count is 687.", sub: "No government has run a national audit. Selangor: 388 on government land, 299 on private. Only Penang has a statutory endowments board. PH promised six more in 2018 — unfulfilled.", lens: "Rights" },
+      { t: "fact", big: "The demolition was crowdfunded as a movement — but the class dynamics underneath matter more than the religious rhetoric.", sub: "Tanah Malaya raised RM131,000 in one month. Rising Rawang land values make informal sites targets. Many worshippers descend from Tamil estate workers among Malaysia's poorest.", lens: "Social" },
+      { t: "reframe", big: "The question is not property versus religion. It is why every party in power since 1965 has chosen inaction — and who profits from the chaos.", sub: "" },
+      { t: "view", big: "Malaysia needs statutory reform for unregistered worship sites — but must confront the class and ethnic power dynamics that make reform politically impossible.", sub: "" },
+    ]
+  }
 ];
 /** Published issues only — shown in the feed. Unpublished issues still accessible by direct URL. */
 export const PUBLISHED_ISSUES: Issue[] = ISSUES.filter(i => i.published === true);
