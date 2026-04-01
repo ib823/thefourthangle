@@ -405,12 +405,12 @@
   }
 
   function closeReader() {
+    activeIssue = null;
+    activeFullIssue = null;
     if (readerHistoryPushed) {
       readerHistoryPushed = false;
-      history.back();
-    } else {
-      activeIssue = null;
-      activeFullIssue = null;
+      // Replace current URL back to home without triggering popstate
+      history.replaceState(null, '', '/');
     }
   }
 
