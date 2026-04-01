@@ -6,7 +6,7 @@
   import { issueCategory } from '../data/issues';
 
   import type { IssueSummary } from '../lib/issues-loader';
-  import type { FeedSection, SectionKind } from '../lib/feed-sections';
+  import type { FeedSection, SectionKind, SortMode } from '../lib/feed-sections';
 
   interface Props {
     issues: IssueSummary[];
@@ -19,8 +19,10 @@
     onSearchFocus?: () => void;
     onSearchClear?: () => void;
     issueHasConnections?: (id: string) => boolean;
+    sortMode?: SortMode;
+    onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections }: Props = $props();
+  let { issues, sections = [], activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
 
   let collapsedSections = $state<Record<string, boolean>>({});
 
@@ -35,7 +37,6 @@
 
   // Filter state
   let filterMode = $state<'all' | 'new' | 'reading' | 'done'>('all');
-  let sortMode = $state<'editorial' | 'topic'>('editorial');
 
   // Reactions — subscribe to the atom for real-time updates
   let reactionRaw = $state('{}');
@@ -197,6 +198,15 @@
         >x</button>
       {/if}
     </div>
+
+    <!-- Sort toggle -->
+    {#if !isSearching && onSortChange}
+      <div style="display:flex;align-items:center;gap:2px;padding:8px 0 4px;font-size:11px;font-weight:600;">
+        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
+        <span style="color:var(--border-divider);">·</span>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
+      </div>
+    {/if}
 
     <!-- Section headers or filter bar -->
     {#if isSearching}
