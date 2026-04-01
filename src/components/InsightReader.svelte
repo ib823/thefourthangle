@@ -980,8 +980,7 @@
 
   <!-- Header -->
   <div class="header">
-    <span class="counter">{completed ? totalCards : current + 1}/{totalCards}</span>
-    <span style="font-size:12px;font-weight:700;color:{issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'};font-variant-numeric:tabular-nums;opacity:0.7;">{issue.opinionShift}% shift</span>
+    <span class="counter">{completed ? totalCards : current + 1}/{totalCards} <span style="color:{issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'};font-variant-numeric:tabular-nums;">· {issue.opinionShift}</span></span>
     <button class="close-btn" onclick={onClose} aria-label="Close">&times;</button>
   </div>
 
