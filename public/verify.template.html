@@ -174,7 +174,7 @@ async function verifyContent() {
     }
   } else {
     resultEl.className = 'result fail';
-    resultEl.innerHTML = '<strong>NOT VERIFIED</strong> — This content does not match any issue published by The Fourth Angle. The content may have been modified or may not originate from this platform.';
+    resultEl.innerHTML = '<strong>NOT VERIFIED</strong> — This content does not match any issue published by The Fourth Angle.';
   }
 }
 document.querySelector(".back").addEventListener("click",function(e){e.preventDefault();history.length>1?history.back():location.href="/";});
