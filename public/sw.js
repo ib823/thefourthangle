@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v9';
+const CACHE_NAME = 'v10';
 const PRECACHE = ['/', '/offline.html', '/manifest.json', '/icons/icon-192.png', '/icons/badge-96.png'];
 
 self.addEventListener('install', (event) => {
