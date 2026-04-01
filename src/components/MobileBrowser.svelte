@@ -6,11 +6,12 @@
   import { haptic } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
-  import type { FeedSection } from '../lib/feed-sections';
+  import type { FeedSection, SortMode } from '../lib/feed-sections';
 
   type DisplayItem =
     | { type: 'issue'; issue: IssueSummary }
-    | { type: 'divider'; label: string; count: number; kind: FeedSection['kind'] };
+    | { type: 'divider'; label: string; count: number; kind: FeedSection['kind'] }
+    | { type: 'sort-toggle' };
 
   interface Props {
     issues: IssueSummary[];
@@ -20,8 +21,10 @@
     issueHasConnections?: (id: string) => boolean;
     initialFeedIndex?: number;
     searchQuery?: string;
+    sortMode?: SortMode;
+    onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '' }: Props = $props();
+  let { issues, sections = [], onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '', sortMode = 'latest', onSortChange }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
@@ -34,6 +37,8 @@
       return issues.map(issue => ({ type: 'issue' as const, issue }));
     }
     const items: DisplayItem[] = [];
+    // Sort toggle at the top of the feed (before first section)
+    if (onSortChange && !searchQuery) items.push({ type: 'sort-toggle' as const });
     for (const section of sections) {
       items.push({ type: 'divider', label: section.label, count: section.count, kind: section.kind });
       for (const issue of section.issues) {
@@ -178,7 +183,13 @@
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
   {/if}
   {#each displayList as item, i}
-    {#if item.type === 'divider'}
+    {#if item.type === 'sort-toggle'}
+      <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size:12px;font-weight:600;">
+        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
+        <span style="color:var(--border-divider);">·</span>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
+      </div>
+    {:else if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
         <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} />
       </div>

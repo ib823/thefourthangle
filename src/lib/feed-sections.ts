@@ -29,10 +29,13 @@ function parseReadState(raw: string | undefined): ReadState | null {
  * Build feed sections from a flat issue list and read state map.
  * Empty sections are omitted.
  */
+export type SortMode = 'latest' | 'shift';
+
 export function buildFeedSections(
   issues: IssueSummary[],
   readMap: Record<string, string>,
   now: Date = new Date(),
+  sortMode: SortMode = 'latest',
 ): FeedSection[] {
   const continueReading: IssueSummary[] = [];
   const newThisWeek: IssueSummary[] = [];
@@ -56,6 +59,16 @@ export function buildFeedSections(
       explore.push(issue);
     }
   }
+
+  // Sort within each bucket
+  const sortFn = sortMode === 'shift'
+    ? (a: IssueSummary, b: IssueSummary) => b.opinionShift - a.opinionShift
+    : (a: IssueSummary, b: IssueSummary) => (b.sourceDate ?? '').localeCompare(a.sourceDate ?? '');
+
+  continueReading.sort(sortFn);
+  newThisWeek.sort(sortFn);
+  explore.sort(sortFn);
+  completed.sort(sortFn);
 
   const sections: FeedSection[] = [];
 

@@ -221,13 +221,6 @@
     </div>
     <p style="font-size:12px;color:var(--text-muted);margin:6px 0 0;">How much you'd miss by reading only the headline.</p>
 
-    <!-- Verdict bar -->
-    {#if issue.stageScores && issue.finalScore}
-      <div style="margin:16px 0 0;">
-        <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} />
-      </div>
-    {/if}
-
     <!-- Meta row -->
     <div style="display:flex;align-items:center;gap:8px;margin:16px 0 32px;">
       {#if issue.status === 'new'}
@@ -319,6 +312,14 @@
               </button>
             {/each}
           </div>
+        </div>
+      {/if}
+
+      <!-- Verdict bar — revealed after reading all perspectives -->
+      {#if issue.stageScores && issue.finalScore}
+        <div style="margin:0 0 20px;padding:16px;background:var(--bg-elevated);border-radius:12px;border:1px solid var(--border-subtle);">
+          <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Editorial Audit</div>
+          <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} />
         </div>
       {/if}
 

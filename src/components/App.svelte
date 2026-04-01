@@ -14,7 +14,7 @@
   import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
-  import { buildFeedSections, type FeedSection } from '../lib/feed-sections';
+  import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
 
   interface FeedIssue {
     id: string;
@@ -46,6 +46,7 @@
   let issueLoadError = $state(false);
   let issueLoading = $state(false);
   let isOffline = $state(typeof navigator !== 'undefined' ? !navigator.onLine : false);
+  let feedSort: SortMode = $state('latest');
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
   let filteredIssues = $derived.by(() => {
@@ -164,7 +165,7 @@
   // Feed sections: computed from sorted issues + read state
   let feedSections = $derived.by(() => {
     if (isSearching) return []; // search bypasses sections
-    return buildFeedSections(sortedIssues, readMap);
+    return buildFeedSections(sortedIssues, readMap, new Date(), feedSort);
   });
 
   // #63: Highest-impact unread issue for empty state hero card
@@ -509,7 +510,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} />
+    <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
   </main>
 
   {#if activeFullIssue}
@@ -534,6 +535,12 @@
       {#if isSearching}
         <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
           {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
+        </div>
+      {:else}
+        <div style="display:flex;align-items:center;gap:2px;margin-bottom:12px;font-size:12px;font-weight:600;">
+          <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
+          <span style="color:var(--border-divider);">·</span>
+          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
         </div>
       {/if}
       <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
@@ -569,6 +576,8 @@
         {onSearchFocus}
         {onSearchClear}
         {issueHasConnections}
+        sortMode={feedSort}
+        onSortChange={(mode) => { feedSort = mode; }}
       />
 
       {#if issueLoadError}

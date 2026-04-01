@@ -18,7 +18,12 @@ if (!existsSync(templatePath)) {
   copyFileSync(outputPath, templatePath);
 }
 
-const privatePem = readFileSync(join(root, '.keys', 'private.pem'), 'utf8');
+const keyPath = join(root, '.keys', 'private.pem');
+if (!existsSync(keyPath)) {
+  console.log('Verifier: skipped (no private key — using existing verify.html)');
+  process.exit(0);
+}
+const privatePem = readFileSync(keyPath, 'utf8');
 const privateKey = createPrivateKey(privatePem);
 
 const CARD_LABELS = {
