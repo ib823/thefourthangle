@@ -1020,7 +1020,7 @@
           </div>
           <p class="completion-title">All {totalCards} perspectives</p>
 
-          <!-- Trust summary: Opinion Shift + Verdict Bar -->
+          <!-- Trust summary: Opinion Shift + Editorial Audit -->
           <div style="width:100%;max-width:300px;margin:4px 0;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
               <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={4} showLabel={false} /></div>

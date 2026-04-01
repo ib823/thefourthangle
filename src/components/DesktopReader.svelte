@@ -315,7 +315,7 @@
         </div>
       {/if}
 
-      <!-- Verdict bar — revealed after reading all perspectives -->
+      <!-- Editorial Audit — revealed after reading all perspectives -->
       {#if issue.stageScores && issue.finalScore}
         <div style="margin:0 0 20px;padding:16px;background:var(--bg-elevated);border-radius:12px;border:1px solid var(--border-subtle);">
           <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Editorial Audit</div>
