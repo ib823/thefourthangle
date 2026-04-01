@@ -79,10 +79,5 @@
   <!-- Right column: score + heart -->
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding-top:2px;">
     <span style="font-size:14px;font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
-    {#if hasReaction}
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="opacity:0.5;">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
-    {/if}
   </div>
 </div>
