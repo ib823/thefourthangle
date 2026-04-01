@@ -173,11 +173,6 @@
     <span style="font-size:11px;font-weight:600;color:var(--text-secondary);">{label}</span>
   </div>
 
-  <!-- Neutrality score (compact — full breakdown revealed after reading) -->
-  {#if issue.finalScore}
-    <span style="font-size:11px;color:var(--text-muted);margin-top:6px;display:inline-block;">Neutrality {Math.round(issue.finalScore)}/100</span>
-  {/if}
-
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
 

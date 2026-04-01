@@ -96,10 +96,6 @@
       <span style="font-size:11px;color:#1864AB;font-weight:600;margin-top:2px;display:inline-block;">Connected</span>
     {/if}
 
-    {#if issue.finalScore}
-      <span style="font-size:10px;color:var(--text-muted);margin-top:4px;display:inline-block;">Neutrality {Math.round(issue.finalScore)}</span>
-    {/if}
-
     <!-- Progress bar: reading state only -->
     {#if isStarted && progress > 0}
       <div style="margin-top:6px;height:2px;background:var(--bg-sunken);border-radius:1px;overflow:hidden;">
