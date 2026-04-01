@@ -543,11 +543,27 @@
           <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
         </div>
       {/if}
-      <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
-        {#each sortedIssues as issue, i}
-          <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+      {#if isSearching}
+        <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+          {#each sortedIssues as issue, i}
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+          {/each}
+        </div>
+      {:else}
+        {#each feedSections as section}
+          <div style="margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
+              <span style="font-size:10px;color:var(--text-faint);">{section.count}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+              {#each section.issues as issue, i}
+                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+              {/each}
+            </div>
+          </div>
         {/each}
-      </div>
+      {/if}
       {#if isSearching && searchResultCount === 0}
         <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery.trim()}"</div>
       {/if}

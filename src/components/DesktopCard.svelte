@@ -111,7 +111,6 @@
       <div style="height:100%;width:{issue.opinionShift}%;background:{scoreColor};border-radius:2px;"></div>
     </div>
     <span style="font-size:14px;font-weight:700;color:{scoreColor};min-width:24px;text-align:right;font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
-    <span style="font-size:11px;font-weight:600;color:var(--text-secondary);white-space:nowrap;">{label}</span>
   </div>
 
   <!-- Progress bar: orange for reading, dim green for done -->
