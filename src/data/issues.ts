@@ -8097,7 +8097,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1520", opinionShift: 92, status: null, edition: 1,
+  id: "1520", published: true, opinionShift: 92, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Public Health Budget Transparency Ranks 42nd of 54 Countries Assessed",
   context: "Malaysia scored poorly on global health budget transparency index with limited public access to expenditure data.",
   stageScores: { pa: 82, ba: 73, fc: 82, af: 70, ct: 57, sr: 80 }, finalScore: 85.9,
@@ -8951,7 +8951,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1581", opinionShift: 94, status: null, edition: 1,
+  id: "1581", published: true, opinionShift: 94, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Orang Asli Dam Resettlement Leaves 340 Families Without Clean Water",
   context: "340 Orang Asli families resettled for the Kelau Dam project in Pahang have been without reliable clean water since 2019, despite resettlement promises of piped supply.",
   stageScores: { pa: 91, ba: 78, fc: 93, af: 75, ct: 64, sr: 86 }, finalScore: 83.7,
@@ -9793,7 +9793,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1641", opinionShift: 92, status: null, edition: 1,
+  id: "1641", published: true, opinionShift: 92, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Tamil Schools Receive 2.1% of Education Budget for 5.4% of Students",
   context: "Federal education budget analysis shows Tamil schools (SJKT) receive 2.1% of total allocation while serving 5.4% of the student population, the largest per-student deficit of any school stream.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 76.0,
@@ -10087,7 +10087,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1662", opinionShift: 91, status: null, edition: 1,
+  id: "1662", published: true, opinionShift: 91, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Wealth Gap: Top 10% Own 58.4% While Bottom 50% Own 7.6%",
   context: "The Credit Suisse Global Wealth Report 2025 shows Malaysia's top 10% own 58.4% of national wealth while the bottom 50% own 7.6%, with the gap widening across all ethnic groups.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 85 }, finalScore: 87.8,
@@ -13125,7 +13125,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1879", opinionShift: 91, status: "new", edition: 1,
+  id: "1879", published: true, opinionShift: 91, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Malaysia Arrests 3 Suspects in Nuclear Material Smuggling",
   context: "PDRM and IAEA cooperation led to arrest of 3 suspects in Penang attempting to sell enriched uranium material in February 2026.",
   stageScores: { pa: 82, ba: 59, fc: 76, af: 72, ct: 60, sr: 70 }, finalScore: 89.2,
@@ -14119,7 +14119,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1950", opinionShift: 92, status: "updated", edition: 1,
+  id: "1950", published: true, opinionShift: 92, status: "new", edition: 1, sourceDate: "2026-04-01",
   headline: "Malaysia Passes Comprehensive Online Safety Act 2026",
   context: "Parliament passed landmark Online Safety Act consolidating 8 existing laws into single framework for digital regulation.",
   stageScores: { pa: 79, ba: 73, fc: 90, af: 76, ct: 57, sr: 86 }, finalScore: 80.0,
