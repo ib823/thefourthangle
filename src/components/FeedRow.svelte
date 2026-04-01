@@ -75,14 +75,6 @@
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
 
-    <!-- Progress bar: orange for reading, dim green for done -->
-    {#if isStarted && progress > 0}
-      <div style="margin-top:6px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-        <div style="height:100%;width:{(progress / 6) * 100}%;background:var(--score-warning);border-radius:2px;transition:width var(--duration-normal, 250ms) ease;"></div>
-      </div>
-    {:else if isCompleted}
-      <div style="margin-top:6px;height:3px;background:var(--status-green);border-radius:2px;opacity:0.3;"></div>
-    {/if}
   </div>
   <!-- Right column: score + heart -->
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding-top:2px;">
