@@ -9582,7 +9582,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1626", opinionShift: 59, status: null, edition: 1,
+  id: "1626", published: true, opinionShift: 59, status: null, edition: 1,
   headline: "Social Contract Concept Has No Single Agreed Definition",
   context: "A 2025 academic review found that the 'social contract' — Malaysia's foundational bargain — has at least 7 competing definitions used by different political actors with contradictory implications.",
   related: ["1960"],
