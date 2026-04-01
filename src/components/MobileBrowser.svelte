@@ -37,8 +37,7 @@
       return issues.map(issue => ({ type: 'issue' as const, issue }));
     }
     const items: DisplayItem[] = [];
-    // Sort toggle at the top of the feed (before first section)
-    if (onSortChange && !searchQuery) items.push({ type: 'sort-toggle' as const });
+    // Sort toggle removed from inline feed — rendered in App.svelte above MobileBrowser
     for (const section of sections) {
       items.push({ type: 'divider', label: section.label, count: section.count, kind: section.kind });
       for (const issue of section.issues) {

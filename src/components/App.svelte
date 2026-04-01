@@ -510,6 +510,13 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
+    {#if !searchActive}
+      <div style="display:flex;align-items:center;gap:2px;padding:6px 16px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
+        <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Latest</button>
+        <span style="color:var(--border-divider);font-size:12px;">·</span>
+        <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Unreported</button>
+      </div>
+    {/if}
     <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
   </main>
 
