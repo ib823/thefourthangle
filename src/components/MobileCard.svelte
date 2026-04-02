@@ -152,7 +152,7 @@
           {/if}
           {#if hasReaction}
             <span class="score-panel-dot"></span>
-            <span>Marked</span>
+            <span>Highlighted</span>
           {/if}
         </div>
       </div>

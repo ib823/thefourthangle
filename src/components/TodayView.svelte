@@ -12,12 +12,13 @@
     issues?: IssueSummary[];
     sections?: FeedSection[];
     readMap?: Record<string, string>;
+    readingCount?: number;
     savedCount?: number;
-    markedCount?: number;
+    highlightCount?: number;
     onOpenIssue?: (issue: IssueSummary) => void;
-    onOpenBrowse?: () => void;
-    onOpenSaved?: () => void;
-    onOpenMarked?: () => void;
+    onOpenLibraryReading?: () => void;
+    onOpenLibrarySaved?: () => void;
+    onOpenLibraryHighlights?: () => void;
   }
   let {
     issueCount = 0,
@@ -25,12 +26,13 @@
     issues = [],
     sections = [],
     readMap = {},
+    readingCount = 0,
     savedCount = 0,
-    markedCount = 0,
+    highlightCount = 0,
     onOpenIssue,
-    onOpenBrowse,
-    onOpenSaved,
-    onOpenMarked,
+    onOpenLibraryReading,
+    onOpenLibrarySaved,
+    onOpenLibraryHighlights,
   }: Props = $props();
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -128,16 +130,6 @@
           <div class="ribbon-value">{readyCount} issues, one clearer view</div>
           <div class="ribbon-copy">Start with the lead, continue what you left unfinished, then move through the briefing.</div>
         </div>
-        <div class="ribbon-card">
-          <div class="ribbon-label">Saved</div>
-          <div class="ribbon-value">{savedCount}</div>
-          <div class="ribbon-copy">Issues kept for deliberate return.</div>
-        </div>
-        <div class="ribbon-card">
-          <div class="ribbon-label">Marked</div>
-          <div class="ribbon-value">{markedCount}</div>
-          <div class="ribbon-copy">Stories with at least one highlighted angle.</div>
-        </div>
       </div>
 
       {#if topIssue && onOpenIssue}
@@ -213,21 +205,22 @@
 
         <section class="today-panel today-panel--library" aria-labelledby="your-library-heading">
           <div class="panel-kicker">Your Library</div>
-          <h2 id="your-library-heading" class="panel-title">Move between ritual, archive, and memory.</h2>
+          <h2 id="your-library-heading" class="panel-title">Return to what you chose to keep.</h2>
+          <div class="panel-subtitle">Reading progress, saved issues, and highlighted angles live here.</div>
           <div class="library-grid">
-            <button class="library-item" onclick={() => onOpenBrowse?.()}>
-              <span class="library-label">Full Queue</span>
-              <span class="library-value">{issueCount}</span>
-              <span class="library-copy">{unread > 0 ? `${unread} still unexplored` : 'Fully explored right now'}</span>
+            <button class="library-item" onclick={() => onOpenLibraryReading?.()}>
+              <span class="library-label">Reading</span>
+              <span class="library-value">{readingCount}</span>
+              <span class="library-copy">Issues you have already started and can resume immediately</span>
             </button>
-            <button class="library-item" onclick={() => onOpenSaved?.()}>
+            <button class="library-item" onclick={() => onOpenLibrarySaved?.()}>
               <span class="library-label">Saved</span>
               <span class="library-value">{savedCount}</span>
               <span class="library-copy">Issues you want to return to on purpose</span>
             </button>
-            <button class="library-item" onclick={() => onOpenMarked?.()}>
-              <span class="library-label">Marked</span>
-              <span class="library-value">{markedCount}</span>
+            <button class="library-item" onclick={() => onOpenLibraryHighlights?.()}>
+              <span class="library-label">Highlights</span>
+              <span class="library-value">{highlightCount}</span>
               <span class="library-copy">Issues with at least one highlighted angle</span>
             </button>
           </div>
@@ -312,8 +305,9 @@
 
   .today-ribbon {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
+    max-width: 620px;
   }
 
   .hero-entry {

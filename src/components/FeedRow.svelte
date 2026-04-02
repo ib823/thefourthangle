@@ -68,7 +68,7 @@
         <span style="font-size:10px;font-weight:700;color:var(--score-warning);background:rgba(210,140,40,0.1);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Saved</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Marked</span>
+        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Highlighted</span>
       {/if}
     </div>
     <span class="balance-title" style="font-size:14px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>

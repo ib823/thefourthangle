@@ -76,12 +76,6 @@
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:0;">
-      {#if onHome}
-        <button class="today-button" class:today-button--active={homeActive} onclick={onHome} aria-label="Return to Today">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
-          <span>Today</span>
-        </button>
-      {/if}
       {#if onSearchToggle}
         <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:8px;transition:background 0.15s ease;" aria-label="Search">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -142,40 +136,9 @@
     display: none;
   }
 
-  .today-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 36px;
-    padding: 0 12px;
-    margin-right: 4px;
-    border-radius: 999px;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-    font: inherit;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  .today-button:hover {
-    background: var(--bg-sunken);
-    border-color: var(--border-divider);
-  }
-
-  .today-button--active {
-    background: rgba(210, 140, 40, 0.12);
-    border-color: rgba(210, 140, 40, 0.28);
-    color: var(--score-warning);
-  }
-
   /* ── Mobile: mark + name only ── */
   @media (max-width: 768px) {
     .search-icon { display: flex !important; }
-    .today-button span { display: none; }
-    .today-button { min-width: 40px; padding-inline: 10px; }
   }
 
   @media (max-width: 480px), (max-height: 640px) {

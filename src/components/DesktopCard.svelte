@@ -90,7 +90,7 @@
       <span style="font-size:10px;font-weight:700;color:var(--score-warning);background:rgba(210,140,40,0.1);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Saved</span>
     {/if}
     {#if hasReaction}
-      <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Marked</span>
+      <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
     {/if}
     <div style="flex:1;"></div>
   </div>

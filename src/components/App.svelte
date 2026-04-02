@@ -8,6 +8,7 @@
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
   import DesktopReader from './DesktopReader.svelte';
+  import LibraryTabs from './LibraryTabs.svelte';
   import MobileDock from './MobileDock.svelte';
   import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
@@ -38,46 +39,66 @@
   }
   let { initialIssueId, feedData = [] }: Props = $props();
 
-  type SurfaceMode = 'today' | 'browse' | 'saved' | 'marked';
+  type SurfaceMode = 'today' | 'browse' | 'library';
+  type LibraryMode = 'reading' | 'saved' | 'highlights';
   type HistoryMode = 'push' | 'replace' | 'none';
 
-  function locationSurfaceMode(): SurfaceMode {
-    if (typeof window === 'undefined') return 'today';
-    const view = new URL(window.location.href).searchParams.get('view');
-    return view === 'browse' || view === 'saved' || view === 'marked' ? view : 'today';
+  function locationAppState(): { surfaceMode: SurfaceMode; libraryMode: LibraryMode } {
+    if (typeof window === 'undefined') return { surfaceMode: 'today', libraryMode: 'reading' };
+    const params = new URL(window.location.href).searchParams;
+    const view = params.get('view');
+    const tab = params.get('tab');
+    const libraryMode: LibraryMode = tab === 'saved' || tab === 'highlights' || tab === 'reading' ? tab : 'reading';
+    if (view === 'browse') return { surfaceMode: 'browse', libraryMode };
+    if (view === 'library') return { surfaceMode: 'library', libraryMode };
+    if (view === 'saved') return { surfaceMode: 'library', libraryMode: 'saved' };
+    if (view === 'marked') return { surfaceMode: 'library', libraryMode: 'highlights' };
+    return { surfaceMode: 'today', libraryMode };
   }
 
   function initialSurfaceMode(): SurfaceMode {
-    return locationSurfaceMode();
+    return locationAppState().surfaceMode;
   }
 
-  function surfaceUrl(mode: SurfaceMode): string {
-    return mode === 'today' ? '/' : `/?view=${mode}`;
+  function initialLibraryMode(): LibraryMode {
+    return locationAppState().libraryMode;
   }
 
-  function surfaceHeading(mode: SurfaceMode): string {
+  function libraryLabel(mode: LibraryMode): string {
+    if (mode === 'saved') return 'Saved';
+    if (mode === 'highlights') return 'Highlights';
+    return 'Reading';
+  }
+
+  function surfaceUrl(mode: SurfaceMode, nextLibraryMode: LibraryMode): string {
+    if (mode === 'today') return '/';
+    if (mode === 'browse') return '/?view=browse';
+    return `/?view=library&tab=${nextLibraryMode}`;
+  }
+
+  function surfaceHeading(mode: SurfaceMode, activeLibraryMode: LibraryMode): string {
     if (mode === 'browse') return 'Browse';
-    if (mode === 'saved') return 'Saved issues';
-    if (mode === 'marked') return 'Marked issues';
+    if (mode === 'library') return `${libraryLabel(activeLibraryMode)} library`;
     return 'Today';
   }
 
-  function queueTitle(mode: SurfaceMode): string {
+  function libraryEmptyTitle(mode: LibraryMode): string {
     if (mode === 'saved') return 'No saved issues yet.';
-    if (mode === 'marked') return 'No marked issues yet.';
-    return 'Pick the next issue from the queue.';
+    if (mode === 'highlights') return 'No highlights yet.';
+    return 'No unfinished issues yet.';
   }
 
-  function queueCopy(mode: SurfaceMode): string {
+  function libraryEmptyCopy(mode: LibraryMode): string {
     if (mode === 'saved') return 'Save an issue while reading and it will wait here for deliberate return.';
-    if (mode === 'marked') return 'Highlight an angle that hits hard and it will show up here for later reference.';
-    return 'Use the queue to scan by recency or by how much the headline hides.';
+    if (mode === 'highlights') return 'Highlight an angle that hits hard and it will show up here as a reusable memory.';
+    return 'Start an issue and it will remain here until you finish the reading path.';
   }
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
   let searchQuery = $state('');
   let searchActive = $state(false);
   let surfaceMode = $state<SurfaceMode>(initialSurfaceMode());
+  let libraryMode = $state<LibraryMode>(initialLibraryMode());
 
   // Feed data comes from Astro props (SSR-available) or from async fetch
   let issues = $state<FeedIssue[]>(feedData);
@@ -159,11 +180,37 @@
   function hasSaved(issueId: string): boolean {
     return !!savedIssueMap[issueId];
   }
+  let readingIssueIds = $derived.by(() => {
+    return new Set(
+      Object.entries(readMap)
+        .filter(([, value]) => {
+          if (!value || value === 'true') return false;
+          try {
+            return JSON.parse(value).state === 'started';
+          } catch {
+            return false;
+          }
+        })
+        .map(([id]) => id)
+    );
+  });
   let savedCount = $derived(Object.keys(savedIssueMap).length);
-  let markedCount = $derived(Object.values(appReactionMap).filter(cards => cards.length > 0).length);
+  let highlightCount = $derived(Object.values(appReactionMap).filter(cards => cards.length > 0).length);
+  let readingCount = $derived(readingIssueIds.size);
+  let libraryCount = $derived.by(() => {
+    const ids = new Set<string>(readingIssueIds);
+    for (const id of Object.keys(savedIssueMap)) ids.add(id);
+    for (const [id, cards] of Object.entries(appReactionMap)) {
+      if ((cards?.length ?? 0) > 0) ids.add(id);
+    }
+    return ids.size;
+  });
   let scopedIssues = $derived.by(() => {
-    if (surfaceMode === 'saved') return issues.filter(i => !!savedIssueMap[i.id]);
-    if (surfaceMode === 'marked') return issues.filter(i => (appReactionMap[i.id]?.length ?? 0) > 0);
+    if (surfaceMode === 'library') {
+      if (libraryMode === 'saved') return issues.filter(i => !!savedIssueMap[i.id]);
+      if (libraryMode === 'highlights') return issues.filter(i => (appReactionMap[i.id]?.length ?? 0) > 0);
+      return issues.filter(i => readingIssueIds.has(i.id));
+    }
     return issues;
   });
   let filteredIssues = $derived.by(() => {
@@ -243,11 +290,11 @@
     return unread.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
   });
 
-  function syncSurfaceUrl(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'replace') {
+  function syncSurfaceUrl(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'replace', nextLibraryMode: LibraryMode = libraryMode) {
     if (typeof window === 'undefined') return;
-    const target = surfaceUrl(mode);
+    const target = surfaceUrl(mode, nextLibraryMode);
     const current = window.location.pathname + window.location.search;
-    const state = { surface: mode };
+    const state = { surface: mode, libraryMode: nextLibraryMode };
     if (historyMode === 'push' && current !== target) {
       history.pushState(state, '', target);
       return;
@@ -279,9 +326,11 @@
     document.body.dataset.commitSha = COMMIT_SHA;
     document.body.dataset.buildId = BUILD_ID;
     checkViewport();
-    surfaceMode = locationSurfaceMode();
+    const currentState = locationAppState();
+    surfaceMode = currentState.surfaceMode;
+    libraryMode = currentState.libraryMode;
     if (!window.location.pathname.startsWith('/issue/')) {
-      syncSurfaceUrl(surfaceMode, 'replace');
+      syncSurfaceUrl(surfaceMode, 'replace', libraryMode);
     }
     window.addEventListener('resize', debouncedResize);
 
@@ -365,7 +414,7 @@
 
     // Keep SPA state in sync with browser history
     function onPopState(e: PopStateEvent) {
-      const nextSurface = locationSurfaceMode();
+      const nextState = locationAppState();
       const issueMatch = window.location.pathname.match(/^\/issue\/([^/]+)$/);
 
       searchActive = false;
@@ -373,7 +422,12 @@
 
       if (issueMatch) {
         const issueId = issueMatch[1];
-        surfaceMode = nextSurface;
+        surfaceMode = e.state?.surface === 'browse' || e.state?.surface === 'library' || e.state?.surface === 'today'
+          ? e.state.surface
+          : nextState.surfaceMode;
+        libraryMode = e.state?.libraryMode === 'saved' || e.state?.libraryMode === 'highlights' || e.state?.libraryMode === 'reading'
+          ? e.state.libraryMode
+          : nextState.libraryMode;
         if (issues.some((item) => item.id === issueId)) {
           readerHistoryPushed = true;
           void openIssueById(issueId, 'none');
@@ -384,7 +438,8 @@
       readerHistoryPushed = false;
       activeIssue = null;
       activeFullIssue = null;
-      surfaceMode = nextSurface;
+      surfaceMode = nextState.surfaceMode;
+      libraryMode = nextState.libraryMode;
     }
     window.addEventListener('popstate', onPopState);
 
@@ -467,10 +522,10 @@
       return;
     }
     if (historyMode === 'push') {
-      history.pushState({ reader: true, issueId: id }, '', issuePath);
+      history.pushState({ reader: true, issueId: id, surface: surfaceMode, libraryMode }, '', issuePath);
       readerHistoryPushed = true;
     } else {
-      history.replaceState({ reader: true, issueId: id }, '', issuePath);
+      history.replaceState({ reader: true, issueId: id, surface: surfaceMode, libraryMode }, '', issuePath);
       readerHistoryPushed = true;
     }
   }
@@ -546,16 +601,17 @@
     loadAndOpenIssue(issue.id, 'push');
   }
 
-  function activateSurface(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'push') {
+  function activateSurface(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'push', nextLibraryMode: LibraryMode = libraryMode) {
     searchQuery = '';
     searchActive = false;
     surfaceMode = mode;
+    libraryMode = nextLibraryMode;
     if (activeIssue || activeFullIssue) {
       activeIssue = null;
       activeFullIssue = null;
       readerHistoryPushed = false;
     }
-    syncSurfaceUrl(mode, historyMode);
+    syncSurfaceUrl(mode, historyMode, nextLibraryMode);
   }
 
   function goToday() {
@@ -566,19 +622,27 @@
     activateSurface('browse', 'push');
   }
 
-  function openSavedLibrary() {
-    activateSurface('saved', 'push');
+  function openLibrary(nextMode: LibraryMode = libraryMode, historyMode: Exclude<HistoryMode, 'none'> = 'push') {
+    activateSurface('library', historyMode, nextMode);
   }
 
-  function openMarkedLibrary() {
-    activateSurface('marked', 'push');
+  function openSavedLibrary() {
+    openLibrary('saved');
+  }
+
+  function openReadingLibrary() {
+    openLibrary('reading');
+  }
+
+  function openHighlightsLibrary() {
+    openLibrary('highlights');
   }
 
   function closeReader(historyMode: Exclude<HistoryMode, 'none'> = 'replace') {
     activeIssue = null;
     activeFullIssue = null;
     readerHistoryPushed = false;
-    syncSurfaceUrl(surfaceMode, historyMode);
+    syncSurfaceUrl(surfaceMode, historyMode, libraryMode);
   }
 
   function openNextIssue() {
@@ -608,11 +672,11 @@
 
   $effect(() => {
     if (typeof window === 'undefined' || activeIssue || activeFullIssue || window.location.pathname.startsWith('/issue/')) return;
-    const target = surfaceUrl(surfaceMode);
+    const target = surfaceUrl(surfaceMode, libraryMode);
     if (window.location.pathname + window.location.search !== target) {
-      history.replaceState({ surface: surfaceMode }, '', target);
-    } else if (history.state?.surface !== surfaceMode) {
-      history.replaceState({ surface: surfaceMode }, '', target);
+      history.replaceState({ surface: surfaceMode, libraryMode }, '', target);
+    } else if (history.state?.surface !== surfaceMode || history.state?.libraryMode !== libraryMode) {
+      history.replaceState({ surface: surfaceMode, libraryMode }, '', target);
     }
   });
 
@@ -702,10 +766,22 @@
     />
     <main class="app-main">
     {#if !searchActive && surfaceMode !== 'today'}
-      <h1 class="sr-only">{surfaceHeading(surfaceMode)}</h1>
+      <h1 class="sr-only">{surfaceHeading(surfaceMode, libraryMode)}</h1>
       <div style="padding:8px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);background:linear-gradient(180deg, rgba(248,249,250,0.82) 0%, rgba(248,249,250,0.54) 100%);">
         {#if surfaceMode === 'browse'}
           <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} panelId="mobile-browse-panel" idPrefix="mobile-sort" />
+        {:else if surfaceMode === 'library'}
+          <LibraryTabs
+            libraryMode={libraryMode}
+            {readingCount}
+            {savedCount}
+            {highlightCount}
+            panelId="mobile-library-panel"
+            idPrefix="mobile-library"
+            onOpenReading={openReadingLibrary}
+            onOpenSaved={openSavedLibrary}
+            onOpenHighlights={openHighlightsLibrary}
+          />
         {/if}
       </div>
     {/if}
@@ -713,13 +789,13 @@
       <div class="sr-only" role="status" aria-live="polite">{searchStatusMessage}</div>
     {/if}
     {#if surfaceMode === 'today' && !isSearching}
-      <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
-    {:else if !isSearching && (surfaceMode === 'saved' || surfaceMode === 'marked') && sortedIssues.length === 0}
+      <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
+    {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
       <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
         <div style="max-width:320px;text-align:center;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">{surfaceHeading(surfaceMode)}</div>
-          <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{queueTitle(surfaceMode)}</h2>
-          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{queueCopy(surfaceMode)}</p>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+          <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
+          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
           <button onclick={openBrowse} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Browse issues</button>
         </div>
       </section>
@@ -727,12 +803,16 @@
       <div id="mobile-browse-panel" role="tabpanel" aria-labelledby={`mobile-sort-${feedSort}`} style="flex:1;min-height:0;">
         <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
       </div>
+    {:else if surfaceMode === 'library' && !isSearching}
+      <div id="mobile-library-panel" role="tabpanel" aria-labelledby={`mobile-library-${libraryMode}`} style="flex:1;min-height:0;">
+        <MobileBrowser issues={sortedIssues} sections={[]} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+      </div>
     {:else}
-      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+      <MobileBrowser issues={sortedIssues} sections={surfaceMode === 'browse' ? feedSections : []} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
     {/if}
     </main>
     {#if !searchActive && !activeFullIssue}
-      <MobileDock surfaceMode={surfaceMode} {savedCount} {markedCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+      <MobileDock surfaceMode={surfaceMode} {libraryCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenLibrary={() => openLibrary()} />
     {/if}
   </div>
 
@@ -746,7 +826,7 @@
     <main>
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
       {#if surfaceMode !== 'today'}
-        <h1 class="sr-only">{surfaceHeading(surfaceMode)}</h1>
+        <h1 class="sr-only">{surfaceHeading(surfaceMode, libraryMode)}</h1>
       {/if}
       <div style="margin-bottom:16px;">
         <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()}>
@@ -766,7 +846,7 @@
       </div>
       {#if !isSearching}
         <div style="margin-bottom:14px;">
-          <SurfaceNav surfaceMode={surfaceMode} {savedCount} {markedCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+          <SurfaceNav surfaceMode={surfaceMode} {libraryCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenLibrary={() => openLibrary()} />
         </div>
       {/if}
       {#if isSearching}
@@ -777,15 +857,29 @@
         <div style="margin-bottom:12px;">
           <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} panelId="tablet-browse-panel" idPrefix="tablet-sort" />
         </div>
+      {:else if surfaceMode === 'library'}
+        <div style="margin-bottom:12px;">
+          <LibraryTabs
+            libraryMode={libraryMode}
+            {readingCount}
+            {savedCount}
+            {highlightCount}
+            panelId="tablet-library-panel"
+            idPrefix="tablet-library"
+            onOpenReading={() => openLibrary('reading', 'replace')}
+            onOpenSaved={() => openLibrary('saved', 'replace')}
+            onOpenHighlights={() => openLibrary('highlights', 'replace')}
+          />
+        </div>
       {/if}
       {#if surfaceMode === 'today' && !isSearching}
-        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
-      {:else if !isSearching && (surfaceMode === 'saved' || surfaceMode === 'marked') && sortedIssues.length === 0}
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
+      {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
         <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
           <div style="max-width:420px;text-align:center;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">{surfaceHeading(surfaceMode)}</div>
-            <h2 style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{queueTitle(surfaceMode)}</h2>
-            <p style="font-size:14px;line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{queueCopy(surfaceMode)}</p>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+            <h2 style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
+            <p style="font-size:14px;line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
             <button onclick={openBrowse} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Browse issues</button>
           </div>
         </section>
@@ -809,6 +903,12 @@
                 {/each}
               </div>
             </div>
+          {/each}
+        </div>
+      {:else if surfaceMode === 'library'}
+        <div id="tablet-library-panel" role="tabpanel" aria-labelledby={`tablet-library-${libraryMode}`} style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+          {#each sortedIssues as issue, i}
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
           {/each}
         </div>
       {:else}
@@ -842,12 +942,17 @@
         activeId={activeIssue?.id ?? null}
         {readMap}
         {surfaceMode}
+        {libraryMode}
+        {readingCount}
         {savedCount}
-        {markedCount}
+        {highlightCount}
+        {libraryCount}
         onGoToday={goToday}
         onOpenBrowse={openBrowse}
+        onOpenLibrary={() => openLibrary()}
+        onOpenReading={() => openLibrary('reading', 'replace')}
         onOpenSaved={openSavedLibrary}
-        onOpenMarked={openMarkedLibrary}
+        onOpenHighlights={openHighlightsLibrary}
         onSelectIssue={openIssue}
         {searchQuery}
         onSearchInput={(q) => { searchQuery = q; }}
@@ -887,24 +992,36 @@
           connections={resolvedConnections}
           onNavigateToIssue={navigateToIssue}
         />
-      {:else if surfaceMode !== 'today'}
+      {:else if surfaceMode === 'library' && sortedIssues.length === 0}
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">
             <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
-              {surfaceMode === 'saved' ? 'Saved Queue' : surfaceMode === 'marked' ? 'Marked Queue' : 'Browse Queue'}
+              Library · {libraryLabel(libraryMode)}
             </div>
-            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Pick the next issue from the queue.</h2>
+            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
             <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
-              {surfaceMode === 'saved'
-                ? 'These are the issues you deliberately kept for later.'
-                : surfaceMode === 'marked'
-                  ? 'These are the issues where at least one angle hit hard enough to highlight.'
-                  : 'Use the queue to scan by recency or by how much the headline hides.'}
+              {libraryEmptyCopy(libraryMode)}
             </p>
           </div>
         </div>
+      {:else if surfaceMode === 'library'}
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
+          <div style="max-width:420px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Choose the next issue from your library.</h2>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">The left rail already holds your current reading memory. Pick an issue there to continue.</p>
+          </div>
+        </div>
+      {:else if surfaceMode !== 'today'}
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
+          <div style="max-width:420px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Browse Queue</div>
+            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Pick the next issue from the queue.</h2>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">Use the queue to scan by recency or by how much the headline hides.</p>
+          </div>
+        </div>
       {:else}
-        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
       {/if}
     </main>
   </div>

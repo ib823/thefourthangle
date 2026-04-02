@@ -2,10 +2,10 @@
   import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
   import SectionHeader from './SectionHeader.svelte';
+  import LibraryTabs from './LibraryTabs.svelte';
   import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
-  import { getReadCount, reactions, savedIssues } from '../stores/reader';
-  import { issueCategory } from '../data/issues';
+  import { reactions, savedIssues } from '../stores/reader';
   import { releaseLabel } from '../lib/build';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -16,13 +16,18 @@
     sections?: FeedSection[];
     activeId: string | null;
     readMap: Record<string, string>;
-    surfaceMode?: 'today' | 'browse' | 'saved' | 'marked';
+    surfaceMode?: 'today' | 'browse' | 'library';
+    libraryMode?: 'reading' | 'saved' | 'highlights';
+    readingCount?: number;
     savedCount?: number;
-    markedCount?: number;
+    highlightCount?: number;
+    libraryCount?: number;
     onGoToday?: () => void;
     onOpenBrowse?: () => void;
+    onOpenLibrary?: () => void;
+    onOpenReading?: () => void;
     onOpenSaved?: () => void;
-    onOpenMarked?: () => void;
+    onOpenHighlights?: () => void;
     onSelectIssue: (issue: IssueSummary) => void;
     searchQuery?: string;
     onSearchInput?: (query: string) => void;
@@ -32,8 +37,14 @@
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', savedCount = 0, markedCount = 0, onGoToday, onOpenBrowse, onOpenSaved, onOpenMarked, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, savedCount = 0, highlightCount = 0, libraryCount = 0, onGoToday, onOpenBrowse, onOpenLibrary, onOpenReading, onOpenSaved, onOpenHighlights, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
   const releaseStamp = releaseLabel();
+
+  function libraryHeading(mode: 'reading' | 'saved' | 'highlights') {
+    if (mode === 'saved') return 'Saved library';
+    if (mode === 'highlights') return 'Highlights library';
+    return 'Reading library';
+  }
 
   let collapsedSections = $state<Record<string, boolean>>({});
 
@@ -113,20 +124,8 @@
     });
   });
 
-  // Apply topic grouping (skip when searching — display flat results)
-  let displayIssues = $derived.by(() => {
-    if (isSearching) return filteredByState;
-    if (sortMode === 'editorial') return filteredByState;
-    const grouped = new Map<string, IssueSummary[]>();
-    for (const issue of filteredByState) {
-      const cat = issueCategory(issue);
-      if (!grouped.has(cat)) grouped.set(cat, []);
-      grouped.get(cat)!.push(issue);
-    }
-    return { grouped };
-  });
-
-  let isGrouped = $derived(sortMode === 'topic' && typeof displayIssues === 'object' && 'grouped' in displayIssues);
+  // Search and library views use a flat issue list in the sidebar.
+  let displayIssues = $derived(filteredByState);
 
   // Virtual feed
   let scrollContainerEl: HTMLDivElement | undefined = $state(undefined);
@@ -152,7 +151,7 @@
     }
   });
 
-  let flatIssues = $derived(Array.isArray(displayIssues) ? displayIssues : []);
+  let flatIssues = $derived(displayIssues);
   let visibleStart = $derived(Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER));
   let visibleEnd = $derived(Math.min(flatIssues.length, Math.ceil((scrollTop + containerHeight) / ITEM_HEIGHT) + BUFFER));
   let totalHeight = $derived(flatIssues.length * ITEM_HEIGHT);
@@ -233,15 +232,15 @@
 </script>
 
 <aside aria-label="Issue list" style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
-  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : surfaceMode === 'saved' ? 'Saved issues' : 'Marked issues'}</h1>
+  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : libraryHeading(libraryMode)}</h1>
   <div style="padding:14px 18px 0;flex-shrink:0;">
     <div style="padding:0 2px 12px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Smart Queue</div>
-      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Move between ritual, archive, and memory without losing your place.</div>
+      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Move between today, archive, and library without losing your place.</div>
     </div>
 
     <div style="padding:0 0 12px;">
-      <SurfaceNav variant="sidebar" {surfaceMode} {savedCount} {markedCount} onGoToday={onGoToday} onOpenBrowse={onOpenBrowse} onOpenSaved={onOpenSaved} onOpenMarked={onOpenMarked} />
+      <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenBrowse={onOpenBrowse} onOpenLibrary={onOpenLibrary} />
     </div>
 
     <!-- Search -->
@@ -275,6 +274,21 @@
       <div style="padding:10px 0 4px;">
         <SortToggle variant="sidebar" {sortMode} onChange={onSortChange} panelId="desktop-browse-panel" idPrefix="desktop-sort" />
       </div>
+    {:else if !isSearching && surfaceMode === 'library'}
+      <div style="padding:10px 0 4px;">
+        <LibraryTabs
+          variant="sidebar"
+          {libraryMode}
+          {readingCount}
+          {savedCount}
+          {highlightCount}
+          panelId="desktop-library-panel"
+          idPrefix="desktop-library"
+          onOpenReading={onOpenReading}
+          onOpenSaved={onOpenSaved}
+          onOpenHighlights={onOpenHighlights}
+        />
+      </div>
     {/if}
 
     <!-- Section headers or filter bar -->
@@ -295,7 +309,7 @@
           {/if}
         </span>
       </div>
-    {:else if sections.length === 0}
+    {:else if sections.length === 0 && surfaceMode !== 'library'}
       <!-- Fallback: filter tabs when no sections computed -->
       <div style="display:flex;gap:0;margin-top:8px;border-bottom:1px solid var(--bg-sunken);" role="tablist" aria-label="Filter issues">
         {#each filterTabs as tab}
@@ -331,7 +345,12 @@
   </div>
 
   <!-- Feed list -->
-  <div id="desktop-browse-panel" role={surfaceMode === 'browse' && !isSearching ? 'tabpanel' : undefined} aria-labelledby={surfaceMode === 'browse' && !isSearching ? `desktop-sort-${sortMode}` : undefined} style="flex:1;display:flex;flex-direction:column;min-height:0;">
+  <div
+    id={surfaceMode === 'library' ? 'desktop-library-panel' : 'desktop-browse-panel'}
+    role={!isSearching && (surfaceMode === 'browse' || surfaceMode === 'library') ? 'tabpanel' : undefined}
+    aria-labelledby={!isSearching && surfaceMode === 'browse' ? `desktop-sort-${sortMode}` : !isSearching && surfaceMode === 'library' ? `desktop-library-${libraryMode}` : undefined}
+    style="flex:1;display:flex;flex-direction:column;min-height:0;"
+  >
   <div
     id="desktop-feed-list"
     bind:this={scrollContainerEl}

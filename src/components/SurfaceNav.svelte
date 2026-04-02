@@ -1,24 +1,20 @@
 <script lang="ts">
   interface Props {
-    surfaceMode: 'today' | 'browse' | 'saved' | 'marked';
-    savedCount?: number;
-    markedCount?: number;
+    surfaceMode: 'today' | 'browse' | 'library';
+    libraryCount?: number;
     variant?: 'inline' | 'sidebar';
     onGoToday?: () => void;
     onOpenBrowse?: () => void;
-    onOpenSaved?: () => void;
-    onOpenMarked?: () => void;
+    onOpenLibrary?: () => void;
   }
 
   let {
     surfaceMode,
-    savedCount = 0,
-    markedCount = 0,
+    libraryCount = 0,
     variant = 'inline',
     onGoToday,
     onOpenBrowse,
-    onOpenSaved,
-    onOpenMarked,
+    onOpenLibrary,
   }: Props = $props();
 </script>
 
@@ -33,16 +29,10 @@
     <span>Browse</span>
   </button>
 
-  <button class="surface-button" class:surface-button--saved={surfaceMode === 'saved'} onclick={() => onOpenSaved?.()} aria-current={surfaceMode === 'saved' ? 'page' : undefined}>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-    <span>Saved</span>
-    <span class="surface-badge" aria-label="{savedCount} saved issues">{savedCount}</span>
-  </button>
-
-  <button class="surface-button" class:surface-button--marked={surfaceMode === 'marked'} onclick={() => onOpenMarked?.()} aria-current={surfaceMode === 'marked' ? 'page' : undefined}>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10z"></path></svg>
-    <span>Marked</span>
-    <span class="surface-badge surface-badge--critical" aria-label="{markedCount} marked issues">{markedCount}</span>
+  <button class="surface-button" class:surface-button--library={surfaceMode === 'library'} onclick={() => onOpenLibrary?.()} aria-current={surfaceMode === 'library' ? 'page' : undefined}>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v15.5A2.5 2.5 0 0 0 17.5 16H3z"></path><path d="M20 18.5A2.5 2.5 0 0 1 17.5 21H6a3 3 0 0 1-3-3V5.5"></path></svg>
+    <span>Library</span>
+    <span class="surface-badge" aria-label="{libraryCount} issues in your library">{libraryCount}</span>
   </button>
 </nav>
 
@@ -96,12 +86,8 @@
     color: var(--text-primary);
   }
 
-  .surface-button--saved {
+  .surface-button--library {
     color: var(--score-warning);
-  }
-
-  .surface-button--marked {
-    color: var(--score-critical);
   }
 
   .surface-badge {
@@ -117,10 +103,6 @@
     font-size: 10px;
     font-weight: 800;
     line-height: 1;
-  }
-
-  .surface-badge--critical {
-    background: rgba(224, 49, 49, 0.1);
   }
 
   .surface-nav--sidebar .surface-button {
@@ -170,8 +152,5 @@
       background: rgba(200, 150, 58, 0.16);
     }
 
-    .surface-badge--critical {
-      background: rgba(248, 113, 113, 0.18);
-    }
   }
 </style>
