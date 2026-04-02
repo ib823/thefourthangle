@@ -6,6 +6,7 @@
   import SurfaceNav from './SurfaceNav.svelte';
   import { getReadCount, reactions, savedIssues } from '../stores/reader';
   import { issueCategory } from '../data/issues';
+  import { releaseLabel } from '../lib/build';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection, SectionKind, SortMode } from '../lib/feed-sections';
@@ -32,6 +33,7 @@
     onSortChange?: (mode: SortMode) => void;
   }
   let { issues, sections = [], activeId, readMap, surfaceMode = 'today', savedCount = 0, markedCount = 0, onGoToday, onOpenBrowse, onOpenSaved, onOpenMarked, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  const releaseStamp = releaseLabel();
 
   let collapsedSections = $state<Record<string, boolean>>({});
 
@@ -391,6 +393,9 @@
     </div>
     <div style="font-size:11px;color:var(--text-tertiary);margin-top:4px;text-align:center;">
       <a href="/about" style="color:var(--text-tertiary);text-decoration:none;">About</a>
+    </div>
+    <div style="font-size:10px;color:var(--text-faint);margin-top:6px;text-align:center;font-variant-numeric:tabular-nums;" title={releaseStamp}>
+      Build {releaseStamp}
     </div>
   </div>
 </aside>

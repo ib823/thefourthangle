@@ -13,6 +13,7 @@ const canonicalPath = Astro.url.pathname
   .replace(/\.html$/, '') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath === '/' ? '/' : canonicalPath}`;
 const buildId = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : new Date().toISOString();
+const commitSha = typeof __COMMIT_SHA__ !== 'undefined' ? __COMMIT_SHA__ : 'unknown';
 const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
 ---
 <!DOCTYPE html>
@@ -58,12 +59,13 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
   <link rel="icon" type="image/png" href={`/favicon.png?v=${encodeURIComponent(buildId)}`} />
   <link rel="apple-touch-icon" href={`/icons/apple-touch-icon.png?v=${encodeURIComponent(buildId)}`} />
 </head>
-<body>
+<body data-build-id={buildId} data-commit-sha={commitSha}>
   <a href="#main-content" class="sr-only">Skip to content</a>
   <div id="main-content" tabindex="-1">
     <slot />
   </div>
-  <script is:inline define:vars={{ buildId }}>
+  <script is:inline define:vars={{ buildId, commitSha }}>
+    window.__TFA_RELEASE__ = { buildId, commitSha };
     if ('serviceWorker' in navigator) {
       const currentBuild = String(buildId);
       const priorBuild = sessionStorage.getItem('tfa-sw-build');

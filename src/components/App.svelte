@@ -18,7 +18,7 @@
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
   import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
-  import { BUILD_ID, getSiteOrigin } from '../lib/build';
+  import { BUILD_ID, COMMIT_SHA, getSiteOrigin, releaseLabel } from '../lib/build';
 
   interface FeedIssue {
     id: string;
@@ -175,6 +175,7 @@
     return source.filter(i => idSet.has(i.id));
   });
   let searchResultCount = $derived(isSearching ? filteredIssues.length : -1);
+  let releaseStamp = releaseLabel();
   let searchStatusMessage = $derived.by(() => {
     if (!isSearching) return '';
     const term = searchQuery.trim();
@@ -273,6 +274,10 @@
   }
 
   onMount(() => {
+    document.body.classList.add('app-shell-root');
+    document.body.dataset.release = releaseStamp;
+    document.body.dataset.commitSha = COMMIT_SHA;
+    document.body.dataset.buildId = BUILD_ID;
     checkViewport();
     surfaceMode = locationSurfaceMode();
     if (!window.location.pathname.startsWith('/issue/')) {
@@ -666,6 +671,10 @@
     navigator.serviceWorker?.addEventListener('message', onSwMessage);
 
     return () => {
+      document.body.classList.remove('app-shell-root');
+      delete document.body.dataset.release;
+      delete document.body.dataset.commitSha;
+      delete document.body.dataset.buildId;
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('t4a-open-issue', onNotifOpen);
       window.removeEventListener('offline', goOffline);

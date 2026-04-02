@@ -1,5 +1,14 @@
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
+import { execSync } from 'node:child_process';
+
+let commitSha = 'unknown';
+try {
+  commitSha = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+    .toString()
+    .trim();
+} catch {}
+
 export default defineConfig({
   site: 'https://thefourthangle.pages.dev',
   output: 'static',
@@ -15,6 +24,7 @@ export default defineConfig({
     define: {
       __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
       __BUILD_ID__: JSON.stringify(new Date().toISOString()),
+      __COMMIT_SHA__: JSON.stringify(commitSha),
     },
     plugins: [],
     build: {

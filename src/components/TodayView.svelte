@@ -1,6 +1,7 @@
 <script lang="ts">
   import { QUOTES } from '../data/quotes';
   import IssueImage from './IssueImage.svelte';
+  import { releaseLabel } from '../lib/build';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection } from '../lib/feed-sections';
@@ -33,6 +34,7 @@
   }: Props = $props();
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  const releaseStamp = releaseLabel();
 
   let readCount = $derived.by(() => {
     return Object.values(readMap).filter(v => {
@@ -233,7 +235,10 @@
       </div>
 
       <footer class="today-footer">
-        <div class="today-note">{unread > 0 ? `${unread} still unexplored in the full archive.` : 'You are fully caught up right now.'}</div>
+        <div>
+          <div class="today-note">{unread > 0 ? `${unread} still unexplored in the full archive.` : 'You are fully caught up right now.'}</div>
+          <div class="today-build" title={releaseStamp}>Build {releaseStamp}</div>
+        </div>
         <div class="today-quote">"{quote}"</div>
       </footer>
     {:else}
@@ -664,6 +669,14 @@
     color: var(--text-tertiary);
   }
 
+  .today-build {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
   .today-quote {
     font-style: italic;
     max-width: 44ch;
@@ -812,6 +825,7 @@
     }
 
     .today-note,
+    .today-build,
     .today-quote {
       color: var(--text-muted);
     }
