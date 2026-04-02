@@ -141,4 +141,37 @@
       font-size: 11px;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    .surface-button {
+      background: rgba(34, 31, 27, 0.9);
+      border-color: var(--border-divider);
+      color: var(--text-secondary);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .surface-button:hover {
+      background: rgba(41, 37, 32, 0.98);
+    }
+
+    .surface-button[aria-current='page'] {
+      background: rgba(200, 150, 58, 0.14);
+      border-color: rgba(200, 150, 58, 0.3);
+      color: var(--text-primary);
+    }
+
+    .surface-button--today {
+      background: rgba(200, 150, 58, 0.16);
+      border-color: rgba(200, 150, 58, 0.34);
+      color: var(--score-warning);
+    }
+
+    .surface-badge {
+      background: rgba(200, 150, 58, 0.16);
+    }
+
+    .surface-badge--critical {
+      background: rgba(248, 113, 113, 0.18);
+    }
+  }
 </style>

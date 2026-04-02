@@ -764,4 +764,56 @@
       max-width: none;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    .today-shell {
+      background:
+        radial-gradient(circle at top right, rgba(200, 150, 58, 0.12), transparent 28%),
+        linear-gradient(180deg, #141312 0%, #171614 22%, #171614 100%);
+    }
+
+    .today-status {
+      background: rgba(38, 34, 29, 0.88);
+      border-color: var(--border-divider);
+      color: var(--text-secondary);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .today-divider {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .ribbon-card,
+    .today-panel {
+      background: rgba(34, 31, 27, 0.92);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .ribbon-card--signal {
+      background:
+        radial-gradient(circle at top right, rgba(200, 150, 58, 0.16), transparent 40%),
+        linear-gradient(180deg, rgba(44, 38, 31, 0.98) 0%, rgba(35, 31, 27, 0.96) 100%);
+    }
+
+    .panel-issue,
+    .brief-item,
+    .library-item {
+      background: rgba(25, 24, 22, 0.96);
+      border-color: var(--border-divider);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .hero-card:hover,
+    .panel-issue:hover,
+    .brief-item:hover,
+    .library-item:hover {
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+    }
+
+    .today-note,
+    .today-quote {
+      color: var(--text-muted);
+    }
+  }
 </style>

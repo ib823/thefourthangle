@@ -84,4 +84,25 @@
     font-size: 11px;
     padding-inline: 10px;
   }
+
+  @media (prefers-color-scheme: dark) {
+    .sort-toggle {
+      background: rgba(34, 31, 27, 0.9);
+      border-color: var(--border-divider);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .sort-chip {
+      color: var(--text-muted);
+    }
+
+    .sort-chip:hover {
+      color: var(--text-primary);
+    }
+
+    .sort-chip--active {
+      background: rgba(200, 150, 58, 0.14);
+      color: var(--text-primary);
+    }
+  }
 </style>

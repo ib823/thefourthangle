@@ -54,7 +54,8 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    min-height: calc(78px + env(safe-area-inset-bottom, 0px));
+    padding: 10px 14px max(14px, calc(10px + env(safe-area-inset-bottom, 0px)));
     margin-top: auto;
     border-top: 1px solid rgba(17, 24, 39, 0.08);
     background:
@@ -64,6 +65,7 @@
     position: sticky;
     bottom: 0;
     z-index: 15;
+    box-shadow: 0 -12px 30px rgba(17, 24, 39, 0.08);
     flex-shrink: 0;
   }
 
@@ -120,12 +122,14 @@
 
   @media (prefers-color-scheme: dark) {
     .mobile-dock {
-      background: linear-gradient(180deg, rgba(26, 26, 26, 0.72) 0%, rgba(26, 26, 26, 0.96) 100%);
-      border-top-color: rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(20, 19, 18, 0.78) 0%, rgba(20, 19, 18, 0.98) 100%);
+      border-top-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 -18px 34px rgba(0, 0, 0, 0.28);
     }
 
     .dock-item--active {
-      background: rgba(61, 56, 48, 0.82);
+      background: rgba(200, 150, 58, 0.14);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
     }
   }
 </style>
