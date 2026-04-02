@@ -77,12 +77,9 @@
   });
   let readyCount = $derived((continueIssue ? 1 : 0) + briefingIssues.length);
   let readyMinutes = $derived(Math.max(4, briefingIssues.length * 3 + (continueIssue ? 2 : 0)));
-  let todayPathLabel = $derived.by(() => {
-    return `${readyCount} issue${readyCount === 1 ? '' : 's'} ready`;
-  });
-  let todayPathCopy = $derived.by(() => {
-    if (continueIssue) return 'Lead issue first, then resume where you stopped.';
-    return 'Lead issue first, then move straight into the briefing.';
+  let todayDeckCopy = $derived.by(() => {
+    if (continueIssue) return 'Start with the lead, then resume where you stopped.';
+    return 'Start with the lead, then move into the briefing.';
   });
 
   const buildDate = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '';
@@ -119,6 +116,7 @@
         <div>
           <div class="today-kicker">Today</div>
           <h1 class="today-title">See what deserves your full attention.</h1>
+          <p class="today-intro pretty-copy">{todayDeckCopy}</p>
         </div>
         <div class="today-status">
           <span>{readyCount} issues ready</span>
@@ -126,14 +124,6 @@
           <span>about {readyMinutes} min</span>
           <span class="today-divider"></span>
           <span>updated {formatDate(buildDate)}</span>
-        </div>
-      </div>
-
-      <div class="today-ribbon">
-        <div class="ribbon-card ribbon-card--signal">
-          <div class="ribbon-label">Today&apos;s Path</div>
-          <div class="ribbon-value">{todayPathLabel}</div>
-          <div class="ribbon-copy">{todayPathCopy}</div>
         </div>
       </div>
 
@@ -151,7 +141,6 @@
               <div class="hero-badge">Lead Issue</div>
               <h2 id="lead-issue-title" class="hero-headline balance-title">{topIssue.headline}</h2>
               <p class="hero-context pretty-copy">{topIssue.context}</p>
-              <p class="hero-hook pretty-copy">The point is not to catch up. The point is to arrive at the story after the rhetoric burns off.</p>
             </div>
             <div class="hero-shift">
               <div class="hero-shift-kicker">Opinion Shift</div>
@@ -293,6 +282,14 @@
     max-width: 15ch;
   }
 
+  .today-intro {
+    margin: 12px 0 0;
+    max-width: 40ch;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
   .today-status {
     display: inline-flex;
     align-items: center;
@@ -307,53 +304,8 @@
     white-space: nowrap;
   }
 
-  .today-ribbon {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-    max-width: 620px;
-  }
-
   .hero-entry {
     display: block;
-  }
-
-  .ribbon-card {
-    padding: 16px 18px;
-    border-radius: 22px;
-    border: 1px solid var(--border-subtle);
-    background: rgba(255, 255, 255, 0.76);
-    box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
-  }
-
-  .ribbon-card--signal {
-    background:
-      radial-gradient(circle at top right, rgba(210, 140, 40, 0.12), transparent 36%),
-      rgba(255, 255, 255, 0.88);
-  }
-
-  .ribbon-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-
-  .ribbon-value {
-    margin-top: 8px;
-    font-family: var(--font-display);
-    font-size: clamp(20px, 2.5vw, 30px);
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    color: var(--text-primary);
-  }
-
-  .ribbon-copy {
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: var(--text-secondary);
   }
 
   .today-divider {
@@ -443,7 +395,6 @@
   }
 
   .hero-context,
-  .hero-hook,
   .hero-shift-copy,
   .hero-shift-foot {
     margin: 0;
@@ -454,13 +405,6 @@
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.78);
     max-width: 56ch;
-  }
-
-  .hero-hook {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.92);
   }
 
   .hero-shift {
@@ -681,14 +625,6 @@
   }
 
   @media (max-width: 1023px) {
-    .today-ribbon {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .ribbon-card--signal {
-      grid-column: 1 / -1;
-    }
-
     .today-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -713,10 +649,6 @@
     .today-footer {
       flex-direction: column;
       align-items: flex-start;
-    }
-
-    .today-ribbon {
-      grid-template-columns: 1fr;
     }
 
     .today-status {
@@ -752,11 +684,6 @@
       border-radius: 20px;
     }
 
-    .ribbon-card {
-      padding: 14px 16px;
-      border-radius: 18px;
-    }
-
     .brief-score,
     .library-value {
       font-size: 28px;
@@ -786,17 +713,10 @@
       background: rgba(255, 255, 255, 0.16);
     }
 
-    .ribbon-card,
     .today-panel {
       background: rgba(34, 31, 27, 0.92);
       border-color: rgba(255, 255, 255, 0.06);
       box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
-    }
-
-    .ribbon-card--signal {
-      background:
-        radial-gradient(circle at top right, rgba(200, 150, 58, 0.16), transparent 40%),
-        linear-gradient(180deg, rgba(44, 38, 31, 0.98) 0%, rgba(35, 31, 27, 0.96) 100%);
     }
 
     .panel-issue,
