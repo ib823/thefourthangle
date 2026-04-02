@@ -14,6 +14,7 @@
   let pushSubscribed = $state(false);
   let pushDenied = $state(false);
   let pushLoading = $state(false);
+  const panelId = 'notifications-panel';
 
   // Cleanup references
   let swListener: ((e: MessageEvent) => void) | null = null;
@@ -206,6 +207,8 @@
     onclick={toggle}
     style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:8px;transition:background 0.15s ease;"
     aria-label={unread > 0 ? `${unread} unread notifications` : 'Notifications'}
+    aria-controls={panelId}
+    aria-haspopup="dialog"
     aria-expanded={open}
   >
     <svg width="18" height="18" viewBox="0 0 24 24" fill={open ? 'var(--text-primary, #212529)' : 'none'} stroke={open ? 'var(--text-primary, #212529)' : 'var(--text-tertiary, #6C757D)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:fill 0.15s ease,stroke 0.15s ease;">
@@ -221,7 +224,7 @@
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div onclick={close} role="presentation" style="position:fixed;inset:0;z-index:1999;" />
-    <div style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius:12px;box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
+    <div id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius:12px;box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle, #E9ECEF);">
         <span style="font-family:var(--font-display, sans-serif);font-size:14px;font-weight:700;color:var(--text-primary, #212529);">Notifications</span>

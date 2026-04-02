@@ -21,15 +21,15 @@
 </script>
 
 <nav class="mobile-dock" aria-label="Primary navigation">
-  <button class="dock-item" class:dock-item--active={surfaceMode === 'today'} onclick={() => onGoToday?.()}>
+  <button class="dock-item" class:dock-item--active={surfaceMode === 'today'} onclick={() => onGoToday?.()} aria-current={surfaceMode === 'today' ? 'page' : undefined}>
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
     <span>Today</span>
   </button>
-  <button class="dock-item" class:dock-item--active={surfaceMode === 'browse'} onclick={() => onOpenBrowse?.()}>
+  <button class="dock-item" class:dock-item--active={surfaceMode === 'browse'} onclick={() => onOpenBrowse?.()} aria-current={surfaceMode === 'browse' ? 'page' : undefined}>
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M9 20V10"></path></svg>
     <span>Browse</span>
   </button>
-  <button class="dock-item" class:dock-item--active={surfaceMode === 'saved'} onclick={() => onOpenSaved?.()}>
+  <button class="dock-item" class:dock-item--active={surfaceMode === 'saved'} onclick={() => onOpenSaved?.()} aria-current={surfaceMode === 'saved' ? 'page' : undefined}>
     <div class="dock-icon-wrap">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
       {#if savedCount > 0}
@@ -38,7 +38,7 @@
     </div>
     <span>Saved</span>
   </button>
-  <button class="dock-item" class:dock-item--active={surfaceMode === 'marked'} onclick={() => onOpenMarked?.()}>
+  <button class="dock-item" class:dock-item--active={surfaceMode === 'marked'} onclick={() => onOpenMarked?.()} aria-current={surfaceMode === 'marked' ? 'page' : undefined}>
     <div class="dock-icon-wrap">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10z"></path></svg>
       {#if markedCount > 0}

@@ -200,6 +200,25 @@ body {
   border-width: 0;
 }
 
+.sr-only:focus,
+.sr-only:focus-visible {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  width: auto;
+  height: auto;
+  padding: 10px 14px;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border-width: 0;
+  border-radius: 999px;
+  background: var(--text-primary);
+  color: var(--bg);
+  z-index: 5000;
+}
+
 @media (min-width: 1024px) {
   * {
     scrollbar-width: thin;

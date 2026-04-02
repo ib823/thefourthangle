@@ -38,16 +38,46 @@
   }
   let { initialIssueId, feedData = [] }: Props = $props();
 
-  function initialSurfaceMode(): 'today' | 'browse' | 'saved' | 'marked' {
+  type SurfaceMode = 'today' | 'browse' | 'saved' | 'marked';
+  type HistoryMode = 'push' | 'replace' | 'none';
+
+  function locationSurfaceMode(): SurfaceMode {
     if (typeof window === 'undefined') return 'today';
     const view = new URL(window.location.href).searchParams.get('view');
     return view === 'browse' || view === 'saved' || view === 'marked' ? view : 'today';
   }
 
+  function initialSurfaceMode(): SurfaceMode {
+    return locationSurfaceMode();
+  }
+
+  function surfaceUrl(mode: SurfaceMode): string {
+    return mode === 'today' ? '/' : `/?view=${mode}`;
+  }
+
+  function surfaceHeading(mode: SurfaceMode): string {
+    if (mode === 'browse') return 'Browse';
+    if (mode === 'saved') return 'Saved issues';
+    if (mode === 'marked') return 'Marked issues';
+    return 'Today';
+  }
+
+  function queueTitle(mode: SurfaceMode): string {
+    if (mode === 'saved') return 'No saved issues yet.';
+    if (mode === 'marked') return 'No marked issues yet.';
+    return 'Pick the next issue from the queue.';
+  }
+
+  function queueCopy(mode: SurfaceMode): string {
+    if (mode === 'saved') return 'Save an issue while reading and it will wait here for deliberate return.';
+    if (mode === 'marked') return 'Highlight an angle that hits hard and it will show up here for later reference.';
+    return 'Use the queue to scan by recency or by how much the headline hides.';
+  }
+
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
   let searchQuery = $state('');
   let searchActive = $state(false);
-  let surfaceMode = $state<'today' | 'browse' | 'saved' | 'marked'>(initialSurfaceMode());
+  let surfaceMode = $state<SurfaceMode>(initialSurfaceMode());
 
   // Feed data comes from Astro props (SSR-available) or from async fetch
   let issues = $state<FeedIssue[]>(feedData);
@@ -145,6 +175,12 @@
     return source.filter(i => idSet.has(i.id));
   });
   let searchResultCount = $derived(isSearching ? filteredIssues.length : -1);
+  let searchStatusMessage = $derived.by(() => {
+    if (!isSearching) return '';
+    const term = searchQuery.trim();
+    if (searchResultCount === 0) return `No results for "${term}".`;
+    return `${searchResultCount} result${searchResultCount !== 1 ? 's' : ''} for "${term}".`;
+  });
 
   // Save position whenever active issue changes
   $effect(() => {
@@ -206,6 +242,18 @@
     return unread.reduce((a, b) => a.opinionShift > b.opinionShift ? a : b);
   });
 
+  function syncSurfaceUrl(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'replace') {
+    if (typeof window === 'undefined') return;
+    const target = surfaceUrl(mode);
+    const current = window.location.pathname + window.location.search;
+    const state = { surface: mode };
+    if (historyMode === 'push' && current !== target) {
+      history.pushState(state, '', target);
+      return;
+    }
+    history.replaceState(state, '', target);
+  }
+
 
   function checkViewport() {
     const w = window.innerWidth;
@@ -226,6 +274,10 @@
 
   onMount(() => {
     checkViewport();
+    surfaceMode = locationSurfaceMode();
+    if (!window.location.pathname.startsWith('/issue/')) {
+      syncSurfaceUrl(surfaceMode, 'replace');
+    }
     window.addEventListener('resize', debouncedResize);
 
     // K2: Offline detection
@@ -246,7 +298,7 @@
           const found = data.find(i => i.id === initialIssueId);
           if (found) {
             activeIssue = found;
-            loadAndOpenIssue(found.id);
+            loadAndOpenIssue(found.id, 'replace');
           }
         }
       });
@@ -257,7 +309,7 @@
 
     // If feedData was SSR-provided (homepage), deep link is already resolved
     if (initialIssueId && activeIssue) {
-      loadAndOpenIssue(activeIssue.id);
+      loadAndOpenIssue(activeIssue.id, 'replace');
     }
 
     // If position restore (returning user within 24h), auto-open the reader
@@ -306,15 +358,28 @@
       document.addEventListener('visibilitychange', visHandler);
     }
 
-    // Back-button support: close reader on popstate
+    // Keep SPA state in sync with browser history
     function onPopState(e: PopStateEvent) {
-      if (activeIssue && !e.state?.reader) {
-        readerHistoryPushed = false;
-        activeIssue = null;
-        activeFullIssue = null;
-        // Restore base URL when reader closes via back button
-        history.replaceState(null, '', surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`);
+      const nextSurface = locationSurfaceMode();
+      const issueMatch = window.location.pathname.match(/^\/issue\/([^/]+)$/);
+
+      searchActive = false;
+      searchQuery = '';
+
+      if (issueMatch) {
+        const issueId = issueMatch[1];
+        surfaceMode = nextSurface;
+        if (issues.some((item) => item.id === issueId)) {
+          readerHistoryPushed = true;
+          void openIssueById(issueId, 'none');
+        }
+        return;
       }
+
+      readerHistoryPushed = false;
+      activeIssue = null;
+      activeFullIssue = null;
+      surfaceMode = nextSurface;
     }
     window.addEventListener('popstate', onPopState);
 
@@ -376,7 +441,7 @@
   // --- History state for reader back-button support ---
   let readerHistoryPushed = false;
 
-  async function loadAndOpenIssue(id: string) {
+  async function loadAndOpenIssue(id: string, historyMode: HistoryMode = 'push') {
     issueLoading = true;
     issueLoadError = false;
     try {
@@ -393,12 +458,26 @@
     issueLoading = false;
     // Sync URL to reflect the active issue
     const issuePath = `/issue/${id}`;
-    if (!readerHistoryPushed) {
+    if (historyMode === 'none') {
+      return;
+    }
+    if (historyMode === 'push') {
       history.pushState({ reader: true, issueId: id }, '', issuePath);
       readerHistoryPushed = true;
     } else {
       history.replaceState({ reader: true, issueId: id }, '', issuePath);
+      readerHistoryPushed = true;
     }
+  }
+
+  async function openIssueById(id: string, historyMode: HistoryMode = 'push') {
+    const target = issues.find((item) => item.id === id) ?? null;
+    if (target) {
+      activeIssue = target;
+    }
+    readerOriginRect = null;
+    restoredCardIndex = 0;
+    await loadAndOpenIssue(id, historyMode);
   }
 
   // Origin rect for shared-element transition
@@ -459,38 +538,42 @@
     activeIssue = issue;
     readerOriginRect = originRect ?? null;
     restoredCardIndex = 0; // Clear resume position — only used once on return
-    loadAndOpenIssue(issue.id);
+    loadAndOpenIssue(issue.id, 'push');
+  }
+
+  function activateSurface(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'push') {
+    searchQuery = '';
+    searchActive = false;
+    surfaceMode = mode;
+    if (activeIssue || activeFullIssue) {
+      activeIssue = null;
+      activeFullIssue = null;
+      readerHistoryPushed = false;
+    }
+    syncSurfaceUrl(mode, historyMode);
   }
 
   function goToday() {
-    searchQuery = '';
-    searchActive = false;
-    surfaceMode = 'today';
-    if (activeIssue || activeFullIssue) closeReader();
+    activateSurface('today', 'push');
   }
 
   function openBrowse() {
-    surfaceMode = 'browse';
-    searchActive = false;
+    activateSurface('browse', 'push');
   }
 
   function openSavedLibrary() {
-    surfaceMode = 'saved';
-    searchActive = false;
+    activateSurface('saved', 'push');
   }
 
   function openMarkedLibrary() {
-    surfaceMode = 'marked';
-    searchActive = false;
+    activateSurface('marked', 'push');
   }
 
-  function closeReader() {
+  function closeReader(historyMode: Exclude<HistoryMode, 'none'> = 'replace') {
     activeIssue = null;
     activeFullIssue = null;
-    if (readerHistoryPushed) {
-      readerHistoryPushed = false;
-      history.replaceState(null, '', surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`);
-    }
+    readerHistoryPushed = false;
+    syncSurfaceUrl(surfaceMode, historyMode);
   }
 
   function openNextIssue() {
@@ -500,7 +583,7 @@
     if (idx >= 0 && idx < sequence.length - 1) {
       const next = sequence[idx + 1];
       activeIssue = next;
-      loadAndOpenIssue(next.id);
+      loadAndOpenIssue(next.id, 'replace');
     }
   }
 
@@ -519,10 +602,12 @@
   });
 
   $effect(() => {
-    if (typeof window === 'undefined' || activeIssue || activeFullIssue) return;
-    const target = surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`;
+    if (typeof window === 'undefined' || activeIssue || activeFullIssue || window.location.pathname.startsWith('/issue/')) return;
+    const target = surfaceUrl(surfaceMode);
     if (window.location.pathname + window.location.search !== target) {
-      history.replaceState(null, '', target);
+      history.replaceState({ surface: surfaceMode }, '', target);
+    } else if (history.state?.surface !== surfaceMode) {
+      history.replaceState({ surface: surfaceMode }, '', target);
     }
   });
 
@@ -538,8 +623,8 @@
           return;
         }
       }
-      if (viewMode !== 'desktop') return;
       if (e.key === 'Escape' && searchActive) { onSearchClear(); return; }
+      if (viewMode !== 'desktop') return;
       if (e.key === 'Escape' && activeIssue) { closeReader(); return; }
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault();
@@ -563,7 +648,9 @@
     // Listen for notification clicks to open specific issues
     function onNotifOpen(e: Event) {
       const id = (e as CustomEvent).detail?.issueId;
-      if (id) loadAndOpenIssue(id);
+      if (id) {
+        void openIssueById(id, 'push');
+      }
     }
     window.addEventListener('t4a-open-issue', onNotifOpen);
 
@@ -571,7 +658,9 @@
     function onSwMessage(e: MessageEvent) {
       if (e.data?.type === 'NAVIGATE_TO' && e.data.url) {
         const match = e.data.url.match(/\/issue\/(\w+)/);
-        if (match) loadAndOpenIssue(match[1]);
+        if (match) {
+          void openIssueById(match[1], 'push');
+        }
       }
     }
     navigator.serviceWorker?.addEventListener('message', onSwMessage);
@@ -591,7 +680,7 @@
 {/if}
 
   {#if viewMode === 'mobile'}
-  <main style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
+  <div style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
     <Header
       issueIds={issues.map(i => i.id)}
       onHome={goToday}
@@ -602,39 +691,69 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
+    <main style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
     {#if !searchActive && surfaceMode !== 'today'}
+      <h1 class="sr-only">{surfaceHeading(surfaceMode)}</h1>
       <div style="padding:8px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);background:linear-gradient(180deg, rgba(248,249,250,0.82) 0%, rgba(248,249,250,0.54) 100%);">
-        <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} />
+        {#if surfaceMode === 'browse'}
+          <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} panelId="mobile-browse-panel" idPrefix="mobile-sort" />
+        {/if}
       </div>
+    {/if}
+    {#if isSearching}
+      <div class="sr-only" role="status" aria-live="polite">{searchStatusMessage}</div>
     {/if}
     {#if surfaceMode === 'today' && !isSearching}
       <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+    {:else if !isSearching && (surfaceMode === 'saved' || surfaceMode === 'marked') && sortedIssues.length === 0}
+      <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
+        <div style="max-width:320px;text-align:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">{surfaceHeading(surfaceMode)}</div>
+          <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{queueTitle(surfaceMode)}</h2>
+          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{queueCopy(surfaceMode)}</p>
+          <button onclick={openBrowse} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Browse issues</button>
+        </div>
+      </section>
+    {:else if surfaceMode === 'browse' && !isSearching}
+      <div id="mobile-browse-panel" role="tabpanel" aria-labelledby={`mobile-sort-${feedSort}`} style="flex:1;min-height:0;">
+        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+      </div>
     {:else}
       <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
     {/if}
+    </main>
     {#if !searchActive && !activeFullIssue}
       <MobileDock surfaceMode={surfaceMode} {savedCount} {markedCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
     {/if}
-  </main>
+  </div>
 
   {#if activeFullIssue}
     <InsightReader issue={activeFullIssue} onClose={closeReader} onReturnHome={goToday} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else if viewMode === 'tablet'}
-  <main style="min-height:100vh;">
+  <div style="min-height:100vh;">
     <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
+    <main>
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
+      {#if surfaceMode !== 'today'}
+        <h1 class="sr-only">{surfaceHeading(surfaceMode)}</h1>
+      {/if}
       <div style="margin-bottom:16px;">
-        <input
-          data-search-input
-          type="text"
-          placeholder="Search issues..."
-          value={searchQuery}
-          oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
-          onfocus={onSearchFocus}
-          style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
-        />
+        <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()}>
+          <label class="sr-only" for="tablet-search">Search issues</label>
+          <input
+            id="tablet-search"
+            data-search-input
+            type="text"
+            placeholder="Search issues..."
+            aria-label="Search issues"
+            value={searchQuery}
+            oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
+            onfocus={onSearchFocus}
+            style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
+          />
+        </form>
       </div>
       {#if !isSearching}
         <div style="margin-bottom:14px;">
@@ -642,54 +761,72 @@
         </div>
       {/if}
       {#if isSearching}
-        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
+        <div role="status" aria-live="polite" style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
           {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
         </div>
-      {:else if surfaceMode !== 'today'}
+      {:else if surfaceMode === 'browse'}
         <div style="margin-bottom:12px;">
-          <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} />
+          <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} panelId="tablet-browse-panel" idPrefix="tablet-sort" />
         </div>
       {/if}
       {#if surfaceMode === 'today' && !isSearching}
         <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+      {:else if !isSearching && (surfaceMode === 'saved' || surfaceMode === 'marked') && sortedIssues.length === 0}
+        <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
+          <div style="max-width:420px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">{surfaceHeading(surfaceMode)}</div>
+            <h2 style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{queueTitle(surfaceMode)}</h2>
+            <p style="font-size:14px;line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{queueCopy(surfaceMode)}</p>
+            <button onclick={openBrowse} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Browse issues</button>
+          </div>
+        </section>
       {:else if isSearching}
         <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
           {#each sortedIssues as issue, i}
             <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
           {/each}
         </div>
+      {:else if surfaceMode === 'browse'}
+        <div id="tablet-browse-panel" role="tabpanel" aria-labelledby={`tablet-sort-${feedSort}`}>
+          {#each feedSections as section}
+            <div style="margin-bottom:32px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
+                <span style="font-size:10px;color:var(--text-faint);">{section.count}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+                {#each section.issues as issue, i}
+                  <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+                {/each}
+              </div>
+            </div>
+          {/each}
+        </div>
       {:else}
-        {#each feedSections as section}
-          <div style="margin-bottom:32px;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
-              <span style="font-size:10px;color:var(--text-faint);">{section.count}</span>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
-              {#each section.issues as issue, i}
-                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
-              {/each}
-            </div>
-          </div>
-        {/each}
+        <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+          {#each sortedIssues as issue, i}
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+          {/each}
+        </div>
       {/if}
       {#if isSearching && searchResultCount === 0}
         <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery.trim()}"</div>
       {/if}
     </div>
-  </main>
+    </main>
+  </div>
 
   {#if activeFullIssue}
     <InsightReader issue={activeFullIssue} onClose={closeReader} onReturnHome={goToday} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else}
-  <main style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
+  <div style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
       <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
-    <div style="flex:1;display:flex;overflow:hidden;">
+    <main style="flex:1;display:flex;overflow:hidden;">
       <DesktopFeed
         issues={sortedIssues}
         sections={feedSections}
@@ -760,6 +897,6 @@
       {:else}
         <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
       {/if}
-    </div>
-  </main>
+    </main>
+  </div>
 {/if}

@@ -473,6 +473,7 @@
   }
 
   function next() {
+    if (animating) return;
     if (current >= totalCards - 1) {
       showCompletion();
       return;
@@ -486,6 +487,7 @@
   }
 
   function prev() {
+    if (animating) return;
     if (completed) {
       completed = false;
       completionVisible = false;
@@ -794,9 +796,11 @@
     }
     if (e.key === 'ArrowRight') {
       e.preventDefault();
+      if (animating) return;
       next();
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
+      if (animating) return;
       prev();
     } else if (e.key === 'Escape') {
       e.preventDefault();
@@ -989,7 +993,7 @@
 
   <!-- Hero image -->
   {#if current === 0 && !completed}
-    <div style="padding:0 20px;margin-bottom:8px;">
+    <div class="reader-hero" style="padding:0 20px;margin-bottom:8px;">
       <div style="border-radius:10px;overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
           <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
       </div>
@@ -1548,6 +1552,8 @@
 
   .completion-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     margin-top: 8px;
   }
@@ -1695,5 +1701,51 @@
   }
   .connection-nudge:hover {
     background: var(--bg-sunken);
+  }
+
+  @media (max-height: 500px) {
+    .overlay {
+      overflow-y: auto;
+    }
+
+    .header {
+      padding-top: 6px;
+    }
+
+    .headline-area {
+      padding-top: 4px;
+    }
+
+    .reader-hero {
+      display: none;
+    }
+
+    .card-area {
+      padding-top: 8px;
+      padding-bottom: 0;
+    }
+
+    .card {
+      padding: 16px 18px;
+    }
+
+    .card-top {
+      margin-bottom: 12px;
+    }
+
+    .card-center {
+      justify-content: flex-start;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .card-bottom {
+      margin-top: 12px;
+    }
+
+    .completion-inner {
+      gap: 12px;
+      padding-top: 16px;
+    }
   }
 </style>

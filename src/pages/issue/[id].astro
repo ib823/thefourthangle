@@ -83,7 +83,7 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
-  <div id="main-content">
+  <div id="main-content" tabindex="-1">
     <App client:load initialIssueId={issue.id} />
   </div>
   <script is:inline define:vars={{ buildId }}>

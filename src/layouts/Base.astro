@@ -60,7 +60,7 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
-  <div id="main-content">
+  <div id="main-content" tabindex="-1">
     <slot />
   </div>
   <script is:inline define:vars={{ buildId }}>

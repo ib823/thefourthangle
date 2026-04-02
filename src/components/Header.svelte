@@ -53,17 +53,20 @@
 
 <header class="site-header">
   {#if searchMode}
-    <div style="flex:1;display:flex;align-items:center;gap:8px;">
+    <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()} style="flex:1;display:flex;align-items:center;gap:8px;">
+      <label class="sr-only" for="header-search">Search issues</label>
       <input
+        id="header-search"
         bind:this={searchInputEl}
         type="text"
         placeholder="Search issues..."
+        aria-label="Search issues"
         value={searchQuery}
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
         style="flex:1;padding:8px 12px;font-size:14px;border:1px solid var(--border-subtle);border-radius:8px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
       />
-      <button onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
-    </div>
+      <button type="button" onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
+    </form>
   {:else}
     <div class="brand">
       <Logo size={72} />

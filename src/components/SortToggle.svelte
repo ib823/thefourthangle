@@ -4,17 +4,37 @@
   interface Props {
     sortMode: SortMode;
     variant?: 'inline' | 'sidebar';
+    panelId?: string;
+    idPrefix?: string;
     onChange?: (mode: SortMode) => void;
   }
 
-  let { sortMode, variant = 'inline', onChange }: Props = $props();
+  let { sortMode, variant = 'inline', panelId, idPrefix = 'issue-sort', onChange }: Props = $props();
+
+  function activate(mode: SortMode) {
+    onChange?.(mode);
+  }
+
+  function onKeyDown(event: KeyboardEvent, mode: SortMode) {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') return;
+    event.preventDefault();
+    if (event.key === 'Home') {
+      activate('latest');
+      return;
+    }
+    if (event.key === 'End') {
+      activate('shift');
+      return;
+    }
+    activate(mode === 'latest' ? 'shift' : 'latest');
+  }
 </script>
 
 <div class="sort-toggle" class:sort-toggle--sidebar={variant === 'sidebar'} role="tablist" aria-label="Issue sorting">
-  <button class="sort-chip" class:sort-chip--active={sortMode === 'latest'} onclick={() => onChange?.('latest')} role="tab" aria-selected={sortMode === 'latest'}>
+  <button class="sort-chip" class:sort-chip--active={sortMode === 'latest'} id={`${idPrefix}-latest`} onclick={() => activate('latest')} onkeydown={(event) => onKeyDown(event, 'latest')} role="tab" tabindex={sortMode === 'latest' ? 0 : -1} aria-selected={sortMode === 'latest'} aria-controls={panelId}>
     Latest
   </button>
-  <button class="sort-chip" class:sort-chip--active={sortMode === 'shift'} onclick={() => onChange?.('shift')} role="tab" aria-selected={sortMode === 'shift'}>
+  <button class="sort-chip" class:sort-chip--active={sortMode === 'shift'} id={`${idPrefix}-shift`} onclick={() => activate('shift')} onkeydown={(event) => onKeyDown(event, 'shift')} role="tab" tabindex={sortMode === 'shift' ? 0 : -1} aria-selected={sortMode === 'shift'} aria-controls={panelId}>
     Most Hidden
   </button>
 </div>

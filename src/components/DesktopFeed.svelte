@@ -49,7 +49,14 @@
   let isSearching = $derived(searchQuery.trim().length >= 2);
 
   // Filter state
-  let filterMode = $state<'all' | 'new' | 'reading' | 'done'>('all');
+  type FilterMode = 'all' | 'new' | 'reading' | 'done';
+  const filterTabs: Array<{ key: FilterMode; label: string }> = [
+    { key: 'all', label: 'All' },
+    { key: 'new', label: 'New' },
+    { key: 'reading', label: 'Reading' },
+    { key: 'done', label: 'Done' },
+  ];
+  let filterMode = $state<FilterMode>('all');
 
   // Reactions — subscribe to the atom for real-time updates
   let reactionRaw = $state('{}');
@@ -175,6 +182,27 @@
     }
   }
 
+  function activateFilter(mode: FilterMode) {
+    filterMode = mode;
+  }
+
+  function onFilterKeyDown(event: KeyboardEvent, mode: FilterMode) {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') return;
+    event.preventDefault();
+    const currentIndex = filterTabs.findIndex((tab) => tab.key === mode);
+    if (event.key === 'Home') {
+      activateFilter(filterTabs[0].key);
+      return;
+    }
+    if (event.key === 'End') {
+      activateFilter(filterTabs[filterTabs.length - 1].key);
+      return;
+    }
+    const delta = event.key === 'ArrowRight' ? 1 : -1;
+    const nextIndex = (currentIndex + delta + filterTabs.length) % filterTabs.length;
+    activateFilter(filterTabs[nextIndex].key);
+  }
+
   function scrollToFocused() {
     if (!scrollContainerEl || focusedIndex < 0) return;
     const itemTop = focusedIndex * ITEM_HEIGHT;
@@ -203,6 +231,7 @@
 </script>
 
 <aside aria-label="Issue list" style="width:320px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
+  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : surfaceMode === 'saved' ? 'Saved issues' : 'Marked issues'}</h1>
   <div style="padding:14px 18px 0;flex-shrink:0;">
     <div style="padding:0 2px 12px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Smart Queue</div>
@@ -214,11 +243,14 @@
     </div>
 
     <!-- Search -->
-    <div style="position:relative;">
+    <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()} style="position:relative;">
+      <label class="sr-only" for="desktop-search">Search issues</label>
       <input
+        id="desktop-search"
         data-search-input
         type="text"
         placeholder="Search issues..."
+        aria-label="Search issues"
         value={searchQuery}
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
         onfocus={() => onSearchFocus?.()}
@@ -228,23 +260,31 @@
       />
       {#if isSearching}
         <button
+          type="button"
           onclick={() => onSearchClear?.()}
           style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;color:var(--text-tertiary);padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;"
           aria-label="Clear search"
         >x</button>
       {/if}
-    </div>
+    </form>
 
     <!-- Sort toggle -->
-    {#if !isSearching && onSortChange && surfaceMode !== 'today'}
+    {#if !isSearching && onSortChange && surfaceMode === 'browse'}
       <div style="padding:10px 0 4px;">
-        <SortToggle variant="sidebar" {sortMode} onChange={onSortChange} />
+        <SortToggle variant="sidebar" {sortMode} onChange={onSortChange} panelId="desktop-browse-panel" idPrefix="desktop-sort" />
       </div>
     {/if}
 
     <!-- Section headers or filter bar -->
     {#if isSearching}
       <div style="padding:6px 0;">
+        <span class="sr-only" role="status" aria-live="polite">
+          {#if issues.length === 0 && searchQuery.trim().length >= 2}
+            No results for "{searchQuery.trim()}"
+          {:else}
+            {issues.length} result{issues.length !== 1 ? 's' : ''} for "{searchQuery.trim()}"
+          {/if}
+        </span>
         <span style="font-size:11px;color:var(--text-tertiary);">
           {#if issues.length === 0 && searchQuery.trim().length >= 2}
             No results for "{searchQuery.trim()}"
@@ -256,16 +296,15 @@
     {:else if sections.length === 0}
       <!-- Fallback: filter tabs when no sections computed -->
       <div style="display:flex;gap:0;margin-top:8px;border-bottom:1px solid var(--bg-sunken);" role="tablist" aria-label="Filter issues">
-        {#each [
-          { key: 'all', label: 'All', count: counts.all },
-          { key: 'new', label: 'New', count: counts.new },
-          { key: 'reading', label: 'Reading', count: counts.reading },
-          { key: 'done', label: 'Done', count: counts.done },
-        ] as tab}
+        {#each filterTabs as tab}
           <button
-            onclick={() => { filterMode = tab.key as typeof filterMode; }}
+            id={`desktop-filter-${tab.key}`}
+            onclick={() => { activateFilter(tab.key); }}
+            onkeydown={(event) => onFilterKeyDown(event, tab.key)}
             role="tab"
             aria-selected={filterMode === tab.key}
+            aria-controls="desktop-feed-list"
+            tabindex={filterMode === tab.key ? 0 : -1}
             style="
               flex:1;padding:8px 4px 10px;background:none;border:none;cursor:pointer;
               font-size:11px;font-weight:{filterMode === tab.key ? '700' : '500'};
@@ -277,7 +316,9 @@
             "
           >
             <span>{tab.label}</span>
-            <span style="font-size:10px;font-weight:500;color:{filterMode === tab.key ? 'var(--text-tertiary)' : 'var(--text-faint)'};">{tab.count}</span>
+            <span style="font-size:10px;font-weight:500;color:{filterMode === tab.key ? 'var(--text-tertiary)' : 'var(--text-faint)'};">
+              {tab.key === 'all' ? counts.all : tab.key === 'new' ? counts.new : tab.key === 'reading' ? counts.reading : counts.done}
+            </span>
           </button>
         {/each}
       </div>
@@ -288,7 +329,9 @@
   </div>
 
   <!-- Feed list -->
+  <div id="desktop-browse-panel" role={surfaceMode === 'browse' && !isSearching ? 'tabpanel' : undefined} aria-labelledby={surfaceMode === 'browse' && !isSearching ? `desktop-sort-${sortMode}` : undefined} style="flex:1;display:flex;flex-direction:column;min-height:0;">
   <div
+    id="desktop-feed-list"
     bind:this={scrollContainerEl}
     onscroll={onFeedScroll}
     onkeydown={onFeedKeyDown}
@@ -339,6 +382,7 @@
         {/each}
       </div>
     {/if}
+  </div>
   </div>
 
   <div style="padding:10px 20px;border-top:1px solid var(--bg-sunken);flex-shrink:0;">

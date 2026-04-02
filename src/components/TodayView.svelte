@@ -109,7 +109,7 @@
       <div class="today-topline">
         <div>
           <div class="today-kicker">Today</div>
-          <h2 class="today-title">See what deserves your full attention.</h2>
+          <h1 class="today-title">See what deserves your full attention.</h1>
         </div>
         <div class="today-status">
           <span>{readyCount} issues ready</span>
@@ -139,6 +139,7 @@
       </div>
 
       {#if topIssue && onOpenIssue}
+        <article class="hero-entry" aria-labelledby="lead-issue-title">
         <button class="hero-card" onclick={() => onOpenIssue?.(topIssue)}>
           {#if topIssue.hasImage}
             <div class="hero-art">
@@ -149,7 +150,7 @@
           <div class="hero-grid">
             <div class="hero-copy">
               <div class="hero-badge">Lead Issue</div>
-              <h3 class="hero-headline balance-title">{topIssue.headline}</h3>
+              <h2 id="lead-issue-title" class="hero-headline balance-title">{topIssue.headline}</h2>
               <p class="hero-context pretty-copy">{topIssue.context}</p>
               <p class="hero-hook pretty-copy">The point is not to catch up. The point is to arrive at the story after the rhetoric burns off.</p>
             </div>
@@ -165,11 +166,13 @@
             </div>
           </div>
         </button>
+        </article>
       {/if}
 
       <div class="today-grid">
-        <div class="today-panel">
+        <section class="today-panel" aria-labelledby="continue-reading-heading">
           <div class="panel-kicker">Continue Reading</div>
+          <h2 id="continue-reading-heading" class="sr-only">Continue Reading</h2>
           {#if continueIssue && onOpenIssue}
             <button class="panel-issue" onclick={() => onOpenIssue?.(continueIssue)}>
               <div class="panel-issue-title balance-title">{continueIssue.headline}</div>
@@ -187,11 +190,11 @@
               <div class="panel-empty-copy">You are not behind. Start with today’s lead or open the daily briefing below.</div>
             </div>
           {/if}
-        </div>
+        </section>
 
-        <div class="today-panel">
+        <section class="today-panel" aria-labelledby="daily-briefing-heading">
           <div class="panel-kicker">Daily Briefing</div>
-          <div class="panel-title">Three strong places to start.</div>
+          <h2 id="daily-briefing-heading" class="panel-title">Three strong places to start.</h2>
           <div class="panel-subtitle">High-yield reads in about {Math.max(6, briefingIssues.length * 3)} minutes.</div>
           <div class="brief-list">
             {#each briefingIssues as issue}
@@ -204,11 +207,11 @@
               </button>
             {/each}
           </div>
-        </div>
+        </section>
 
-        <div class="today-panel today-panel--library">
+        <section class="today-panel today-panel--library" aria-labelledby="your-library-heading">
           <div class="panel-kicker">Your Library</div>
-          <div class="panel-title">Move between ritual, archive, and memory.</div>
+          <h2 id="your-library-heading" class="panel-title">Move between ritual, archive, and memory.</h2>
           <div class="library-grid">
             <button class="library-item" onclick={() => onOpenBrowse?.()}>
               <span class="library-label">Full Queue</span>
@@ -226,17 +229,17 @@
               <span class="library-copy">Issues with at least one highlighted angle</span>
             </button>
           </div>
-        </div>
+        </section>
       </div>
 
-      <div class="today-footer">
+      <footer class="today-footer">
         <div class="today-note">{unread > 0 ? `${unread} still unexplored in the full archive.` : 'You are fully caught up right now.'}</div>
         <div class="today-quote">"{quote}"</div>
-      </div>
+      </footer>
     {:else}
       <div class="coming-soon">
         <div class="today-kicker">Coming Soon</div>
-        <h2 class="today-title">New issues publish three times a week.</h2>
+        <h1 class="today-title">New issues publish three times a week.</h1>
         <p class="today-quote">"{quote}"</p>
       </div>
     {/if}
@@ -306,6 +309,10 @@
     display: grid;
     grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
     gap: 14px;
+  }
+
+  .hero-entry {
+    display: block;
   }
 
   .ribbon-card {
