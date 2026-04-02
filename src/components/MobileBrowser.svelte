@@ -83,7 +83,6 @@
   let swipeSuppressUntil = 0;
   let touchStartY = 0;
   let touchStartX = 0;
-  let touchStartScrollTop = 0;
   let touchTracking = false;
 
   function getState(id: string) {
@@ -201,7 +200,6 @@
     touchTracking = true;
     touchStartY = touch.clientY;
     touchStartX = touch.clientX;
-    touchStartScrollTop = containerEl.scrollTop;
   }
 
   function onTouchEnd(event: TouchEvent) {
@@ -214,11 +212,9 @@
     const touch = event.changedTouches[0];
     const deltaY = touch.clientY - touchStartY;
     const deltaX = touch.clientX - touchStartX;
-    const scrollDelta = Math.abs(containerEl.scrollTop - touchStartScrollTop);
 
     if (Math.abs(deltaY) < 48) return;
     if (Math.abs(deltaY) < Math.abs(deltaX) * 1.2) return;
-    if (scrollDelta > 24) return;
 
     swipeSuppressUntil = performance.now() + 350;
     if (deltaY < 0) scrollToAdjacentIssue(1);

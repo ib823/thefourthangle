@@ -602,15 +602,16 @@
     color: var(--text-tertiary);
   }
 
-  .brief-list,
-  .today-library-list {
-    display: flex;
-    gap: 10px;
+  .brief-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 12px;
   }
 
   .today-library-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .brief-item {
@@ -755,6 +756,10 @@
     }
 
     .today-library-list {
+      grid-template-columns: 1fr;
+    }
+
+    .brief-list {
       grid-template-columns: 1fr;
     }
 
