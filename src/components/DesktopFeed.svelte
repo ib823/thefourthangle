@@ -230,7 +230,7 @@
   });
 </script>
 
-<aside aria-label="Issue list" style="width:320px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
+<aside aria-label="Issue list" style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
   <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : surfaceMode === 'saved' ? 'Saved issues' : 'Marked issues'}</h1>
   <div style="padding:14px 18px 0;flex-shrink:0;">
     <div style="padding:0 2px 12px;">

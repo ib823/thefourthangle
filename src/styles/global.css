@@ -19,11 +19,15 @@
 }
 
 html {
+  min-height: 100%;
   overscroll-behavior-x: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
   font-family: var(--font-body);
   background: var(--bg-elevated);
   color: var(--text-primary);
@@ -31,6 +35,11 @@ body {
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#main-content {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .balance-title {

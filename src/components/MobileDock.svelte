@@ -55,11 +55,15 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    margin-top: auto;
     border-top: 1px solid rgba(17, 24, 39, 0.08);
     background:
       linear-gradient(180deg, rgba(248, 249, 250, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    position: sticky;
+    bottom: 0;
+    z-index: 15;
     flex-shrink: 0;
   }
 

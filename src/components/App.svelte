@@ -680,7 +680,7 @@
 {/if}
 
   {#if viewMode === 'mobile'}
-  <div style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="app-shell app-shell--mobile">
     <Header
       issueIds={issues.map(i => i.id)}
       onHome={goToday}
@@ -691,7 +691,7 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    <main style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+    <main class="app-main">
     {#if !searchActive && surfaceMode !== 'today'}
       <h1 class="sr-only">{surfaceHeading(surfaceMode)}</h1>
       <div style="padding:8px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);background:linear-gradient(180deg, rgba(248,249,250,0.82) 0%, rgba(248,249,250,0.54) 100%);">
@@ -732,7 +732,7 @@
   {/if}
 
 {:else if viewMode === 'tablet'}
-  <div style="min-height:100vh;">
+  <div class="app-shell app-shell--tablet">
     <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     <main>
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
@@ -821,12 +821,12 @@
   {/if}
 
 {:else}
-  <div style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="app-shell app-shell--desktop">
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
       <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
-    <main style="flex:1;display:flex;overflow:hidden;">
+    <main class="app-main app-main--desktop">
       <DesktopFeed
         issues={sortedIssues}
         sections={feedSections}
@@ -900,3 +900,32 @@
     </main>
   </div>
 {/if}
+
+<style>
+  .app-shell {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg);
+  }
+
+  .app-shell--mobile,
+  .app-shell--desktop {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .app-main--desktop {
+    flex-direction: row;
+  }
+</style>
