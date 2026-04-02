@@ -32,9 +32,14 @@ body {
   background: var(--bg-elevated);
   color: var(--text-primary);
   touch-action: manipulation;
-  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.app-shell-standalone {
+  overscroll-behavior: none;
 }
 
 #main-content {

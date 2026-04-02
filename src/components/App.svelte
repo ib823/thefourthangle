@@ -320,8 +320,19 @@
     resizeTimer = setTimeout(checkViewport, 150);
   }
 
+  function isStandaloneDisplay(): boolean {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.matchMedia('(display-mode: fullscreen)').matches
+      || ('standalone' in window.navigator && window.navigator.standalone === true);
+  }
+
+  function syncShellModeClass() {
+    document.body.classList.toggle('app-shell-standalone', isStandaloneDisplay());
+  }
+
   onMount(() => {
     document.body.classList.add('app-shell-root');
+    syncShellModeClass();
     document.body.dataset.release = releaseStamp;
     document.body.dataset.commitSha = COMMIT_SHA;
     document.body.dataset.buildId = BUILD_ID;
@@ -443,9 +454,16 @@
     }
     window.addEventListener('popstate', onPopState);
 
+    const standaloneMedia = window.matchMedia('(display-mode: standalone)');
+    const fullscreenMedia = window.matchMedia('(display-mode: fullscreen)');
+    standaloneMedia.addEventListener('change', syncShellModeClass);
+    fullscreenMedia.addEventListener('change', syncShellModeClass);
+
     return () => {
       window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('popstate', onPopState);
+      standaloneMedia.removeEventListener('change', syncShellModeClass);
+      fullscreenMedia.removeEventListener('change', syncShellModeClass);
     };
   });
 
@@ -736,6 +754,7 @@
 
     return () => {
       document.body.classList.remove('app-shell-root');
+      document.body.classList.remove('app-shell-standalone');
       delete document.body.dataset.release;
       delete document.body.dataset.commitSha;
       delete document.body.dataset.buildId;
