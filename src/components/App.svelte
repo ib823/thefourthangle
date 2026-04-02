@@ -819,11 +819,21 @@
         </div>
       </section>
     {:else if surfaceMode === 'browse' && !isSearching}
-      <div id="mobile-browse-panel" role="tabpanel" aria-labelledby={`mobile-sort-${feedSort}`} style="flex:1;min-height:0;">
+      <div
+        id="mobile-browse-panel"
+        role="tabpanel"
+        aria-labelledby={`mobile-sort-${feedSort}`}
+        style="flex:1;min-height:0;display:flex;flex-direction:column;"
+      >
         <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
       </div>
     {:else if surfaceMode === 'library' && !isSearching}
-      <div id="mobile-library-panel" role="tabpanel" aria-labelledby={`mobile-library-${libraryMode}`} style="flex:1;min-height:0;">
+      <div
+        id="mobile-library-panel"
+        role="tabpanel"
+        aria-labelledby={`mobile-library-${libraryMode}`}
+        style="flex:1;min-height:0;display:flex;flex-direction:column;"
+      >
         <MobileBrowser issues={sortedIssues} sections={[]} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
       </div>
     {:else}
