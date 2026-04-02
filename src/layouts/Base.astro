@@ -100,14 +100,16 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
     // Progressive enhancement — falls back to instant navigation on unsupported browsers
     if ('startViewTransition' in document) {
       document.addEventListener('click', (e) => {
-        const anchor = (e.target as Element)?.closest('a[href]') as HTMLAnchorElement | null;
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        const anchor = target.closest('a[href]');
         if (!anchor) return;
         const href = anchor.getAttribute('href');
         if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
         // Same-origin internal navigation only
         if (anchor.origin !== location.origin) return;
         e.preventDefault();
-        (document as any).startViewTransition(() => {
+        document.startViewTransition(() => {
           location.href = href;
         });
       });

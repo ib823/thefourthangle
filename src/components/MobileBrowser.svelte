@@ -27,7 +27,7 @@
   let { issues, sections = [], onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '', sortMode = 'latest', onSortChange }: Props = $props();
 
   let mounted = $state(false);
-  let current = $state(Math.min(initialFeedIndex, Math.max(0, issues.length - 1)));
+  let current = $state(0);
   let readMap: Record<string, string> = $state({});
 
   // Build display list: interleave section dividers with issues
@@ -80,12 +80,71 @@
   // Intersection observer for tracking current card
   let observer: IntersectionObserver | undefined;
   let lastSnappedIndex = current;
+  let swipeSuppressUntil = 0;
+  let touchStartY = 0;
+  let touchStartX = 0;
+  let touchStartScrollTop = 0;
+  let touchTracking = false;
 
   function getState(id: string) {
     const raw = readMap[id];
     if (!raw) return null;
     if (raw === 'true') return { state: 'completed', progress: 6 };
     try { return JSON.parse(raw); } catch { return null; }
+  }
+
+  function getIssueDisplayIndex(issueId: string): number {
+    const idx = displayList.findIndex((item) => item.type === 'issue' && item.issue.id === issueId);
+    return idx >= 0 ? idx : 0;
+  }
+
+  function getDisplayIndexForIssueIndex(issueIndex: number): number {
+    if (issues.length === 0) return 0;
+    const clamped = Math.max(0, Math.min(issueIndex, issues.length - 1));
+    const issue = issues[clamped];
+    return issue ? getIssueDisplayIndex(issue.id) : 0;
+  }
+
+  function normalizeIssueDisplayIndex(index: number): number {
+    if (displayList.length === 0) return 0;
+    const clamped = Math.max(0, Math.min(index, displayList.length - 1));
+    if (displayList[clamped]?.type === 'issue') return clamped;
+
+    for (let next = clamped + 1; next < displayList.length; next += 1) {
+      if (displayList[next]?.type === 'issue') return next;
+    }
+
+    for (let prev = clamped - 1; prev >= 0; prev -= 1) {
+      if (displayList[prev]?.type === 'issue') return prev;
+    }
+
+    return 0;
+  }
+
+  function findAdjacentIssueIndex(from: number, direction: 1 | -1): number {
+    let idx = from + direction;
+    while (idx >= 0 && idx < displayList.length) {
+      if (displayList[idx]?.type === 'issue') return idx;
+      idx += direction;
+    }
+    return from;
+  }
+
+  function scrollToDisplayIndex(index: number, behavior: ScrollBehavior = 'smooth') {
+    if (!containerEl) return;
+    const normalized = normalizeIssueDisplayIndex(index);
+    const el = containerEl.querySelector(`[data-idx="${normalized}"]`) as HTMLElement | null;
+    if (!el) return;
+    current = normalized;
+    lastSnappedIndex = normalized;
+    el.scrollIntoView({ behavior, block: 'start' });
+  }
+
+  function scrollToAdjacentIssue(direction: 1 | -1) {
+    const next = findAdjacentIssueIndex(current, direction);
+    if (next === current) return;
+    haptic(5);
+    scrollToDisplayIndex(next, 'smooth');
   }
 
   $effect(() => {
@@ -131,15 +190,55 @@
     }
   }
 
+  function handleCardOpen(issue: IssueSummary) {
+    if (performance.now() < swipeSuppressUntil) return;
+    handleOpenIssue(issue);
+  }
+
+  function onTouchStart(event: TouchEvent) {
+    if (!containerEl || sections.length === 0 || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    touchTracking = true;
+    touchStartY = touch.clientY;
+    touchStartX = touch.clientX;
+    touchStartScrollTop = containerEl.scrollTop;
+  }
+
+  function onTouchEnd(event: TouchEvent) {
+    if (!touchTracking || !containerEl || sections.length === 0 || event.changedTouches.length === 0) {
+      touchTracking = false;
+      return;
+    }
+
+    touchTracking = false;
+    const touch = event.changedTouches[0];
+    const deltaY = touch.clientY - touchStartY;
+    const deltaX = touch.clientX - touchStartX;
+    const scrollDelta = Math.abs(containerEl.scrollTop - touchStartScrollTop);
+
+    if (Math.abs(deltaY) < 48) return;
+    if (Math.abs(deltaY) < Math.abs(deltaX) * 1.2) return;
+    if (scrollDelta > 24) return;
+
+    swipeSuppressUntil = performance.now() + 350;
+    if (deltaY < 0) scrollToAdjacentIssue(1);
+    else scrollToAdjacentIssue(-1);
+  }
+
+  function onTouchCancel() {
+    touchTracking = false;
+  }
+
   onMount(() => {
     requestAnimationFrame(() => { mounted = true; });
 
     // Scroll to initial position
-    if (containerEl && initialFeedIndex > 0) {
-      const slot = containerEl.querySelector(`[data-idx="${initialFeedIndex}"]`) as HTMLElement;
-      if (slot) {
-        slot.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
-      }
+    if (containerEl) {
+      const initialDisplayIndex = normalizeIssueDisplayIndex(getDisplayIndexForIssueIndex(initialFeedIndex));
+      current = initialDisplayIndex;
+      lastSnappedIndex = initialDisplayIndex;
+      const slot = containerEl.querySelector(`[data-idx="${initialDisplayIndex}"]`) as HTMLElement | null;
+      slot?.scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'start' });
     }
 
     // Set up IntersectionObserver after initial scroll
@@ -150,21 +249,10 @@
       if (!containerEl) return;
       if (e.key === 'ArrowDown' && current < displayList.length - 1) {
         e.preventDefault();
-        // Skip dividers
-        let next = current + 1;
-        while (next < displayList.length && displayList[next].type === 'divider') next++;
-        if (next < displayList.length) {
-          const el = containerEl.querySelector(`[data-idx="${next}"]`) as HTMLElement;
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }
+        scrollToAdjacentIssue(1);
       } else if (e.key === 'ArrowUp' && current > 0) {
         e.preventDefault();
-        let prev = current - 1;
-        while (prev >= 0 && displayList[prev].type === 'divider') prev--;
-        if (prev >= 0) {
-          const el = containerEl.querySelector(`[data-idx="${prev}"]`) as HTMLElement;
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }
+        scrollToAdjacentIssue(-1);
       } else if (e.key === 'Enter') {
         e.preventDefault();
         const item = displayList[current];
@@ -182,7 +270,11 @@
   // Re-setup observer when display list changes
   $effect(() => {
     void displayList.length;
-    requestAnimationFrame(setupObserver);
+    requestAnimationFrame(() => {
+      current = normalizeIssueDisplayIndex(current);
+      lastSnappedIndex = current;
+      setupObserver();
+    });
   });
 </script>
 
@@ -190,6 +282,9 @@
   bind:this={containerEl}
   class="feed-scroll"
   style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.15s ease;"
+  ontouchstart={onTouchStart}
+  ontouchend={onTouchEnd}
+  ontouchcancel={onTouchCancel}
 >
   {#if displayList.length === 0 && searchQuery}
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
@@ -210,7 +305,7 @@
         <MobileCard
           issue={item.issue}
           readState={getState(item.issue.id)}
-          onOpen={() => handleOpenIssue(item.issue)}
+          onOpen={() => handleCardOpen(item.issue)}
           onPrefetch={() => onPrefetch?.(item.issue)}
           hasReaction={hasReaction(item.issue.id)}
           isSaved={isSaved(item.issue.id)}
