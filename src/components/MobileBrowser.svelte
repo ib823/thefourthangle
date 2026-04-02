@@ -225,10 +225,11 @@
 <style>
   .feed-scroll {
     overflow-y: auto;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: auto;
     scroll-behavior: smooth;
+    touch-action: pan-y;
     padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
@@ -236,7 +237,7 @@
     min-height: 100%;
     height: 100%;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
     padding: 0 12px max(12px, env(safe-area-inset-bottom, 12px));
     display: flex;
     flex-direction: column;

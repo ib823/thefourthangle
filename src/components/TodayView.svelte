@@ -196,30 +196,32 @@
             {/each}
           </div>
         </section>
-
-        <section class="today-panel today-panel--library" aria-labelledby="your-library-heading">
-          <div class="panel-kicker">Your Library</div>
-          <h2 id="your-library-heading" class="panel-title">Return to what you chose to keep.</h2>
-          <div class="panel-subtitle">Reading progress, saved issues, and highlighted angles live here.</div>
-          <div class="library-grid">
-            <button class="library-item" onclick={() => onOpenLibraryReading?.()}>
-              <span class="library-label">Reading</span>
-              <span class="library-value">{readingCount}</span>
-              <span class="library-copy">Issues you have already started and can resume immediately</span>
-            </button>
-            <button class="library-item" onclick={() => onOpenLibrarySaved?.()}>
-              <span class="library-label">Saved</span>
-              <span class="library-value">{savedCount}</span>
-              <span class="library-copy">Issues you want to return to on purpose</span>
-            </button>
-            <button class="library-item" onclick={() => onOpenLibraryHighlights?.()}>
-              <span class="library-label">Highlights</span>
-              <span class="library-value">{highlightCount}</span>
-              <span class="library-copy">Issues with at least one highlighted angle</span>
-            </button>
-          </div>
-        </section>
       </div>
+
+      <section class="today-library-strip" aria-labelledby="your-library-heading">
+        <div class="today-library-head">
+          <div class="panel-kicker">Library</div>
+          <h2 id="your-library-heading" class="today-library-title">Keep your place without leaving Today.</h2>
+          <p class="today-library-copy">Reading progress, saved issues, and highlights live here when you want them.</p>
+        </div>
+        <div class="today-library-list">
+          <button class="library-item library-item--compact" onclick={() => onOpenLibraryReading?.()}>
+            <span class="library-label">Reading</span>
+            <span class="library-value">{readingCount}</span>
+            <span class="library-copy">Resume immediately</span>
+          </button>
+          <button class="library-item library-item--compact" onclick={() => onOpenLibrarySaved?.()}>
+            <span class="library-label">Saved</span>
+            <span class="library-value">{savedCount}</span>
+            <span class="library-copy">Held for later</span>
+          </button>
+          <button class="library-item library-item--compact" onclick={() => onOpenLibraryHighlights?.()}>
+            <span class="library-label">Highlights</span>
+            <span class="library-value">{highlightCount}</span>
+            <span class="library-copy">Angles worth keeping</span>
+          </button>
+        </div>
+      </section>
 
       <footer class="today-footer">
         <div>
@@ -475,7 +477,7 @@
 
   .today-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
     gap: 18px;
   }
 
@@ -488,6 +490,41 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+
+  .today-library-strip {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
+    align-items: start;
+  }
+
+  .today-library-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 30ch;
+  }
+
+  .today-library-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+  }
+
+  .today-library-copy {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
   }
 
   .panel-title {
@@ -566,10 +603,14 @@
   }
 
   .brief-list,
-  .library-grid {
+  .today-library-list {
     display: flex;
-    flex-direction: column;
     gap: 10px;
+  }
+
+  .today-library-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .brief-item {
@@ -599,6 +640,30 @@
     grid-column: 1 / -1;
   }
 
+  .library-item--compact {
+    padding: 14px 16px;
+    border-radius: 16px;
+    gap: 8px 10px;
+    align-content: start;
+  }
+
+  .library-item--compact .library-label {
+    grid-column: 1;
+    align-self: center;
+  }
+
+  .library-item--compact .library-value {
+    grid-column: 2;
+    justify-self: end;
+    font-size: 28px;
+  }
+
+  .library-item--compact .library-copy {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
   .today-footer {
     display: flex;
     align-items: baseline;
@@ -625,17 +690,17 @@
   }
 
   @media (max-width: 1023px) {
-    .today-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .today-panel--library {
-      grid-column: 1 / -1;
-    }
-
     .hero-grid {
       grid-template-columns: 1fr;
       align-items: end;
+    }
+
+    .today-library-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .today-library-head {
+      max-width: none;
     }
   }
 
@@ -684,6 +749,15 @@
       border-radius: 20px;
     }
 
+    .today-library-strip {
+      padding: 18px;
+      border-radius: 20px;
+    }
+
+    .today-library-list {
+      grid-template-columns: 1fr;
+    }
+
     .brief-score,
     .library-value {
       font-size: 28px;
@@ -714,6 +788,12 @@
     }
 
     .today-panel {
+      background: rgba(34, 31, 27, 0.92);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .today-library-strip {
       background: rgba(34, 31, 27, 0.92);
       border-color: rgba(255, 255, 255, 0.06);
       box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);

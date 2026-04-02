@@ -16,6 +16,7 @@ export function pressAction(node: HTMLElement, config: Partial<PressConfig> = {}
   let pressed = false;
 
   function onDown(e: PointerEvent) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
     if ((e.target as HTMLElement)?.closest('button, a')) return;
     pressed = true;
     // Immediate — 1 frame, no transition
