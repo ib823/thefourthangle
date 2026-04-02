@@ -52,6 +52,7 @@
     if (raw === 'true') return 6;
     try { return JSON.parse(raw).progress ?? 0; } catch { return 0; }
   });
+  let nextContinueAngle = $derived(Math.min(continueProgress + 1, 6));
   let newIssues = $derived(sections.find((section) => section.kind === 'new')?.issues ?? []);
   let briefingIssues = $derived.by(() => {
     const picked: IssueSummary[] = [];
@@ -108,7 +109,7 @@
       <div class="today-topline">
         <div>
           <div class="today-kicker">Today</div>
-          <h2 class="today-title">Return to the clearest place in the product.</h2>
+          <h2 class="today-title">See what deserves your full attention.</h2>
         </div>
         <div class="today-status">
           <span>{readyCount} issues ready</span>
@@ -116,6 +117,24 @@
           <span>about {readyMinutes} min</span>
           <span class="today-divider"></span>
           <span>updated {formatDate(buildDate)}</span>
+        </div>
+      </div>
+
+      <div class="today-ribbon">
+        <div class="ribbon-card ribbon-card--signal">
+          <div class="ribbon-label">Daily Ritual</div>
+          <div class="ribbon-value">{readyCount} issues, one clearer view</div>
+          <div class="ribbon-copy">Start with the lead, continue what you left unfinished, then move through the briefing.</div>
+        </div>
+        <div class="ribbon-card">
+          <div class="ribbon-label">Saved</div>
+          <div class="ribbon-value">{savedCount}</div>
+          <div class="ribbon-copy">Issues kept for deliberate return.</div>
+        </div>
+        <div class="ribbon-card">
+          <div class="ribbon-label">Marked</div>
+          <div class="ribbon-value">{markedCount}</div>
+          <div class="ribbon-copy">Stories with at least one highlighted angle.</div>
         </div>
       </div>
 
@@ -130,9 +149,9 @@
           <div class="hero-grid">
             <div class="hero-copy">
               <div class="hero-badge">Lead Issue</div>
-              <h3 class="hero-headline">{topIssue.headline}</h3>
-              <p class="hero-context">{topIssue.context}</p>
-              <p class="hero-hook">Read past the headline, then decide what the story is really about.</p>
+              <h3 class="hero-headline balance-title">{topIssue.headline}</h3>
+              <p class="hero-context pretty-copy">{topIssue.context}</p>
+              <p class="hero-hook pretty-copy">The point is not to catch up. The point is to arrive at the story after the rhetoric burns off.</p>
             </div>
             <div class="hero-shift">
               <div class="hero-shift-kicker">Opinion Shift</div>
@@ -142,7 +161,7 @@
                 <div class="hero-shift-fill" style="width:{topIssue.opinionShift}%;background:{opinionColor(topIssue.opinionShift)};"></div>
               </div>
               <div class="hero-shift-foot">How much the headline hides.</div>
-              <div class="hero-cta">Read all 6 angles</div>
+              <div class="hero-cta">Start reading <span aria-hidden="true">→</span></div>
             </div>
           </div>
         </button>
@@ -153,13 +172,13 @@
           <div class="panel-kicker">Continue Reading</div>
           {#if continueIssue && onOpenIssue}
             <button class="panel-issue" onclick={() => onOpenIssue?.(continueIssue)}>
-              <div class="panel-issue-title">{continueIssue.headline}</div>
-              <div class="panel-issue-copy">You stopped after {continueProgress} of 6 angles. Pick up where the argument starts to turn.</div>
+              <div class="panel-issue-title balance-title">{continueIssue.headline}</div>
+              <div class="panel-issue-copy pretty-copy">Next: angle {nextContinueAngle}. Pick up where the argument starts to turn.</div>
               <div class="panel-progress-row">
                 <div class="panel-progress-track">
                   <div class="panel-progress-fill" style="width:{Math.min(100, (continueProgress / 6) * 100)}%;"></div>
                 </div>
-                <span>{continueProgress}/6</span>
+                <span>Angle {nextContinueAngle} next</span>
               </div>
             </button>
           {:else}
@@ -179,8 +198,8 @@
               <button class="brief-item" onclick={() => onOpenIssue?.(issue)}>
                 <div class="brief-score" style="color:{opinionColor(issue.opinionShift)};">{issue.opinionShift}</div>
                 <div class="brief-copy">
-                  <div class="brief-headline">{issue.headline}</div>
-                  <div class="brief-context">{issue.context}</div>
+                  <div class="brief-headline balance-title">{issue.headline}</div>
+                  <div class="brief-context pretty-copy">{issue.context}</div>
                 </div>
               </button>
             {/each}
@@ -283,6 +302,50 @@
     white-space: nowrap;
   }
 
+  .today-ribbon {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .ribbon-card {
+    padding: 16px 18px;
+    border-radius: 22px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
+  }
+
+  .ribbon-card--signal {
+    background:
+      radial-gradient(circle at top right, rgba(210, 140, 40, 0.12), transparent 36%),
+      rgba(255, 255, 255, 0.88);
+  }
+
+  .ribbon-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .ribbon-value {
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 30px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+  }
+
+  .ribbon-copy {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
   .today-divider {
     width: 4px;
     height: 4px;
@@ -364,9 +427,9 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: clamp(32px, 5vw, 54px);
-    line-height: 0.97;
-    letter-spacing: -0.05em;
-    max-width: 12ch;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    max-width: 15ch;
   }
 
   .hero-context,
@@ -514,7 +577,7 @@
   .brief-headline {
     font-size: 15px;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.28;
     color: var(--text-primary);
   }
 
@@ -608,6 +671,14 @@
   }
 
   @media (max-width: 1023px) {
+    .today-ribbon {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ribbon-card--signal {
+      grid-column: 1 / -1;
+    }
+
     .today-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -632,6 +703,10 @@
     .today-footer {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .today-ribbon {
+      grid-template-columns: 1fr;
     }
 
     .today-status {
@@ -665,6 +740,11 @@
     .today-panel {
       padding: 18px;
       border-radius: 20px;
+    }
+
+    .ribbon-card {
+      padding: 14px 16px;
+      border-radius: 18px;
     }
 
     .brief-score,

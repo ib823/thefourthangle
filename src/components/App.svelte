@@ -8,6 +8,9 @@
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
   import DesktopReader from './DesktopReader.svelte';
+  import MobileDock from './MobileDock.svelte';
+  import SortToggle from './SortToggle.svelte';
+  import SurfaceNav from './SurfaceNav.svelte';
   import TodayView from './TodayView.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
@@ -599,25 +602,18 @@
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
     />
-    {#if !searchActive}
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 16px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-        <button onclick={goToday} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;transition:color 0.15s ease,font-family:inherit;min-height:34px;">Today</button>
-        <button onclick={openBrowse} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'none'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-subtle)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Browse</button>
-        <button onclick={openSavedLibrary} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Saved {savedCount}</button>
-        <button onclick={openMarkedLibrary} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'none'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Marked {markedCount}</button>
+    {#if !searchActive && surfaceMode !== 'today'}
+      <div style="padding:8px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);background:linear-gradient(180deg, rgba(248,249,250,0.82) 0%, rgba(248,249,250,0.54) 100%);">
+        <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} />
       </div>
-      {#if surfaceMode !== 'today'}
-        <div style="display:flex;align-items:center;gap:2px;padding:0 16px 6px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-          <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Latest</button>
-          <span style="color:var(--border-divider);font-size:12px;">·</span>
-          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Hidden</button>
-        </div>
-      {/if}
     {/if}
     {#if surfaceMode === 'today' && !isSearching}
       <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
     {:else}
       <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+    {/if}
+    {#if !searchActive && !activeFullIssue}
+      <MobileDock surfaceMode={surfaceMode} {savedCount} {markedCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
     {/if}
   </main>
 
@@ -641,11 +637,8 @@
         />
       </div>
       {#if !isSearching}
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px;">
-          <button onclick={goToday} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Today</button>
-          <button onclick={openBrowse} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'none'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-subtle)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Browse</button>
-          <button onclick={openSavedLibrary} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Saved {savedCount}</button>
-          <button onclick={openMarkedLibrary} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'none'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Marked {markedCount}</button>
+        <div style="margin-bottom:14px;">
+          <SurfaceNav surfaceMode={surfaceMode} {savedCount} {markedCount} onGoToday={goToday} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
         </div>
       {/if}
       {#if isSearching}
@@ -653,10 +646,8 @@
           {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
         </div>
       {:else if surfaceMode !== 'today'}
-        <div style="display:flex;align-items:center;gap:2px;margin-bottom:12px;font-size:12px;font-weight:600;">
-          <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
-          <span style="color:var(--border-divider);">·</span>
-          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
+        <div style="margin-bottom:12px;">
+          <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} />
         </div>
       {/if}
       {#if surfaceMode === 'today' && !isSearching}

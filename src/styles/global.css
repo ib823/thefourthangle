@@ -33,6 +33,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.balance-title {
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.pretty-copy {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: rgba(25, 113, 194, 0.12);
 }
@@ -140,7 +151,7 @@ body {
 .close-btn{width:28px;height:28px;border-radius:50%;background:var(--bg-sunken);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-tertiary);transition:background var(--duration-fast,150ms) ease;flex-shrink:0}
 .close-btn:hover{background:var(--border-subtle)}
 .preview-card{background:var(--bg-elevated);border-radius:12px;padding:16px;border:1px solid var(--border-subtle);margin-bottom:20px}
-.preview-headline{font-size:14px;font-weight:700;color:var(--text-primary);line-height:1.35;margin-bottom:6px}
+.preview-headline{font-size:14px;font-weight:700;color:var(--text-primary);line-height:1.28;margin-bottom:6px;text-wrap:balance;hyphens:auto}
 .preview-context{font-size:12px;color:var(--text-tertiary);line-height:1.5;margin-bottom:10px}
 .preview-scores{display:flex;align-items:center;gap:6px}
 .preview-bar-track{width:40px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden}

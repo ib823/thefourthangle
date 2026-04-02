@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
   import SectionHeader from './SectionHeader.svelte';
+  import SortToggle from './SortToggle.svelte';
+  import SurfaceNav from './SurfaceNav.svelte';
   import { getReadCount, reactions, savedIssues } from '../stores/reader';
   import { issueCategory } from '../data/issues';
 
@@ -207,11 +209,8 @@
       <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Move between ritual, archive, and memory without losing your place.</div>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px;">
-      <button onclick={() => onGoToday?.()} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'transparent'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Today</button>
-      <button onclick={() => onOpenBrowse?.()} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'transparent'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-divider)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Browse</button>
-      <button onclick={() => onOpenSaved?.()} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'transparent'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Saved {savedCount}</button>
-      <button onclick={() => onOpenMarked?.()} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'transparent'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Marked {markedCount}</button>
+    <div style="padding:0 0 12px;">
+      <SurfaceNav variant="sidebar" {surfaceMode} {savedCount} {markedCount} onGoToday={onGoToday} onOpenBrowse={onOpenBrowse} onOpenSaved={onOpenSaved} onOpenMarked={onOpenMarked} />
     </div>
 
     <!-- Search -->
@@ -238,10 +237,8 @@
 
     <!-- Sort toggle -->
     {#if !isSearching && onSortChange && surfaceMode !== 'today'}
-      <div style="display:flex;align-items:center;gap:2px;padding:10px 0 4px;font-size:11px;font-weight:600;">
-        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
-        <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
+      <div style="padding:10px 0 4px;">
+        <SortToggle variant="sidebar" {sortMode} onChange={onSortChange} />
       </div>
     {/if}
 

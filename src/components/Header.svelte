@@ -69,7 +69,7 @@
       <Logo size={72} />
       <div class="brand-text-block">
         <span class="brand-name">The Fourth Angle</span>
-        <span class="brand-tagline">Bite-size clarity for smarter thinking and better questions.</span>
+        <span class="brand-tagline">Read past the first telling.</span>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:0;">
@@ -111,6 +111,7 @@
     background: var(--header-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(17, 24, 39, 0.05);
   }
 
   /* ── Brand block: mark + text ── */
@@ -202,9 +203,9 @@
       display: block;
       font-family: var(--font-body);
       font-size: 11.5px;
-      font-weight: 400;
+      font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
       line-height: 1.3;
       white-space: nowrap;
     }

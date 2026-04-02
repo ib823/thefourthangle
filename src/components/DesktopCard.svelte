@@ -103,7 +103,7 @@
   {/if}
 
   <!-- Headline -->
-  <h3 style="font-size:15px;font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.35;overflow-wrap:break-word;word-break:break-word;">{issue.headline}</h3>
+  <h3 class="balance-title" style="font-size:15px;font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.28;overflow-wrap:normal;">{issue.headline}</h3>
   <!-- Context -->
   <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
 

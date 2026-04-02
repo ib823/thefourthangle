@@ -179,6 +179,7 @@
   });
 
   let viewCard = $derived(issue.cards.findLast((c) => c.t === 'view'));
+  let activeStageLabel = $derived(cardLabel(issue.cards[activeStep] ?? issue.cards[0]));
 
   let barColor = $derived(
     issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
@@ -191,10 +192,6 @@
     if (score >= 60) return `The headline leaves out most of the context that changes the meaning.`;
     if (score >= 40) return `The headline is directionally true, but it still misses a consequential layer.`;
     return `The headline gets the outline, but the deeper frame still matters.`;
-  }
-
-  function toneForCard(index: number): string {
-    return index < activeStep ? 'done' : index === activeStep ? 'active' : 'idle';
   }
 
   function setupStepObserver() {
@@ -247,31 +244,27 @@
   <!-- Screen reader announcement for issue change -->
   <div class="sr-only" aria-live="polite" aria-atomic="true">Now reading: {issue.headline}</div>
   <div style="max-width:760px;margin:0 auto;padding:32px 24px 56px;">
-    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Six-Angle Reader</div>
-        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);">Angle {activeStep + 1} of {issue.cards.length}</div>
+    <div class="reader-progress-shell">
+      <div class="reader-progress-copy">
+        <div class="reader-progress-kicker">Reading path</div>
+        <div class="reader-progress-label balance-title">{activeStageLabel}</div>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        {#each issue.cards as step, i}
-          <div style="
-            display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;
-            background:{toneForCard(i) === 'active' ? 'rgba(210,140,40,0.14)' : toneForCard(i) === 'done' ? 'rgba(46,125,50,0.12)' : 'var(--bg-elevated)'};
-            border:1px solid {toneForCard(i) === 'active' ? 'rgba(210,140,40,0.28)' : toneForCard(i) === 'done' ? 'rgba(46,125,50,0.2)' : 'var(--border-subtle)'};
-            color:{toneForCard(i) === 'active' ? 'var(--score-warning)' : toneForCard(i) === 'done' ? 'var(--status-green)' : 'var(--text-secondary)'};
-          ">
-            <span style="width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:{toneForCard(i) === 'active' ? 'rgba(210,140,40,0.18)' : toneForCard(i) === 'done' ? 'rgba(46,125,50,0.18)' : 'var(--bg-sunken)'};">{i + 1}</span>
-            <span style="font-size:11px;font-weight:700;">{cardLabel(step)}</span>
-          </div>
+      <div class="reader-progress-track" style="--steps:{issue.cards.length};" aria-hidden="true">
+        {#each issue.cards as _, i}
+          <span
+            class="reader-progress-segment"
+            class:reader-progress-segment--done={i < activeStep}
+            class:reader-progress-segment--active={i === activeStep}
+          ></span>
         {/each}
       </div>
     </div>
 
-    <div style="display:flex;align-items:flex-start;gap:16px;">
-      <div style="flex:1;">
-        <h1 style="font-family:var(--font-display);font-size:40px;font-weight:800;color:var(--text-primary);letter-spacing:-0.04em;line-height:0.98;margin:0;max-width:14ch;">{issue.headline}</h1>
+    <div class="reader-head">
+      <div class="reader-headline-wrap">
+        <h1 class="reader-headline balance-title">{issue.headline}</h1>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+      <div class="reader-actions">
         <IssueSaveButton issueId={issue.id} compact={true} />
         <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
@@ -354,7 +347,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div>
-          <div style="font-family:var(--font-display);font-size:24px;line-height:1.05;letter-spacing:-0.03em;color:var(--text-primary);">You’ve seen all 6 angles.</div>
+          <div style="font-family:var(--font-display);font-size:24px;line-height:1.05;letter-spacing:-0.03em;color:var(--text-primary);">You’ve seen the full picture.</div>
           <div style="font-size:13px;line-height:1.55;color:var(--text-secondary);margin-top:4px;">The headline, the evidence, the reframing, and the considered view are now on the table.</div>
         </div>
       </div>
@@ -450,5 +443,105 @@
   .reader-switching {
     opacity: 0;
     transform: translateY(8px);
+  }
+
+  .reader-progress-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .reader-progress-copy {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .reader-progress-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .reader-progress-label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-secondary);
+    max-width: 30ch;
+  }
+
+  .reader-progress-track {
+    display: grid;
+    grid-template-columns: repeat(var(--steps, 6), minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .reader-progress-segment {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    transition: background var(--duration-fast, 150ms) ease, border-color var(--duration-fast, 150ms) ease;
+  }
+
+  .reader-progress-segment--done {
+    background: rgba(46, 125, 50, 0.14);
+    border-color: rgba(46, 125, 50, 0.18);
+  }
+
+  .reader-progress-segment--active {
+    background: rgba(210, 140, 40, 0.18);
+    border-color: rgba(210, 140, 40, 0.26);
+  }
+
+  .reader-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 18px;
+  }
+
+  .reader-headline-wrap {
+    min-width: 0;
+  }
+
+  .reader-headline {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 54px);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.045em;
+    line-height: 1.01;
+    max-width: 17ch;
+  }
+
+  .reader-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 720px) {
+    .reader-head {
+      grid-template-columns: 1fr;
+    }
+
+    .reader-actions {
+      justify-content: flex-start;
+    }
+
+    .reader-headline {
+      max-width: 100%;
+      font-size: clamp(34px, 9vw, 44px);
+    }
   }
 </style>

@@ -23,6 +23,7 @@
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
   let totalAngles = $derived(issue.cards.length || 6);
+  let nextAngle = $derived(Math.min((readState?.progress ?? 0) + 1, totalAngles));
 
   function handleKeydown(e: KeyboardEvent) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(); }
@@ -122,11 +123,11 @@
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}
-      <span class="meta-pill">Angle {Math.min(readState.progress + 1, totalAngles)} of {totalAngles}</span>
+      <span class="meta-pill">Next: angle {nextAngle}</span>
     {:else if isCompleted}
-      <span class="meta-pill">All {totalAngles} angles read</span>
+      <span class="meta-pill">Complete</span>
     {:else}
-      <span class="meta-pill">{totalAngles} angles</span>
+      <span class="meta-pill">Ready</span>
     {/if}
   </div>
 
@@ -162,7 +163,7 @@
   </div>
 
   <!-- Headline -->
-  <h2 class="headline" style="color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};font-weight:{isCompleted ? 700 : 800};">{issue.headline}</h2>
+  <h2 class="headline balance-title" style="color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};font-weight:{isCompleted ? 700 : 800};">{issue.headline}</h2>
 
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
@@ -172,11 +173,11 @@
   <div style="flex-shrink:0;">
     <div class="mobile-callout">
       {#if isStarted && readState && readState.progress > 0}
-        Continue from angle {Math.min(readState.progress + 1, totalAngles)} of {totalAngles}
+        Continue from angle {nextAngle}
       {:else if isCompleted}
-        Revisit the full six-angle read
+        Revisit the full read
       {:else}
-        Tap to read all {totalAngles} angles
+        Start reading
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}
@@ -207,13 +208,13 @@
 
   .headline {
     font-size: 27px;
-    line-height: 1.2;
+    line-height: 1.08;
     margin: 16px 0 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.035em;
     transition: color var(--duration-normal, 250ms) var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1));
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: normal;
     hyphens: auto;
+    max-width: 15ch;
   }
 
   .bar-fill {
@@ -383,6 +384,7 @@
       font-size: 21px;
       line-height: 1.15;
       margin-top: 10px;
+      max-width: 100%;
     }
 
     .score-panel {

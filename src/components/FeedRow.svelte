@@ -36,7 +36,7 @@
   // Visual weight: bold unread → medium reading → light done
   let headlineWeight = $derived(isCompleted ? '500' : (isStarted ? '600' : '700'));
   let headlineColor = $derived(isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)');
-  let progressLabel = $derived(isStarted && progress > 0 ? `${progress}/6 read` : (isCompleted ? 'Done' : ''));
+  let progressLabel = $derived(isStarted && progress > 0 ? `Angle ${Math.min(progress + 1, 6)} next` : (isCompleted ? 'Done' : ''));
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -71,11 +71,11 @@
         <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Marked</span>
       {/if}
     </div>
-    <span style="font-size:14px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>
+    <span class="balance-title" style="font-size:14px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.45;margin:5px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
     {#if isStarted && progress > 0}
-      <p style="font-size:11px;font-weight:600;color:var(--score-warning);margin:7px 0 0;">Continue at angle {Math.min(progress + 1, 6)} of 6</p>
+      <p style="font-size:11px;font-weight:600;color:var(--score-warning);margin:7px 0 0;">Continue at angle {Math.min(progress + 1, 6)}</p>
     {/if}
   </div>
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;min-width:54px;">
