@@ -1,7 +1,6 @@
 <script lang="ts">
   import { QUOTES } from '../data/quotes';
   import IssueImage from './IssueImage.svelte';
-  import { releaseLabel } from '../lib/build';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection } from '../lib/feed-sections';
@@ -36,7 +35,6 @@
   }: Props = $props();
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
-  const releaseStamp = releaseLabel();
 
   let readCount = $derived.by(() => {
     return Object.values(readMap).filter(v => {
@@ -79,6 +77,13 @@
   });
   let readyCount = $derived((continueIssue ? 1 : 0) + briefingIssues.length);
   let readyMinutes = $derived(Math.max(4, briefingIssues.length * 3 + (continueIssue ? 2 : 0)));
+  let todayPathLabel = $derived.by(() => {
+    return `${readyCount} issue${readyCount === 1 ? '' : 's'} ready`;
+  });
+  let todayPathCopy = $derived.by(() => {
+    if (continueIssue) return 'Lead issue first, then resume where you stopped.';
+    return 'Lead issue first, then move straight into the briefing.';
+  });
 
   const buildDate = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '';
 
@@ -126,9 +131,9 @@
 
       <div class="today-ribbon">
         <div class="ribbon-card ribbon-card--signal">
-          <div class="ribbon-label">Daily Ritual</div>
-          <div class="ribbon-value">{readyCount} issues, one clearer view</div>
-          <div class="ribbon-copy">Start with the lead, continue what you left unfinished, then move through the briefing.</div>
+          <div class="ribbon-label">Today&apos;s Path</div>
+          <div class="ribbon-value">{todayPathLabel}</div>
+          <div class="ribbon-copy">{todayPathCopy}</div>
         </div>
       </div>
 
@@ -230,7 +235,6 @@
       <footer class="today-footer">
         <div>
           <div class="today-note">{unread > 0 ? `${unread} still unexplored in the full archive.` : 'You are fully caught up right now.'}</div>
-          <div class="today-build" title={releaseStamp}>Build {releaseStamp}</div>
         </div>
         <div class="today-quote">"{quote}"</div>
       </footer>
@@ -663,14 +667,6 @@
     color: var(--text-tertiary);
   }
 
-  .today-build {
-    margin-top: 6px;
-    font-size: 10px;
-    line-height: 1.4;
-    color: var(--text-faint);
-    font-variant-numeric: tabular-nums;
-  }
-
   .today-quote {
     font-style: italic;
     max-width: 44ch;
@@ -819,7 +815,6 @@
     }
 
     .today-note,
-    .today-build,
     .today-quote {
       color: var(--text-muted);
     }

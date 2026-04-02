@@ -6,7 +6,6 @@
   import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
   import { reactions, savedIssues } from '../stores/reader';
-  import { releaseLabel } from '../lib/build';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection, SectionKind, SortMode } from '../lib/feed-sections';
@@ -38,8 +37,6 @@
     onSortChange?: (mode: SortMode) => void;
   }
   let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, savedCount = 0, highlightCount = 0, libraryCount = 0, onGoToday, onOpenBrowse, onOpenLibrary, onOpenReading, onOpenSaved, onOpenHighlights, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
-  const releaseStamp = releaseLabel();
-
   function libraryHeading(mode: 'reading' | 'saved' | 'highlights') {
     if (mode === 'saved') return 'Saved library';
     if (mode === 'highlights') return 'Highlights library';
@@ -233,12 +230,7 @@
 
 <aside aria-label="Issue list" style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
   <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : libraryHeading(libraryMode)}</h1>
-  <div style="padding:14px 18px 0;flex-shrink:0;">
-    <div style="padding:0 2px 12px;">
-      <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Smart Queue</div>
-      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Move between today, archive, and library without losing your place.</div>
-    </div>
-
+  <div style="padding:14px 18px 12px;flex-shrink:0;">
     <div style="padding:0 0 12px;">
       <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenBrowse={onOpenBrowse} onOpenLibrary={onOpenLibrary} />
     </div>
@@ -404,17 +396,5 @@
       </div>
     {/if}
   </div>
-  </div>
-
-  <div style="padding:10px 20px;border-top:1px solid var(--bg-sunken);flex-shrink:0;">
-    <div style="font-size:10px;color:var(--text-tertiary);text-align:center;">
-      Press ↑↓ to navigate · Enter to read · / to search
-    </div>
-    <div style="font-size:11px;color:var(--text-tertiary);margin-top:4px;text-align:center;">
-      <a href="/about" style="color:var(--text-tertiary);text-decoration:none;">About</a>
-    </div>
-    <div style="font-size:10px;color:var(--text-faint);margin-top:6px;text-align:center;font-variant-numeric:tabular-nums;" title={releaseStamp}>
-      Build {releaseStamp}
-    </div>
   </div>
 </aside>
