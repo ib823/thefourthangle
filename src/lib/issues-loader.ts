@@ -4,6 +4,7 @@
  * Full issue data is fetched on demand when the reader opens.
  */
 import type { Issue } from '../data/issues';
+import { freshFetch } from './build';
 
 /** Feed summary — same as Issue but cards lack big/sub text */
 export interface IssueSummary {
@@ -28,7 +29,7 @@ export function loadFeedIssues(): Promise<IssueSummary[]> {
   if (feedCache) return Promise.resolve(feedCache);
   if (feedPromise) return feedPromise;
 
-  feedPromise = fetch('/issues-feed.json')
+  feedPromise = freshFetch('/issues-feed.json')
     .then(res => res.json())
     .then((data: IssueSummary[]) => {
       feedCache = data;
@@ -54,7 +55,7 @@ export function loadFullIssue(id: string): Promise<Issue | null> {
   const existing = issuePromises.get(id);
   if (existing) return existing;
 
-  const promise = fetch(`/issues/${id}.json`)
+  const promise = freshFetch(`/issues/${id}.json`)
     .then(res => {
       if (!res.ok) return null;
       return res.json();
@@ -95,7 +96,7 @@ export function loadFactGraph(): Promise<FactGraph | null> {
   if (graphCache) return Promise.resolve(graphCache);
   if (graphPromise) return graphPromise;
 
-  graphPromise = fetch('/fact-graph.json')
+  graphPromise = freshFetch('/fact-graph.json')
     .then(res => {
       if (!res.ok) return null;
       return res.json();

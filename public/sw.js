@@ -1,5 +1,21 @@
-const CACHE_NAME = 'v10';
-const PRECACHE = ['/', '/offline.html', '/manifest.json', '/icons/icon-192.png', '/icons/badge-96.png'];
+const CACHE_NAME = 'tfa-static-v12';
+const PRECACHE = ['/offline.html', '/icons/icon-192.png', '/icons/badge-96.png'];
+
+function freshRequest(request) {
+  return new Request(request, { cache: 'no-store' });
+}
+
+function isMutablePath(pathname) {
+  return pathname === '/' ||
+    pathname.endsWith('.html') ||
+    pathname === '/manifest.json' ||
+    pathname === '/issues-feed.json' ||
+    pathname === '/fact-graph.json' ||
+    pathname === '/search-index.json' ||
+    pathname === '/signatures.json' ||
+    pathname === '/verify.html' ||
+    pathname.startsWith('/issues/');
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -12,12 +28,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    ).then(() => {
-      // Request persistent storage so cached content survives browser pressure
-      if (navigator.storage && navigator.storage.persist) {
-        navigator.storage.persist();
-      }
-    })
+    )
   );
   self.clients.claim();
 });
@@ -26,18 +37,14 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
 
-  // HTML: network-first with offline fallback
-  if (event.request.mode === 'navigate' || url.pathname === '/' || url.pathname.endsWith('.html')) {
+  if (event.request.mode === 'navigate' || isMutablePath(url.pathname)) {
     event.respondWith(
-      fetch(event.request).then((res) => {
-        if (res.ok) {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+      fetch(freshRequest(event.request)).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('/offline.html');
         }
-        return res;
-      }).catch(() =>
-        caches.match(event.request).then((c) => c || caches.match('/offline.html'))
-      )
+        return Response.error();
+      })
     );
     return;
   }
@@ -71,23 +78,6 @@ self.addEventListener('fetch', (event) => {
           }
           return res;
         });
-      })
-    );
-    return;
-  }
-
-  // Issue data + feed: stale-while-revalidate (instant from cache, update in background)
-  if (url.pathname === '/issues-feed.json' || url.pathname.startsWith('/issues/') || url.pathname === '/fact-graph.json') {
-    event.respondWith(
-      caches.match(event.request).then((cached) => {
-        const fetched = fetch(event.request).then((res) => {
-          if (res.ok) {
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
-          }
-          return res;
-        });
-        return cached || fetched;
       })
     );
     return;

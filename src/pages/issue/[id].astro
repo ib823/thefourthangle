@@ -4,7 +4,7 @@ import App from '../../components/App.svelte';
 import { ISSUES, opinionLabel } from '../../data/issues';
 
 export function getStaticPaths() {
-  return ISSUES.map(issue => ({
+  return ISSUES.filter(issue => issue.published === true).map(issue => ({
     params: { id: issue.id },
     props: { issue },
   }));
@@ -13,7 +13,10 @@ export function getStaticPaths() {
 const { issue } = Astro.props;
 const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
 const issueUrl = `${siteUrl}/issue/${issue.id}`;
-const ogImage = `${siteUrl}/og/issue-${issue.id}.png`;
+const buildId = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : new Date().toISOString();
+const ogImage = issue.published === true
+  ? `${siteUrl}/og/issue-${issue.id}.png?v=${encodeURIComponent(buildId)}`
+  : `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
 
 // OG description: context + scores, optimized for social platforms (110-160 chars)
 const os = issue.opinionShift;
@@ -33,6 +36,9 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
   <meta name="theme-color" content="#F8F9FA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
   <title>{title}</title>
@@ -67,19 +73,44 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" href="/favicon.png?v=6" />
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <meta name="application-name" content="The Fourth Angle" />
+  <meta name="apple-mobile-web-app-title" content="4th Angle" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href={`/manifest.json?v=${encodeURIComponent(buildId)}`} />
+  <link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${encodeURIComponent(buildId)}`} />
+  <link rel="icon" type="image/png" href={`/favicon.png?v=${encodeURIComponent(buildId)}`} />
+  <link rel="apple-touch-icon" href={`/icons/apple-touch-icon.png?v=${encodeURIComponent(buildId)}`} />
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
   <div id="main-content">
     <App client:load initialIssueId={issue.id} />
   </div>
-  <script>
+  <script is:inline define:vars={{ buildId }}>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      const currentBuild = String(buildId);
+      const priorBuild = sessionStorage.getItem('tfa-sw-build');
+      let reloading = false;
+
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!priorBuild || priorBuild === currentBuild || reloading) {
+          sessionStorage.setItem('tfa-sw-build', currentBuild);
+          return;
+        }
+        reloading = true;
+        sessionStorage.setItem('tfa-sw-build', currentBuild);
+        location.reload();
+      });
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register(`/sw.js?v=${encodeURIComponent(currentBuild)}`, { updateViaCache: 'none' })
+          .then((registration) => {
+            sessionStorage.setItem('tfa-sw-build', currentBuild);
+            registration.update().catch(() => {});
+          })
+          .catch(() => {});
+      });
     }
   </script>
 </body>

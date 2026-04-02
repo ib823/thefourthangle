@@ -5,7 +5,7 @@
  * Issues without a background image are blocked by validation.
  */
 import sharp from 'sharp';
-import { readFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,6 +26,12 @@ try {
 const outDir = join(root, 'public', 'og');
 const bgDir = join(root, 'public', 'og', 'backgrounds');
 mkdirSync(outDir, { recursive: true });
+
+for (const file of readdirSync(outDir)) {
+  if (file.startsWith('issue-') && file.endsWith('.png')) {
+    unlinkSync(join(outDir, file));
+  }
+}
 
 // Only generate for published issues
 const published = issues.filter(i => i.published);

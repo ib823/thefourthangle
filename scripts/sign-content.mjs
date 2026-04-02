@@ -1,27 +1,75 @@
 import { createHash, createPrivateKey, sign } from 'node:crypto';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-const privatePem = readFileSync(join(root, '.keys', 'private.pem'), 'utf8');
 const publicPem = readFileSync(join(root, 'public', 'pubkey.pem'), 'utf8');
-const privateKey = createPrivateKey(privatePem);
-
 const pubFingerprint = createHash('sha256').update(publicPem).digest('hex').slice(0, 16);
+const keyPath = join(root, '.keys', 'private.pem');
+const privateKey = existsSync(keyPath)
+  ? createPrivateKey(readFileSync(keyPath, 'utf8'))
+  : null;
 
-function canonicalize(obj) {
-  if (Array.isArray(obj)) return obj.map(canonicalize);
-  if (obj !== null && typeof obj === 'object') {
-    const sorted = {};
-    for (const key of Object.keys(obj).sort()) {
-      sorted[key] = canonicalize(obj[key]);
-    }
-    return sorted;
+const CARD_LABELS = {
+  hook: 'What they said',
+  fact: 'What we found',
+  reframe: 'The real question',
+  view: 'The considered view',
+};
+
+function opinionLabel(score) {
+  if (score >= 80) return 'Fundamental';
+  if (score >= 60) return 'Significant';
+  if (score >= 40) return 'Partial';
+  return 'Surface';
+}
+
+function buildReadableText(issue) {
+  const lines = [];
+  lines.push(issue.headline);
+  lines.push(issue.context);
+  lines.push('');
+  lines.push(`${issue.opinionShift}`);
+  lines.push(opinionLabel(issue.opinionShift));
+
+  if (issue.stageScores) {
+    lines.push('PA');
+    lines.push('BA');
+    lines.push('FC');
+    lines.push('AF');
+    lines.push('CT');
+    lines.push('SR');
   }
-  return obj;
+
+  if (issue.finalScore != null) {
+    lines.push(String(issue.finalScore));
+    lines.push('/100');
+  }
+
+  if (issue.status) lines.push(issue.status === 'new' ? 'New' : 'Updated');
+
+  for (const card of issue.cards) {
+    lines.push('');
+    let label = CARD_LABELS[card.t] || card.t;
+    if (card.t === 'fact' && card.lens) label += ` \u00B7 ${card.lens}`;
+    lines.push(label);
+    lines.push('');
+    lines.push(card.big);
+    if (card.sub) {
+      lines.push('');
+      lines.push(card.sub);
+    }
+  }
+
+  lines.push('');
+  lines.push('All 6 perspectives read');
+  const viewCard = [...issue.cards].reverse().find(card => card.t === 'view');
+  if (viewCard) lines.push(viewCard.big);
+
+  return lines.join('\n');
 }
 
 // Extract ISSUES array from the TypeScript file
@@ -45,17 +93,20 @@ try {
   process.exit(1);
 }
 
+const publishedIssues = issues.filter(issue => issue.published === true);
+
 const manifest = {
   publicKeyFingerprint: pubFingerprint,
   issues: {},
 };
 
-for (const issue of issues) {
-  const canonical = JSON.stringify(canonicalize(issue.cards));
-  const fingerprint = createHash('sha256').update(canonical).digest('hex');
+for (const issue of publishedIssues) {
+  const readableText = buildReadableText(issue);
+  const fingerprint = createHash('sha256').update(readableText).digest('hex');
 
-  const signature = sign(null, Buffer.from(fingerprint), privateKey);
-  const sig64 = signature.toString('base64');
+  const sig64 = privateKey
+    ? sign(null, Buffer.from(fingerprint), privateKey).toString('base64')
+    : null;
 
   manifest.issues[issue.id] = {
     fingerprint,
@@ -67,6 +118,9 @@ for (const issue of issues) {
 }
 
 writeFileSync(join(root, 'public', 'signatures.json'), JSON.stringify(manifest, null, 2));
-console.log(`\nSigned ${issues.length} issues`);
+console.log(`\nPrepared ${publishedIssues.length} published issue fingerprints`);
 console.log(`Signatures written to public/signatures.json`);
 console.log(`Public key fingerprint: ${pubFingerprint}`);
+if (!privateKey) {
+  console.log('Private key not found — fingerprints written without signatures');
+}

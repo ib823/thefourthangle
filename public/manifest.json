@@ -1,14 +1,17 @@
 {
+  "lang": "en-MY",
+  "dir": "ltr",
   "name": "The Fourth Angle",
-  "short_name": "T4A",
+  "short_name": "4th Angle",
   "description": "What satisfying headlines leave out. Independent Malaysian policy analysis — scored for neutrality, verified for accuracy, published with full transparency.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "handle_links": "preferred",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
-  "orientation": "portrait",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "prefer_related_applications": false,
   "background_color": "#0f0f23",
   "theme_color": "#0f0f23",
   "icons": [
@@ -28,16 +31,16 @@
       "sizes": "709x1536",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "T4A issue feed on mobile"
+      "label": "The Fourth Angle issue feed on mobile"
     },
     {
       "src": "/screenshots/desktop-reader.png",
       "sizes": "1911x943",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "T4A desktop reading experience"
+      "label": "The Fourth Angle desktop reading experience"
     }
   ],
-  "categories": ["education", "politics"],
+  "categories": ["news", "education", "politics"],
   "launch_handler": { "client_mode": "navigate-existing" }
 }

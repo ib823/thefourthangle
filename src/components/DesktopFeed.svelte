@@ -26,6 +26,10 @@
 
   let collapsedSections = $state<Record<string, boolean>>({});
 
+  function defaultCollapsed(kind: SectionKind): boolean {
+    return kind === 'completed' || kind === 'explore';
+  }
+
   function issueReadState(id: string): { state: string; progress: number } | null {
     const raw = readMap[id];
     if (!raw) return null;
@@ -176,8 +180,13 @@
   });
 </script>
 
-<aside aria-label="Issue list" style="width:360px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:var(--bg);display:flex;flex-direction:column;">
-  <div style="padding:12px 20px 0;flex-shrink:0;">
+<aside aria-label="Issue list" style="width:320px;height:100vh;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
+  <div style="padding:14px 18px 0;flex-shrink:0;">
+    <div style="padding:0 2px 12px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Smart Queue</div>
+      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Continue where you left off, then open the stories whose headlines hide the most.</div>
+    </div>
+
     <!-- Search -->
     <div style="position:relative;">
       <input
@@ -202,10 +211,10 @@
 
     <!-- Sort toggle -->
     {#if !isSearching && onSortChange}
-      <div style="display:flex;align-items:center;gap:2px;padding:8px 0 4px;font-size:11px;font-weight:600;">
+      <div style="display:flex;align-items:center;gap:2px;padding:10px 0 4px;font-size:11px;font-weight:600;">
         <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
         <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
       </div>
     {/if}
 
@@ -270,10 +279,10 @@
           label={section.label}
           count={section.count}
           kind={section.kind}
-          collapsed={collapsedSections[section.kind] ?? (section.kind === 'completed')}
-          onToggle={() => { collapsedSections[section.kind] = !(collapsedSections[section.kind] ?? (section.kind === 'completed')); }}
+          collapsed={collapsedSections[section.kind] ?? defaultCollapsed(section.kind)}
+          onToggle={() => { collapsedSections[section.kind] = !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind)); }}
         />
-        {#if !(collapsedSections[section.kind] ?? (section.kind === 'completed'))}
+        {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
           {#each section.issues as issue}
             <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           {/each}

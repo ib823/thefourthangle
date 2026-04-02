@@ -14,6 +14,7 @@ export default defineConfig({
   vite: {
     define: {
       __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
+      __BUILD_ID__: JSON.stringify(new Date().toISOString()),
     },
     plugins: [],
     build: {

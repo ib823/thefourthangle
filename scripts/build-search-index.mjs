@@ -59,4 +59,4 @@ const indexJson = JSON.stringify(miniSearch.toJSON());
 writeFileSync(join(root, 'public', 'search-index.json'), indexJson);
 
 const sizeKB = (Buffer.byteLength(indexJson) / 1024).toFixed(1);
-console.log(`Search index: ${issues.length} issues indexed, ${sizeKB}KB`);
+console.log(`Search index: ${publishedIssues.length} issues indexed, ${sizeKB}KB`);

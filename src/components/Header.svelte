@@ -135,6 +135,12 @@
     .search-icon { display: flex !important; }
   }
 
+  @media (max-width: 480px), (max-height: 640px) {
+    .site-header { height: 54px; padding-inline: 12px; }
+    .brand { gap: 10px; }
+    .brand-name { font-size: 14px; }
+  }
+
   /* ── Desktop: stacked name + tagline beside mark ── */
   @media (min-width: 769px) {
     .site-header { height: 60px; }

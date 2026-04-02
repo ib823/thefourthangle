@@ -30,6 +30,8 @@ try {
   issues = eval('(' + arr + ')');
 } catch (e) { console.error('Parse error:', e.message); process.exit(1); }
 
+const publishedIssues = issues.filter(i => i.published === true);
+
 // ── Entity extraction patterns ──
 
 // Malaysian institutions and agencies
@@ -132,13 +134,13 @@ function extractIssueEntities(issue) {
 }
 
 // ── Build the graph ──
-console.log(`  Building fact graph for ${issues.length} issues...`);
+console.log(`  Building fact graph for ${publishedIssues.length} published issues...`);
 
 // Step 1: Extract entities for every issue
 const issueEntities = new Map(); // issueId -> Set<entityId>
 const entityIssues = new Map();  // entityId -> Set<issueId>
 
-for (const issue of issues) {
+for (const issue of publishedIssues) {
   const entities = extractIssueEntities(issue);
   issueEntities.set(issue.id, entities);
 
@@ -150,7 +152,7 @@ for (const issue of issues) {
 
 // Step 2: Filter entities — only keep those appearing in 2+ issues but <30% of all issues
 // (Entities in 30%+ issues are too generic to be meaningful)
-const maxIssueThreshold = Math.floor(issues.length * 0.3);
+const maxIssueThreshold = Math.floor(publishedIssues.length * 0.3);
 const meaningfulEntities = new Map();
 
 for (const [eid, issueSet] of entityIssues) {
@@ -163,7 +165,7 @@ for (const [eid, issueSet] of entityIssues) {
 const connections = {};
 let totalConnections = 0;
 
-for (const issue of issues) {
+for (const issue of publishedIssues) {
   const myEntities = issueEntities.get(issue.id);
   const neighborWeights = new Map(); // targetId -> { weight, entities }
 
@@ -231,7 +233,7 @@ const graph = {
   entities: entityIndex,
   meta: {
     generatedAt: new Date().toISOString(),
-    issueCount: issues.length,
+    issueCount: publishedIssues.length,
     entityCount: Object.keys(entityIndex).length,
     connectedIssues: Object.keys(connections).length,
     totalEdges: totalConnections,
@@ -245,4 +247,4 @@ const issuesWithConnections = Object.keys(connections).length;
 const avgConnections = issuesWithConnections > 0 ? (totalConnections / issuesWithConnections).toFixed(1) : 0;
 
 console.log(`  ✓ fact-graph.json (${Math.round(json.length / 1024)}KB)`);
-console.log(`    ${Object.keys(entityIndex).length} entities, ${issuesWithConnections}/${issues.length} issues connected, avg ${avgConnections} connections/issue`);
+console.log(`    ${Object.keys(entityIndex).length} entities, ${issuesWithConnections}/${publishedIssues.length} issues connected, avg ${avgConnections} connections/issue`);

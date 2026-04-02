@@ -186,7 +186,7 @@
       <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size:12px;font-weight:600;">
         <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
         <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
       </div>
     {:else if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
@@ -215,14 +215,46 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: contain;
     scroll-behavior: smooth;
+    padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
   .feed-card-slot {
-    height: calc(100dvh - 52px);
+    min-height: 100%;
+    height: 100%;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     padding: 0 12px max(12px, env(safe-area-inset-bottom, 12px));
     display: flex;
     flex-direction: column;
+  }
+
+  .feed-card-slot[data-divider='true'] {
+    min-height: auto;
+    height: auto;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    padding-top: 20px;
+  }
+
+  @media (max-height: 640px) {
+    .feed-card-slot {
+      padding-inline: 10px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    }
+
+    .feed-card-slot[data-divider='true'] {
+      padding-top: 16px;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 640px) {
+    .feed-card-slot {
+      padding-inline: 8px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom, 8px));
+    }
+
+    .feed-card-slot[data-divider='true'] {
+      padding-top: 12px;
+    }
   }
 </style>

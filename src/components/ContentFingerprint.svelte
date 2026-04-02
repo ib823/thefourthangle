@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { freshFetch } from '../lib/build';
+
   interface Props {
     issueId: string;
   }
@@ -14,7 +16,7 @@
     loaded = false;
     copied = false;
 
-    fetch('/signatures.json')
+    freshFetch('/signatures.json')
       .then(r => r.json())
       .then(data => {
         const issue = data.issues?.[issueId];

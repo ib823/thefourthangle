@@ -15,6 +15,7 @@
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
   import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
+  import { BUILD_ID, getSiteOrigin } from '../lib/build';
 
   interface FeedIssue {
     id: string;
@@ -178,7 +179,10 @@
 
   function checkViewport() {
     const w = window.innerWidth;
-    if (w < 768) viewMode = 'mobile';
+    const h = window.innerHeight;
+    const compactLandscape = w < 960 && h < 640;
+
+    if (w < 768 || compactLandscape) viewMode = 'mobile';
     else if (w < 1024) viewMode = 'tablet';
     else viewMode = 'desktop';
   }
@@ -293,8 +297,6 @@
   // --- Keep browser tab & meta tags in sync with active issue ---
   const defaultTitle = 'The Fourth Angle — Bite-Sized Malaysian Issues Analysis';
   const defaultDesc = 'Bite-size clarity for smarter thinking and better questions. The strongest check on power is a public that reads.';
-  const siteUrl = 'https://thefourthangle.pages.dev';
-
   function setMeta(attr: string, value: string, content: string) {
     const el = document.querySelector(`meta[${attr}="${value}"]`);
     if (el) el.setAttribute('content', content);
@@ -305,12 +307,14 @@
   }
 
   $effect(() => {
+    const siteUrl = getSiteOrigin();
+    const homeUrl = `${siteUrl}/`;
     if (activeFullIssue) {
       const i = activeFullIssue;
       const title = `${i.headline} — The Fourth Angle`;
       const desc = i.context;
       const url = `${siteUrl}/issue/${i.id}`;
-      const image = `${siteUrl}/og/issue-${i.id}.png`;
+      const image = `${siteUrl}/og/issue-${i.id}.png?v=${encodeURIComponent(BUILD_ID)}`;
       document.title = title;
       setMeta('name', 'description', desc);
       setMeta('property', 'og:title', title);
@@ -328,14 +332,14 @@
       setMeta('name', 'description', defaultDesc);
       setMeta('property', 'og:title', defaultTitle);
       setMeta('property', 'og:description', defaultDesc);
-      setMeta('property', 'og:url', siteUrl);
-      setMeta('property', 'og:image', `${siteUrl}/og-image.png`);
+      setMeta('property', 'og:url', homeUrl);
+      setMeta('property', 'og:image', `${siteUrl}/og-image.png?v=${encodeURIComponent(BUILD_ID)}`);
       setMeta('property', 'og:image:alt', `${defaultTitle} — Independent Malaysian issues analysis`);
       setMeta('name', 'twitter:title', defaultTitle);
       setMeta('name', 'twitter:description', defaultDesc);
-      setMeta('name', 'twitter:image', `${siteUrl}/og-image.png`);
+      setMeta('name', 'twitter:image', `${siteUrl}/og-image.png?v=${encodeURIComponent(BUILD_ID)}`);
       setMeta('name', 'twitter:image:alt', `${defaultTitle} — Independent Malaysian issues analysis`);
-      setCanonical(siteUrl);
+      setCanonical(homeUrl);
     }
   });
 
@@ -537,7 +541,7 @@
       <div style="display:flex;align-items:center;gap:2px;padding:6px 16px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
         <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Latest</button>
         <span style="color:var(--border-divider);font-size:12px;">·</span>
-        <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Unreported</button>
+        <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Hidden</button>
       </div>
     {/if}
     <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
@@ -570,7 +574,7 @@
         <div style="display:flex;align-items:center;gap:2px;margin-bottom:12px;font-size:12px;font-weight:600;">
           <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
           <span style="color:var(--border-divider);">·</span>
-          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Unreported</button>
+          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
         </div>
       {/if}
       {#if isSearching}
@@ -655,7 +659,7 @@
           onNavigateToIssue={navigateToIssue}
         />
       {:else}
-        <DesktopEmptyState issueCount={issues.length} topIssue={topUnreadIssue} onOpenIssue={openIssue} />
+        <DesktopEmptyState issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} />
       {/if}
     </div>
   </main>

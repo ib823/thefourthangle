@@ -9,7 +9,7 @@
  *          manifest.json                    — list of IDs with images
  */
 import sharp from 'sharp';
-import { readdirSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readdirSync, mkdirSync, writeFileSync, readFileSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,8 +19,21 @@ const dir = join(root, 'public', 'og', 'backgrounds');
 
 mkdirSync(dir, { recursive: true });
 
-const files = readdirSync(dir).filter(f => /^issue-\d+-bg\.(jpg|jpeg|png)$/i.test(f));
-const ids = files.map(f => f.match(/^issue-(\d+)-bg/)[1]);
+const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
+const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
+if (!issuesMatch) { console.error('Could not find ISSUES'); process.exit(1); }
+
+let issues;
+try {
+  let arr = issuesMatch[1].replace(/;\s*$/, '');
+  issues = eval('(' + arr + ')');
+} catch (e) { console.error('Parse error:', e.message); process.exit(1); }
+
+const publishedIds = new Set(issues.filter(issue => issue.published === true).map(issue => issue.id));
+const files = readdirSync(dir).filter(file => /^issue-\d+-bg\.(jpg|jpeg|png)$/i.test(file));
+const ids = files
+  .map(file => file.match(/^issue-(\d+)-bg/i)?.[1])
+  .filter(id => id && publishedIds.has(id));
 
 console.log(`Generating image variants for ${ids.length} issues...`);
 
@@ -31,8 +44,16 @@ const SIZES = [
 ];
 
 let count = 0;
+for (const file of readdirSync(dir)) {
+  if (/^issue-\d+-(thumb|card|hero)\.(avif|jpg)$/i.test(file)) {
+    unlinkSync(join(dir, file));
+  }
+}
+
 for (const id of ids) {
-  const src = join(dir, files[ids.indexOf(id)]);
+  const srcFile = files.find(file => file.startsWith(`issue-${id}-bg.`));
+  if (!srcFile) continue;
+  const src = join(dir, srcFile);
 
   for (const size of SIZES) {
     const base = join(dir, `issue-${id}-${size.suffix}`);

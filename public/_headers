@@ -11,13 +11,64 @@
   Cross-Origin-Embedder-Policy: credentialless
 
 /*.html
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, max-age=0, must-revalidate
 
 /
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/issue/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/about
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/disclaimer
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/verify
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/verify.html
+  Cache-Control: no-store, max-age=0, must-revalidate
 
 /sw.js
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/offline.html
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/manifest.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/favicon.svg
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/favicon.png
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/icons/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/screenshots/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/issues-feed.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/issues/*
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/fact-graph.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/search-index.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/signatures.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+
+/pubkey.pem
+  Cache-Control: no-store, max-age=0, must-revalidate
 
 /_a/*
   Cache-Control: public, max-age=31536000, immutable
@@ -26,11 +77,16 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /og/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: no-store, max-age=0, must-revalidate
+  Cross-Origin-Resource-Policy: cross-origin
+  Access-Control-Allow-Origin: *
+
+/og/backgrounds/*
+  Cache-Control: no-store, max-age=0, must-revalidate
   Cross-Origin-Resource-Policy: cross-origin
   Access-Control-Allow-Origin: *
 
 /og-image.png
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: no-store, max-age=0, must-revalidate
   Cross-Origin-Resource-Policy: cross-origin
   Access-Control-Allow-Origin: *

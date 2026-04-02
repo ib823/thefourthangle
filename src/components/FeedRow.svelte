@@ -1,6 +1,5 @@
 <script lang="ts">
   import { opinionLabel } from '../data/issues';
-  import IssueImage from './IssueImage.svelte';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';
@@ -36,6 +35,7 @@
   // Visual weight: bold unread → medium reading → light done
   let headlineWeight = $derived(isCompleted ? '500' : (isStarted ? '600' : '700'));
   let headlineColor = $derived(isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)');
+  let progressLabel = $derived(isStarted && progress > 0 ? `${progress}/6 read` : (isCompleted ? 'Done' : ''));
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -48,41 +48,37 @@
   aria-current={isActive ? 'true' : undefined}
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}."
   style="
-    padding:14px 20px;cursor:pointer;
+    padding:12px 16px;cursor:pointer;
     border-bottom:1px solid var(--bg-sunken);
-    border-left:{isActive ? '3px solid ' + scoreColor : '3px solid transparent'};
-    background:{isActive ? 'rgba(25,113,194,0.04)' : (hovered ? 'var(--bg-sunken)' : 'transparent')};
+    background:{isActive ? 'rgba(25,113,194,0.05)' : (hovered ? 'var(--bg-sunken)' : 'transparent')};
     transition:background var(--duration-fast, 150ms) ease;
-    display:flex;align-items:flex-start;gap:12px;
+    display:grid;grid-template-columns:4px minmax(0,1fr) auto;align-items:flex-start;gap:12px;
   "
 >
-  <!-- Thumbnail -->
-  {#if issue.hasImage}
-    <div style="width:48px;height:48px;flex-shrink:0;border-radius:8px;overflow:hidden;background:var(--bg-sunken);opacity:{isCompleted ? 0.5 : 1};transition:opacity 0.15s ease;">
-      <IssueImage issueId={issue.id} size="thumb" aspectRatio="1/1" borderRadius="8px" alt="Illustration for {issue.headline}" />
-    </div>
-  {/if}
+  <div style="width:4px;align-self:stretch;border-radius:999px;background:{scoreColor};opacity:{isActive ? 1 : (isStarted ? 0.7 : 0.28)};"></div>
   <div style="flex:1;min-width:0;">
-    <!-- Status pill + headline -->
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
       {#if issue.status === 'new' && !readState}
         <span style="font-size:10px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">New</span>
       {:else if issue.status === 'updated'}
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
+      {#if hasReaction}
+        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Marked</span>
+      {/if}
     </div>
     <span style="font-size:14px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>
 
-    <p style="font-size:12px;color:var(--text-tertiary);line-height:1.4;margin:4px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{issue.context}</p>
-
+    <p style="font-size:12px;color:var(--text-tertiary);line-height:1.45;margin:5px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
+    {#if isStarted && progress > 0}
+      <p style="font-size:11px;font-weight:600;color:var(--score-warning);margin:7px 0 0;">Continue at angle {Math.min(progress + 1, 6)} of 6</p>
+    {/if}
   </div>
-  <!-- Right column: score (+ heart if saved) -->
-  <div style="flex-shrink:0;display:flex;align-items:center;gap:4px;padding-top:2px;">
+  <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;min-width:54px;">
     <span style="font-size:14px;font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
-    {#if hasReaction}
-      <svg width="10" height="10" viewBox="0 0 24 24" fill={scoreColor} stroke="none" style="opacity:0.4;flex-shrink:0;">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-      </svg>
+    <span style="font-size:10px;font-weight:700;color:{scoreColor};text-transform:uppercase;letter-spacing:0.05em;">{label}</span>
+    {#if progressLabel}
+      <span style="font-size:10px;color:var(--text-muted);">{progressLabel}</span>
     {/if}
   </div>
 </div>

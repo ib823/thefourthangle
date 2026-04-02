@@ -1,4 +1,5 @@
 import MiniSearch from 'minisearch';
+import { freshFetch } from './build';
 
 let miniSearch: MiniSearch | null = null;
 let loading = false;
@@ -21,7 +22,7 @@ export async function loadSearchIndex(): Promise<void> {
   if (loaded || loading) return;
   loading = true;
   try {
-    const res = await fetch('/search-index.json');
+    const res = await freshFetch('/search-index.json');
     const json = await res.json();
     miniSearch = MiniSearch.loadJSON(JSON.stringify(json), SEARCH_CONFIG);
     loaded = true;

@@ -11,7 +11,7 @@
     "generate-og": "node scripts/generate-og-images.mjs",
     "validate": "node scripts/validate-issues.mjs",
     "build-graph": "node scripts/build-fact-graph.mjs",
-    "build": "rm -rf dist && node scripts/validate-issues.mjs && node scripts/build-issues-json.mjs && node scripts/build-fact-graph.mjs && node scripts/build-verifier.mjs && node scripts/build-search-index.mjs && node scripts/generate-image-sizes.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs && node scripts/build-csp-hashes.mjs",
+    "build": "rm -rf dist && node scripts/validate-issues.mjs && node scripts/build-issues-json.mjs && node scripts/build-fact-graph.mjs && node scripts/sign-content.mjs && node scripts/build-verifier.mjs && node scripts/build-search-index.mjs && node scripts/generate-image-sizes.mjs && node scripts/generate-og-images.mjs && astro build && node scripts/stealth.mjs && node scripts/build-csp-hashes.mjs",
     "preview": "astro preview",
     "test": "vitest run",
     "astro": "astro",

@@ -155,6 +155,11 @@ async function verifyContent() {
   const match = SIGNED_FINGERPRINTS.find(s => s.fp === fingerprint);
 
   if (match) {
+    if (!match.sig) {
+      resultEl.className = 'result fail';
+      resultEl.innerHTML = '<strong>FINGERPRINT MATCHED</strong> — This build was generated without a signing key, so the cryptographic signature is unavailable.';
+      return;
+    }
     try {
       const key = await getPublicKey();
       const sigBin = Uint8Array.from(atob(match.sig), c => c.charCodeAt(0));

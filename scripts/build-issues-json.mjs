@@ -3,7 +3,7 @@
  * - public/issues-feed.json  — feed summaries (no card text)
  * - public/issues/[id].json  — full issue per file
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -51,15 +51,16 @@ writeFileSync(
 );
 console.log(`  ✓ issues-feed.json (${feedSummaries.length} issues, ${Math.round(JSON.stringify(feedSummaries).length / 1024)}KB)`);
 
-// --- Per-issue full payloads ---
 const issuesDir = join(root, 'public', 'issues');
+rmSync(issuesDir, { recursive: true, force: true });
 mkdirSync(issuesDir, { recursive: true });
 
-for (const issue of issues) {
+// --- Per-issue full payloads (published only) ---
+for (const issue of publishedIssues) {
   writeFileSync(
     join(issuesDir, `${issue.id}.json`),
     JSON.stringify(issue),
     'utf8'
   );
 }
-console.log(`  ✓ issues/*.json (${issues.length} files)`);
+console.log(`  ✓ issues/*.json (${publishedIssues.length} files)`);

@@ -8,14 +8,21 @@ interface Props {
 
 const { title = 'The Fourth Angle — Bite-Sized Malaysian Issues Analysis', description = 'Bite-size clarity for smarter thinking and better questions. The strongest check on power is a public that reads.' } = Astro.props;
 const siteUrl = Astro.site?.origin || 'https://thefourthangle.pages.dev';
-const canonicalUrl = `${siteUrl}${Astro.url.pathname === '/' ? '/' : Astro.url.pathname}`;
-const ogImage = `${siteUrl}/og-image.png`;
+const canonicalPath = Astro.url.pathname
+  .replace(/index\.html$/, '')
+  .replace(/\.html$/, '') || '/';
+const canonicalUrl = `${siteUrl}${canonicalPath === '/' ? '/' : canonicalPath}`;
+const buildId = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : new Date().toISOString();
+const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
 ---
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="MobileOptimized" content="320" />
   <meta name="theme-color" content="#F8F9FA" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)" />
   <title>{title}</title>
@@ -43,19 +50,44 @@ const ogImage = `${siteUrl}/og-image.png`;
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" href="/favicon.png?v=6" />
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <meta name="application-name" content="The Fourth Angle" />
+  <meta name="apple-mobile-web-app-title" content="4th Angle" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href={`/manifest.json?v=${encodeURIComponent(buildId)}`} />
+  <link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${encodeURIComponent(buildId)}`} />
+  <link rel="icon" type="image/png" href={`/favicon.png?v=${encodeURIComponent(buildId)}`} />
+  <link rel="apple-touch-icon" href={`/icons/apple-touch-icon.png?v=${encodeURIComponent(buildId)}`} />
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
   <div id="main-content">
     <slot />
   </div>
-  <script>
+  <script is:inline define:vars={{ buildId }}>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      const currentBuild = String(buildId);
+      const priorBuild = sessionStorage.getItem('tfa-sw-build');
+      let reloading = false;
+
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!priorBuild || priorBuild === currentBuild || reloading) {
+          sessionStorage.setItem('tfa-sw-build', currentBuild);
+          return;
+        }
+        reloading = true;
+        sessionStorage.setItem('tfa-sw-build', currentBuild);
+        location.reload();
+      });
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register(`/sw.js?v=${encodeURIComponent(currentBuild)}`, { updateViaCache: 'none' })
+          .then((registration) => {
+            sessionStorage.setItem('tfa-sw-build', currentBuild);
+            registration.update().catch(() => {});
+          })
+          .catch(() => {});
+      });
     }
     // Back link: go back if history exists, otherwise go home
     document.querySelector('.back-link')?.addEventListener('click', (e) => {

@@ -29,12 +29,12 @@
   let expandedStage: string | null = $state(null);
 
   const stages = [
-    { key: 'pa', label: 'PA', full: 'Primary Analysis' },
-    { key: 'ba', label: 'BA', full: 'Bias Audit' },
-    { key: 'fc', label: 'FC', full: 'Fact Check' },
-    { key: 'af', label: 'AF', full: 'Alt. Framing' },
-    { key: 'ct', label: 'CT', full: 'Stress Test' },
-    { key: 'sr', label: 'SR', full: 'Synthesis' },
+    { key: 'pa', label: 'PA', full: 'Primary Analysis', description: 'Checks whether the core claim is framed clearly before interpretation starts.' },
+    { key: 'ba', label: 'BA', full: 'Bias Audit', description: 'Looks for slant, omission, or loaded framing that could tilt the reader early.' },
+    { key: 'fc', label: 'FC', full: 'Fact Check', description: 'Verifies whether the article’s central factual claims hold up against source material.' },
+    { key: 'af', label: 'AF', full: 'Alternative Framing', description: 'Tests whether a credible competing frame changes the meaning of the story.' },
+    { key: 'ct', label: 'CT', full: 'Stress Test', description: 'Pushes the argument against the strongest counter-case available.' },
+    { key: 'sr', label: 'SR', full: 'Synthesis Review', description: 'Assesses whether the final view stays fair after the earlier checks.' },
   ] as const;
 
   function dotColor(score: number | undefined): string {
@@ -133,10 +133,13 @@
         {@const val = scores[expandedStage as keyof StageScores]}
         {@const stage = stages.find(s => s.key === expandedStage)}
         {#if stage && val !== undefined}
-          <div style="margin-top:6px;padding:6px 0 2px;border-top:1px solid var(--border-light);font-size:11px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;">
-            <span style="font-weight:600;color:var(--text-primary);">{stage.full}</span>
-            <span style="color:{dotColor(val)};font-weight:700;">{val}/100</span>
-            <span style="color:var(--text-muted);">— {scoreLabel(val)}</span>
+          <div style="margin-top:8px;padding:8px 0 2px;border-top:1px solid var(--border-light);display:flex;flex-direction:column;gap:4px;">
+            <div style="font-size:11px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <span style="font-weight:600;color:var(--text-primary);">{stage.full}</span>
+              <span style="color:{dotColor(val)};font-weight:700;">{val}/100</span>
+              <span style="color:var(--text-muted);">— {scoreLabel(val)}</span>
+            </div>
+            <div style="font-size:11px;line-height:1.5;color:var(--text-secondary);">{stage.description}</div>
           </div>
         {/if}
       {/if}

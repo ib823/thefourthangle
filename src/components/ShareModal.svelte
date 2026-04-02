@@ -3,6 +3,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { stagger, haptic } from '../lib/animation';
   import { createSpring, animateSpring } from '../lib/spring';
+  import { BUILD_ID, getSiteOrigin } from '../lib/build';
 
   interface Props {
     issue: Issue;
@@ -87,7 +88,7 @@
   let card = $derived(cardIndex !== null ? issue.cards[cardIndex] : null);
   let shareText = $derived(card ? card.big : issue.headline);
   let previewText = $derived(card ? (shareText.length > 120 ? shareText.slice(0, 117) + '...' : shareText) : (issue.context.length > 120 ? issue.context.slice(0, 117) + '...' : issue.context));
-  let fullUrl = $derived(`https://thefourthangle.pages.dev/issue/${issue.id}`);
+  let fullUrl = $derived(`${getSiteOrigin()}/issue/${issue.id}?v=${encodeURIComponent(BUILD_ID)}`);
 
   let os = $derived(issue.opinionShift);
   let ns = $derived(Math.round(issue.finalScore ?? 0));
@@ -325,4 +326,3 @@
     </button>
   </div>
 </div>
-
