@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import FeedRow from './FeedRow.svelte';
   import SectionHeader from './SectionHeader.svelte';
-  import { getReadCount, reactions } from '../stores/reader';
+  import { getReadCount, reactions, savedIssues } from '../stores/reader';
   import { issueCategory } from '../data/issues';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -13,6 +13,13 @@
     sections?: FeedSection[];
     activeId: string | null;
     readMap: Record<string, string>;
+    surfaceMode?: 'today' | 'browse' | 'saved' | 'marked';
+    savedCount?: number;
+    markedCount?: number;
+    onGoToday?: () => void;
+    onOpenBrowse?: () => void;
+    onOpenSaved?: () => void;
+    onOpenMarked?: () => void;
     onSelectIssue: (issue: IssueSummary) => void;
     searchQuery?: string;
     onSearchInput?: (query: string) => void;
@@ -22,7 +29,7 @@
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], activeId, readMap, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', savedCount = 0, markedCount = 0, onGoToday, onOpenBrowse, onOpenSaved, onOpenMarked, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
 
   let collapsedSections = $state<Record<string, boolean>>({});
 
@@ -54,6 +61,19 @@
 
   function hasReaction(issueId: string): boolean {
     return (reactionMap[issueId]?.length ?? 0) > 0;
+  }
+
+  let savedRaw = $state('{}');
+  $effect(() => {
+    const unsub = savedIssues.subscribe(v => { savedRaw = v; });
+    return unsub;
+  });
+  let savedMap: Record<string, number> = $derived.by(() => {
+    try { return JSON.parse(savedRaw); } catch { return {}; }
+  });
+
+  function isSaved(issueId: string): boolean {
+    return !!savedMap[issueId];
   }
 
   // Compute counts
@@ -184,7 +204,14 @@
   <div style="padding:14px 18px 0;flex-shrink:0;">
     <div style="padding:0 2px 12px;">
       <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Smart Queue</div>
-      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Continue where you left off, then open the stories whose headlines hide the most.</div>
+      <div style="font-size:13px;line-height:1.45;color:var(--text-secondary);margin-top:6px;">Move between ritual, archive, and memory without losing your place.</div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px;">
+      <button onclick={() => onGoToday?.()} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'transparent'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Today</button>
+      <button onclick={() => onOpenBrowse?.()} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'transparent'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-divider)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Browse</button>
+      <button onclick={() => onOpenSaved?.()} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'transparent'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Saved {savedCount}</button>
+      <button onclick={() => onOpenMarked?.()} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'transparent'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'var(--border-subtle)'};cursor:pointer;padding:6px 10px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:11px;font-weight:700;">Marked {markedCount}</button>
     </div>
 
     <!-- Search -->
@@ -210,7 +237,7 @@
     </div>
 
     <!-- Sort toggle -->
-    {#if !isSearching && onSortChange}
+    {#if !isSearching && onSortChange && surfaceMode !== 'today'}
       <div style="display:flex;align-items:center;gap:2px;padding:10px 0 4px;font-size:11px;font-weight:600;">
         <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:11px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
         <span style="color:var(--border-divider);">·</span>
@@ -284,7 +311,7 @@
         />
         {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
           {#each section.issues as issue}
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={isSaved(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           {/each}
         {/if}
       {/each}
@@ -310,7 +337,7 @@
             aria-selected={activeId === issue.id}
             tabindex={focusedIndex === idx ? 0 : -1}
           >
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} isSaved={isSaved(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           </div>
         {/each}
       </div>

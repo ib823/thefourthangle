@@ -3,6 +3,7 @@
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
   import SaveButton from './SaveButton.svelte';
+  import IssueSaveButton from './IssueSaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
   import { CARD_TYPES } from '../data/issues';
@@ -10,6 +11,7 @@
   import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
   import { haptic, stagger, tween, ease } from '../lib/animation';
+  import { withBuildId } from '../lib/build';
   import { lockScroll, unlockScroll } from '../lib/scroll-lock';
   import { observeScroll, applyFadeGradient, shouldBlockSwipe, type ScrollState } from '../lib/scroll-physics';
 
@@ -42,6 +44,7 @@
   interface Props {
     issue: Issue;
     onClose: () => void;
+    onReturnHome?: () => void;
     onNext?: () => void;
     onNavigateToIssue?: (issueId: string) => void;
     initialCardIndex?: number;
@@ -50,7 +53,7 @@
     nextIssueHeadline?: string;
   }
 
-  let { issue, onClose, onNext, onNavigateToIssue, initialCardIndex = 0, originRect, connections = [], nextIssueHeadline = '' }: Props = $props();
+  let { issue, onClose, onReturnHome, onNext, onNavigateToIssue, initialCardIndex = 0, originRect, connections = [], nextIssueHeadline = '' }: Props = $props();
 
   let patternSheetOpen = $state(false);
 
@@ -499,7 +502,7 @@
     completionVisible = true;
     announceCompletion();
     // Stagger buttons in
-    const btnCount = onNext ? 2 : 2; // share + next/done
+    const btnCount = onReturnHome ? 3 : 2;
     completionButtonsVisible = [];
     stagger(btnCount, 120, 500, (i) => {
       completionButtonsVisible = [...completionButtonsVisible, true];
@@ -988,10 +991,7 @@
   {#if current === 0 && !completed}
     <div style="padding:0 20px;margin-bottom:8px;">
       <div style="border-radius:10px;overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
-        <picture>
-          <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
-          <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
-        </picture>
+          <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
       </div>
     </div>
   {/if}
@@ -1045,10 +1045,21 @@
               <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
             {/if}
             {#if completionButtonsVisible.length > 1}
-              {#if onNext}
+              {#if onReturnHome}
+                <button class="btn-done completion-btn-enter" onclick={onReturnHome}>Back to Today</button>
+              {:else if onNext}
                 <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
               {:else}
                 <button class="btn-done completion-btn-enter" onclick={onClose}>Done</button>
+              {/if}
+            {/if}
+            {#if completionButtonsVisible.length > 2}
+              {#if onNext}
+                <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
+              {:else}
+                <div class="completion-btn-enter" style="display:flex;justify-content:center;">
+                  <IssueSaveButton issueId={issue.id} label="Save issue" />
+                </div>
               {/if}
             {/if}
           </div>
@@ -1078,6 +1089,7 @@
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
+            <IssueSaveButton issueId={issue.id} compact={true} />
             <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>

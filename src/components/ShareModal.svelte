@@ -262,10 +262,7 @@
     <!-- Preview card -->
     <div class="preview-card">
       <div style="margin:-12px -14px 10px;border-radius:10px 10px 0 0;overflow:hidden;background:var(--bg-sunken);">
-        <picture>
-          <source srcset={`/og/backgrounds/issue-${issue.id}-card.avif`} type="image/avif" />
-          <img src={`/og/backgrounds/issue-${issue.id}-card.jpg`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
-        </picture>
+        <img src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(BUILD_ID)}`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
       </div>
       <div class="preview-headline">{issue.headline}</div>
       <div class="preview-context">{previewText}</div>

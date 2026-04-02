@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { readIssues } from '../stores/reader';
   import { QUOTES } from '../data/quotes';
   import IssueImage from './IssueImage.svelte';
 
@@ -11,24 +10,36 @@
     topIssue?: IssueSummary | null;
     issues?: IssueSummary[];
     sections?: FeedSection[];
+    readMap?: Record<string, string>;
+    savedCount?: number;
+    markedCount?: number;
     onOpenIssue?: (issue: IssueSummary) => void;
+    onOpenBrowse?: () => void;
+    onOpenSaved?: () => void;
+    onOpenMarked?: () => void;
   }
-  let { issueCount = 0, topIssue = null, issues = [], sections = [], onOpenIssue }: Props = $props();
+  let {
+    issueCount = 0,
+    topIssue = null,
+    issues = [],
+    sections = [],
+    readMap = {},
+    savedCount = 0,
+    markedCount = 0,
+    onOpenIssue,
+    onOpenBrowse,
+    onOpenSaved,
+    onOpenMarked,
+  }: Props = $props();
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
-  let readCount = $state(0);
-  let readMap: Record<string, string> = $state({});
-  $effect(() => {
-    const unsub = readIssues.subscribe(val => {
-      readMap = { ...val };
-      readCount = Object.values(val).filter(v => {
-        if (!v) return false;
-        if (v === 'true') return true;
-        try { return JSON.parse(v).state === 'completed'; } catch { return false; }
-      }).length;
-    });
-    return unsub;
+  let readCount = $derived.by(() => {
+    return Object.values(readMap).filter(v => {
+      if (!v) return false;
+      if (v === 'true') return true;
+      try { return JSON.parse(v).state === 'completed'; } catch { return false; }
+    }).length;
   });
 
   let unread = $derived(Math.max(0, issueCount - readCount));
@@ -97,7 +108,7 @@
       <div class="today-topline">
         <div>
           <div class="today-kicker">Today</div>
-          <h2 class="today-title">Start with what matters now, not the whole archive.</h2>
+          <h2 class="today-title">Return to the clearest place in the product.</h2>
         </div>
         <div class="today-status">
           <span>{readyCount} issues ready</span>
@@ -118,7 +129,7 @@
           <div class="hero-scrim"></div>
           <div class="hero-grid">
             <div class="hero-copy">
-              <div class="hero-badge">Featured Issue</div>
+              <div class="hero-badge">Lead Issue</div>
               <h3 class="hero-headline">{topIssue.headline}</h3>
               <p class="hero-context">{topIssue.context}</p>
               <p class="hero-hook">Read past the headline, then decide what the story is really about.</p>
@@ -175,6 +186,28 @@
             {/each}
           </div>
         </div>
+
+        <div class="today-panel today-panel--library">
+          <div class="panel-kicker">Your Library</div>
+          <div class="panel-title">Move between ritual, archive, and memory.</div>
+          <div class="library-grid">
+            <button class="library-item" onclick={() => onOpenBrowse?.()}>
+              <span class="library-label">Full Queue</span>
+              <span class="library-value">{issueCount}</span>
+              <span class="library-copy">{unread > 0 ? `${unread} still unexplored` : 'Fully explored right now'}</span>
+            </button>
+            <button class="library-item" onclick={() => onOpenSaved?.()}>
+              <span class="library-label">Saved</span>
+              <span class="library-value">{savedCount}</span>
+              <span class="library-copy">Issues you want to return to on purpose</span>
+            </button>
+            <button class="library-item" onclick={() => onOpenMarked?.()}>
+              <span class="library-label">Marked</span>
+              <span class="library-value">{markedCount}</span>
+              <span class="library-copy">Issues with at least one highlighted angle</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="today-footer">
@@ -201,9 +234,9 @@
   }
 
   .today-wrap {
-    max-width: 1040px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 40px 32px 56px;
+    padding: 32px 24px 56px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -229,11 +262,11 @@
   .today-title {
     margin: 10px 0 0;
     font-family: var(--font-display);
-    font-size: 36px;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
     color: var(--text-primary);
-    max-width: 14ch;
+    max-width: 15ch;
   }
 
   .today-status {
@@ -257,100 +290,113 @@
     background: var(--border-divider);
   }
 
+  .hero-card,
+  .panel-issue,
+  .brief-item,
+  .library-item {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+  }
+
   .hero-card {
     position: relative;
-    min-height: 460px;
-    border-radius: 28px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: #141414;
-    cursor: pointer;
-    text-align: left;
-    padding: 0;
-    box-shadow: 0 24px 60px rgba(24, 24, 24, 0.12);
+    border-radius: 30px;
+    min-height: 420px;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.94), rgba(28, 28, 28, 0.82));
+    color: #fff;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
   }
 
   .hero-art,
-  .hero-scrim {
+  .hero-art :global(img),
+  .hero-art :global(picture) {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-scrim {
+    position: absolute;
+    inset: 0;
     background:
-      linear-gradient(90deg, rgba(15, 15, 15, 0.92) 0%, rgba(15, 15, 15, 0.7) 42%, rgba(15, 15, 15, 0.46) 100%),
-      linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.5) 100%);
-    z-index: 1;
+      linear-gradient(90deg, rgba(10, 10, 10, 0.82) 0%, rgba(10, 10, 10, 0.56) 45%, rgba(10, 10, 10, 0.7) 100%),
+      linear-gradient(180deg, rgba(210, 140, 40, 0.16), transparent 36%);
   }
 
   .hero-grid {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
-    gap: 24px;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    gap: 28px;
+    min-height: 420px;
+    padding: 30px;
     align-items: end;
-    min-height: 460px;
-    padding: 32px;
   }
 
   .hero-copy {
-    max-width: 640px;
+    max-width: 56ch;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
+    width: fit-content;
+    padding: 7px 12px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.14);
-    color: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     font-size: 11px;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.08em;
-    backdrop-filter: blur(10px);
+    text-transform: uppercase;
   }
 
   .hero-headline {
-    margin: 16px 0 0;
+    margin: 0;
     font-family: var(--font-display);
-    font-size: 44px;
-    line-height: 0.98;
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 0.97;
     letter-spacing: -0.05em;
-    color: #fff;
-    max-width: 11.5ch;
+    max-width: 12ch;
+  }
+
+  .hero-context,
+  .hero-hook,
+  .hero-shift-copy,
+  .hero-shift-foot {
+    margin: 0;
   }
 
   .hero-context {
-    margin: 16px 0 0;
-    max-width: 58ch;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.65;
-    color: rgba(255, 255, 255, 0.84);
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 56ch;
   }
 
   .hero-hook {
-    margin: 18px 0 0;
-    max-width: 36ch;
-    font-size: 18px;
-    font-style: italic;
+    font-size: 14px;
+    font-weight: 700;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.94);
+    color: rgba(255, 255, 255, 0.92);
   }
 
   .hero-shift {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 10px;
-    padding: 20px;
+    padding: 22px;
     border-radius: 22px;
-    background: rgba(15, 15, 15, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .hero-shift-kicker {
@@ -363,34 +409,26 @@
 
   .hero-shift-score {
     font-family: var(--font-display);
-    font-size: 64px;
-    line-height: 0.92;
+    font-size: 76px;
+    line-height: 0.88;
     letter-spacing: -0.05em;
-  }
-
-  .hero-shift-copy,
-  .hero-shift-foot {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.84);
-    line-height: 1.5;
+    margin-top: 14px;
   }
 
   .hero-shift-copy {
     font-size: 15px;
-    font-weight: 600;
-  }
-
-  .hero-shift-foot {
-    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+    margin-top: 10px;
   }
 
   .hero-shift-meter,
   .panel-progress-track {
-    width: 100%;
     height: 8px;
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 999px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.12);
+    margin-top: 14px;
   }
 
   .hero-shift-fill,
@@ -399,15 +437,20 @@
     border-radius: 999px;
   }
 
-  .panel-progress-fill {
-    background: var(--score-warning);
+  .hero-shift-foot {
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
   }
 
   .hero-cta {
+    margin-top: 16px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 4px;
     font-size: 13px;
     font-weight: 700;
     color: #fff;
@@ -415,153 +458,223 @@
 
   .today-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .today-panel {
     padding: 22px;
-    border-radius: 22px;
+    border-radius: 24px;
     border: 1px solid var(--border-subtle);
-    background: rgba(255, 255, 255, 0.82);
-    box-shadow: 0 10px 30px rgba(24, 24, 24, 0.05);
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 
   .panel-title {
-    margin-top: 12px;
     font-family: var(--font-display);
     font-size: 24px;
-    line-height: 1.1;
+    line-height: 1.04;
     letter-spacing: -0.03em;
     color: var(--text-primary);
   }
 
   .panel-subtitle,
-  .panel-issue-copy,
   .panel-empty-copy,
-  .brief-context {
-    margin-top: 8px;
-    font-size: 14px;
-    line-height: 1.55;
+  .panel-issue-copy,
+  .brief-context,
+  .library-copy,
+  .today-note,
+  .today-quote {
+    font-size: 13px;
+    line-height: 1.6;
     color: var(--text-secondary);
   }
 
   .panel-issue,
-  .brief-item {
-    width: 100%;
-    border: none;
+  .brief-item,
+  .library-item {
+    padding: 16px;
+    border-radius: 18px;
     background: var(--bg);
-    text-align: left;
-    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
-  .panel-issue {
-    margin-top: 14px;
-    padding: 18px;
-    border-radius: 18px;
-    border: 1px solid var(--border-subtle);
+  .panel-issue:hover,
+  .brief-item:hover,
+  .library-item:hover,
+  .hero-card:hover {
+    transform: translateY(-2px);
   }
 
   .panel-issue-title,
-  .brief-headline,
-  .panel-empty-title {
-    font-size: 18px;
+  .brief-headline {
+    font-size: 15px;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.35;
     color: var(--text-primary);
   }
 
   .panel-progress-row {
-    margin-top: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 10px;
     font-size: 12px;
     font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  .panel-progress-track {
+    flex: 1;
+    height: 6px;
+    margin-top: 0;
+    background: var(--bg-sunken);
+  }
+
+  .panel-progress-fill {
+    background: var(--score-warning);
+  }
+
+  .panel-empty-title,
+  .library-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--text-tertiary);
   }
 
-  .panel-empty {
-    margin-top: 14px;
-    padding: 18px;
-    border-radius: 18px;
-    background: var(--bg);
-    border: 1px solid var(--border-subtle);
-  }
-
-  .brief-list {
+  .brief-list,
+  .library-grid {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 16px;
   }
 
   .brief-item {
     display: grid;
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
     align-items: start;
-    padding: 14px 0;
-    border-top: 1px solid var(--bg-sunken);
   }
 
-  .brief-item:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .brief-score {
+  .brief-score,
+  .library-value {
     font-family: var(--font-display);
-    font-size: 28px;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    font-size: 36px;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+
+  .library-item {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 10px 14px;
+    align-items: center;
+  }
+
+  .library-label,
+  .library-copy {
+    grid-column: 1 / -1;
   }
 
   .today-footer {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 18px;
-    color: var(--text-muted);
-    font-size: 13px;
+    gap: 20px;
+    padding: 0 2px;
   }
 
   .today-note {
-    font-weight: 600;
+    color: var(--text-tertiary);
   }
 
   .today-quote {
-    max-width: 40ch;
-    text-align: right;
     font-style: italic;
+    max-width: 44ch;
+    text-align: right;
   }
 
   .coming-soon {
-    min-height: 60vh;
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 16px;
   }
 
-  @media (max-width: 1180px) {
-    .hero-grid,
-    .today-grid,
+  @media (max-width: 1023px) {
+    .today-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .today-panel--library {
+      grid-column: 1 / -1;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      align-items: end;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .today-wrap {
+      padding: 18px 14px 28px;
+      gap: 16px;
+    }
+
     .today-topline,
     .today-footer {
-      grid-template-columns: 1fr;
       flex-direction: column;
       align-items: flex-start;
     }
 
-    .hero-headline,
-    .today-title {
-      max-width: unset;
+    .today-status {
+      flex-wrap: wrap;
+      white-space: normal;
     }
 
-    .today-status,
+    .hero-card {
+      min-height: 0;
+      border-radius: 24px;
+    }
+
+    .hero-grid {
+      min-height: 0;
+      padding: 20px;
+      gap: 18px;
+    }
+
+    .hero-headline {
+      max-width: none;
+    }
+
+    .hero-shift-score {
+      font-size: 58px;
+    }
+
+    .today-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .today-panel {
+      padding: 18px;
+      border-radius: 20px;
+    }
+
+    .brief-score,
+    .library-value {
+      font-size: 28px;
+    }
+
     .today-quote {
-      white-space: normal;
       text-align: left;
+      max-width: none;
     }
   }
 </style>

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
   import MobileSectionDivider from './MobileSectionDivider.svelte';
-  import { readIssues, savePosition, reactions } from '../stores/reader';
+  import { readIssues, savePosition, reactions, savedIssues } from '../stores/reader';
   import { haptic } from '../lib/animation';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -59,6 +59,19 @@
 
   function hasReaction(issueId: string): boolean {
     return (reactionMap[issueId]?.length ?? 0) > 0;
+  }
+
+  let savedRaw = $state('{}');
+  $effect(() => {
+    const unsub = savedIssues.subscribe(v => { savedRaw = v; });
+    return unsub;
+  });
+  let savedMap: Record<string, number> = $derived.by(() => {
+    try { return JSON.parse(savedRaw); } catch { return {}; }
+  });
+
+  function isSaved(issueId: string): boolean {
+    return !!savedMap[issueId];
   }
 
   // DOM refs
@@ -200,6 +213,7 @@
           onOpen={() => handleOpenIssue(item.issue)}
           onPrefetch={() => onPrefetch?.(item.issue)}
           hasReaction={hasReaction(item.issue.id)}
+          isSaved={isSaved(item.issue.id)}
           hasConnections={issueHasConnections?.(item.issue.id) ?? false}
           eager={i === 0 || i === 1}
         />

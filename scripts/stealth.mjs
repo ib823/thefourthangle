@@ -2,7 +2,7 @@
  * Post-build stealth hardening script.
  * Strips all framework-identifiable markers from the dist/ output.
  */
-import { readdir, readFile, writeFile, rename, unlink } from 'fs/promises';
+import { readdir, readFile, writeFile, rename, unlink, rm } from 'fs/promises';
 import { join, basename } from 'path';
 
 const DIST = new URL('../dist', import.meta.url).pathname;
@@ -157,6 +157,7 @@ async function main() {
   try { await unlink(join(DIST, 'fonts', 'playfair-latin.woff2')); } catch {}
   try { await unlink(join(DIST, 'favicon.ico')); } catch {}
   try { await unlink(join(DIST, 'favicon.svg')); } catch {}
+  try { await rm(join(DIST, 'og', 'backgrounds'), { recursive: true, force: true }); } catch {}
 
   // ── PHASE 7: Strip image metadata (PNG chunks + JPEG EXIF) ──
   const pngFiles = files.filter(f => f.endsWith('.png'));

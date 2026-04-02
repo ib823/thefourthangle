@@ -6,9 +6,11 @@
   import { markStarted, markCompleted } from '../stores/reader';
   import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
+  import IssueSaveButton from './IssueSaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
   import IssueImage from './IssueImage.svelte';
+  import { withBuildId } from '../lib/build';
 
   import type { Issue } from '../data/issues';
 
@@ -24,12 +26,13 @@
 
   interface Props {
     issue: Issue;
+    onReturnHome?: () => void;
     onNext?: () => void;
     nextHeadline?: string;
     connections?: Connection[];
     onNavigateToIssue?: (issueId: string) => void;
   }
-  let { issue, onNext, nextHeadline, connections = [], onNavigateToIssue }: Props = $props();
+  let { issue, onReturnHome, onNext, nextHeadline, connections = [], onNavigateToIssue }: Props = $props();
 
   // Reactions handled by SaveButton component
   let scrollEl: HTMLDivElement | undefined = $state(undefined);
@@ -268,18 +271,18 @@
       <div style="flex:1;">
         <h1 style="font-family:var(--font-display);font-size:40px;font-weight:800;color:var(--text-primary);letter-spacing:-0.04em;line-height:0.98;margin:0;max-width:14ch;">{issue.headline}</h1>
       </div>
-      <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        <span style="font-size:12px;font-weight:700;color:var(--text-tertiary);">Share</span>
-      </button>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+        <IssueSaveButton issueId={issue.id} compact={true} />
+        <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          <span style="font-size:12px;font-weight:700;color:var(--text-tertiary);">Share</span>
+        </button>
+      </div>
     </div>
     <p style="font-size:18px;color:var(--text-secondary);font-weight:450;line-height:1.65;margin:16px 0 0;max-width:62ch;">{issue.context}</p>
 
     <div style="margin:24px -24px 0;overflow:hidden;background:var(--bg-sunken);border-radius:24px;">
-      <picture>
-        <source srcset={`/og/backgrounds/issue-${issue.id}-hero.avif`} type="image/avif" />
-        <img src={`/og/backgrounds/issue-${issue.id}-hero.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
-      </picture>
+      <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
     </div>
 
     <div style="margin:22px 0 0;padding:20px 22px;border-radius:22px;border:1px solid var(--border-subtle);background:linear-gradient(135deg, rgba(210,140,40,0.08) 0%, rgba(255,255,255,0.9) 55%);display:grid;grid-template-columns:minmax(110px, 0.4fr) minmax(0, 1fr);gap:18px;align-items:center;">
@@ -369,10 +372,7 @@
                 onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
               >
                 <div style="width:36px;height:36px;flex-shrink:0;border-radius:6px;overflow:hidden;background:var(--bg-sunken);">
-                  <picture>
-                    <source srcset={`/og/backgrounds/issue-${conn.id}-thumb.avif`} type="image/avif" />
-                    <img src={`/og/backgrounds/issue-${conn.id}-thumb.jpg`} alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" onerror={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }} />
-                  </picture>
+                  <img src={withBuildId(`/og/issue-${conn.id}.png`)} alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" onerror={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }} />
                 </div>
                 <div style="flex:1;min-width:0;">
                   <div style="display:flex;align-items:center;gap:6px;">
@@ -407,6 +407,17 @@
       {/if}
 
       <!-- Share -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;margin-bottom:12px;">
+        {#if onReturnHome}
+          <button onclick={onReturnHome} style="width:100%;padding:12px 16px;background:rgba(210,140,40,0.12);color:var(--score-warning);border:1px solid rgba(210,140,40,0.24);border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;">
+            Back to Today
+          </button>
+        {/if}
+        <div style="display:flex;">
+          <IssueSaveButton issueId={issue.id} label="Save for later" />
+        </div>
+      </div>
+
       <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
         onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
         onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>

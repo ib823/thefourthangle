@@ -13,9 +13,10 @@
     onOpen: () => void;
     onPrefetch?: () => void;
     hasReaction?: boolean;
+    isSaved?: boolean;
     hasConnections?: boolean;
   }
-  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false, hasConnections = false }: Props = $props();
+  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false, isSaved = false, hasConnections = false }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -85,6 +86,12 @@
     {:else if issue.status === 'updated'}
       <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
     {/if}
+    {#if isSaved}
+      <span style="font-size:10px;font-weight:700;color:var(--score-warning);background:rgba(210,140,40,0.1);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Saved</span>
+    {/if}
+    {#if hasReaction}
+      <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Marked</span>
+    {/if}
     <div style="flex:1;"></div>
   </div>
 
@@ -109,6 +116,11 @@
     {#if hasReaction}
       <svg width="10" height="10" viewBox="0 0 24 24" fill={scoreColor} stroke="none" style="opacity:0.4;flex-shrink:0;">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    {/if}
+    {#if isSaved}
+      <svg width="10" height="10" viewBox="0 0 24 24" fill={scoreColor} stroke="none" style="opacity:0.5;flex-shrink:0;">
+        <path d="M7 3h10a1 1 0 0 1 1 1v17l-6-3-6 3V4a1 1 0 0 1 1-1z"></path>
       </svg>
     {/if}
   </div>

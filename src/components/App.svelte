@@ -8,10 +8,10 @@
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
   import DesktopReader from './DesktopReader.svelte';
-  import DesktopEmptyState from './DesktopEmptyState.svelte';
+  import TodayView from './TodayView.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
-  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
+  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, savedIssues, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
   import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
@@ -35,9 +35,16 @@
   }
   let { initialIssueId, feedData = [] }: Props = $props();
 
+  function initialSurfaceMode(): 'today' | 'browse' | 'saved' | 'marked' {
+    if (typeof window === 'undefined') return 'today';
+    const view = new URL(window.location.href).searchParams.get('view');
+    return view === 'browse' || view === 'saved' || view === 'marked' ? view : 'today';
+  }
+
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
   let searchQuery = $state('');
   let searchActive = $state(false);
+  let surfaceMode = $state<'today' | 'browse' | 'saved' | 'marked'>(initialSurfaceMode());
 
   // Feed data comes from Astro props (SSR-available) or from async fetch
   let issues = $state<FeedIssue[]>(feedData);
@@ -50,14 +57,6 @@
   let feedSort: SortMode = $state('latest');
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
-  let filteredIssues = $derived.by(() => {
-    if (!searchQuery.trim() || !isSearching) return issues;
-    const ids = doSearch(searchQuery);
-    if (ids.length === 0) return [];
-    const idSet = new Set(ids);
-    return issues.filter(i => idSet.has(i.id));
-  });
-  let searchResultCount = $derived(isSearching ? filteredIssues.length : -1);
 
   function onSearchFocus() {
     loadSearchIndex();
@@ -115,6 +114,34 @@
   function hasReaction(issueId: string): boolean {
     return (appReactionMap[issueId]?.length ?? 0) > 0;
   }
+
+  let savedRaw = $state('{}');
+  $effect(() => {
+    const unsub = savedIssues.subscribe(v => { savedRaw = v; });
+    return unsub;
+  });
+  let savedIssueMap = $derived.by(() => {
+    try { return JSON.parse(savedRaw) as Record<string, number>; } catch { return {}; }
+  });
+  function hasSaved(issueId: string): boolean {
+    return !!savedIssueMap[issueId];
+  }
+  let savedCount = $derived(Object.keys(savedIssueMap).length);
+  let markedCount = $derived(Object.values(appReactionMap).filter(cards => cards.length > 0).length);
+  let scopedIssues = $derived.by(() => {
+    if (surfaceMode === 'saved') return issues.filter(i => !!savedIssueMap[i.id]);
+    if (surfaceMode === 'marked') return issues.filter(i => (appReactionMap[i.id]?.length ?? 0) > 0);
+    return issues;
+  });
+  let filteredIssues = $derived.by(() => {
+    const source = scopedIssues;
+    if (!searchQuery.trim() || !isSearching) return source;
+    const ids = doSearch(searchQuery);
+    if (ids.length === 0) return [];
+    const idSet = new Set(ids);
+    return source.filter(i => idSet.has(i.id));
+  });
+  let searchResultCount = $derived(isSearching ? filteredIssues.length : -1);
 
   // Save position whenever active issue changes
   $effect(() => {
@@ -283,7 +310,7 @@
         activeIssue = null;
         activeFullIssue = null;
         // Restore base URL when reader closes via back button
-        history.replaceState(null, '', '/');
+        history.replaceState(null, '', surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`);
       }
     }
     window.addEventListener('popstate', onPopState);
@@ -432,20 +459,43 @@
     loadAndOpenIssue(issue.id);
   }
 
+  function goToday() {
+    searchQuery = '';
+    searchActive = false;
+    surfaceMode = 'today';
+    if (activeIssue || activeFullIssue) closeReader();
+  }
+
+  function openBrowse() {
+    surfaceMode = 'browse';
+    searchActive = false;
+  }
+
+  function openSavedLibrary() {
+    surfaceMode = 'saved';
+    searchActive = false;
+  }
+
+  function openMarkedLibrary() {
+    surfaceMode = 'marked';
+    searchActive = false;
+  }
+
   function closeReader() {
     activeIssue = null;
     activeFullIssue = null;
     if (readerHistoryPushed) {
       readerHistoryPushed = false;
-      history.replaceState(null, '', '/');
+      history.replaceState(null, '', surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`);
     }
   }
 
   function openNextIssue() {
     if (!activeIssue) return;
-    const idx = issues.findIndex(i => i.id === activeIssue!.id);
-    if (idx >= 0 && idx < issues.length - 1) {
-      const next = issues[idx + 1];
+    const sequence = sortedIssues.length > 0 ? sortedIssues : issues;
+    const idx = sequence.findIndex(i => i.id === activeIssue!.id);
+    if (idx >= 0 && idx < sequence.length - 1) {
+      const next = sequence[idx + 1];
       activeIssue = next;
       loadAndOpenIssue(next.id);
     }
@@ -453,14 +503,24 @@
 
   let isLastIssue = $derived.by(() => {
     if (!activeIssue) return true;
-    const idx = issues.findIndex(i => i.id === activeIssue!.id);
-    return idx >= issues.length - 1;
+    const sequence = sortedIssues.length > 0 ? sortedIssues : issues;
+    const idx = sequence.findIndex(i => i.id === activeIssue!.id);
+    return idx >= sequence.length - 1;
   });
 
   let nextHeadline = $derived.by(() => {
     if (!activeIssue) return '';
-    const idx = issues.findIndex(i => i.id === activeIssue!.id);
-    return idx >= 0 && idx < issues.length - 1 ? issues[idx + 1].headline : '';
+    const sequence = sortedIssues.length > 0 ? sortedIssues : issues;
+    const idx = sequence.findIndex(i => i.id === activeIssue!.id);
+    return idx >= 0 && idx < sequence.length - 1 ? sequence[idx + 1].headline : '';
+  });
+
+  $effect(() => {
+    if (typeof window === 'undefined' || activeIssue || activeFullIssue) return;
+    const target = surfaceMode === 'today' ? '/' : `/?view=${surfaceMode}`;
+    if (window.location.pathname + window.location.search !== target) {
+      history.replaceState(null, '', target);
+    }
   });
 
   // Keyboard nav for desktop feed
@@ -527,10 +587,12 @@
   <div role="status" aria-live="polite" style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
 {/if}
 
-{#if viewMode === 'mobile'}
+  {#if viewMode === 'mobile'}
   <main style="height:100dvh;display:flex;flex-direction:column;overflow:hidden;">
     <Header
       issueIds={issues.map(i => i.id)}
+      onHome={goToday}
+      homeActive={surfaceMode === 'today' && !activeIssue}
       onSearchToggle={() => { searchActive = true; loadSearchIndex(); }}
       searchMode={searchActive}
       {searchQuery}
@@ -538,22 +600,34 @@
       onSearchClear={onSearchClear}
     />
     {#if !searchActive}
-      <div style="display:flex;align-items:center;gap:2px;padding:6px 16px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-        <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Latest</button>
-        <span style="color:var(--border-divider);font-size:12px;">·</span>
-        <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Hidden</button>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 16px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
+        <button onclick={goToday} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;transition:color 0.15s ease,font-family:inherit;min-height:34px;">Today</button>
+        <button onclick={openBrowse} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'none'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-subtle)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Browse</button>
+        <button onclick={openSavedLibrary} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Saved {savedCount}</button>
+        <button onclick={openMarkedLibrary} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'none'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'transparent'};cursor:pointer;padding:5px 10px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:12px;font-weight:700;min-height:34px;">Marked {markedCount}</button>
       </div>
+      {#if surfaceMode !== 'today'}
+        <div style="display:flex;align-items:center;gap:2px;padding:0 16px 6px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
+          <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Latest</button>
+          <span style="color:var(--border-divider);font-size:12px;">·</span>
+          <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;min-height:32px;">Most Hidden</button>
+        </div>
+      {/if}
     {/if}
-    <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+    {#if surfaceMode === 'today' && !isSearching}
+      <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+    {:else}
+      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+    {/if}
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onReturnHome={goToday} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else if viewMode === 'tablet'}
   <main style="min-height:100vh;">
-    <Header issueIds={issues.map(i => i.id)} />
+    <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
       <div style="margin-bottom:16px;">
         <input
@@ -566,21 +640,31 @@
           style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
         />
       </div>
+      {#if !isSearching}
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px;">
+          <button onclick={goToday} style="background:{surfaceMode === 'today' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'today' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'today' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Today</button>
+          <button onclick={openBrowse} style="background:{surfaceMode === 'browse' ? 'var(--bg-sunken)' : 'none'};border:1px solid {surfaceMode === 'browse' ? 'var(--border-subtle)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'browse' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Browse</button>
+          <button onclick={openSavedLibrary} style="background:{surfaceMode === 'saved' ? 'rgba(210,140,40,0.12)' : 'none'};border:1px solid {surfaceMode === 'saved' ? 'rgba(210,140,40,0.24)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'saved' ? 'var(--score-warning)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Saved {savedCount}</button>
+          <button onclick={openMarkedLibrary} style="background:{surfaceMode === 'marked' ? 'rgba(224,49,49,0.08)' : 'none'};border:1px solid {surfaceMode === 'marked' ? 'rgba(224,49,49,0.16)' : 'transparent'};cursor:pointer;padding:6px 12px;border-radius:999px;color:{surfaceMode === 'marked' ? 'var(--score-critical)' : 'var(--text-faint)'};font-size:12px;font-weight:700;">Marked {markedCount}</button>
+        </div>
+      {/if}
       {#if isSearching}
         <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
           {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
         </div>
-      {:else}
+      {:else if surfaceMode !== 'today'}
         <div style="display:flex;align-items:center;gap:2px;margin-bottom:12px;font-size:12px;font-weight:600;">
           <button onclick={() => { feedSort = 'latest'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
           <span style="color:var(--border-divider);">·</span>
           <button onclick={() => { feedSort = 'shift'; }} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{feedSort === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
         </div>
       {/if}
-      {#if isSearching}
+      {#if surfaceMode === 'today' && !isSearching}
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
+      {:else if isSearching}
         <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
           {#each sortedIssues as issue, i}
-            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
           {/each}
         </div>
       {:else}
@@ -592,7 +676,7 @@
             </div>
             <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
               {#each section.issues as issue, i}
-                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
               {/each}
             </div>
           </div>
@@ -605,13 +689,13 @@
   </main>
 
   {#if activeFullIssue}
-    <InsightReader issue={activeFullIssue} onClose={closeReader} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
+    <InsightReader issue={activeFullIssue} onClose={closeReader} onReturnHome={goToday} onNext={isLastIssue ? undefined : openNextIssue} onNavigateToIssue={navigateToIssue} initialCardIndex={restoredCardIndex} originRect={readerOriginRect ?? undefined} connections={resolvedConnections} nextIssueHeadline={nextHeadline} />
   {/if}
 
 {:else}
   <main style="height:100vh;display:flex;flex-direction:column;overflow:hidden;">
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-      <Header issueIds={issues.map(i => i.id)} />
+      <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
     <div style="flex:1;display:flex;overflow:hidden;">
@@ -620,6 +704,13 @@
         sections={feedSections}
         activeId={activeIssue?.id ?? null}
         {readMap}
+        {surfaceMode}
+        {savedCount}
+        {markedCount}
+        onGoToday={goToday}
+        onOpenBrowse={openBrowse}
+        onOpenSaved={openSavedLibrary}
+        onOpenMarked={openMarkedLibrary}
         onSelectIssue={openIssue}
         {searchQuery}
         onSearchInput={(q) => { searchQuery = q; }}
@@ -653,13 +744,30 @@
       {:else if activeFullIssue}
         <DesktopReader
           issue={activeFullIssue}
+          onReturnHome={goToday}
           onNext={isLastIssue ? undefined : openNextIssue}
           {nextHeadline}
           connections={resolvedConnections}
           onNavigateToIssue={navigateToIssue}
         />
+      {:else if surfaceMode !== 'today'}
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
+          <div style="max-width:420px;text-align:center;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
+              {surfaceMode === 'saved' ? 'Saved Queue' : surfaceMode === 'marked' ? 'Marked Queue' : 'Browse Queue'}
+            </div>
+            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Pick the next issue from the queue.</h2>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+              {surfaceMode === 'saved'
+                ? 'These are the issues you deliberately kept for later.'
+                : surfaceMode === 'marked'
+                  ? 'These are the issues where at least one angle hit hard enough to highlight.'
+                  : 'Use the queue to scan by recency or by how much the headline hides.'}
+            </p>
+          </div>
+        </div>
       {:else}
-        <DesktopEmptyState issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} />
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {savedCount} {markedCount} onOpenIssue={openIssue} onOpenBrowse={openBrowse} onOpenSaved={openSavedLibrary} onOpenMarked={openMarkedLibrary} />
       {/if}
     </div>
   </main>

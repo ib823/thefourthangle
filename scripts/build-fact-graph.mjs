@@ -12,7 +12,7 @@
  * }
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -227,12 +227,47 @@ for (const [issueId, conns] of Object.entries(connections)) {
 }
 
 // ── Output ──
+const outPath = join(root, 'public', 'fact-graph.json');
+let generatedAt = new Date().toISOString();
+
+if (existsSync(outPath)) {
+  try {
+    const existing = JSON.parse(readFileSync(outPath, 'utf8'));
+    const nextComparable = JSON.stringify({
+      connections,
+      connectionCounts,
+      entities: entityIndex,
+      meta: {
+        issueCount: publishedIssues.length,
+        entityCount: Object.keys(entityIndex).length,
+        connectedIssues: Object.keys(connections).length,
+        totalEdges: totalConnections,
+      },
+    });
+    const existingComparable = JSON.stringify({
+      connections: existing.connections,
+      connectionCounts: existing.connectionCounts,
+      entities: existing.entities,
+      meta: {
+        issueCount: existing.meta?.issueCount,
+        entityCount: existing.meta?.entityCount,
+        connectedIssues: existing.meta?.connectedIssues,
+        totalEdges: existing.meta?.totalEdges,
+      },
+    });
+
+    if (existingComparable === nextComparable && existing.meta?.generatedAt) {
+      generatedAt = existing.meta.generatedAt;
+    }
+  } catch {}
+}
+
 const graph = {
   connections,
   connectionCounts,
   entities: entityIndex,
   meta: {
-    generatedAt: new Date().toISOString(),
+    generatedAt,
     issueCount: publishedIssues.length,
     entityCount: Object.keys(entityIndex).length,
     connectedIssues: Object.keys(connections).length,
@@ -241,7 +276,7 @@ const graph = {
 };
 
 const json = JSON.stringify(graph);
-writeFileSync(join(root, 'public', 'fact-graph.json'), json, 'utf8');
+writeFileSync(outPath, json, 'utf8');
 
 const issuesWithConnections = Object.keys(connections).length;
 const avgConnections = issuesWithConnections > 0 ? (totalConnections / issuesWithConnections).toFixed(1) : 0;

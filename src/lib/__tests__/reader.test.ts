@@ -1,5 +1,33 @@
-import { describe, it, expect } from 'vitest';
-import { computeAffinity, scoreIssue, getReadCount } from '../../stores/reader';
+import { beforeEach, describe, it, expect } from 'vitest';
+import { computeAffinity, scoreIssue, getReadCount, savedIssues, getSavedIssueMap, isSavedIssue, saveIssue, unsaveIssue, toggleSavedIssue } from '../../stores/reader';
+
+describe('saved issues', () => {
+  beforeEach(() => {
+    savedIssues.set('{}');
+  });
+
+  it('starts empty', () => {
+    expect(getSavedIssueMap()).toEqual({});
+  });
+
+  it('saves an issue', () => {
+    saveIssue('001');
+    expect(isSavedIssue('001')).toBe(true);
+  });
+
+  it('unsaves an issue', () => {
+    saveIssue('001');
+    unsaveIssue('001');
+    expect(isSavedIssue('001')).toBe(false);
+  });
+
+  it('toggles saved state', () => {
+    toggleSavedIssue('001');
+    expect(isSavedIssue('001')).toBe(true);
+    toggleSavedIssue('001');
+    expect(isSavedIssue('001')).toBe(false);
+  });
+});
 
 describe('getReadCount', () => {
   it('returns zero for empty map', () => {

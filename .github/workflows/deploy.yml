@@ -31,13 +31,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Restore signing key
+      - name: Validate signing secret
+        env:
+          TFA_PRIVATE_KEY_B64: ${{ secrets.TFA_PRIVATE_KEY_B64 || secrets.SIGNING_KEY_BASE64 }}
+          TFA_PRIVATE_KEY_PEM: ${{ secrets.TFA_PRIVATE_KEY_PEM }}
         run: |
-          mkdir -p .keys
-          printf '%s\n' '-----BEGIN PRIVATE KEY-----' '${{ secrets.SIGNING_KEY_BASE64 }}' '-----END PRIVATE KEY-----' > .keys/private.pem
+          if [ -z "$TFA_PRIVATE_KEY_B64" ] && [ -z "$TFA_PRIVATE_KEY_PEM" ]; then
+            echo "Missing signing secret. Configure TFA_PRIVATE_KEY_B64 or TFA_PRIVATE_KEY_PEM."
+            exit 1
+          fi
 
       - name: Build
         run: npm run build
+        env:
+          TFA_PRIVATE_KEY_B64: ${{ secrets.TFA_PRIVATE_KEY_B64 || secrets.SIGNING_KEY_BASE64 }}
+          TFA_PRIVATE_KEY_PEM: ${{ secrets.TFA_PRIVATE_KEY_PEM }}
+
+      - name: Verify published signatures
+        run: npm run check-signatures
 
       - name: Extract commit subject
         id: msg

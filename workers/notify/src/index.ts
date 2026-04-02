@@ -53,7 +53,7 @@ function getCorsHeaders(request: Request): Record<string, string> {
 }
 
 function json(data: unknown, status = 200, request?: Request) {
-  const cors = request ? getCorsHeaders(request) : { 'Access-Control-Allow-Origin': ALLOWED_ORIGINS[0] };
+  const cors = request ? getCorsHeaders(request) : { 'Access-Control-Allow-Origin': PRODUCTION_ORIGIN };
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'Content-Type': 'application/json', ...cors },
