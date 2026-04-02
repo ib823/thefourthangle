@@ -786,7 +786,7 @@
     <main class="app-main">
     {#if !searchActive && surfaceMode !== 'today'}
       <h1 class="sr-only">{surfaceHeading(surfaceMode, libraryMode)}</h1>
-      <div style="padding:8px 14px 10px;flex-shrink:0;border-bottom:1px solid var(--bg-sunken);background:linear-gradient(180deg, rgba(248,249,250,0.82) 0%, rgba(248,249,250,0.54) 100%);">
+      <div class="mobile-secondary-bar">
         {#if surfaceMode === 'browse'}
           <SortToggle sortMode={feedSort} onChange={(mode) => { feedSort = mode; }} panelId="mobile-browse-panel" idPrefix="mobile-sort" />
         {:else if surfaceMode === 'library'}
@@ -1082,5 +1082,22 @@
 
   .app-main--desktop {
     flex-direction: row;
+  }
+
+  .mobile-secondary-bar {
+    flex-shrink: 0;
+    padding: 8px 14px 10px;
+    border-bottom: 1px solid var(--border-subtle);
+    background:
+      linear-gradient(180deg, rgba(248, 249, 250, 0.82) 0%, rgba(248, 249, 250, 0.54) 100%);
+    backdrop-filter: blur(12px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .mobile-secondary-bar {
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(22, 20, 18, 0.94) 0%, rgba(22, 20, 18, 0.78) 100%);
+    }
   }
 </style>
