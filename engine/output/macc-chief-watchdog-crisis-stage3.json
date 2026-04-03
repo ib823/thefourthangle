@@ -1,0 +1,104 @@
+{
+  "factual_accuracy_score": 74,
+  "source_diversity_estimate": 0.5,
+  "claims": [
+    {
+      "claim": "Bloomberg published an exposé alleging MACC Chief Commissioner Azam Baki worked with businessmen to seize control of companies",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.0,
+      "m_unknown": 0.15,
+      "source": "Bloomberg reporting series February 2026, corroborated by SCMP and Malay Mail",
+      "correction": "None needed. The characterisation 'seize control of companies' should be attributed explicitly to Bloomberg's reporting rather than stated as established fact."
+    },
+    {
+      "claim": "The cabinet ordered a probe in February 2026",
+      "status": "VERIFIED",
+      "m_true": 0.80,
+      "m_false": 0.0,
+      "m_unknown": 0.20,
+      "source": "Bloomberg Feb 13, 2026; confirmed by Malay Mail",
+      "correction": "The analysis should specify whether the cabinet formally ordered the probe or whether the PM directed it — these are constitutionally different actions."
+    },
+    {
+      "claim": "Azam responded by suing Bloomberg for $25 million",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.0,
+      "m_unknown": 0.15,
+      "source": "CPJ February 2026 reporting, Malay Mail",
+      "correction": "Should specify USD or MYR. The '$25 million' without currency designation is ambiguous — if USD, this is approximately RM110 million. The distinction matters for assessing the scale of the suit."
+    },
+    {
+      "claim": "Under the MACC Act 2009, the Chief Commissioner is appointed by the Yang di-Pertuan Agong on the PM's advice",
+      "status": "VERIFIED",
+      "m_true": 0.90,
+      "m_false": 0.0,
+      "m_unknown": 0.10,
+      "source": "MACC Act 2009 Section 5(1)",
+      "correction": "None."
+    },
+    {
+      "claim": "The Act creates no mechanism for independent investigation of the commissioner",
+      "status": "MISLEADING",
+      "m_true": 0.40,
+      "m_false": 0.25,
+      "m_unknown": 0.35,
+      "source": "MACC Act 2009; Anti-Corruption Advisory Board provisions",
+      "correction": "The MACC Act 2009 establishes an Anti-Corruption Advisory Board (Section 13), a Special Committee on Corruption (Section 14), a Complaints Committee (Section 15), and an Operations Review Panel (Section 16). While none of these has explicit power to investigate the Chief Commissioner in a criminal sense, the analysis overstates the gap by saying 'no mechanism' exists. The correct statement is that no mechanism with criminal investigative powers exists specifically for investigating the commissioner. The oversight bodies exist but lack teeth."
+    },
+    {
+      "claim": "The AG under Article 145 of the Federal Constitution holds prosecutorial discretion that requires cooperation with MACC",
+      "status": "MISLEADING",
+      "m_true": 0.45,
+      "m_false": 0.15,
+      "m_unknown": 0.40,
+      "source": "Federal Constitution Article 145",
+      "correction": "Article 145 gives the AG prosecutorial discretion but does not explicitly 'require cooperation with MACC.' The AG can prosecute based on any agency's investigation — police, customs, immigration. The analysis implies MACC is the AG's sole feeder of corruption cases, which overstates the dependency. The structural concern has merit but the constitutional claim is stretched."
+    },
+    {
+      "claim": "An unnamed senior minister publicly called for a Royal Commission of Inquiry on February 24, 2026",
+      "status": "UNVERIFIED",
+      "m_true": 0.50,
+      "m_false": 0.10,
+      "m_unknown": 0.40,
+      "source": "Bloomberg Feb 24, 2026 — cited but the minister remains unnamed",
+      "correction": "The analysis cites Bloomberg as source but does not name the minister. If Bloomberg named them, the analysis should too. If Bloomberg did not name them, the claim rests on a single anonymous source in a single outlet — which should be flagged as lower-confidence."
+    },
+    {
+      "claim": "Malaysia's Transparency International Corruption Perceptions Index ranking has slid to 47th globally",
+      "status": "VERIFIED",
+      "m_true": 0.75,
+      "m_false": 0.05,
+      "m_unknown": 0.20,
+      "source": "Transparency International CPI 2025",
+      "correction": "The phrase 'has slid' implies a downward trend. The analysis should specify what the previous ranking was and over what period the decline occurred to substantiate the 'sliding' characterisation."
+    },
+    {
+      "claim": "Estimated annual cost of corruption is RM47 billion — roughly 3% of GDP",
+      "status": "UNVERIFIED",
+      "m_true": 0.40,
+      "m_false": 0.10,
+      "m_unknown": 0.50,
+      "source": "Cited as 'established estimate cited by Transparency International Malaysia'",
+      "correction": "This figure has circulated in Malaysian discourse but its methodology and original source are unclear. Malaysia's GDP is approximately RM1.7-1.9 trillion, so RM47B would be 2.5-2.8% — the '3%' is rounded up. The analysis should note the estimate's provenance and methodological limitations rather than presenting it as established fact."
+    },
+    {
+      "claim": "Governance score dropping 8 points in recent assessments",
+      "status": "UNVERIFIED",
+      "m_true": 0.35,
+      "m_false": 0.10,
+      "m_unknown": 0.55,
+      "source": "Cited as 'published issue 1120' — an internal reference, not a primary source",
+      "correction": "What governance score? CPI uses a 0-100 scale. An 8-point drop on what baseline, over what period? This claim lacks specificity and relies on an internal cross-reference rather than a primary source."
+    }
+  ],
+  "omitted_facts": [
+    "Azam Baki's 2022 share ownership controversy — the Securities Commission investigated allegations he held shares exceeding public servant limits through a nominee arrangement. He was cleared but the episode established the pattern of institutional conflict in investigating the MACC chief. This is critical context that the analysis entirely omits. Source: multiple Malaysian outlets, 2022.",
+    "The MACC Anti-Corruption Advisory Board's response (or silence) on the current crisis — this body exists precisely for situations like this. Has it issued a statement? Source: MACC Act 2009 Section 13.",
+    "Malaysia's Whistleblower Protection Act 2010 and its relevance — if MACC staff had concerns about the chief, what protections exist? Source: WPA 2010.",
+    "The specific nature of Bloomberg's allegations beyond 'seize control of companies' — the analysis is vague about what Azam allegedly did, which makes it impossible for readers to assess severity. Source: Bloomberg Feb 2026 series."
+  ],
+  "source_assessment": "The analysis relies heavily on Bloomberg as its primary source — Bloomberg is cited for five of the six key timeline events. While Bloomberg is a credible international outlet, this concentration creates a single-source dependency risk. Malaysian primary sources are thin: Malay Mail is cited once for a confirmation quote, The Star once for an editorial. No academic sources, no legal expert commentary, no opposition statements, no civil society direct quotes. The government perspective is represented only through Fahmi Fadzil's two-word confirmation. The Bar Council is mentioned but not directly quoted. For an issue about institutional integrity, the source base is surprisingly narrow.",
+  "overall_assessment": "The core structural argument — that no independent body can investigate the MACC chief — is substantially correct but overstated in places. The analysis ignores the existing oversight mechanisms in the MACC Act (advisory board, complaints committee, operations review panel) to make the governance gap seem absolute rather than severe. The RM47B corruption cost and the 8-point governance score drop are presented with false precision — the sourcing is weak and the numbers are soft. The currency ambiguity on the $25M suit is sloppy. The unnamed minister claim needs better attribution. Most importantly, the omission of the 2022 share ownership scandal is a significant gap — it is directly relevant precedent that strengthens the analysis's own argument. Factual accuracy is adequate but not rigorous enough for a publication claiming editorial independence."
+}

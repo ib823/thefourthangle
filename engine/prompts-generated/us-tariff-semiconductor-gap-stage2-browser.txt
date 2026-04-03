@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's semiconductor sector is shielded from US tariffs. The chip exemption protects the crown jewel of Malaysian exports.",
+      "sub": "The Trump administration imposed a 24% tariff on Malaysian exports but exempted semiconductors — Malaysia's single largest export category at RM120.2 billion ($26.7B) to the US in 2024. Trade Minister Tengku Zafrul confirmed the exemption. Headlines celebrated. But the exemption has a gap wide enough to drive a finished product through: chips embedded in consumer electronics, automotive modules, and assembled devices still face the full 24% tariff. The shield protects the raw chip. It does not protect the economy that assembles it."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "65% of Malaysia's semiconductor exports to the US come from American firms — Intel, Micron, Texas Instruments — operating in Malaysia. The tariff taxes America's own supply chain.",
+      "s": "Malaysia is not a competitor to the US semiconductor industry. It is the US semiconductor industry's back-end workshop. Intel's Penang facility is the company's largest global test-and-assembly site. Micron, Texas Instruments, and other US firms account for 65% of the chips Malaysia sends to America. The 24% tariff on finished products containing these chips means US companies pay more to import goods assembled using their own components. Meanwhile, the RM1.5B ($356M) SME relief package covers barely 1.3% of the RM120.2B export sector — a bandage on an arterial bleed.",
+      "d": "Sources: CEIC (65% US-firm share), KR Institute (tariff exemption analysis), The ASEAN Frontier (semiconductor tariff exposure), SCMP ($356M relief package), Intel Penang facility data. The irony: US tariffs on Malaysian-assembled products hurt US firms' profitability more than Malaysian firms' revenue, since the value-add in Malaysia is primarily low-margin assembly and testing."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Malaysia is caught between two superpowers with no free trade agreement to protect it from either. The Section 301 probe targets Malaysia for hosting Chinese manufacturers doing exactly what the US encouraged.",
+      "s": "The USTR launched Section 301 investigations into 16 economies including Malaysia for 'excess manufacturing capacity' — code for Chinese firms rerouting production through Southeast Asia to bypass US-China tariffs. But Malaysia's FDI strategy for the past decade, endorsed by successive US administrations, was precisely to attract manufacturing diversification away from China. Chinese firms like BYD setting up in Malaysia was the intended outcome. Now the US is penalising it. Malaysia has no FTA with the US, is not in a US-led trade bloc (the US left CPTPP), and has limited bilateral leverage.",
+      "d": "Sources: Fortune (Section 301 probe, Mar 16), SCMP (Malaysia's trade position), RHB (trade war impact analysis), Malay Mail (Anwar on US-China tensions), Published issue 1957 (BYD/Proton auto trade policy). Malaysia's GDP growth target of 4.0-4.5% for 2026 is now at risk from both the tariff shock and the concurrent $126/barrel oil price crisis."
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "The semiconductor exemption protects the lowest-value segment of the chip chain. Malaysia does almost no chip design — it packages what others invent.",
+      "s": "Malaysia's position in the semiconductor value chain is overwhelmingly back-end: assembly, testing, and packaging (ATP). This captures roughly 5-10% of a chip's final value. Front-end design and fabrication — where 70-80% of value sits — happens in the US, Taiwan, South Korea, and increasingly India. The tariff exemption protects this low-margin ATP work. But 150,000+ Malaysian SMEs that manufacture components, casings, circuit boards, and finished products containing those chips get no exemption. The 'semiconductor shield' protects the least vulnerable link and leaves the most exposed workers unprotected.",
+      "d": "Sources: KR Institute (value chain analysis), The ASEAN Frontier (ATP vs fab distinction), SCMP (150,000 SME exposure), MITI (Malaysia's E&E sector positioning). Penang and Johor — the two states most dependent on E&E manufacturing — face disproportionate job risk from the 24% tariff on assembled products."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether semiconductors are exempt. It is whether Malaysia has a strategy for when they are not.",
+      "text": "The chip exemption is a policy choice by the current US administration, not a treaty obligation. It can be revoked with a single executive order. The Section 301 probe into 'excess capacity' is already building the legal infrastructure to do so. Malaysia's entire E&E export strategy depends on a tariff exemption it did not negotiate, cannot enforce, and has no fallback for. The RM1.5B relief package treats the symptom. The absence of a US-Malaysia FTA, a chip-design upgrading roadmap, or a diversified export strategy beyond the US and China — that is the structural vulnerability no relief package addresses."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's semiconductor exemption is real but fragile — a discretionary reprieve, not a structural advantage. The country occupies the most replaceable segment of the chip value chain (assembly and testing) while 150,000 SMEs in the broader E&E ecosystem face the full 24% tariff. The RM1.5B relief covers 1.3% of the exposed sector. The harder truth: Malaysia's trade strategy assumed it could be everyone's neutral workshop indefinitely. The Section 301 probe signals that era may be ending, and Malaysia has neither the bilateral agreements nor the value-chain position to negotiate from strength."
+    }
+  ],
+  "sources": "Tax Foundation, Fortune, SCMP, RHB, FMT, KR Institute, The ASEAN Frontier, CEIC, Malay Mail, MITI, USTR Section 301 filings, Published issue 1957",
+  "confidence": "High — Tariff rates from official USTR filings and Tax Foundation tracker. 65% US-firm share from CEIC data. RM120.2B export figure from MITI. RM1.5B relief package confirmed by SCMP and government statements. Section 301 probe documented by Fortune and USTR. Medium confidence on value-chain percentages (industry estimates vary by source).",
+  "lenses_used": ["Economic", "Political", "Technology"],
+  "lenses_applicable_but_unused": ["Regional", "Governance", "Social", "Security"]
+}

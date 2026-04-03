@@ -1,0 +1,111 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's semiconductor sector is shielded from US tariffs. The chip exemption protects the crown jewel of Malaysian exports.",
+      "sub": "The Trump administration imposed a 24% tariff on Malaysian exports but exempted semiconductors — Malaysia's single largest export category at RM120.2 billion ($26.7B) to the US in 2024. Trade Minister Tengku Zafrul confirmed the exemption. Headlines celebrated. But the exemption has a gap wide enough to drive a finished product through: chips embedded in consumer electronics, automotive modules, and assembled devices still face the full 24% tariff. The shield protects the raw chip. It does not protect the economy that assembles it."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "65% of Malaysia's semiconductor exports to the US come from American firms — Intel, Micron, Texas Instruments — operating in Malaysia. The tariff taxes America's own supply chain.",
+      "s": "Malaysia is not a competitor to the US semiconductor industry. It is the US semiconductor industry's back-end workshop. Intel's Penang facility is the company's largest global test-and-assembly site. Micron, Texas Instruments, and other US firms account for 65% of the chips Malaysia sends to America. The 24% tariff on finished products containing these chips means US companies pay more to import goods assembled using their own components. Meanwhile, the RM1.5B ($356M) SME relief package covers barely 1.3% of the RM120.2B export sector — a bandage on an arterial bleed.",
+      "d": "Sources: CEIC (65% US-firm share), KR Institute (tariff exemption analysis), The ASEAN Frontier (semiconductor tariff exposure), SCMP ($356M relief package), Intel Penang facility data. The irony: US tariffs on Malaysian-assembled products hurt US firms' profitability more than Malaysian firms' revenue, since the value-add in Malaysia is primarily low-margin assembly and testing."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Malaysia is caught between two superpowers with no free trade agreement to protect it from either. The Section 301 probe targets Malaysia for hosting Chinese manufacturers doing exactly what the US encouraged.",
+      "s": "The USTR launched Section 301 investigations into 16 economies including Malaysia for 'excess manufacturing capacity' — code for Chinese firms rerouting production through Southeast Asia to bypass US-China tariffs. But Malaysia's FDI strategy for the past decade, endorsed by successive US administrations, was precisely to attract manufacturing diversification away from China. Chinese firms like BYD setting up in Malaysia was the intended outcome. Now the US is penalising it. Malaysia has no FTA with the US, is not in a US-led trade bloc (the US left CPTPP), and has limited bilateral leverage.",
+      "d": "Sources: Fortune (Section 301 probe, Mar 16), SCMP (Malaysia's trade position), RHB (trade war impact analysis), Malay Mail (Anwar on US-China tensions), Published issue 1957 (BYD/Proton auto trade policy). Malaysia's GDP growth target of 4.0-4.5% for 2026 is now at risk from both the tariff shock and the concurrent $126/barrel oil price crisis."
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "The semiconductor exemption protects the lowest-value segment of the chip chain. Malaysia does almost no chip design — it packages what others invent.",
+      "s": "Malaysia's position in the semiconductor value chain is overwhelmingly back-end: assembly, testing, and packaging (ATP). This captures roughly 5-10% of a chip's final value. Front-end design and fabrication — where 70-80% of value sits — happens in the US, Taiwan, South Korea, and increasingly India. The tariff exemption protects this low-margin ATP work. But 150,000+ Malaysian SMEs that manufacture components, casings, circuit boards, and finished products containing those chips get no exemption. The 'semiconductor shield' protects the least vulnerable link and leaves the most exposed workers unprotected.",
+      "d": "Sources: KR Institute (value chain analysis), The ASEAN Frontier (ATP vs fab distinction), SCMP (150,000 SME exposure), MITI (Malaysia's E&E sector positioning). Penang and Johor — the two states most dependent on E&E manufacturing — face disproportionate job risk from the 24% tariff on assembled products."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether semiconductors are exempt. It is whether Malaysia has a strategy for when they are not.",
+      "text": "The chip exemption is a policy choice by the current US administration, not a treaty obligation. It can be revoked with a single executive order. The Section 301 probe into 'excess capacity' is already building the legal infrastructure to do so. Malaysia's entire E&E export strategy depends on a tariff exemption it did not negotiate, cannot enforce, and has no fallback for. The RM1.5B relief package treats the symptom. The absence of a US-Malaysia FTA, a chip-design upgrading roadmap, or a diversified export strategy beyond the US and China — that is the structural vulnerability no relief package addresses."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's semiconductor exemption is real but fragile — a discretionary reprieve, not a structural advantage. The country occupies the most replaceable segment of the chip value chain (assembly and testing) while 150,000 SMEs in the broader E&E ecosystem face the full 24% tariff. The RM1.5B relief covers 1.3% of the exposed sector. The harder truth: Malaysia's trade strategy assumed it could be everyone's neutral workshop indefinitely. The Section 301 probe signals that era may be ending, and Malaysia has neither the bilateral agreements nor the value-chain position to negotiate from strength."
+    }
+  ],
+  "sources": "Tax Foundation, Fortune, SCMP, RHB, FMT, KR Institute, The ASEAN Frontier, CEIC, Malay Mail, MITI, USTR Section 301 filings, Published issue 1957",
+  "confidence": "High — Tariff rates from official USTR filings and Tax Foundation tracker. 65% US-firm share from CEIC data. RM120.2B export figure from MITI. RM1.5B relief package confirmed by SCMP and government statements. Section 301 probe documented by Fortune and USTR. Medium confidence on value-chain percentages (industry estimates vary by source).",
+  "lenses_used": ["Economic", "Political", "Technology"],
+  "lenses_applicable_but_unused": ["Regional", "Governance", "Social", "Security"]
+}

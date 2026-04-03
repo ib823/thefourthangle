@@ -1,0 +1,68 @@
+{
+  "bias_score": 35,
+  "political_lean_estimate": -0.2,
+  "ethnic_framing_estimate": 0.1,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": -0.3,
+  "geographic_bias_estimate": 0.5,
+  "economic_framing_estimate": 0.4,
+  "gender_agency_estimate": 0.8,
+  "partisan_flags": [
+    {
+      "quote": "a bandage on an arterial bleed",
+      "why_biased": "This is emotionally loaded language that frames the government's RM1.5B SME relief as almost negligibly inadequate. While the relief may indeed be small relative to the sector, the metaphor implies the government is performing triage incompetently rather than making a constrained fiscal decision. A similar metaphor would never be used if the opposition proposed the same amount.",
+      "fix": "Replace with factual framing: 'The RM1.5B package covers approximately 1.3% of the affected export sector, raising questions about whether the scale matches the exposure.'"
+    },
+    {
+      "quote": "Malaysia's entire E&E export strategy depends on a tariff exemption it did not negotiate, cannot enforce, and has no fallback for",
+      "why_biased": "This triple construction creates a rhetorical crescendo that frames the Malaysian government as entirely passive and incompetent. It omits that trade negotiation is a live process — MITI has been in discussions with USTR — and that the semiconductor exemption reflects US self-interest, not Malaysian helplessness.",
+      "fix": "Acknowledge that MITI has engaged with US counterparts and that the exemption exists partly because US firms benefit from it, not solely because Malaysia failed to negotiate."
+    }
+  ],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [
+    {
+      "quote": "Penang and Johor — the two states most dependent on E&E manufacturing — face disproportionate job risk",
+      "why_biased": "The analysis mentions Penang and Johor but treats the tariff impact as a two-state problem. Kedah (where Intel has operations), Melaka (semiconductor packaging), and Sarawak (which is actively courting semiconductor FDI) are absent. East Malaysia is entirely missing from the tariff impact discussion despite Sarawak's push to become a data centre and semiconductor hub.",
+      "fix": "Include Sarawak's semiconductor ambitions and Kedah/Melaka E&E exposure. Note whether the tariff impact reaches beyond Penang and Johor."
+    }
+  ],
+  "economic_flags": [
+    {
+      "quote": "65% of Malaysia's semiconductor exports to the US come from American firms — Intel, Micron, Texas Instruments — operating in Malaysia. The tariff taxes America's own supply chain.",
+      "why_biased": "The framing implies the tariff is irrational because it hurts US firms. But this is the US government's stated policy objective — reshoring and friend-shoring. The analysis adopts the perspective of multinational corporations rather than asking what the tariff means for Malaysian workers, SME owners, or the B40 communities around semiconductor corridors. The T20/corporate lens dominates.",
+      "fix": "Add the worker perspective: how many Malaysian jobs are at risk, what is the average wage in ATP facilities, and what happens to contract workers (often B40) when orders slow."
+    },
+    {
+      "quote": "US companies pay more to import goods assembled using their own components",
+      "why_biased": "This frames the issue from the boardroom of US multinationals, not from the factory floor in Bayan Lepas. The analysis is more concerned with Intel's profitability than with the livelihoods of 150,000+ SME workers who face the tariff directly.",
+      "fix": "Rebalance by leading with the SME worker impact and then noting the irony of US firms also being affected."
+    }
+  ],
+  "gender_flags": [
+    {
+      "quote": "150,000+ Malaysian SMEs that manufacture components, casings, circuit boards, and finished products",
+      "why_biased": "Women make up approximately 50-60% of the workforce in Malaysia's electronics assembly sector, particularly in clean-room ATP operations. The analysis discusses 150,000 SMEs and job risk without once mentioning that the most affected workers are disproportionately women. Gender is completely invisible in a story where women are the majority of the at-risk labour force.",
+      "fix": "Note that women constitute a majority of the E&E assembly workforce and that tariff-induced order reductions would disproportionately affect female factory workers, many of whom are B40."
+    }
+  ],
+  "omission_flags": [
+    "Women in the E&E workforce are invisible. Malaysia's semiconductor assembly sector employs a majority-female workforce at the operator level. A tariff story that ignores this is gender-blind.",
+    "Workers' voices are entirely absent. No mention of unions, contract worker conditions, retrenchment procedures, or what happens to the human beings on the assembly line when orders drop.",
+    "East Malaysia (especially Sarawak's semiconductor and data centre ambitions) is missing despite being directly relevant to Malaysia's chip-sector future.",
+    "The B40 impact is mentioned only through the relief package figure. No attempt to describe how tariff shocks transmit to household incomes in Penang's working-class neighborhoods.",
+    "ASEAN neighbours' responses are absent. Vietnam, Thailand, and Indonesia face similar tariffs — how are they responding, and does Malaysia's strategy compare well or poorly?",
+    "Migrant workers in the E&E sector are invisible. A significant portion of ATP work is done by documented and undocumented foreign workers whose jobs and legal status become precarious during downturns."
+  ],
+  "evasion_flags": [
+    "The analysis says Malaysia has 'no fallback' but does not assess RCEP, CPTPP, or bilateral trade diversification efforts already underway. Dismissing all alternatives as nonexistent is evasive — it avoids the harder question of whether existing instruments are adequate.",
+    "The reframe card poses 'what happens when the exemption ends' but avoids answering it. What specifically would happen? Factory closures? Relocation to Vietnam? The analysis raises the spectre without mapping the consequences.",
+    "The piece avoids discussing the political economy of why Malaysia has no US FTA. Is it because successive governments refused investor-state dispute settlement provisions? Because of Bumiputera procurement preferences that conflict with US FTA demands? This is a harder truth than 'we have no FTA.'"
+  ],
+  "shoe_test_failures": [
+    "If the analysis were about Vietnam facing the same tariff (46%), would it still frame the story as 'the tariff taxes America's own supply chain'? Vietnam hosts similar US firms. The framing works for any ASEAN host country, which means it does not actually explain anything specific about Malaysia's vulnerability.",
+    "If the relief package came from an opposition state government instead of the federal government, would 'bandage on an arterial bleed' still be the framing? The metaphor implies federal incompetence in a way that might not survive party-swap."
+  ],
+  "overall_assessment": "The analysis is economically literate and identifies a genuine structural vulnerability — the gap between chip exemption and finished-product exposure. But it suffers from a pronounced corporate/T20 lens that discusses Intel's profitability more than factory workers' livelihoods. Women, who form the majority of E&E assembly workers, are completely absent. East Malaysia is missing. Workers are invisible. The government is framed as passive and incompetent through rhetorical devices ('bandage on an arterial bleed', triple-negative constructions) that cross from analysis into editorialising. The piece needs to look down the value chain at the humans assembling chips, not just up at the trade policy architecture."
+}

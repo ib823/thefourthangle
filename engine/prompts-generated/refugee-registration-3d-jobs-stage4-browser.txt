@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia finally registers refugees. But they can only scrub floors, dig mines, and pour concrete.",
+      "sub": "On 1 January 2026, Malaysia launched the Dokumen Pendaftaran Pelarian (DPP) — its first national refugee registration system, screening 37,000+ individuals so far. The government hailed it as a humanitarian milestone. Then came the fine print: work permits will be restricted to '3D' jobs — dirty, dangerous, difficult — in manufacturing, mining, and construction. Malaysia has 211,260 UNHCR-registered refugees. It is not a signatory to the 1951 Refugee Convention. And the system that promises to bring refugees out of the shadows may lock them into the most exploitative tier of the labour market by design."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Legal refugee employment could add RM3 billion to GDP annually — but only if they work beyond the jobs Malaysians already refuse to do.",
+      "s": "The Center for Global Development estimates legal refugee work rights would generate RM3 billion in annual GDP and RM50 million in tax revenue. Yet restricting permits to 3D sectors — where 800,000+ Bangladeshi workers already hold permits — means refugees would compete at the bottom of an already oversupplied labour pool rather than filling gaps in services, education, and healthcare where demand is unmet. The economic case for registration collapses if the work-permit design channels refugees into sectors with the highest exploitation rates and lowest productivity gains.",
+      "d": "Sources: CGD research 2026, HRW report on Bangladeshi worker exploitation Nov 2025, Malay Mail on 3D restriction, DOSM labour force data. Bangladesh already supplies the largest documented foreign worker cohort at 800,000+. Adding refugees to the same sectors without expanding the permit scope risks wage depression, not GDP growth."
+    },
+    {
+      "t": "fact",
+      "lens": "Rights",
+      "h": "18,000 refugees sit in immigration detention centres right now. Registration does not guarantee they leave.",
+      "s": "Under the Immigration Act 1959/63, refugees have no legal status distinct from undocumented migrants — both are subject to arrest, detention, and deportation. The DPP provides registration but does not amend the Act. Malaysia's 18,000 detained migrants and refugees remain in a legal black hole: registered or not, the law that put them in detention has not changed. Federal Constitution Article 6 prohibits slavery and forced labour, yet the Employment Act 1955 does not extend protections to undocumented workers. A registration document without legislative reform is an administrative gesture, not a legal shield.",
+      "d": "Sources: Immigration Act 1959/63, UNHCR Malaysia 2026, Al Jazeera (refugees struggle to eat and pay rent), Asylum Access (landmark court ruling on refugee worker rights), Berghahn Journals 2024 analysis of Malaysian registration schemes. The gap between registration and rights is the gap between a database entry and a law."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "Refugee women — who face the highest exploitation — are excluded by design: domestic work is not a '3D' category.",
+      "s": "The 3D restriction covers manufacturing, mining, and construction — overwhelmingly male-dominated sectors. Domestic work, caregiving, and food services, where refugee women disproportionately find informal employment, are not included. This means the registration system's work-permit benefit structurally excludes the most vulnerable subgroup. Rohingya women, who make up a significant portion of the 124,123 Rohingya refugees, face compounded discrimination: gender, ethnicity, and now a policy design that treats their labour as invisible.",
+      "d": "Sources: SCMP analysis of 3D restriction as 'human rights facade', SAGE 2025 on migrant worker issues, risk assessment noting gender dimension as MEDIUM risk. The 12-dimension risk assessment flagged this gap explicitly — yet no public discussion of the policy has centred women's exclusion."
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether Malaysia should register refugees. It is whether registration without legal reform creates a controlled underclass with documents.",
+      "text": "Every stakeholder — government, UNHCR, civil society, employers — wanted registration. They got it. But registration under the current Immigration Act means refugees now have a document that makes them visible to the state without making the state accountable to them. They can be tracked, taxed, and channelled into 3D jobs, but they cannot access labour protections, challenge exploitation, or work outside sectors the government assigns them. Thailand and Bangladesh followed the same path — register first, restrict second — and created documented but disposable workforces. The real question is not whether refugees are registered. It is who registration serves."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The DPP is a genuine step — Malaysia's first formal acknowledgment that refugees exist as a distinct category from illegal immigrants. This matters. But a registration system designed without amending the Immigration Act, without signing the 1951 Convention, and with work permits limited to the most exploitative sectors risks creating something worse than invisibility: a documented, trackable population with no legal recourse. The RM3 billion GDP promise requires letting refugees work where they are needed, not where they are least protected. The 18,000 in detention need more than a database. If Malaysia wants credit for humanitarian progress, the DPP must be a floor, not a ceiling."
+    }
+  ],
+  "sources": "CGD 2026, UNHCR Malaysia 2026, FMT, Malay Mail, SCMP, HRW Nov 2025, Asylum Access, Al Jazeera, IOM Malaysia, Business & Human Rights Resource Centre, Berghahn Journals 2024, SAGE 2025, Immigration Act 1959/63, Federal Constitution Article 6, Employment Act 1955",
+  "confidence": "High — UNHCR official registration data, government announcements on DPP and 3D restriction, CGD economic modelling, HRW documentation of migrant worker conditions, parliamentary records on detention numbers. Medium on gender exclusion analysis (inferred from sector definitions rather than explicit government statement on women's inclusion).",
+  "lenses_used": ["Economic", "Rights", "Social"],
+  "lenses_applicable_but_unused": ["Legal", "Governance", "Political", "Regional", "Security"]
+}

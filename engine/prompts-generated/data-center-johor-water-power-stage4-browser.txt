@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia is betting its economic future on data centers. Johor residents are asking who will be left with water.",
+      "sub": "In February 2026, more than 50 residents of Gelang Patah, Johor staged Malaysia's first-ever protest against a data center — a Chinese-linked facility by Zdata Technologies. Their concerns: water depletion, pollution, and noise. Within weeks, the federal government announced a moratorium on non-AI data centers, citing unsustainable energy and water demands. But the numbers had been visible for months. TNB disclosed that data center electricity applications already totalled 11,000 megawatts — equivalent to 40% of Peninsular Malaysia's entire installed capacity. The moratorium is a course correction. The question is whether it comes after the infrastructure damage is already locked in."
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "Data centers have applied for 11,000MW of electricity — 40% of the entire peninsular grid — and TNB cannot say no.",
+      "s": "Tenaga Nasional Berhad disclosed in late 2025 that it had received data center electricity connection applications totalling 11,000 megawatts. Peninsular Malaysia's total installed generation capacity is approximately 27,500MW. The applications alone — not yet built — would require TNB to expand capacity by 40%. By 2030, projected data center demand will add 59 terawatt-hours annually — equivalent to the Philippines' entire electricity consumption. There are currently 34 operational data centers and 33 more approved or in planning. The moratorium pauses non-AI facilities, but the AI-focused centers it exempts are the most power-hungry category. The grid math does not work.",
+      "d": "Sources: TNB investor disclosures (11,000MW figure), PV Magazine (Feb 25, 2026 — moratorium announcement), Asia Society (2026 — demand projections), FULCRUM/ISEAS (2026 — 59 TWh projection), TechWire Asia (Mar 2026 — moratorium analysis). The exemption for AI data centers is critical: AI training workloads consume 3-10x more power per rack than standard cloud or storage facilities. Exempting them while restricting 'non-AI' centers may actually accelerate the grid capacity crisis."
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "Malaysia's first data center protest was about water — the one resource the moratorium does not address.",
+      "s": "The Gelang Patah protesters' primary concern was water depletion. Data centers using liquid cooling — the most efficient method for high-density AI workloads — consume millions of litres annually. Johor's state investment committee had already been quietly rejecting liquid-cooled data center applications before the federal moratorium, citing water supply constraints. But the federal moratorium's criteria focus on energy, not water. The Environmental Quality Act 1974 requires Environmental Impact Assessments for large developments, yet data centers may fall outside mandatory EIA categories depending on size. Sahabat Alam Malaysia warned that data centers are 'big energy and water guzzlers' with insufficient environmental oversight. Meanwhile, the Department of Environment's enforcement budget was cut by 18%.",
+      "d": "Sources: Bloomberg (Feb 7, 2026 — Gelang Patah protest), Lowyat (Feb 2026 — first DC protest), FOE Malaysia/Sahabat Alam Malaysia (2026 — environmental analysis), The Independent Singapore (2026 — Johor water strain), published issue 1564 (DOE 18% enforcement cut), Environmental Quality Act 1974. The gap between Johor's state-level water-based rejections and the federal energy-based moratorium reveals a coordination failure between state and federal policy."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Johor's RM14.4 billion data center pipeline faces a moratorium — but the contracts are already signed.",
+      "s": "Johor alone has an estimated RM14.4 billion in announced data center investments from 2024-2026, from hyperscalers including Microsoft, Google, ByteDance, and GDS Holdings. The federal moratorium on non-AI data centers, expected to last approximately two years, creates immediate uncertainty for projects in the pipeline. But most major hyperscaler investments were structured as AI-focused from the outset — meaning the moratorium's practical impact may be limited to smaller operators and local developers. A corruption dimension already exists: a Sunway Construction Group employee is under MACC investigation over an alleged RM180 million Johor data center contract. The investment boom arrived faster than governance, and the moratorium is attempting to impose order retroactively on commitments already made.",
+      "d": "Sources: Bloomberg (multiple 2024-2026 investment announcements), DCD (Jul 2025 — Sunway/MACC probe), PM Anwar press conference (Mar 2026 — moratorium duration), Reccessary (2026 — Johor green energy requirements), China Global South Project (2026 — grid stress analysis). The RM180M corruption case is a leading indicator: when investment flows exceed governance capacity, procurement corruption follows."
+    },
+    {
+      "t": "reframe",
+      "h": "The moratorium exempts AI data centers — the category that consumes the most power and water. The ceiling has a hole in it.",
+      "text": "The federal moratorium is framed as responsible governance: pausing unsustainable growth to let infrastructure catch up. But by exempting AI-focused data centers, the policy preserves the most resource-intensive category while restricting the least. AI training workloads consume 3-10 times more power per rack than standard cloud storage. AI facilities are the ones most likely to require liquid cooling — the water-intensive method Johor was already rejecting. The moratorium protects Malaysia's political narrative (we are an AI hub) while offering limited relief to the grid and water systems that prompted it. The 50 protesters in Gelang Patah identified the problem more precisely than the federal policy: it is not about which data centers get built, but whether anyone calculated the total resource cost before saying yes."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's data center ambition is not wrong — it is ungoverned. The country has a genuine competitive advantage over Singapore in land and power costs, and digital infrastructure investment creates long-term economic value. But 11,000MW of applications against a 27,500MW grid is not an investment boom — it is a capacity crisis announced in advance. The moratorium is a necessary pause, but its AI exemption undermines its own logic. What Malaysia needs is not a blanket pause or blanket approval, but a transparent resource allocation framework: published water and power budgets per state, mandatory EIAs for all data centers above a threshold, and a single federal-state coordination body. Johor's residents should not have to protest to trigger policy that the numbers already demanded."
+    }
+  ],
+  "sources": "Bloomberg (Feb 7, 2026), Lowyat (Feb 2026), PV Magazine (Feb 25, 2026), TechWire Asia (Mar 2026), Asia Society (2026), FOE Malaysia/Sahabat Alam Malaysia (2026), China Global South Project (2026), The Independent Singapore (2026), Reccessary (2026), DCD (Jul 2025), FULCRUM/ISEAS (2026), TNB investor disclosures, PM Anwar Ibrahim press conference (Mar 2026), published issue 1564 (DOE enforcement cut), Environmental Quality Act 1974, Water Services Industry Act 2006",
+  "confidence": "High — TNB's 11,000MW disclosure is from official investor communications. The moratorium is confirmed by multiple sources including PM's own statements. Protest details from Bloomberg and Lowyat with consistent accounts. The 59 TWh projection from ISEAS is an established research institute. Medium confidence on the AI exemption's practical impact — the distinction between 'AI' and 'non-AI' data centers is commercially fluid and enforcement criteria have not been published.",
+  "lenses_used": ["Technology", "Environmental", "Economic"],
+  "lenses_applicable_but_unused": ["Governance", "Political", "Regional", "Social"]
+}

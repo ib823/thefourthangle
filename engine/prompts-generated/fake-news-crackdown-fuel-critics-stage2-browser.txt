@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The government is cracking down on fake news about fuel prices to protect Malaysians from panic and misinformation.",
+      "sub": "Between April 1-3, 2026, MCMC opened investigations into 17 individuals and flagged 96 social media posts as misleading after PM Anwar called fuel price criticism 'betrayal of the nation.' Five users were tracked for creating fabricated TV3-branded graphics showing fake fuel price hikes. The government says it is fighting disinformation. Critics say it is criminalising anxiety during a real cost-of-living crisis."
+    },
+    {
+      "t": "fact",
+      "lens": "Rights",
+      "h": "Section 233 of the CMA carries up to 1 year in jail and RM50,000 fine — and does not distinguish between fabricated graphics and genuine questions about policy.",
+      "s": "The 17 individuals under investigation include those who created fake TV3-branded price graphics and those who simply posted about expected fuel price increases. Both categories face the same Section 233 charge. The law criminalises content deemed 'offensive' or likely to cause 'annoyance' — terms so broad that the UN Special Rapporteur on Freedom of Expression flagged them in 2019. Malaysia's own Online Safety Act 2026 was supposed to modernise this framework but consolidated 8 existing laws without narrowing Section 233's scope.",
+      "d": "Sources: CMA 1998 Section 233 text, FMT (Apr 1-3 coverage of MCMC probes), Published issue 1950 (Online Safety Act 2026). The UN Special Rapporteur's 2019 report on Malaysia specifically cited Section 233 as incompatible with international free expression standards."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "The same PM who built his career on 'Reformasi' and free speech is now using the word 'betrayal' to describe citizens questioning fuel policy.",
+      "s": "Anwar Ibrahim spent 11 years in prison and two decades in opposition partly because previous governments used similar laws — the Sedition Act, the Printing Presses and Publications Act — to silence his movement. His 2022 election platform explicitly promised to repeal Section 233. Instead, MCMC investigations under his government have accelerated: 17 probed in 3 days over fuel posts alone. The 'betrayal' framing — pengkhianatan — is the same nationalist rhetoric BN governments deployed against opposition voices for decades.",
+      "d": "Sources: Bloomberg (Apr 2, Anwar 'warns against sabotage'), The Star (Apr 1, 'betrayal of the nation'), SCMP (Apr 2 coverage), Anwar's 2022 manifesto commitments on media freedom. Historical parallel: Mahathir's government used the same 'national security' framing to justify the 1987 Ops Lalang mass arrests."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "The fuel subsidy bill hit RM4 billion per month — 6 times January levels — and the RON95 quota was already cut 33%. The public's anxiety is not fabricated.",
+      "s": "Brent crude surged to $126/barrel after Iran's Strait of Hormuz disruption. The Finance Ministry confirmed the monthly subsidy burden exploded to RM4B. On April 1, the RON95 quota dropped from 300 to 200 litres. PM Anwar himself said the RM1.99/litre subsidised price can last 'two months max.' Civil servants were told to work from home starting April 15 to conserve energy. Every factual indicator confirms the public has rational grounds to worry about imminent price increases — yet expressing that worry online now triggers an MCMC investigation.",
+      "d": "Sources: Finance Ministry (RM4B subsidy figure), Published issue 1952 (RON95 quota cut), FMT (WFH directive for civil servants), Bloomberg (Brent crude at $126). The government's own actions — quota cuts, WFH orders, PM's 'two months max' statement — validate the public concern it is simultaneously criminalising."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether the 96 posts were true or false. It is whether a government that admits fuel prices may rise can criminally investigate citizens for saying fuel prices may rise.",
+      "text": "The crackdown frames the issue as truth vs falsehood. But the PM himself said the subsidy can last 'two months max.' The Finance Ministry confirmed a 6x subsidy explosion. The quota was already cut. When the government's own statements confirm the trajectory that citizens are being investigated for predicting, the distinction between 'fake news' and 'premature news' collapses. What remains is a speech-control apparatus activated not because the claims are false, but because they are inconvenient during a crisis the government has not yet decided how to manage publicly."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Fabricated TV3-branded graphics are genuinely harmful and warrant investigation — no serious free-speech advocate disputes that. But bundling 17 investigations together, applying the 'betrayal' label indiscriminately, and using the same Section 233 charges for hoax graphics and genuine questions about policy creates a chilling effect that extends far beyond disinformation. When the underlying anxiety is economically rational — RM4B monthly subsidies, quota cuts, the PM's own two-month warning — the state's response must distinguish between fraud and fear. Malaysia's current legal framework, and the political rhetoric surrounding this crackdown, makes no such distinction. That is the failure."
+    }
+  ],
+  "sources": "Bloomberg, SCMP, FMT, Malay Mail, NST, Borneo Post, The Star, SAYS, DayakDaily, Yahoo News, CMA 1998 text, Published issues 0142/1940/1950/1952, Finance Ministry statements, MCMC official figures",
+  "confidence": "High — Government statements, MCMC official data, and multiple domestic and international news outlets corroborate all key facts. The 17-individual and 96-post figures come directly from MCMC. The RM4B subsidy figure is from the Finance Ministry. The 'betrayal' quote is PM Anwar's own words reported by multiple outlets.",
+  "lenses_used": ["Rights", "Political", "Economic"],
+  "lenses_applicable_but_unused": ["Legal", "Governance", "Historical", "Social"]
+}

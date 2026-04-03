@@ -1,0 +1,74 @@
+{
+  "bias_score": 58,
+  "political_lean_estimate": -0.5,
+  "ethnic_framing_estimate": 0.1,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": -0.4,
+  "geographic_bias_estimate": 0.5,
+  "economic_framing_estimate": -0.2,
+  "gender_agency_estimate": 0.9,
+  "partisan_flags": [
+    {
+      "quote": "The same PM who built his career on 'Reformasi' and free speech is now using the word 'betrayal' to describe citizens questioning fuel policy",
+      "why_biased": "This framing is factually accurate but structurally partisan. It selects the most damaging interpretation of Anwar's record. The same sentence could read: 'A PM who spent 11 years in prison for his beliefs is now balancing free expression against disinformation that could trigger panic buying.' Both framings are factually true. The analysis chose the one that maximises hypocrisy.",
+      "fix": "Present both framings: acknowledge the genuine disinformation problem (fake TV3 graphics) AND the hypocrisy of using Section 233. Let the reader weigh them rather than pre-loading the hypocrisy frame."
+    },
+    {
+      "quote": "The 'betrayal' framing — pengkhianatan — is the same nationalist rhetoric BN governments deployed against opposition voices for decades",
+      "why_biased": "Drawing a direct equivalence between Anwar's rhetoric and BN-era repression is a strong editorial claim that collapses significant differences. BN-era crackdowns involved mass arrests (Ops Lalang), physical detention under ISA, and direct media censorship. The current situation involves MCMC investigations that may result in fines. The analysis treats these as equivalent through rhetorical framing rather than evidence.",
+      "fix": "Acknowledge the difference in severity while noting the rhetorical parallel. Say: 'While the current investigations are far less severe than BN-era mass detentions, the rhetorical framing echoes language that was used to justify escalation in the past.'"
+    },
+    {
+      "quote": "MCMC investigations under his government have accelerated: 17 probed in 3 days over fuel posts alone",
+      "why_biased": "The 17-in-3-days figure is presented to imply acceleration but no baseline comparison is provided. How many investigations did MCMC open under Muhyiddin? Under Ismail Sabri? Without comparison data, '17 in 3 days' could be normal enforcement activity or an alarming spike — the reader cannot tell, but the framing assumes the latter.",
+      "fix": "Provide MCMC investigation data from previous administrations for comparison. If unavailable, state that the baseline is unknown rather than implying acceleration."
+    },
+    {
+      "quote": "His 2022 election platform explicitly promised to repeal Section 233",
+      "why_biased": "If this claim is accurate, it is devastating for Anwar. But manifesto promises are routinely broken by all Malaysian parties. The analysis singles out this broken promise without noting that BN, PAS, and Bersatu have equally poor records on manifesto fulfilment. The selectivity creates a partisan effect even if the individual claim is true.",
+      "fix": "Either frame this as a broader pattern of Malaysian manifesto non-compliance or explicitly state why this particular broken promise is more significant than others."
+    }
+  ],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [
+    {
+      "quote": "All analysis focuses on Peninsular fuel pricing",
+      "why_biased": "The entire analysis is Peninsular-centric. Sabah and Sarawak have different fuel distribution systems, different subsidy structures, and different price sensitivities. The RON95 quota cut may affect East Malaysians differently due to longer supply chains and higher transport costs. Borneo perspectives are completely absent.",
+      "fix": "Include at least one reference to how the fuel subsidy changes and MCMC crackdown affect East Malaysian communities, where fuel supply chain logistics create additional cost pressures."
+    }
+  ],
+  "economic_flags": [
+    {
+      "quote": "The fuel subsidy bill hit RM4 billion per month — 6 times January levels",
+      "why_biased": "The RM4B figure is used to validate public anxiety, but the analysis does not explore who pays for the subsidy and what it displaces. If the subsidy bill went from RM670M to RM4B monthly, that is RM40B annualised — money that cannot go to healthcare, education, or infrastructure. The analysis frames subsidy spending as proof that prices should not rise, which is an implicit B40/populist economic position. A complete analysis would also present the fiscal sustainability argument.",
+      "fix": "Acknowledge that the subsidy explosion creates a genuine fiscal crisis: RM4B/month is unsustainable and the government faces a real dilemma between consumer protection and fiscal responsibility. Both the public's anxiety AND the government's fiscal constraint are legitimate."
+    }
+  ],
+  "gender_flags": [
+    {
+      "quote": "17 individuals under investigation",
+      "why_biased": "The 17 investigated individuals are genderless. Are they men? Women? Are women being investigated at the same rate? Women's experience of the fuel crisis — as primary household budget managers in many Malaysian families — is invisible. The entire analysis treats 'the public' as undifferentiated.",
+      "fix": "If gender data is available for the 17 investigated individuals, include it. Regardless, note that fuel price increases disproportionately affect women who manage household budgets and transport for children."
+    }
+  ],
+  "omission_flags": [
+    "The fake TV3 graphics themselves are described but never shown or analysed. What did they depict? What prices did they claim? How far were they from the actual prices the government itself suggested might come? If the fake graphics showed RM3.50/litre and the government's own trajectory suggests RM2.50-3.00/litre, that is relevant context.",
+    "No voice from any of the 17 investigated individuals. Who are they? Are they political operatives or ordinary citizens? Are any of them journalists? The analysis assumes they are all equivalent when the circumstances may vary dramatically.",
+    "MCMC's own justification is absent. MCMC presumably has a stated rationale beyond 'the PM said so.' What did MCMC say? What were their enforcement criteria? Excluding the regulator's stated position is an omission that strengthens the persecution narrative.",
+    "Opposition political response is absent. What did PAS, Bersatu, or PN say about the crackdown? Given that fuel pricing is an active political battleground, opposition voices are conspicuously missing.",
+    "Civil society response beyond the 'critics say' framing. What did Lawyers for Liberty, Bersih, CIJ, or other established rights organisations say specifically? 'Critics say' is vague attribution.",
+    "B40 community voice: the people most affected by both fuel prices AND potential criminalisation of online speech are the urban and rural poor. Their perspective is entirely absent."
+  ],
+  "evasion_flags": [
+    "The analysis correctly identifies the contradiction between the government's own statements and its investigation of citizens saying the same thing. But it evades the harder question: is there ANY legitimate basis for the crackdown? Fabricated TV3 graphics ARE harmful. The analysis treats the fake graphics as a footnote ('no serious free-speech advocate disputes that') rather than genuinely engaging with the disinformation harm.",
+    "The Ops Lalang comparison is dropped in as a historical parallel without follow-through. If this parallel is meaningful, what specifically does it predict? If it is not meaningful (because the current crackdown is far less severe), why invoke it?",
+    "The analysis never asks whether MCMC's actions were directed by the PM's office or were independent regulatory enforcement. This distinction is critical: politically directed prosecution is fundamentally different from routine regulatory enforcement. The analysis assumes political direction without evidence."
+  ],
+  "shoe_test_failures": [
+    "If PN were in power and cracking down on fake news about fuel prices, the analysis would likely frame it as 'authoritarian Islamist censorship.' Because PH is in power, it is framed as 'hypocrisy' — a softer charge. Swap the parties and the rhetorical temperature would be different.",
+    "If the fake TV3 graphics had been created by PH-aligned operatives during a PN government, the analysis would likely focus more on the disinformation harm and less on the free speech implications. The sympathy flows toward whoever is being investigated, which varies with the political alignment of the author.",
+    "If MCMC investigated 17 people for spreading fake graphics about a PAS government policy, the analysis would likely not invoke 'Reformasi' or the PM's personal history. The personal attack on Anwar's credibility — comparing his present to his past — is a framing choice that would not be applied symmetrically to other PMs."
+  ],
+  "overall_assessment": "The analysis identifies a genuine and important tension — the government investigating citizens for expressing concerns its own data validates — but it leans consistently anti-government in its framing. The hypocrisy frame is valid but overplayed: every card reinforces the same thesis (government bad, people justified) without genuine engagement with the disinformation problem or the government's fiscal dilemma. The fake TV3 graphics are treated as a footnote when they should be a serious concern — fabricated branded media is a genuine threat to information integrity. The Ops Lalang comparison is inflammatory without being earned by the evidence. The analysis would fail the shoe test for partisan balance: swap PH for PN and the same evidence would produce a different editorial temperature. The complete absence of MCMC's stated rationale, opposition political voices, and B40 community perspectives further narrows the analysis into a free-speech advocacy piece rather than balanced editorial analysis."
+}

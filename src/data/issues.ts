@@ -82,7 +82,8 @@ export const ISSUES: Issue[] = [
     context: "Parliament passed the Communications Amendment on 20 March 2026 with 148-32 votes. Buried in Section 14A: platforms become liable for user content.",
     stageScores: { pa: 88, ba: 74, fc: 91, af: 62, ct: 45, sr: 79 },
     finalScore: 72.4,
-    cards: [
+    related: ["1964"],
+  cards: [
       { t: "hook", big: "Bipartisan support for the Communications Amendment.", sub: "Nobody is talking about Section 14A on page 34, which redefines who is responsible for what you post." },
       { t: "fact", big: "The term 'reasonable steps' is never defined.", sub: "MCMC decides what platforms must do — without publishing any standard. Three previous actions overturned by High Court.", lens: "Legal" },
       { t: "fact", big: "Indonesia passed the same law. Takedowns rose 43%.", sub: "Malaysia's bill bypassed the standard 30-day consultation.", lens: "Rights" },
@@ -412,7 +413,8 @@ export const ISSUES: Issue[] = [
     context: "The PAC's eighth report on the Littoral Combat Ship programme confirmed RM6.08B spent with zero vessels delivered, while Boustead Naval Shipyard's accounts remain qualified.",
     stageScores: { pa: 85, ba: 64, fc: 87, af: 56, ct: 40, sr: 72 },
     finalScore: 68.4,
-    cards: [
+    related: ["1962"],
+  cards: [
       { t: "hook", big: "Six billion spent. Zero ships delivered. The contract continues.", sub: "LCS programme: started 2011, first delivery due 2019, none delivered by 2026." },
       { t: "fact", big: "PAC found RM1.4B in payments without matching work milestones.", sub: "Progress payments were disbursed based on timelines, not completion. MACC investigation: ongoing since 2022.", lens: "Governance" },
       { t: "fact", big: "Boustead Naval Shipyard: government-linked, politically connected, not technically qualified.", sub: "Original technical partner DCNS withdrew. Replacement arrangements remain unclear.", lens: "Critical" },
@@ -787,7 +789,8 @@ export const ISSUES: Issue[] = [
     context: "An estimated 50,000 to 100,000 children born in Malaysia lack citizenship due to gaps in the Federal Constitution, statelessness of parents, or administrative failures.",
     stageScores: { pa: 86, ba: 63, fc: 88, af: 55, ct: 41, sr: 72 },
     finalScore: 68.9,
-    cards: [
+    related: ["1966"],
+  cards: [
       { t: "hook", big: "Born in Malaysian hospitals. Cannot attend school. Cannot work.", sub: "Stateless children have no IC, no access to public education, and no legal path forward." },
       { t: "fact", big: "Article 14 grants citizenship by birth — but not to all births.", sub: "Children of Malaysian mothers married to foreign fathers were excluded until the 2024 amendment stalled.", lens: "Legal" },
       { t: "fact", big: "NRD rejection rates for citizenship applications: estimated over 90%.", sub: "Appeals take 5 to 15 years. Children age out of school while waiting.", lens: "Rights" },
@@ -3197,6 +3200,7 @@ export const ISSUES: Issue[] = [
   headline: "Bumiputera Contract Quota System Loses RM12B to Rent-Seeking",
   context: "A MACC investigation revealed that an estimated RM12 billion annually in government procurement value is lost to Ali Baba arrangements where Bumiputera quota holders sell contracts to non-Bumiputera operators for 5-15% commissions.",
   stageScores: { pa: 90, ba: 85, fc: 92, af: 79, ct: 74, sr: 87 }, finalScore: 84.5,
+  related: ["1961"],
   cards: [
     { t: "hook", big: "RM12 billion yearly — Bumiputera contract quotas create a commission economy where middlemen profit without doing any work", sub: "Ali Baba practice is open secret: 34% of surveyed contractors admitted participating in MACC's 2025 study" },
     { t: "fact", big: "Government procurement at RM150 billion annually allocates 30% or RM45 billion to Bumiputera-only contracts", sub: "If RM12 billion leaks to rent-seeking, effective Bumiputera benefit is only RM33 billion — a 27% loss to middlemen", lens: "Economic" },
@@ -3729,6 +3733,7 @@ export const ISSUES: Issue[] = [
   headline: "Corruption Costs Malaysia RM47B Annually — 3% of GDP",
   context: "Transparency International Malaysia estimated that corruption costs the Malaysian economy RM47 billion annually through procurement leakage, bribery, and regulatory rent-seeking, equivalent to 3% of GDP or the entire education development budget.",
   stageScores: { pa: 91, ba: 84, fc: 93, af: 79, ct: 73, sr: 87 }, finalScore: 84.6,
+  related: ["1961"],
   cards: [
     { t: "hook", big: "RM47 billion lost to corruption annually — enough to give every B40 household RM15,600 in direct support per year", sub: "Malaysia's CPI score of 50/100 ranks 57th globally — worse than every advanced Asian economy" },
     { t: "fact", big: "Government procurement corruption accounts for RM28 billion — 19% of total RM150 billion annual government spending", sub: "Average bribery cost for business licences is RM12,000 — effectively a corruption tax that falls hardest on SMEs", lens: "Economic" },
@@ -4556,6 +4561,7 @@ export const ISSUES: Issue[] = [
   headline: "Migrant worker exploitation affects 2.1 million documented workers",
   context: "Malaysia's 2.1 million documented migrant workers face systemic rights violations including passport confiscation and wage theft, per a 2025 ILO report.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 81.4,
+  related: ["1966"],
   cards: [
     { t: "hook", big: "2.1 million documented migrant workers face systemic exploitation in Malaysia", sub: "ILO found 68% experienced at least one forced labour indicator" },
     { t: "fact", big: "Employment Act 1955 amendments in 2022 extended protections to foreign workers", sub: "Enforcement remains weak with only 23 prosecutions for worker abuse in 2024", lens: "Legal" },
@@ -4780,6 +4786,7 @@ export const ISSUES: Issue[] = [
   headline: "Rohingya community faces 12 hate speech incidents monthly",
   context: "Monitoring by human rights groups recorded an average of 12 hate speech incidents targeting Rohingya refugees monthly in Malaysia during 2024.",
   stageScores: { pa: 88, ba: 78, fc: 90, af: 74, ct: 67, sr: 83 }, finalScore: 83.9,
+  related: ["1966"],
   cards: [
     { t: "hook", big: "144 documented hate speech incidents targeting Rohingya in Malaysia in 2024", sub: "Social media amplifies xenophobia against Southeast Asia's largest refugee group" },
     { t: "fact", big: "No specific anti-hate speech legislation exists in Malaysian law", sub: "CMA and Penal Code rarely applied to protect minority communities from hate speech", lens: "Legal" },
@@ -8717,6 +8724,7 @@ export const ISSUES: Issue[] = [
   headline: "DOE Enforcement Officers Cut by 18% Despite Rising Pollution",
   context: "Parliamentary records show DOE's enforcement headcount fell from 892 in 2019 to 732 in 2025, an 18% reduction, while registered pollution sources increased 24% in the same period.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 74, ct: 62, sr: 86 }, finalScore: 76.6,
+  related: ["1963"],
   cards: [
     { t: "hook", big: "DOE lost 160 enforcement officers in 6 years.", sub: "In the same period, registered factories increased by 12,400. Each officer now covers 47% more pollution sources." },
     { t: "fact", big: "DOE's 2025 enforcement budget is RM42M — down 12% in real terms from 2019.", sub: "Environmental crimes generate an estimated RM8.4B in economic damage annually.", lens: "Economic" },
@@ -12093,6 +12101,7 @@ export const ISSUES: Issue[] = [
   headline: "Abandoned LCS Programme Wastes RM6.1 Billion on Zero Ships",
   context: "Littoral Combat Ship programme delivered 0 of 6 contracted vessels after RM6.1 billion in payments to Boustead Naval Shipyard.",
   stageScores: { pa: 76, ba: 61, fc: 83, af: 56, ct: 45, sr: 69 }, finalScore: 77.8,
+  related: ["1962"],
   cards: [
     { t: "hook", big: "LCS programme delivered zero ships after RM6.1 billion spent", sub: "Malaysia costliest defence procurement failure now under criminal investigation" },
     { t: "fact", big: "First vessel was 60% complete when work halted in 2022 due to fund depletion", sub: "PAC found RM1.4 billion diverted to non-LCS activities within the shipyard", lens: "Political" },
@@ -13983,6 +13992,7 @@ export const ISSUES: Issue[] = [
   headline: "Government Surveillance Powers Expanded Without Judicial Oversight",
   context: "Amendments to Official Secrets Act and CMA expanded government electronic surveillance powers without requiring judicial warrants.",
   stageScores: { pa: 85, ba: 85, fc: 83, af: 64, ct: 75, sr: 87 }, finalScore: 74.0,
+  related: ["1964"],
   cards: [
     { t: "hook", big: "Surveillance powers expanded without judicial warrant requirements", sub: "Amendments allow interception of communications for national security" },
     { t: "fact", big: "Home Minister can authorize surveillance without court approval", sub: "Previous framework required AG approval which served as limited check", lens: "Critical" },
@@ -14123,6 +14133,7 @@ export const ISSUES: Issue[] = [
   headline: "Malaysia Passes Comprehensive Online Safety Act 2026",
   context: "Parliament passed landmark Online Safety Act consolidating 8 existing laws into single framework for digital regulation.",
   stageScores: { pa: 79, ba: 73, fc: 90, af: 76, ct: 57, sr: 86 }, finalScore: 80.0,
+  related: ["1964"],
   cards: [
     { t: "hook", big: "Online Safety Act consolidates 8 laws into single digital regulatory framework", sub: "Act creates Digital Safety Commissioner with RM180 million annual budget" },
     { t: "fact", big: "Platforms must respond to harmful content reports within 24 hours", sub: "Repeated failure to act results in revenue-based fines up to 5% of turnover", lens: "Rights" },
@@ -14156,7 +14167,7 @@ export const ISSUES: Issue[] = [
   sourceDate: "2026-03-30",
   stageScores: { pa: 86, ba: 68, fc: 82, af: 62, ct: 55, sr: 76 },
   finalScore: 72.8,
-  related: ["1951", "1953", "1954"],
+  related: ["1951", "1953", "1954", "1964"],
   cards: [
     { t: "hook", big: "RON95 stays at RM1.99. The government says 90% of users won't notice.", sub: "The quota drops from 300 to 200 litres per month on 1 April. The 90% figure has no published methodology, sample period, or source — it is a government assertion, not a verified statistic." },
     { t: "fact", big: "Above-quota fuel costs 68% more. The burden falls on those who drive farthest with the fewest alternatives.", sub: "Rural B40 commuters, plantation workers, and gig riders have no public transport fallback. But universal subsidies are regressive — T20 with larger cars benefit most. The quota cut is milder than full liberalisation.", lens: "Economic" },
@@ -14224,7 +14235,7 @@ export const ISSUES: Issue[] = [
   sourceDate: "2026-03-30",
   stageScores: { pa: 85, ba: 72, fc: 85, af: 66, ct: 58, sr: 77 },
   finalScore: 74.8,
-  related: [],
+  related: ["1965"],
   cards: [
     { t: "hook", big: "Malaysia doubles the expat salary floor to RM20,000. The message: hire Malaysians first.", sub: "RM10,000 was too low and undercut locals. A higher floor can attract quality investment and force knowledge transfer. But is the system ready?" },
     { t: "fact", big: "Semiconductor target: 60,000 workers by 2030. Pipeline: 3,000 graduates/year — many leave for Singapore within five years.", sub: "Malaysia loses thousands of skilled professionals annually to neighbours offering higher pay and clearer meritocracy. Raising the price of foreign replacements does not fix why Malaysians leave.", lens: "Economic" },
@@ -14241,6 +14252,7 @@ export const ISSUES: Issue[] = [
     context: "MITI's conditions for BYD's Tanjung Malim EV plant — 80% export and RM200K domestic price floor — have stalled the world's largest EV maker's Malaysia plans while protecting Proton (49.9% Geely-owned) and Perodua (25.2% Daihatsu-owned) behind a wall that prices B40 consumers out of the EV transition.",
     sourceDate: "2026-03-30",
     stageScores: { pa: 88, ba: 60, fc: 96, af: 58, ct: 38, sr: 82 }, finalScore: 83.7,
+    related: ["1965"],
     cards: [
       { t: "hook", big: "MITI set an RM200K floor and 80% export rule. BYD walked. Thailand didn't.", sub: "Both Proton (49.9% Geely) and Perodua (25.2% Daihatsu) are shielded. Neither is wholly Malaysian-owned." },
       { t: "fact", big: "BYD Dolphin sells at RM100K. MITI's floor is RM200K. B40 median income: RM4,588/month.", sub: "Only 5,624 public chargers installed — 56% of target. High-rise residents can't charge at home.", lens: "Economic" },
@@ -14280,6 +14292,132 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "The demolition was crowdfunded as a movement — but the class dynamics underneath matter more than the religious rhetoric.", sub: "Tanah Malaya raised RM131,000 in one month. Rising Rawang land values make informal sites targets. Many worshippers descend from Tamil estate workers among Malaysia's poorest.", lens: "Social" },
       { t: "reframe", big: "The question is not property versus religion. It is why every party in power since 1965 has chosen inaction — and who profits from the chaos.", sub: "" },
       { t: "view", big: "Malaysia needs statutory reform for unregistered worship sites — but must confront the class and ethnic power dynamics that make reform politically impossible.", sub: "" },
+    ]
+  },
+  {
+    id: "1961",
+    opinionShift: 79,
+    status: "new",
+    edition: 1,
+    headline: "MACC Chief Under Probe — But the System Investigating Him Answers to Those Who Appointed Him",
+    context: "Bloomberg alleged MACC Chief Azam Baki colluded with businessmen. He sued for RM100 million. The PM deferred an RCI to an AG committee whose members and terms of reference remain undisclosed. Transport Minister Anthony Loke demanded an RCI and was overruled in 72 hours.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 85, ba: 45, fc: 41, af: 62, ct: 42, sr: 78 },
+    finalScore: 58.8,
+    related: ["1208", "1170"],
+    cards: [
+      { t: "hook", big: "Malaysia's anti-corruption chief is under investigation — but the system investigating him answers to those who appointed him", sub: "Bloomberg alleged Azam Baki colluded with businessmen. He sued for RM100 million. The PM deferred an RCI to an AG committee. Two months on: no timeline, no findings, no disclosure of committee members." },
+      { t: "fact", big: "The MACC Act created four oversight bodies — none can criminally investigate its own chief", sub: "Advisory Board, Special Committee, Complaints Committee, and Operations Review Panel all lack teeth. The AG committee's composition remains undisclosed. The UNCAC 2024 review recommended Malaysia build an independent oversight body. It has not.", lens: "Governance" },
+      { t: "fact", big: "Anthony Loke demanded an RCI. He was overruled in 72 hours. Every government since 2009 has preserved this power structure", sub: "Four administrations — Najib's BN, Muhyiddin's PN, Ismail Sabri's BN, Anwar's PH-BN — kept the same MACC appointment architecture. No PM has proposed independent confirmation. The design serves whoever holds executive power.", lens: "Political" },
+      { t: "fact", big: "Corruption costs RM277 billion over five years — the burden falls hardest on B40 families paying bribes for basic services", sub: "The NACS 2024-2028 estimates 3.4% of GDP lost. Malaysia's CPI improved to 54th (score 52) — but that preceded the Bloomberg revelations. The RM100 million suit signals investigating corruption carries a price.", lens: "Economic" },
+      { t: "reframe", big: "The question is not whether Azam Baki is guilty — it is whether any institution can answer that independently when every government has chosen not to build one", sub: "" },
+      { t: "view", big: "The fix is a permanent independent oversight body for MACC, as the UNCAC recommended. But building it requires a government to surrender power over its own watchdog. No government has.", sub: "" }
+    ]
+  },
+  {
+    id: "1962",
+    opinionShift: 76,
+    status: "new",
+    edition: 1,
+    headline: "Military Generals Charged — Historic Prosecution, but the 4,679-Contract Cartel System Remains Intact",
+    context: "Former Army Chief Muhammad Hafizuddeain Jantan and former Defence Forces Chief Mohamad Nizam Jaafar face corruption charges. MACC's Ops Parasit seized RM52 million. A 26-firm cartel — including firms owned by relatives of serving officers — operated across 4,679 contracts while 12 auditors oversaw the entire defence portfolio.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 83, ba: 38, fc: 52, af: 65, ct: 52, sr: 76 },
+    finalScore: 61,
+    related: ["0154", "1805"],
+    cards: [
+      { t: "hook", big: "Two former military chiefs charged with corruption — Malaysia's first prosecution of its top brass", sub: "Hafizuddeain faces money laundering; Nizam faces abuse of power, CBT, and receipt of a valuable item. His wife was also charged. MACC seized RM52 million. An external activist, not internal oversight, triggered the probe." },
+      { t: "fact", big: "A 26-firm cartel ran 4,679 contracts while 12 auditors watched — an external activist triggered the probe", sub: "The Whistleblower Protection Act excludes material covered by the Official Secrets Act. Military procurement is classified by default. Defence spending at 1.1% GDP means corruption takes an outsized bite from a thin budget.", lens: "Security" },
+      { t: "fact", big: "The LCS scandal ended in DNAA. Then the same procurement system produced a new cartel on this government's watch", sub: "RM6.1 billion spent on warships that do not exist. Contracts over RM500K required MOF approval — civilian bureaucrats either colluded or failed. Every coalition has fingerprints on defence graft.", lens: "Governance" },
+      { t: "fact", big: "The King warned the Ministry was 'full of agents' — constitutionally grounded but potentially prejudicial to fair trial", sub: "As Supreme Commander under Article 41, the Agong has a legitimate role. But 'hunt' language on active cases risks defence challenges. The intervention may serve both accountability and reassertion of royal influence.", lens: "Legal" },
+      { t: "reframe", big: "These are not the first generals caught — they are the first charged. The system that enabled a 4,679-contract cartel has been announced reformed but not actually changed", sub: "" },
+      { t: "view", big: "The prosecution is historic and substantive. But soldiers in substandard barracks while chiefs hoarded gold deserve more than accountability theatre — they deserve a system that cannot be captured.", sub: "" }
+    ]
+  },
+  {
+    id: "1963",
+    opinionShift: 82,
+    status: "new",
+    edition: 1,
+    headline: "Data Centers vs Johor's Water: RM182B Pipeline Meets a Moratorium That Exempts the Biggest Consumers",
+    context: "Malaysia imposed a moratorium on non-AI data centers after 11,000MW in electricity applications overwhelmed the peninsular grid, though effective demand is ~7.5GW. The AI exemption, lobbied for by PIKOM and AMCHAM, protects multinational hyperscalers while threatening smaller Malaysian operators. Johor has RM182.96B approved.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 85, ba: 52, fc: 43, af: 65, ct: 48, sr: 76 },
+    finalScore: 61.5,
+    related: ["1564"],
+    cards: [
+      { t: "hook", big: "Malaysia is betting its future on data centers. Johor residents are asking who will be left with water.", sub: "Gelang Patah residents protested a China-based data center. The moratorium was already in effect — but 11,000MW in applications, effective demand ~7.5GW, still dwarfs the peninsular grid. Johor has RM182.96B approved." },
+      { t: "fact", big: "11,000MW applied, ~7.5GW effective demand — and the moratorium exempts AI centers, the most power-hungry category", sub: "AI facilities consume 3-10x more power per rack. The exemption was lobbied for by PIKOM and AMCHAM. Sarawak courts diverted investment with surplus hydropower. Singapore reopened after its own moratorium with strict PUE requirements.", lens: "Technology" },
+      { t: "fact", big: "The moratorium cited both power and water — but no public data exists on actual water use per data center in Johor", sub: "Johor set a WUE threshold of 1.8, steered operators to alternative water, and planned 4 new treatment plants costing RM1.41B. Orang Asli communities near proposed sites have been absent from development consultations.", lens: "Environmental" },
+      { t: "fact", big: "RM182.96B approved in Johor alone — the moratorium protects hyperscalers while local operators face shutdown", sub: "Microsoft, Google, and ByteDance structured investments as AI-focused, bypassing the pause. Smaller Malaysian firms cannot relabel. Working-class residents bear environmental costs while high-skill jobs go to expats.", lens: "Economic" },
+      { t: "reframe", big: "The real filter is not sustainability — it is who has the lobbying power to secure an exemption. The ceiling has a hole sized for the biggest players.", sub: "" },
+      { t: "view", big: "The ambition is not wrong — it is ungoverned. Successive governments prioritise FDI headlines over resource limits. Residents should not have to protest to trigger what the numbers already demanded.", sub: "" }
+    ]
+  },
+  {
+    id: "1964",
+    opinionShift: 78,
+    status: "new",
+    edition: 1,
+    headline: "Fuel Fake News Crackdown: Only 8 of 96 Flagged Posts Were Fabrications",
+    context: "MCMC investigated 17 individuals and flagged 96 posts after PM Anwar called spreading false fuel information a betrayal. Only 8 posts involved fabricated graphics — 88 were reposts or speculation. The amended Section 233 now carries up to RM500,000 and 2 years. The RM4B monthly subsidy confirms the anxiety being targeted.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 82, ba: 47, fc: 48, af: 62, ct: 52, sr: 74 },
+    finalScore: 60.8,
+    related: ["0142", "1940", "1950", "1952"],
+    cards: [
+      { t: "hook", big: "The government is cracking down on fake news about fuel and electricity prices to protect Malaysians from misinformation.", sub: "MCMC investigated 17 individuals and flagged 96 posts. Only 8 involved fabricated graphics — the remaining 88 were reposts or speculation. The amended Section 233 now carries up to RM500,000 and 2 years." },
+      { t: "fact", big: "Section 233 penalties jumped to RM500,000 and 2 years — yet MCMC's conviction rate is just 3.8% across 1,243 investigations", sub: "The process is the punishment. A Parliamentary committee recommended narrowing it in 2024; ignored. Singapore's POFMA requires corrections before prosecution. Indonesia's ITE Law shows where unchecked enforcement leads.", lens: "Rights" },
+      { t: "fact", big: "Every PM — Mahathir, Badawi, Najib, Muhyiddin, Ismail Sabri, Anwar — has used these laws against critics. The pattern is systemic.", sub: "PAS and PN weaponise cost-of-living anger into ethnic grievance. Subsidy entitlement combined with low savings creates acute panic when cuts loom. No ruling party voluntarily narrows tools it may need.", lens: "Political" },
+      { t: "fact", big: "The fuel subsidy hit RM4 billion per month — the public's anxiety is rational, but so is the government's fiscal alarm", sub: "Brent crude above $109/barrel. RON95 quota cut from 300 to 200 litres. The subsidy is regressive — T20 households benefit more than B40 families. Informal economy workers rely on social media as their only price intelligence.", lens: "Economic" },
+      { t: "reframe", big: "A government that signals fuel prices must rise cannot criminally investigate citizens for saying the same thing. That is not fighting fake news — it is punishing premature truth.", sub: "" },
+      { t: "view", big: "Fabricated graphics deserve investigation. But when only 8 of 96 flagged posts are fabrications, enforcement has expanded into suppression — a pattern every PM inherits and none will fix.", sub: "" }
+    ]
+  },
+  {
+    id: "1965",
+    opinionShift: 82,
+    status: "new",
+    edition: 1,
+    headline: "US tariff reset after Supreme Court ruling leaves Malaysia worse off",
+    context: "The US Supreme Court struck down IEEPA tariffs in February 2026, but replacement Section 301 investigations target solar, steel, aluminum, and EVs across 60 economies. Malaysia walked out of the ART deal with no bilateral framework and 68% of semiconductor exports controlled by US firms.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 82, ba: 65, fc: 42, af: 65, ct: 55, sr: 80 },
+    finalScore: 64.8,
+    related: ["1957", "1956"],
+    cards: [
+      { t: "hook", big: "Malaysia celebrated the Supreme Court striking down Trump's tariffs. The replacement regime may be worse.", sub: "SCOTUS voided the 24% IEEPA tariff and the ART deal. Trump imposed a 10% blanket tariff within days and launched two Section 301 probes across up to 60 economies — legally unchallengeable infrastructure for targeted tariffs with no rate cap." },
+      { t: "fact", big: "IEEPA tariffs had a constitutional weakness. Section 301 tariffs do not — court challenges are nearly impossible.", sub: "Section 301 targets solar, steel, aluminum, and EVs — not semiconductors directly. But Malaysia's finished electronics could fall within scope. White House exempted computers, smartphones, and SSDs under specific HTS headings.", lens: "Legal" },
+      { t: "fact", big: "68% of semiconductor exports come from US firms. The 180,000 ATP workers are 65% women. R&D flatlined at 1% of GDP for a decade.", sub: "RM60.6B in semiconductors within RM120.2B total E&E exports to US. The NSSP commits RM25B, but Silterra — the one wafer fab attempt — failed. The CHIPS Act excludes ATP, reinforcing Malaysia's role by luck.", lens: "Economic" },
+      { t: "fact", big: "A forced labor probe across 60 economies gives the US a second front. Every coalition chose patronage over reform.", sub: "Some Chinese manufacturing involves minimal value-add to circumvent tariffs. The ~7,200 local suppliers face scrutiny. Sabah and Sarawak have zero chip plants but bear full tariff exposure on commodities.", lens: "Political" },
+      { t: "reframe", big: "The court victory was a trap. Every government since Mahathir 1.0 chose procurement preferences over a US trade deal. Those consequences are arriving.", sub: "" },
+      { t: "view", big: "The vulnerability is real but leverage is underestimated. Malaysia lacks not options but political will to convert CPTPP, RCEP, and the NSSP into actual strategy.", sub: "" }
+    ]
+  },
+  {
+    id: "1966",
+    opinionShift: 80,
+    status: "new",
+    edition: 1,
+    headline: "Refugee registration system launched but work permits remain unissued",
+    context: "Malaysia launched the DPP on 1 January 2026, screening 37,000+ individuals with the first phase targeting detention centres holding 21,000+ people including 3,200 children. Work permits restricted to 3D sectors are announced but not yet operative. Thailand has moved ahead by piloting actual permits.",
+    published: true,
+    sourceDate: "2026-04-03",
+    stageScores: { pa: 80, ba: 70, fc: 58, af: 65, ct: 48, sr: 78 },
+    finalScore: 66.5,
+    related: ["1267", "1283", "0179"],
+    cards: [
+      { t: "hook", big: "Malaysia launches its first refugee registration system. Work permits are announced but not yet issued. Thailand has already moved ahead.", sub: "The DPP screened 37,000+ since January 2026, starting with detention centre populations. The government promised employment, education, and healthcare access, but permits remain policy direction, not reality." },
+      { t: "fact", big: "A 2019 study estimated RM3B in GDP gains — but B40 workers of all races face real wage competition in the same sectors.", sub: "Employers sought documented workers for shortage sectors. Registration creates a market for permits risking labour broker capture. Centres are only in major cities, leaving rural refugees unable to register.", lens: "Economic" },
+      { t: "fact", big: "Over 21,000 detained including 3,200 children under 12. The Employment Act covers them by case law, but the Immigration Act has not changed.", sub: "Indonesia achieved a more comprehensive refugee framework without signing the 1951 Convention. Malaysia's DPP is executive action because no coalition will seek parliamentary reform of immigration law.", lens: "Rights" },
+      { t: "fact", big: "Sabah has 50,000+ refugees but DPP rollout faces state objections. Political Islam drives selective sympathy for Muslim refugees only.", sub: "Domestic work and plantations are excluded despite forced labour flags. Anti-refugee sentiment is mainstream across all races, driven by genuine economic anxiety among lower-income communities.", lens: "Social" },
+      { t: "reframe", big: "Registration serves the state and employers first. No coalition will expand beyond this. The DPP is likely both the floor and the ceiling.", sub: "" },
+      { t: "view", big: "The DPP is the political maximum Malaysian democracy can produce now. The task is making this registration exercise function as actual protection.", sub: "" }
     ]
   }
 ];

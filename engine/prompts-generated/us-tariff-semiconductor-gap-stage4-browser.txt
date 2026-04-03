@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's semiconductor sector is shielded from US tariffs. The chip exemption protects the crown jewel of Malaysian exports.",
+      "sub": "The Trump administration imposed a 24% tariff on Malaysian exports but exempted semiconductors — Malaysia's single largest export category at RM120.2 billion ($26.7B) to the US in 2024. Trade Minister Tengku Zafrul confirmed the exemption. Headlines celebrated. But the exemption has a gap wide enough to drive a finished product through: chips embedded in consumer electronics, automotive modules, and assembled devices still face the full 24% tariff. The shield protects the raw chip. It does not protect the economy that assembles it."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "65% of Malaysia's semiconductor exports to the US come from American firms — Intel, Micron, Texas Instruments — operating in Malaysia. The tariff taxes America's own supply chain.",
+      "s": "Malaysia is not a competitor to the US semiconductor industry. It is the US semiconductor industry's back-end workshop. Intel's Penang facility is the company's largest global test-and-assembly site. Micron, Texas Instruments, and other US firms account for 65% of the chips Malaysia sends to America. The 24% tariff on finished products containing these chips means US companies pay more to import goods assembled using their own components. Meanwhile, the RM1.5B ($356M) SME relief package covers barely 1.3% of the RM120.2B export sector — a bandage on an arterial bleed.",
+      "d": "Sources: CEIC (65% US-firm share), KR Institute (tariff exemption analysis), The ASEAN Frontier (semiconductor tariff exposure), SCMP ($356M relief package), Intel Penang facility data. The irony: US tariffs on Malaysian-assembled products hurt US firms' profitability more than Malaysian firms' revenue, since the value-add in Malaysia is primarily low-margin assembly and testing."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Malaysia is caught between two superpowers with no free trade agreement to protect it from either. The Section 301 probe targets Malaysia for hosting Chinese manufacturers doing exactly what the US encouraged.",
+      "s": "The USTR launched Section 301 investigations into 16 economies including Malaysia for 'excess manufacturing capacity' — code for Chinese firms rerouting production through Southeast Asia to bypass US-China tariffs. But Malaysia's FDI strategy for the past decade, endorsed by successive US administrations, was precisely to attract manufacturing diversification away from China. Chinese firms like BYD setting up in Malaysia was the intended outcome. Now the US is penalising it. Malaysia has no FTA with the US, is not in a US-led trade bloc (the US left CPTPP), and has limited bilateral leverage.",
+      "d": "Sources: Fortune (Section 301 probe, Mar 16), SCMP (Malaysia's trade position), RHB (trade war impact analysis), Malay Mail (Anwar on US-China tensions), Published issue 1957 (BYD/Proton auto trade policy). Malaysia's GDP growth target of 4.0-4.5% for 2026 is now at risk from both the tariff shock and the concurrent $126/barrel oil price crisis."
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "The semiconductor exemption protects the lowest-value segment of the chip chain. Malaysia does almost no chip design — it packages what others invent.",
+      "s": "Malaysia's position in the semiconductor value chain is overwhelmingly back-end: assembly, testing, and packaging (ATP). This captures roughly 5-10% of a chip's final value. Front-end design and fabrication — where 70-80% of value sits — happens in the US, Taiwan, South Korea, and increasingly India. The tariff exemption protects this low-margin ATP work. But 150,000+ Malaysian SMEs that manufacture components, casings, circuit boards, and finished products containing those chips get no exemption. The 'semiconductor shield' protects the least vulnerable link and leaves the most exposed workers unprotected.",
+      "d": "Sources: KR Institute (value chain analysis), The ASEAN Frontier (ATP vs fab distinction), SCMP (150,000 SME exposure), MITI (Malaysia's E&E sector positioning). Penang and Johor — the two states most dependent on E&E manufacturing — face disproportionate job risk from the 24% tariff on assembled products."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether semiconductors are exempt. It is whether Malaysia has a strategy for when they are not.",
+      "text": "The chip exemption is a policy choice by the current US administration, not a treaty obligation. It can be revoked with a single executive order. The Section 301 probe into 'excess capacity' is already building the legal infrastructure to do so. Malaysia's entire E&E export strategy depends on a tariff exemption it did not negotiate, cannot enforce, and has no fallback for. The RM1.5B relief package treats the symptom. The absence of a US-Malaysia FTA, a chip-design upgrading roadmap, or a diversified export strategy beyond the US and China — that is the structural vulnerability no relief package addresses."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's semiconductor exemption is real but fragile — a discretionary reprieve, not a structural advantage. The country occupies the most replaceable segment of the chip value chain (assembly and testing) while 150,000 SMEs in the broader E&E ecosystem face the full 24% tariff. The RM1.5B relief covers 1.3% of the exposed sector. The harder truth: Malaysia's trade strategy assumed it could be everyone's neutral workshop indefinitely. The Section 301 probe signals that era may be ending, and Malaysia has neither the bilateral agreements nor the value-chain position to negotiate from strength."
+    }
+  ],
+  "sources": "Tax Foundation, Fortune, SCMP, RHB, FMT, KR Institute, The ASEAN Frontier, CEIC, Malay Mail, MITI, USTR Section 301 filings, Published issue 1957",
+  "confidence": "High — Tariff rates from official USTR filings and Tax Foundation tracker. 65% US-firm share from CEIC data. RM120.2B export figure from MITI. RM1.5B relief package confirmed by SCMP and government statements. Section 301 probe documented by Fortune and USTR. Medium confidence on value-chain percentages (industry estimates vary by source).",
+  "lenses_used": ["Economic", "Political", "Technology"],
+  "lenses_applicable_but_unused": ["Regional", "Governance", "Social", "Security"]
+}

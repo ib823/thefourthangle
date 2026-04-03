@@ -1,0 +1,115 @@
+{
+  "factual_accuracy_score": 70,
+  "source_diversity_estimate": 0.6,
+  "claims": [
+    {
+      "claim": "On 1 January 2026, Malaysia launched the Dokumen Pendaftaran Pelarian (DPP) — its first national refugee registration system, screening 37,000+ individuals so far.",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.0,
+      "m_unknown": 0.15,
+      "source": "Malaysian Home Ministry announcements, UNHCR Malaysia updates, Malay Mail and FMT reporting on DPP launch",
+      "correction": "The 37,000+ screening figure should specify the date of the count, as registration is ongoing and the number changes. Verify whether 37,000 refers to applications received, screenings completed, or documents issued — these are different metrics."
+    },
+    {
+      "claim": "Work permits will be restricted to '3D' jobs — dirty, dangerous, difficult — in manufacturing, mining, and construction.",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.0,
+      "m_unknown": 0.15,
+      "source": "Home Ministry policy announcements, Malay Mail reporting on DPP work-permit conditions",
+      "correction": null
+    },
+    {
+      "claim": "Malaysia has 211,260 UNHCR-registered refugees.",
+      "status": "VERIFIED",
+      "m_true": 0.8,
+      "m_false": 0.0,
+      "m_unknown": 0.2,
+      "source": "UNHCR Malaysia statistics (figures fluctuate monthly; as of late 2025/early 2026, the figure was in the 180,000-215,000 range depending on the reporting date)",
+      "correction": "Specify the date of this figure. UNHCR Malaysia updates monthly and the number has fluctuated. The 211,260 may be accurate for a specific month but should be dated."
+    },
+    {
+      "claim": "The Center for Global Development estimates legal refugee work rights would generate RM3 billion in annual GDP and RM50 million in tax revenue.",
+      "status": "UNVERIFIED",
+      "m_true": 0.45,
+      "m_false": 0.1,
+      "m_unknown": 0.45,
+      "source": "Attributed to CGD research 2026",
+      "correction": "The specific RM3 billion and RM50 million figures need verification against the actual CGD publication. CGD has published research on the economic benefits of refugee employment in Malaysia, but the exact figures, methodology, and assumptions should be cited precisely. Economic projections of this kind depend heavily on assumptions about participation rates, wage levels, and sector allocation."
+    },
+    {
+      "claim": "800,000+ Bangladeshi workers already hold permits in 3D sectors",
+      "status": "MISLEADING",
+      "m_true": 0.4,
+      "m_false": 0.3,
+      "m_unknown": 0.3,
+      "source": "Immigration Department data, DOSM foreign worker statistics",
+      "correction": "The 800,000+ figure for Bangladeshi workers needs verification. As of 2024-2025, Bangladesh was indeed the largest source country for documented foreign workers in Malaysia, but the exact figure has fluctuated due to recruitment freezes, repatriation drives, and permit renewals. The claim that they are all in '3D sectors' may overstate concentration — some hold permits in plantation agriculture and domestic work. The figure should be sourced to a specific government dataset and date."
+    },
+    {
+      "claim": "18,000 refugees sit in immigration detention centres right now.",
+      "status": "UNVERIFIED",
+      "m_true": 0.35,
+      "m_false": 0.15,
+      "m_unknown": 0.5,
+      "source": "The analysis attributes this to general reporting but does not cite a specific source for the 18,000 figure",
+      "correction": "This is a critical claim that needs a primary source. Malaysian immigration detention figures are not routinely published. SUHAKAM, UNHCR, and human rights organisations provide estimates, but they vary significantly. The 18,000 figure may include all immigration detainees (not just refugees) and may be outdated. Distinguish between refugees, asylum seekers, undocumented migrants, and trafficking victims in detention."
+    },
+    {
+      "claim": "Under the Immigration Act 1959/63, refugees have no legal status distinct from undocumented migrants — both are subject to arrest, detention, and deportation.",
+      "status": "VERIFIED",
+      "m_true": 0.9,
+      "m_false": 0.0,
+      "m_unknown": 0.1,
+      "source": "Immigration Act 1959/63, legal analyses by Asylum Access and Bar Council Malaysia",
+      "correction": null
+    },
+    {
+      "claim": "Federal Constitution Article 6 prohibits slavery and forced labour, yet the Employment Act 1955 does not extend protections to undocumented workers.",
+      "status": "MISLEADING",
+      "m_true": 0.5,
+      "m_false": 0.2,
+      "m_unknown": 0.3,
+      "source": "Federal Constitution Article 6, Employment Act 1955",
+      "correction": "Article 6 prohibits slavery and forced labour but this is a constitutional protection that applies to all persons, not an employment law provision. The juxtaposition implies that the Employment Act should cover undocumented workers, but this conflates two different legal frameworks. The Employment Act covers employer-employee relationships for lawful employment. The real gap is that undocumented workers cannot access the Employment Act's protections because they cannot form lawful employment contracts — which is precisely what the DPP might change. The legal analysis is more nuanced than the binary presented."
+    },
+    {
+      "claim": "Rohingya refugees number 124,123 in Malaysia",
+      "status": "UNVERIFIED",
+      "m_true": 0.6,
+      "m_false": 0.05,
+      "m_unknown": 0.35,
+      "source": "UNHCR Malaysia statistics",
+      "correction": "This figure should be dated and sourced to a specific UNHCR monthly update. Rohingya are consistently the largest refugee group in Malaysia (typically 55-60% of registered refugees), so the proportion is correct even if the exact number fluctuates."
+    },
+    {
+      "claim": "The 3D restriction covers manufacturing, mining, and construction — overwhelmingly male-dominated sectors.",
+      "status": "VERIFIED",
+      "m_true": 0.8,
+      "m_false": 0.05,
+      "m_unknown": 0.15,
+      "source": "DOSM labour force data, ILO sector employment statistics for Malaysia",
+      "correction": "Manufacturing is not as overwhelmingly male-dominated as mining and construction. Women constitute a significant portion of the manufacturing workforce, particularly in electronics and food processing. The claim is accurate for mining and construction but less so for manufacturing."
+    },
+    {
+      "claim": "Thailand and Bangladesh followed the same path — register first, restrict second — and created documented but disposable workforces.",
+      "status": "MISLEADING",
+      "m_true": 0.45,
+      "m_false": 0.25,
+      "m_unknown": 0.3,
+      "source": "ILO and IOM reports on migrant worker registration in Thailand and Bangladesh",
+      "correction": "Thailand's migrant worker registration system (the MOU system and national verification process) has a very different structure from what Malaysia is implementing. Thailand has moved through multiple registration rounds since the 2000s with varying degrees of rights expansion. Bangladesh's context involves Rohingya camps and is primarily about humanitarian registration, not work permits. The comparison is too glib — the mechanisms, legal contexts, and outcomes differ significantly."
+    }
+  ],
+  "omitted_facts": [
+    "Sabah hosts an estimated 800,000-1 million undocumented migrants and refugees, primarily Filipino and Indonesian, with a completely different legal and security context than Peninsular Malaysia. The IMM13 document system for Filipino refugees in Sabah predates the DPP and offers a direct comparison point. Source: Sabah state government estimates, UNHCR Sabah, academic research on Sabah migration.",
+    "The Asylum Access landmark court ruling referenced in the sources section found that UNHCR card holders had a right to work — a judicial precedent that could interact with the DPP in significant ways. The analysis mentions the source but does not explain the ruling or its implications. Source: Asylum Access Malaysia, court records.",
+    "Indonesia, which has a much larger refugee population and is also not a signatory to the 1951 Convention, passed Presidential Regulation No. 125 of 2016 on handling foreign refugees — a more comprehensive framework than what Malaysia has with the DPP. This is a directly relevant comparison that is missing. Source: Indonesian Presidential Regulation 125/2016.",
+    "The DPP screening process reportedly includes biometric data collection, which raises significant privacy and surveillance concerns for refugee communities — particularly for those who fear deportation to Myanmar. Source: civil society monitoring reports on DPP implementation.",
+    "Malaysia's plantation sector — palm oil and rubber — employs a large number of undocumented workers including refugees but is not included in the 3D work-permit categories. This is a significant omission given that plantations are among the most exploitative employers. Source: US State Department TIP Report, Sime Darby and FGV labour audits.",
+    "The RM50 fee for DPP registration is a barrier for refugees who live below the poverty line. Some refugees report being unable to afford the fee. Source: Al Jazeera, refugee community organisations."
+  ],
+  "source_assessment": "The analysis relies on a mix of international organisations (UNHCR, CGD, HRW), Malaysian media (Malay Mail, FMT), and legal texts (Immigration Act, Federal Constitution). This provides reasonable breadth but is missing several critical source types: no Malaysian government officials defending the DPP design, no employer or industry perspectives, no refugee community voices (quotes from actual refugees), no Sabah-specific sources, and no Malaysian academic research on migration policy. The CGD economic projection is presented without critical examination of its methodology. The legal analysis would benefit from Bar Council Malaysia or Malaysian legal academics' perspectives rather than relying primarily on international organisations.",
+  "overall_assessment": "The analysis is well-intentioned but has significant factual precision problems. Several key figures — the 18,000 detention number, the 800,000 Bangladeshi workers, the RM3B GDP projection, and the 124,123 Rohingya count — are presented without adequate sourcing or dating. The Thailand/Bangladesh comparison is oversimplified. The legal analysis of Article 6 vs. the Employment Act conflates different legal frameworks. The most important factual omission is Sabah's migration context, which is arguably the most significant testing ground for the DPP. The analysis would be stronger with more precise sourcing, dated figures, and engagement with the government's own stated rationale for the 3D restriction."
+}

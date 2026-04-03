@@ -1,0 +1,58 @@
+{
+  "bias_score": 35,
+  "political_lean_estimate": -0.3,
+  "ethnic_framing_estimate": 0.2,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": -0.4,
+  "geographic_bias_estimate": 0.8,
+  "economic_framing_estimate": 0.5,
+  "gender_agency_estimate": 1.0,
+  "partisan_flags": [
+    {
+      "quote": "The moratorium protects Malaysia's political narrative (we are an AI hub) while offering limited relief to the grid and water systems that prompted it.",
+      "why_biased": "Ascribes a cynical motive ('protecting a narrative') to the federal government without acknowledging potential logistical or diplomatic complexities of a total ban.",
+      "fix": "Focus on the technical inconsistency of the policy without ascribing specific political intent to the 'narrative'."
+    }
+  ],
+  "racial_flags": [
+    {
+      "quote": "a Chinese-linked facility by Zdata Technologies.",
+      "why_biased": "Mentions the foreign/ethnic link of the company in a context where the protest is about resources (water/noise), potentially triggering xenophobic or anti-Chinese sentiment common in local resource disputes.",
+      "fix": "Remove 'Chinese-linked' unless the investment's origin is central to the legal or regulatory failure described."
+    }
+  ],
+  "religious_flags": [],
+  "geographic_flags": [
+    {
+      "quote": "Malaysia is betting its economic future on data centers. Johor residents are asking who will be left with water.",
+      "why_biased": "Treats a specific Johor-based protest as a proxy for the entire nation's sentiment, ignoring other data center hubs like Selangor or Kedah.",
+      "fix": "Acknowledge that while Johor is the epicenter of the protest, the impact varies across states with different water/power reserves."
+    }
+  ],
+  "economic_flags": [
+    {
+      "quote": "meaning the moratorium's practical impact may be limited to smaller operators and local developers.",
+      "why_biased": "Frames the policy as potentially favoring 'hyperscalers' (multinationals) over local SMEs/developers, which leans into a populist 'big tech vs local' narrative.",
+      "fix": "Provide data on why AI data centers are predominantly multinational-owned to ground the observation in economics rather than narrative bias."
+    }
+  ],
+  "gender_flags": [
+    {
+      "quote": "Entire analysis",
+      "why_biased": "Zero female representation. No female experts, residents, or officials are cited, despite women being heavily involved in community activism and environmental oversight in Malaysia.",
+      "fix": "Include quotes or data from female environmental experts or local community leaders."
+    }
+  ],
+  "omission_flags": [
+    "East Malaysia is entirely absent; the analysis equates 'Peninsular grid' with 'Malaysia's grid.'",
+    "Women's voices are non-existent.",
+    "The perspective of the 'smaller operators' who are being restricted is missing, focusing only on 'hyperscalers' and 'protesters'."
+  ],
+  "evasion_flags": [
+    "The analysis dodges whether the 'AI' label is actually being used as a loophole by the government to keep big-tech money flowing despite the grid crisis."
+  ],
+  "shoe_test_failures": [
+    "If the 'Chinese-linked facility' was a 'GLC-linked facility,' would the analysis still highlight the ownership as a point of contention in the first paragraph? Likely not, suggesting the 'Chinese' tag is used to heighten the sense of 'resource theft' by outsiders."
+  ],
+  "overall_assessment": "The analysis is geographically myopic and gender-blind. It weaponizes a small local protest to dismantle federal policy logic, leaning into a 'competent local vs. incompetent federal' framing. While the technical critique of the 'AI exemption' is sharp and likely accurate, the unnecessary inclusion of the company's Chinese links and the total erasure of East Malaysia and women reveals a narrow, West-coast Peninsular perspective that favors community activism over balanced policy review."
+}

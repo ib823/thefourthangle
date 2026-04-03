@@ -1,0 +1,104 @@
+{
+  "factual_accuracy_score": 78,
+  "source_diversity_estimate": 0.65,
+  "claims": [
+    {
+      "claim": "In February 2026, Bloomberg published an exposé alleging MACC Chief Commissioner Azam Baki worked with businessmen to seize control of companies.",
+      "status": "VERIFIED",
+      "m_true": 0.95,
+      "m_false": 0.0,
+      "m_unknown": 0.05,
+      "source": "Bloomberg Investigative Reports (Feb 10 & 12, 2026)",
+      "correction": null
+    },
+    {
+      "claim": "Azam Baki responded by suing Bloomberg for $25 million.",
+      "status": "VERIFIED",
+      "m_true": 0.9,
+      "m_false": 0.0,
+      "m_unknown": 0.1,
+      "source": "Kuala Lumpur High Court Filings; Bernama (Feb 2026)",
+      "correction": "The defamation lawsuit was for RM100 million, which is approximately $25.7 million USD."
+    },
+    {
+      "claim": "The PM deferred the RCI decision to an AG-led committee.",
+      "status": "VERIFIED",
+      "m_true": 0.95,
+      "m_false": 0.0,
+      "m_unknown": 0.05,
+      "source": "Cabinet Statement (Feb 13, 2026); PMO Announcement (Feb 27, 2026)",
+      "correction": null
+    },
+    {
+      "claim": "Malaysia's Transparency International Corruption Perceptions Index ranking has slid to 47th globally.",
+      "status": "INCORRECT",
+      "m_true": 0.0,
+      "m_false": 0.95,
+      "m_unknown": 0.05,
+      "source": "Transparency International CPI 2025 (Released Feb 10, 2026)",
+      "correction": "Malaysia actually improved its rank to 54th globally in the 2025 CPI (up from 57th in 2024). The figure 47 refers to Malaysia's 2022 CPI score, not its 2025 ranking."
+    },
+    {
+      "claim": "Its governance score dropping 8 points in recent assessments.",
+      "status": "INCORRECT",
+      "m_true": 0.0,
+      "m_false": 0.95,
+      "m_unknown": 0.05,
+      "source": "Transparency International CPI 2025; Edelman Trust Barometer 2026",
+      "correction": "Malaysia's CPI score improved by 2 points (from 50 to 52) in the 2025 assessment. The 8-point drop mentioned likely refers to Austria's 2025 CPI performance or historical Edelman trust data from 2023."
+    },
+    {
+      "claim": "The estimated annual cost of corruption is RM47 billion — roughly 3% of GDP.",
+      "status": "MISLEADING",
+      "m_true": 0.3,
+      "m_false": 0.4,
+      "m_unknown": 0.3,
+      "source": "MACC Annual Report 2024; Dr. Wan Azizah Statement (2018)",
+      "correction": "RM47 billion is an outdated figure from 2017. Current MACC estimates (2024) place the annual loss at RM55 billion. The 3% of GDP figure is actually the government's medium-term fiscal deficit target under the FRA 2023."
+    },
+    {
+      "claim": "Military procurement corruption (RM58 million seized in raids).",
+      "status": "VERIFIED",
+      "m_true": 0.98,
+      "m_false": 0.0,
+      "m_unknown": 0.02,
+      "source": "MACC 'Op Parasit' Investigation Report (Jan 2026)",
+      "correction": null
+    },
+    {
+      "claim": "The Star ran an editorial on March 11 saying it was 'about time' for an RCI.",
+      "status": "VERIFIED",
+      "m_true": 0.95,
+      "m_false": 0.0,
+      "m_unknown": 0.05,
+      "source": "The Star Editorial (March 11, 2026)",
+      "correction": null
+    },
+    {
+      "claim": "On February 24, 2026, an unnamed senior minister publicly called for a Royal Commission of Inquiry.",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.0,
+      "m_unknown": 0.15,
+      "source": "Bloomberg (Feb 24, 2026); Malaysiakini (Feb 25, 2026)",
+      "correction": null
+    },
+    {
+      "claim": "Communications Minister Fahmi Fadzil confirmed the investigation was 'still ongoing' on April 1, 2026.",
+      "status": "VERIFIED",
+      "m_true": 0.98,
+      "m_false": 0.0,
+      "m_unknown": 0.02,
+      "source": "Ministerial Press Conference (April 1, 2026)",
+      "correction": null
+    }
+  ],
+  "omitted_facts": [
+    "The Army Chief, General Tan Sri Muhammad Hafizuddeain Jantan, was remanded in January 2026 as part of the military procurement investigation ('Op Parasit').",
+    "Bloomberg's report specifically identified MACC's 'Section D' as the unit used for corporate intimidation.",
+    "The 2025 CPI score of 52 was actually a historical high for Malaysia since the 2018 reforms, contradicting the 'sliding' narrative.",
+    "The King (Sultan Ibrahim) personally intervened in the procurement crisis, ordering a freeze on 'nonsensical' equipment purchases."
+  ],
+  "source_assessment": "The analysis relies almost exclusively on Bloomberg for the central exposé and political fallout, which creates a narrow focus. While it correctly cites the MACC Act and the Constitution, it fails to incorporate the more recent and accurate MACC figure of RM55 billion for corruption costs, instead repeating an 8-year-old estimate. The lack of primary data from Transparency International led to significant errors regarding Malaysia's CPI ranking and score performance.",
+  "overall_assessment": "The analysis is reliable regarding the political and legal timeline of the Azam Baki crisis and the military procurement raids. However, it is factually unreliable in its statistical claims, specifically regarding the CPI ranking (54th, not 47th) and governance trends, where it incorrectly reports a decline instead of a documented improvement. The reliance on internal 'Issue' references seems to have introduced outdated or misapplied economic data."
+}

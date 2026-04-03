@@ -1,0 +1,141 @@
+{
+  "factual_accuracy_score": 72,
+  "source_diversity_estimate": 0.50,
+  "claims": [
+    {
+      "claim": "MCMC opened investigations into 17 individuals and flagged 96 social media posts as misleading",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.02,
+      "m_unknown": 0.13,
+      "source": "MCMC official statements, FMT (Apr 1-3, 2026), multiple domestic outlets",
+      "correction": "The 17 and 96 figures come directly from MCMC official communications and are widely reported. Verified."
+    },
+    {
+      "claim": "PM Anwar called fuel price criticism 'betrayal of the nation'",
+      "status": "VERIFIED",
+      "m_true": 0.90,
+      "m_false": 0.02,
+      "m_unknown": 0.08,
+      "source": "The Star (Apr 1, 2026), Bloomberg (Apr 2, 2026), SCMP (Apr 2, 2026)",
+      "correction": "Verified across multiple outlets. The Malay term 'pengkhianatan' was used, which translates to 'betrayal' or 'treachery.' The translation is accurate."
+    },
+    {
+      "claim": "Five users were tracked for creating fabricated TV3-branded graphics showing fake fuel price hikes",
+      "status": "VERIFIED",
+      "m_true": 0.75,
+      "m_false": 0.05,
+      "m_unknown": 0.20,
+      "source": "FMT reporting, MCMC statements",
+      "correction": "The five-user figure for fake TV3 graphics specifically is reported but less extensively corroborated than the 17-total figure. Likely accurate but based on fewer independent confirmations."
+    },
+    {
+      "claim": "Section 233 of the CMA carries up to 1 year in jail and RM50,000 fine",
+      "status": "VERIFIED",
+      "m_true": 0.90,
+      "m_false": 0.02,
+      "m_unknown": 0.08,
+      "source": "Communications and Multimedia Act 1998, Section 233 text",
+      "correction": "Verified from the statute. Section 233(3) provides for a fine not exceeding RM50,000 or imprisonment for a term not exceeding one year, or both."
+    },
+    {
+      "claim": "The UN Special Rapporteur on Freedom of Expression flagged Section 233 in 2019",
+      "status": "VERIFIED",
+      "m_true": 0.80,
+      "m_false": 0.03,
+      "m_unknown": 0.17,
+      "source": "UN Special Rapporteur on Freedom of Opinion and Expression, country visit report on Malaysia",
+      "correction": "The UN Special Rapporteur did address Malaysia's digital speech laws. The exact year and specific citation to Section 233 should be verified against the official report rather than secondary reporting. The rapporteur's name and report reference should be cited for credibility."
+    },
+    {
+      "claim": "Anwar Ibrahim spent 11 years in prison",
+      "status": "MISLEADING",
+      "m_true": 0.40,
+      "m_false": 0.30,
+      "m_unknown": 0.30,
+      "source": "Multiple biographical sources on Anwar Ibrahim",
+      "correction": "Anwar served approximately 6 years from 1999-2004 on the first conviction, and approximately 3 years from 2015-2018 on the second. The total is closer to 9 years, not 11. The discrepancy may arise from counting time from arrest to release rather than actual imprisonment. The analysis should use a verified figure rather than a round number."
+    },
+    {
+      "claim": "His 2022 election platform explicitly promised to repeal Section 233",
+      "status": "UNVERIFIED",
+      "m_true": 0.45,
+      "m_false": 0.15,
+      "m_unknown": 0.40,
+      "source": "PH 2022 manifesto",
+      "correction": "PH's 2022 manifesto included commitments to media freedom and reform of repressive laws. Whether it 'explicitly promised to repeal Section 233' specifically — as opposed to broader commitments to review the CMA — requires verification against the actual manifesto text. The word 'explicitly' is doing heavy lifting here and may overstate the specificity of the promise."
+    },
+    {
+      "claim": "Brent crude surged to $126/barrel after Iran's Strait of Hormuz disruption",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.03,
+      "m_unknown": 0.12,
+      "source": "Bloomberg commodity data, multiple financial outlets",
+      "correction": "Verified. The Strait of Hormuz disruption and resulting oil price surge are widely reported. The exact $126 figure should be verified against the specific date referenced — oil prices fluctuate daily and the analysis should specify whether this is a peak, close, or average."
+    },
+    {
+      "claim": "The Finance Ministry confirmed the monthly subsidy burden exploded to RM4B",
+      "status": "VERIFIED",
+      "m_true": 0.80,
+      "m_false": 0.05,
+      "m_unknown": 0.15,
+      "source": "Finance Ministry statements, reported by multiple outlets",
+      "correction": "The RM4B monthly figure is reported. However, the analysis should specify whether this is the total fuel subsidy bill or specifically RON95. Malaysia also subsidises diesel, LPG, and cooking oil. If RM4B is the total subsidy bill, the RON95-specific burden would be lower."
+    },
+    {
+      "claim": "RON95 quota dropped from 300 to 200 litres",
+      "status": "VERIFIED",
+      "m_true": 0.80,
+      "m_false": 0.03,
+      "m_unknown": 0.17,
+      "source": "Published issue 1952, FMT, multiple domestic outlets",
+      "correction": "The quota cut is widely reported. The analysis cross-references its own publication (issue 1952) which is circular. Independent primary sources (government gazette, KPDNHEP official announcement) would be stronger."
+    },
+    {
+      "claim": "PM Anwar himself said the RM1.99/litre subsidised price can last 'two months max'",
+      "status": "UNVERIFIED",
+      "m_true": 0.55,
+      "m_false": 0.10,
+      "m_unknown": 0.35,
+      "source": "Attributed to PM Anwar but no specific source cited in the analysis",
+      "correction": "This is a critical claim because the entire reframe depends on it — the government is investigating people for saying what the PM himself said. The analysis MUST provide a specific source: date, venue, exact quote, and reporting outlet. If the PM said this, it needs a primary citation. If he said something softer that was interpreted this way, that distinction matters enormously."
+    },
+    {
+      "claim": "Civil servants were told to work from home starting April 15 to conserve energy",
+      "status": "VERIFIED",
+      "m_true": 0.75,
+      "m_false": 0.05,
+      "m_unknown": 0.20,
+      "source": "FMT reporting on WFH directive",
+      "correction": "Reported by FMT. The connection between WFH and energy conservation should be verified — was the stated rationale energy conservation, or were other reasons given? Government WFH directives can have multiple justifications."
+    },
+    {
+      "claim": "Mahathir's government used the same 'national security' framing to justify the 1987 Ops Lalang mass arrests",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.03,
+      "m_unknown": 0.12,
+      "source": "Multiple historical sources on Ops Lalang (Oct 27, 1987)",
+      "correction": "Ops Lalang is a well-documented historical event. However, the parallel is editorial rather than factual — the analysis presents it as a factual equivalence when it is an interpretive comparison. The severity differs enormously: Ops Lalang involved 106 arrests under ISA. The current crackdown involves MCMC investigations under the CMA."
+    },
+    {
+      "claim": "The Online Safety Act 2026 consolidated 8 existing laws without narrowing Section 233's scope",
+      "status": "UNVERIFIED",
+      "m_true": 0.50,
+      "m_false": 0.10,
+      "m_unknown": 0.40,
+      "source": "Referenced to published issue 1950",
+      "correction": "This is another circular self-reference. The claim that the OSA 2026 'consolidated 8 existing laws' and did not narrow Section 233 should be verified against the actual legislation text and parliamentary record, not another issue in the same publication."
+    }
+  ],
+  "omitted_facts": [
+    "The specific content of the fake TV3 graphics — what prices they showed, how far from realistic they were, and how widely they spread before being flagged. This matters because the severity of the disinformation directly affects whether the MCMC response was proportionate. Source: MCMC press statements, social media archives.",
+    "MCMC's full enforcement record under the current government — how many Section 233 investigations were opened in 2023, 2024, and 2025 for comparison. Without baseline data, '17 in 3 days' cannot be evaluated as normal or abnormal. Source: MCMC annual reports.",
+    "The legal distinction between MCMC investigation (opening a file) and prosecution (filing charges). Of Malaysia's historical Section 233 investigations, what percentage result in charges? What percentage result in conviction? An investigation is not a conviction and the analysis conflates the two. Source: AGC prosecution statistics, legal commentary.",
+    "Whether any of the 17 investigated individuals have been charged, released, or had investigations dropped. The analysis treats all 17 as ongoing without follow-up. Source: FMT, Malaysiakini follow-up reporting.",
+    "Specific civil society responses — Lawyers for Liberty, Centre for Independent Journalism (CIJ), ARTICLE 19, Bersih — have all likely issued statements on this crackdown. These are absent. Source: respective organisations' press releases."
+  ],
+  "source_assessment": "The analysis cites Bloomberg, SCMP, FMT, The Star, and other mainstream English-language outlets, plus statutory references. However, it relies heavily on self-referencing (published issues 0142, 1940, 1950, 1952) which is circular. Malay-language sources (Utusan, Berita Harian, Sinar Harian) are absent — these would capture the BM-language discourse about fuel prices, which is where most of the investigated social media posts were likely written. Government primary documents (MCMC enforcement guidelines, Finance Ministry subsidy breakdown) are not directly cited. Opposition political voices are absent as sources. The source range is moderate for English-language coverage but weak on Malay-language discourse, government primary documents, legal expert opinion, and civil society statements.",
+  "overall_assessment": "The analysis is factually solid on the headline claims — MCMC figures, Section 233 text, oil price data — but has verification gaps on several critical supporting claims. The '11 years in prison' figure for Anwar appears overstated by 2 years. The claim that Anwar's manifesto 'explicitly promised to repeal Section 233' may overstate the specificity of the commitment. The 'two months max' quote attributed to the PM is the linchpin of the reframe and has no cited source — this is a major gap. The Philippines electricity comparison in the data center issue was wrong; similarly here, the precise Anwar prison duration matters for credibility. The self-referencing of internal publications as factual sources is a pattern across both analyses and should be eliminated — every claim needs an independent primary source."
+}

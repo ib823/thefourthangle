@@ -1,0 +1,80 @@
+{
+  "bias_score": 68,
+  "political_lean_estimate": -0.3,
+  "ethnic_framing_estimate": 0.4,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": -0.2,
+  "geographic_bias_estimate": 0.3,
+  "economic_framing_estimate": 0.4,
+  "gender_agency_estimate": 0.8,
+  "partisan_flags": [
+    {
+      "quote": "The moratorium is a course correction",
+      "why_biased": "Frames the government's moratorium as a positive step ('course correction') rather than neutral language like 'policy response.' This implicitly credits the government with responsible governance before any evidence is presented.",
+      "fix": "Replace with 'The moratorium is a policy response' or 'The government announced a moratorium.'"
+    },
+    {
+      "quote": "The moratorium protects Malaysia's political narrative (we are an AI hub) while offering limited relief",
+      "why_biased": "This is a strong editorial claim presented as analytical fact. While arguably well-supported, the 'protects political narrative' framing assigns cynical motives to federal policy without attributing this interpretation to any source.",
+      "fix": "Attribute: 'Critics argue the moratorium protects the AI-hub narrative while offering limited relief' or cite a source making this claim."
+    }
+  ],
+  "racial_flags": [
+    {
+      "quote": "a Chinese-linked facility by Zdata Technologies",
+      "why_biased": "The 'Chinese-linked' descriptor is loaded. Zdata is a company — its national origin is relevant to FDI analysis but the phrase 'Chinese-linked' carries racial overtones in Malaysia's political context. The analysis does not describe Microsoft or Google as 'American-linked.' Asymmetric ethnic labelling of foreign investors is a bias marker.",
+      "fix": "Use 'China-based Zdata Technologies' or simply 'Zdata Technologies' unless the China connection is analytically necessary, in which case apply the same country-of-origin labelling to all investors mentioned (Microsoft/US, Google/US, ByteDance/China, GDS/China)."
+    }
+  ],
+  "religious_flags": [],
+  "geographic_flags": [
+    {
+      "quote": "Peninsular Malaysia's total installed generation capacity is approximately 27,500MW",
+      "why_biased": "The entire analysis is framed through Peninsular Malaysia's grid. Sabah and Sarawak have their own grids, their own data center proposals, and their own water constraints. The analysis treats 'Malaysia' and 'Peninsular Malaysia' as interchangeable. East Malaysian data center developments (e.g., Sarawak's push to attract hyperscalers with cheap hydropower) are completely absent.",
+      "fix": "Acknowledge that the 11,000MW/27,500MW comparison is Peninsular-only. Add a sentence on Sarawak's separate grid and its own data center strategy, which offers a direct contrast to Johor's resource constraints."
+    },
+    {
+      "quote": "published water and power budgets per state",
+      "why_biased": "The recommendation for state-level resource budgets is good policy, but by never mentioning Sarawak or Sabah's distinct constitutional authority over resources, it implicitly assumes a Peninsular governance model where federal coordination is straightforward. In East Malaysia, state resource sovereignty is constitutionally entrenched.",
+      "fix": "Note that any federal coordination body must account for Sabah and Sarawak's constitutional rights over their own resources under MA63."
+    }
+  ],
+  "economic_flags": [
+    {
+      "quote": "hyperscalers including Microsoft, Google, ByteDance, and GDS Holdings",
+      "why_biased": "The analysis discusses billion-ringgit investments but never mentions who benefits economically at the local level — construction workers, land sellers, equipment suppliers, service providers. The economic framing is entirely top-down (corporate investment, grid capacity) with no bottom-up perspective on local economic impact.",
+      "fix": "Include data on local job creation estimates, land value changes in Gelang Patah, or how data center construction contracts are distributed between local and foreign firms."
+    },
+    {
+      "quote": "a Sunway Construction Group employee is under MACC investigation over an alleged RM180 million Johor data center contract",
+      "why_biased": "Introducing the MACC investigation creates an implicit corruption frame for the entire industry based on one case. This is the equivalent of citing one highway corruption case to frame all road construction as corrupt. The analysis does not balance this with successful, clean procurement examples.",
+      "fix": "Either expand the corruption analysis with more cases to establish a pattern, or frame the single case more carefully: 'At least one procurement integrity concern has emerged' rather than implying systemic corruption."
+    }
+  ],
+  "gender_flags": [
+    {
+      "quote": "more than 50 residents of Gelang Patah",
+      "why_biased": "The Gelang Patah protesters are rendered genderless. Were women leading or participating in the protest? Community environmental protests in Malaysia are frequently led by women. The entire analysis has zero female voices, zero gender-differentiated impact analysis, and zero mention of women as economic actors in the data center supply chain.",
+      "fix": "If available, note women's participation in the Gelang Patah protest. Include at least one female expert voice (academics, environmental activists, state assemblywoman). Consider gendered economic impact: data center construction jobs skew heavily male."
+    }
+  ],
+  "omission_flags": [
+    "Orang Asli land rights: Data center developments in Johor have displaced indigenous communities. No mention whatsoever.",
+    "Sarawak's competing data center strategy using cheap hydropower is entirely absent — this is a major analytical gap since it provides both comparison and competition to Johor's approach.",
+    "Labour dimensions: Who builds these data centers? Foreign construction workers? What are their conditions? The analysis treats data centers as abstractions, not physical construction projects with human labour.",
+    "No mention of renewable energy commitments by hyperscalers — Microsoft, Google, and others have their own carbon-neutral pledges that interact with Malaysia's energy mix.",
+    "No community voice beyond the protest — what do Gelang Patah residents who support the data centers say? Landowners who sold at premium prices? Workers who got jobs?",
+    "No mention of Singapore's own data center moratorium (2019-2022) and what Malaysia could learn from that experience."
+  ],
+  "evasion_flags": [
+    "The analysis identifies the AI exemption as illogical but stops short of saying who benefits from this loophole and why it exists. The political economy of the exemption — which companies lobbied for it, which politicians championed it — is completely dodged.",
+    "The 'transparent resource allocation framework' recommendation in the conclusion is generic to the point of evasion. Every policy analyst recommends 'transparency' and 'coordination.' What specific institutional mechanism? Who pays for it? Who has veto power?",
+    "The analysis never names which political actors approved the data center applications that created the 11,000MW pipeline. Were these state-level approvals? Federal? MIDA? The governance failure is described as systemic but never attributed to specific decision-makers."
+  ],
+  "shoe_test_failures": [
+    "If the Gelang Patah facility were Microsoft (American) instead of Zdata (Chinese), would it be described as 'American-linked'? The ethnic labelling is asymmetric.",
+    "If this were a PH-governed state approving data centers recklessly, the analysis would likely frame it as 'governance failure.' Because it involves federal policy under PH, the moratorium gets framed as a 'course correction.' Swap the political actors and the framing breaks.",
+    "If Sarawak residents protested a data center, would the analysis still ignore East Malaysia? The Peninsular-centrism is structural, not accidental."
+  ],
+  "overall_assessment": "The analysis is substantively strong on the grid-capacity and water-depletion facts, and the reframe about the AI exemption is genuinely sharp. However, it has significant blind spots: East Malaysia is invisible, women are invisible, local economic beneficiaries are invisible, and the political economy of the AI exemption is dodged. The 'Chinese-linked' descriptor is a real bias marker in the Malaysian context. The conclusion's policy recommendations are so generic they amount to throat-clearing. The analysis is better than most mainstream coverage but falls short of its own stated ambition to surface what others miss — it misses the community-level economic split between those who benefit from data centers and those who bear the environmental cost, which is the actual ground-level tension."
+}

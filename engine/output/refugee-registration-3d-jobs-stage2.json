@@ -1,0 +1,75 @@
+{
+  "bias_score": 30,
+  "political_lean_estimate": -0.3,
+  "ethnic_framing_estimate": 0.3,
+  "religious_sensitivity_estimate": -0.2,
+  "narrative_framing_estimate": -0.2,
+  "geographic_bias_estimate": 0.4,
+  "economic_framing_estimate": -0.3,
+  "gender_agency_estimate": 0.5,
+  "partisan_flags": [
+    {
+      "quote": "The government hailed it as a humanitarian milestone. Then came the fine print.",
+      "why_biased": "The 'Then came the fine print' construction is a classic journalistic gotcha that frames the government as either deceptive or performative. It implies the 3D restriction was hidden or sneaked in, when in fact the work-permit scope was announced alongside the DPP. This framing positions the government as the antagonist before the analysis even begins.",
+      "fix": "Replace with neutral framing: 'The government announced the DPP alongside work permits restricted to 3D sectors — dirty, dangerous, difficult — in manufacturing, mining, and construction.'"
+    },
+    {
+      "quote": "registration without legal reform creates a controlled underclass with documents",
+      "why_biased": "The phrase 'controlled underclass' implies deliberate state malice — that the government designed the system to create a subjugated class. This is an opposition/NGO framing that assumes worst-case intent rather than acknowledging that incremental policy (registration first, expanded rights later) is a common approach in countries that have not signed the 1951 Convention.",
+      "fix": "Acknowledge the incremental interpretation: 'Critics argue registration without legal reform risks creating a documented but legally unprotected class. Defenders argue registration is a necessary first step that creates the administrative infrastructure for future rights expansion.'"
+    }
+  ],
+  "racial_flags": [
+    {
+      "quote": "Rohingya women, who make up a significant portion of the 124,123 Rohingya refugees, face compounded discrimination: gender, ethnicity, and now a policy design that treats their labour as invisible.",
+      "why_biased": "The analysis singles out Rohingya women for compounded discrimination without noting that similar patterns affect other refugee communities — Afghan women, Somali women, Myanmar ethnic minorities beyond Rohingya. By naming only Rohingya, the analysis implicitly centres one ethnic group's experience as representative of all refugees, which collapses the diversity of Malaysia's refugee population.",
+      "fix": "Broaden to include other refugee communities facing similar compounded barriers, or explicitly state why Rohingya women are highlighted (largest single group) while acknowledging others."
+    }
+  ],
+  "religious_flags": [
+    {
+      "quote": "Malaysia has 211,260 UNHCR-registered refugees. It is not a signatory to the 1951 Refugee Convention.",
+      "why_biased": "The analysis never examines why Malaysia has not signed the Convention. One significant factor is the perception among Malay-Muslim communities that unlimited refugee intake (particularly non-Muslim refugees) could shift demographic and religious balances. This religious dimension of anti-refugee sentiment is completely absent, making the non-signatory status sound like a bureaucratic oversight rather than a politically and religiously charged decision.",
+      "fix": "Acknowledge the religious and demographic anxieties that inform Malaysia's refugee policy without endorsing them. Note that anti-refugee sentiment in Malaysia is partly driven by concerns about religious and ethnic composition changes."
+    }
+  ],
+  "geographic_flags": [
+    {
+      "quote": "The entire analysis",
+      "why_biased": "The analysis is entirely Peninsular-focused. Sabah hosts the largest population of undocumented migrants and refugees in Malaysia — estimated at 800,000-1 million, many of them Filipino and Indonesian. Sabah's experience with irregular migration, the IMM13 document system, Project IC (Mahathir-era citizenship-for-votes scandal), and the ongoing security concerns from the Sulu claim are completely absent. The DPP's impact on Sabah is potentially the most significant and the most contentious.",
+      "fix": "Add a substantive discussion of Sabah's unique migration context, including: the IMM13 system, the scale of undocumented populations, the security dimension, and whether the DPP applies differently in East Malaysia."
+    }
+  ],
+  "economic_flags": [
+    {
+      "quote": "Legal refugee employment could add RM3 billion to GDP annually",
+      "why_biased": "The RM3B GDP figure from the Center for Global Development is presented as the economic upside of refugee employment, but the analysis does not give equal weight to the economic concerns of Malaysian workers: wage depression in 3D sectors, competition for B40 jobs, strain on public services. The framing positions refugee employment as pure economic gain without acknowledging the distributional costs that Malaysian B40 workers bear.",
+      "fix": "Present the economic case with both sides: the aggregate GDP gain AND the distributional impact on existing B40 workers who compete for 3D sector jobs."
+    }
+  ],
+  "gender_flags": [
+    {
+      "quote": "Refugee women — who face the highest exploitation — are excluded by design: domestic work is not a '3D' category.",
+      "why_biased": "The analysis frames refugee women's exclusion from work permits as a gender justice issue but does not engage with the perspective of Malaysian women who currently work in domestic and caregiving roles. How would formalising refugee competition in these sectors affect Malaysian women workers? The gender analysis is one-sided — it advocates for refugee women's inclusion without considering the impact on Malaysian women.",
+      "fix": "Add the perspective of Malaysian women in domestic and caregiving work. Would refugee work permits in these sectors depress wages for Malaysian women? Is there a labour shortage that refugees could fill? Both sides of the gendered labour market deserve attention."
+    }
+  ],
+  "omission_flags": [
+    "Sabah's migration crisis is entirely absent. Sabah hosts the largest undocumented population in Malaysia and has a completely different migration dynamic than Peninsular Malaysia. The DPP's application in Sabah is the biggest untold story in this analysis.",
+    "Malaysian workers' perspective on refugee employment is missing. B40 Malaysians who work in 3D sectors — or who compete for the same jobs — have legitimate concerns about wage depression and job competition that the analysis dismisses by focusing only on the RM3B GDP upside.",
+    "The religious dimension of anti-refugee sentiment is absent. A significant portion of Malaysian resistance to refugee rights comes from anxieties about demographic and religious composition, particularly regarding non-Muslim refugees. This is uncomfortable but essential context.",
+    "Security concerns are missing. The Lahad Datu incursion (2013), cross-border crime, and the Sulu claim are directly connected to Malaysia's migration and refugee policy in Sabah. The analysis treats refugee policy as purely a humanitarian and economic issue.",
+    "The employer perspective is absent. Malaysian employers in 3D sectors — plantation owners, construction firms, manufacturers — have a direct interest in the DPP as a source of cheap, documented labour. Their role in shaping the policy is not examined.",
+    "Cost of public services for registered refugees — healthcare, education, policing — is not discussed. Registration creates visibility but also creates demand on public resources that the analysis does not account for."
+  ],
+  "evasion_flags": [
+    "The analysis says 'registration under the current Immigration Act means refugees now have a document that makes them visible to the state without making the state accountable to them' — but it avoids the harder question: is Malaysia morally obligated to sign the 1951 Convention? If yes, say so. If the answer is complicated, explain why. Posing the structural problem without taking a position is evasion.",
+    "The mature view says the DPP 'must be a floor, not a ceiling' but does not specify what the ceiling looks like. Full work permits across all sectors? Convention signatory status? Citizenship pathways? The prescription is vague because specificity would be controversial.",
+    "The analysis compares Malaysia to Thailand and Bangladesh but avoids comparing it to Indonesia, which has a much larger refugee population and a similarly non-signatory status but has adopted more progressive policies in some areas. This omission avoids a comparison that might show Malaysia is behind its closest peer."
+  ],
+  "shoe_test_failures": [
+    "If the analysis were about the UAE or Saudi Arabia registering migrant workers with 3D restrictions, would it use the same sympathetic framing? Gulf states do exactly this — register workers, restrict them to specific sectors, deny them legal protections — and are rightly criticised. The analysis should apply the same standard to Malaysia.",
+    "If the refugees in question were predominantly non-Muslim (e.g., Myanmar Christians, Sri Lankan Tamils) rather than Rohingya Muslims, would the analysis frame the government's response differently? The religious affinity between Rohingya Muslims and the Malay-Muslim majority complicates the narrative in ways the analysis does not explore."
+  ],
+  "overall_assessment": "The analysis is well-structured and identifies a genuine policy gap — registration without legal reform. But it suffers from three significant biases: first, it frames the government as antagonist from the outset ('Then came the fine print,' 'controlled underclass') rather than engaging with the incremental-progress interpretation. Second, it is completely blind to Sabah, which is the epicentre of Malaysia's migration challenge. Third, it presents the economic case one-sidedly (RM3B GDP gain) without accounting for distributional costs to B40 Malaysian workers or public service strain. The gender analysis of refugee women is valuable but incomplete — it does not consider the impact on Malaysian women workers. The religious dimension of anti-refugee sentiment, which drives much of the political resistance to expanded rights, is avoided entirely."
+}
