@@ -68,13 +68,23 @@
       <button type="button" onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
     </form>
   {:else}
-    <div class="brand">
+    <a
+      class="brand"
+      href="/"
+      aria-label="The Fourth Angle — go to Today"
+      aria-current={homeActive ? 'page' : undefined}
+      onclick={(event) => {
+        if (!onHome) return;
+        event.preventDefault();
+        onHome();
+      }}
+    >
       <Logo size={72} />
       <div class="brand-text-block">
         <span class="brand-name">The Fourth Angle</span>
         <span class="brand-tagline">Read past the first telling.</span>
       </div>
-    </div>
+    </a>
     <div style="display:flex;align-items:center;gap:0;">
       {#if onSearchToggle}
         <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:8px;transition:background 0.15s ease;" aria-label="Search">
@@ -116,6 +126,8 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
+    border-radius: 12px;
   }
 
   .brand-text-block {

@@ -191,7 +191,7 @@
   });
   let highlightCount = $derived(countHighlights(appReactionMap));
   let readingCount = $derived(readingIssueIds.size);
-  let libraryCount = $derived(readingCount + highlightCount);
+  let libraryCount = $derived.by(() => new Set([...readingIssueIds, ...highlightedIssueIds]).size);
   let scopedIssues = $derived.by(() => {
     if (surfaceMode === 'library') {
       if (libraryMode === 'highlights') return issues.filter(i => highlightedIssueIds.has(i.id));
@@ -271,14 +271,9 @@
 
   // #63: Highest-impact unread issue for empty state hero card
   let topUnreadIssue = $derived.by(() => {
-    const unread = sortedIssues.filter(i => !readMap[i.id]);
+    const unread = issues.filter(i => !readMap[i.id]);
     if (unread.length === 0) return null;
     return unread.reduce((winner, issue) => {
-      if (feedSort === 'shift') {
-        if (issue.opinionShift !== winner.opinionShift) {
-          return issue.opinionShift > winner.opinionShift ? issue : winner;
-        }
-      }
       const issueDate = issue.sourceDate ?? '';
       const winnerDate = winner.sourceDate ?? '';
       if (issueDate !== winnerDate) return issueDate > winnerDate ? issue : winner;
@@ -1026,8 +1021,14 @@
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">
             <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Choose the next issue from your library.</h1>
-            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">The left rail already holds your current reading memory. Pick an issue there to continue.</p>
+            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
+              {libraryMode === 'highlights' ? 'Choose an issue with saved angles.' : 'Choose the next issue from your library.'}
+            </h1>
+            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+              {libraryMode === 'highlights'
+                ? 'The left rail shows every issue with highlights. Open one to revisit the angles you kept.'
+                : 'The left rail already holds your current reading memory. Pick an issue there to continue.'}
+            </p>
           </div>
         </div>
       {:else}

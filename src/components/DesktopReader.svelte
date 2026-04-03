@@ -3,7 +3,7 @@
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
   import { CARD_TYPES, opinionLabel } from '../data/issues';
-  import { markStarted, markCompleted } from '../stores/reader';
+  import { getReadState, markCompleted, updateProgress } from '../stores/reader';
   import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
@@ -40,6 +40,7 @@
   let shareOpen = $state(false);
   let copied = $state(false);
   let activeStep = $state(0);
+  let persistedProgress = $state(0);
   let stepObserver: IntersectionObserver | null = null;
 
   const CARD_LABELS: Record<string, string> = {
@@ -163,7 +164,6 @@
         countUpCancel = countUp(0, issue.opinionShift, 600, (v) => { displayOS = v; });
       }, 100);
     }
-    markStarted(issue.id);
   });
 
   $effect(() => {
@@ -216,7 +216,14 @@
           }
         }
 
-        if (bestRatio > 0) activeStep = bestIndex;
+        if (bestRatio > 0) {
+          activeStep = bestIndex;
+          const nextProgress = bestIndex + 1;
+          if (bestIndex > 0 && nextProgress > persistedProgress) {
+            persistedProgress = nextProgress;
+            updateProgress(issue.id, nextProgress);
+          }
+        }
       }, { root: scrollEl, threshold: [0.25, 0.45, 0.7] });
 
       els.forEach((el) => stepObserver?.observe(el));
@@ -226,6 +233,7 @@
   $effect(() => {
     void issue.id;
     activeStep = 0;
+    persistedProgress = getReadState(issue.id)?.progress ?? 0;
     cardEls = [];
     setupStepObserver();
   });

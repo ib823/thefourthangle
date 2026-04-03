@@ -1,15 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.svelte';
 
 const title = 'Page not found — The Fourth Angle';
 const description = 'This page or issue could not be found. Return to Today to continue reading The Fourth Angle.';
 ---
 
 <Base {title} {description}>
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border-subtle);background:var(--bg);">
+    <a href="/" aria-label="The Fourth Angle — go to Today" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary);min-height:44px;">
+      <Logo size={60} />
+      <span style="font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);">The Fourth Angle</span>
+    </a>
+    <a href="/about" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);font-size:12px;font-weight:700;color:var(--text-secondary);text-decoration:none;">How This Works</a>
+  </header>
   <main
     style="
-      min-height:100vh;
-      min-height:100dvh;
+      min-height:calc(100vh - 77px);
+      min-height:calc(100dvh - 77px);
       display:flex;
       align-items:center;
       justify-content:center;

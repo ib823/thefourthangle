@@ -6,7 +6,7 @@
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
   import { CARD_TYPES } from '../data/issues';
-  import { markStarted, markCompleted, updateProgress, savePosition } from '../stores/reader';
+  import { markCompleted, updateProgress, savePosition } from '../stores/reader';
   import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
   import { haptic, stagger, tween, ease } from '../lib/animation';
@@ -853,7 +853,6 @@
   onMount(() => {
     focusOrigin = document.activeElement;
     overlayEl?.focus();
-    markStarted(issue.id);
     lockScroll();
 
     // Acquire wake lock
