@@ -95,8 +95,8 @@
 
   .section-count {
     font-family: var(--font-body, 'Nunito Sans', system-ui, sans-serif);
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--text-faint);
   }
 </style>
