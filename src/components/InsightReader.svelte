@@ -1331,6 +1331,7 @@
     border-radius: 20px;
     pointer-events: none;
     will-change: transform;
+    overflow-anchor: none;
   }
 
   .ghost-2 {
@@ -1360,6 +1361,7 @@
     flex-direction: column;
     user-select: none;
     will-change: transform;
+    overflow-anchor: none;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
   import MobileSectionDivider from './MobileSectionDivider.svelte';
   import { readIssues, savePosition, reactions, savedIssues } from '../stores/reader';
@@ -99,6 +99,9 @@
   let touchStartX = 0;
   let touchStartScrollTop = 0;
   let touchTracking = false;
+  let slotOffsets = new Map<number, number>();
+  let pendingScrollFrame = 0;
+  let pendingOffsetFrame = 0;
   let pullDistance = $state(0);
   let pullRefreshState = $state<'idle' | 'pulling' | 'ready' | 'refreshing'>('idle');
   const pullThreshold = 72;
@@ -148,14 +151,51 @@
     return from;
   }
 
+  function refreshSlotOffsets() {
+    if (!containerEl) return;
+
+    const nextOffsets = new Map<number, number>();
+    const slots = containerEl.querySelectorAll<HTMLElement>('.feed-card-slot');
+    slots.forEach((slot) => {
+      const idx = Number(slot.dataset.idx);
+      if (!Number.isNaN(idx)) {
+        nextOffsets.set(idx, slot.offsetTop);
+      }
+    });
+    slotOffsets = nextOffsets;
+  }
+
+  function queueSlotOffsetRefresh() {
+    if (pendingOffsetFrame) cancelAnimationFrame(pendingOffsetFrame);
+    pendingOffsetFrame = requestAnimationFrame(() => {
+      pendingOffsetFrame = 0;
+      refreshSlotOffsets();
+    });
+  }
+
   function scrollToDisplayIndex(index: number, behavior: ScrollBehavior = 'smooth') {
     if (!containerEl) return;
     const normalized = normalizeIssueDisplayIndex(index);
-    const el = containerEl.querySelector(`[data-idx="${normalized}"]`) as HTMLElement | null;
-    if (!el) return;
     current = normalized;
     lastSnappedIndex = normalized;
-    el.scrollIntoView({ behavior, block: 'start' });
+
+    if (pendingScrollFrame) cancelAnimationFrame(pendingScrollFrame);
+    pendingScrollFrame = requestAnimationFrame(() => {
+      pendingScrollFrame = 0;
+      if (!containerEl) return;
+
+      let top = slotOffsets.get(normalized);
+      if (top === undefined) {
+        refreshSlotOffsets();
+        top = slotOffsets.get(normalized);
+      }
+      if (top === undefined) return;
+
+      containerEl.scrollTo({
+        top,
+        behavior: behavior === ('instant' as ScrollBehavior) ? 'auto' : behavior
+      });
+    });
   }
 
   function scrollToAdjacentIssue(direction: 1 | -1) {
@@ -195,6 +235,7 @@
 
     const slots = containerEl.querySelectorAll('.feed-card-slot');
     slots.forEach(s => observer!.observe(s));
+    refreshSlotOffsets();
   }
 
   function handleOpenIssue(issue: IssueSummary) {
@@ -305,8 +346,9 @@
       const initialDisplayIndex = normalizeIssueDisplayIndex(getDisplayIndexForIssueIndex(initialFeedIndex));
       current = initialDisplayIndex;
       lastSnappedIndex = initialDisplayIndex;
-      const slot = containerEl.querySelector(`[data-idx="${initialDisplayIndex}"]`) as HTMLElement | null;
-      slot?.scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'start' });
+      refreshSlotOffsets();
+      const top = slotOffsets.get(initialDisplayIndex);
+      if (top !== undefined) containerEl.scrollTop = top;
     }
 
     // Set up IntersectionObserver after initial scroll
@@ -328,16 +370,24 @@
       }
     }
     window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('resize', queueSlotOffsetRefresh);
 
     return () => {
       window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('resize', queueSlotOffsetRefresh);
       observer?.disconnect();
     };
+  });
+
+  onDestroy(() => {
+    if (pendingScrollFrame) cancelAnimationFrame(pendingScrollFrame);
+    if (pendingOffsetFrame) cancelAnimationFrame(pendingOffsetFrame);
   });
 
   // Re-setup observer when display list changes
   $effect(() => {
     void displayList.length;
+    queueSlotOffsetRefresh();
     requestAnimationFrame(() => {
       current = normalizeIssueDisplayIndex(current);
       lastSnappedIndex = current;
@@ -410,6 +460,7 @@
     scroll-snap-type: y proximity;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: auto;
+    overflow-anchor: none;
     scroll-behavior: smooth;
     touch-action: pan-y;
     padding-bottom: env(safe-area-inset-bottom, 0);
@@ -464,6 +515,7 @@
     padding: 0 12px max(12px, env(safe-area-inset-bottom, 12px));
     display: flex;
     flex-direction: column;
+    overflow-anchor: none;
   }
 
   .feed-card-slot[data-divider='true'] {

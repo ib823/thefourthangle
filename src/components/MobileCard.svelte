@@ -203,6 +203,7 @@
     transition: background var(--duration-normal, 250ms) var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1)),
                 box-shadow var(--duration-normal, 250ms) var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1));
     touch-action: pan-y;
+    overflow-anchor: none;
     -webkit-tap-highlight-color: transparent;
   }
 
