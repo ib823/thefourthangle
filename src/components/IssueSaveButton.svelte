@@ -6,7 +6,7 @@
     label?: string;
     compact?: boolean;
   }
-  let { issueId, label = 'Save issue', compact = false }: Props = $props();
+  let { issueId, label = 'Add to Highlights', compact = false }: Props = $props();
 
   let savedRaw = $state('{}');
   $effect(() => {
@@ -32,13 +32,13 @@
   class:save-issue-btn--compact={compact}
   onclick={handleClick}
   aria-pressed={isSaved}
-  aria-label={isSaved ? 'Issue saved for later' : 'Save issue for later'}
+  aria-label={isSaved ? 'Issue in Highlights' : 'Add issue to Highlights'}
 >
   <svg class="bookmark-icon" width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M7 3h10a1 1 0 0 1 1 1v17l-6-3-6 3V4a1 1 0 0 1 1-1z"></path>
   </svg>
   {#if !compact}
-    <span>{isSaved ? 'Saved' : label}</span>
+    <span>{isSaved ? 'In Highlights' : label}</span>
   {/if}
 </button>
 
@@ -49,28 +49,36 @@
     justify-content: center;
     gap: 8px;
     min-height: 44px;
-    padding: 0 14px;
+    padding: 0 16px;
     border-radius: 999px;
     border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
-    color: var(--text-tertiary);
+    background: rgba(255, 255, 255, 0.64);
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
   }
 
   .save-issue-btn:hover {
-    background: var(--bg-sunken);
+    background: var(--bg);
     border-color: var(--border-divider);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
   }
 
   .save-issue-btn--saved {
-    background: rgba(210, 140, 40, 0.12);
-    border-color: rgba(210, 140, 40, 0.3);
-    color: var(--score-warning);
+    background: rgba(224, 49, 49, 0.06);
+    border-color: rgba(224, 49, 49, 0.18);
+    color: var(--score-critical);
   }
 
   .save-issue-btn--saved:hover {
-    background: rgba(210, 140, 40, 0.16);
+    background: rgba(224, 49, 49, 0.08);
   }
 
   .save-issue-btn--compact {
@@ -86,6 +94,23 @@
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .save-issue-btn {
+      background: rgba(34, 31, 27, 0.74);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .save-issue-btn:hover {
+      background: rgba(40, 36, 31, 0.94);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .save-issue-btn--saved {
+      background: rgba(224, 49, 49, 0.08);
+      border-color: rgba(224, 49, 49, 0.22);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

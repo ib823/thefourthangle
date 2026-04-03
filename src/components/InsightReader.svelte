@@ -1062,7 +1062,7 @@
                 <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
               {:else}
                 <div class="completion-btn-enter" style="display:flex;justify-content:center;">
-                  <IssueSaveButton issueId={issue.id} label="Save issue" />
+                  <IssueSaveButton issueId={issue.id} label="Add to Highlights" />
                 </div>
               {/if}
             {/if}

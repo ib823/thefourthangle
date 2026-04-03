@@ -399,34 +399,32 @@
         </div>
       {/if}
 
-      <!-- Share -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;margin-bottom:12px;">
+      <div class="reader-completion-actions">
         {#if onReturnHome}
-          <button onclick={onReturnHome} style="width:100%;padding:12px 16px;background:rgba(210,140,40,0.12);color:var(--score-warning);border:1px solid rgba(210,140,40,0.24);border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;">
+          <button onclick={onReturnHome} class="completion-primary-btn">
             Back to Today
           </button>
         {/if}
-        <div style="display:flex;">
-          <IssueSaveButton issueId={issue.id} label="Save for later" />
+        <div class="completion-secondary-wrap">
+          <IssueSaveButton issueId={issue.id} label="Add to Highlights" />
         </div>
       </div>
 
-      <button onclick={() => { shareOpen = true; }} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:var(--text-tertiary);border:1px solid var(--border-subtle);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
-        onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
-        onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
+      <button onclick={() => { shareOpen = true; }} class="completion-utility-btn">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share this issue
+        Share issue
       </button>
 
-      <!-- Copy for verification -->
-      <button onclick={copyForVerification} style="width:100%;padding:12px 16px;background:var(--bg-elevated);color:{copied ? 'var(--status-green)' : 'var(--text-tertiary)'};border:1px solid {copied ? 'var(--status-green)' : 'var(--border-subtle)'};border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;"
-        onmouseenter={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }}
-        onmouseleave={(e) => { if (!copied) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}>
-        {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}
-        {#if !copied}
-          <a href="/verify" style="font-size:11px;color:var(--text-muted);margin-left:4px;" onclick={(e) => e.stopPropagation()}>What is this?</a>
-        {/if}
-      </button>
+      <div class="completion-verify-row">
+        <button
+          onclick={copyForVerification}
+          class="completion-utility-btn"
+          class:completion-utility-btn--copied={copied}
+        >
+          {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}
+        </button>
+        <a href="/verify" class="completion-help-link">What is this?</a>
+      </div>
     </div>
 
     <PushPrompt />
@@ -530,6 +528,123 @@
     justify-content: flex-end;
   }
 
+  .reader-completion-actions {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) auto;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 12px;
+  }
+
+  .completion-primary-btn,
+  .completion-utility-btn {
+    border-radius: 999px;
+    font: inherit;
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .completion-primary-btn {
+    min-height: 46px;
+    padding: 0 24px;
+    border: 1px solid rgba(210, 140, 40, 0.22);
+    background: linear-gradient(180deg, rgba(210, 140, 40, 0.12), rgba(210, 140, 40, 0.08));
+    color: var(--score-warning);
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 14px 28px rgba(210, 140, 40, 0.08);
+  }
+
+  .completion-primary-btn:hover {
+    border-color: rgba(210, 140, 40, 0.3);
+    background: linear-gradient(180deg, rgba(210, 140, 40, 0.15), rgba(210, 140, 40, 0.1));
+    transform: translateY(-1px);
+    box-shadow: 0 18px 32px rgba(210, 140, 40, 0.12);
+  }
+
+  .completion-secondary-wrap {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .completion-utility-btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 20px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.64);
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
+  }
+
+  .completion-utility-btn:hover {
+    background: var(--bg);
+    border-color: var(--border-divider);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+  }
+
+  .completion-utility-btn--copied {
+    border-color: rgba(46, 125, 50, 0.28);
+    color: var(--status-green);
+    background: rgba(46, 125, 50, 0.08);
+  }
+
+  .completion-verify-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .completion-help-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .completion-help-link:hover {
+    color: var(--text-secondary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .completion-primary-btn {
+      border-color: rgba(200, 150, 58, 0.24);
+      background: linear-gradient(180deg, rgba(200, 150, 58, 0.13), rgba(200, 150, 58, 0.08));
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .completion-primary-btn:hover {
+      border-color: rgba(200, 150, 58, 0.3);
+      background: linear-gradient(180deg, rgba(200, 150, 58, 0.16), rgba(200, 150, 58, 0.1));
+      box-shadow: 0 20px 36px rgba(0, 0, 0, 0.26);
+    }
+
+    .completion-utility-btn {
+      background: rgba(34, 31, 27, 0.74);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .completion-utility-btn:hover {
+      background: rgba(40, 36, 31, 0.94);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+    }
+  }
+
   @media (max-width: 720px) {
     .reader-head {
       grid-template-columns: 1fr;
@@ -542,6 +657,22 @@
     .reader-headline {
       max-width: 100%;
       font-size: clamp(34px, 9vw, 44px);
+    }
+
+    .reader-completion-actions,
+    .completion-verify-row {
+      grid-template-columns: 1fr;
+    }
+
+    .completion-help-link {
+      justify-self: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .completion-primary-btn,
+    .completion-utility-btn {
+      transition: none;
     }
   }
 </style>

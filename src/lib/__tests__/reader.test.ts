@@ -1,5 +1,19 @@
 import { beforeEach, describe, it, expect } from 'vitest';
-import { computeAffinity, scoreIssue, getReadCount, savedIssues, getSavedIssueMap, isSavedIssue, saveIssue, unsaveIssue, toggleSavedIssue } from '../../stores/reader';
+import {
+  addReaction,
+  computeAffinity,
+  getReadCount,
+  getReactions,
+  getSavedIssueMap,
+  hasReacted,
+  isSavedIssue,
+  reactions,
+  saveIssue,
+  savedIssues,
+  scoreIssue,
+  toggleSavedIssue,
+  unsaveIssue
+} from '../../stores/reader';
 
 describe('saved issues', () => {
   beforeEach(() => {
@@ -26,6 +40,36 @@ describe('saved issues', () => {
     expect(isSavedIssue('001')).toBe(true);
     toggleSavedIssue('001');
     expect(isSavedIssue('001')).toBe(false);
+  });
+});
+
+describe('reactions', () => {
+  beforeEach(() => {
+    reactions.set('{}');
+  });
+
+  it('starts empty', () => {
+    expect(getReactions()).toEqual({});
+  });
+
+  it('stores a highlighted card', () => {
+    addReaction('001', 2);
+    expect(hasReacted('001', 2)).toBe(true);
+    expect(getReactions()).toEqual({ '001': [2] });
+  });
+
+  it('deduplicates repeat highlights for the same card', () => {
+    addReaction('001', 2);
+    addReaction('001', 2);
+    expect(getReactions()).toEqual({ '001': [2] });
+  });
+
+  it('tracks multiple highlighted cards on one issue', () => {
+    addReaction('001', 1);
+    addReaction('001', 4);
+    expect(hasReacted('001', 1)).toBe(true);
+    expect(hasReacted('001', 4)).toBe(true);
+    expect(getReactions()['001']).toEqual([1, 4]);
   });
 });
 

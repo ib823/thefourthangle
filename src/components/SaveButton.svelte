@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hasReacted, addReaction } from '../stores/reader';
+  import { reactions, addReaction } from '../stores/reader';
 
   interface Props {
     issueId: string;
@@ -7,18 +7,30 @@
   }
   let { issueId, cardIndex }: Props = $props();
 
-  let sessionReactions = $state(new Set<string>());
+  let reactionRaw = $state('{}');
+  $effect(() => {
+    const unsub = reactions.subscribe((value) => {
+      reactionRaw = value;
+    });
+    return unsub;
+  });
 
-  let reacted = $derived(
-    hasReacted(issueId, cardIndex) || sessionReactions.has(`${issueId}:${cardIndex}`)
-  );
+  let reactionMap = $derived.by(() => {
+    try {
+      return JSON.parse(reactionRaw) as Record<string, number[]>;
+    } catch {
+      return {};
+    }
+  });
+
+  let reacted = $derived((reactionMap[issueId]?.includes(cardIndex) ?? false));
 
   let animPhase = $state<'idle' | 'burst' | 'settle'>('idle');
 
-  function handleClick() {
+  function handleClick(event: MouseEvent) {
+    event.stopPropagation();
     if (reacted) return;
     addReaction(issueId, cardIndex);
-    sessionReactions = new Set([...sessionReactions, `${issueId}:${cardIndex}`]);
 
     // Burst animation
     animPhase = 'burst';
@@ -35,6 +47,7 @@
   class:save-btn--burst={animPhase === 'burst'}
   class:save-btn--settle={animPhase === 'settle'}
   onclick={handleClick}
+  aria-pressed={reacted}
   aria-label={reacted ? 'Insight highlighted' : 'Highlight this insight'}
 >
   <!-- Burst ring (visible only during animation) -->

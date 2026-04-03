@@ -88,7 +88,7 @@
   }
 
   function libraryEmptyCopy(mode: LibraryMode): string {
-    if (mode === 'highlights') return 'Save an issue or highlight an angle while reading, and it will stay here as your personal trail.';
+    if (mode === 'highlights') return 'Add an issue to Highlights or mark an angle while reading, and it will stay here as your personal trail.';
     return 'Start an issue and it will remain here until you finish the reading path.';
   }
 

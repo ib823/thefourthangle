@@ -118,8 +118,8 @@
       {:else if issue.status === 'updated'}
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
-      {#if isSaved}
-        <span style="font-size:10px;font-weight:700;color:var(--score-warning);background:rgba(210,140,40,0.1);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Saved</span>
+      {#if isSaved || hasReaction}
+        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}
@@ -146,11 +146,7 @@
         <div class="score-panel-line">{opinionTone(issue.opinionShift)}</div>
         <div class="score-panel-meta">
           <span>{label}</span>
-          {#if isSaved}
-            <span class="score-panel-dot"></span>
-            <span>Saved</span>
-          {/if}
-          {#if hasReaction}
+          {#if isSaved || hasReaction}
             <span class="score-panel-dot"></span>
             <span>Highlighted</span>
           {/if}
