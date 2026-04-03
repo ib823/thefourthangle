@@ -69,7 +69,7 @@
     justify-content: center;
     gap: 8px;
     min-width: 44px;
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 12px;
     border-radius: 999px;
     background: transparent;

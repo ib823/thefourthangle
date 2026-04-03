@@ -273,7 +273,7 @@
     <p style="font-size:18px;color:var(--text-secondary);font-weight:450;line-height:1.65;margin:16px 0 0;max-width:62ch;">{issue.context}</p>
 
     <div style="margin:24px -24px 0;overflow:hidden;background:var(--bg-sunken);border-radius:24px;">
-      <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="lazy" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+      <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="sync" fetchpriority="high" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
     </div>
 
     <div style="margin:22px 0 0;padding:20px 22px;border-radius:22px;border:1px solid var(--border-subtle);background:linear-gradient(135deg, rgba(210,140,40,0.08) 0%, rgba(255,255,255,0.9) 55%);display:grid;grid-template-columns:minmax(110px, 0.4fr) minmax(0, 1fr);gap:18px;align-items:center;">

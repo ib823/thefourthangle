@@ -63,7 +63,7 @@
         aria-label="Search issues"
         value={searchQuery}
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
-        style="flex:1;padding:8px 12px;font-size:14px;border:1px solid var(--border-subtle);border-radius:8px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
+        style="flex:1;min-height:44px;box-sizing:border-box;padding:8px 12px;font-size:14px;border:1px solid var(--border-subtle);border-radius:8px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
       />
       <button type="button" onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
     </form>

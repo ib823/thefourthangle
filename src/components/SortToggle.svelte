@@ -79,7 +79,7 @@
   .sort-chip {
     position: relative;
     z-index: 1;
-    min-height: 32px;
+    min-height: 44px;
     min-width: 0;
     padding: 0 16px;
     border: none;

@@ -118,7 +118,7 @@
     justify-content: center;
     gap: 8px;
     min-width: 0;
-    min-height: 32px;
+    min-height: 44px;
     padding: 0 16px;
     border-radius: 999px;
     border: none;

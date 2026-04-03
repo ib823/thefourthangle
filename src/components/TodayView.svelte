@@ -215,7 +215,7 @@
         <button class="hero-card" onclick={() => onOpenIssue?.(topIssue)}>
           {#if topIssue.hasImage}
             <div class="hero-art">
-              <IssueImage issueId={topIssue.id} size="hero" aspectRatio="16/9" borderRadius="0" alt="Illustration for {topIssue.headline}" />
+              <IssueImage issueId={topIssue.id} size="hero" aspectRatio="16/9" borderRadius="0" alt="Illustration for {topIssue.headline}" eager={true} />
             </div>
           {/if}
           <div class="hero-scrim"></div>
@@ -593,7 +593,7 @@
 
   .today-grid {
     display: grid;
-    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
   }
 
@@ -808,7 +808,10 @@
 
   @media (max-width: 1023px) {
     .hero-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+      min-height: 360px;
+      padding: 24px;
+      gap: 22px;
       align-items: end;
     }
 
@@ -844,6 +847,7 @@
     }
 
     .hero-grid {
+      grid-template-columns: 1fr;
       min-height: 0;
       padding: 20px;
       gap: 18px;

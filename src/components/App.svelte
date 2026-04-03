@@ -844,12 +844,12 @@
 {:else if viewMode === 'tablet'}
   <div class="app-shell app-shell--tablet">
     <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
-    <main>
-    <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
+    <main class="app-main app-main--tablet">
+    <div class="tablet-shell">
       {#if surfaceMode !== 'today'}
         <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
       {/if}
-      <div style="margin-bottom:16px;">
+      <div style="margin:12px 0 16px;">
         <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()}>
           <label class="sr-only" for="tablet-search">Search issues</label>
           <input
@@ -861,7 +861,7 @@
             value={searchQuery}
             oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
             onfocus={onSearchFocus}
-            style="width:100%;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
+            style="width:100%;min-height:44px;box-sizing:border-box;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
           />
         </form>
       </div>
@@ -1063,6 +1063,25 @@
 
   .app-main--desktop {
     flex-direction: row;
+  }
+
+  .app-shell--tablet {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .app-main--tablet {
+    display: block;
+    overflow-y: auto;
+  }
+
+  .tablet-shell {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 18px 40px;
   }
 
   .mobile-secondary-bar {

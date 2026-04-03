@@ -310,12 +310,12 @@
 
     animating = true;
     cancelAnimation?.();
-    // A1: Hide text for stagger reveal
-    if (!prefersReducedMotion) {
-      bigTextVisible = false;
-      subTextVisible = false;
-      if (subRevealTimer) clearTimeout(subRevealTimer);
+    if (subRevealTimer) {
+      clearTimeout(subRevealTimer);
+      subRevealTimer = null;
     }
+    bigTextVisible = true;
+    subTextVisible = true;
 
     // Safety: guarantee text becomes visible even if animation callback fails
     if (textRevealSafety) clearTimeout(textRevealSafety);
@@ -386,9 +386,9 @@
           }
           animating = false;
           cancelAnimation = null;
-          // A1: Stagger text reveal — big first, sub 400ms later
           bigTextVisible = true;
-          subRevealTimer = setTimeout(() => { subTextVisible = true; autoFitCardText(); }, 400);
+          subTextVisible = true;
+          autoFitCardText();
           // A8: Haptic pulse on settle
           haptic(3);
           announceCard();
@@ -477,12 +477,7 @@
       showCompletion();
       return;
     }
-    // A2: Micro-pause before final card (reframe → view transition)
-    if (current === totalCards - 2 && !prefersReducedMotion) {
-      setTimeout(() => goTo(current + 1, 'right'), 600);
-    } else {
-      goTo(current + 1, 'right');
-    }
+    goTo(current + 1, 'right');
   }
 
   function prev() {
@@ -1692,7 +1687,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: background var(--duration-fast, 150ms) ease;
-    min-height: 36px;
+    min-height: 44px;
     margin-bottom: 4px;
   }
   .connection-nudge:hover {
