@@ -85,7 +85,7 @@
 
   .section-label {
     font-family: var(--font-display, 'Manrope', system-ui, sans-serif);
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -95,7 +95,7 @@
 
   .section-count {
     font-family: var(--font-body, 'Nunito Sans', system-ui, sans-serif);
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 600;
     color: var(--text-faint);
   }

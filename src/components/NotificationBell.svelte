@@ -205,7 +205,7 @@
 <div style="position:relative;">
   <button
     onclick={toggle}
-    style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:8px;transition:background 0.15s ease;"
+    style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius: var(--radius-md);transition:background 0.15s ease;"
     aria-label={unread > 0 ? `${unread} unread notifications` : 'Notifications'}
     aria-controls={panelId}
     aria-haspopup="dialog"
@@ -216,7 +216,7 @@
       <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
     </svg>
     {#if unread > 0}
-      <span style="position:absolute;top:4px;right:4px;width:16px;height:16px;background:var(--score-critical, #E03131);color:#fff;font-family:var(--font-display, sans-serif);font-size:10px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1;">{unread > 9 ? '9+' : unread}</span>
+      <span style="position:absolute;top:4px;right:4px;width:16px;height:16px;background:var(--score-critical, #E03131);color:#fff;font-family:var(--font-display, sans-serif);font-size: var(--text-micro);font-weight:700;border-radius: var(--radius-round);display:flex;align-items:center;justify-content:center;line-height:1;">{unread > 9 ? '9+' : unread}</span>
     {/if}
   </button>
 
@@ -227,16 +227,16 @@
       onclick={close}
       aria-label="Close notifications panel"
     ></button>
-    <div id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius:12px;box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
+    <div id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle, #E9ECEF);">
-        <span style="font-family:var(--font-display, sans-serif);font-size:14px;font-weight:700;color:var(--text-primary, #212529);">Notifications</span>
+        <span style="font-family:var(--font-display, sans-serif);font-size: var(--text-body);font-weight:700;color:var(--text-primary, #212529);">Notifications</span>
         <div style="display:flex;align-items:center;gap:4px;">
           {#if unread > 0}
-            <button onclick={handleMarkAllRead} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:12px;color:var(--focus, #1971C2);padding:8px;min-height:44px;display:flex;align-items:center;">Mark all read</button>
+            <button onclick={handleMarkAllRead} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--focus, #1971C2);padding:8px;min-height:44px;display:flex;align-items:center;">Mark all read</button>
           {/if}
           {#if items.length > 0}
-            <button onclick={handleClearAll} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-muted, #868E96);padding:8px;min-height:44px;display:flex;align-items:center;">Clear all</button>
+            <button onclick={handleClearAll} style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--text-muted, #868E96);padding:8px;min-height:44px;display:flex;align-items:center;">Clear all</button>
           {/if}
         </div>
       </div>
@@ -248,17 +248,17 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint, #ADB5BD)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
             </svg>
-            <p style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:600;color:var(--text-primary, #212529);margin:0 0 4px 0;">Get notified</p>
-            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0 0 12px 0;line-height:1.4;">New issues delivered to your device. Max 3/week.</p>
+            <p style="font-family:var(--font-display, sans-serif);font-size: var(--text-ui);font-weight:600;color:var(--text-primary, #212529);margin:0 0 4px 0;">Get notified</p>
+            <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--text-tertiary, #5C636A);margin:0 0 12px 0;line-height:1.4;">New issues delivered to your device. Max 3/week.</p>
             <button
               onclick={subscribePush}
               disabled={pushLoading}
-              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius:8px;font-family:var(--font-display, sans-serif);font-size:12px;font-weight:600;cursor:pointer;min-height:44px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
+              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius: var(--radius-md);font-family:var(--font-display, sans-serif);font-size: var(--text-sm);font-weight:600;cursor:pointer;min-height:44px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
             >{pushLoading ? 'Enabling...' : 'Enable notifications'}</button>
           {:else if pushDenied}
-            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-muted, #868E96);margin:0;line-height:1.4;">Notifications blocked. Enable in browser settings.</p>
+            <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--text-muted, #868E96);margin:0;line-height:1.4;">Notifications blocked. Enable in browser settings.</p>
           {:else}
-            <p style="font-family:var(--font-body, sans-serif);font-size:13px;color:var(--text-tertiary, #5C636A);margin:0;">No notifications yet</p>
+            <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-ui);color:var(--text-tertiary, #5C636A);margin:0;">No notifications yet</p>
           {/if}
         </div>
       {:else}
@@ -274,17 +274,17 @@
             >
               <div style="display:flex;align-items:center;gap:8px;min-width:0;">
                 {#if !item.read}
-                  <div style="width:6px;height:6px;border-radius:50%;background:var(--score-info, #1971C2);flex-shrink:0;"></div>
+                  <div style="width:6px;height:6px;border-radius: var(--radius-round);background:var(--score-info, #1971C2);flex-shrink:0;"></div>
                 {/if}
-                <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">{item.title}</span>
-                <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
+                <span style="font-family:var(--font-display, sans-serif);font-size: var(--text-ui);font-weight:{item.read ? '600' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">{item.title}</span>
+                <span style="font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
               </div>
-              <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
+              <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
             </button>
             <button
               type="button"
               onclick={(e) => handleRemoveItem(e, item)}
-              style="flex-shrink:0;padding:0;width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;"
+              style="flex-shrink:0;padding:0;width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--text-muted, #868E96);font-size: var(--text-body);line-height:1;"
               aria-label="Remove notification"
             >&times;</button>
           </div>
@@ -295,24 +295,24 @@
       {#if pushSupported}
         <div style="padding:10px 16px;border-top:1px solid var(--border-subtle, #E9ECEF);display:flex;align-items:center;justify-content:space-between;">
           {#if pushSubscribed}
-            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--status-green, #2B8A3E);display:flex;align-items:center;gap:4px;">
+            <span style="font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--status-green, #2B8A3E);display:flex;align-items:center;gap:4px;">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               Notifications on
             </span>
             <button
               onclick={unsubscribePush}
               disabled={pushLoading}
-              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);padding:6px 8px;min-height:44px;transition:color 0.15s ease;"
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);padding:6px 8px;min-height:44px;transition:color 0.15s ease;"
             >Turn off</button>
           {:else if !pushDenied}
-            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Notifications off</span>
+            <span style="font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);">Notifications off</span>
             <button
               onclick={subscribePush}
               disabled={pushLoading}
-              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--focus, #1971C2);padding:6px 8px;min-height:44px;font-weight:600;"
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--focus, #1971C2);padding:6px 8px;min-height:44px;font-weight:600;"
             >{pushLoading ? 'Enabling...' : 'Turn on'}</button>
           {:else}
-            <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Blocked in browser settings</span>
+            <span style="font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);">Blocked in browser settings</span>
           {/if}
         </div>
       {/if}

@@ -74,7 +74,7 @@
     min-width: 44px;
     min-height: 44px;
     padding: 0 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: transparent;
     border: 1px solid var(--border-subtle);
     cursor: pointer;
@@ -113,14 +113,14 @@
   .burst-ring {
     position: absolute;
     inset: -4px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 2px solid var(--highlight-accent, var(--score-warning));
     animation: burstExpand 0.5s ease-out forwards;
     pointer-events: none;
   }
 
   .save-label {
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     color: var(--text-secondary);
     white-space: nowrap;

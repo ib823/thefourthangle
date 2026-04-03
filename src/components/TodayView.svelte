@@ -335,11 +335,11 @@
     width: fit-content;
     margin: 0 0 -32px;
     padding: 8px 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.88);
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
     pointer-events: none;
@@ -383,7 +383,7 @@
   .today-kicker,
   .panel-kicker {
     font-family: var(--font-display);
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -393,7 +393,7 @@
   .today-title {
     margin: 10px 0 0;
     font-family: var(--font-display);
-    font-size: clamp(30px, 4vw, 40px);
+    font-size: var(--text-home-title-fluid);
     line-height: 1.02;
     letter-spacing: -0.045em;
     color: var(--text-primary);
@@ -403,7 +403,7 @@
   .today-intro {
     margin: 12px 0 0;
     max-width: 40ch;
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.6;
     color: var(--text-secondary);
   }
@@ -413,11 +413,11 @@
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 600;
     white-space: nowrap;
   }
@@ -429,7 +429,7 @@
   .today-divider {
     width: 4px;
     height: 4px;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     background: var(--border-divider);
   }
 
@@ -447,7 +447,7 @@
   .hero-card {
     position: relative;
     overflow: hidden;
-    border-radius: 30px;
+    border-radius: var(--radius-xl);
     min-height: 420px;
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.94), rgba(28, 28, 28, 0.82));
     color: #fff;
@@ -494,10 +494,10 @@
     align-items: center;
     width: fit-content;
     padding: 7px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -506,7 +506,7 @@
   .hero-headline {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(32px, 5vw, 54px);
+    font-size: var(--text-issue-title-fluid);
     line-height: 1.02;
     letter-spacing: -0.045em;
     max-width: 15ch;
@@ -519,7 +519,7 @@
   }
 
   .hero-context {
-    font-size: 15px;
+    font-size: var(--text-body);
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.78);
     max-width: 56ch;
@@ -527,7 +527,7 @@
 
   .hero-shift {
     padding: 22px;
-    border-radius: 22px;
+    border-radius: var(--radius-xl);
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(12px);
@@ -535,7 +535,7 @@
   }
 
   .hero-shift-kicker {
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -544,14 +544,14 @@
 
   .hero-shift-score {
     font-family: var(--font-display);
-    font-size: 76px;
+    font-size: var(--text-display);
     line-height: 0.88;
     letter-spacing: -0.05em;
     margin-top: 14px;
   }
 
   .hero-shift-copy {
-    font-size: 15px;
+    font-size: var(--text-body);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.82);
     margin-top: 10px;
@@ -561,7 +561,7 @@
   .panel-progress-track {
     height: 8px;
     background: rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     overflow: hidden;
     margin-top: 14px;
   }
@@ -569,12 +569,12 @@
   .hero-shift-fill,
   .panel-progress-fill {
     height: 100%;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
   }
 
   .hero-shift-foot {
     margin-top: 10px;
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -586,7 +586,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: var(--text-ui);
     font-weight: 700;
     color: #fff;
   }
@@ -599,7 +599,7 @@
 
   .today-panel {
     padding: 22px;
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.76);
     box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
@@ -613,7 +613,7 @@
     grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
     gap: 16px;
     padding: 18px 20px;
-    border-radius: 22px;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
     box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
@@ -630,7 +630,7 @@
   .today-library-title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: var(--text-title);
     line-height: 1.08;
     letter-spacing: -0.03em;
     color: var(--text-primary);
@@ -638,14 +638,14 @@
 
   .today-library-copy {
     margin: 0;
-    font-size: 13px;
+    font-size: var(--text-ui);
     line-height: 1.6;
     color: var(--text-secondary);
   }
 
   .panel-title {
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: var(--text-title);
     line-height: 1.04;
     letter-spacing: -0.03em;
     color: var(--text-primary);
@@ -658,7 +658,7 @@
   .library-copy,
   .today-note,
   .today-quote {
-    font-size: 13px;
+    font-size: var(--text-ui);
     line-height: 1.6;
     color: var(--text-secondary);
   }
@@ -667,7 +667,7 @@
   .brief-item,
   .library-item {
     padding: 16px;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     background: var(--bg);
     border: 1px solid var(--border-subtle);
     transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
@@ -682,7 +682,7 @@
 
   .panel-issue-title,
   .brief-headline {
-    font-size: 15px;
+    font-size: var(--text-body);
     font-weight: 700;
     line-height: 1.28;
     color: var(--text-primary);
@@ -693,7 +693,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     color: var(--text-secondary);
   }
@@ -711,7 +711,7 @@
 
   .panel-empty-title,
   .library-label {
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -740,7 +740,7 @@
   .brief-score,
   .library-value {
     font-family: var(--font-display);
-    font-size: 36px;
+    font-size: var(--text-metric);
     line-height: 0.92;
     letter-spacing: -0.05em;
   }
@@ -759,7 +759,7 @@
 
   .library-item--compact {
     padding: 14px 16px;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     gap: 8px 10px;
     align-content: start;
   }
@@ -772,12 +772,12 @@
   .library-item--compact .library-value {
     grid-column: 2;
     justify-self: end;
-    font-size: 28px;
+    font-size: var(--text-title-lg);
   }
 
   .library-item--compact .library-copy {
     grid-column: 1 / -1;
-    font-size: 12px;
+    font-size: var(--text-sm);
     line-height: 1.45;
   }
 
@@ -843,7 +843,7 @@
 
     .hero-card {
       min-height: 0;
-      border-radius: 24px;
+      border-radius: var(--radius-xl);
     }
 
     .hero-grid {
@@ -858,7 +858,7 @@
     }
 
     .hero-shift-score {
-      font-size: 58px;
+      font-size: var(--text-display);
     }
 
     .today-grid {
@@ -867,12 +867,12 @@
 
     .today-panel {
       padding: 18px;
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
     }
 
     .today-library-strip {
       padding: 18px;
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
     }
 
     .today-library-list {
@@ -885,7 +885,7 @@
 
     .brief-score,
     .library-value {
-      font-size: 28px;
+      font-size: var(--text-title-lg);
     }
 
     .today-quote {

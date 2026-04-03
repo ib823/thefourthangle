@@ -113,12 +113,12 @@
   <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;">
     <div style="display:flex;align-items:center;gap:8px;">
       {#if issue.status === 'new' && !readState}
-        <span style="font-size:10px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">New</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">New</span>
       {:else if issue.status === 'updated'}
-        <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Updated</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size:10px;font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Highlighted</span>
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}
@@ -152,13 +152,13 @@
         </div>
       </div>
     </div>
-    <div style="margin-top:10px;height:6px;background:var(--bg-sunken);border-radius:3px;overflow:hidden;">
-      <div class="bar-fill" style="height:100%;width:{barFillPercent}%;background:{scoreColor};border-radius:3px;"></div>
+    <div style="margin-top:10px;height:6px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+      <div class="bar-fill" style="height:100%;width:{barFillPercent}%;background:{scoreColor};border-radius: var(--radius-pill);"></div>
     </div>
   </div>
 
   <!-- Headline -->
-  <h2 class="headline balance-title" style="color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};font-weight:{isCompleted ? 700 : 800};">{issue.headline}</h2>
+  <h2 class="headline balance-title" style="color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};font-weight:{isCompleted ? 600 : 700};">{issue.headline}</h2>
 
   <!-- Context -->
   <p class="context-text">{issue.context}</p>
@@ -176,11 +176,11 @@
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}
-      <div style="height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-        <div style="height:100%;width:{(readState.progress / totalAngles) * 100}%;background:var(--score-warning);border-radius:2px;transition:width var(--duration-normal, 250ms) ease;"></div>
+      <div style="height:3px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+        <div style="height:100%;width:{(readState.progress / totalAngles) * 100}%;background:var(--score-warning);border-radius: var(--radius-pill);transition:width var(--duration-normal, 250ms) ease;"></div>
       </div>
     {:else if isCompleted}
-      <div style="height:3px;background:var(--status-green);border-radius:2px;opacity:0.3;"></div>
+      <div style="height:3px;background:var(--status-green);border-radius: var(--radius-pill);opacity:0.3;"></div>
     {/if}
   </div>
 </div>
@@ -190,7 +190,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     padding: 24px;
     cursor: pointer;
     overflow: hidden;
@@ -203,7 +203,7 @@
   }
 
   .headline {
-    font-size: 27px;
+    font-size: var(--text-title-lg);
     line-height: 1.08;
     margin: 16px 0 0;
     letter-spacing: -0.035em;
@@ -218,7 +218,7 @@
   }
 
   .score-number {
-    font-size: 14px;
+    font-size: var(--text-body);
     font-weight: 700;
     min-width: 24px;
     text-align: right;
@@ -227,7 +227,7 @@
 
   .score-number--hero {
     font-family: var(--font-display);
-    font-size: 42px;
+    font-size: var(--text-hero);
     line-height: 0.92;
     letter-spacing: -0.05em;
     min-width: 54px;
@@ -237,14 +237,14 @@
   .score-panel {
     margin-top: 16px;
     padding: 14px 16px;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     background: var(--bg);
     border: 1px solid var(--border-subtle);
   }
 
   .score-panel-kicker,
   .meta-pill {
-    font-size: 10px;
+    font-size: var(--text-micro);
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -258,7 +258,7 @@
     color: var(--text-secondary);
     background: var(--bg-sunken);
     padding: 4px 8px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
   }
 
   .score-panel-main {
@@ -269,7 +269,7 @@
   }
 
   .score-panel-line {
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.35;
     font-weight: 700;
     color: var(--text-primary);
@@ -281,7 +281,7 @@
     align-items: center;
     gap: 6px;
     flex-wrap: wrap;
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 600;
     color: var(--text-secondary);
   }
@@ -289,16 +289,16 @@
   .score-panel-dot {
     width: 4px;
     height: 4px;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     background: var(--border-divider);
   }
 
   .context-text {
-    font-size: 16px;
+    font-size: var(--text-body-lg);
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 12px 0 0;
-    font-weight: 450;
+    font-weight: 400;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -306,7 +306,7 @@
   }
 
   .mobile-callout {
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     color: var(--text-secondary);
     margin: 0 0 10px;
@@ -318,23 +318,23 @@
     }
 
     .headline {
-      font-size: 24px;
+      font-size: var(--text-title);
     }
 
     .score-number--hero {
-      font-size: 38px;
+      font-size: var(--text-hero);
       min-width: 48px;
     }
 
     .context-text {
-      font-size: 15px;
+      font-size: var(--text-body);
     }
   }
 
   @media (max-height: 640px) {
     .mobile-card {
       padding: 18px;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
     }
 
     .mobile-card-art {
@@ -342,7 +342,7 @@
     }
 
     .headline {
-      font-size: 24px;
+      font-size: var(--text-title);
       margin-top: 12px;
     }
 
@@ -352,13 +352,13 @@
     }
 
     .score-number--hero {
-      font-size: 36px;
+      font-size: var(--text-metric);
       min-width: 46px;
     }
 
     .context-text {
       margin-top: 10px;
-      font-size: 15px;
+      font-size: var(--text-body);
       -webkit-line-clamp: 2;
     }
 
@@ -377,7 +377,7 @@
     }
 
     .headline {
-      font-size: 21px;
+      font-size: var(--text-subtitle);
       line-height: 1.15;
       margin-top: 10px;
       max-width: 100%;
@@ -393,22 +393,22 @@
     }
 
     .score-number--hero {
-      font-size: 32px;
+      font-size: var(--text-title-lg);
       min-width: 40px;
     }
 
     .score-panel-line {
-      font-size: 13px;
+      font-size: var(--text-ui);
     }
 
     .score-panel-meta,
     .mobile-callout {
-      font-size: 10px;
+      font-size: var(--text-micro);
     }
 
     .context-text {
       margin-top: 8px;
-      font-size: 13px;
+      font-size: var(--text-ui);
       line-height: 1.45;
       -webkit-line-clamp: 2;
     }

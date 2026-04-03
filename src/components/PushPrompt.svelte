@@ -108,21 +108,21 @@
 </script>
 
 {#if showPrompt && !subscribed && !denied && !unsupported}
-  <div style="background:var(--card, #FFFDF9);border:1px solid var(--border-light, rgba(0,0,0,0.05));border-radius:12px;padding:16px;margin-top:16px;display:flex;flex-direction:column;gap:12px;">
+  <div style="background:var(--card, #FFFDF9);border:1px solid var(--border-light, rgba(0,0,0,0.05));border-radius: var(--radius-lg);padding:16px;margin-top:16px;display:flex;flex-direction:column;gap:12px;">
     <div style="display:flex;align-items:center;gap:8px;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber, #7A5A12)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <span style="font-family:var(--font-display, sans-serif);font-size:14px;font-weight:700;color:var(--text-primary, #212529);">Stay updated</span>
+      <span style="font-family:var(--font-display, sans-serif);font-size: var(--text-body);font-weight:700;color:var(--text-primary, #212529);">Stay updated</span>
     </div>
-    <p style="font-family:var(--font-body, sans-serif);font-size:13px;line-height:1.5;color:var(--text-secondary, #495057);margin:0;">Get notified when new issues drop. Max 3/week. Unsubscribe anytime.</p>
+    <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-ui);line-height:1.5;color:var(--text-secondary, #495057);margin:0;">Get notified when new issues drop. Max 3/week. Unsubscribe anytime.</p>
     <div style="display:flex;gap:8px;">
       <button
         onclick={subscribe}
-        style="flex:1;padding:10px 16px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius:10px;font-family:var(--font-display, sans-serif);font-size:13px;font-weight:600;cursor:pointer;min-height:44px;"
+        style="flex:1;padding:10px 16px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius: var(--radius-md);font-family:var(--font-display, sans-serif);font-size: var(--text-ui);font-weight:600;cursor:pointer;min-height:44px;"
         aria-label="Enable push notifications"
       >Notify me</button>
       <button
         onclick={dismiss}
-        style="padding:10px 16px;background:var(--bg-elevated, #F8F9FA);color:var(--text-tertiary, #6C757D);border:1px solid var(--border-subtle, #E9ECEF);border-radius:10px;font-family:var(--font-body, sans-serif);font-size:13px;cursor:pointer;min-height:44px;"
+        style="padding:10px 16px;background:var(--bg-elevated, #F8F9FA);color:var(--text-tertiary, #6C757D);border:1px solid var(--border-subtle, #E9ECEF);border-radius: var(--radius-md);font-family:var(--font-body, sans-serif);font-size: var(--text-ui);cursor:pointer;min-height:44px;"
         aria-label="Dismiss notification prompt"
       >Not now</button>
     </div>

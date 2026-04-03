@@ -987,7 +987,7 @@
   <!-- Hero image -->
   {#if current === 0 && !completed}
     <div class="reader-hero" style="padding:0 20px;margin-bottom:8px;">
-      <div style="border-radius:10px;overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
+      <div style="border-radius: var(--radius-md);overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
           <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
       </div>
     </div>
@@ -1013,8 +1013,8 @@
           <div style="width:100%;max-width:300px;margin:4px 0;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
               <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={4} showLabel={false} /></div>
-              <span style="font-size:12px;font-weight:700;color:var(--text-secondary);">{issue.opinionShift}%</span>
-              <span style="font-size:10px;color:var(--text-tertiary);">Opinion Shift</span>
+              <span style="font-size: var(--text-sm);font-weight:700;color:var(--text-secondary);">{issue.opinionShift}%</span>
+              <span style="font-size: var(--text-micro);color:var(--text-tertiary);">Opinion Shift</span>
             </div>
             {#if issue.stageScores && issue.finalScore}
               <VerdictBar scores={issue.stageScores} finalScore={issue.finalScore} compact={false} />
@@ -1031,9 +1031,9 @@
 
           <!-- C6: Next issue preview -->
           {#if nextIssueHeadline}
-            <div style="width:100%;max-width:300px;padding:10px 14px;background:var(--bg-sunken);border-radius:8px;margin:4px 0;">
-              <div style="font-size:10px;font-weight:600;color:var(--text-faint);text-transform:uppercase;">Up next</div>
-              <div style="font-size:12px;font-weight:600;color:var(--text-secondary);line-height:1.35;margin-top:2px;">{nextIssueHeadline}</div>
+            <div style="width:100%;max-width:300px;padding:10px 14px;background:var(--bg-sunken);border-radius: var(--radius-md);margin:4px 0;">
+              <div style="font-size: var(--text-micro);font-weight:600;color:var(--text-faint);text-transform:uppercase;">Up next</div>
+              <div style="font-size: var(--text-sm);font-weight:600;color:var(--text-secondary);line-height:1.35;margin-top:2px;">{nextIssueHeadline}</div>
             </div>
           {/if}
 
@@ -1082,7 +1082,7 @@
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
-            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
+            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius: var(--radius-md);cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
@@ -1103,11 +1103,11 @@
           {#if showSwipeHint && current === 0}
             <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe or tap arrows</span>
           {:else if card.t === 'fact' && connections.length > 0}
-            <span style="font-size:11px;color:var(--text-muted);">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
+            <span style="font-size: var(--text-xs);color:var(--text-muted);">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
           {:else if current === totalCards - 2 && !completed}
-            <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Almost done</span>
+            <span style="font-size: var(--text-sm);font-weight:600;color:var(--text-tertiary);">Almost done</span>
           {:else if current === totalCards - 1 && !completed}
-            <span style="font-size:12px;font-weight:600;color:var(--text-tertiary);">Last one</span>
+            <span style="font-size: var(--text-sm);font-weight:600;color:var(--text-tertiary);">Last one</span>
           {/if}
           </div>
         </div>
@@ -1166,14 +1166,14 @@
                 {:else if conn.readState === 'started'}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
                 {/if}
-                <div style="font-size:13px;font-weight:{conn.readState === 'completed' ? '500' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
+                <div style="font-size: var(--text-ui);font-weight:{conn.readState === 'completed' ? '600' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
               </div>
               <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
-                <div style="width:32px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-                  <div style="height:100%;width:{conn.opinionShift}%;background:{opinionColor(conn.opinionShift)};border-radius:2px;"></div>
+                <div style="width:32px;height:3px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+                  <div style="height:100%;width:{conn.opinionShift}%;background:{opinionColor(conn.opinionShift)};border-radius: var(--radius-pill);"></div>
                 </div>
-                <span style="font-size:10px;font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
-                <span style="font-size:9px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
+                <span style="font-size: var(--text-micro);font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
+                <span style="font-size: var(--text-micro);color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
                 {#if conn.hasReaction}
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 {/if}
@@ -1185,7 +1185,7 @@
       </div>
 
       {#if connections.length > 5}
-        <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:4px 0;">
+        <div style="font-size: var(--text-xs);color:var(--text-muted);text-align:center;padding:4px 0;">
           +{connections.length - 5} more
         </div>
       {/if}
@@ -1239,7 +1239,7 @@
 
   .progress-fill {
     height: 100%;
-    border-radius: 0 2px 2px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     transition: width var(--duration-normal, 250ms) ease, background var(--duration-normal, 250ms) ease;
   }
 
@@ -1254,7 +1254,7 @@
   }
 
   .counter {
-    font-size: 14px;
+    font-size: var(--text-body);
     font-weight: 700;
     color: var(--text-primary);
   }
@@ -1264,8 +1264,8 @@
     height: 44px;
     border: none;
     background: var(--bg-elevated);
-    border-radius: 10px;
-    font-size: 20px;
+    border-radius: var(--radius-md);
+    font-size: var(--text-subtitle);
     line-height: 1;
     color: var(--text-secondary);
     cursor: pointer;
@@ -1287,7 +1287,7 @@
   }
 
   .headline {
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 600;
     color: var(--text-secondary);
     margin: 0 0 6px;
@@ -1316,7 +1316,7 @@
     top: 12px;
     bottom: 4px;
     background: var(--bg);
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     pointer-events: none;
     will-change: transform;
     overflow-anchor: none;
@@ -1342,7 +1342,7 @@
     z-index: 3;
     width: auto;
     background: var(--bg);
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
     padding: 20px 24px;
     display: flex;
@@ -1376,18 +1376,18 @@
     align-items: center;
     gap: 6px;
     padding: 5px 12px;
-    border-radius: 100px;
+    border-radius: var(--radius-pill);
   }
 
   .pill-dot {
     width: 5px;
     height: 5px;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     flex-shrink: 0;
   }
 
   .pill-label {
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 600;
     white-space: nowrap;
   }
@@ -1408,7 +1408,7 @@
     right: 2px;
     width: 3px;
     height: 24px;
-    border-radius: 3px;
+    border-radius: var(--radius-pill);
     background: rgba(0, 0, 0, 0.15);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -1433,7 +1433,7 @@
   }
 
   .sub-text {
-    font-size: 17px;
+    font-size: var(--text-reading);
     color: var(--text-secondary);
     line-height: 1.65;
     margin: 0;
@@ -1447,7 +1447,7 @@
   }
 
   .swipe-hint {
-    font-size: 12px;
+    font-size: var(--text-sm);
     color: var(--text-tertiary);
     user-select: none;
     display: inline-block;
@@ -1493,7 +1493,7 @@
   .check-circle {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     background: linear-gradient(135deg, var(--status-green), var(--status-green-text));
     display: flex;
     align-items: center;
@@ -1525,14 +1525,14 @@
   }
 
   .completion-title {
-    font-size: 16px;
+    font-size: var(--text-body-lg);
     font-weight: 700;
     color: var(--text-primary);
     margin: 0;
   }
 
   .completion-takeaway {
-    font-size: 15px;
+    font-size: var(--text-body);
     font-style: italic;
     color: var(--text-secondary);
     line-height: 1.6;
@@ -1565,8 +1565,8 @@
 
   .btn-done {
     padding: 10px 28px;
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-body);
     font-weight: 600;
     cursor: pointer;
     border: none;
@@ -1581,8 +1581,8 @@
 
   .btn-share {
     padding: 10px 28px;
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-body);
     font-weight: 600;
     cursor: pointer;
     border: 1.5px solid var(--border-subtle);
@@ -1598,8 +1598,8 @@
 
   .btn-next {
     padding: 10px 28px;
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-body);
     font-weight: 600;
     cursor: pointer;
     border: none;
@@ -1648,7 +1648,7 @@
     height: 48px;
     border: none;
     background: var(--bg-elevated);
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     color: var(--text-secondary);
     cursor: pointer;
     opacity: 0.4;
@@ -1678,11 +1678,11 @@
     justify-content: center;
     gap: 6px;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 600;
     cursor: pointer;
     transition: background var(--duration-fast, 150ms) ease;

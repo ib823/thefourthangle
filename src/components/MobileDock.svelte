@@ -58,12 +58,12 @@
     gap: 5px;
     min-height: 58px;
     border: none;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     background: transparent;
     color: var(--text-faint);
     cursor: pointer;
     font: inherit;
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
   }
@@ -86,11 +86,11 @@
     min-width: 16px;
     height: 16px;
     padding: 0 4px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: rgba(210, 140, 40, 0.12);
     color: var(--score-warning);
-    font-size: 9px;
-    font-weight: 800;
+    font-size: var(--text-micro);
+    font-weight: 700;
     display: inline-flex;
     align-items: center;
     justify-content: center;

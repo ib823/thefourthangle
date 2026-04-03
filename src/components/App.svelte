@@ -762,7 +762,7 @@
 </script>
 
 {#if isOffline}
-  <div role="status" aria-live="polite" style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size:12px;font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
+  <div role="status" aria-live="polite" style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size: var(--text-sm);font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
 {/if}
 
   {#if viewMode === 'mobile'}
@@ -832,10 +832,10 @@
     {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
       <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
         <div style="max-width:320px;text-align:center;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-	          <p style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
-          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
-          <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Return to Today</button>
+          <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+	          <p style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
+          <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
+          <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius: var(--radius-pill);border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size: var(--text-ui);font-weight:700;cursor:pointer;">Return to Today</button>
         </div>
       </section>
     {:else if surfaceMode === 'library' && !isSearching}
@@ -880,7 +880,7 @@
             value={searchQuery}
             oninput={(e) => { searchQuery = (e.currentTarget as HTMLInputElement).value; }}
             onfocus={onSearchFocus}
-            style="width:100%;min-height:44px;box-sizing:border-box;padding:10px 16px;font-size:14px;border:1px solid var(--border-subtle);border-radius:12px;background:var(--bg-sunken);color:var(--text-primary);outline:none;"
+            style="width:100%;min-height:44px;box-sizing:border-box;padding:10px 16px;font-size: var(--text-body);border:1px solid var(--border-subtle);border-radius: var(--radius-lg);background:var(--bg-sunken);color:var(--text-primary);outline:none;"
           />
         </form>
       </div>
@@ -890,7 +890,7 @@
         </div>
       {/if}
       {#if isSearching}
-        <div role="status" aria-live="polite" style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;">
+        <div role="status" aria-live="polite" style="font-size: var(--text-sm);color:var(--text-tertiary);margin-bottom:12px;">
           {searchResultCount} result{searchResultCount !== 1 ? 's' : ''}{searchQuery.trim() ? ` for "${searchQuery.trim()}"` : ''}
         </div>
       {:else if surfaceMode === 'library'}
@@ -929,12 +929,12 @@
           />
         </div>
       {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
-        <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
+        <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius: var(--radius-xl);">
           <div style="max-width:420px;text-align:center;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <p style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
-            <p style="font-size:14px;line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
-            <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Return to Today</button>
+            <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+            <p style="margin:12px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
+            <p style="font-size: var(--text-body);line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
+            <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius: var(--radius-pill);border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size: var(--text-ui);font-weight:700;cursor:pointer;">Return to Today</button>
           </div>
         </section>
       {:else if isSearching}
@@ -948,8 +948,8 @@
           {#each feedSections as section}
             <div style="margin-bottom:32px;">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
-                <span style="font-size:10px;color:var(--text-faint);">{section.count}</span>
+                <span style="font-size: var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
+                <span style="font-size: var(--text-micro);color:var(--text-faint);">{section.count}</span>
               </div>
               <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
                 {#each section.issues as issue, i}
@@ -967,7 +967,7 @@
         </div>
       {/if}
       {#if isSearching && searchResultCount === 0}
-        <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery.trim()}"</div>
+        <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size: var(--text-body);">No issues match "{searchQuery.trim()}"</div>
       {/if}
     </div>
     </main>
@@ -1018,21 +1018,21 @@
         <!-- I1: Error state with offline differentiation -->
         <div style="flex:1;display:flex;align-items:center;justify-content:center;">
           <div style="text-align:center;max-width:300px;">
-            <p style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin:0 0 8px;">{isOffline ? "You're offline" : "Couldn't load this issue"}</p>
-            <p style="font-family:var(--font-body);font-size:13px;color:var(--text-muted);margin:0 0 16px;">{isOffline ? "This issue hasn't been cached yet. Connect to the internet to read it." : "Something went wrong. Try again."}</p>
-            <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
+            <p style="font-family:var(--font-display);font-size: var(--text-body);font-weight:600;color:var(--text-primary);margin:0 0 8px;">{isOffline ? "You're offline" : "Couldn't load this issue"}</p>
+            <p style="font-family:var(--font-body);font-size: var(--text-ui);color:var(--text-muted);margin:0 0 16px;">{isOffline ? "This issue hasn't been cached yet. Connect to the internet to read it." : "Something went wrong. Try again."}</p>
+            <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius: var(--radius-md);font-size: var(--text-ui);font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
           </div>
         </div>
       {:else if issueLoading}
         <!-- I2: Skeleton loader -->
         <div style="flex:1;padding:40px 24px;max-width:640px;margin:0 auto;">
-          <div style="height:28px;width:70%;background:var(--bg-sunken);border-radius:6px;margin-bottom:16px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:16px;width:100%;background:var(--bg-sunken);border-radius:4px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:16px;width:85%;background:var(--bg-sunken);border-radius:4px;margin-bottom:24px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:6px;width:100%;background:var(--bg-sunken);border-radius:3px;margin-bottom:32px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:20px;width:50%;background:var(--bg-sunken);border-radius:4px;margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;width:90%;background:var(--bg-sunken);border-radius:4px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;width:75%;background:var(--bg-sunken);border-radius:4px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:28px;width:70%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:16px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:16px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:16px;width:85%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:24px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:6px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-pill);margin-bottom:32px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:20px;width:50%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;width:90%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;width:75%;background:var(--bg-sunken);border-radius: var(--radius-sm);animation:shimmer 1.5s infinite;"></div>
         </div>
       {:else if activeFullIssue}
         <DesktopReader
@@ -1047,11 +1047,11 @@
       {:else if surfaceMode === 'library' && sortedIssues.length === 0}
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
+            <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
               Library · {libraryLabel(libraryMode)}
             </div>
-            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
-            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
+            <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
               {libraryEmptyCopy(libraryMode)}
             </p>
           </div>
@@ -1065,11 +1065,11 @@
       {:else if surfaceMode === 'library'}
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
+            <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
               {libraryMode === 'highlights' ? 'Choose an issue with saved angles.' : 'Choose the next issue from your library.'}
             </h1>
-            <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+            <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
               {libraryMode === 'highlights'
                 ? 'The left rail shows every issue with highlights. Open one to revisit the angles you kept.'
                 : 'The left rail already holds your current reading memory. Pick an issue there to continue.'}

@@ -64,7 +64,7 @@
 {#if showButton && !isInstalled}
   <button
     onclick={install}
-    style="background:none;border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:background 0.15s ease;position:relative;"
+    style="background:none;border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;border-radius: var(--radius-md);transition:background 0.15s ease;position:relative;"
     aria-label="Install app"
     title="Install The Fourth Angle"
   >
@@ -76,12 +76,12 @@
   </button>
 
   {#if showIOSGuide}
-    <div style="position:absolute;top:100%;right:0;width:280px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:12px;box-shadow:var(--shadow-lg);z-index:2000;margin-top:4px;padding:16px;">
-      <p style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Install The Fourth Angle</p>
-      <p style="font-family:var(--font-body);font-size:13px;color:var(--text-secondary);margin:0 0 12px 0;line-height:1.5;">
-        Tap the share button <span style="font-size:16px;">&#x2191;</span> in Safari, then tap <strong>"Add to Home Screen"</strong>.
+    <div style="position:absolute;top:100%;right:0;width:280px;background:var(--bg);border:1px solid var(--border-subtle);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg);z-index:2000;margin-top:4px;padding:16px;">
+      <p style="font-family:var(--font-display);font-size: var(--text-body);font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Install The Fourth Angle</p>
+      <p style="font-family:var(--font-body);font-size: var(--text-ui);color:var(--text-secondary);margin:0 0 12px 0;line-height:1.5;">
+        Tap the share button <span style="font-size: var(--text-body-lg);">&#x2191;</span> in Safari, then tap <strong>"Add to Home Screen"</strong>.
       </p>
-      <button onclick={dismiss} style="font-family:var(--font-body);font-size:12px;color:var(--text-tertiary);background:none;border:none;cursor:pointer;padding:4px 0;">Dismiss</button>
+      <button onclick={dismiss} style="font-family:var(--font-body);font-size: var(--text-sm);color:var(--text-tertiary);background:none;border:none;cursor:pointer;padding:4px 0;">Dismiss</button>
     </div>
   {/if}
 {/if}

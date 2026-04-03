@@ -68,6 +68,6 @@
     <div style="height:100%;width:{fillWidth}%;background:{color};border-radius:{height/2}px;"></div>
   </div>
   {#if showLabel}
-    <span style="font-family:var(--font-display, 'Manrope', system-ui, sans-serif);font-size:12px;font-weight:700;color:{color};min-width:28px;text-align:right;">{displayScore}</span>
+    <span style="font-family:var(--font-display, 'Manrope', system-ui, sans-serif);font-size: var(--text-sm);font-weight:700;color:{color};min-width:28px;text-align:right;">{displayScore}</span>
   {/if}
 </div>

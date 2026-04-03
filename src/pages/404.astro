@@ -10,9 +10,9 @@ const description = 'This page or issue could not be found. Return to Today to c
   <header style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border-subtle);background:var(--bg);">
     <a href="/" aria-label="The Fourth Angle — go to Today" style="display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary);min-height:44px;">
       <Logo size={60} />
-      <span style="font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);">The Fourth Angle</span>
+      <span style="font-family:var(--font-display);font-size: var(--text-body-lg);font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);">The Fourth Angle</span>
     </a>
-    <a href="/about" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);font-size:12px;font-weight:700;color:var(--text-secondary);text-decoration:none;">How This Works</a>
+    <a href="/about" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius: var(--radius-pill);border:1px solid var(--border-subtle);background:var(--bg-elevated);font-size: var(--text-sm);font-weight:700;color:var(--text-secondary);text-decoration:none;">How This Works</a>
   </header>
   <main
     style="
@@ -28,14 +28,14 @@ const description = 'This page or issue could not be found. Return to Today to c
     "
   >
     <section style="max-width:520px;width:100%;text-align:center;">
-      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
+      <p style="margin:0;font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
         404
       </p>
       <h1
         style="
           margin:12px 0 0;
           font-family:var(--font-display);
-          font-size:clamp(34px, 6vw, 52px);
+          font-size:var(--text-error-title-fluid);
           line-height:0.98;
           letter-spacing:-0.05em;
           color:var(--text-primary);
@@ -43,7 +43,7 @@ const description = 'This page or issue could not be found. Return to Today to c
       >
         This page wasn’t found.
       </h1>
-      <p style="margin:16px 0 0;font-size:15px;line-height:1.7;color:var(--text-secondary);">
+      <p style="margin:16px 0 0;font-size: var(--text-body);line-height:1.7;color:var(--text-secondary);">
         The issue may have moved, the link may be incomplete, or the route may no longer exist. Return to Today and continue from a verified issue card.
       </p>
       <a
@@ -52,7 +52,7 @@ const description = 'This page or issue could not be found. Return to Today to c
           margin-top:24px;
           min-height:48px;
           padding:0 22px;
-          border-radius:999px;
+          border-radius: var(--radius-pill);
           border:1px solid rgba(184, 92, 0, 0.28);
           background:rgba(210, 140, 40, 0.12);
           color:var(--score-warning);
@@ -60,7 +60,7 @@ const description = 'This page or issue could not be found. Return to Today to c
           align-items:center;
           justify-content:center;
           text-decoration:none;
-          font-size:13px;
+          font-size: var(--text-ui);
           font-weight:700;
           letter-spacing:0.01em;
         "

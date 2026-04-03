@@ -138,7 +138,7 @@
   .highlights-kicker,
   .issue-count,
   .saved-angle-jump {
-    font-size: 11px;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -152,7 +152,7 @@
   .highlights-title {
     margin: 10px 0 0;
     font-family: var(--font-display);
-    font-size: clamp(38px, 4vw, 48px);
+    font-size: var(--text-highlights-title-fluid);
     line-height: 0.98;
     letter-spacing: -0.05em;
     font-weight: 700;
@@ -162,7 +162,7 @@
   .highlights-copy {
     max-width: 58ch;
     margin: 14px 0 0;
-    font-size: 15px;
+    font-size: var(--text-body);
     line-height: 1.65;
     color: var(--text-secondary);
   }
@@ -177,7 +177,7 @@
 
   .highlight-group {
     border: 1px solid var(--border-subtle);
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     background: var(--card);
     padding: 22px;
     box-shadow: 0 16px 36px rgba(24, 24, 24, 0.05);
@@ -196,7 +196,7 @@
 
   .issue-title {
     margin: 0;
-    font-size: 24px;
+    font-size: var(--text-title);
     line-height: 1.2;
     letter-spacing: -0.04em;
     font-weight: 700;
@@ -205,7 +205,7 @@
 
   .issue-context {
     margin: 10px 0 0;
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.6;
     color: var(--text-secondary);
   }
@@ -223,7 +223,7 @@
   }
 
   .saved-angle-card {
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
     padding: 16px;
@@ -242,21 +242,21 @@
     align-items: center;
     gap: 8px;
     padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 12px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
     font-weight: 700;
   }
 
   .saved-angle-index {
     width: 18px;
     height: 18px;
-    border-radius: 50%;
+    border-radius: var(--radius-round);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.66);
-    font-size: 11px;
-    font-weight: 800;
+    font-size: var(--text-xs);
+    font-weight: 700;
   }
 
   .saved-angle-open {
@@ -267,7 +267,7 @@
     text-align: left;
     cursor: pointer;
     padding: 0;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
   }
 
   .saved-angle-open:focus-visible {
@@ -277,7 +277,7 @@
 
   .saved-angle-claim {
     margin: 0;
-    font-size: 22px;
+    font-size: var(--text-title);
     line-height: 1.35;
     letter-spacing: -0.03em;
     font-weight: 700;
@@ -287,7 +287,7 @@
 
   .saved-angle-sub {
     margin: 10px 0 0;
-    font-size: 15px;
+    font-size: var(--text-body);
     line-height: 1.6;
     color: var(--text-secondary);
   }
@@ -315,11 +315,11 @@
     }
 
     .highlights-copy {
-      font-size: 14px;
+      font-size: var(--text-body);
     }
 
     .highlight-group {
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
       padding: 18px;
     }
 
@@ -333,20 +333,20 @@
     }
 
     .issue-title {
-      font-size: 22px;
+      font-size: var(--text-title);
     }
 
     .saved-angle-card {
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       padding: 14px;
     }
 
     .saved-angle-claim {
-      font-size: 20px;
+      font-size: var(--text-subtitle);
     }
 
     .saved-angle-sub {
-      font-size: 14px;
+      font-size: var(--text-body);
     }
   }
 

@@ -83,19 +83,19 @@
         {@const val = scores[stage.key as keyof StageScores]}
         {@const shape = dotShape(val)}
         {#if shape === 'circle'}
-          <div style="width:7px;height:7px;border-radius:50%;background:{dotColor(val)};opacity:0.85;" role="img" aria-label="{stage.full}: {val !== undefined ? val + '/100' : 'N/A'}{val !== undefined ? ' — ' + scoreLabel(val) : ''}"></div>
+          <div style="width:7px;height:7px;border-radius: var(--radius-round);background:{dotColor(val)};opacity:0.85;" role="img" aria-label="{stage.full}: {val !== undefined ? val + '/100' : 'N/A'}{val !== undefined ? ' — ' + scoreLabel(val) : ''}"></div>
         {:else if shape === 'triangle'}
           <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid {dotColor(val)};opacity:0.85;" role="img" aria-label="{stage.full}: {val}/100 — {scoreLabel(val)}"></div>
         {:else}
           <div style="width:6px;height:6px;background:{dotColor(val)};transform:rotate(45deg);opacity:0.85;" role="img" aria-label="{stage.full}: {val}/100 — {scoreLabel(val)}"></div>
         {/if}
       {/each}
-      <span style="font-family:var(--font-display, 'Manrope', system-ui, sans-serif);font-size:11px;font-weight:700;color:var(--text-tertiary);margin-left:4px;">{finalScore}</span>
+      <span style="font-family:var(--font-display, 'Manrope', system-ui, sans-serif);font-size: var(--text-xs);font-weight:700;color:var(--text-tertiary);margin-left:4px;">{finalScore}</span>
     </div>
   {:else}
     <!-- Full: shaped dots + labels + tap-to-expand tooltips -->
     <div
-      style="display:flex;flex-direction:column;gap:0;padding:10px 14px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius:12px;"
+      style="display:flex;flex-direction:column;gap:0;padding:10px 14px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius: var(--radius-lg);"
       role="group"
       aria-label="6-stage editorial review — Neutrality: {finalScore} out of 100"
     >
@@ -112,19 +112,19 @@
               aria-expanded={expandedStage === stage.key}
             >
               {#if shape === 'circle'}
-                <div style="width:10px;height:10px;border-radius:50%;background:{dotColor(val)};box-shadow:0 0 0 2px {dotBg(val)};"></div>
+                <div style="width:10px;height:10px;border-radius: var(--radius-round);background:{dotColor(val)};box-shadow:0 0 0 2px {dotBg(val)};"></div>
               {:else if shape === 'triangle'}
                 <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid {dotColor(val)};filter:drop-shadow(0 0 2px {dotBg(val)});"></div>
               {:else}
                 <div style="width:8px;height:8px;background:{dotColor(val)};transform:rotate(45deg);box-shadow:0 0 0 2px {dotBg(val)};"></div>
               {/if}
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;text-transform:uppercase;">{stage.label}</span>
+              <span style="font-family:var(--font-display);font-size: var(--text-micro);font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;text-transform:uppercase;">{stage.label}</span>
             </button>
           {/each}
         </div>
         <div style="display:flex;align-items:baseline;gap:4px;margin-left:12px;">
-          <span style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);">{finalScore}</span>
-          <span style="font-family:var(--font-display);font-size:10px;font-weight:500;color:var(--text-tertiary);">/100</span>
+          <span style="font-family:var(--font-display);font-size: var(--text-body-lg);font-weight:700;color:var(--text-primary);">{finalScore}</span>
+          <span style="font-family:var(--font-display);font-size: var(--text-micro);font-weight: 600;color:var(--text-tertiary);">/100</span>
         </div>
       </div>
 
@@ -134,12 +134,12 @@
         {@const stage = stages.find(s => s.key === expandedStage)}
         {#if stage && val !== undefined}
           <div style="margin-top:8px;padding:8px 0 2px;border-top:1px solid var(--border-light);display:flex;flex-direction:column;gap:4px;">
-            <div style="font-size:11px;color:var(--text-secondary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <div style="font-size: var(--text-xs);color:var(--text-secondary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
               <span style="font-weight:600;color:var(--text-primary);">{stage.full}</span>
               <span style="color:{dotColor(val)};font-weight:700;">{val}/100</span>
               <span style="color:var(--text-muted);">— {scoreLabel(val)}</span>
             </div>
-            <div style="font-size:11px;line-height:1.5;color:var(--text-secondary);">{stage.description}</div>
+            <div style="font-size: var(--text-xs);line-height:1.5;color:var(--text-secondary);">{stage.description}</div>
           </div>
         {/if}
       {/if}

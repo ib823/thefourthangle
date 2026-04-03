@@ -52,7 +52,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     padding: 4px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: rgba(255, 255, 255, 0.74);
     border: 1px solid var(--border-subtle);
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
@@ -64,7 +64,7 @@
     position: absolute;
     inset: 4px auto 4px 4px;
     width: calc(50% - 4px);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--bg-sunken);
     box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
     transform: translate3d(calc(var(--sort-index, 0) * 100%), 0, 0);
@@ -83,12 +83,12 @@
     min-width: 0;
     padding: 0 16px;
     border: none;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: transparent;
     color: var(--text-faint);
     cursor: pointer;
     font: inherit;
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     transition: color 180ms ease, transform 180ms ease;
   }
@@ -109,7 +109,7 @@
 
   .sort-toggle--sidebar .sort-chip {
     min-height: 44px;
-    font-size: 11px;
+    font-size: var(--text-xs);
     padding-inline: 12px;
   }
 

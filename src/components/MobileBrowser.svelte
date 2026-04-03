@@ -410,14 +410,14 @@
     </div>
   {/if}
   {#if displayList.length === 0 && searchQuery}
-    <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
+    <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size: var(--text-body);">No issues match "{searchQuery}"</div>
   {/if}
   {#each displayList as item, i}
     {#if item.type === 'sort-toggle'}
-      <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size:12px;font-weight:600;">
-        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
+      <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size: var(--text-sm);font-weight:600;">
+        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
         <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:12px;font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
       </div>
     {:else if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
@@ -460,11 +460,11 @@
     width: fit-content;
     margin: 0 0 -32px;
     padding: 8px 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.88);
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
     pointer-events: none;

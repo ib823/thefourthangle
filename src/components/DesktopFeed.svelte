@@ -243,7 +243,7 @@
         value={searchQuery}
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
         onfocus={() => onSearchFocus?.()}
-        style="width:100%;padding:8px 32px 8px 12px;font-size:13px;border:1px solid var(--border-subtle);border-radius:8px;background:var(--bg-sunken);color:var(--text-primary);outline:none;transition:border-color 0.15s ease;"
+        style="width:100%;padding:8px 32px 8px 12px;font-size: var(--text-ui);border:1px solid var(--border-subtle);border-radius: var(--radius-md);background:var(--bg-sunken);color:var(--text-primary);outline:none;transition:border-color 0.15s ease;"
         onfocusin={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--score-info)'; }}
         onfocusout={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
       />
@@ -251,7 +251,7 @@
         <button
           type="button"
           onclick={() => onSearchClear?.()}
-          style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;color:var(--text-tertiary);padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;"
+          style="position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size: var(--text-body);color:var(--text-tertiary);padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;"
           aria-label="Clear search"
         >x</button>
       {/if}
@@ -294,7 +294,7 @@
             {issues.length} result{issues.length !== 1 ? 's' : ''} for "{searchQuery.trim()}"
           {/if}
         </span>
-        <span style="font-size:11px;color:var(--text-tertiary);">
+        <span style="font-size: var(--text-xs);color:var(--text-tertiary);">
           {#if issues.length === 0 && searchQuery.trim().length >= 2}
             No results for "{searchQuery.trim()}"
           {:else}
@@ -316,7 +316,7 @@
             tabindex={filterMode === tab.key ? 0 : -1}
             style="
               flex:1;padding:8px 4px 10px;background:none;border:none;cursor:pointer;
-              font-size:11px;font-weight:{filterMode === tab.key ? '700' : '500'};
+              font-size: var(--text-xs);font-weight:{filterMode === tab.key ? '700' : '600'};
               color:{filterMode === tab.key ? 'var(--text-primary)' : 'var(--text-muted)'};
               border-bottom:2px solid {filterMode === tab.key ? 'var(--text-primary)' : 'transparent'};
               transition:color var(--duration-fast, 150ms) ease, border-color var(--duration-fast, 150ms) ease;
@@ -325,14 +325,14 @@
             "
           >
             <span>{tab.label}</span>
-            <span style="font-size:10px;font-weight:500;color:{filterMode === tab.key ? 'var(--text-tertiary)' : 'var(--text-faint)'};">
+            <span style="font-size: var(--text-micro);font-weight: 600;color:{filterMode === tab.key ? 'var(--text-tertiary)' : 'var(--text-faint)'};">
               {tab.key === 'all' ? counts.all : tab.key === 'new' ? counts.new : tab.key === 'reading' ? counts.reading : counts.done}
             </span>
           </button>
         {/each}
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;">
-        <span style="font-size:10px;color:var(--text-muted);">{issues.length} issues</span>
+        <span style="font-size: var(--text-micro);color:var(--text-muted);">{issues.length} issues</span>
       </div>
     {/if}
   </div>
@@ -372,7 +372,7 @@
       {/each}
     {:else if flatIssues.length === 0 && (isSearching || filterMode !== 'all')}
       <div style="padding:40px 20px;text-align:center;">
-        <p style="font-size:13px;color:var(--text-muted);">
+        <p style="font-size: var(--text-ui);color:var(--text-muted);">
           {#if isSearching}
             No issues match "{searchQuery}"
           {:else}

@@ -86,7 +86,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     padding: 4px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.74);
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
@@ -98,7 +98,7 @@
     position: absolute;
     inset: 4px auto 4px 4px;
     width: calc(50% - 4px);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--bg-sunken);
     box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
     transform: translate3d(calc(var(--library-index, 0) * 100%), 0, 0);
@@ -120,13 +120,13 @@
     min-width: 0;
     min-height: 44px;
     padding: 0 16px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: none;
     background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
     font: inherit;
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     transition: color 180ms ease, transform 180ms ease;
   }
@@ -143,25 +143,25 @@
     min-width: 18px;
     height: 18px;
     padding: 0 6px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: rgba(210, 140, 40, 0.12);
     color: inherit;
-    font-size: 10px;
-    font-weight: 800;
+    font-size: var(--text-micro);
+    font-weight: 700;
     line-height: 1;
   }
 
   .library-tabs--sidebar .library-tab {
     min-height: 44px;
     padding-inline: 12px;
-    font-size: 11px;
+    font-size: var(--text-xs);
   }
 
   @media (max-width: 767px) {
     .library-tab {
       min-height: 44px;
       padding-inline: 12px;
-      font-size: 11px;
+      font-size: var(--text-xs);
     }
   }
 

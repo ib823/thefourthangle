@@ -42,14 +42,14 @@
     gap: 8px;
     min-height: 44px;
     padding: 0 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
     color: var(--text-secondary);
     cursor: pointer;
     transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
     font: inherit;
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 0.01em;
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
@@ -84,18 +84,18 @@
     min-width: 18px;
     height: 18px;
     padding: 0 6px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: rgba(210, 140, 40, 0.12);
     color: inherit;
-    font-size: 10px;
-    font-weight: 800;
+    font-size: var(--text-micro);
+    font-weight: 700;
     line-height: 1;
   }
 
   .surface-nav--sidebar .surface-button {
     min-height: 44px;
     padding-inline: 12px;
-    font-size: 11px;
+    font-size: var(--text-xs);
     box-shadow: none;
   }
 
@@ -107,7 +107,7 @@
     .surface-button {
       min-height: 44px;
       padding-inline: 12px;
-      font-size: 11px;
+      font-size: var(--text-xs);
     }
   }
 

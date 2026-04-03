@@ -69,7 +69,7 @@
   aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}."
   style="
     background:{isCompleted ? 'var(--bg-elevated)' : 'var(--bg)'};
-    border-radius:16px;padding:18px;cursor:pointer;
+    border-radius:var(--radius-lg);padding:18px;cursor:pointer;
     box-shadow:{hovered ? '0 8px 30px rgba(0,0,0,0.08)' : '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)'};
     transform:{visible ? (hovered ? 'translateY(-3px) scale(1.006)' : 'translateY(0) scale(1)') : 'translateY(24px)'};
     opacity:{visible ? 1 : 0};
@@ -81,12 +81,12 @@
   <!-- Top row: status pill + heart -->
   <div style="display:flex;align-items:center;gap:6px;">
     {#if issue.status === 'new' && !readState}
-      <span style="font-size:10px;font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">New</span>
+      <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;">New</span>
     {:else if issue.status === 'updated'}
-      <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
+      <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;">Updated</span>
     {/if}
     {#if hasReaction}
-      <span style="font-size:10px;font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
+      <span style="font-size:var(--text-micro);font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;">Highlighted</span>
     {/if}
     <div style="flex:1;"></div>
   </div>
@@ -99,16 +99,16 @@
   {/if}
 
   <!-- Headline -->
-  <h3 class="balance-title" style="font-size:15px;font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.28;overflow-wrap:normal;">{issue.headline}</h3>
+  <h3 class="balance-title" style="font-size:var(--text-body);font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.28;overflow-wrap:normal;">{issue.headline}</h3>
   <!-- Context -->
-  <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
+  <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
 
   <!-- Score row -->
   <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
-    <div style="flex:1;height:4px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-      <div style="height:100%;width:{issue.opinionShift}%;background:{scoreColor};border-radius:2px;"></div>
+    <div style="flex:1;height:4px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+      <div style="height:100%;width:{issue.opinionShift}%;background:{scoreColor};border-radius: var(--radius-pill);"></div>
     </div>
-    <span style="font-size:14px;font-weight:700;color:{scoreColor};min-width:24px;text-align:right;font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
+    <span style="font-size:var(--text-body);font-weight:700;color:{scoreColor};min-width:24px;text-align:right;font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
     {#if hasReaction}
       <svg width="10" height="10" viewBox="0 0 24 24" fill={scoreColor} stroke="none" style="opacity:0.4;flex-shrink:0;">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -118,10 +118,10 @@
 
   <!-- Progress bar: orange for reading, dim green for done -->
   {#if isStarted && progress > 0}
-    <div style="margin-top:10px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-      <div style="height:100%;width:{(progress / 6) * 100}%;background:var(--score-warning);border-radius:2px;"></div>
+    <div style="margin-top:10px;height:3px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+      <div style="height:100%;width:{(progress / 6) * 100}%;background:var(--score-warning);border-radius: var(--radius-pill);"></div>
     </div>
   {:else if isCompleted}
-    <div style="margin-top:10px;height:3px;background:var(--status-green);border-radius:2px;opacity:0.3;"></div>
+    <div style="margin-top:10px;height:3px;background:var(--status-green);border-radius: var(--radius-pill);opacity:0.3;"></div>
   {/if}
 </div>
