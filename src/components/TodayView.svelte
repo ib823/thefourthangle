@@ -296,7 +296,7 @@
           <button class="library-item library-item--compact" onclick={() => onOpenLibraryHighlights?.()}>
             <span class="library-label">Highlights</span>
             <span class="library-value">{highlightCount}</span>
-            <span class="library-copy">Issues and angles you kept</span>
+            <span class="library-copy">Angles you marked while reading</span>
           </button>
         </div>
       </section>

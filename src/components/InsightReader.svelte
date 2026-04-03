@@ -3,7 +3,6 @@
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
   import SaveButton from './SaveButton.svelte';
-  import IssueSaveButton from './IssueSaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
   import { CARD_TYPES } from '../data/issues';
@@ -504,7 +503,7 @@
     completionVisible = true;
     announceCompletion();
     // Stagger buttons in
-    const btnCount = onReturnHome ? 3 : 2;
+    const btnCount = onReturnHome && onNext ? 3 : 2;
     completionButtonsVisible = [];
     stagger(btnCount, 120, 500, (i) => {
       completionButtonsVisible = [...completionButtonsVisible, true];
@@ -1060,10 +1059,6 @@
             {#if completionButtonsVisible.length > 2}
               {#if onNext}
                 <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
-              {:else}
-                <div class="completion-btn-enter" style="display:flex;justify-content:center;">
-                  <IssueSaveButton issueId={issue.id} label="Add to Highlights" />
-                </div>
               {/if}
             {/if}
           </div>
@@ -1093,7 +1088,6 @@
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
-            <IssueSaveButton issueId={issue.id} compact={true} />
             <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius:10px;cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>

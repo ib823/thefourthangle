@@ -5,7 +5,7 @@
   import LibraryTabs from './LibraryTabs.svelte';
   import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
-  import { reactions, savedIssues } from '../stores/reader';
+  import { reactions } from '../stores/reader';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection, SectionKind, SortMode } from '../lib/feed-sections';
@@ -76,19 +76,6 @@
 
   function hasReaction(issueId: string): boolean {
     return (reactionMap[issueId]?.length ?? 0) > 0;
-  }
-
-  let savedRaw = $state('{}');
-  $effect(() => {
-    const unsub = savedIssues.subscribe(v => { savedRaw = v; });
-    return unsub;
-  });
-  let savedMap: Record<string, number> = $derived.by(() => {
-    try { return JSON.parse(savedRaw); } catch { return {}; }
-  });
-
-  function isSaved(issueId: string): boolean {
-    return !!savedMap[issueId];
   }
 
   // Compute counts
@@ -365,7 +352,7 @@
         />
         {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
           {#each section.issues as issue}
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={isSaved(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           {/each}
         {/if}
       {/each}
@@ -391,7 +378,7 @@
             aria-selected={activeId === issue.id}
             tabindex={focusedIndex === idx ? 0 : -1}
           >
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} isSaved={isSaved(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           </div>
         {/each}
       </div>

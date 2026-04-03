@@ -13,10 +13,9 @@
     onOpen: () => void;
     onPrefetch?: () => void;
     hasReaction?: boolean;
-    isSaved?: boolean;
     hasConnections?: boolean;
   }
-  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false, isSaved = false, hasConnections = false }: Props = $props();
+  let { issue, index, readState, onOpen, onPrefetch, hasReaction = false, hasConnections = false }: Props = $props();
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
@@ -86,7 +85,7 @@
     {:else if issue.status === 'updated'}
       <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
     {/if}
-    {#if isSaved || hasReaction}
+    {#if hasReaction}
       <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
     {/if}
     <div style="flex:1;"></div>
@@ -110,7 +109,7 @@
       <div style="height:100%;width:{issue.opinionShift}%;background:{scoreColor};border-radius:2px;"></div>
     </div>
     <span style="font-size:14px;font-weight:700;color:{scoreColor};min-width:24px;text-align:right;font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
-    {#if isSaved || hasReaction}
+    {#if hasReaction}
       <svg width="10" height="10" viewBox="0 0 24 24" fill={scoreColor} stroke="none" style="opacity:0.4;flex-shrink:0;">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
       </svg>

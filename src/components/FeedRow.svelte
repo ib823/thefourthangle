@@ -10,11 +10,10 @@
     isActive: boolean;
     onClick: () => void;
     hasReaction?: boolean;
-    isSaved?: boolean;
     hasConnections?: boolean;
     searchTerms?: string;
   }
-  let { issue, readState, isActive, onClick, hasReaction = false, isSaved = false, hasConnections = false, searchTerms = '' }: Props = $props();
+  let { issue, readState, isActive, onClick, hasReaction = false, hasConnections = false, searchTerms = '' }: Props = $props();
 
   function highlightText(text: string, terms: string): string {
     if (!terms || terms.length < 2) return text;
@@ -64,7 +63,7 @@
       {:else if issue.status === 'updated'}
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
-      {#if isSaved || hasReaction}
+      {#if hasReaction}
         <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Highlighted</span>
       {/if}
     </div>

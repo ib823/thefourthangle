@@ -15,7 +15,7 @@
   import TodayView from './TodayView.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
   import InsightReader from './InsightReader.svelte';
-  import { readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, savedIssues, computeAffinity, scoreIssue } from '../stores/reader';
+  import { countHighlights, readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
   import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
@@ -83,12 +83,12 @@
   }
 
   function libraryEmptyTitle(mode: LibraryMode): string {
-    if (mode === 'highlights') return 'No highlights saved yet.';
+    if (mode === 'highlights') return 'No highlights yet.';
     return 'No unfinished issues yet.';
   }
 
   function libraryEmptyCopy(mode: LibraryMode): string {
-    if (mode === 'highlights') return 'Add an issue to Highlights or mark an angle while reading, and it will stay here as your personal trail.';
+    if (mode === 'highlights') return 'Tap Highlight on any card while reading, and every marked angle will stay here as your personal trail.';
     return 'Start an issue and it will remain here until you finish the reading path.';
   }
 
@@ -168,17 +168,6 @@
     return (appReactionMap[issueId]?.length ?? 0) > 0;
   }
 
-  let savedRaw = $state('{}');
-  $effect(() => {
-    const unsub = savedIssues.subscribe(v => { savedRaw = v; });
-    return unsub;
-  });
-  let savedIssueMap = $derived.by(() => {
-    try { return JSON.parse(savedRaw) as Record<string, number>; } catch { return {}; }
-  });
-  function hasSaved(issueId: string): boolean {
-    return !!savedIssueMap[issueId];
-  }
   let readingIssueIds = $derived.by(() => {
     return new Set(
       Object.entries(readMap)
@@ -195,19 +184,14 @@
   });
   let highlightedIssueIds = $derived.by(() => {
     const ids = new Set<string>();
-    for (const id of Object.keys(savedIssueMap)) ids.add(id);
     for (const [id, cards] of Object.entries(appReactionMap)) {
       if ((cards?.length ?? 0) > 0) ids.add(id);
     }
     return ids;
   });
-  let highlightCount = $derived(highlightedIssueIds.size);
+  let highlightCount = $derived(countHighlights(appReactionMap));
   let readingCount = $derived(readingIssueIds.size);
-  let libraryCount = $derived.by(() => {
-    const ids = new Set<string>(readingIssueIds);
-    for (const id of highlightedIssueIds) ids.add(id);
-    return ids.size;
-  });
+  let libraryCount = $derived(readingCount + highlightCount);
   let scopedIssues = $derived.by(() => {
     if (surfaceMode === 'library') {
       if (libraryMode === 'highlights') return issues.filter(i => highlightedIssueIds.has(i.id));
@@ -929,7 +913,7 @@
       {:else if isSearching}
         <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
           {#each sortedIssues as issue, i}
-            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
           {/each}
         </div>
       {:else if surfaceMode === 'library'}
@@ -942,7 +926,7 @@
               </div>
               <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
                 {#each section.issues as issue, i}
-                  <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+                  <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
                 {/each}
               </div>
             </div>
@@ -951,7 +935,7 @@
       {:else}
         <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
           {#each sortedIssues as issue, i}
-            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} isSaved={hasSaved(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+            <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
           {/each}
         </div>
       {/if}

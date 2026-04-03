@@ -1,6 +1,7 @@
 import { beforeEach, describe, it, expect } from 'vitest';
 import {
   addReaction,
+  countHighlights,
   computeAffinity,
   getReadCount,
   getReactions,
@@ -70,6 +71,13 @@ describe('reactions', () => {
     expect(hasReacted('001', 1)).toBe(true);
     expect(hasReacted('001', 4)).toBe(true);
     expect(getReactions()['001']).toEqual([1, 4]);
+  });
+
+  it('counts every highlighted card, not just unique issues', () => {
+    addReaction('001', 1);
+    addReaction('001', 4);
+    addReaction('002', 0);
+    expect(countHighlights()).toBe(3);
   });
 });
 

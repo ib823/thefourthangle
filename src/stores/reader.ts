@@ -53,6 +53,14 @@ export function addReaction(issueId: string, cardIndex: number): void {
   }
 }
 
+export function countHighlights(reactionMap: Record<string, number[]> = getReactions()): number {
+  let total = 0;
+  for (const cards of Object.values(reactionMap)) {
+    total += cards?.length ?? 0;
+  }
+  return total;
+}
+
 // Saved issues — issue-level "return later" list
 export const savedIssues = persistentAtom<string>('tfa-saved', '{}');
 

@@ -6,7 +6,6 @@
   import { markStarted, markCompleted } from '../stores/reader';
   import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
-  import IssueSaveButton from './IssueSaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
   import IssueImage from './IssueImage.svelte';
@@ -265,7 +264,6 @@
         <h1 class="reader-headline balance-title">{issue.headline}</h1>
       </div>
       <div class="reader-actions">
-        <IssueSaveButton issueId={issue.id} compact={true} />
         <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           <span style="font-size:12px;font-weight:700;color:var(--text-tertiary);">Share</span>
@@ -405,9 +403,6 @@
             Back to Today
           </button>
         {/if}
-        <div class="completion-secondary-wrap">
-          <IssueSaveButton issueId={issue.id} label="Add to Highlights" />
-        </div>
       </div>
 
       <button onclick={() => { shareOpen = true; }} class="completion-utility-btn">
@@ -529,10 +524,8 @@
   }
 
   .reader-completion-actions {
-    display: grid;
-    grid-template-columns: minmax(220px, 1fr) auto;
-    gap: 12px;
-    align-items: stretch;
+    display: flex;
+    align-items: center;
     margin-bottom: 12px;
   }
 
@@ -565,11 +558,6 @@
     background: linear-gradient(180deg, rgba(210, 140, 40, 0.15), rgba(210, 140, 40, 0.1));
     transform: translateY(-1px);
     box-shadow: 0 18px 32px rgba(210, 140, 40, 0.12);
-  }
-
-  .completion-secondary-wrap {
-    display: flex;
-    align-items: stretch;
   }
 
   .completion-utility-btn {
@@ -659,7 +647,6 @@
       font-size: clamp(34px, 9vw, 44px);
     }
 
-    .reader-completion-actions,
     .completion-verify-row {
       grid-template-columns: 1fr;
     }
