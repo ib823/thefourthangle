@@ -39,6 +39,11 @@
     return 'Reading library';
   }
 
+  function feedAriaLabel(mode: 'today' | 'library', activeLibraryMode: 'reading' | 'highlights') {
+    if (mode === 'library') return libraryHeading(activeLibraryMode);
+    return 'Issue list';
+  }
+
   let collapsedSections = $state<Record<string, boolean>>({});
 
   function defaultCollapsed(kind: SectionKind): boolean {
@@ -132,6 +137,7 @@
   });
 
   let flatIssues = $derived(displayIssues);
+  let issueIndexMap = $derived.by(() => new Map(flatIssues.map((issue, index) => [issue.id, index])));
   let visibleStart = $derived(Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER));
   let visibleEnd = $derived(Math.min(flatIssues.length, Math.ceil((scrollTop + containerHeight) / ITEM_HEIGHT) + BUFFER));
   let totalHeight = $derived(flatIssues.length * ITEM_HEIGHT);
@@ -201,6 +207,13 @@
     });
   }
 
+  function rowTabIndex(issueId: string, index: number): number {
+    if (focusedIndex === index) return 0;
+    if (focusedIndex >= 0) return -1;
+    if (!activeId) return index === 0 ? 0 : -1;
+    return activeId === issueId ? 0 : -1;
+  }
+
   // Reset scroll when filter changes
   $effect(() => {
     void filterMode;
@@ -211,8 +224,8 @@
   });
 </script>
 
-<aside aria-label="Issue list" style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
-  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : libraryHeading(libraryMode)}</h1>
+<aside aria-label={feedAriaLabel(surfaceMode, libraryMode)} style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
+  <h2 class="sr-only">{surfaceMode === 'today' ? 'Issue list' : libraryHeading(libraryMode)}</h2>
   <div style="padding:14px 18px 12px;flex-shrink:0;">
     <div style="padding:0 0 12px;">
       <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenLibrary={onOpenLibrary} />
@@ -352,7 +365,8 @@
         />
         {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
           {#each section.issues as issue}
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => onSelectIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            {@const idx = issueIndexMap.get(issue.id) ?? 0}
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           {/each}
         {/if}
       {/each}
@@ -373,12 +387,8 @@
           {@const idx = visibleStart + i}
           <div
             style="position:absolute;top:{idx * ITEM_HEIGHT}px;left:0;right:0;height:{ITEM_HEIGHT}px;"
-            data-index={idx}
-            role="option"
-            aria-selected={activeId === issue.id}
-            tabindex={focusedIndex === idx ? 0 : -1}
           >
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           </div>
         {/each}
       </div>

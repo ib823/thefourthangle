@@ -77,11 +77,6 @@
     return `/?view=library&tab=${nextLibraryMode}`;
   }
 
-  function surfaceHeading(mode: SurfaceMode, activeLibraryMode: LibraryMode): string {
-    if (mode === 'library') return `${libraryLabel(activeLibraryMode)} library`;
-    return 'Today';
-  }
-
   function libraryEmptyTitle(mode: LibraryMode): string {
     if (mode === 'highlights') return 'No highlights yet.';
     return 'No unfinished issues yet.';
@@ -90,6 +85,11 @@
   function libraryEmptyCopy(mode: LibraryMode): string {
     if (mode === 'highlights') return 'Tap Highlight on any card while reading, and every marked angle will stay here as your personal trail.';
     return 'Start an issue and it will remain here until you finish the reading path.';
+  }
+
+  function pageHeading(mode: SurfaceMode, activeLibraryMode: LibraryMode): string {
+    if (mode === 'library') return libraryEmptyTitle(activeLibraryMode);
+    return 'See what deserves your full attention.';
   }
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
@@ -774,9 +774,9 @@
       onSearchClear={onSearchClear}
     />
     <main class="app-main">
-    {#if !searchActive}
+      {#if !searchActive}
       {#if surfaceMode !== 'today'}
-        <h1 class="sr-only">{surfaceHeading(surfaceMode, libraryMode)}</h1>
+        <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
       {/if}
       <div class="mobile-secondary-bar" class:mobile-secondary-bar--library={surfaceMode === 'library'}>
         {#if surfaceMode === 'library'}
@@ -814,7 +814,7 @@
       <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
         <div style="max-width:320px;text-align:center;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-          <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
+	          <p style="margin:10px 0 0;font-family:var(--font-display);font-size:28px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
           <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
           <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Return to Today</button>
         </div>
@@ -847,7 +847,7 @@
     <main>
     <div style="max-width:960px;margin:0 auto;padding:0 18px 40px;">
       {#if surfaceMode !== 'today'}
-        <h1 class="sr-only">{surfaceHeading(surfaceMode, libraryMode)}</h1>
+        <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
       {/if}
       <div style="margin-bottom:16px;">
         <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()}>
@@ -905,7 +905,7 @@
         <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
           <div style="max-width:420px;text-align:center;">
             <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <h2 style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
+            <p style="margin:12px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
             <p style="font-size:14px;line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
             <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius:999px;border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size:13px;font-weight:700;cursor:pointer;">Return to Today</button>
           </div>
@@ -1016,7 +1016,7 @@
             <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
               Library · {libraryLabel(libraryMode)}
             </div>
-            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h2>
+            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
             <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
               {libraryEmptyCopy(libraryMode)}
             </p>
@@ -1026,7 +1026,7 @@
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">
             <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <h2 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Choose the next issue from your library.</h2>
+            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size:32px;line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">Choose the next issue from your library.</h1>
             <p style="font-size:14px;line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">The left rail already holds your current reading memory. Pick an issue there to continue.</p>
           </div>
         </div>

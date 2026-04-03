@@ -8,12 +8,14 @@
     issue: IssueSummary;
     readState: ReadState | null;
     isActive: boolean;
+    tabIndex?: number;
+    itemIndex?: number;
     onClick: () => void;
     hasReaction?: boolean;
     hasConnections?: boolean;
     searchTerms?: string;
   }
-  let { issue, readState, isActive, onClick, hasReaction = false, hasConnections = false, searchTerms = '' }: Props = $props();
+  let { issue, readState, isActive, tabIndex = 0, itemIndex = 0, onClick, hasReaction = false, hasConnections = false, searchTerms = '' }: Props = $props();
 
   function highlightText(text: string, terms: string): string {
     if (!terms || terms.length < 2) return text;
@@ -35,19 +37,25 @@
   // Visual weight: bold unread → medium reading → light done
   let headlineWeight = $derived(isCompleted ? '500' : (isStarted ? '600' : '700'));
   let headlineColor = $derived(isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)');
-  let progressLabel = $derived(isStarted && progress > 0 ? `Angle ${Math.min(progress + 1, 6)} next` : (isCompleted ? 'Done' : ''));
+  let progressLabel = $derived(isStarted && progress > 0 ? `Resume from insight ${Math.min(progress + 1, 6)} of 6` : (isCompleted ? 'Done' : ''));
+  let optionLabel = $derived(
+    `${issue.headline}. Opinion Shift ${issue.opinionShift}. ${isCompleted ? 'Finished.' : progressLabel || 'Not started.'}`
+  );
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<div
+<button
+  type="button"
+  class="feed-row"
+  data-index={itemIndex}
   onclick={onClick}
-  onkeydown={(e) => { if (e.key === 'Enter') onClick(); }}
   onmouseenter={() => hovered = true}
   onmouseleave={() => hovered = false}
-  role="presentation"
-  aria-current={isActive ? 'true' : undefined}
-  aria-label="{issue.headline}. Opinion Shift {issue.opinionShift}."
+  role="option"
+  aria-selected={isActive}
+  aria-label={optionLabel}
+  tabindex={tabIndex}
   style="
+    width:100%;appearance:none;border:none;text-align:left;font:inherit;
     padding:12px 16px;cursor:pointer;
     border-bottom:1px solid var(--bg-sunken);
     background:{isActive ? 'rgba(25,113,194,0.05)' : (hovered ? 'var(--bg-sunken)' : 'transparent')};
@@ -71,7 +79,7 @@
 
     <p style="font-size:12px;color:var(--text-tertiary);line-height:1.45;margin:5px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
     {#if isStarted && progress > 0}
-      <p style="font-size:11px;font-weight:600;color:var(--score-warning);margin:7px 0 0;">Continue at angle {Math.min(progress + 1, 6)}</p>
+      <p style="font-size:11px;font-weight:600;color:var(--score-warning);margin:7px 0 0;">Resume from insight {Math.min(progress + 1, 6)} of 6</p>
     {/if}
   </div>
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;min-width:54px;">
@@ -81,4 +89,11 @@
       <span style="font-size:10px;color:var(--text-muted);">{progressLabel}</span>
     {/if}
   </div>
-</div>
+</button>
+
+<style>
+  .feed-row:focus-visible {
+    outline: 2px solid var(--score-info);
+    outline-offset: -2px;
+  }
+</style>

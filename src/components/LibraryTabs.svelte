@@ -152,14 +152,14 @@
   }
 
   .library-tabs--sidebar .library-tab {
-    min-height: 30px;
+    min-height: 44px;
     padding-inline: 12px;
     font-size: 11px;
   }
 
   @media (max-width: 767px) {
     .library-tab {
-      min-height: 30px;
+      min-height: 44px;
       padding-inline: 12px;
       font-size: 11px;
     }

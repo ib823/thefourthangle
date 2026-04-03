@@ -65,7 +65,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    min-height: 36px;
+    min-height: 44px;
     transition: background var(--duration-fast, 150ms) ease;
   }
 

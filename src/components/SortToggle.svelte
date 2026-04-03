@@ -34,14 +34,14 @@
   class="sort-toggle"
   class:sort-toggle--sidebar={variant === 'sidebar'}
   role="tablist"
-  aria-label="Issue sorting"
+    aria-label="Issue sorting"
   style={`--sort-index:${sortMode === 'shift' ? 1 : 0};`}
 >
   <button class="sort-chip" class:sort-chip--active={sortMode === 'latest'} id={`${idPrefix}-latest`} onclick={() => activate('latest')} onkeydown={(event) => onKeyDown(event, 'latest')} role="tab" tabindex={sortMode === 'latest' ? 0 : -1} aria-selected={sortMode === 'latest'} aria-controls={panelId}>
     Latest
   </button>
   <button class="sort-chip" class:sort-chip--active={sortMode === 'shift'} id={`${idPrefix}-shift`} onclick={() => activate('shift')} onkeydown={(event) => onKeyDown(event, 'shift')} role="tab" tabindex={sortMode === 'shift' ? 0 : -1} aria-selected={sortMode === 'shift'} aria-controls={panelId}>
-    Most Hidden
+    Biggest Shift
   </button>
 </div>
 
@@ -108,7 +108,7 @@
   }
 
   .sort-toggle--sidebar .sort-chip {
-    min-height: 30px;
+    min-height: 44px;
     font-size: 11px;
     padding-inline: 12px;
   }

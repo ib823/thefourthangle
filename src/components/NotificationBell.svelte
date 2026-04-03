@@ -221,9 +221,12 @@
   </button>
 
   {#if open}
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div onclick={close} role="presentation" style="position:fixed;inset:0;z-index:1999;" />
+    <button
+      type="button"
+      class="notifications-backdrop"
+      onclick={close}
+      aria-label="Close notifications panel"
+    ></button>
     <div id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius:12px;box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle, #E9ECEF);">
@@ -250,7 +253,7 @@
             <button
               onclick={subscribePush}
               disabled={pushLoading}
-              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius:8px;font-family:var(--font-display, sans-serif);font-size:12px;font-weight:600;cursor:pointer;min-height:36px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
+              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius:8px;font-family:var(--font-display, sans-serif);font-size:12px;font-weight:600;cursor:pointer;min-height:44px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
             >{pushLoading ? 'Enabling...' : 'Enable notifications'}</button>
           {:else if pushDenied}
             <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-muted, #868E96);margin:0;line-height:1.4;">Notifications blocked. Enable in browser settings.</p>
@@ -260,21 +263,31 @@
         </div>
       {:else}
         {#each items.slice(0, 20) as item}
-          <button
-            onclick={() => handleItemClick(item)}
-            style="width:100%;text-align:left;background:{item.read ? 'var(--bg, #fff)' : 'var(--bg-elevated, #F8F9FA)'};border:none;border-bottom:1px solid var(--border-light, rgba(0,0,0,0.05));padding:12px 16px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background 0.15s ease;min-height:44px;"
+          <div
+            class="notification-row"
+            style="background:{item.read ? 'var(--bg, #fff)' : 'var(--bg-elevated, #F8F9FA)'};border-bottom:1px solid var(--border-light, rgba(0,0,0,0.05));"
           >
-            <div style="display:flex;align-items:center;gap:8px;">
-              {#if !item.read}
-                <div style="width:6px;height:6px;border-radius:50%;background:var(--score-info, #1971C2);flex-shrink:0;"></div>
-              {/if}
-              <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">{item.title}</span>
-              <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
-              <!-- svelte-ignore a11y_no_static_element_interactions -->
-              <span role="button" tabindex="0" onclick={(e) => handleRemoveItem(e, item)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleRemoveItem(e, item); } }} style="flex-shrink:0;padding:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;" aria-label="Remove notification">&times;</span>
-            </div>
-            <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
-          </button>
+            <button
+              type="button"
+              onclick={() => handleItemClick(item)}
+              style="flex:1;min-width:0;text-align:left;background:none;border:none;padding:12px 0 12px 16px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background 0.15s ease;min-height:44px;"
+            >
+              <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+                {#if !item.read}
+                  <div style="width:6px;height:6px;border-radius:50%;background:var(--score-info, #1971C2);flex-shrink:0;"></div>
+                {/if}
+                <span style="font-family:var(--font-display, sans-serif);font-size:13px;font-weight:{item.read ? '500' : '700'};color:var(--text-primary, #212529);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;">{item.title}</span>
+                <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);flex-shrink:0;">{timeAgo(item.timestamp)}</span>
+              </div>
+              <p style="font-family:var(--font-body, sans-serif);font-size:12px;color:var(--text-tertiary, #5C636A);margin:0;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{!item.read ? 'padding-left:14px;' : ''}">{item.body}</p>
+            </button>
+            <button
+              type="button"
+              onclick={(e) => handleRemoveItem(e, item)}
+              style="flex-shrink:0;padding:0;width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--text-muted, #868E96);font-size:14px;line-height:1;"
+              aria-label="Remove notification"
+            >&times;</button>
+          </div>
         {/each}
       {/if}
 
@@ -289,14 +302,14 @@
             <button
               onclick={unsubscribePush}
               disabled={pushLoading}
-              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);padding:6px 8px;min-height:32px;transition:color 0.15s ease;"
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);padding:6px 8px;min-height:44px;transition:color 0.15s ease;"
             >Turn off</button>
           {:else if !pushDenied}
             <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Notifications off</span>
             <button
               onclick={subscribePush}
               disabled={pushLoading}
-              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--focus, #1971C2);padding:6px 8px;min-height:32px;font-weight:600;"
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size:11px;color:var(--focus, #1971C2);padding:6px 8px;min-height:44px;font-weight:600;"
             >{pushLoading ? 'Enabling...' : 'Turn on'}</button>
           {:else}
             <span style="font-family:var(--font-body, sans-serif);font-size:11px;color:var(--text-muted, #868E96);">Blocked in browser settings</span>
@@ -306,3 +319,21 @@
     </div>
   {/if}
 </div>
+
+<style>
+  .notifications-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1999;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: default;
+  }
+
+  .notification-row {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+</style>
