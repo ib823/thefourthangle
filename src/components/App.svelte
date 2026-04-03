@@ -95,6 +95,7 @@
   }
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
+  let allowBrowserPullRefresh = $state(false);
   let searchQuery = $state('');
   let searchActive = $state(false);
   let surfaceMode = $state<SurfaceMode>(initialSurfaceMode());
@@ -327,7 +328,13 @@
   }
 
   function syncShellModeClass() {
-    document.body.classList.toggle('app-shell-standalone', isStandaloneDisplay());
+    const standalone = isStandaloneDisplay();
+    document.body.classList.toggle('app-shell-standalone', standalone);
+    allowBrowserPullRefresh = !standalone;
+  }
+
+  function refreshApp() {
+    window.location.reload();
   }
 
   onMount(() => {
@@ -808,7 +815,7 @@
       <div class="sr-only" role="status" aria-live="polite">{searchStatusMessage}</div>
     {/if}
     {#if surfaceMode === 'today' && !isSearching}
-      <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
+      <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
     {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
       <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
         <div style="max-width:320px;text-align:center;">
@@ -825,7 +832,7 @@
         aria-labelledby={`mobile-sort-${feedSort}`}
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
-        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
       </div>
     {:else if surfaceMode === 'library' && !isSearching}
       <div
@@ -834,10 +841,10 @@
         aria-labelledby={`mobile-library-${libraryMode}`}
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
-        <MobileBrowser issues={sortedIssues} sections={[]} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+        <MobileBrowser issues={sortedIssues} sections={[]} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
       </div>
     {:else}
-      <MobileBrowser issues={sortedIssues} sections={surfaceMode === 'browse' ? feedSections : []} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} />
+      <MobileBrowser issues={sortedIssues} sections={surfaceMode === 'browse' ? feedSections : []} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
     {/if}
     </main>
     {#if !searchActive && !activeFullIssue}
@@ -902,7 +909,7 @@
         </div>
       {/if}
       {#if surfaceMode === 'today' && !isSearching}
-        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} {savedCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibrarySaved={openSavedLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
       {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
         <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
           <div style="max-width:420px;text-align:center;">

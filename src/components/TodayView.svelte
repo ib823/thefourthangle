@@ -18,6 +18,8 @@
     onOpenLibraryReading?: () => void;
     onOpenLibrarySaved?: () => void;
     onOpenLibraryHighlights?: () => void;
+    allowPullRefresh?: boolean;
+    onPullRefresh?: () => void;
   }
   let {
     issueCount = 0,
@@ -32,6 +34,8 @@
     onOpenLibraryReading,
     onOpenLibrarySaved,
     onOpenLibraryHighlights,
+    allowPullRefresh = false,
+    onPullRefresh,
   }: Props = $props();
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
@@ -83,6 +87,65 @@
   });
 
   const buildDate = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '';
+  const pullThreshold = 72;
+  const pullMax = 104;
+
+  let todayShellEl: HTMLDivElement | undefined = $state();
+  let touchTracking = false;
+  let touchStartY = 0;
+  let touchStartX = 0;
+  let touchStartScrollTop = 0;
+  let pullDistance = $state(0);
+  let pullRefreshState = $state<'idle' | 'pulling' | 'ready' | 'refreshing'>('idle');
+
+  function resetPullRefresh() {
+    if (pullRefreshState === 'refreshing') return;
+    pullDistance = 0;
+    pullRefreshState = 'idle';
+  }
+
+  function onTouchStart(event: TouchEvent) {
+    if (!todayShellEl || !allowPullRefresh || pullRefreshState === 'refreshing' || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    touchTracking = true;
+    touchStartY = touch.clientY;
+    touchStartX = touch.clientX;
+    touchStartScrollTop = todayShellEl.scrollTop;
+  }
+
+  function onTouchMove(event: TouchEvent) {
+    if (!todayShellEl || !touchTracking || !allowPullRefresh || pullRefreshState === 'refreshing' || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    const deltaY = touch.clientY - touchStartY;
+    const deltaX = touch.clientX - touchStartX;
+    const pullingFromTop = touchStartScrollTop <= 0 && todayShellEl.scrollTop <= 0 && deltaY > 0;
+    const mostlyVertical = Math.abs(deltaY) >= Math.abs(deltaX) * 1.15;
+
+    if (!pullingFromTop || !mostlyVertical) {
+      if (pullRefreshState !== 'idle') resetPullRefresh();
+      return;
+    }
+
+    if (event.cancelable) event.preventDefault();
+    pullDistance = Math.min(pullMax, Math.max(0, deltaY * 0.5));
+    pullRefreshState = pullDistance >= pullThreshold ? 'ready' : 'pulling';
+  }
+
+  function onTouchEnd() {
+    touchTracking = false;
+    if (pullRefreshState === 'ready' && onPullRefresh) {
+      pullRefreshState = 'refreshing';
+      pullDistance = 58;
+      onPullRefresh();
+      return;
+    }
+    resetPullRefresh();
+  }
+
+  function onTouchCancel() {
+    touchTracking = false;
+    resetPullRefresh();
+  }
 
   function formatDate(iso: string): string {
     if (!iso) return '';
@@ -109,7 +172,31 @@
   }
 </script>
 
-<div class="today-shell">
+<div
+  class="today-shell"
+  bind:this={todayShellEl}
+  ontouchstart={onTouchStart}
+  ontouchmove={onTouchMove}
+  ontouchend={onTouchEnd}
+  ontouchcancel={onTouchCancel}
+>
+  {#if allowPullRefresh}
+    <div
+      class="pull-refresh"
+      class:pull-refresh--visible={pullRefreshState !== 'idle'}
+      class:pull-refresh--ready={pullRefreshState === 'ready' || pullRefreshState === 'refreshing'}
+      style={`transform: translate3d(-50%, ${Math.round(Math.max(-24, pullDistance - 44))}px, 0); opacity: ${Math.min(1, pullDistance / 36)};`}
+      aria-hidden="true"
+    >
+      {#if pullRefreshState === 'refreshing'}
+        Refreshing…
+      {:else if pullRefreshState === 'ready'}
+        Release to refresh
+      {:else}
+        Pull to refresh
+      {/if}
+    </div>
+  {/if}
   <div class="today-wrap">
     {#if hasIssues}
       <div class="today-topline">
@@ -241,11 +328,49 @@
 
 <style>
   .today-shell {
+    position: relative;
     flex: 1;
     overflow-y: auto;
     background:
       radial-gradient(circle at top right, rgba(210, 140, 40, 0.08), transparent 28%),
       linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 22%, var(--bg) 100%);
+  }
+
+  .pull-refresh {
+    position: sticky;
+    top: 10px;
+    left: 50%;
+    z-index: 5;
+    width: fit-content;
+    margin: 0 0 -32px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    will-change: transform, opacity;
+  }
+
+  .pull-refresh--ready {
+    border-color: rgba(184, 92, 0, 0.22);
+    color: var(--text-primary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .pull-refresh {
+      background: rgba(34, 31, 27, 0.92);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .pull-refresh--ready {
+      border-color: rgba(200, 150, 58, 0.24);
+    }
   }
 
   .today-wrap {

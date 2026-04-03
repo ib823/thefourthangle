@@ -23,8 +23,22 @@
     searchQuery?: string;
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
+    allowPullRefresh?: boolean;
+    onPullRefresh?: () => void;
   }
-  let { issues, sections = [], onOpenIssue, onPrefetch, issueHasConnections, initialFeedIndex = 0, searchQuery = '', sortMode = 'latest', onSortChange }: Props = $props();
+  let {
+    issues,
+    sections = [],
+    onOpenIssue,
+    onPrefetch,
+    issueHasConnections,
+    initialFeedIndex = 0,
+    searchQuery = '',
+    sortMode = 'latest',
+    onSortChange,
+    allowPullRefresh = false,
+    onPullRefresh,
+  }: Props = $props();
 
   let mounted = $state(false);
   let current = $state(0);
@@ -85,6 +99,10 @@
   let touchStartX = 0;
   let touchStartScrollTop = 0;
   let touchTracking = false;
+  let pullDistance = $state(0);
+  let pullRefreshState = $state<'idle' | 'pulling' | 'ready' | 'refreshing'>('idle');
+  const pullThreshold = 72;
+  const pullMax = 104;
 
   function getState(id: string) {
     const raw = readMap[id];
@@ -195,22 +213,68 @@
     handleOpenIssue(issue);
   }
 
+  function resetPullRefresh() {
+    if (pullRefreshState === 'refreshing') return;
+    pullDistance = 0;
+    pullRefreshState = 'idle';
+  }
+
   function onTouchStart(event: TouchEvent) {
-    if (!containerEl || sections.length === 0 || event.touches.length !== 1) return;
+    if (!containerEl || event.touches.length !== 1) return;
     const touch = event.touches[0];
     touchTracking = true;
     touchStartY = touch.clientY;
     touchStartX = touch.clientX;
     touchStartScrollTop = containerEl.scrollTop;
+    if (allowPullRefresh && pullRefreshState !== 'refreshing' && containerEl.scrollTop <= 0) {
+      resetPullRefresh();
+    }
+  }
+
+  function onTouchMove(event: TouchEvent) {
+    if (!touchTracking || !containerEl || !allowPullRefresh || pullRefreshState === 'refreshing' || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    const deltaY = touch.clientY - touchStartY;
+    const deltaX = touch.clientX - touchStartX;
+    const pullingFromTop = touchStartScrollTop <= 0 && containerEl.scrollTop <= 0 && deltaY > 0;
+    const mostlyVertical = Math.abs(deltaY) >= Math.abs(deltaX) * 1.15;
+
+    if (!pullingFromTop || !mostlyVertical) {
+      if (pullRefreshState !== 'idle') resetPullRefresh();
+      return;
+    }
+
+    if (event.cancelable) event.preventDefault();
+    pullDistance = Math.min(pullMax, Math.max(0, deltaY * 0.5));
+    pullRefreshState = pullDistance >= pullThreshold ? 'ready' : 'pulling';
   }
 
   function onTouchEnd(event: TouchEvent) {
-    if (!touchTracking || !containerEl || sections.length === 0 || event.changedTouches.length === 0) {
+    if (!touchTracking || !containerEl || event.changedTouches.length === 0) {
       touchTracking = false;
+      resetPullRefresh();
       return;
     }
 
     touchTracking = false;
+
+    if (pullRefreshState === 'pulling' || pullRefreshState === 'ready') {
+      if (pullRefreshState === 'ready' && onPullRefresh) {
+        pullRefreshState = 'refreshing';
+        pullDistance = 58;
+        haptic(8);
+        onPullRefresh();
+      } else {
+        resetPullRefresh();
+      }
+      return;
+    }
+
+    if (sections.length === 0) {
+      resetPullRefresh();
+      return;
+    }
+
     const touch = event.changedTouches[0];
     const deltaY = touch.clientY - touchStartY;
     const deltaX = touch.clientX - touchStartX;
@@ -230,6 +294,7 @@
 
   function onTouchCancel() {
     touchTracking = false;
+    resetPullRefresh();
   }
 
   onMount(() => {
@@ -286,9 +351,27 @@
   class="feed-scroll"
   style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.15s ease;"
   ontouchstart={onTouchStart}
+  ontouchmove={onTouchMove}
   ontouchend={onTouchEnd}
   ontouchcancel={onTouchCancel}
 >
+  {#if allowPullRefresh}
+    <div
+      class="pull-refresh"
+      class:pull-refresh--visible={pullRefreshState !== 'idle'}
+      class:pull-refresh--ready={pullRefreshState === 'ready' || pullRefreshState === 'refreshing'}
+      style={`transform: translate3d(-50%, ${Math.round(Math.max(-24, pullDistance - 44))}px, 0); opacity: ${Math.min(1, pullDistance / 36)};`}
+      aria-hidden="true"
+    >
+      {#if pullRefreshState === 'refreshing'}
+        Refreshing…
+      {:else if pullRefreshState === 'ready'}
+        Release to refresh
+      {:else}
+        Pull to refresh
+      {/if}
+    </div>
+  {/if}
   {#if displayList.length === 0 && searchQuery}
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size:14px;">No issues match "{searchQuery}"</div>
   {/if}
@@ -322,6 +405,7 @@
 
 <style>
   .feed-scroll {
+    position: relative;
     overflow-y: auto;
     scroll-snap-type: y proximity;
     -webkit-overflow-scrolling: touch;
@@ -329,6 +413,47 @@
     scroll-behavior: smooth;
     touch-action: pan-y;
     padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .pull-refresh {
+    position: sticky;
+    top: 10px;
+    left: 50%;
+    z-index: 5;
+    width: fit-content;
+    margin: 0 0 -32px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    will-change: transform, opacity;
+  }
+
+  .pull-refresh--visible {
+    opacity: 1;
+  }
+
+  .pull-refresh--ready {
+    border-color: rgba(184, 92, 0, 0.22);
+    color: var(--text-primary);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .pull-refresh {
+      background: rgba(34, 31, 27, 0.92);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .pull-refresh--ready {
+      border-color: rgba(200, 150, 58, 0.24);
+    }
   }
 
   .feed-card-slot {
