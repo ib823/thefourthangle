@@ -1,45 +1,38 @@
 <script lang="ts">
   interface Props {
-    libraryMode: 'reading' | 'saved' | 'highlights';
+    libraryMode: 'reading' | 'highlights';
     readingCount?: number;
-    savedCount?: number;
     highlightCount?: number;
     variant?: 'inline' | 'sidebar';
     panelId?: string;
     idPrefix?: string;
     onOpenReading?: () => void;
-    onOpenSaved?: () => void;
     onOpenHighlights?: () => void;
   }
 
   const tabs = [
     { key: 'reading', label: 'Reading' },
-    { key: 'saved', label: 'Saved' },
     { key: 'highlights', label: 'Highlights' },
   ] as const;
 
   let {
     libraryMode,
     readingCount = 0,
-    savedCount = 0,
     highlightCount = 0,
     variant = 'inline',
     panelId = 'library-panel',
     idPrefix = 'library-tab',
     onOpenReading,
-    onOpenSaved,
     onOpenHighlights,
   }: Props = $props();
 
   function activate(tab: typeof tabs[number]['key']) {
     if (tab === 'reading') onOpenReading?.();
-    else if (tab === 'saved') onOpenSaved?.();
     else onOpenHighlights?.();
   }
 
   function countFor(tab: typeof tabs[number]['key']) {
     if (tab === 'reading') return readingCount;
-    if (tab === 'saved') return savedCount;
     return highlightCount;
   }
 

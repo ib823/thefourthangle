@@ -1,9 +1,8 @@
 <script lang="ts">
   interface Props {
-    surfaceMode: 'today' | 'browse' | 'library';
+    surfaceMode: 'today' | 'library';
     libraryCount?: number;
     onGoToday?: () => void;
-    onOpenBrowse?: () => void;
     onOpenLibrary?: () => void;
   }
 
@@ -11,7 +10,6 @@
     surfaceMode,
     libraryCount = 0,
     onGoToday,
-    onOpenBrowse,
     onOpenLibrary,
   }: Props = $props();
 </script>
@@ -20,10 +18,6 @@
   <button class="dock-item" class:dock-item--active={surfaceMode === 'today'} onclick={() => onGoToday?.()} aria-current={surfaceMode === 'today' ? 'page' : undefined}>
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
     <span>Today</span>
-  </button>
-  <button class="dock-item" class:dock-item--active={surfaceMode === 'browse'} onclick={() => onOpenBrowse?.()} aria-current={surfaceMode === 'browse' ? 'page' : undefined}>
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M9 20V10"></path></svg>
-    <span>Browse</span>
   </button>
   <button class="dock-item" class:dock-item--active={surfaceMode === 'library'} onclick={() => onOpenLibrary?.()} aria-current={surfaceMode === 'library' ? 'page' : undefined}>
     <div class="dock-icon-wrap">
@@ -39,7 +33,7 @@
 <style>
   .mobile-dock {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     min-height: calc(78px + env(safe-area-inset-bottom, 0px));
     padding: 10px 14px max(14px, calc(10px + env(safe-area-inset-bottom, 0px)));

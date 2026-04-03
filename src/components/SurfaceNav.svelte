@@ -1,10 +1,9 @@
 <script lang="ts">
   interface Props {
-    surfaceMode: 'today' | 'browse' | 'library';
+    surfaceMode: 'today' | 'library';
     libraryCount?: number;
     variant?: 'inline' | 'sidebar';
     onGoToday?: () => void;
-    onOpenBrowse?: () => void;
     onOpenLibrary?: () => void;
   }
 
@@ -13,7 +12,6 @@
     libraryCount = 0,
     variant = 'inline',
     onGoToday,
-    onOpenBrowse,
     onOpenLibrary,
   }: Props = $props();
 </script>
@@ -22,11 +20,6 @@
   <button class="surface-button" class:surface-button--today={surfaceMode === 'today'} onclick={() => onGoToday?.()} aria-current={surfaceMode === 'today' ? 'page' : undefined}>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
     <span>Today</span>
-  </button>
-
-  <button class="surface-button" class:surface-button--active={surfaceMode === 'browse'} onclick={() => onOpenBrowse?.()} aria-current={surfaceMode === 'browse' ? 'page' : undefined}>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M9 20V10"></path></svg>
-    <span>Browse</span>
   </button>
 
   <button class="surface-button" class:surface-button--library={surfaceMode === 'library'} onclick={() => onOpenLibrary?.()} aria-current={surfaceMode === 'library' ? 'page' : undefined}>
@@ -78,12 +71,6 @@
     background: rgba(210, 140, 40, 0.12);
     border-color: rgba(210, 140, 40, 0.28);
     color: var(--score-warning);
-  }
-
-  .surface-button--active {
-    background: var(--bg-sunken);
-    border-color: var(--border-divider);
-    color: var(--text-primary);
   }
 
   .surface-button--library {

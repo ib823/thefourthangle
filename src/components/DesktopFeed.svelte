@@ -15,17 +15,14 @@
     sections?: FeedSection[];
     activeId: string | null;
     readMap: Record<string, string>;
-    surfaceMode?: 'today' | 'browse' | 'library';
-    libraryMode?: 'reading' | 'saved' | 'highlights';
+    surfaceMode?: 'today' | 'library';
+    libraryMode?: 'reading' | 'highlights';
     readingCount?: number;
-    savedCount?: number;
     highlightCount?: number;
     libraryCount?: number;
     onGoToday?: () => void;
-    onOpenBrowse?: () => void;
     onOpenLibrary?: () => void;
     onOpenReading?: () => void;
-    onOpenSaved?: () => void;
     onOpenHighlights?: () => void;
     onSelectIssue: (issue: IssueSummary) => void;
     searchQuery?: string;
@@ -36,9 +33,8 @@
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, savedCount = 0, highlightCount = 0, libraryCount = 0, onGoToday, onOpenBrowse, onOpenLibrary, onOpenReading, onOpenSaved, onOpenHighlights, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
-  function libraryHeading(mode: 'reading' | 'saved' | 'highlights') {
-    if (mode === 'saved') return 'Saved library';
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  function libraryHeading(mode: 'reading' | 'highlights') {
     if (mode === 'highlights') return 'Highlights library';
     return 'Reading library';
   }
@@ -229,10 +225,10 @@
 </script>
 
 <aside aria-label="Issue list" style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
-  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : surfaceMode === 'browse' ? 'Browse' : libraryHeading(libraryMode)}</h1>
+  <h1 class="sr-only">{surfaceMode === 'today' ? 'Today' : libraryHeading(libraryMode)}</h1>
   <div style="padding:14px 18px 12px;flex-shrink:0;">
     <div style="padding:0 0 12px;">
-      <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenBrowse={onOpenBrowse} onOpenLibrary={onOpenLibrary} />
+      <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenLibrary={onOpenLibrary} />
     </div>
 
     <!-- Search -->
@@ -261,24 +257,29 @@
       {/if}
     </form>
 
-    <!-- Sort toggle -->
-    {#if !isSearching && onSortChange && surfaceMode === 'browse'}
-      <div style="padding:10px 0 4px;">
-        <SortToggle variant="sidebar" {sortMode} onChange={onSortChange} panelId="desktop-browse-panel" idPrefix="desktop-sort" />
-      </div>
-    {:else if !isSearching && surfaceMode === 'library'}
+    {#if !isSearching && surfaceMode === 'library'}
       <div style="padding:10px 0 4px;">
         <LibraryTabs
           variant="sidebar"
           {libraryMode}
           {readingCount}
-          {savedCount}
           {highlightCount}
           panelId="desktop-library-panel"
           idPrefix="desktop-library"
           onOpenReading={onOpenReading}
-          onOpenSaved={onOpenSaved}
           onOpenHighlights={onOpenHighlights}
+        />
+      </div>
+    {/if}
+
+    {#if !isSearching && onSortChange}
+      <div style="padding:10px 0 4px;">
+        <SortToggle
+          variant="sidebar"
+          {sortMode}
+          onChange={onSortChange}
+          panelId={surfaceMode === 'today' ? 'desktop-today-panel' : undefined}
+          idPrefix={surfaceMode === 'today' ? 'desktop-today-sort' : 'desktop-library-sort'}
         />
       </div>
     {/if}
@@ -338,9 +339,9 @@
 
   <!-- Feed list -->
   <div
-    id={surfaceMode === 'library' ? 'desktop-library-panel' : 'desktop-browse-panel'}
-    role={!isSearching && (surfaceMode === 'browse' || surfaceMode === 'library') ? 'tabpanel' : undefined}
-    aria-labelledby={!isSearching && surfaceMode === 'browse' ? `desktop-sort-${sortMode}` : !isSearching && surfaceMode === 'library' ? `desktop-library-${libraryMode}` : undefined}
+    id={surfaceMode === 'library' ? 'desktop-library-panel' : 'desktop-today-panel'}
+    role={!isSearching ? 'tabpanel' : undefined}
+    aria-labelledby={!isSearching && surfaceMode === 'library' ? `desktop-library-${libraryMode}` : !isSearching ? `desktop-today-sort-${sortMode}` : undefined}
     style="flex:1;display:flex;flex-direction:column;min-height:0;"
   >
   <div

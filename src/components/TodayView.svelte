@@ -12,11 +12,9 @@
     sections?: FeedSection[];
     readMap?: Record<string, string>;
     readingCount?: number;
-    savedCount?: number;
     highlightCount?: number;
     onOpenIssue?: (issue: IssueSummary) => void;
     onOpenLibraryReading?: () => void;
-    onOpenLibrarySaved?: () => void;
     onOpenLibraryHighlights?: () => void;
     allowPullRefresh?: boolean;
     onPullRefresh?: () => void;
@@ -28,11 +26,9 @@
     sections = [],
     readMap = {},
     readingCount = 0,
-    savedCount = 0,
     highlightCount = 0,
     onOpenIssue,
     onOpenLibraryReading,
-    onOpenLibrarySaved,
     onOpenLibraryHighlights,
     allowPullRefresh = false,
     onPullRefresh,
@@ -289,7 +285,7 @@
         <div class="today-library-head">
           <div class="panel-kicker">Library</div>
           <h2 id="your-library-heading" class="today-library-title">Keep your place without leaving Today.</h2>
-          <p class="today-library-copy">Reading progress, saved issues, and highlights live here when you want them.</p>
+          <p class="today-library-copy">Reading progress and kept highlights stay here, away from the main feed.</p>
         </div>
         <div class="today-library-list">
           <button class="library-item library-item--compact" onclick={() => onOpenLibraryReading?.()}>
@@ -297,15 +293,10 @@
             <span class="library-value">{readingCount}</span>
             <span class="library-copy">Resume immediately</span>
           </button>
-          <button class="library-item library-item--compact" onclick={() => onOpenLibrarySaved?.()}>
-            <span class="library-label">Saved</span>
-            <span class="library-value">{savedCount}</span>
-            <span class="library-copy">Held for later</span>
-          </button>
           <button class="library-item library-item--compact" onclick={() => onOpenLibraryHighlights?.()}>
             <span class="library-label">Highlights</span>
             <span class="library-value">{highlightCount}</span>
-            <span class="library-copy">Angles worth keeping</span>
+            <span class="library-copy">Saved issues and marked angles</span>
           </button>
         </div>
       </section>
@@ -735,7 +726,7 @@
 
   .today-library-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
