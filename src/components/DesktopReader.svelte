@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
-  import { CARD_TYPES, opinionLabel } from '../data/issues';
+  import { CARD_TYPES, opinionColor, opinionLabel } from '../data/issues';
   import { getReadState, markCompleted, updateProgress } from '../stores/reader';
   import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
@@ -30,8 +30,9 @@
     nextHeadline?: string;
     connections?: Connection[];
     onNavigateToIssue?: (issueId: string) => void;
+    initialCardIndex?: number;
   }
-  let { issue, onReturnHome, onNext, nextHeadline, connections = [], onNavigateToIssue }: Props = $props();
+  let { issue, onReturnHome, onNext, nextHeadline, connections = [], onNavigateToIssue, initialCardIndex = 0 }: Props = $props();
 
   // Reactions handled by SaveButton component
   let scrollEl: HTMLDivElement | undefined = $state(undefined);
@@ -39,8 +40,9 @@
   let cardEls: Array<HTMLDivElement | undefined> = $state([]);
   let shareOpen = $state(false);
   let copied = $state(false);
-  let activeStep = $state(0);
+  let activeStep = $state(Math.max(0, Math.min(initialCardIndex, Math.max(issue.cards.length - 1, 0))));
   let persistedProgress = $state(0);
+  let pendingInitialCardIndex: number | null = $state(initialCardIndex > 0 ? initialCardIndex : null);
   let stepObserver: IntersectionObserver | null = null;
 
   const CARD_LABELS: Record<string, string> = {
@@ -180,9 +182,7 @@
   let viewCard = $derived(issue.cards.findLast((c) => c.t === 'view'));
   let activeStageLabel = $derived(cardLabel(issue.cards[activeStep] ?? issue.cards[0]));
 
-  let barColor = $derived(
-    issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
-  );
+  let barColor = $derived(opinionColor(issue.opinionShift));
 
   let label = $derived(opinionLabel(issue.opinionShift));
 
@@ -227,13 +227,26 @@
       }, { root: scrollEl, threshold: [0.25, 0.45, 0.7] });
 
       els.forEach((el) => stepObserver?.observe(el));
+
+      if (pendingInitialCardIndex != null && pendingInitialCardIndex > 0) {
+        const targetIndex = Math.max(0, Math.min(pendingInitialCardIndex, els.length - 1));
+        const targetEl = els[targetIndex];
+        if (targetEl) {
+          scrollEl.scrollTop = Math.max(0, targetEl.offsetTop - 24);
+          activeStep = targetIndex;
+        }
+        pendingInitialCardIndex = null;
+      }
     });
   }
 
   $effect(() => {
     void issue.id;
-    activeStep = 0;
+    void initialCardIndex;
+    const nextInitialIndex = Math.max(0, Math.min(initialCardIndex, Math.max(issue.cards.length - 1, 0)));
+    activeStep = nextInitialIndex;
     persistedProgress = getReadState(issue.id)?.progress ?? 0;
+    pendingInitialCardIndex = nextInitialIndex > 0 ? nextInitialIndex : null;
     cardEls = [];
     setupStepObserver();
   });
@@ -385,11 +398,11 @@
                   <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
                     <span style="font-size:10px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
                     {#if conn.hasReaction}
-                      <svg width="9" height="9" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     {/if}
                   </div>
                 </div>
-                <span style="font-size:12px;font-weight:700;color:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};font-variant-numeric:tabular-nums;flex-shrink:0;">{conn.opinionShift}%</span>
+                <span style="font-size:12px;font-weight:700;color:{opinionColor(conn.opinionShift)};font-variant-numeric:tabular-nums;flex-shrink:0;">{conn.opinionShift}%</span>
               </button>
             {/each}
           </div>

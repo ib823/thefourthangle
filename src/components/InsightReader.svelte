@@ -5,7 +5,7 @@
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
-  import { CARD_TYPES } from '../data/issues';
+  import { CARD_TYPES, opinionColor } from '../data/issues';
   import { markCompleted, updateProgress, savePosition } from '../stores/reader';
   import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';
@@ -975,7 +975,7 @@
 
   <!-- Header -->
   <div class="header">
-    <span class="counter">{completed ? totalCards : current + 1}/{totalCards} <span style="color:{issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'};font-variant-numeric:tabular-nums;">· {issue.opinionShift}</span></span>
+    <span class="counter">{completed ? totalCards : current + 1}/{totalCards} <span style="color:{opinionColor(issue.opinionShift)};font-variant-numeric:tabular-nums;">· {issue.opinionShift}</span></span>
     <button class="close-btn" onclick={onClose} aria-label="Close">&times;</button>
   </div>
 
@@ -1170,12 +1170,12 @@
               </div>
               <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
                 <div style="width:32px;height:3px;background:var(--bg-sunken);border-radius:2px;overflow:hidden;">
-                  <div style="height:100%;width:{conn.opinionShift}%;background:{conn.opinionShift >= 80 ? 'var(--score-critical)' : conn.opinionShift >= 60 ? 'var(--score-warning)' : conn.opinionShift >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'};border-radius:2px;"></div>
+                  <div style="height:100%;width:{conn.opinionShift}%;background:{opinionColor(conn.opinionShift)};border-radius:2px;"></div>
                 </div>
                 <span style="font-size:10px;font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
                 <span style="font-size:9px;color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
                 {#if conn.hasReaction}
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--score-critical)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 {/if}
               </div>
             </div>

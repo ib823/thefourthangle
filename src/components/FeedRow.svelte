@@ -12,10 +12,11 @@
     itemIndex?: number;
     onClick: () => void;
     hasReaction?: boolean;
+    reactionCount?: number;
     hasConnections?: boolean;
     searchTerms?: string;
   }
-  let { issue, readState, isActive, tabIndex = 0, itemIndex = 0, onClick, hasReaction = false, hasConnections = false, searchTerms = '' }: Props = $props();
+  let { issue, readState, isActive, tabIndex = 0, itemIndex = 0, onClick, hasReaction = false, reactionCount = 0, hasConnections = false, searchTerms = '' }: Props = $props();
 
   function highlightText(text: string, terms: string): string {
     if (!terms || terms.length < 2) return text;
@@ -26,18 +27,19 @@
 
   let hovered = $state(false);
   let scoreColor = $derived(
-    issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
+    issue.opinionShift >= 80 ? 'var(--score-strong)' : issue.opinionShift >= 60 ? 'var(--score-medium)' : issue.opinionShift >= 40 ? 'var(--score-partial)' : 'var(--text-tertiary)'
   );
   let label = $derived(opinionLabel(issue.opinionShift));
 
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
   let progress = $derived(readState?.progress ?? 0);
+  let savedLabel = $derived(reactionCount > 0 ? `${reactionCount} saved angle${reactionCount === 1 ? '' : 's'}` : '');
 
   // Visual weight: bold unread → medium reading → light done
   let headlineWeight = $derived(isCompleted ? '500' : (isStarted ? '600' : '700'));
   let headlineColor = $derived(isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)');
-  let progressLabel = $derived(isStarted && progress > 0 ? `Resume from insight ${Math.min(progress + 1, 6)} of 6` : (isCompleted ? 'Done' : ''));
+  let progressLabel = $derived(isStarted && progress > 0 ? `Resume from insight ${Math.min(progress + 1, 6)} of 6` : (savedLabel || (isCompleted ? 'Done' : '')));
   let optionLabel = $derived(
     `${issue.headline}. Opinion Shift ${issue.opinionShift}. ${isCompleted ? 'Finished.' : progressLabel || 'Not started.'}`
   );
@@ -72,7 +74,7 @@
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">Highlighted</span>
+        <span style="font-size:10px;font-weight:700;color:var(--highlight-accent, var(--score-warning));background:var(--highlight-bg, rgba(184,92,0,0.08));padding:3px 8px;border-radius:4px;text-transform:uppercase;flex-shrink:0;">{reactionCount > 0 ? `${reactionCount} saved` : 'Highlighted'}</span>
       {/if}
     </div>
     <span class="balance-title" style="font-size:14px;font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>
@@ -81,7 +83,7 @@
   </div>
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;min-width:54px;">
     <span style="font-size:14px;font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
-    <span style="font-size:10px;font-weight:700;color:{scoreColor};text-transform:uppercase;letter-spacing:0.05em;">{label}</span>
+    <span style="font-size:11px;font-weight:600;color:var(--text-muted);">{label}</span>
     {#if progressLabel}
       <span style="font-size:10px;color:var(--text-muted);">{progressLabel}</span>
     {/if}

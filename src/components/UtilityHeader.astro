@@ -1,0 +1,149 @@
+---
+interface Props {
+  current?: 'about' | 'verify' | 'disclaimer';
+}
+
+const { current } = Astro.props;
+---
+
+<header class="utility-header">
+  <div class="utility-header-inner">
+    <a href="/" class="utility-brand" aria-label="The Fourth Angle — go to Today">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="176 350 607 258"
+        class="utility-logo"
+        aria-hidden="true"
+      >
+        <path
+          d="M 773 363 L 691 363 L 680 366 L 666 378 L 590 542 L 567 595 L 616 595 L 624 574 L 637 547 L 728 547 L 729 595 L 773 595 Z M 727 399 L 729 401 L 729 506 L 656 507 L 655 506 L 698 411 L 703 405 L 709 401 Z M 482 363 L 378 509 L 378 547 L 499 547 L 500 595 L 545 595 L 545 549 L 576 507 L 545 506 L 545 364 Z M 499 412 L 500 506 L 432 507 L 431 506 Z M 186 363 L 186 408 L 273 409 L 273 595 L 318 595 L 318 409 L 391 408 L 422 363 Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span class="utility-wordmark">The Fourth Angle</span>
+    </a>
+
+    <nav class="utility-nav" aria-label="Main navigation">
+      <a href="/" class="utility-nav-link">Today</a>
+      <a
+        href="/about"
+        class={`utility-nav-link${current === 'about' ? ' utility-nav-link--active' : ''}`}
+        aria-current={current === 'about' ? 'page' : undefined}
+      >
+        How This Works
+      </a>
+      <a
+        href="/verify"
+        class={`utility-nav-link${current === 'verify' ? ' utility-nav-link--active' : ''}`}
+        aria-current={current === 'verify' ? 'page' : undefined}
+      >
+        Verify
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .utility-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+  }
+
+  .utility-header-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 18px;
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .utility-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    border-radius: 12px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .utility-logo {
+    width: 46px;
+    height: auto;
+    display: block;
+  }
+
+  .utility-wordmark {
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .utility-nav {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: var(--radius-pill, 999px);
+    padding: 4px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.56);
+  }
+
+  .utility-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: var(--radius-pill, 999px);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition:
+      background var(--duration-fast, 150ms) ease,
+      color var(--duration-fast, 150ms) ease;
+  }
+
+  .utility-nav-link:hover,
+  .utility-nav-link--active {
+    color: var(--score-medium);
+    background: var(--bg);
+  }
+
+  @media (max-width: 720px) {
+    .utility-header-inner {
+      padding: 0 12px;
+      gap: 12px;
+    }
+
+    .utility-logo {
+      width: 42px;
+    }
+
+    .utility-wordmark {
+      display: none;
+    }
+
+    .utility-nav-link {
+      padding: 0 12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .utility-nav {
+      background: rgba(34, 31, 27, 0.7);
+    }
+  }
+</style>

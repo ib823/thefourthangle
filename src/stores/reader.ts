@@ -53,6 +53,26 @@ export function addReaction(issueId: string, cardIndex: number): void {
   }
 }
 
+export function removeReaction(issueId: string, cardIndex: number): void {
+  const r = getReactions();
+  const nextCards = (r[issueId] ?? []).filter((index) => index !== cardIndex);
+  if (nextCards.length > 0) {
+    r[issueId] = nextCards;
+  } else {
+    delete r[issueId];
+  }
+  reactions.set(JSON.stringify(r));
+}
+
+export function toggleReaction(issueId: string, cardIndex: number): boolean {
+  if (hasReacted(issueId, cardIndex)) {
+    removeReaction(issueId, cardIndex);
+    return false;
+  }
+  addReaction(issueId, cardIndex);
+  return true;
+}
+
 export function countHighlights(reactionMap: Record<string, number[]> = getReactions()): number {
   let total = 0;
   for (const cards of Object.values(reactionMap)) {

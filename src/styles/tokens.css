@@ -22,10 +22,18 @@
   --amber-bg: rgba(122,90,18,0.04);
 
   /* Score colors */
+  --score-strong: #8B5A00;
+  --score-medium: #B85C00;
+  --score-partial: #1971C2;
   --score-critical: #E03131;
   --score-warning: #B85C00;
   --score-info: #1971C2;
   --score-neutral: #6C757D;
+
+  /* Highlight */
+  --highlight-accent: #B85C00;
+  --highlight-bg: rgba(184, 92, 0, 0.08);
+  --highlight-bg-strong: rgba(184, 92, 0, 0.12);
 
   /* Status colors */
   --status-green: #2B8A3E;
@@ -69,6 +77,25 @@
   --font-display: 'Manrope', system-ui, sans-serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
 
+  /* Type scale */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-ui: 13px;
+  --text-body: 14px;
+  --text-reading: 17px;
+  --text-reading-lg: 18px;
+  --text-title: 24px;
+  --text-hero: 40px;
+  --text-display: 56px;
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --radius-round: 50%;
+
   /* Easing curves */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -96,8 +123,8 @@
   --card-hook-bg: #F8F9FA;
   --card-fact-color: #1971C2;
   --card-fact-bg: #E7F5FF;
-  --card-reframe-color: #E03131;
-  --card-reframe-bg: #FFF5F5;
+  --card-reframe-color: #B85C00;
+  --card-reframe-bg: #FFF4E6;
   --card-view-color: #7048E8;
   --card-view-bg: #F3F0FF;
 }
@@ -124,6 +151,12 @@
     --score-warning: #FBBF24;
     --score-info: #60A5FA;
     --score-neutral: #8C8478;
+    --score-strong: #F5C451;
+    --score-medium: #FBBF24;
+    --score-partial: #60A5FA;
+    --highlight-accent: #F5C451;
+    --highlight-bg: rgba(245, 196, 81, 0.12);
+    --highlight-bg-strong: rgba(245, 196, 81, 0.18);
     --status-green: #4ADE80;
     --status-green-text: #4ADE80;
     --status-green-bg: rgba(74,222,128,0.1);
@@ -158,8 +191,8 @@
     --card-hook-bg: #2A2620;
     --card-fact-color: #60A5FA;
     --card-fact-bg: rgba(96,165,250,0.1);
-    --card-reframe-color: #F87171;
-    --card-reframe-bg: rgba(248,113,113,0.1);
+    --card-reframe-color: #FBBF24;
+    --card-reframe-bg: rgba(251,191,36,0.12);
     --card-view-color: #A78BFA;
     --card-view-bg: rgba(167,139,250,0.1);
   }

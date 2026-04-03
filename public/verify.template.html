@@ -7,6 +7,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
+@font-face{font-family:'Manrope';src:url('/fonts/manrope-latin.woff2') format('woff2');font-weight:400 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Nunito Sans';src:url('/fonts/nunito-latin.woff2') format('woff2');font-weight:400 700;font-style:normal;font-display:swap}
+
 :root{
   --bg:#F8F9FA;--bg-card:#FFFFFF;--bg-sunken:#F1F3F5;
   --text-primary:#212529;--text-secondary:#495057;--text-tertiary:#5C636A;--text-muted:#868E96;
@@ -30,20 +33,25 @@
 }
 
 body{font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--bg);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased}
-.container{max-width:560px;margin:0 auto;padding:32px 20px 60px}
-.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text-muted);text-decoration:none;margin-bottom:24px;min-height:44px}
-.back:hover{color:var(--text-secondary)}
-.back svg{width:16px;height:16px}
-h1{font-family:'Manrope',system-ui,sans-serif;font-size:22px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;margin-bottom:6px}
+.verify-header{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--border);background:rgba(248,249,250,.85);backdrop-filter:blur(12px)}
+.verify-header-inner{max-width:1180px;margin:0 auto;min-height:62px;padding:0 18px;display:flex;align-items:center;gap:18px}
+.verify-brand{display:inline-flex;align-items:center;gap:12px;min-height:44px;border-radius:12px;color:var(--text-primary);text-decoration:none}
+.verify-logo{width:46px;height:auto;display:block}
+.verify-wordmark{font-family:'Manrope',system-ui,sans-serif;font-size:17px;line-height:1;letter-spacing:-.03em;font-weight:700}
+.verify-nav{margin-left:auto;display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px;border:1px solid var(--border);background:rgba(255,255,255,.56)}
+.verify-nav-link{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:999px;font-size:12px;font-weight:700;color:var(--text-secondary);text-decoration:none;transition:background .15s ease,color .15s ease}
+.verify-nav-link:hover,.verify-nav-link[aria-current="page"]{background:var(--bg-card);color:#B85C00;text-decoration:none}
+.container{max-width:640px;margin:0 auto;padding:24px 20px 60px}
+h1{font-family:'Manrope',system-ui,sans-serif;font-size:32px;font-weight:700;color:var(--text-primary);letter-spacing:-0.04em;line-height:1.04;margin-bottom:10px}
 .subtitle{font-size:14px;color:var(--text-tertiary);line-height:1.6;margin-bottom:28px}
-.card{background:var(--bg-card);border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid var(--border)}
-.card h2{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;color:var(--text-primary)}
+.card{background:var(--bg-card);border-radius:16px;padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+.card h2{font-family:'Manrope',system-ui,sans-serif;font-size:16px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;color:var(--text-primary)}
 .card .desc{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:16px}
 label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
 textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:12px;font-family:inherit;font-size:13px;background:var(--bg-sunken);color:var(--text-primary);resize:vertical;min-height:180px;line-height:1.6;transition:border-color 0.15s ease}
 textarea:focus{outline:none;border-color:var(--focus)}
-button.primary{background:var(--text-primary);color:var(--bg);border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;margin-top:12px;transition:opacity 0.15s ease;min-height:44px}
-button.primary:hover{opacity:0.85}
+button.primary{background:linear-gradient(180deg,rgba(184,92,0,.12),rgba(184,92,0,.08));color:#B85C00;border:1px solid rgba(184,92,0,.22);border-radius:999px;padding:14px 20px;font-size:13px;font-weight:700;cursor:pointer;width:100%;margin-top:12px;transition:background .18s ease,border-color .18s ease,transform .18s ease;min-height:46px}
+button.primary:hover{background:linear-gradient(180deg,rgba(184,92,0,.16),rgba(184,92,0,.1));border-color:rgba(184,92,0,.32);transform:translateY(-1px)}
 .result{margin-top:16px;padding:16px;border-radius:12px;font-size:14px;line-height:1.5}
 .result.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
 .result.ok strong{font-weight:700}
@@ -61,15 +69,25 @@ a{color:var(--focus);text-decoration:none}
 a:hover{text-decoration:underline}
 .badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;color:var(--green);background:var(--green-bg)}
 .legal-note{font-size:12px;color:var(--text-muted);line-height:1.6;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:10px;padding:14px 16px;margin-top:16px}
+@media(max-width:720px){.verify-header-inner{padding:0 12px;gap:12px}.verify-logo{width:42px}.verify-wordmark{display:none}.verify-nav-link{padding:0 12px}}
+@media(prefers-color-scheme:dark){.verify-header{background:rgba(26,26,26,.85)}.verify-nav{background:rgba(34,31,27,.7)}}
 </style>
 </head>
 <body>
+<header class="verify-header">
+  <div class="verify-header-inner">
+    <a href="/" class="verify-brand" aria-label="The Fourth Angle — go to Today">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="176 350 607 258" class="verify-logo" aria-hidden="true"><path d="M 773 363 L 691 363 L 680 366 L 666 378 L 590 542 L 567 595 L 616 595 L 624 574 L 637 547 L 728 547 L 729 595 L 773 595 Z M 727 399 L 729 401 L 729 506 L 656 507 L 655 506 L 698 411 L 703 405 L 709 401 Z M 482 363 L 378 509 L 378 547 L 499 547 L 500 595 L 545 595 L 545 549 L 576 507 L 545 506 L 545 364 Z M 499 412 L 500 506 L 432 507 L 431 506 Z M 186 363 L 186 408 L 273 409 L 273 595 L 318 595 L 318 409 L 391 408 L 422 363 Z" fill="currentColor" fill-rule="evenodd"/></svg>
+      <span class="verify-wordmark">The Fourth Angle</span>
+    </a>
+    <nav class="verify-nav" aria-label="Main navigation">
+      <a href="/" class="verify-nav-link">Today</a>
+      <a href="/about" class="verify-nav-link">How This Works</a>
+      <a href="/verify" class="verify-nav-link" aria-current="page">Verify</a>
+    </nav>
+  </div>
+</header>
 <div class="container">
-  <a href="/" class="back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Back
-  </a>
-
   <h1>Verify content</h1>
   <p class="subtitle">Check whether content originated from The Fourth Angle.</p>
 
@@ -182,7 +200,6 @@ async function verifyContent() {
     resultEl.innerHTML = '<strong>NOT VERIFIED</strong> — This content does not match any issue published by The Fourth Angle.';
   }
 }
-document.querySelector(".back").addEventListener("click",function(e){e.preventDefault();history.length>1?history.back():location.href="/";});
 document.querySelector("button.primary").addEventListener("click",verifyContent);
 </script>
 </body>

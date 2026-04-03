@@ -12,6 +12,7 @@ import {
   saveIssue,
   savedIssues,
   scoreIssue,
+  toggleReaction,
   toggleSavedIssue,
   unsaveIssue
 } from '../../stores/reader';
@@ -78,6 +79,14 @@ describe('reactions', () => {
     addReaction('001', 4);
     addReaction('002', 0);
     expect(countHighlights()).toBe(3);
+  });
+
+  it('toggles a highlight off and removes empty issue buckets', () => {
+    expect(toggleReaction('001', 2)).toBe(true);
+    expect(getReactions()).toEqual({ '001': [2] });
+    expect(toggleReaction('001', 2)).toBe(false);
+    expect(hasReacted('001', 2)).toBe(false);
+    expect(getReactions()).toEqual({});
   });
 });
 

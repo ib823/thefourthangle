@@ -94,7 +94,15 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
     // Back link: go back if history exists, otherwise go home
     document.querySelector('.back-link')?.addEventListener('click', (e) => {
       e.preventDefault();
-      history.length > 1 ? history.back() : location.href = '/';
+      let canGoBack = false;
+      try {
+        canGoBack = !!document.referrer && new URL(document.referrer).origin === location.origin;
+      } catch {}
+      if (canGoBack) {
+        history.back();
+      } else {
+        location.href = '/';
+      }
     });
     // F02/F03: Crossfade route transition using View Transitions API
     // Progressive enhancement — falls back to instant navigation on unsupported browsers

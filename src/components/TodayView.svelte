@@ -161,9 +161,9 @@
   }
 
   function opinionColor(score: number): string {
-    if (score >= 80) return 'var(--score-critical)';
-    if (score >= 60) return 'var(--score-warning)';
-    if (score >= 40) return 'var(--score-info)';
+    if (score >= 80) return 'var(--score-strong)';
+    if (score >= 60) return 'var(--score-medium)';
+    if (score >= 40) return 'var(--score-partial)';
     return 'var(--score-neutral)';
   }
 </script>

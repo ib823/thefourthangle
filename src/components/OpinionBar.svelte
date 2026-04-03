@@ -18,7 +18,7 @@
     : false;
 
   let color = $derived(
-    score >= 80 ? 'var(--score-critical)' : score >= 60 ? 'var(--score-warning)' : score >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'
+    score >= 80 ? 'var(--score-strong)' : score >= 60 ? 'var(--score-medium)' : score >= 40 ? 'var(--score-partial)' : 'var(--score-neutral)'
   );
 
   onMount(() => {

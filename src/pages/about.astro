@@ -1,36 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
+import UtilityHeader from '../components/UtilityHeader.astro';
 const buildId = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : new Date().toISOString();
 const commitSha = typeof __COMMIT_SHA__ !== 'undefined' ? __COMMIT_SHA__ : 'unknown';
 const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} · ${commitSha}`;
 ---
 <Base title="How This Works — The Fourth Angle">
-  <div style="max-width:640px;margin:0 auto;">
-    <header style="position:sticky;top:0;z-index:10;padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border-subtle);background:var(--bg);">
-      <a href="/" class="back-link" style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back
-      </a>
-      <div style="flex:1;"></div>
-      <a href="/" aria-label="Home" style="display:flex;align-items:center;min-height:44px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="176 350 607 258" style="width:60px;height:24px;color:var(--text-primary);" aria-label="Home"><path d="M 773 363 L 691 363 L 680 366 L 666 378 L 590 542 L 567 595 L 616 595 L 624 574 L 637 547 L 728 547 L 729 595 L 773 595 Z M 727 399 L 729 401 L 729 506 L 656 507 L 655 506 L 698 411 L 703 405 L 709 401 Z M 482 363 L 378 509 L 378 547 L 499 547 L 500 595 L 545 595 L 545 549 L 576 507 L 545 506 L 545 364 Z M 499 412 L 500 506 L 432 507 L 431 506 Z M 186 363 L 186 408 L 273 409 L 273 595 L 318 595 L 318 409 L 391 408 L 422 363 Z" fill="currentColor" fill-rule="evenodd"/></svg></a>
-    </header>
-    <article style="padding:20px 18px;max-width:640px;">
+  <UtilityHeader current="about" />
+  <main style="max-width:640px;margin:0 auto;padding:24px 18px 80px;">
 
       <!-- Hero -->
       <section style="margin-bottom:32px;">
-        <h1 style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--text-primary);margin:0 0 8px 0;letter-spacing:-0.02em;line-height:1.2;">How This Works</h1>
+        <h1 style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--text-primary);margin:0 0 10px 0;letter-spacing:-0.04em;line-height:1.04;">How This Works</h1>
         <p style="font-family:var(--font-body);font-size:17px;line-height:1.65;color:var(--text-primary);margin:0;font-weight:500;">On any Malaysian issue, there are three angles: the government's, the opposition's, and the mob's. All three are shaped by political incentive. We provide the fourth.</p>
       </section>
 
       <!-- Mission -->
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">What We Do</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">What We Do</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">The Fourth Angle is a non-partisan Malaysian issues platform. We do not tell you what to think. We show you what every side left out — then let you decide.</p>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Every issue is fact-checked, bias-measured across 12 dimensions, stress-tested for cowardice, and published with the full audit visible. If we are biased, you can see exactly where and by how much.</p>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">The Process</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">The Process</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 8px 0;">Every issue goes through 6 independent editorial stages designed to catch what the others miss. Each stage challenges the one before it. The final output is scored, measured, and published with full audit transparency.</p>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-primary);margin:0;font-weight:600;">No Malaysian outlet publishes its bias measurements. We do.</p>
       </div>
@@ -40,7 +33,7 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
 
       <!-- Editorial Audit -->
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">The Editorial Audit</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;letter-spacing:-0.03em;">The Editorial Audit</h2>
         <p style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-secondary);margin:0 0 16px 0;">Every issue shows how each editorial stage assessed it.</p>
         <!-- Example: PA=85(green/circle), BA=62(amber/triangle), FC=88(green/circle), AF=76(green/circle), CT=52(amber/triangle), SR=78(green/circle) -->
         <div style="display:flex;align-items:center;gap:0;padding:12px 16px;background:var(--amber-bg);border:1px solid rgba(44,34,21,0.05);border-radius:10px;margin-bottom:16px;">
@@ -48,32 +41,32 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
             <!-- PA: 85 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">PA</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">PA</span>
             </div>
             <!-- BA: 62 → triangle (amber) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid var(--score-warning);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">BA</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">BA</span>
             </div>
             <!-- FC: 88 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">FC</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">FC</span>
             </div>
             <!-- AF: 76 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">AF</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">AF</span>
             </div>
             <!-- CT: 52 → triangle (amber) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid var(--score-warning);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">CT</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">CT</span>
             </div>
             <!-- SR: 78 → circle (green) -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <div style="width:10px;height:10px;border-radius:50%;background:var(--status-green);box-shadow:0 0 0 2px var(--status-green-bg);"></div>
-              <span style="font-family:var(--font-display);font-size:8px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">SR</span>
+              <span style="font-family:var(--font-display);font-size:10px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;">SR</span>
             </div>
           </div>
           <div style="display:flex;align-items:baseline;gap:4px;margin-left:12px;">
@@ -100,7 +93,7 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
 
       <!-- Opinion Shift -->
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Opinion Shift</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;letter-spacing:-0.03em;">Opinion Shift</h2>
         <p style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-secondary);margin:0 0 16px 0;">How much you'd miss by reading only the headline. Higher means more hidden complexity.</p>
         <!-- Example bar -->
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
@@ -112,7 +105,7 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg-elevated);border-radius:8px;">
-            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-critical);">80–100</span>
+            <span style="font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--score-strong);">80–100</span>
             <span style="font-family:var(--font-body);font-size:12px;color:var(--text-secondary);">Fundamental</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg-elevated);border-radius:8px;">
@@ -135,33 +128,33 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
 
       <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">1. Primary Analysis (PA)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">1. Primary Analysis (PA)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Six-card analysis from court documents, parliamentary records, and primary sources.</p>
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">2. Bias Audit (BA)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">2. Bias Audit (BA)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Scans for 9 bias types — partisan, racial, religious, geographic, economic, gender, omission, emotional manipulation, and diplomatic evasion.</p>
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">3. Fact Verification (FC)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">3. Fact Verification (FC)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Every claim verified against primary sources. Each gets a confidence score: verified, unverified, misleading, or incorrect.</p>
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">4. Alternative Framing (AF)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">4. Alternative Framing (AF)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Finds missing voices — B40, East Malaysia, women, youth, intra-community class divides.</p>
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">5. Contrarian Stress-Test (CT)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">5. Contrarian Stress-Test (CT)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Attacks the analysis. Where is it cowardly? Where does it hedge when evidence is clear?</p>
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px 20px;">
-          <h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;">6. Synthesis Review (SR)</h3>
+          <h3 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 4px 0;letter-spacing:-0.02em;">6. Synthesis Review (SR)</h3>
           <p style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);margin:0;line-height:1.6;">Integrates all five critiques. Corrects facts first, then rebalances bias, fills gaps, strengthens courage. Produces the final score.</p>
         </div>
       </div>
 
       <!-- Bias Dimensions -->
-      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">12 Bias Dimensions</h2>
+      <p style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">12 Bias Dimensions</p>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
         <p style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-secondary);margin:0 0 16px 0;">Every article is measured across all 12. The full vector is published on each issue.</p>
@@ -187,10 +180,10 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
       </div>
 
       <!-- Trust & Verify -->
-      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Trust & Verify</h2>
+      <p style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Trust & Verify</p>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;">
-        <a href="/verify.html" style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;text-decoration:none;display:flex;flex-direction:column;gap:8px;">
+        <a href="/verify" style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;text-decoration:none;display:flex;flex-direction:column;gap:8px;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <span style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);">Verify Content</span>
           <span style="font-family:var(--font-body);font-size:12px;color:var(--text-tertiary);line-height:1.4;">Cryptographic fingerprint + Ed25519 signature on every issue</span>
@@ -216,7 +209,5 @@ const releaseStamp = `${buildId.replace('T', ' ').replace(/\.\d+Z$/, ' UTC')} ·
         </div>
       </div>
 
-    </article>
-    <div style="height:40px;"></div>
-  </div>
+  </main>
 </Base>

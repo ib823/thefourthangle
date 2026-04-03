@@ -272,7 +272,7 @@
       </div>
     {/if}
 
-    {#if !isSearching && onSortChange}
+    {#if !isSearching && onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
       <div style="padding:10px 0 4px;">
         <SortToggle
           variant="sidebar"
@@ -366,7 +366,7 @@
         {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
           {#each section.issues as issue}
             {@const idx = issueIndexMap.get(issue.id) ?? 0}
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} reactionCount={reactionMap[issue.id]?.length ?? 0} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           {/each}
         {/if}
       {/each}
@@ -388,7 +388,7 @@
           <div
             style="position:absolute;top:{idx * ITEM_HEIGHT}px;left:0;right:0;height:{ITEM_HEIGHT}px;"
           >
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} reactionCount={reactionMap[issue.id]?.length ?? 0} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
           </div>
         {/each}
       </div>

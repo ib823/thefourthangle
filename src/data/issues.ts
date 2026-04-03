@@ -37,9 +37,9 @@ export const CARD_TYPES: Record<string, { label: string; color: string; bg: stri
 };
 
 export function opinionColor(s: number): string {
-  if (s >= 80) return "var(--score-critical)";
-  if (s >= 60) return "var(--score-warning)";
-  if (s >= 40) return "var(--score-info)";
+  if (s >= 80) return "var(--score-strong)";
+  if (s >= 60) return "var(--score-medium)";
+  if (s >= 40) return "var(--score-partial)";
   return "var(--score-neutral)";
 }
 

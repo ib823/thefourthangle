@@ -85,7 +85,7 @@
   });
 
   let scoreColor = $derived(
-    issue.opinionShift >= 80 ? 'var(--score-critical)' : issue.opinionShift >= 60 ? 'var(--score-warning)' : issue.opinionShift >= 40 ? 'var(--score-info)' : 'var(--text-tertiary)'
+    issue.opinionShift >= 80 ? 'var(--score-strong)' : issue.opinionShift >= 60 ? 'var(--score-medium)' : issue.opinionShift >= 40 ? 'var(--score-partial)' : 'var(--text-tertiary)'
   );
 
   function opinionTone(score: number): string {
@@ -118,7 +118,7 @@
         <span style="font-size:10px;font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Updated</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size:10px;font-weight:700;color:var(--score-critical);background:rgba(224,49,49,0.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
+        <span style="font-size:10px;font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius:4px;text-transform:uppercase;">Highlighted</span>
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}

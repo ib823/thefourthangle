@@ -8,6 +8,7 @@
   import DesktopCard from './DesktopCard.svelte';
   import DesktopFeed from './DesktopFeed.svelte';
   import DesktopReader from './DesktopReader.svelte';
+  import HighlightsPanel from './HighlightsPanel.svelte';
   import LibraryTabs from './LibraryTabs.svelte';
   import MobileDock from './MobileDock.svelte';
   import SortToggle from './SortToggle.svelte';
@@ -612,6 +613,14 @@
     loadAndOpenIssue(issue.id, 'push');
   }
 
+  function openIssueAtCard(issue: FeedIssue, cardIndex: number) {
+    activeIssue = issue;
+    readerOriginRect = null;
+    restoredCardIndex = Math.max(0, Math.min(cardIndex, Math.max(issue.cards.length - 1, 0)));
+    savePosition(issue.id, restoredCardIndex);
+    loadAndOpenIssue(issue.id, 'push');
+  }
+
   function activateSurface(mode: SurfaceMode, historyMode: Exclude<HistoryMode, 'none'> = 'push', nextLibraryMode: LibraryMode = libraryMode) {
     searchQuery = '';
     searchActive = false;
@@ -770,29 +779,31 @@
     />
     <main class="app-main">
       {#if !searchActive}
-      {#if surfaceMode !== 'today'}
-        <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
-      {/if}
-      <div class="mobile-secondary-bar" class:mobile-secondary-bar--library={surfaceMode === 'library'}>
-        {#if surfaceMode === 'library'}
-          <LibraryTabs
-            libraryMode={libraryMode}
-            {readingCount}
-            {highlightCount}
-            panelId="mobile-library-panel"
-            idPrefix="mobile-library"
-            onOpenReading={openReadingLibrary}
-            onOpenHighlights={openHighlightsLibrary}
-          />
+        {#if surfaceMode !== 'today' && !(surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0)}
+          <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
         {/if}
-        <SortToggle
-          sortMode={feedSort}
-          onChange={(mode) => { feedSort = mode; }}
-          panelId={surfaceMode === 'today' ? 'mobile-today-panel' : undefined}
-          idPrefix={surfaceMode === 'today' ? 'mobile-today-sort' : 'mobile-library-sort'}
-        />
-      </div>
-    {/if}
+        <div class="mobile-secondary-bar" class:mobile-secondary-bar--library={surfaceMode === 'library'}>
+          {#if surfaceMode === 'library'}
+            <LibraryTabs
+              libraryMode={libraryMode}
+              {readingCount}
+              {highlightCount}
+              panelId="mobile-library-panel"
+              idPrefix="mobile-library"
+              onOpenReading={openReadingLibrary}
+              onOpenHighlights={openHighlightsLibrary}
+            />
+          {/if}
+          {#if !(surfaceMode === 'library' && libraryMode === 'highlights')}
+            <SortToggle
+              sortMode={feedSort}
+              onChange={(mode) => { feedSort = mode; }}
+              panelId={surfaceMode === 'today' ? 'mobile-today-panel' : undefined}
+              idPrefix={surfaceMode === 'today' ? 'mobile-today-sort' : 'mobile-library-sort'}
+            />
+          {/if}
+        </div>
+      {/if}
     {#if isSearching}
       <div class="sr-only" role="status" aria-live="polite">{searchStatusMessage}</div>
     {/if}
@@ -804,6 +815,19 @@
         aria-labelledby={`mobile-today-sort-${feedSort}`}
       >
         <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+      </div>
+    {:else if !isSearching && surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0}
+      <div
+        id="mobile-library-panel"
+        role="tabpanel"
+        aria-labelledby="mobile-library-highlights"
+        style="flex:1;min-height:0;display:flex;flex-direction:column;"
+      >
+        <HighlightsPanel
+          issues={sortedIssues}
+          reactionMap={appReactionMap}
+          onOpenHighlight={openIssueAtCard}
+        />
       </div>
     {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
       <section style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px 18px 32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 28%);">
@@ -841,7 +865,7 @@
     <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     <main class="app-main app-main--tablet">
     <div class="tablet-shell">
-      {#if surfaceMode !== 'today'}
+      {#if surfaceMode !== 'today' && !(surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0)}
         <h1 class="sr-only">{pageHeading(surfaceMode, libraryMode)}</h1>
       {/if}
       <div style="margin:12px 0 16px;">
@@ -882,7 +906,7 @@
           />
         </div>
       {/if}
-      {#if !isSearching}
+      {#if !isSearching && !(surfaceMode === 'library' && libraryMode === 'highlights')}
         <div style="margin-bottom:12px;">
           <SortToggle
             sortMode={feedSort}
@@ -895,6 +919,14 @@
       {#if surfaceMode === 'today' && !isSearching}
         <div id="tablet-today-panel" role="tabpanel" aria-labelledby={`tablet-today-sort-${feedSort}`}>
           <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+        </div>
+      {:else if !isSearching && surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0}
+        <div id="tablet-library-panel" role="tabpanel" aria-labelledby="tablet-library-highlights">
+          <HighlightsPanel
+            issues={sortedIssues}
+            reactionMap={appReactionMap}
+            onOpenHighlight={openIssueAtCard}
+          />
         </div>
       {:else if !isSearching && surfaceMode === 'library' && sortedIssues.length === 0}
         <section style="display:flex;align-items:center;justify-content:center;min-height:360px;padding:28px 20px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);border-radius:24px;">
@@ -966,7 +998,13 @@
         onOpenLibrary={() => openLibrary()}
         onOpenReading={() => openLibrary('reading', 'replace')}
         onOpenHighlights={openHighlightsLibrary}
-        onSelectIssue={openIssue}
+        onSelectIssue={(issue) => {
+          if (surfaceMode === 'library' && libraryMode === 'highlights') {
+            openIssueAtCard(issue, appReactionMap[issue.id]?.[0] ?? 0);
+            return;
+          }
+          openIssue(issue);
+        }}
         {searchQuery}
         onSearchInput={(q) => { searchQuery = q; }}
         {onSearchFocus}
@@ -1004,6 +1042,7 @@
           {nextHeadline}
           connections={resolvedConnections}
           onNavigateToIssue={navigateToIssue}
+          initialCardIndex={restoredCardIndex}
         />
       {:else if surfaceMode === 'library' && sortedIssues.length === 0}
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
@@ -1017,6 +1056,12 @@
             </p>
           </div>
         </div>
+      {:else if surfaceMode === 'library' && libraryMode === 'highlights'}
+        <HighlightsPanel
+          issues={sortedIssues}
+          reactionMap={appReactionMap}
+          onOpenHighlight={openIssueAtCard}
+        />
       {:else if surfaceMode === 'library'}
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
           <div style="max-width:420px;text-align:center;">

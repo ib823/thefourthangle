@@ -1,43 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
+import UtilityHeader from '../components/UtilityHeader.astro';
 ---
 <Base title="Disclaimer & Legal Notice — The Fourth Angle" description="Legal disclaimer, editorial standards, and content policies for The Fourth Angle analysis platform.">
-  <div style="max-width:640px;margin:0 auto;">
-    <header style="padding:16px 18px;display:flex;align-items:center;gap:12px;">
-      <a href="/" class="back-link" style="font-family:var(--font-body);font-size:14px;color:var(--text-secondary);text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back
-      </a>
-      <div style="flex:1;"></div>
-      <a href="/" aria-label="Home" style="display:flex;align-items:center;min-height:44px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="176 350 607 258" style="width:60px;height:24px;color:var(--text-primary);" aria-label="Home"><path d="M 773 363 L 691 363 L 680 366 L 666 378 L 590 542 L 567 595 L 616 595 L 624 574 L 637 547 L 728 547 L 729 595 L 773 595 Z M 727 399 L 729 401 L 729 506 L 656 507 L 655 506 L 698 411 L 703 405 L 709 401 Z M 482 363 L 378 509 L 378 547 L 499 547 L 500 595 L 545 595 L 545 549 L 576 507 L 545 506 L 545 364 Z M 499 412 L 500 506 L 432 507 L 431 506 Z M 186 363 L 186 408 L 273 409 L 273 595 L 318 595 L 318 409 L 391 408 L 422 363 Z" fill="currentColor" fill-rule="evenodd"/></svg></a>
-    </header>
-    <article style="padding:20px 18px;max-width:640px;">
+  <UtilityHeader current="disclaimer" />
+  <main style="max-width:640px;margin:0 auto;padding:24px 18px 80px;">
 
-      <h1 style="font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--text-primary);margin:0 0 8px 0;letter-spacing:-0.02em;line-height:1.2;">Disclaimer & Legal Notice</h1>
+      <h1 style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--text-primary);margin:0 0 10px 0;letter-spacing:-0.04em;line-height:1.04;">Disclaimer & Legal Notice</h1>
       <p style="font-family:var(--font-body);font-size:15px;color:var(--text-tertiary);margin:0 0 32px 0;">Last reviewed March 2026</p>
 
       <!-- Group 1: What We Are -->
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Analysis Platform, Not a News Outlet</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Analysis Platform, Not a News Outlet</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">The Fourth Angle is an independent, non-partisan <strong>analysis platform</strong>. We are not a licensed news outlet, media organisation, or press entity. We publish independent analysis and commentary on matters of public interest based on publicly available information. This platform operates under the Communications and Multimedia Act 1998.</p>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Opinion and Analysis</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Opinion and Analysis</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">All content constitutes <strong>analysis, opinion, and commentary</strong>. Content is protected as fair comment on matters of public interest under Malaysian law.</p>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Factual claims are sourced and cited. Scores and measurements represent our editorial methodology — they are opinions, not objective truth claims.</p>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Good Faith</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Good Faith</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">All analysis is published in good faith. We do not intend to defame, harass, threaten, or cause harm. Commentary on public figures is directed at their public actions and policies — not their private lives.</p>
       </div>
 
       <!-- Group 2: Respect & Sensitivity -->
-      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Respect & Sensitivity</h2>
+      <p style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Respect & Sensitivity</p>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Race, Religion, and Royalty</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Race, Religion, and Royalty</h2>
         <div style="display:flex;flex-direction:column;gap:12px;font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);">
           <p style="margin:0;">We respect the equal dignity of all races and ethnic communities. We do not publish content intended to degrade or cause enmity between racial groups.</p>
           <p style="margin:0;">We respect all religions and religious beliefs. We do not intend to insult or attack any religion, religious figure, or institution.</p>
@@ -47,12 +40,12 @@ import Base from '../layouts/Base.astro';
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Constitutional Framework</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Constitutional Framework</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">We respect Malaysia's constitutional framework and rule of law. We do not advocate violence, armed rebellion, or unlawful action. Analysis of government policy supports informed democratic participation.</p>
       </div>
 
       <!-- Group 3: Accuracy & Limits -->
-      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Accuracy & Limitations</h2>
+      <p style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Accuracy & Limitations</p>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
@@ -74,20 +67,20 @@ import Base from '../layouts/Base.astro';
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Sources</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Sources</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">We use only publicly available information. We do not receive, store, or publish material classified under the Official Secrets Act 1972. All sources are disclosed in our published audit for each issue.</p>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Limitation of Liability</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Limitation of Liability</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">To the maximum extent permitted by Malaysian law, The Fourth Angle disclaims all liability for damages arising from use of this platform or reliance on its content.</p>
       </div>
 
       <!-- Group 4: Standards & Trust -->
-      <h2 style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Standards & Trust</h2>
+      <p style="font-family:var(--font-display);font-size:11px;font-weight:600;color:var(--text-tertiary);margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.1em;">Standards & Trust</p>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Editorial Review Process</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Editorial Review Process</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Every issue undergoes a 6-stage editorial review: Primary Analysis, Bias Audit, Fact Verification, Alternative Framing, Contrarian Stress-Test, and Synthesis Review. The complete audit is published with every issue. <a href="/about" style="color:var(--focus);text-decoration:none;">Full methodology</a></p>
       </div>
 
@@ -98,19 +91,19 @@ import Base from '../layouts/Base.astro';
         </div>
         <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:16px;">
           <h3 style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Authenticity</h3>
-          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Every issue carries a cryptographic fingerprint (SHA-256) + Ed25519 signature. <a href="/verify.html" style="color:var(--focus);text-decoration:none;">Verify content</a></p>
+          <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-secondary);margin:0;">Every issue carries a cryptographic fingerprint (SHA-256) + Ed25519 signature. <a href="/verify" style="color:var(--focus);text-decoration:none;">Verify content</a></p>
         </div>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:16px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Privacy and Data</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Privacy and Data</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">No user accounts, no tracking, no third-party analytics, no personally identifiable information collected.</p>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0 0 12px 0;">Your browser's local storage remembers reading progress. This data stays on your device, is never transmitted, and can be cleared via browser settings.</p>
         <p style="font-family:var(--font-body);font-size:13px;line-height:1.6;color:var(--text-tertiary);margin:0;">Cloudflare (our host) may record standard server logs per their privacy policy.</p>
       </div>
 
       <div style="background:var(--card);border:1px solid var(--border-light);border-radius:12px;padding:20px;margin-bottom:32px;">
-        <h2 style="font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;">Independence</h2>
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary);margin:0 0 12px 0;letter-spacing:-0.03em;">Independence</h2>
         <p style="font-family:var(--font-body);font-size:15px;line-height:1.72;color:var(--text-secondary);margin:0;">Independently operated. No political funding, government grants, or payments from any political party, politician, or government-linked entity.</p>
       </div>
 
@@ -126,7 +119,5 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
 
-    </article>
-    <div style="height:40px;"></div>
-  </div>
+  </main>
 </Base>

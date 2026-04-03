@@ -53,7 +53,7 @@
       {copied ? 'Copied' : 'Copy hash'}
     </button>
     <a
-      href="/verify.html"
+      href="/verify"
       style="font-size:11px;color:var(--amber);text-decoration:none;white-space:nowrap;"
     >
       Verify

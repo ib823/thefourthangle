@@ -113,7 +113,7 @@
   ];
 
   let barColor = $derived(
-    os >= 80 ? 'var(--score-critical)' : os >= 60 ? 'var(--score-warning)' : os >= 40 ? 'var(--score-info)' : 'var(--score-neutral)'
+    os >= 80 ? 'var(--score-strong)' : os >= 60 ? 'var(--score-medium)' : os >= 40 ? 'var(--score-partial)' : 'var(--score-neutral)'
   );
   let nsColor = $derived(
     ns >= 75 ? 'var(--score-info)' : ns >= 50 ? 'var(--score-warning)' : 'var(--score-critical)'
