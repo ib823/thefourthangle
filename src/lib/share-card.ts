@@ -125,6 +125,11 @@ export async function generateShareCard(
   ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)';
   ctx.fillText('Read past the first telling.', cx, y);
 
+  // ── Legal notice ──
+  ctx.font = '12px "Nunito Sans"';
+  ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.25)';
+  ctx.fillText('Analysis only · Verify: thefourthangle.pages.dev/verify', cx, H - 76);
+
   // ── URL at bottom ──
   ctx.font = '13px "Nunito Sans"';
   ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.18)';
