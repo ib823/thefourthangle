@@ -55,7 +55,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
     min-height: 58px;
     border: none;
     border-radius: var(--radius-lg);

@@ -67,14 +67,14 @@
 >
   <div style="width:4px;align-self:stretch;border-radius:var(--radius-pill);background:{scoreColor};opacity:{isActive ? 1 : (isStarted ? 0.7 : 0.28)};"></div>
   <div style="flex:1;min-width:0;">
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
       {#if issue.status === 'new' && !readState}
-        <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">New</span>
+        <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:4px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">New</span>
       {:else if issue.status === 'updated'}
-        <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">Updated</span>
+        <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size:var(--text-micro);font-weight:700;color:var(--highlight-accent, var(--score-warning));background:var(--highlight-bg, rgba(184,92,0,0.08));padding:3px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">{reactionCount > 0 ? `${reactionCount} saved` : 'Highlighted'}</span>
+        <span style="font-size:var(--text-micro);font-weight:700;color:var(--highlight-accent, var(--score-warning));background:var(--highlight-bg, rgba(184,92,0,0.08));padding:4px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">{reactionCount > 0 ? `${reactionCount} saved` : 'Highlighted'}</span>
       {/if}
     </div>
     <span class="balance-title" style="font-size:var(--text-body);font-weight:{headlineWeight};color:{isActive ? 'var(--text-primary)' : headlineColor};line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;">{#if searchTerms}{@html highlightText(issue.headline, searchTerms)}{:else}{issue.headline}{/if}</span>

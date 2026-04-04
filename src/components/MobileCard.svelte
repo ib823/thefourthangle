@@ -113,12 +113,12 @@
   <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;">
     <div style="display:flex;align-items:center;gap:8px;">
       {#if issue.status === 'new' && !readState}
-        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">New</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:4px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">New</span>
       {:else if issue.status === 'updated'}
-        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Updated</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Updated</span>
       {/if}
       {#if hasReaction}
-        <span style="font-size: var(--text-micro);font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:3px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Highlighted</span>
+        <span style="font-size: var(--text-micro);font-weight:700;color:var(--highlight-accent);background:var(--highlight-bg);padding:4px 8px;border-radius: var(--radius-sm);text-transform:uppercase;">Highlighted</span>
       {/if}
     </div>
     {#if isStarted && readState && readState.progress > 0}

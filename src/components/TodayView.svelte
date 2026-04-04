@@ -490,7 +490,7 @@
     grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
     gap: 28px;
     min-height: 420px;
-    padding: 30px;
+    padding: 32px;
     align-items: end;
   }
 
@@ -505,7 +505,7 @@
     display: inline-flex;
     align-items: center;
     width: fit-content;
-    padding: 7px 12px;
+    padding: 8px 12px;
     border-radius: var(--radius-pill);
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -538,7 +538,7 @@
   }
 
   .hero-shift {
-    padding: 22px;
+    padding: 24px;
     border-radius: var(--radius-xl);
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -610,7 +610,7 @@
   }
 
   .today-panel {
-    padding: 22px;
+    padding: 24px;
     border-radius: var(--radius-xl);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.76);
@@ -624,7 +624,7 @@
     display: grid;
     grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
     gap: 16px;
-    padding: 18px 20px;
+    padding: 20px;
     border-radius: var(--radius-xl);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
@@ -850,7 +850,7 @@
 
   @media (max-width: 767px) {
     .today-wrap {
-      padding: 18px 14px 28px;
+      padding: 16px 16px 28px;
       gap: 16px;
     }
 
@@ -874,7 +874,7 @@
       grid-template-columns: 1fr;
       min-height: 0;
       padding: 20px;
-      gap: 18px;
+      gap: 20px;
     }
 
     .hero-headline {
@@ -890,12 +890,12 @@
     }
 
     .today-panel {
-      padding: 18px;
+      padding: 16px;
       border-radius: var(--radius-xl);
     }
 
     .today-library-strip {
-      padding: 18px;
+      padding: 16px;
       border-radius: var(--radius-xl);
     }
 

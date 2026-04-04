@@ -33,6 +33,8 @@
   // Accessibility: focus management
   let focusOrigin: Element | null = null;
   let inertSiblings: HTMLElement[] = [];
+  // Cache the overlay element ref for onDestroy — panelEl.parentElement is null after DOM removal
+  let overlayRef: HTMLElement | null = null;
 
   function toggleBackgroundInert(overlayEl: HTMLElement | null, shouldInert: boolean) {
     // Scope inert to immediate siblings only — never walk up to the app shell,
@@ -66,9 +68,12 @@
   onMount(() => {
     focusOrigin = document.activeElement;
     isDesktop = window.innerWidth >= 640;
-    toggleBackgroundInert(panelEl?.parentElement ?? null, true);
 
+    // Capture overlay ref while it's still in the DOM — panelEl.parentElement is null after Svelte removes the node
     requestAnimationFrame(() => {
+      overlayRef = panelEl?.parentElement as HTMLElement ?? null;
+      if (overlayRef) toggleBackgroundInert(overlayRef, true);
+
       visible = true;
       staggerCancel = stagger(openPlatforms.length, 40, 250, (i) => {
         buttonVisible[i] = true;
@@ -81,7 +86,13 @@
   });
 
   onDestroy(() => {
-    toggleBackgroundInert(panelEl?.parentElement ?? null, false);
+    // Use cached overlayRef — panelEl is already detached from DOM at this point
+    if (inertSiblings.length > 0) {
+      for (const node of inertSiblings) {
+        node.inert = false;
+      }
+      inertSiblings = [];
+    }
     if (copyRevertTimer) clearTimeout(copyRevertTimer);
     if (staggerCancel) staggerCancel();
     restoreShareFocus();

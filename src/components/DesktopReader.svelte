@@ -297,7 +297,7 @@
       <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="sync" fetchpriority="high" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
     </div>
 
-    <div style="margin:22px 0 0;padding:20px 22px;border-radius: var(--radius-xl);border:1px solid var(--border-subtle);background:linear-gradient(135deg, rgba(210,140,40,0.08) 0%, rgba(255,255,255,0.9) 55%);display:grid;grid-template-columns:minmax(110px, 0.4fr) minmax(0, 1fr);gap:18px;align-items:center;">
+    <div style="margin:24px 0 0;padding:20px 24px;border-radius: var(--radius-xl);border:1px solid var(--border-subtle);background:linear-gradient(135deg, rgba(210,140,40,0.08) 0%, rgba(255,255,255,0.9) 55%);display:grid;grid-template-columns:minmax(110px, 0.4fr) minmax(0, 1fr);gap:20px;align-items:center;">
       <div>
         <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Opinion Shift</div>
         <div style="font-family:var(--font-display);font-size: var(--text-display);line-height:0.9;letter-spacing:-0.05em;color:{barColor};margin-top:10px;">{displayOS}</div>
@@ -360,7 +360,7 @@
 
     <div bind:this={completionMarker} style="height:1px;"></div>
 
-    <div style="margin-top:20px;padding:22px;border-radius: var(--radius-xl);border:1px solid rgba(46,125,50,0.16);background:linear-gradient(180deg, rgba(46,125,50,0.08) 0%, rgba(255,255,255,0.92) 100%);">
+    <div style="margin-top:20px;padding:24px;border-radius: var(--radius-xl);border:1px solid rgba(46,125,50,0.16);background:linear-gradient(180deg, rgba(46,125,50,0.08) 0%, rgba(255,255,255,0.92) 100%);">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
         <div style="width:34px;height:34px;border-radius: var(--radius-round);display:flex;align-items:center;justify-content:center;background:rgba(46,125,50,0.14);color:var(--status-green);">
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>

@@ -179,7 +179,7 @@
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     background: var(--card);
-    padding: 22px;
+    padding: 24px;
     box-shadow: 0 16px 36px rgba(24, 24, 24, 0.05);
   }
 
@@ -241,7 +241,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 12px;
+    padding: 8px 12px;
     border-radius: var(--radius-pill);
     font-size: var(--text-sm);
     font-weight: 700;

@@ -346,7 +346,10 @@
         cardEl.style.opacity = `${Math.max(0, 1 - Math.abs(value) / (width * 1.5))}`;
       }
     }, () => {
-      // Exit complete — switch card
+      // Exit complete — hide text before switching card content
+      bigTextVisible = false;
+      subTextVisible = false;
+
       current = index;
       readCards = new Set([...readCards, index]);
       updateProgress(issue.id, index + 1);
@@ -354,10 +357,16 @@
       resetGhostStyles();
       resetDotStyles();
 
-      // Enter animation
+      // Enter animation — reveal text after DOM has painted new content
       if (cardEl) {
         const enterFrom = direction === 'right' ? 60 : -60;
         cardEl.style.opacity = '1';
+
+        // Wait one frame for Svelte to render new card content, then fade text in
+        requestAnimationFrame(() => {
+          bigTextVisible = true;
+          subTextVisible = true;
+        });
 
         if (prefersReducedMotion) {
           cardEl.style.transform = 'translateX(0) rotate(0deg)';
@@ -386,8 +395,6 @@
           }
           animating = false;
           cancelAnimation = null;
-          bigTextVisible = true;
-          subTextVisible = true;
           autoFitCardText();
           // A8: Haptic pulse on settle
           haptic(3);
