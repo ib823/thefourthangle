@@ -89,12 +89,18 @@
     background: transparent;
     border: 1px solid var(--border-subtle);
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease;
+    transition: background 0.2s ease-out, border-color 0.2s ease-out;
     overflow: visible;
   }
 
-  .save-btn:hover {
-    background: var(--bg-sunken);
+  @media (hover: hover) {
+    .save-btn:hover {
+      background: var(--bg-sunken);
+    }
+
+    .save-btn--reacted:hover {
+      background: var(--highlight-bg-strong, rgba(184, 92, 0, 0.12));
+    }
   }
 
   .save-btn--reacted {
@@ -102,13 +108,9 @@
     border-color: var(--highlight-accent, var(--score-warning));
   }
 
-  .save-btn--reacted:hover {
-    background: var(--highlight-bg-strong, rgba(184, 92, 0, 0.12));
-  }
-
   /* Heart icon animation */
   .heart-icon {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.15s ease;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.2s ease-out;
     flex-shrink: 0;
   }
 

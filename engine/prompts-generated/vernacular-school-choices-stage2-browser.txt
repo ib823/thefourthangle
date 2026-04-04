@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The vernacular school debate is about national unity versus cultural rights — and the solution is either abolishing them or preserving them as they are.",
+      "sub": "Politicians, activists, and commentators have spent decades locked in a binary: vernacular schools divide the nation, or they protect minority heritage. The Federal Court settled the legal question in February 2024, ruling them constitutional. Yet the argument rages on — because the real issues driving school choice have nothing to do with unity or culture."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "69% of Malay parents choosing SJKC cite academic reputation — not Mandarin, not culture, not proximity",
+      "s": "An ISEAS-Yusof Ishak Institute survey of 929 predominantly middle-class Malay families found that academic quality was the overwhelming reason for choosing Chinese primary schools. Language of instruction ranked among the least important factors. Bumiputera enrolment in SJKC nearly doubled from 11.67% (2014) to 18.52% (2024), driven not by any love of Mandarin but by a quiet, devastating parental verdict: national schools are failing.",
+      "d": "This reframes the entire debate. The 'flight to SJKC' is not an ethnic or cultural phenomenon — it is a quality referendum. When two-thirds of parents still prefer SJKC even when those schools offer only basic amenities, the signal is unmistakable: the perceived gap between national school and SJKC quality has become a chasm. Yet MOE's response has been to trumpet national school enrolment numbers (4.8 million) rather than address why parents with options are leaving. The 7,681 bullying cases recorded in national schools in 2024 — a 17% jump from 2023 — only reinforces the perception."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Tamil schools are collapsing: enrolment halved, funding halved, 37 schools down to 10 students or fewer",
+      "s": "SJKT enrolment has fallen from 102,000 students in 2011 to 72,080 by February 2025. The number of schools with 10 or fewer students rose from 26 (May 2024) to 37 (February 2025). Budget allocation was slashed from RM50 million in 2020 to RM25.5 million in Budget 2025. Zero Tamil-medium secondary schools exist anywhere in Malaysia. Budget 2026 earmarked just one SJKT for rebuilding.",
+      "d": "While the national conversation fixates on SJKC — whether too many Malays are enrolling, whether Chinese identity is being diluted — SJKT is dying in plain sight. The Indian community, 7% of the population, lacks the economic and political clout of Chinese education movements like Dong Zong. Tamil schools sit on former plantation land with crumbling infrastructure, and safety concerns at schools like SJKT Kerajaan in Buntong have gone unresolved since 2024. The funding cut from RM50M to RM25.5M is not a budget adjustment — it is institutional abandonment dressed as fiscal discipline."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "International school enrolment surged 67% in a decade — the real school choice is now about class, not ethnicity",
+      "s": "As of July 2024, 111,185 students attended 348 international schools in Malaysia, with 67% being Malaysian citizens. Malaysian enrolment in international schools rose 34% from 2019 to 2024 alone. A total of 216,513 Malaysians were enrolled in private schools. Fees range from RM20,000 to RM100,000+ annually — accessible only to upper-middle and wealthy families.",
+      "d": "The vernacular school debate serves as a convenient distraction from a more uncomfortable reality: Malaysia is developing a two-tier education system stratified by wealth, not ethnicity. Upper-middle-class families of all races are quietly exiting the public system entirely. The national school system — with 4.8 million students — is becoming the school of last resort for those who cannot afford alternatives. This class dimension is politically untouchable because it implicates both the failure of public education and the growing inequality that Madani governance was supposed to address."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question: Why are Malaysian parents of every race voting with their feet against national schools — and why does nobody in power want to talk about it?",
+      "text": "Strip away the ethnic framing and a single pattern emerges: parents who can choose are choosing anything other than SK. Malay parents go to SJKC for quality. Chinese parents stay in SJKC out of tradition and quality. Indian parents watch their SJKT schools crumble. Wealthy families of all races flee to international schools. The common denominator is not culture or language — it is a crisis of confidence in the national school system that MOE has failed to reverse despite a 13-year Education Blueprint. The unity-versus-heritage argument is a political comfort blanket. The real question is whether Malaysia can build a national school system good enough that parents stop running from it."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The Federal Court has settled the legal question — vernacular schools are constitutional. It is time the country moved past that debate and confronted what the data actually shows. First, national schools are haemorrhaging credibility. When 69% of Malay parents choosing SJKC cite quality over language, the message is not about Mandarin — it is about a public school system that has lost the trust of its own majority community. Second, the obsession with SJKC has rendered SJKT invisible. Tamil schools are approaching a point of no return — enrolment collapsing, funding halved, dozens of schools functionally empty — yet they barely register in national discourse. Third, the fastest-growing school 'stream' is international schools, which serve as an escape hatch for families who can afford RM20,000-100,000 annual fees. This is creating a class-based education apartheid far more consequential than any ethnic division the vernacular school debate pretends to address. The path forward requires honesty: not abolishing vernacular schools (constitutionally settled, educationally counterproductive), but making national schools competitive enough that choosing them feels like an aspiration rather than a concession. Until then, the vernacular school 'debate' remains what it has always been — a proxy war that lets politicians avoid the harder question of why public education keeps failing the children it was built to serve."
+    }
+  ],
+  "sources": "ISEAS Perspective 2025/34 (James Chai), BERNAMA parliamentary data Jul 2024, Malay Mail education reporting, FMT survey coverage May 2025, Federal Court judgment Feb 2024, The Star Tamil school reporting Mar 2025, Malaysiakini Tamil school decline, The Edge international school data, Aliran education analysis, IIUM Law Majalla constitutional analysis, MOE official statistics, Budget 2025/2026 documents",
+  "confidence": "High — Core statistics from MOE parliamentary answers, ISEAS peer-reviewed survey (n=929), Federal Court judgment, and official budget documents. International school data from ISC Research via multiple outlets. SJKT decline figures from BERNAMA and MOE data. Minor uncertainty around exact breakdown of reasons for national school quality perception, as comprehensive national survey data is limited.",
+  "lenses_used": ["Social", "Economic", "Political"],
+  "lenses_applicable_but_unused": ["Legal", "Historical", "Governance"]
+}

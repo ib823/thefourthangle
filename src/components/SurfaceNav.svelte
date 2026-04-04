@@ -41,13 +41,13 @@
     align-items: center;
     gap: 8px;
     min-height: 44px;
-    padding: 0 14px;
+    padding: 0 16px;
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
     color: var(--text-secondary);
     cursor: pointer;
-    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.2s ease-out, background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out, box-shadow 0.2s ease-out;
     font: inherit;
     font-size: var(--text-sm);
     font-weight: 700;
@@ -55,10 +55,12 @@
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
   }
 
-  .surface-button:hover {
-    transform: translateY(-1px);
-    background: var(--bg);
-    border-color: var(--border-divider);
+  @media (hover: hover) {
+    .surface-button:hover {
+      transform: translateY(-1px);
+      background: var(--bg);
+      border-color: var(--border-divider);
+    }
   }
 
   .surface-button[aria-current='page'] {
@@ -81,9 +83,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 8px;
     border-radius: var(--radius-pill);
     background: rgba(210, 140, 40, 0.12);
     color: inherit;
@@ -101,7 +103,7 @@
 
   @media (max-width: 767px) {
     .surface-nav {
-      gap: 6px;
+      gap: 8px;
     }
 
     .surface-button {
@@ -117,10 +119,6 @@
       border-color: var(--border-divider);
       color: var(--text-secondary);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
-    }
-
-    .surface-button:hover {
-      background: rgba(41, 37, 32, 0.98);
     }
 
     .surface-button[aria-current='page'] {

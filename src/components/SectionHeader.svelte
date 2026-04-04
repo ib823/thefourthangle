@@ -74,8 +74,10 @@
     transition: background var(--duration-fast, 150ms) ease;
   }
 
-  .section-toggle:hover {
-    background: var(--bg-sunken);
+  @media (hover: hover) {
+    .section-toggle:hover {
+      background: var(--bg-sunken);
+    }
   }
 
   .chevron {

@@ -402,7 +402,7 @@
   }
 
   .today-title {
-    margin: 10px 0 0;
+    margin: 12px 0 0;
     font-family: var(--font-display);
     font-size: var(--text-home-title-fluid);
     line-height: 1.15;
@@ -422,8 +422,8 @@
   .today-status {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
+    gap: 12px;
+    padding: 12px 16px;
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.72);
@@ -498,7 +498,7 @@
     max-width: 56ch;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
   }
 
   .hero-badge {
@@ -685,15 +685,17 @@
     transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
-  .panel-issue:hover,
-  .brief-item:hover,
-  .library-item:hover {
-    transform: translateY(-2px);
-  }
+  @media (hover: hover) {
+    .panel-issue:hover,
+    .brief-item:hover,
+    .library-item:hover {
+      transform: translateY(-2px);
+    }
 
-  .hero-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
+    .hero-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
+    }
   }
 
   .panel-issue-title,
@@ -707,8 +709,8 @@
   .panel-progress-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 12px;
+    margin-top: 12px;
     font-size: var(--text-sm);
     font-weight: 700;
     color: var(--text-secondary);
@@ -828,6 +830,29 @@
     .library-item {
       padding: 20px;
     }
+
+    /* Fix: title at 1024px was cramped at 12ch/line. Span full width above hero. */
+    .today-topline {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .today-title {
+      max-width: none;
+    }
+
+    /* Constrain hero context to prevent 82ch+ line lengths on wide viewports */
+    .hero-context {
+      max-width: 40ch;
+    }
+  }
+
+  /* Tablet: increase body text for arm's-length reading */
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .today-intro,
+    .hero-context {
+      font-size: var(--text-body-lg);
+    }
   }
 
   @media (max-width: 1023px) {
@@ -835,7 +860,7 @@
       grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
       min-height: 360px;
       padding: 24px;
-      gap: 22px;
+      gap: 24px;
       align-items: end;
     }
 
@@ -956,6 +981,9 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
+  }
+
+  @media (prefers-color-scheme: dark) and (hover: hover) {
     .hero-card:hover,
     .panel-issue:hover,
     .brief-item:hover,

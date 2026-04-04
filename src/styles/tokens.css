@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light dark;
+
   /* Backgrounds */
   --bg: #FFFFFF;
   --bg-elevated: #F8F9FA;
@@ -25,7 +27,7 @@
   --score-strong: #8B5A00;
   --score-medium: #B85C00;
   --score-partial: #1971C2;
-  --score-critical: #E03131;
+  --score-critical: #C92A2A;
   --score-warning: #B85C00;
   --score-info: #1971C2;
   --score-neutral: #6C757D;
@@ -129,6 +131,61 @@
   --overlay-bg: rgba(255,255,255,0.96);
   --header-bg: rgba(248,249,250,0.85);
 
+  /* Elevation system (5 levels) */
+  --elevation-0: none;
+  --elevation-1: 0 1px 3px rgba(0,0,0,0.04);
+  --elevation-2: 0 4px 12px rgba(0,0,0,0.06);
+  --elevation-3: 0 12px 28px rgba(0,0,0,0.08);
+  --elevation-4: 0 24px 60px rgba(0,0,0,0.12);
+
+  /* Spacing scale (4px grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Typography line-height tokens */
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.65;
+
+  /* Motion tokens */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-slow: 300ms ease-out;
+  --transition-slower: 500ms ease-out;
+
+  /* Content width tokens */
+  --content-narrow: 560px;
+  --content-normal: 640px;
+  --content-wide: 780px;
+  --content-max: 1400px;
+
+  /* Border width tokens */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+
+  /* Interactive state tokens */
+  --hover-lift-sm: translateY(-1px);
+  --hover-lift-md: translateY(-2px);
+  --hover-lift-lg: translateY(-4px);
+  --hover-tint: rgba(0, 0, 0, 0.04);
+  --active-press: translateY(0px) scale(0.98);
+
+  /* Surface tokens */
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --surface-glass-hover: var(--bg);
+  --surface-active: var(--bg-sunken);
+  --surface-toggle: rgba(255, 255, 255, 0.74);
+
   /* Card type colors */
   --card-hook-color: #5C636A;
   --card-hook-bg: #F8F9FA;
@@ -194,8 +251,20 @@
     --shadow-md: 0 2px 12px rgba(0,0,0,0.3);
     --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
     --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+    --elevation-0: none;
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.2);
+    --elevation-2: 0 4px 12px rgba(0,0,0,0.2);
+    --elevation-3: 0 12px 28px rgba(0,0,0,0.3);
+    --elevation-4: 0 24px 60px rgba(0,0,0,0.4);
+    --hover-tint: rgba(255, 255, 255, 0.06);
     --overlay-bg: rgba(26,26,26,0.96);
     --header-bg: rgba(26,26,26,0.85);
+
+    /* Surface tokens — dark mode */
+    --surface-glass: rgba(34, 31, 27, 0.9);
+    --surface-glass-hover: rgba(41, 37, 32, 0.98);
+    --surface-active: rgba(200, 150, 58, 0.14);
+    --surface-toggle: rgba(40, 36, 30, 0.74);
 
     /* Card type colors — dark mode */
     --card-hook-color: #9CA3AF;

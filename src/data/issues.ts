@@ -789,7 +789,7 @@ export const ISSUES: Issue[] = [
     context: "An estimated 50,000 to 100,000 children born in Malaysia lack citizenship due to gaps in the Federal Constitution, statelessness of parents, or administrative failures.",
     stageScores: { pa: 86, ba: 63, fc: 88, af: 55, ct: 41, sr: 72 },
     finalScore: 68.9,
-    related: ["1966"],
+    related: ["1966", "1967"],
   cards: [
       { t: "hook", big: "Born in Malaysian hospitals. Cannot attend school. Cannot work.", sub: "Stateless children have no IC, no access to public education, and no legal path forward." },
       { t: "fact", big: "Article 14 grants citizenship by birth — but not to all births.", sub: "Children of Malaysian mothers married to foreign fathers were excluded until the 2024 amendment stalled.", lens: "Legal" },
@@ -9805,6 +9805,7 @@ export const ISSUES: Issue[] = [
   headline: "Tamil Schools Receive 2.1% of Education Budget for 5.4% of Students",
   context: "Federal education budget analysis shows Tamil schools (SJKT) receive 2.1% of total allocation while serving 5.4% of the student population, the largest per-student deficit of any school stream.",
   stageScores: { pa: 89, ba: 76, fc: 91, af: 72, ct: 60, sr: 84 }, finalScore: 76.0,
+  related: ["1967"],
   cards: [
     { t: "hook", big: "Tamil schools serve 5.4% of students and receive 2.1% of funding.", sub: "The 3.3-point gap translates to approximately RM480M in annual underfunding." },
     { t: "fact", big: "42% of SJKT buildings are classified as 'dilapidated' by MOE.", sub: "The equivalent figure for national schools is 12%. For Chinese schools, 18%.", lens: "Governance" },
@@ -14418,6 +14419,27 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Sabah has 50,000+ refugees but DPP rollout faces state objections. Political Islam drives selective sympathy for Muslim refugees only.", sub: "Domestic work and plantations are excluded despite forced labour flags. Anti-refugee sentiment is mainstream across all races, driven by genuine economic anxiety among lower-income communities.", lens: "Social" },
       { t: "reframe", big: "Registration serves the state and employers first. No coalition will expand beyond this. The DPP is likely both the floor and the ceiling.", sub: "" },
       { t: "view", big: "The DPP is the political maximum Malaysian democracy can produce now. The task is making this registration exercise function as actual protection.", sub: "" }
+    ]
+  },
+  {
+    id: "1967",
+    opinionShift: 76,
+    status: "new",
+    edition: 1,
+    headline: "Vernacular school choices: the quality crisis nobody wants to name",
+    context: "Parents of all races are fleeing national schools — but the decades-old unity-vs-culture debate hides a governance failure, a Tamil school collapse, and a growing class divide in education.",
+    published: true,
+    sourceDate: "2026-04-04",
+    stageScores: { pa: 82, ba: 82, fc: 61, af: 62, ct: 58, sr: 80 },
+    finalScore: 70.8,
+    related: ["0179", "1641"],
+    cards: [
+      { t: "hook", big: "The vernacular school fight is stuck on unity vs culture — the courts settled the law, but parents keep leaving", sub: "The Federal Court refused leave to appeal in February 2024, preserving vernacular schools' constitutionality. Yet the real forces driving school choice have little to do with heritage or national identity." },
+      { t: "fact", big: "69% of middle-class Malay parents preferred SJKC for academic quality — but no data proves SJKC is actually better", sub: "An ISEAS survey of 928 Malay respondents found quality, discipline, and location drove the choice. SJKC and SK share the same syllabus — the gap is perceived, rooted in community governance and fundraising, not proven pedagogy.", lens: "Social" },
+      { t: "fact", big: "Tamil schools are collapsing: 37 have 10 or fewer students, and 67% sit in rural areas the Indian community has left behind", sub: "SJKT enrolment fell from over 100,000 in 2011 to 72,080 by 2025. Funding fluctuated from RM50M (2020) to RM19M (2025) before restoration in 2026. No Tamil secondary schools exist.", lens: "Economic" },
+      { t: "fact", big: "Malaysian enrolment in international schools rose 34% in five years — class is reshaping education faster than ethnicity", sub: "MOE data shows 88,951 citizens in international schools by 2024. But the deeper class divide is the RM7-billion tuition industry and hidden costs that stratify outcomes within public schools.", lens: "Political" },
+      { t: "reframe", big: "The real question: what specifically is driving parents away — governance rigidity, curriculum imbalance, or discipline failures?", sub: "" },
+      { t: "view", big: "Stop debating whether vernacular schools should exist — start asking why national schools keep losing the families they serve", sub: "" }
     ]
   }
 ];

@@ -1,0 +1,111 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The vernacular school debate is about national unity versus cultural rights — and the solution is either abolishing them or preserving them as they are.",
+      "sub": "Politicians, activists, and commentators have spent decades locked in a binary: vernacular schools divide the nation, or they protect minority heritage. The Federal Court settled the legal question in February 2024, ruling them constitutional. Yet the argument rages on — because the real issues driving school choice have nothing to do with unity or culture."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "69% of Malay parents choosing SJKC cite academic reputation — not Mandarin, not culture, not proximity",
+      "s": "An ISEAS-Yusof Ishak Institute survey of 929 predominantly middle-class Malay families found that academic quality was the overwhelming reason for choosing Chinese primary schools. Language of instruction ranked among the least important factors. Bumiputera enrolment in SJKC nearly doubled from 11.67% (2014) to 18.52% (2024), driven not by any love of Mandarin but by a quiet, devastating parental verdict: national schools are failing.",
+      "d": "This reframes the entire debate. The 'flight to SJKC' is not an ethnic or cultural phenomenon — it is a quality referendum. When two-thirds of parents still prefer SJKC even when those schools offer only basic amenities, the signal is unmistakable: the perceived gap between national school and SJKC quality has become a chasm. Yet MOE's response has been to trumpet national school enrolment numbers (4.8 million) rather than address why parents with options are leaving. The 7,681 bullying cases recorded in national schools in 2024 — a 17% jump from 2023 — only reinforces the perception."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Tamil schools are collapsing: enrolment halved, funding halved, 37 schools down to 10 students or fewer",
+      "s": "SJKT enrolment has fallen from 102,000 students in 2011 to 72,080 by February 2025. The number of schools with 10 or fewer students rose from 26 (May 2024) to 37 (February 2025). Budget allocation was slashed from RM50 million in 2020 to RM25.5 million in Budget 2025. Zero Tamil-medium secondary schools exist anywhere in Malaysia. Budget 2026 earmarked just one SJKT for rebuilding.",
+      "d": "While the national conversation fixates on SJKC — whether too many Malays are enrolling, whether Chinese identity is being diluted — SJKT is dying in plain sight. The Indian community, 7% of the population, lacks the economic and political clout of Chinese education movements like Dong Zong. Tamil schools sit on former plantation land with crumbling infrastructure, and safety concerns at schools like SJKT Kerajaan in Buntong have gone unresolved since 2024. The funding cut from RM50M to RM25.5M is not a budget adjustment — it is institutional abandonment dressed as fiscal discipline."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "International school enrolment surged 67% in a decade — the real school choice is now about class, not ethnicity",
+      "s": "As of July 2024, 111,185 students attended 348 international schools in Malaysia, with 67% being Malaysian citizens. Malaysian enrolment in international schools rose 34% from 2019 to 2024 alone. A total of 216,513 Malaysians were enrolled in private schools. Fees range from RM20,000 to RM100,000+ annually — accessible only to upper-middle and wealthy families.",
+      "d": "The vernacular school debate serves as a convenient distraction from a more uncomfortable reality: Malaysia is developing a two-tier education system stratified by wealth, not ethnicity. Upper-middle-class families of all races are quietly exiting the public system entirely. The national school system — with 4.8 million students — is becoming the school of last resort for those who cannot afford alternatives. This class dimension is politically untouchable because it implicates both the failure of public education and the growing inequality that Madani governance was supposed to address."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question: Why are Malaysian parents of every race voting with their feet against national schools — and why does nobody in power want to talk about it?",
+      "text": "Strip away the ethnic framing and a single pattern emerges: parents who can choose are choosing anything other than SK. Malay parents go to SJKC for quality. Chinese parents stay in SJKC out of tradition and quality. Indian parents watch their SJKT schools crumble. Wealthy families of all races flee to international schools. The common denominator is not culture or language — it is a crisis of confidence in the national school system that MOE has failed to reverse despite a 13-year Education Blueprint. The unity-versus-heritage argument is a political comfort blanket. The real question is whether Malaysia can build a national school system good enough that parents stop running from it."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The Federal Court has settled the legal question — vernacular schools are constitutional. It is time the country moved past that debate and confronted what the data actually shows. First, national schools are haemorrhaging credibility. When 69% of Malay parents choosing SJKC cite quality over language, the message is not about Mandarin — it is about a public school system that has lost the trust of its own majority community. Second, the obsession with SJKC has rendered SJKT invisible. Tamil schools are approaching a point of no return — enrolment collapsing, funding halved, dozens of schools functionally empty — yet they barely register in national discourse. Third, the fastest-growing school 'stream' is international schools, which serve as an escape hatch for families who can afford RM20,000-100,000 annual fees. This is creating a class-based education apartheid far more consequential than any ethnic division the vernacular school debate pretends to address. The path forward requires honesty: not abolishing vernacular schools (constitutionally settled, educationally counterproductive), but making national schools competitive enough that choosing them feels like an aspiration rather than a concession. Until then, the vernacular school 'debate' remains what it has always been — a proxy war that lets politicians avoid the harder question of why public education keeps failing the children it was built to serve."
+    }
+  ],
+  "sources": "ISEAS Perspective 2025/34 (James Chai), BERNAMA parliamentary data Jul 2024, Malay Mail education reporting, FMT survey coverage May 2025, Federal Court judgment Feb 2024, The Star Tamil school reporting Mar 2025, Malaysiakini Tamil school decline, The Edge international school data, Aliran education analysis, IIUM Law Majalla constitutional analysis, MOE official statistics, Budget 2025/2026 documents",
+  "confidence": "High — Core statistics from MOE parliamentary answers, ISEAS peer-reviewed survey (n=929), Federal Court judgment, and official budget documents. International school data from ISC Research via multiple outlets. SJKT decline figures from BERNAMA and MOE data. Minor uncertainty around exact breakdown of reasons for national school quality perception, as comprehensive national survey data is limited.",
+  "lenses_used": ["Social", "Economic", "Political"],
+  "lenses_applicable_but_unused": ["Legal", "Historical", "Governance"]
+}
