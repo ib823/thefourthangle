@@ -2,13 +2,15 @@
   import type { SectionKind } from '../lib/feed-sections';
 
   interface Props {
+    id?: string;
+    controlsId?: string;
     label: string;
     count: number;
     kind: SectionKind;
     collapsed: boolean;
     onToggle: () => void;
   }
-  let { label, count, kind, collapsed, onToggle }: Props = $props();
+  let { id, controlsId, label, count, kind, collapsed, onToggle }: Props = $props();
 
   let kindColor = $derived(
     kind === 'continue' ? 'var(--score-warning)' :
@@ -26,6 +28,7 @@
 </script>
 
 <div
+  {id}
   class="section-header"
   role="heading"
   aria-level={2}
@@ -35,9 +38,11 @@
     onclick={onToggle}
     onkeydown={handleKeydown}
     aria-expanded={!collapsed}
+    aria-controls={controlsId}
     aria-label="{label}, {count} {count === 1 ? 'issue' : 'issues'}"
   >
     <svg
+      aria-hidden="true"
       class="chevron"
       class:chevron--collapsed={collapsed}
       width="10" height="10" viewBox="0 0 24 24"

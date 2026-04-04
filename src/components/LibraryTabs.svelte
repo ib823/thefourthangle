@@ -1,39 +1,46 @@
 <script lang="ts">
   interface Props {
-    libraryMode: 'reading' | 'highlights';
+    libraryMode: 'reading' | 'highlights' | 'archive';
     readingCount?: number;
     highlightCount?: number;
+    archiveCount?: number;
     variant?: 'inline' | 'sidebar';
     panelId?: string;
     idPrefix?: string;
     onOpenReading?: () => void;
     onOpenHighlights?: () => void;
+    onOpenArchive?: () => void;
   }
 
   const tabs = [
     { key: 'reading', label: 'Reading' },
     { key: 'highlights', label: 'Highlights' },
+    { key: 'archive', label: 'Archive' },
   ] as const;
 
   let {
     libraryMode,
     readingCount = 0,
     highlightCount = 0,
+    archiveCount = 0,
     variant = 'inline',
     panelId = 'library-panel',
     idPrefix = 'library-tab',
     onOpenReading,
     onOpenHighlights,
+    onOpenArchive,
   }: Props = $props();
 
   function activate(tab: typeof tabs[number]['key']) {
     if (tab === 'reading') onOpenReading?.();
-    else onOpenHighlights?.();
+    else if (tab === 'highlights') onOpenHighlights?.();
+    else onOpenArchive?.();
   }
 
   function countFor(tab: typeof tabs[number]['key']) {
     if (tab === 'reading') return readingCount;
-    return highlightCount;
+    if (tab === 'highlights') return highlightCount;
+    return archiveCount;
   }
 
   function onKeyDown(event: KeyboardEvent, tab: typeof tabs[number]['key']) {
@@ -59,7 +66,7 @@
   class:library-tabs--sidebar={variant === 'sidebar'}
   role="tablist"
   aria-label="Library views"
-  style={`--library-index:${libraryMode === 'highlights' ? 1 : 0};`}
+  style={`--library-index:${libraryMode === 'reading' ? 0 : libraryMode === 'highlights' ? 1 : 2};`}
 >
   {#each tabs as tab}
     <button
@@ -83,7 +90,7 @@
   .library-tabs {
     position: relative;
     display: inline-grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
     padding: 4px;
     border-radius: var(--radius-pill);
@@ -97,7 +104,7 @@
     content: '';
     position: absolute;
     inset: 4px auto 4px 4px;
-    width: calc(50% - 4px);
+    width: calc(33.333% - 4px);
     border-radius: var(--radius-pill);
     background: var(--bg-sunken);
     box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);

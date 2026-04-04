@@ -34,7 +34,7 @@
   class="sort-toggle"
   class:sort-toggle--sidebar={variant === 'sidebar'}
   role="tablist"
-    aria-label="Issue sorting"
+  aria-label="Issue sorting"
   style={`--sort-index:${sortMode === 'shift' ? 1 : 0};`}
 >
   <button class="sort-chip" class:sort-chip--active={sortMode === 'latest'} id={`${idPrefix}-latest`} onclick={() => activate('latest')} onkeydown={(event) => onKeyDown(event, 'latest')} role="tab" tabindex={sortMode === 'latest' ? 0 : -1} aria-selected={sortMode === 'latest'} aria-controls={panelId}>

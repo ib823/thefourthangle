@@ -24,6 +24,7 @@
   }
 
   let { scores, finalScore, compact = false }: Props = $props();
+  const auditPanelId = 'editorial-audit-details';
 
   // #69: Tap-to-expand tooltip state
   let expandedStage: string | null = $state(null);
@@ -107,9 +108,10 @@
             <!-- #69: Tap-to-expand tooltip -->
             <button
               onclick={() => toggleExpand(stage.key)}
-              style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 2px;min-width:28px;min-height:44px;justify-content:center;"
+              style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 6px;min-width:44px;min-height:44px;justify-content:center;"
               aria-label="{stage.full}: {val}/100 — {scoreLabel(val)}"
               aria-expanded={expandedStage === stage.key}
+              aria-controls={auditPanelId}
             >
               {#if shape === 'circle'}
                 <div style="width:10px;height:10px;border-radius: var(--radius-round);background:{dotColor(val)};box-shadow:0 0 0 2px {dotBg(val)};"></div>
@@ -129,20 +131,24 @@
       </div>
 
       <!-- #69: Expanded tooltip -->
-      {#if expandedStage}
-        {@const val = scores[expandedStage as keyof StageScores]}
-        {@const stage = stages.find(s => s.key === expandedStage)}
-        {#if stage && val !== undefined}
-          <div style="margin-top:8px;padding:8px 0 2px;border-top:1px solid var(--border-light);display:flex;flex-direction:column;gap:4px;">
+      <div
+        id={auditPanelId}
+        hidden={!expandedStage}
+        style="margin-top:8px;padding:8px 0 2px;border-top:1px solid var(--border-light);display:flex;flex-direction:column;gap:4px;"
+      >
+        {#if expandedStage}
+          {@const val = scores[expandedStage as keyof StageScores]}
+          {@const stage = stages.find(s => s.key === expandedStage)}
+          {#if stage && val !== undefined}
             <div style="font-size: var(--text-xs);color:var(--text-secondary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
               <span style="font-weight:600;color:var(--text-primary);">{stage.full}</span>
               <span style="color:{dotColor(val)};font-weight:700;">{val}/100</span>
               <span style="color:var(--text-muted);">— {scoreLabel(val)}</span>
             </div>
             <div style="font-size: var(--text-xs);line-height:1.5;color:var(--text-secondary);">{stage.description}</div>
-          </div>
         {/if}
-      {/if}
+        {/if}
+      </div>
     </div>
   {/if}
 {/if}

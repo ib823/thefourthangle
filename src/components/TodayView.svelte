@@ -16,6 +16,7 @@
     onOpenIssue?: (issue: IssueSummary) => void;
     onOpenLibraryReading?: () => void;
     onOpenLibraryHighlights?: () => void;
+    onOpenLibraryArchive?: () => void;
     allowPullRefresh?: boolean;
     onPullRefresh?: () => void;
   }
@@ -30,6 +31,7 @@
     onOpenIssue,
     onOpenLibraryReading,
     onOpenLibraryHighlights,
+    onOpenLibraryArchive,
     allowPullRefresh = false,
     onPullRefresh,
   }: Props = $props();
@@ -212,7 +214,11 @@
 
       {#if topIssue && onOpenIssue}
         <article class="hero-entry" aria-labelledby="lead-issue-title">
-        <button class="hero-card" onclick={() => onOpenIssue?.(topIssue)}>
+        <button
+          class="hero-card"
+          onclick={() => onOpenIssue?.(topIssue)}
+          aria-label={`Read lead issue: ${topIssue.headline}`}
+        >
           {#if topIssue.hasImage}
             <div class="hero-art">
               <IssueImage issueId={topIssue.id} size="hero" aspectRatio="16/9" borderRadius="0" alt="Illustration for {topIssue.headline}" eager={true} />
@@ -297,6 +303,11 @@
             <span class="library-label">Highlights</span>
             <span class="library-value">{highlightCount}</span>
             <span class="library-copy">Angles you marked while reading</span>
+          </button>
+          <button class="library-item library-item--compact" onclick={() => onOpenLibraryArchive?.()}>
+            <span class="library-label">Archive</span>
+            <span class="library-value">{issueCount}</span>
+            <span class="library-copy">Browse every published issue</span>
           </button>
         </div>
       </section>

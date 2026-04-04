@@ -16,14 +16,16 @@
     activeId: string | null;
     readMap: Record<string, string>;
     surfaceMode?: 'today' | 'library';
-    libraryMode?: 'reading' | 'highlights';
+    libraryMode?: 'reading' | 'highlights' | 'archive';
     readingCount?: number;
     highlightCount?: number;
+    archiveCount?: number;
     libraryCount?: number;
     onGoToday?: () => void;
     onOpenLibrary?: () => void;
     onOpenReading?: () => void;
     onOpenHighlights?: () => void;
+    onOpenArchive?: () => void;
     onSelectIssue: (issue: IssueSummary) => void;
     searchQuery?: string;
     onSearchInput?: (query: string) => void;
@@ -33,13 +35,14 @@
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
   }
-  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
-  function libraryHeading(mode: 'reading' | 'highlights') {
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, archiveCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onOpenArchive, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  function libraryHeading(mode: 'reading' | 'highlights' | 'archive') {
     if (mode === 'highlights') return 'Highlights library';
+    if (mode === 'archive') return 'Archive library';
     return 'Reading library';
   }
 
-  function feedAriaLabel(mode: 'today' | 'library', activeLibraryMode: 'reading' | 'highlights') {
+  function feedAriaLabel(mode: 'today' | 'library', activeLibraryMode: 'reading' | 'highlights' | 'archive') {
     if (mode === 'library') return libraryHeading(activeLibraryMode);
     return 'Issue list';
   }
@@ -149,21 +152,26 @@
     if (sortMode === 'topic') return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
+      e.stopPropagation();
       focusedIndex = Math.min(focusedIndex + 1, flatIssues.length - 1);
       scrollToFocused();
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
+      e.stopPropagation();
       focusedIndex = Math.max(focusedIndex - 1, 0);
       scrollToFocused();
     } else if (e.key === 'Enter' && focusedIndex >= 0) {
       e.preventDefault();
+      e.stopPropagation();
       onSelectIssue(flatIssues[focusedIndex]);
     } else if (e.key === 'Home') {
       e.preventDefault();
+      e.stopPropagation();
       focusedIndex = 0;
       scrollToFocused();
     } else if (e.key === 'End') {
       e.preventDefault();
+      e.stopPropagation();
       focusedIndex = flatIssues.length - 1;
       scrollToFocused();
     }
@@ -264,10 +272,12 @@
           {libraryMode}
           {readingCount}
           {highlightCount}
+          {archiveCount}
           panelId="desktop-library-panel"
           idPrefix="desktop-library"
           onOpenReading={onOpenReading}
           onOpenHighlights={onOpenHighlights}
+          onOpenArchive={onOpenArchive}
         />
       </div>
     {/if}
@@ -278,7 +288,7 @@
           variant="sidebar"
           {sortMode}
           onChange={onSortChange}
-          panelId={surfaceMode === 'today' ? 'desktop-today-panel' : undefined}
+          panelId={surfaceMode === 'today' ? 'desktop-today-panel' : 'desktop-library-panel'}
           idPrefix={surfaceMode === 'today' ? 'desktop-today-sort' : 'desktop-library-sort'}
         />
       </div>
@@ -342,6 +352,7 @@
     id={surfaceMode === 'library' ? 'desktop-library-panel' : 'desktop-today-panel'}
     role={!isSearching ? 'tabpanel' : undefined}
     aria-labelledby={!isSearching && surfaceMode === 'library' ? `desktop-library-${libraryMode}` : !isSearching ? `desktop-today-sort-${sortMode}` : undefined}
+    tabindex={!isSearching ? 0 : undefined}
     style="flex:1;display:flex;flex-direction:column;min-height:0;"
   >
   <div
@@ -356,19 +367,28 @@
     {#if sections.length > 0 && !isSearching}
       <!-- Section-based feed -->
       {#each sections as section}
-        <SectionHeader
-          label={section.label}
-          count={section.count}
-          kind={section.kind}
-          collapsed={collapsedSections[section.kind] ?? defaultCollapsed(section.kind)}
-          onToggle={() => { collapsedSections[section.kind] = !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind)); }}
-        />
-        {#if !(collapsedSections[section.kind] ?? defaultCollapsed(section.kind))}
-          {#each section.issues as issue}
-            {@const idx = issueIndexMap.get(issue.id) ?? 0}
-            <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} reactionCount={reactionMap[issue.id]?.length ?? 0} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
-          {/each}
-        {/if}
+        {@const sectionHeadingId = `desktop-feed-section-${section.kind}-heading`}
+        {@const sectionPanelId = `desktop-feed-section-${section.kind}-panel`}
+        {@const sectionCollapsed = collapsedSections[section.kind] ?? defaultCollapsed(section.kind)}
+        <div role="group" aria-labelledby={sectionHeadingId}>
+          <SectionHeader
+            id={sectionHeadingId}
+            controlsId={sectionPanelId}
+            label={section.label}
+            count={section.count}
+            kind={section.kind}
+            collapsed={sectionCollapsed}
+            onToggle={() => { collapsedSections[section.kind] = !sectionCollapsed; }}
+          />
+          <div id={sectionPanelId} hidden={sectionCollapsed}>
+            {#if !sectionCollapsed}
+              {#each section.issues as issue}
+                {@const idx = issueIndexMap.get(issue.id) ?? 0}
+                <FeedRow {issue} readState={issueReadState(issue.id)} isActive={activeId === issue.id} tabIndex={rowTabIndex(issue.id, idx)} itemIndex={idx} onClick={() => { focusedIndex = idx; onSelectIssue(issue); }} hasReaction={hasReaction(issue.id)} reactionCount={reactionMap[issue.id]?.length ?? 0} hasConnections={issueHasConnections?.(issue.id) ?? false} searchTerms={isSearching ? searchQuery.trim() : ''} />
+              {/each}
+            {/if}
+          </div>
+        </div>
       {/each}
     {:else if flatIssues.length === 0 && (isSearching || filterMode !== 'all')}
       <div style="padding:40px 20px;text-align:center;">

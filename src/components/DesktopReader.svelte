@@ -285,8 +285,8 @@
         <h1 class="reader-headline balance-title">{issue.headline}</h1>
       </div>
       <div class="reader-actions">
-        <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius: var(--radius-pill);border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius: var(--radius-pill);border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen} aria-haspopup="dialog">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           <span style="font-size: var(--text-sm);font-weight:700;color:var(--text-tertiary);">Share</span>
         </button>
       </div>
@@ -332,13 +332,13 @@
               <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius: var(--radius-pill);background:{meta.bg};">
                 <span style="width:18px;height:18px;border-radius: var(--radius-round);display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.66);">
                   {#if card.t === 'hook'}
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   {:else if card.t === 'fact'}
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-3.5-3.5"></path></svg>
+                    <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-3.5-3.5"></path></svg>
                   {:else if card.t === 'reframe'}
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                    <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
                   {:else}
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="m14.5 9.5-3 7-1-4-4-1z"></path></svg>
+                    <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="m14.5 9.5-3 7-1-4-4-1z"></path></svg>
                   {/if}
                 </span>
                 <span style="font-size: var(--text-sm);font-weight:700;color:{meta.color};">{cardLabel(card)}</span>
@@ -363,7 +363,7 @@
     <div style="margin-top:20px;padding:22px;border-radius: var(--radius-xl);border:1px solid rgba(46,125,50,0.16);background:linear-gradient(180deg, rgba(46,125,50,0.08) 0%, rgba(255,255,255,0.92) 100%);">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
         <div style="width:34px;height:34px;border-radius: var(--radius-round);display:flex;align-items:center;justify-content:center;background:rgba(46,125,50,0.14);color:var(--status-green);">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div>
           <div style="font-family:var(--font-display);font-size: var(--text-title);line-height:1.05;letter-spacing:-0.03em;color:var(--text-primary);">You’ve seen the full picture.</div>
@@ -389,16 +389,16 @@
                 <div style="flex:1;min-width:0;">
                   <div style="display:flex;align-items:center;gap:6px;">
                     {#if conn.readState === 'completed'}
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+                      <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
                     {:else if conn.readState === 'started'}
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
+                      <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
                     {/if}
                     <div style="font-size: var(--text-sm);font-weight:{conn.readState === 'completed' ? '600' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;">{conn.headline}</div>
                   </div>
                   <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
                     <span style="font-size: var(--text-micro);color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
                     {#if conn.hasReaction}
-                      <svg width="9" height="9" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                      <svg aria-hidden="true" width="9" height="9" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     {/if}
                   </div>
                 </div>
@@ -426,8 +426,8 @@
         {/if}
       </div>
 
-      <button onclick={() => { shareOpen = true; }} class="completion-utility-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      <button onclick={() => { shareOpen = true; }} class="completion-utility-btn" aria-expanded={shareOpen} aria-haspopup="dialog">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share issue
       </button>
 

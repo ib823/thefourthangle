@@ -845,6 +845,32 @@
 
   // Accessibility: store focus origin for restoration on close
   let focusOrigin: Element | null = null;
+  let inertSiblings: HTMLElement[] = [];
+
+  function toggleBackgroundInert(shouldInert: boolean) {
+    const host = overlayEl?.parentElement;
+    if (!host) return;
+    if (shouldInert) {
+      inertSiblings = [];
+      for (const node of Array.from(host.children)) {
+        if (!(node instanceof HTMLElement) || node === overlayEl || node.inert) continue;
+        node.inert = true;
+        inertSiblings.push(node);
+      }
+      return;
+    }
+    for (const node of inertSiblings) {
+      node.inert = false;
+    }
+    inertSiblings = [];
+  }
+
+  function restoreReaderFocus() {
+    const target = focusOrigin instanceof HTMLElement && focusOrigin !== document.body
+      ? focusOrigin
+      : document.querySelector<HTMLElement>('[role="option"][aria-selected="true"], .hero-card, .brand');
+    target?.focus();
+  }
 
   // Screen Wake Lock: keep screen on while reading
   let wakeLock: WakeLockSentinel | null = null;
@@ -852,6 +878,7 @@
 
   onMount(() => {
     focusOrigin = document.activeElement;
+    toggleBackgroundInert(true);
     overlayEl?.focus();
     lockScroll();
 
@@ -925,6 +952,7 @@
 
   onDestroy(() => {
     unlockScroll();
+    toggleBackgroundInert(false);
     cancelAnimation?.();
     cleanupScrollObserver?.();
     if (scrollIndicatorTimer) clearTimeout(scrollIndicatorTimer);
@@ -933,9 +961,7 @@
     wakeLock = null;
     wakeLockVisCleanup?.();
     // Restore focus to the element that opened the reader
-    if (focusOrigin && 'focus' in focusOrigin) {
-      (focusOrigin as HTMLElement).focus();
-    }
+    restoreReaderFocus();
   });
 
   // Re-attach scroll observer when card changes (new content element)
@@ -957,6 +983,7 @@
   class="overlay"
   class:reduced-motion={prefersReducedMotion}
   bind:this={overlayEl}
+  id="mobile-reader-dialog"
   tabindex="0"
   role="dialog"
   aria-modal="true"
@@ -981,7 +1008,7 @@
 
   <!-- Headline -->
   <div class="headline-area">
-    <h2 class="headline">{issue.headline}</h2>
+    <h1 class="headline">{issue.headline}</h1>
   </div>
 
   <!-- Hero image -->
@@ -1003,7 +1030,7 @@
       <div class="card completion-card" class:completion-visible={completionVisible}>
         <div class="completion-inner">
           <div class="check-circle">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12" stroke-dasharray="50" stroke-dashoffset="50" class="check-path" />
             </svg>
           </div>
@@ -1023,9 +1050,9 @@
 
           {#if connections.length >= 2}
             <button class="connection-nudge" onclick={() => { patternSheetOpen = true; }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
               {connections.length} connected {connections.length === 1 ? 'issue' : 'issues'}
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           {/if}
 
@@ -1039,7 +1066,7 @@
 
           <div class="completion-buttons">
             {#if completionButtonsVisible.length > 0}
-              <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }}>Share</button>
+              <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }} aria-expanded={shareOpen} aria-haspopup="dialog">Share</button>
             {/if}
             {#if completionButtonsVisible.length > 1}
               {#if onReturnHome}
@@ -1082,8 +1109,8 @@
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
           <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
-            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius: var(--radius-md);cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius: var(--radius-md);cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen} aria-haspopup="dialog">
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
         </div>
@@ -1116,12 +1143,12 @@
       <!-- Nav chevrons -->
       {#if current > 0}
         <button class="nav-chevron nav-prev" onclick={prev} aria-label="Previous card">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
       {/if}
       {#if current < totalCards - 1}
         <button class="nav-chevron nav-next" onclick={next} aria-label="Next card">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       {/if}
     {/if}
@@ -1144,7 +1171,7 @@
       <div class="panel-header">
         <span class="panel-title">Connected issues</span>
         <button class="close-btn" onclick={() => { patternSheetOpen = false; }} aria-label="Close">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
 
@@ -1162,9 +1189,9 @@
             <div style="flex:1;min-width:0;">
               <div style="display:flex;align-items:center;gap:6px;">
                 {#if conn.readState === 'completed'}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+                  <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--status-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
                 {:else if conn.readState === 'started'}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
+                  <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><circle cx="12" cy="12" r="9" stroke="var(--score-warning)" stroke-width="2" fill="none"/><path d="M12 3a9 9 0 0 1 0 18" fill="var(--score-warning)"/></svg>
                 {/if}
                 <div style="font-size: var(--text-ui);font-weight:{conn.readState === 'completed' ? '600' : '600'};color:{conn.readState === 'completed' ? 'var(--text-secondary)' : 'var(--text-primary)'};line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{conn.headline}</div>
               </div>
@@ -1175,11 +1202,11 @@
                 <span style="font-size: var(--text-micro);font-weight:700;color:var(--text-secondary);font-variant-numeric:tabular-nums;">{conn.opinionShift}%</span>
                 <span style="font-size: var(--text-micro);color:var(--text-muted);">{conn.sharedEntities.slice(0, 3).join(' · ')}</span>
                 {#if conn.hasReaction}
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  <svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="var(--highlight-accent)" stroke="none" style="flex-shrink:0;opacity:0.6;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 {/if}
               </div>
             </div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         {/each}
       </div>

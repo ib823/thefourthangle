@@ -42,10 +42,11 @@
   let { initialIssueId, feedData = [] }: Props = $props();
 
   type SurfaceMode = 'today' | 'library';
-  type LibraryMode = 'reading' | 'highlights';
+  type LibraryMode = 'reading' | 'highlights' | 'archive';
   type HistoryMode = 'push' | 'replace' | 'none';
 
   function normalizeLibraryMode(mode: string | null | undefined): LibraryMode {
+    if (mode === 'archive' || mode === 'explore') return 'archive';
     return mode === 'highlights' || mode === 'saved' ? 'highlights' : 'reading';
   }
 
@@ -70,6 +71,7 @@
 
   function libraryLabel(mode: LibraryMode): string {
     if (mode === 'highlights') return 'Highlights';
+    if (mode === 'archive') return 'Archive';
     return 'Reading';
   }
 
@@ -80,11 +82,13 @@
 
   function libraryEmptyTitle(mode: LibraryMode): string {
     if (mode === 'highlights') return 'No highlights yet.';
+    if (mode === 'archive') return 'No archive issues available yet.';
     return 'No unfinished issues yet.';
   }
 
   function libraryEmptyCopy(mode: LibraryMode): string {
     if (mode === 'highlights') return 'Tap Highlight on any card while reading, and every marked angle will stay here as your personal trail.';
+    if (mode === 'archive') return 'Every published issue will appear here as the archive grows.';
     return 'Start an issue and it will remain here until you finish the reading path.';
   }
 
@@ -196,6 +200,7 @@
   let scopedIssues = $derived.by(() => {
     if (surfaceMode === 'library') {
       if (libraryMode === 'highlights') return issues.filter(i => highlightedIssueIds.has(i.id));
+      if (libraryMode === 'archive') return issues;
       return issues.filter(i => readingIssueIds.has(i.id));
     }
     return issues;
@@ -650,6 +655,10 @@
     openLibrary('highlights');
   }
 
+  function openArchiveLibrary() {
+    openLibrary('archive');
+  }
+
   function closeReader(historyMode: Exclude<HistoryMode, 'none'> = 'replace') {
     activeIssue = null;
     activeFullIssue = null;
@@ -788,19 +797,21 @@
               libraryMode={libraryMode}
               {readingCount}
               {highlightCount}
+              archiveCount={issues.length}
               panelId="mobile-library-panel"
               idPrefix="mobile-library"
               onOpenReading={openReadingLibrary}
               onOpenHighlights={openHighlightsLibrary}
+              onOpenArchive={openArchiveLibrary}
             />
           {/if}
           {#if !(surfaceMode === 'library' && libraryMode === 'highlights')}
-            <SortToggle
-              sortMode={feedSort}
-              onChange={(mode) => { feedSort = mode; }}
-              panelId={surfaceMode === 'today' ? 'mobile-today-panel' : undefined}
-              idPrefix={surfaceMode === 'today' ? 'mobile-today-sort' : 'mobile-library-sort'}
-            />
+          <SortToggle
+            sortMode={feedSort}
+            onChange={(mode) => { feedSort = mode; }}
+            panelId={surfaceMode === 'today' ? 'mobile-today-panel' : 'mobile-library-panel'}
+            idPrefix={surfaceMode === 'today' ? 'mobile-today-sort' : 'mobile-library-sort'}
+          />
           {/if}
         </div>
       {/if}
@@ -813,14 +824,16 @@
         class="mobile-today-panel"
         role="tabpanel"
         aria-labelledby={`mobile-today-sort-${feedSort}`}
+        tabindex="0"
       >
-        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} onOpenLibraryArchive={openArchiveLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
       </div>
     {:else if !isSearching && surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0}
       <div
         id="mobile-library-panel"
         role="tabpanel"
         aria-labelledby="mobile-library-highlights"
+        tabindex="0"
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
         <HighlightsPanel
@@ -843,6 +856,7 @@
         id="mobile-library-panel"
         role="tabpanel"
         aria-labelledby={`mobile-library-${libraryMode}`}
+        tabindex="0"
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
         <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
@@ -899,10 +913,12 @@
             libraryMode={libraryMode}
             {readingCount}
             {highlightCount}
+            archiveCount={issues.length}
             panelId="tablet-library-panel"
             idPrefix="tablet-library"
             onOpenReading={() => openLibrary('reading', 'replace')}
             onOpenHighlights={() => openLibrary('highlights', 'replace')}
+            onOpenArchive={() => openLibrary('archive', 'replace')}
           />
         </div>
       {/if}
@@ -911,17 +927,17 @@
           <SortToggle
             sortMode={feedSort}
             onChange={(mode) => { feedSort = mode; }}
-            panelId={surfaceMode === 'today' ? 'tablet-today-panel' : undefined}
+            panelId={surfaceMode === 'today' ? 'tablet-today-panel' : 'tablet-library-panel'}
             idPrefix={surfaceMode === 'today' ? 'tablet-today-sort' : 'tablet-library-sort'}
           />
         </div>
       {/if}
       {#if surfaceMode === 'today' && !isSearching}
-        <div id="tablet-today-panel" role="tabpanel" aria-labelledby={`tablet-today-sort-${feedSort}`}>
-          <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+        <div id="tablet-today-panel" role="tabpanel" aria-labelledby={`tablet-today-sort-${feedSort}`} tabindex="0">
+          <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} onOpenLibraryArchive={openArchiveLibrary} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
         </div>
       {:else if !isSearching && surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0}
-        <div id="tablet-library-panel" role="tabpanel" aria-labelledby="tablet-library-highlights">
+        <div id="tablet-library-panel" role="tabpanel" aria-labelledby="tablet-library-highlights" tabindex="0">
           <HighlightsPanel
             issues={sortedIssues}
             reactionMap={appReactionMap}
@@ -944,7 +960,7 @@
           {/each}
         </div>
       {:else if surfaceMode === 'library'}
-        <div id="tablet-library-panel" role="tabpanel" aria-labelledby={`tablet-library-${libraryMode}`}>
+        <div id="tablet-library-panel" role="tabpanel" aria-labelledby={`tablet-library-${libraryMode}`} tabindex="0">
           {#each feedSections as section}
             <div style="margin-bottom:32px;">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
@@ -983,7 +999,81 @@
       <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
-    <main class="app-main app-main--desktop">
+    <div class="app-main app-main--desktop">
+      <main class="desktop-main-panel">
+        {#if issueLoadError}
+          <!-- I1: Error state with offline differentiation -->
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;max-width:300px;">
+              <p style="font-family:var(--font-display);font-size: var(--text-body);font-weight:600;color:var(--text-primary);margin:0 0 8px;">{isOffline ? "You're offline" : "Couldn't load this issue"}</p>
+              <p style="font-family:var(--font-body);font-size: var(--text-ui);color:var(--text-muted);margin:0 0 16px;">{isOffline ? "This issue hasn't been cached yet. Connect to the internet to read it." : "Something went wrong. Try again."}</p>
+              <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius: var(--radius-md);font-size: var(--text-ui);font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
+            </div>
+          </div>
+        {:else if issueLoading}
+          <!-- I2: Skeleton loader -->
+          <div style="flex:1;padding:40px 24px;max-width:640px;margin:0 auto;">
+            <div style="height:28px;width:70%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:16px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:16px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:16px;width:85%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:24px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:6px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-pill);margin-bottom:32px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:20px;width:50%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:14px;width:90%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+            <div style="height:14px;width:75%;background:var(--bg-sunken);border-radius: var(--radius-sm);animation:shimmer 1.5s infinite;"></div>
+          </div>
+        {:else if activeFullIssue}
+          <DesktopReader
+            issue={activeFullIssue}
+            onReturnHome={goToday}
+            onNext={isLastIssue ? undefined : openNextIssue}
+            {nextHeadline}
+            connections={resolvedConnections}
+            onNavigateToIssue={navigateToIssue}
+            initialCardIndex={restoredCardIndex}
+          />
+        {:else if surfaceMode === 'library' && sortedIssues.length === 0}
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
+            <div style="max-width:420px;text-align:center;">
+              <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
+                Library · {libraryLabel(libraryMode)}
+              </div>
+              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+                {libraryEmptyCopy(libraryMode)}
+              </p>
+            </div>
+          </div>
+        {:else if surfaceMode === 'library' && libraryMode === 'highlights'}
+          <HighlightsPanel
+            issues={sortedIssues}
+            reactionMap={appReactionMap}
+            onOpenHighlight={openIssueAtCard}
+          />
+        {:else if surfaceMode === 'library'}
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
+            <div style="max-width:420px;text-align:center;">
+              <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
+              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
+                {libraryMode === 'highlights'
+                  ? 'Choose an issue with saved angles.'
+                  : libraryMode === 'archive'
+                    ? 'Choose any issue from the full archive.'
+                    : 'Choose the next issue from your library.'}
+              </h1>
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+                {libraryMode === 'highlights'
+                  ? 'The left rail shows every issue with highlights. Open one to revisit the angles you kept.'
+                  : libraryMode === 'archive'
+                    ? 'The left rail now exposes every published issue, grouped by reading state and freshness.'
+                  : 'The left rail already holds your current reading memory. Pick an issue there to continue.'}
+              </p>
+            </div>
+          </div>
+        {:else}
+          <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} onOpenLibraryArchive={openArchiveLibrary} />
+        {/if}
+      </main>
+
       <DesktopFeed
         issues={sortedIssues}
         sections={feedSections}
@@ -993,11 +1083,13 @@
         {libraryMode}
         {readingCount}
         {highlightCount}
+        archiveCount={issues.length}
         {libraryCount}
         onGoToday={goToday}
         onOpenLibrary={() => openLibrary()}
         onOpenReading={() => openLibrary('reading', 'replace')}
         onOpenHighlights={openHighlightsLibrary}
+        onOpenArchive={() => openLibrary('archive', 'replace')}
         onSelectIssue={(issue) => {
           if (surfaceMode === 'library' && libraryMode === 'highlights') {
             openIssueAtCard(issue, appReactionMap[issue.id]?.[0] ?? 0);
@@ -1013,73 +1105,7 @@
         sortMode={feedSort}
         onSortChange={(mode) => { feedSort = mode; }}
       />
-
-      {#if issueLoadError}
-        <!-- I1: Error state with offline differentiation -->
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-          <div style="text-align:center;max-width:300px;">
-            <p style="font-family:var(--font-display);font-size: var(--text-body);font-weight:600;color:var(--text-primary);margin:0 0 8px;">{isOffline ? "You're offline" : "Couldn't load this issue"}</p>
-            <p style="font-family:var(--font-body);font-size: var(--text-ui);color:var(--text-muted);margin:0 0 16px;">{isOffline ? "This issue hasn't been cached yet. Connect to the internet to read it." : "Something went wrong. Try again."}</p>
-            <button onclick={() => { if (activeIssue) loadAndOpenIssue(activeIssue.id); }} style="padding:8px 20px;background:var(--text-primary);color:var(--bg);border:none;border-radius: var(--radius-md);font-size: var(--text-ui);font-weight:600;cursor:pointer;min-height:44px;">Retry</button>
-          </div>
-        </div>
-      {:else if issueLoading}
-        <!-- I2: Skeleton loader -->
-        <div style="flex:1;padding:40px 24px;max-width:640px;margin:0 auto;">
-          <div style="height:28px;width:70%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:16px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:16px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:16px;width:85%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:24px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:6px;width:100%;background:var(--bg-sunken);border-radius: var(--radius-pill);margin-bottom:32px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:20px;width:50%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;width:90%;background:var(--bg-sunken);border-radius: var(--radius-sm);margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;width:75%;background:var(--bg-sunken);border-radius: var(--radius-sm);animation:shimmer 1.5s infinite;"></div>
-        </div>
-      {:else if activeFullIssue}
-        <DesktopReader
-          issue={activeFullIssue}
-          onReturnHome={goToday}
-          onNext={isLastIssue ? undefined : openNextIssue}
-          {nextHeadline}
-          connections={resolvedConnections}
-          onNavigateToIssue={navigateToIssue}
-          initialCardIndex={restoredCardIndex}
-        />
-      {:else if surfaceMode === 'library' && sortedIssues.length === 0}
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
-          <div style="max-width:420px;text-align:center;">
-            <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
-              Library · {libraryLabel(libraryMode)}
-            </div>
-            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
-            <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
-              {libraryEmptyCopy(libraryMode)}
-            </p>
-          </div>
-        </div>
-      {:else if surfaceMode === 'library' && libraryMode === 'highlights'}
-        <HighlightsPanel
-          issues={sortedIssues}
-          reactionMap={appReactionMap}
-          onOpenHighlight={openIssueAtCard}
-        />
-      {:else if surfaceMode === 'library'}
-        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
-          <div style="max-width:420px;text-align:center;">
-            <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-            <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
-              {libraryMode === 'highlights' ? 'Choose an issue with saved angles.' : 'Choose the next issue from your library.'}
-            </h1>
-            <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
-              {libraryMode === 'highlights'
-                ? 'The left rail shows every issue with highlights. Open one to revisit the angles you kept.'
-                : 'The left rail already holds your current reading memory. Pick an issue there to continue.'}
-            </p>
-          </div>
-        </div>
-      {:else}
-        <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} />
-      {/if}
-    </main>
+    </div>
   </div>
 {/if}
 
@@ -1109,6 +1135,19 @@
 
   .app-main--desktop {
     flex-direction: row;
+  }
+
+  .desktop-main-panel {
+    order: 2;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-main--desktop :global(aside[aria-label]) {
+    order: 1;
   }
 
   .app-shell--tablet {

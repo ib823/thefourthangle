@@ -32,10 +32,37 @@
 
   // Accessibility: focus management
   let focusOrigin: Element | null = null;
+  let inertSiblings: HTMLElement[] = [];
+
+  function toggleBackgroundInert(overlayEl: HTMLElement | null, shouldInert: boolean) {
+    const host = overlayEl?.parentElement;
+    if (!host) return;
+    if (shouldInert) {
+      inertSiblings = [];
+      for (const node of Array.from(host.children)) {
+        if (!(node instanceof HTMLElement) || node === overlayEl || node.inert) continue;
+        node.inert = true;
+        inertSiblings.push(node);
+      }
+      return;
+    }
+    for (const node of inertSiblings) {
+      node.inert = false;
+    }
+    inertSiblings = [];
+  }
+
+  function restoreShareFocus() {
+    const target = focusOrigin instanceof HTMLElement && focusOrigin !== document.body
+      ? focusOrigin
+      : document.querySelector<HTMLElement>('[aria-label="Share this card"], [aria-label="Share this issue"], .btn-share');
+    target?.focus();
+  }
 
   onMount(() => {
     focusOrigin = document.activeElement;
     isDesktop = window.innerWidth >= 640;
+    toggleBackgroundInert(panelEl?.parentElement ?? null, true);
 
     requestAnimationFrame(() => {
       visible = true;
@@ -50,11 +77,10 @@
   });
 
   onDestroy(() => {
+    toggleBackgroundInert(panelEl?.parentElement ?? null, false);
     if (copyRevertTimer) clearTimeout(copyRevertTimer);
     if (staggerCancel) staggerCancel();
-    if (focusOrigin && 'focus' in focusOrigin) {
-      (focusOrigin as HTMLElement).focus();
-    }
+    restoreShareFocus();
   });
 
   function closeWithAnimation() {
@@ -255,7 +281,7 @@
     <div class="panel-header">
       <span class="panel-title">Share</span>
       <button class="close-btn" onclick={closeWithAnimation} aria-label="Close">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
 
@@ -281,7 +307,7 @@
     <!-- Native share (mobile primary action) -->
     {#if canNativeShare}
       <button class="native-share-btn" onclick={nativeShare}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share
       </button>
     {/if}
@@ -310,7 +336,7 @@
       style="background:{copyBg};border-color:{copyBorder};"
     >
       <span class="copy-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         Copy link
       </span>
       <span class="copy-right">
