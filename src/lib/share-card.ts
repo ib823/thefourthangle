@@ -94,17 +94,19 @@ export async function generateShareCard(
       ctx.drawImage(logo, cx - lw / 2, y, lw, logoH);
       ctx.globalAlpha = 1;
     } else {
-      // Invert logo for dark background using offscreen canvas
-      const inv = document.createElement('canvas');
-      inv.width = logo.width;
-      inv.height = logo.height;
-      const ictx = inv.getContext('2d')!;
-      ictx.drawImage(logo, 0, 0);
-      ictx.globalCompositeOperation = 'difference';
-      ictx.fillStyle = '#FFFFFF';
-      ictx.fillRect(0, 0, inv.width, inv.height);
-      ctx.globalAlpha = 0.85;
-      ctx.drawImage(inv, cx - lw / 2, y, lw, logoH);
+      // Recolor logo white for dark background:
+      // 1. Draw logo to temp canvas
+      // 2. Use source-in compositing to fill visible pixels with white
+      const tmp = document.createElement('canvas');
+      tmp.width = logo.width;
+      tmp.height = logo.height;
+      const tc = tmp.getContext('2d')!;
+      tc.drawImage(logo, 0, 0);
+      tc.globalCompositeOperation = 'source-in';
+      tc.fillStyle = '#FFFFFF';
+      tc.fillRect(0, 0, tmp.width, tmp.height);
+      ctx.globalAlpha = 0.9;
+      ctx.drawImage(tmp, cx - lw / 2, y, lw, logoH);
       ctx.globalAlpha = 1;
     }
   } catch {
