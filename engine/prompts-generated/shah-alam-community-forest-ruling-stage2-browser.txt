@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The Federal Court just killed Shah Alam's last forest corridor — not by ruling the degazettement was lawful, but by ruling nobody had the right to ask.",
+      "sub": "On April 1, 2026, the Federal Court dismissed a 2-1 split appeal by two environmental NGOs challenging Selangor's degazettement of 406.22 hectares from the Bukit Cherakah Forest Reserve. The majority ruled the NGOs lacked standing because they were formed after the government's decision in November 2000. But that decision was only published as a gazette in May 2022 — 22 years later — bypassing Selangor's own 2011 law requiring a public inquiry before any forest can be excised. The court never ruled on whether the backdating was lawful. The road through the forest is already 70% built."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "The Selangor government backdated a gazette 22 years to bypass its own public inquiry law. Three courts said nobody had the right to challenge it.",
+      "s": "In 2011, Selangor became the only Malaysian state to require a mandatory public inquiry before any permanent forest reserve could be excised — Section 11 of the Selangor NFA (Adoption) Enactment. In May 2022, the state published Gazette Notification No. 1645 degazetting 406.22 hectares, but referenced a November 2000 EXCO decision made under the previous BN government — a full 11 years before the public inquiry law existed. The legal effect: the degazettement predates the inquiry requirement. The SACF Society and PEKA challenged this in court. The High Court, Court of Appeal, and Federal Court majority all dismissed the challenge — not because the backdating was ruled lawful, but because the NGOs were formed after 2000 and therefore had 'no legal rights or interest in the subject land.' Justice Lee Swee Seng dissented: 'Where the policy or action of the executive is inconsistent with the law, or is arbitrary, irrational or tainted by mala fides or abuse of power, courts are duty-bound to intervene.' The substantive question — is a backdated gazette that circumvents public inquiry law valid? — remains unanswered.",
+      "d": "Sources: EdgeProp (Apr 1, 2026 — Federal Court 2-1 decision details, dissent quoted), FMT (Apr 1, 2026 — dismissal), The Star (Apr 1, 2026 — standing ruling), Malaysian Bar press release (2022 — due process demands), Selangor NFA (Adoption) Enactment 1985 Section 11 (amended 2011). The majority's reasoning creates a standing trap: if NGOs formed after a decision cannot challenge it, and the government can publish gazette notifications decades after the decision, then effectively no environmental organization can ever challenge degazettement."
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "SACF is not just trees — it is the only corridor connecting two major forest fragments. A 1km road will permanently sever it.",
+      "s": "The Shah Alam Community Forest spans 430 acres of lowland dipterocarp rainforest — one of the rarest and most threatened forest types in Peninsular Malaysia. A UNDP-funded biodiversity survey documented 316 species including 40 on the IUCN Red List: Malayan tapir, White-handed gibbon, and Leopard cat are 'totally protected' under the Wildlife Conservation Act 2010. But SACF's greatest ecological value is not what lives in it — it is what it connects. The forest is the only remaining biological corridor between the 1,356-hectare Subang Dam Water Catchment and the 818-hectare Taman Botani Negara Shah Alam. The 1km road — 70% complete as of March 2026 — will sever this corridor, isolating two major forest fragments and condemning species that require contiguous habitat to genetic decline. Selangor's NFA Section 12 requires replacement forest of equal or greater size when a reserve is excised. No replacement has been gazetted.",
+      "d": "Sources: UNDP GEF-SGP project page (316 species, 40 IUCN Red List), Wildlife Conservation Act 2010 (species protection status), The Star (Mar 3, 2026 — road 70% complete), SACF Society (corridor function), Selangor NFA Section 12 (replacement land requirement). Bukit Cherakah has shrunk from 23,826 acres in 1909 to approximately 6,482 acres by 2020 — a 73% loss through 21 excisions."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The same MB reversed Kuala Langat's degazettement after 45,000 objections. SACF got 718 objections — and a road.",
+      "s": "In 2021, Menteri Besar Amirudin Shari halted and reversed the degazettement of 931 hectares of Kuala Langat North Forest Reserve after 45,423 objections and roughly 130,000 petition signatures forced a political reversal. The KLNFR controversy involved MBI Selangor and connections to the Selangor royal family. For SACF, MBSA received 718 objections against the road and 195 against the cemetery — and the state pressed ahead. The road continued during active Federal Court proceedings, reaching 70% completion before the final ruling. PKNS, the state development corporation, owns 70% of the SACF land. The road connects to Setia Ecopark (SP Setia development) and will become the main route to the DASH highway — boosting property values for developers. No public cost-benefit analysis has been produced. The difference between KLNFR (reversed) and SACF (not reversed) appears to be political calculus, not environmental principle: 45,000 objections create electoral risk; 718 do not.",
+      "d": "Sources: Malay Mail (Sep 8, 2021 — KLNFR reversal), The Star (Feb 11, 2026 — petition), FMT (Dec 21, 2025 — protest), The Star (Mar 3, 2026 — 70% complete), SACF Society (PKNS ownership), MBSA (objection counts). The PH government in Selangor brands itself as reformist and pro-environment, but is defending a BN-era backdated degazettement while claiming credit for reversing KLNFR."
+    },
+    {
+      "t": "reframe",
+      "h": "This isn't about one forest. It's about whether any Malaysian can challenge a government that backdates its own decisions to dodge its own laws.",
+      "text": "The Federal Court never ruled on whether backdating a gazette 22 years is lawful. By dismissing the case on standing, the substantive question was evaded entirely. This means the loophole remains open: any Malaysian state can degazette forest reserve land by publishing a gazette today and backdating it to before public inquiry requirements existed. Malaysia has 14.3 million hectares of permanent reserved forest. The precedent from this case — that environmental organizations formed after a decision cannot challenge it, even when the gazette was published decades later — effectively immunizes executive forest decisions from judicial review. Justice Lee's dissent warned that courts are 'duty-bound to intervene' against arbitrary executive action. The majority disagreed. The road is 70% built, and the forest corridor is being severed while the ink on the judgment dries."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The SACF ruling is not the end of a forest dispute — it is the beginning of a governance crisis. A state government used a 22-year-old BN-era decision to bypass its own progressive public inquiry law. Three courts declined to examine whether this was lawful, each deferring on standing rather than substance. The road continued during litigation, making the judicial process moot in practice. The Temuan Orang Asli community with traditional territory in the forest was not separately represented. And Section 12's replacement forest requirement — equal or greater area — was never enforced. The uncomfortable truth is that Selangor's environmental progressivism is selective: KLNFR was reversed because 45,000 objections created political cost; SACF was not because 718 objections did not. The loophole this creates is national: if a backdated gazette survives judicial scrutiny by default, then every forest reserve in Malaysia is only as safe as the political cost of cutting it down. What Selangor needs — and what Malaysia needs — is a standing framework that allows environmental challenges based on when a decision is published, not when it was allegedly made; mandatory enforcement of Section 12 replacement land; and a moratorium on any further degazettement using pre-2011 decisions. The forest is 430 acres. The precedent covers 14.3 million hectares."
+    }
+  ],
+  "sources": "EdgeProp (Apr 1, 2026 — Federal Court 2-1 decision), FMT (Apr 1, 2026 — dismissal; Dec 21, 2025 — protest; Jul 9, 2022 — Forestry Dept), The Star (Apr 1, 2026 — ruling; Mar 3, 2026 — 70% complete; Feb 11, 2026 — petition), Malay Mail (Mar 30, 2026 — pre-ruling; Sep 8, 2021 — KLNFR reversal), Eco-Business (Sep 2024 — leave granted), NST (Jun 2024 — community feature), Malaysian Bar (2022 — due process press release), WWF-Malaysia (2022 — joint media release), SME Asia (Jul 18, 2022 — 53 CSOs), UNDP GEF-SGP (biodiversity survey data), SACF official site (chronology), Wildlife Conservation Act 2010, Selangor NFA (Adoption) Enactment 1985 (Sections 11, 12)",
+  "confidence": "High — Court decisions reported by multiple legal and news outlets (EdgeProp, FMT, The Star, Malaysiakini). Gazette notification and dates are official public records. Biodiversity data from UNDP-funded survey. KLNFR reversal confirmed by Malay Mail. Medium confidence on PKNS ownership percentage (cited by SACF Society, not independently verified from land records). High confidence on the legal analysis — the backdating mechanism and standing reasoning are directly quoted from court reporting.",
+  "lenses_used": ["Legal", "Environmental", "Governance"],
+  "lenses_applicable_but_unused": ["Political", "Social", "Rights", "Economic"]
+}
