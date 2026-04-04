@@ -93,9 +93,11 @@
     transition: color 180ms ease, transform 180ms ease;
   }
 
-  .sort-chip:hover {
-    transform: translateY(-1px);
-    color: var(--text-primary);
+  @media (hover: hover) {
+    .sort-chip:hover {
+      transform: translateY(-1px);
+      color: var(--text-primary);
+    }
   }
 
   .sort-chip--active {
@@ -127,10 +129,6 @@
 
     .sort-chip {
       color: var(--text-muted);
-    }
-
-    .sort-chip:hover {
-      color: var(--text-primary);
     }
 
     .sort-chip--active {

@@ -596,11 +596,13 @@
     box-shadow: 0 14px 28px rgba(210, 140, 40, 0.08);
   }
 
-  .completion-primary-btn:hover {
-    border-color: rgba(210, 140, 40, 0.3);
-    background: linear-gradient(180deg, rgba(210, 140, 40, 0.15), rgba(210, 140, 40, 0.1));
-    transform: translateY(-1px);
-    box-shadow: 0 18px 32px rgba(210, 140, 40, 0.12);
+  @media (hover: hover) {
+    .completion-primary-btn:hover {
+      border-color: rgba(210, 140, 40, 0.3);
+      background: linear-gradient(180deg, rgba(210, 140, 40, 0.15), rgba(210, 140, 40, 0.1));
+      transform: translateY(-1px);
+      box-shadow: 0 18px 32px rgba(210, 140, 40, 0.12);
+    }
   }
 
   .completion-utility-btn {
@@ -619,12 +621,14 @@
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
   }
 
-  .completion-utility-btn:hover {
-    background: var(--bg);
-    border-color: var(--border-divider);
-    color: var(--text-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+  @media (hover: hover) {
+    .completion-utility-btn:hover {
+      background: var(--bg);
+      border-color: var(--border-divider);
+      color: var(--text-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+    }
   }
 
   .completion-utility-btn--copied {
@@ -648,8 +652,10 @@
     text-decoration: none;
   }
 
-  .completion-help-link:hover {
-    color: var(--text-secondary);
+  @media (hover: hover) {
+    .completion-help-link:hover {
+      color: var(--text-secondary);
+    }
   }
 
   @media (prefers-color-scheme: dark) {
@@ -659,15 +665,17 @@
       box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
     }
 
+    .completion-utility-btn {
+      background: rgba(34, 31, 27, 0.74);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) and (hover: hover) {
     .completion-primary-btn:hover {
       border-color: rgba(200, 150, 58, 0.3);
       background: linear-gradient(180deg, rgba(200, 150, 58, 0.16), rgba(200, 150, 58, 0.1));
       box-shadow: 0 20px 36px rgba(0, 0, 0, 0.26);
-    }
-
-    .completion-utility-btn {
-      background: rgba(34, 31, 27, 0.74);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
     }
 
     .completion-utility-btn:hover {

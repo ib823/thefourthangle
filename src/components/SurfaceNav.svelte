@@ -55,10 +55,12 @@
     box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
   }
 
-  .surface-button:hover {
-    transform: translateY(-1px);
-    background: var(--bg);
-    border-color: var(--border-divider);
+  @media (hover: hover) {
+    .surface-button:hover {
+      transform: translateY(-1px);
+      background: var(--bg);
+      border-color: var(--border-divider);
+    }
   }
 
   .surface-button[aria-current='page'] {
@@ -117,10 +119,6 @@
       border-color: var(--border-divider);
       color: var(--text-secondary);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
-    }
-
-    .surface-button:hover {
-      background: rgba(41, 37, 32, 0.98);
     }
 
     .surface-button[aria-current='page'] {

@@ -301,3 +301,53 @@ body.app-shell-root #main-content {
     }
   }
 }
+
+/* P0: Prevent iOS Safari auto-zoom on input focus (requires ≥ 16px) */
+@media (max-width: 1023px) {
+  input, select, textarea {
+    font-size: max(1rem, var(--text-body)) !important;
+  }
+}
+
+/* P1: Gate hover styles behind pointer capability — prevents sticky hover on touch */
+@media (hover: none) {
+  .close-btn:hover,
+  .native-share-btn:hover,
+  .share-btn:hover,
+  .copy-btn:hover,
+  .pattern-issue-card:hover {
+    all: unset;
+  }
+}
+
+/* P1: Windows High Contrast Mode — ensure borders and text remain visible */
+@media (forced-colors: active) {
+  * {
+    forced-color-adjust: auto;
+  }
+
+  .hero-card,
+  .panel-issue,
+  .brief-item,
+  .library-item,
+  .share-btn,
+  .copy-btn,
+  .completion-primary-btn,
+  .completion-utility-btn {
+    border: 1px solid ButtonText;
+  }
+
+  .preview-bar-fill,
+  .panel-progress-fill {
+    background: Highlight;
+  }
+
+  a, button {
+    color: LinkText;
+  }
+
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}

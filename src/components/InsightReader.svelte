@@ -1347,8 +1347,10 @@
     transition: background var(--duration-fast, 150ms) ease;
   }
 
-  .close-btn:hover {
-    background: var(--border-subtle);
+  @media (hover: hover) {
+    .close-btn:hover {
+      background: var(--border-subtle);
+    }
   }
 
   .headline-area {
@@ -1647,8 +1649,10 @@
     transition: background var(--duration-fast, 150ms) ease;
   }
 
-  .btn-done:hover {
-    background: var(--text-secondary);
+  @media (hover: hover) {
+    .btn-done:hover {
+      background: var(--text-secondary);
+    }
   }
 
   .btn-share {
@@ -1664,8 +1668,10 @@
     touch-action: auto;
   }
 
-  .btn-share:hover {
-    background: var(--border-subtle);
+  @media (hover: hover) {
+    .btn-share:hover {
+      background: var(--border-subtle);
+    }
   }
 
   .btn-next {
@@ -1680,8 +1686,10 @@
     transition: background var(--duration-fast, 150ms) ease;
   }
 
-  .btn-next:hover {
-    background: var(--text-secondary);
+  @media (hover: hover) {
+    .btn-next:hover {
+      background: var(--text-secondary);
+    }
   }
 
   /* Reduced motion overrides */
@@ -1732,9 +1740,11 @@
     box-shadow: var(--shadow-sm);
     touch-action: manipulation;
   }
-  .nav-chevron:hover {
-    opacity: 0.8;
-    background: var(--bg);
+  @media (hover: hover) {
+    .nav-chevron:hover {
+      opacity: 0.8;
+      background: var(--bg);
+    }
   }
   .nav-prev { left: 4px; }
   .nav-next { right: 4px; }
@@ -1761,8 +1771,10 @@
     min-height: 44px;
     margin-bottom: 4px;
   }
-  .connection-nudge:hover {
-    background: var(--bg-sunken);
+  @media (hover: hover) {
+    .connection-nudge:hover {
+      background: var(--bg-sunken);
+    }
   }
 
   /* Tablet: widen card area from phone-sized 440px to use tablet space */

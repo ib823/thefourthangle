@@ -685,15 +685,17 @@
     transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
-  .panel-issue:hover,
-  .brief-item:hover,
-  .library-item:hover {
-    transform: translateY(-2px);
-  }
+  @media (hover: hover) {
+    .panel-issue:hover,
+    .brief-item:hover,
+    .library-item:hover {
+      transform: translateY(-2px);
+    }
 
-  .hero-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
+    .hero-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
+    }
   }
 
   .panel-issue-title,
@@ -979,6 +981,9 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
+  }
+
+  @media (prefers-color-scheme: dark) and (hover: hover) {
     .hero-card:hover,
     .panel-issue:hover,
     .brief-item:hover,

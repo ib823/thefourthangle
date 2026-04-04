@@ -116,10 +116,16 @@ const { current } = Astro.props;
       color var(--duration-fast, 150ms) ease;
   }
 
-  .utility-nav-link:hover,
   .utility-nav-link--active {
     color: var(--score-medium);
     background: var(--bg);
+  }
+
+  @media (hover: hover) {
+    .utility-nav-link:hover {
+      color: var(--score-medium);
+      background: var(--bg);
+    }
   }
 
   @media (max-width: 720px) {

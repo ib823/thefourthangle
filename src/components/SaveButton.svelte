@@ -93,17 +93,19 @@
     overflow: visible;
   }
 
-  .save-btn:hover {
-    background: var(--bg-sunken);
+  @media (hover: hover) {
+    .save-btn:hover {
+      background: var(--bg-sunken);
+    }
+
+    .save-btn--reacted:hover {
+      background: var(--highlight-bg-strong, rgba(184, 92, 0, 0.12));
+    }
   }
 
   .save-btn--reacted {
     background: var(--highlight-bg, rgba(184, 92, 0, 0.08));
     border-color: var(--highlight-accent, var(--score-warning));
-  }
-
-  .save-btn--reacted:hover {
-    background: var(--highlight-bg-strong, rgba(184, 92, 0, 0.12));
   }
 
   /* Heart icon animation */
