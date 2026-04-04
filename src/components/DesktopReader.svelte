@@ -39,6 +39,7 @@
   let completionMarker: HTMLDivElement | undefined = $state(undefined);
   let cardEls: Array<HTMLDivElement | undefined> = $state([]);
   let shareOpen = $state(false);
+  let shareCardIndex: number | null = $state(null);
   let copied = $state(false);
   let activeStep = $state(Math.max(0, Math.min(initialCardIndex, Math.max(issue.cards.length - 1, 0))));
   let persistedProgress = $state(0);
@@ -307,7 +308,7 @@
         <h1 class="reader-headline balance-title">{issue.headline}</h1>
       </div>
       <div class="reader-actions">
-        <button onclick={() => { shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius: var(--radius-pill);border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.2s ease-out,border-color 0.2s ease-out;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen} aria-haspopup="dialog">
+        <button onclick={() => { shareCardIndex = null; shareOpen = true; }} style="flex-shrink:0;display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius: var(--radius-pill);border:1px solid var(--border-subtle);background:var(--bg-elevated);cursor:pointer;transition:background 0.2s ease-out,border-color 0.2s ease-out;margin-top:4px;min-height:44px;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--border-subtle)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-divider)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }} aria-label="Share this issue" aria-expanded={shareOpen} aria-haspopup="dialog">
           <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           <span style="font-size: var(--text-sm);font-weight:700;color:var(--text-tertiary);">Share</span>
         </button>
@@ -366,7 +367,12 @@
                 <span style="font-size: var(--text-sm);font-weight:700;color:{meta.color};">{cardLabel(card)}</span>
               </div>
             </div>
-            <SaveButton issueId={issue.id} cardIndex={i} />
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button onclick={() => { shareCardIndex = i; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:var(--radius-md);cursor:pointer;transition:background 0.2s ease-out;" aria-label="Share this card as image" aria-haspopup="dialog">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </button>
+              <SaveButton issueId={issue.id} cardIndex={i} />
+            </div>
           </div>
 
           <p style="font-size: var(--text-title);font-weight:700;color:var(--text-primary);line-height:1.45;margin:0;max-width:33ch;">{card.big}</p>
@@ -448,7 +454,7 @@
         {/if}
       </div>
 
-      <button onclick={() => { shareOpen = true; }} class="completion-utility-btn" aria-expanded={shareOpen} aria-haspopup="dialog">
+      <button onclick={() => { shareCardIndex = null; shareOpen = true; }} class="completion-utility-btn" aria-expanded={shareOpen} aria-haspopup="dialog">
         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share issue
       </button>
@@ -472,7 +478,7 @@
 </div>
 
 {#if shareOpen}
-  <ShareModal {issue} cardIndex={null} onClose={() => { shareOpen = false; }} />
+  <ShareModal {issue} cardIndex={shareCardIndex} onClose={() => { shareOpen = false; }} />
 {/if}
 
 <style>

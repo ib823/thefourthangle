@@ -313,80 +313,93 @@
       </button>
     </div>
 
-    <!-- Preview card -->
-    <div class="preview-card">
-      <div style="margin:-12px -14px 10px;border-radius: var(--radius-md) var(--radius-md) 0 0;overflow:hidden;background:var(--bg-sunken);">
-        <img src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(BUILD_ID)}`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
-      </div>
-      <div class="preview-headline">{issue.headline}</div>
-      <div class="preview-context">{previewText}</div>
-      <div class="preview-scores">
-        <div class="preview-bar-track">
-          <div class="preview-bar-fill" style="width:{os}%;background:{barColor};"></div>
-        </div>
-        <span class="preview-score" style="color:{barColor};">{os}%</span>
-        <span class="preview-label">Opinion Shift</span>
-        <span class="preview-dot">&middot;</span>
-        <span class="preview-score" style="color:{nsColor};">{ns}</span>
-        <span class="preview-label">Neutrality</span>
-      </div>
-    </div>
+    {#if cardIndex !== null}
+      <!-- ═══ CARD-LEVEL SHARE: Image is primary ═══ -->
 
-    <!-- Share as image -->
-    <div style="margin-bottom:16px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <span class="section-label" style="margin:0;">Share as image</span>
-        <div style="display:flex;gap:4px;">
-          <button
-            onclick={() => { cardVariant = 'black'; }}
-            style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'black' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#000;cursor:pointer;"
-            aria-label="Black card"
-            aria-pressed={cardVariant === 'black'}
-          ></button>
-          <button
-            onclick={() => { cardVariant = 'white'; }}
-            style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'white' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#fff;cursor:pointer;"
-            aria-label="White card"
-            aria-pressed={cardVariant === 'white'}
-          ></button>
+      <!-- Card text preview -->
+      <div style="padding:16px;border-radius:var(--radius-md);background:var(--bg-sunken);margin-bottom:16px;">
+        <div style="font-size:var(--text-sm);font-weight:600;color:var(--text-tertiary);margin-bottom:4px;">{card ? (card.lens ? `${card.lens} angle` : 'Angle') : 'Card'}</div>
+        <div style="font-size:var(--text-body);font-weight:600;color:var(--text-primary);line-height:1.4;">{shareText.length > 140 ? shareText.slice(0, 137) + '...' : shareText}</div>
+      </div>
+
+      <!-- Share as image — primary action -->
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span class="section-label" style="margin:0;">Share as image</span>
+          <div style="display:flex;gap:4px;">
+            <button
+              onclick={() => { cardVariant = 'black'; }}
+              style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'black' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#000;cursor:pointer;"
+              aria-label="Black card"
+              aria-pressed={cardVariant === 'black'}
+            ></button>
+            <button
+              onclick={() => { cardVariant = 'white'; }}
+              style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'white' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#fff;cursor:pointer;"
+              aria-label="White card"
+              aria-pressed={cardVariant === 'white'}
+            ></button>
+          </div>
+        </div>
+        <button
+          onclick={shareAsImage}
+          disabled={cardGenerating}
+          style="width:100%;padding:12px 16px;background:{cardVariant === 'black' ? '#000' : '#fff'};color:{cardVariant === 'black' ? '#fff' : '#000'};border:1px solid {cardVariant === 'black' ? 'rgba(255,255,255,0.1)' : 'var(--border-subtle)'};border-radius:var(--radius-md);font:inherit;font-size:var(--text-ui);font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;opacity:{cardGenerating ? 0.6 : 1};transition:opacity 0.2s ease-out;"
+        >
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          {cardGenerating ? 'Generating...' : 'Save & share card'}
+        </button>
+      </div>
+
+    {:else}
+      <!-- ═══ ISSUE-LEVEL SHARE: URL/platforms is primary ═══ -->
+
+      <!-- Preview card -->
+      <div class="preview-card">
+        <div style="margin:-12px -14px 10px;border-radius: var(--radius-md) var(--radius-md) 0 0;overflow:hidden;background:var(--bg-sunken);">
+          <img src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(BUILD_ID)}`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+        </div>
+        <div class="preview-headline">{issue.headline}</div>
+        <div class="preview-context">{previewText}</div>
+        <div class="preview-scores">
+          <div class="preview-bar-track">
+            <div class="preview-bar-fill" style="width:{os}%;background:{barColor};"></div>
+          </div>
+          <span class="preview-score" style="color:{barColor};">{os}%</span>
+          <span class="preview-label">Opinion Shift</span>
+          <span class="preview-dot">&middot;</span>
+          <span class="preview-score" style="color:{nsColor};">{ns}</span>
+          <span class="preview-label">Neutrality</span>
         </div>
       </div>
-      <button
-        onclick={shareAsImage}
-        disabled={cardGenerating}
-        style="width:100%;padding:12px 16px;background:{cardVariant === 'black' ? '#000' : '#fff'};color:{cardVariant === 'black' ? '#fff' : '#000'};border:1px solid {cardVariant === 'black' ? 'rgba(255,255,255,0.1)' : 'var(--border-subtle)'};border-radius:var(--radius-md);font:inherit;font-size:var(--text-ui);font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;opacity:{cardGenerating ? 0.6 : 1};transition:opacity 0.2s ease-out;"
-      >
-        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        {cardGenerating ? 'Generating...' : 'Save & share card'}
-      </button>
-    </div>
 
-    <!-- Native share (mobile primary action) -->
-    {#if canNativeShare}
-      <button class="native-share-btn" onclick={nativeShare}>
-        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share link
-      </button>
+      <!-- Native share (mobile primary action) -->
+      {#if canNativeShare}
+        <button class="native-share-btn" onclick={nativeShare}>
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share link
+        </button>
+      {/if}
+
+      <!-- Platform grid: only on desktop where native share is unavailable -->
+      {#if !canNativeShare}
+        <div class="section-label">Share on</div>
+        <div class="platform-grid">
+          {#each openPlatforms as p, i}
+            <button
+              onclick={() => openPlatform(p)}
+              class="share-btn"
+              class:share-btn--visible={buttonVisible[i]}
+            >
+              <span class="share-btn-label">{p.label}</span>
+            </button>
+          {/each}
+        </div>
+        <div class="divider"></div>
+      {/if}
     {/if}
 
-    <!-- Platform grid: only on desktop where native share is unavailable -->
-    {#if !canNativeShare}
-      <div class="section-label">Share on</div>
-      <div class="platform-grid">
-        {#each openPlatforms as p, i}
-          <button
-            onclick={() => openPlatform(p)}
-            class="share-btn"
-            class:share-btn--visible={buttonVisible[i]}
-          >
-            <span class="share-btn-label">{p.label}</span>
-          </button>
-        {/each}
-      </div>
-      <div class="divider"></div>
-    {/if}
-
-    <!-- Copy link -->
+    <!-- Copy link (always available) -->
     <button
       onclick={copyLink}
       class="copy-btn"
