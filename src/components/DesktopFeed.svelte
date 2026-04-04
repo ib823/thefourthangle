@@ -251,7 +251,7 @@
         value={searchQuery}
         oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
         onfocus={() => onSearchFocus?.()}
-        style="width:100%;padding:8px 32px 8px 12px;font-size: var(--text-ui);border:1px solid var(--border-subtle);border-radius: var(--radius-md);background:var(--bg-sunken);color:var(--text-primary);outline:none;transition:border-color 0.15s ease;"
+        style="width:100%;padding:8px 32px 8px 12px;font-size: var(--text-ui);border:1px solid var(--border-subtle);border-radius: var(--radius-md);background:var(--bg-sunken);color:var(--text-primary);outline:none;transition:border-color 0.2s ease-out;"
         onfocusin={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--score-info)'; }}
         onfocusout={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-subtle)'; }}
       />
@@ -362,6 +362,8 @@
     onkeydown={onFeedKeyDown}
     role="listbox"
     aria-label="Issues"
+    aria-live="polite"
+    aria-atomic="false"
     style="flex:1;overflow-y:auto;"
   >
     {#if sections.length > 0 && !isSearching}

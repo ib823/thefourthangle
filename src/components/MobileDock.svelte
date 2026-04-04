@@ -65,7 +65,7 @@
     font: inherit;
     font-size: var(--text-xs);
     font-weight: 700;
-    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    transition: background 0.2s ease-out, color 0.2s ease-out, transform 0.2s ease-out;
   }
 
   .dock-item--active {

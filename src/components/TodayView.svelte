@@ -406,7 +406,7 @@
     font-family: var(--font-display);
     font-size: var(--text-home-title-fluid);
     line-height: 1.15;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
     max-width: 15ch;
   }
@@ -462,7 +462,8 @@
     min-height: 420px;
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.94), rgba(28, 28, 28, 0.82));
     color: #fff;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
   .hero-art,
@@ -519,7 +520,7 @@
     font-family: var(--font-display);
     font-size: var(--text-issue-title-fluid);
     line-height: 1.15;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.02em;
     max-width: 15ch;
   }
 
@@ -681,14 +682,18 @@
     border-radius: var(--radius-lg);
     background: var(--bg);
     border: 1px solid var(--border-subtle);
-    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
   .panel-issue:hover,
   .brief-item:hover,
-  .library-item:hover,
-  .hero-card:hover {
+  .library-item:hover {
     transform: translateY(-2px);
+  }
+
+  .hero-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.12);
   }
 
   .panel-issue-title,
@@ -815,6 +820,14 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  @media (min-width: 1024px) {
+    .panel-issue,
+    .brief-item,
+    .library-item {
+      padding: 20px;
+    }
   }
 
   @media (max-width: 1023px) {
