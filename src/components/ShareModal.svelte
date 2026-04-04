@@ -35,12 +35,16 @@
   let inertSiblings: HTMLElement[] = [];
 
   function toggleBackgroundInert(overlayEl: HTMLElement | null, shouldInert: boolean) {
+    // Scope inert to immediate siblings only — never walk up to the app shell,
+    // which is already managed by InsightReader's own inert logic.
     const host = overlayEl?.parentElement;
     if (!host) return;
     if (shouldInert) {
       inertSiblings = [];
       for (const node of Array.from(host.children)) {
         if (!(node instanceof HTMLElement) || node === overlayEl || node.inert) continue;
+        // Skip the app shell — it's managed by the reader overlay
+        if (node.classList.contains('app-shell')) continue;
         node.inert = true;
         inertSiblings.push(node);
       }

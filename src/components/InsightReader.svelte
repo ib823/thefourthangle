@@ -859,8 +859,16 @@
       }
       return;
     }
+    // Restore tracked siblings
     for (const node of inertSiblings) {
       node.inert = false;
+    }
+    // Safety: also sweep all host children — catches nodes marked inert
+    // by nested dialogs (ShareModal) that may not have cleaned up yet
+    for (const node of Array.from(host.children)) {
+      if (node instanceof HTMLElement && node !== overlayEl) {
+        node.inert = false;
+      }
     }
     inertSiblings = [];
   }
@@ -962,6 +970,26 @@
     wakeLockVisCleanup?.();
     // Restore focus to the element that opened the reader
     restoreReaderFocus();
+
+    // Safety net: force-clear body scroll lock and inert on next frame
+    // in case the primary cleanup missed due to DOM timing
+    requestAnimationFrame(() => {
+      const b = document.body;
+      if (b.style.position === 'fixed') {
+        const y = Math.abs(parseInt(b.style.top || '0', 10));
+        b.style.position = '';
+        b.style.top = '';
+        b.style.left = '';
+        b.style.right = '';
+        b.style.overflow = '';
+        window.scrollTo(0, y);
+      }
+      // Clear any stale inert on the app shell
+      const shell = document.querySelector('.app-shell');
+      if (shell instanceof HTMLElement && shell.inert) {
+        shell.inert = false;
+      }
+    });
   });
 
   // Re-attach scroll observer when card changes (new content element)
