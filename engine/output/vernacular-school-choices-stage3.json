@@ -1,0 +1,141 @@
+{
+  "factual_accuracy_score": 61,
+  "source_diversity_estimate": 0.76,
+  "claims": [
+    {
+      "claim": "The Federal Court settled the legal question in February 2024, ruling vernacular schools constitutional.",
+      "status": "MISLEADING",
+      "m_true": 0.6,
+      "m_false": 0.25,
+      "m_unknown": 0.15,
+      "source": "Federal Court coverage on 20 Feb 2024 shows the court dismissed the leave application by a 2-1 majority, which left the Court of Appeal ruling intact.",
+      "correction": "The practical legal effect was to preserve the constitutionality of vernacular schools, but the Federal Court did not deliver a full merits judgment after hearing a substantive appeal. It refused leave to appeal."
+    },
+    {
+      "claim": "An ISEAS survey of 929 predominantly middle-class Malay families found that 69% chose SJKC for academic reputation, and language was among the least important factors.",
+      "status": "MISLEADING",
+      "m_true": 0.45,
+      "m_false": 0.35,
+      "m_unknown": 0.2,
+      "source": "ISEAS Perspective 2025/34 states that language of instruction was the least important factor, that respondents were primarily middle-class Malays, and that 928 users completed the survey. It also says around 69% preferred SJKC for a profile combining high academic reputation, location, and disciplined environment.",
+      "correction": "The completed sample was 928, not 929. The 69% figure is not 'academic reputation only'; it refers to a school profile featuring high academic reputation, location, and discipline. Academic reputation was the dominant factor, but the original wording compresses the result too aggressively."
+    },
+    {
+      "claim": "Bumiputera enrolment in SJKC nearly doubled from 11.67% in 2014 to 18.52% in 2024.",
+      "status": "VERIFIED",
+      "m_true": 0.9,
+      "m_false": 0.03,
+      "m_unknown": 0.07,
+      "source": "The Education Ministry's parliamentary reply, as reported by Bernama, gave these exact percentages for 2014 and 2024.",
+      "correction": ""
+    },
+    {
+      "claim": "The 7,681 bullying cases recorded in 2024 represented a 17% jump from 2023.",
+      "status": "MISLEADING",
+      "m_true": 0.75,
+      "m_false": 0.1,
+      "m_unknown": 0.15,
+      "source": "Parliamentary and Bernama reporting shows 7,681 bullying cases in 2024 versus 6,528 in 2023, which is roughly a 17.7% increase.",
+      "correction": "The numbers are broadly right, but the analysis narrows them to 'national schools'. The available source wording points to cases recorded in schools under MOE/SSDM, not a cleanly isolated national-school-only figure."
+    },
+    {
+      "claim": "SJKT enrolment fell from 102,000 in 2011 to 72,080 by February 2025.",
+      "status": "UNVERIFIED",
+      "m_true": 0.55,
+      "m_false": 0.1,
+      "m_unknown": 0.35,
+      "source": "Press reports citing Education Ministry statistics state 72,080 pupils as of Feb 2025. The 2011 figure appears in community and advocacy reporting as about 102,642, but I did not locate the underlying primary 2011 ministry table directly.",
+      "correction": "The 2025 endpoint is plausibly correct. The 2011 baseline may also be directionally right, but it is not directly verified here from an accessible primary ministry source."
+    },
+    {
+      "claim": "The number of SJKTs with 10 or fewer students rose from 26 in May 2024 to 37 in February 2025.",
+      "status": "UNVERIFIED",
+      "m_true": 0.55,
+      "m_false": 0.1,
+      "m_unknown": 0.35,
+      "source": "The Star reported these figures and attributed them to Education Ministry statistics, but I did not locate the primary parliamentary or ministry document itself.",
+      "correction": "This looks plausible and may well be correct, but the accessible verification here is still second-hand."
+    },
+    {
+      "claim": "Budget allocation for Tamil schools was slashed from RM50 million in 2020 to RM25.5 million in Budget 2025.",
+      "status": "INCORRECT",
+      "m_true": 0.15,
+      "m_false": 0.7,
+      "m_unknown": 0.15,
+      "source": "Budget 2020 explicitly earmarked RM50 million for SJKT maintenance. Budget 2025 publicly announced RM2 billion for upgrading and maintaining schools nationwide, but I did not find an official RM25.5 million SJKT line in the Budget 2025 speech. Later reporting in 2025 cited RM19.09 million for maintenance of government-aided SJKTs, and 2026 raised the annual SJKT allocation to RM50 million.",
+      "correction": "The 2020 RM50 million figure is correct. The claim that Budget 2025 'slashed' SJKT funding to RM25.5 million is not supported by the accessible official budget speech and appears to conflate advocacy/media interpretation with a formal budget line."
+    },
+    {
+      "claim": "Zero Tamil-medium secondary schools exist anywhere in Malaysia.",
+      "status": "VERIFIED",
+      "m_true": 0.75,
+      "m_false": 0.1,
+      "m_unknown": 0.15,
+      "source": "The Education Act 1996 provides for national-type schools under the primary-education provisions in section 28, while section 30 lists national secondary school categories without a Tamil national-type secondary stream.",
+      "correction": "More precisely, the publicly funded national-type Tamil school stream exists at primary level, not as a recognized national-type secondary stream."
+    },
+    {
+      "claim": "Budget 2026 earmarked just one SJKT for rebuilding.",
+      "status": "VERIFIED",
+      "m_true": 0.9,
+      "m_false": 0.03,
+      "m_unknown": 0.07,
+      "source": "The official Budget 2026 speech names SJKT Ladang Jeram, Pahang and SJKC Aik Hua, Perak for rebuilding. That means one SJKT was specifically named.",
+      "correction": ""
+    },
+    {
+      "claim": "International school enrolment in Malaysia surged 67% in a decade to 111,185 students by July 2024.",
+      "status": "VERIFIED",
+      "m_true": 0.75,
+      "m_false": 0.1,
+      "m_unknown": 0.15,
+      "source": "The Edge attributed this exact decade-growth figure and total to ISC Research, using July 2024 data.",
+      "correction": "This is an ISC Research market estimate, not the same dataset as MOE's parliamentary count."
+    },
+    {
+      "claim": "As of July 2024, 111,185 students attended 348 international schools in Malaysia, with 67% being Malaysian citizens.",
+      "status": "MISLEADING",
+      "m_true": 0.2,
+      "m_false": 0.65,
+      "m_unknown": 0.15,
+      "source": "ISC-linked reporting supports 111,185 students and 348 schools by July 2024. MOE's parliamentary reply supports about 67.1% citizens, but for a different count: 88,951 students as of 31 May 2024.",
+      "correction": "The analysis mixes two different datasets and dates. The 111,185 and 348 figures are ISC-style July 2024 market data, while the 67.1% citizen share comes from MOE's 31 May 2024 parliamentary data on 88,951 students."
+    },
+    {
+      "claim": "Malaysian enrolment in international schools rose 34% from 2019 to 2024.",
+      "status": "VERIFIED",
+      "m_true": 0.85,
+      "m_false": 0.05,
+      "m_unknown": 0.1,
+      "source": "Bernama's report of the Education Ministry parliamentary reply states a 34% increase in citizen student enrolment in international schools from 2019 to 2024.",
+      "correction": ""
+    },
+    {
+      "claim": "A total of 216,513 Malaysians were enrolled in private schools in 2024.",
+      "status": "UNVERIFIED",
+      "m_true": 0.45,
+      "m_false": 0.1,
+      "m_unknown": 0.45,
+      "source": "This figure appears repeatedly in later reporting attributed to DOSM, but I did not locate the primary DOSM table directly in accessible search results.",
+      "correction": "The number is plausible, but the accessible verification here is not direct from a primary DOSM release."
+    },
+    {
+      "claim": "The national school system had 4.8 million students.",
+      "status": "UNVERIFIED",
+      "m_true": 0.45,
+      "m_false": 0.1,
+      "m_unknown": 0.45,
+      "source": "This figure appears in later reporting about schooling trends, but I did not locate the primary ministry or DOSM table directly in accessible search results.",
+      "correction": "Likely directionally correct, but not directly verified here from a primary source."
+    }
+  ],
+  "omitted_facts": [
+    "The ISEAS survey was run in-app on the Versa platform from 16 to 18 Dec 2024, targeted at married ethnic Malay users, and had 928 completed responses. The paper explicitly says it is not nationally representative.",
+    "The Federal Court outcome in Feb 2024 was a refusal of leave to appeal under section 96(a), not a full merits judgment after a substantive constitutional appeal hearing.",
+    "There are two materially different international-school datasets in circulation: MOE's parliamentary figure of 88,951 students as of 31 May 2024, and ISC Research's market estimate of 111,185 students as of July 2024. The analysis should not blend them without explanation.",
+    "Budget 2025 officially highlighted RM2 billion for upgrading and maintaining schools nationwide, not an accessible dedicated RM25.5 million SJKT budget line in the speech text.",
+    "In 2025, MOE later reported RM19.09 million for maintenance of government-aided SJKTs, and in early 2026 the federal annual SJKT allocation was raised to RM50 million. That complicates any simple narrative of uninterrupted decline."
+  ],
+  "source_assessment": "The original analysis draws from a reasonably broad mix of source types: government and parliamentary material, budget documents, a regional think tank paper from ISEAS, mainstream media such as Bernama, The Star, FMT, Malay Mail, and The Edge, plus legal commentary. The weakness is not lack of source variety so much as source stitching: several claims merge unlike datasets or media characterisations into cleaner-sounding facts than the underlying records support, especially on the Federal Court outcome, SJKT budgeting, and international-school counts.",
+  "overall_assessment": "The analysis is directionally right on some major themes: Bumiputera enrolment in SJKC has risen sharply, the ISEAS paper does show academic reputation outweighing language among surveyed Malay respondents, and international schooling has grown. But it overcompresses legal nuance, misstates the ISEAS sample size, simplifies the 69% survey finding, mis-scopes the bullying statistic, makes a weakly supported SJKT budget-cut claim, and blends MOE and ISC international-school datasets as if they were one. The piece is therefore analytically interesting but only moderately reliable as a factual briefing without correction."
+}
