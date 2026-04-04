@@ -4,6 +4,7 @@
   import { stagger, haptic } from '../lib/animation';
   import { createSpring, animateSpring } from '../lib/spring';
   import { BUILD_ID, getSiteOrigin } from '../lib/build';
+  import { shareCardAsImage, type CardVariant } from '../lib/share-card';
 
   interface Props {
     issue: Issue;
@@ -13,6 +14,8 @@
   let { issue, cardIndex, onClose }: Props = $props();
 
   let copiedId: string | null = $state(null);
+  let cardVariant: CardVariant = $state('black');
+  let cardGenerating = $state(false);
   let copyPhase: 'idle' | 'out' | 'check' | 'in' | 'revert-out' | 'revert-in' = $state('idle');
   let copyBgFlash = $state(false);
   let visible = $state(false);
@@ -188,6 +191,16 @@
     } catch {}
   }
 
+  async function shareAsImage() {
+    if (cardGenerating) return;
+    cardGenerating = true;
+    try {
+      haptic(5);
+      await shareCardAsImage(shareText, cardVariant);
+    } catch {}
+    cardGenerating = false;
+  }
+
   async function nativeShare() {
     try {
       await navigator.share({
@@ -319,11 +332,40 @@
       </div>
     </div>
 
+    <!-- Share as image -->
+    <div style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span class="section-label" style="margin:0;">Share as image</span>
+        <div style="display:flex;gap:4px;">
+          <button
+            onclick={() => { cardVariant = 'black'; }}
+            style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'black' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#000;cursor:pointer;"
+            aria-label="Black card"
+            aria-pressed={cardVariant === 'black'}
+          ></button>
+          <button
+            onclick={() => { cardVariant = 'white'; }}
+            style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'white' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#fff;cursor:pointer;"
+            aria-label="White card"
+            aria-pressed={cardVariant === 'white'}
+          ></button>
+        </div>
+      </div>
+      <button
+        onclick={shareAsImage}
+        disabled={cardGenerating}
+        style="width:100%;padding:12px 16px;background:{cardVariant === 'black' ? '#000' : '#fff'};color:{cardVariant === 'black' ? '#fff' : '#000'};border:1px solid {cardVariant === 'black' ? 'rgba(255,255,255,0.1)' : 'var(--border-subtle)'};border-radius:var(--radius-md);font:inherit;font-size:var(--text-ui);font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;opacity:{cardGenerating ? 0.6 : 1};transition:opacity 0.2s ease-out;"
+      >
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        {cardGenerating ? 'Generating...' : 'Save & share card'}
+      </button>
+    </div>
+
     <!-- Native share (mobile primary action) -->
     {#if canNativeShare}
       <button class="native-share-btn" onclick={nativeShare}>
         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share
+        Share link
       </button>
     {/if}
 
