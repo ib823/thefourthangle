@@ -248,14 +248,14 @@
   let copyBorder = $derived(copyBgFlash ? 'var(--status-green)' : 'var(--border-subtle)');
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events — backdrop dismiss; Escape key handled via onKeyDown -->
+<!-- svelte-ignore a11y_no_static_element_interactions — modal backdrop, not a focusable control -->
 <div
   onclick={handleBackdrop}
   class="share-backdrop"
   class:share-backdrop--visible={visible && !closing}
 >
-  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions — touch drag-to-dismiss, not keyboard-targetable -->
   <div
     bind:this={panelEl}
     class="share-panel"

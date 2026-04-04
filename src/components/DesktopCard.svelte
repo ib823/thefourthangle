@@ -42,9 +42,10 @@
     const row = Math.floor(index / 2);
     const delay = Math.min(row * 80 + col * 40, 400);
     if (!cardEl) { visible = true; return; }
+    let delayTimer: ReturnType<typeof setTimeout> | null = null;
     const obs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        setTimeout(() => {
+        delayTimer = setTimeout(() => {
           visible = true;
           if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(key, '1');
         }, delay);
@@ -52,12 +53,15 @@
       }
     }, { threshold: 0.1 });
     obs.observe(cardEl);
-    return () => obs.disconnect();
+    return () => {
+      obs.disconnect();
+      if (delayTimer) clearTimeout(delayTimer);
+    };
   });
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events — onkeydown handles Enter/Space below -->
+<!-- svelte-ignore a11y_no_static_element_interactions — role="article" + tabindex="0" make this interactive -->
 <div
   bind:this={cardEl}
   onclick={onOpen}

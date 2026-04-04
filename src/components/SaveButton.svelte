@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
   import { reactions, toggleReaction } from '../stores/reader';
 
   interface Props {
@@ -26,6 +27,15 @@
   let reacted = $derived((reactionMap[issueId]?.includes(cardIndex) ?? false));
 
   let animPhase = $state<'idle' | 'burst' | 'settle'>('idle');
+  let settleTimer: ReturnType<typeof setTimeout> | null = null;
+  let idleTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function clearAnimTimers() {
+    if (settleTimer) { clearTimeout(settleTimer); settleTimer = null; }
+    if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; }
+  }
+
+  onDestroy(clearAnimTimers);
 
   function handleClick(event: MouseEvent) {
     event.stopPropagation();
@@ -36,9 +46,10 @@
     }
 
     // Burst animation
+    clearAnimTimers();
     animPhase = 'burst';
-    setTimeout(() => { animPhase = 'settle'; }, 400);
-    setTimeout(() => { animPhase = 'idle'; }, 800);
+    settleTimer = setTimeout(() => { animPhase = 'settle'; }, 400);
+    idleTimer = setTimeout(() => { animPhase = 'idle'; }, 800);
 
     try { navigator.vibrate?.(8); } catch {}
   }

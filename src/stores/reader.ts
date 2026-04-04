@@ -81,38 +81,6 @@ export function countHighlights(reactionMap: Record<string, number[]> = getReact
   return total;
 }
 
-// Saved issues — issue-level "return later" list
-export const savedIssues = persistentAtom<string>('tfa-saved', '{}');
-
-export function getSavedIssueMap(): Record<string, number> {
-  try { return JSON.parse(savedIssues.get()); } catch { return {}; }
-}
-
-export function isSavedIssue(issueId: string): boolean {
-  return !!getSavedIssueMap()[issueId];
-}
-
-export function saveIssue(issueId: string): void {
-  const saved = getSavedIssueMap();
-  saved[issueId] = Date.now();
-  savedIssues.set(JSON.stringify(saved));
-}
-
-export function unsaveIssue(issueId: string): void {
-  const saved = getSavedIssueMap();
-  if (!saved[issueId]) return;
-  delete saved[issueId];
-  savedIssues.set(JSON.stringify(saved));
-}
-
-export function toggleSavedIssue(issueId: string): void {
-  if (isSavedIssue(issueId)) {
-    unsaveIssue(issueId);
-  } else {
-    saveIssue(issueId);
-  }
-}
-
 // Position persistence — resume reading
 const savedPosition = persistentAtom<string>('tfa-pos', '');
 

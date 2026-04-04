@@ -5,45 +5,11 @@ import {
   computeAffinity,
   getReadCount,
   getReactions,
-  getSavedIssueMap,
   hasReacted,
-  isSavedIssue,
   reactions,
-  saveIssue,
-  savedIssues,
   scoreIssue,
   toggleReaction,
-  toggleSavedIssue,
-  unsaveIssue
 } from '../../stores/reader';
-
-describe('saved issues', () => {
-  beforeEach(() => {
-    savedIssues.set('{}');
-  });
-
-  it('starts empty', () => {
-    expect(getSavedIssueMap()).toEqual({});
-  });
-
-  it('saves an issue', () => {
-    saveIssue('001');
-    expect(isSavedIssue('001')).toBe(true);
-  });
-
-  it('unsaves an issue', () => {
-    saveIssue('001');
-    unsaveIssue('001');
-    expect(isSavedIssue('001')).toBe(false);
-  });
-
-  it('toggles saved state', () => {
-    toggleSavedIssue('001');
-    expect(isSavedIssue('001')).toBe(true);
-    toggleSavedIssue('001');
-    expect(isSavedIssue('001')).toBe(false);
-  });
-});
 
 describe('reactions', () => {
   beforeEach(() => {
