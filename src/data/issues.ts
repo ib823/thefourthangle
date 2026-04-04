@@ -14441,6 +14441,27 @@ export const ISSUES: Issue[] = [
       { t: "reframe", big: "The real question: what specifically is driving parents away — governance rigidity, curriculum imbalance, or discipline failures?", sub: "" },
       { t: "view", big: "Stop debating whether vernacular schools should exist — start asking why national schools keep losing the families they serve", sub: "" }
     ]
+  },
+  {
+    id: "1970",
+    opinionShift: 74,
+    status: "new",
+    edition: 1,
+    headline: "Penang's 520% tourism surge — who counts the arrivals and who pays the rent",
+    context: "Malaysia's Middle East arrivals fell 40% in March 2026. Penang pivoted hard to China, India, and ASEAN — 161,599 Chinese tourists in nine months, 61 weekly flights. George Town's heritage core has lost 80% of residents since UNESCO listing.",
+    published: true,
+    sourceDate: "2026-04-04",
+    stageScores: { pa: 82, ba: 68, fc: 51, af: 63, ct: 40, sr: 78 },
+    finalScore: 63.7,
+    related: [],
+    cards: [
+      { t: "hook", big: "520% more Chinese tourists landed in Penang — but the success story has a rent bill attached", sub: "Penang runs 61 weekly flights to China, projects 8 million airport passengers for 2026. The 520% surge uses a low 2023 base of 26,056. George Town's heritage core has shrunk from 50,000 to 9,000 residents since UNESCO listing." },
+      { t: "fact", big: "China generated RM20.87B in tourism receipts nationally — the 'low-value tourist' claim doesn't survive the data", sub: "Post-pandemic Chinese FITs spend 40% more than pre-pandemic group tourists. The real gap is segment, not nationality. MOTAC has no Penang-specific spending breakdown published.", lens: "Economic" },
+      { t: "fact", big: "Heritage core lost 80% of residents since 2008 — renters of every ethnicity, not one community", sub: "B40 renters, women hawkers, Indian Muslim traders, Chinese clan tenants all face the same economics: a tourist night earns more than a month's rent. GTWHI's repair fund exists but can't match market pressure.", lens: "Social" },
+      { t: "fact", big: "Penang has a sustainable tourism master plan — but nobody is measuring whether it works", sub: "No carrying-capacity study for the UNESCO zone. No displacement tracking. Airport expanding to 12M capacity by 2028, but water, waste, and housing haven't scaled alongside.", lens: "Governance" },
+      { t: "reframe", big: "This isn't about Chinese tourists versus heritage — it's about who profits from growth and who pays rent", sub: "" },
+      { t: "view", big: "Penang needs a public dashboard tracking residents, rents, and local retention — not just arrivals", sub: "" }
+    ]
   }
 ];
 /** Published issues only — shown in the feed. Unpublished issues still accessible by direct URL. */
