@@ -64,7 +64,7 @@
 {#if showButton && !isInstalled}
   <button
     onclick={install}
-    style="background:none;border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;border-radius: var(--radius-md);transition:background 0.15s ease;position:relative;"
+    style="background:none;border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;border-radius: var(--radius-md);transition:background 0.2s ease-out;position:relative;"
     aria-label="Install app"
     title="Install The Fourth Angle"
   >

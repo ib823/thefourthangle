@@ -132,7 +132,7 @@
 
   <!-- Issue art -->
   {#if issue.hasImage}
-    <div class="mobile-card-art" style="margin:12px -24px 0;border-radius:0;overflow:hidden;opacity:{isCompleted ? 0.6 : 1};transition:opacity 0.15s ease;">
+    <div class="mobile-card-art" style="margin:12px -24px 0;border-radius:0;overflow:hidden;opacity:{isCompleted ? 0.6 : 1};transition:opacity 0.2s ease-out;">
       <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" {eager} alt="Illustration for {issue.headline}" />
     </div>
   {/if}

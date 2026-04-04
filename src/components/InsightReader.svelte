@@ -1140,11 +1140,21 @@
         <!-- Card top -->
         <div class="card-top">
           <div class="type-pill" style="background:{meta.bg};">
-            <span class="pill-dot" style="background:{meta.color};"></span>
+            <span class="pill-icon" style="color:{meta.color};">
+              {#if card.t === 'hook'}
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              {:else if card.t === 'fact'}
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-3.5-3.5"></path></svg>
+              {:else if card.t === 'reframe'}
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+              {:else}
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="m14.5 9.5-3 7-1-4-4-1z"></path></svg>
+              {/if}
+            </span>
             <span class="pill-label" style="color:{meta.color};">{cardLabel(card)}</span>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;touch-action:manipulation;position:relative;z-index:15;">
-            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius: var(--radius-md);cursor:pointer;transition:border-color 0.15s ease;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen} aria-haspopup="dialog">
+          <div style="display:flex;align-items:center;gap:8px;touch-action:manipulation;position:relative;z-index:15;">
+            <button onclick={(e) => { e.stopPropagation(); shareCardIndex = current; shareOpen = true; }} style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--bg-elevated);border:1px solid var(--border-divider);border-radius: var(--radius-md);cursor:pointer;transition:border-color 0.2s ease-out;touch-action:manipulation;" aria-label="Share this card" aria-expanded={shareOpen} aria-haspopup="dialog">
               <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
@@ -1436,15 +1446,15 @@
   .type-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
+    gap: 8px;
+    padding: 4px 12px;
     border-radius: var(--radius-pill);
   }
 
-  .pill-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: var(--radius-round);
+  .pill-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
 
@@ -1738,7 +1748,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     padding: 8px 16px;
     border-radius: var(--radius-md);
     background: var(--bg-elevated);
@@ -1747,12 +1757,21 @@
     font-size: var(--text-sm);
     font-weight: 600;
     cursor: pointer;
-    transition: background var(--duration-fast, 150ms) ease;
+    transition: background 0.2s ease-out;
     min-height: 44px;
     margin-bottom: 4px;
   }
   .connection-nudge:hover {
     background: var(--bg-sunken);
+  }
+
+  /* Tablet: widen card area from phone-sized 440px to use tablet space */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .header,
+    .headline-area,
+    .card-area {
+      max-width: 560px;
+    }
   }
 
   @media (max-height: 500px) {

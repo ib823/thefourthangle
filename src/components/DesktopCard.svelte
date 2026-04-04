@@ -97,7 +97,7 @@
 
   <!-- Issue art -->
   {#if issue.hasImage}
-    <div style="margin:8px -18px 0;overflow:hidden;opacity:{isCompleted ? 0.5 : 1};transition:opacity 0.15s ease;">
+    <div style="margin:8px -18px 0;overflow:hidden;opacity:{isCompleted ? 0.5 : 1};transition:opacity 0.2s ease-out;">
       <IssueImage issueId={issue.id} size="hero" aspectRatio="1.91/1" borderRadius="0" alt="Illustration for {issue.headline}" />
     </div>
   {/if}

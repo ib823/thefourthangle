@@ -215,13 +215,13 @@
   <button
     bind:this={triggerEl}
     onclick={toggle}
-    style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius: var(--radius-md);transition:background 0.15s ease;"
+    style="background:{open ? 'var(--bg-sunken, #F1F3F5)' : 'none'};border:none;cursor:pointer;padding:8px;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;position:relative;border-radius: var(--radius-md);transition:background 0.2s ease-out;"
     aria-label={unread > 0 ? `${unread} unread notifications` : 'Notifications'}
     aria-controls={panelId}
     aria-haspopup="dialog"
     aria-expanded={open}
   >
-    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill={open ? 'var(--text-primary, #212529)' : 'none'} stroke={open ? 'var(--text-primary, #212529)' : 'var(--text-tertiary, #6C757D)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:fill 0.15s ease,stroke 0.15s ease;">
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill={open ? 'var(--text-primary, #212529)' : 'none'} stroke={open ? 'var(--text-primary, #212529)' : 'var(--text-tertiary, #6C757D)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:fill 0.2s ease-out,stroke 0.2s ease-out;">
       <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
       <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
     </svg>
@@ -263,7 +263,7 @@
             <button
               onclick={subscribePush}
               disabled={pushLoading}
-              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius: var(--radius-md);font-family:var(--font-display, sans-serif);font-size: var(--text-sm);font-weight:600;cursor:pointer;min-height:44px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.15s ease;"
+              style="padding:8px 20px;background:var(--text-primary, #212529);color:var(--bg, #fff);border:none;border-radius: var(--radius-md);font-family:var(--font-display, sans-serif);font-size: var(--text-sm);font-weight:600;cursor:pointer;min-height:44px;opacity:{pushLoading ? 0.6 : 1};transition:opacity 0.2s ease-out;"
             >{pushLoading ? 'Enabling...' : 'Enable notifications'}</button>
           {:else if pushDenied}
             <p style="font-family:var(--font-body, sans-serif);font-size: var(--text-sm);color:var(--text-muted, #868E96);margin:0;line-height:1.4;">Notifications blocked. Enable in browser settings.</p>
@@ -280,7 +280,7 @@
             <button
               type="button"
               onclick={() => handleItemClick(item)}
-              style="flex:1;min-width:0;text-align:left;background:none;border:none;padding:12px 0 12px 16px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background 0.15s ease;min-height:44px;"
+              style="flex:1;min-width:0;text-align:left;background:none;border:none;padding:12px 0 12px 16px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background 0.2s ease-out;min-height:44px;"
             >
               <div style="display:flex;align-items:center;gap:8px;min-width:0;">
                 {#if !item.read}
@@ -312,7 +312,7 @@
             <button
               onclick={unsubscribePush}
               disabled={pushLoading}
-              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);padding:6px 8px;min-height:44px;transition:color 0.15s ease;"
+              style="background:none;border:none;cursor:pointer;font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);padding:6px 8px;min-height:44px;transition:color 0.2s ease-out;"
             >Turn off</button>
           {:else if !pushDenied}
             <span style="font-family:var(--font-body, sans-serif);font-size: var(--text-xs);color:var(--text-muted, #868E96);">Notifications off</span>

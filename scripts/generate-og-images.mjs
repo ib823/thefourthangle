@@ -61,6 +61,16 @@ for (const issue of published) {
       .png({ compressionLevel: 9 })
       .toFile(outPath);
 
+    // Generate WebP variants at 640w, 960w, 1200w for responsive srcset
+    const widths = [640, 960, 1200];
+    for (const w of widths) {
+      const h = Math.round(w / 1.9047619); // maintain 1.91:1 aspect
+      await sharp(bgPath)
+        .resize(w, h, { fit: 'cover', position: 'centre' })
+        .webp({ quality: 80 })
+        .toFile(join(outDir, `issue-${issue.id}-${w}w.webp`));
+    }
+
     count++;
   } catch (e) {
     errors++;

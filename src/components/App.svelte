@@ -306,7 +306,6 @@
     const compactLandscape = w < 960 && h < 640;
 
     if (w < 768 || compactLandscape) viewMode = 'mobile';
-    else if (w < 1024) viewMode = 'tablet';
     else viewMode = 'desktop';
   }
 
@@ -847,7 +846,7 @@
         <div style="max-width:320px;text-align:center;">
           <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
 	          <p style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
-          <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
+          <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:16px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
           <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius: var(--radius-pill);border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size: var(--text-ui);font-weight:700;cursor:pointer;">Return to Today</button>
         </div>
       </section>
@@ -949,7 +948,7 @@
           <div style="max-width:420px;text-align:center;">
             <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
             <p style="margin:12px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.04;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</p>
-            <p style="font-size: var(--text-body);line-height:1.65;color:var(--text-secondary);margin:14px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
+            <p style="font-size: var(--text-body);line-height:1.65;color:var(--text-secondary);margin:16px 0 0;">{libraryEmptyCopy(libraryMode)}</p>
             <button onclick={goToday} style="margin-top:18px;padding:0 18px;min-height:44px;border-radius: var(--radius-pill);border:1px solid var(--border-divider);background:var(--bg-elevated);color:var(--text-primary);font:inherit;font-size: var(--text-ui);font-weight:700;cursor:pointer;">Return to Today</button>
           </div>
         </section>
@@ -1038,7 +1037,7 @@
                 Library · {libraryLabel(libraryMode)}
               </div>
               <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
-              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:16px 0 0;">
                 {libraryEmptyCopy(libraryMode)}
               </p>
             </div>
@@ -1049,25 +1048,52 @@
             reactionMap={appReactionMap}
             onOpenHighlight={openIssueAtCard}
           />
+        {:else if surfaceMode === 'library' && libraryMode === 'archive'}
+          <!-- Archive grid: browsable card grid in main panel -->
+          <div style="flex:1;overflow-y:auto;padding:32px 24px;">
+            <div style="margin-bottom:24px;">
+              <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · Archive</div>
+              <h1 style="margin:8px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.02em;color:var(--text-primary);">Full archive</h1>
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:8px 0 0;">{sortedIssues.length} issues published</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+              {#each sortedIssues as issue, i}
+                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+              {/each}
+            </div>
+          </div>
         {:else if surfaceMode === 'library'}
           <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
             <div style="max-width:420px;text-align:center;">
               <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.04em;color:var(--text-primary);">
+              <h1 style="margin:12px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.04em;color:var(--text-primary);">
                 {libraryMode === 'highlights'
                   ? 'Choose an issue with saved angles.'
-                  : libraryMode === 'archive'
-                    ? 'Choose any issue from the full archive.'
-                    : 'Choose the next issue from your library.'}
+                  : 'Choose the next issue from your library.'}
               </h1>
-              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:16px 0 0;">
                 {libraryMode === 'highlights'
                   ? 'The left rail shows every issue with highlights. Open one to revisit the angles you kept.'
-                  : libraryMode === 'archive'
-                    ? 'The left rail now exposes every published issue, grouped by reading state and freshness.'
                   : 'The left rail already holds your current reading memory. Pick an issue there to continue.'}
               </p>
             </div>
+          </div>
+        {:else if isSearching && sortedIssues.length > 0}
+          <!-- Search results in main panel -->
+          <div style="flex:1;overflow-y:auto;padding:32px 24px;">
+            <div style="margin-bottom:24px;">
+              <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Search results</div>
+              <p style="font-size: var(--text-body);color:var(--text-secondary);margin:8px 0 0;">{searchResultCount} result{searchResultCount !== 1 ? 's' : ''} for "{searchQuery.trim()}"</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+              {#each sortedIssues as issue, i}
+                <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+              {/each}
+            </div>
+          </div>
+        {:else if isSearching}
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;">
+            <p style="font-size: var(--text-body);color:var(--text-muted);">No issues match "{searchQuery.trim()}"</p>
           </div>
         {:else}
           <TodayView issueCount={issues.length} topIssue={topUnreadIssue} issues={sortedIssues} sections={feedSections} {readMap} {readingCount} highlightCount={highlightCount} onOpenIssue={openIssue} onOpenLibraryReading={openReadingLibrary} onOpenLibraryHighlights={openHighlightsLibrary} onOpenLibraryArchive={openArchiveLibrary} />
@@ -1169,7 +1195,24 @@
   .tablet-shell {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 18px 40px;
+    padding: 0 20px 40px;
+  }
+
+  /* Compact sidebar for 768-1023px (tablet portrait) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .app-main--desktop :global(aside[aria-label]) {
+      width: 240px !important;
+    }
+
+    /* Hide excerpts in compact sidebar */
+    .app-main--desktop :global(.feed-row p) {
+      display: none;
+    }
+
+    /* Tighten feed row padding in compact sidebar */
+    .app-main--desktop :global(.feed-row) {
+      padding: 8px 12px;
+    }
   }
 
   .mobile-secondary-bar {

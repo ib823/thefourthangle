@@ -386,7 +386,7 @@
 <div
   bind:this={containerEl}
   class="feed-scroll"
-  style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.15s ease;"
+  style="flex:1;opacity:{mounted ? 1 : 0};transition:opacity 0.2s ease-out;"
   ontouchstart={onTouchStart}
   ontouchmove={onTouchMove}
   ontouchend={onTouchEnd}
@@ -415,9 +415,9 @@
   {#each displayList as item, i}
     {#if item.type === 'sort-toggle'}
       <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size: var(--text-sm);font-weight:600;">
-        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.15s ease;font-family:inherit;">Latest</button>
+        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;">Latest</button>
         <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.15s ease;font-family:inherit;">Most Hidden</button>
+        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;">Most Hidden</button>
       </div>
     {:else if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
