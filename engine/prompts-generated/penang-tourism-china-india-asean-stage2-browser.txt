@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Penang just posted a 520% surge in Chinese tourist arrivals. The state calls it a success story. George Town's heritage residents call it an eviction notice.",
+      "sub": "When Middle Eastern and European arrivals dropped 40% in early 2026, Penang pivoted hard toward China, India, and ASEAN — courting 50 weekly flights from Chinese cities, launching new routes from Phuket and Qingdao, and projecting 8 million airport passengers for 2026. The numbers are spectacular: 161,599 Chinese tourists in the first nine months of 2025 alone, Indonesian arrivals up to 284,364, Indian arrivals up 108%. Hotels are running at 70-80% occupancy. But behind the arrival statistics is a question nobody in the tourism press is asking: what happens to the UNESCO World Heritage Site when its population is replaced by its visitors?"
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Penang is replacing high-spending Middle Eastern tourists with high-volume Chinese tourists — and nobody is publishing the per-capita spending comparison.",
+      "s": "Malaysia's average tourist spending is RM4,300 per visit (Q1 2025). But this national average masks a critical gap between source markets. Middle Eastern visitors have historically been among Malaysia's highest per-capita spenders — longer stays, premium hotels, medical tourism, and family shopping. Chinese tourists, while arriving in far greater numbers, tend toward shorter stays and group-tour economics with pre-negotiated rates. The 40% decline in Middle Eastern arrivals (163,366 from 7 countries in 2025, down from 175,192 in 2024) is being offset by volume from China and ASEAN. But MOTAC has not published comparative spending-per-tourist data by source market for Penang specifically. The revenue question — whether 520% more Chinese arrivals compensate for 40% fewer Middle Eastern visitors in actual ringgit — remains unanswered.",
+      "d": "Sources: Malay Mail (Apr 1, 2026 — big spenders article), MOTAC national statistics (RM4,300 average), Bernama (2025 — Penang airport data), Travel & Tour World (2025 — arrival statistics). The absence of per-capita spending data by source market for Penang is itself significant: it means the 'success story' is being told entirely through arrival volumes, not economic value delivered."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "George Town lost 90% of its residents in two decades — and the tourism boom is accelerating the emptying.",
+      "s": "George Town's inner-city population has collapsed from approximately 200,000 in the 1970s to fewer than 20,000 by the mid-2010s. The 1997 repeal of the Rent Control Act triggered the first wave of displacement; UNESCO World Heritage listing in 2008 triggered the second by making heritage shophouses valuable as boutique hotels and Airbnb conversions rather than residences. Academic research documents how tourism gentrification converts residential clan houses, temples, and community spaces into commercial attractions. The George Town Special Area Plan (SAP) restricts commercial conversion in heritage zones, but enforcement has been inconsistent. The Penang Heritage Trust has documented cases of traditional communities — including Chinese clan associations and Indian Muslim trading families — being priced out of the very streets that earned UNESCO recognition for their living cultural heritage.",
+      "d": "Sources: Chan & Lean (2017 — 'Transition of Economic Structure and Demography'), academic paper on George Town affordable housing (Tandfonline, 2023), Penang Institute (2020 — 'Transforming Tourism in Penang'), George Town Special Area Plan, National Heritage Act 2005. The paradox: UNESCO listed George Town for its living multicultural community, but the economic forces unleashed by that listing are destroying the community that justified it."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Penang's tourism pivot is bipartisan policy — which means nobody is asking the hard infrastructure questions.",
+      "s": "The state government (DAP-led) and federal government (PH-led) are fully aligned on the tourism growth strategy. MOTAC's national recalibration toward Asian markets and Penang's state-level China/India push are complementary policies with no political opposition. This alignment removes the normal accountability mechanism — opposition scrutiny. Penang International Airport handled nearly 2 million passengers in Q1 2025 (69.5% year-on-year surge), yet the airport's terminal capacity has not been expanded proportionally. Water supply, waste management, and public transport infrastructure serving tourism hotspots have not scaled with the 520% arrival growth. The political consensus means infrastructure gaps go unchallenged: when both sides agree tourism is good, nobody budgets for the costs.",
+      "d": "Sources: Bernama (Q1 2025 — airport passenger data), Buletin Mutiara (2025 — state tourism strategy statements), The Star (Mar 2026 — federal market recalibration), Penang Institute (2020 — infrastructure recommendations). Penang's airport master plan envisions expansion, but timelines lag behind the growth curve already materialising."
+    },
+    {
+      "t": "reframe",
+      "h": "The question isn't whether tourists are coming — it's whether Penang has calculated the carrying cost of its own success.",
+      "text": "Every tourism headline counts arrivals. None counts carrying capacity. Penang is adding 50 weekly flights from China, projecting 8 million airport passengers in 2026, and celebrating record occupancy — but has not published a tourism carrying capacity study for George Town's UNESCO zone, a water-and-waste impact assessment for the growth trajectory, or a displacement monitoring framework for heritage communities. The George Town SAP was designed for a different era of tourism pressure. The 520% surge is not a problem to solve — it is a structural transformation that requires governance infrastructure Penang has not yet built. The real question: at what visitor volume does a UNESCO World Heritage Site stop being a living city and become a theme park of itself?"
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Penang's tourism pivot is rational economics. When Middle Eastern and European markets contract, you diversify toward the fastest-growing source of outbound travelers in the world. China, India, and ASEAN together represent an almost limitless demand pool, and Penang's heritage, food culture, and affordability are genuine draws. The arrival numbers are real and the economic impact is significant. But rational economics is not the same as sustainable planning. George Town was listed as a UNESCO World Heritage Site for its living multicultural community — not its shophouse architecture alone. The community that earned that listing is being displaced by the economic forces the listing unleashed. Penang needs what no Malaysian state has attempted: a tourism carrying capacity framework that caps daily visitor volumes in heritage zones, mandates residential-use ratios in the SAP, and publishes per-tourist economic data by source market so the public can judge whether volume growth equals value growth. The 520% number is impressive. The question is whether Penang is managing growth or being consumed by it."
+    }
+  ],
+  "sources": "Malay Mail (Mar 30, 2026 — Penang pivot; Apr 1, 2026 — big spenders), The Star (Mar 31, 2026 — national market recalibration), Bernama (2025 — airport data, Penang destination), Travel & Tour World (2025/2026 — arrival statistics, airport projections), ChinaTravelNews (2025 — Chinese tourist analysis), Buletin Mutiara (2025 — state tourism policy), TTG Asia (Jan 2025 — Chinese traveler conditions), Penang Institute (2020 — tourism reform), Chan & Lean (2017 — gentrification study), Tandfonline (2023 — affordable housing), George Town Special Area Plan, National Heritage Act 2005, Tourism Industry Act 1992, Rent Control Act 1966 (repealed 1997)",
+  "confidence": "High — Arrival statistics from Immigration Department and airport authority are official data. The 520% figure, Middle Eastern decline, and occupancy rates are corroborated across multiple outlets (Bernama, Travel & Tour World, Malay Mail). Medium confidence on George Town displacement figures — the 200,000-to-20,000 population decline is from academic sources but exact current numbers are estimated. Low confidence on per-tourist spending comparisons by source market — the data gap is itself the finding.",
+  "lenses_used": ["Economic", "Social", "Political"],
+  "lenses_applicable_but_unused": ["Environmental", "Regional", "Historical", "Governance"]
+}
