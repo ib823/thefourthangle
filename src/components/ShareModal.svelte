@@ -4,7 +4,7 @@
   import { stagger, haptic } from '../lib/animation';
   import { createSpring, animateSpring } from '../lib/spring';
   import { BUILD_ID, getSiteOrigin } from '../lib/build';
-  import { shareCardAsImage, type CardVariant } from '../lib/share-card';
+  import { shareCardAsImage, type CardVariant, type CardFormat } from '../lib/share-card';
 
   interface Props {
     issue: Issue;
@@ -15,6 +15,7 @@
 
   let copiedId: string | null = $state(null);
   let cardVariant: CardVariant = $state('black');
+  let cardFormat: CardFormat = $state('feed');
   let cardGenerating = $state(false);
   let copyPhase: 'idle' | 'out' | 'check' | 'in' | 'revert-out' | 'revert-in' = $state('idle');
   let copyBgFlash = $state(false);
@@ -196,7 +197,7 @@
     cardGenerating = true;
     try {
       haptic(5);
-      await shareCardAsImage(shareText, cardVariant);
+      await shareCardAsImage(shareText, cardVariant, cardFormat);
     } catch {}
     cardGenerating = false;
   }
@@ -324,23 +325,42 @@
 
       <!-- Share as image — primary action -->
       <div style="margin-bottom:16px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <span class="section-label" style="margin:0;">Share as image</span>
+        <span class="section-label">Share as image</span>
+
+        <!-- Options row: format + color -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <!-- Format toggle -->
+          <div style="display:flex;border:1px solid var(--border-subtle);border-radius:var(--radius-md);overflow:hidden;flex:1;">
+            <button
+              onclick={() => { cardFormat = 'feed'; }}
+              style="flex:1;padding:8px 0;border:none;font:inherit;font-size:var(--text-sm);font-weight:{cardFormat === 'feed' ? '700' : '500'};cursor:pointer;background:{cardFormat === 'feed' ? 'var(--bg-sunken)' : 'transparent'};color:{cardFormat === 'feed' ? 'var(--text-primary)' : 'var(--text-muted)'};min-height:40px;transition:background 0.2s ease-out;"
+              aria-pressed={cardFormat === 'feed'}
+            >Feed</button>
+            <button
+              onclick={() => { cardFormat = 'story'; }}
+              style="flex:1;padding:8px 0;border:none;border-left:1px solid var(--border-subtle);font:inherit;font-size:var(--text-sm);font-weight:{cardFormat === 'story' ? '700' : '500'};cursor:pointer;background:{cardFormat === 'story' ? 'var(--bg-sunken)' : 'transparent'};color:{cardFormat === 'story' ? 'var(--text-primary)' : 'var(--text-muted)'};min-height:40px;transition:background 0.2s ease-out;"
+              aria-pressed={cardFormat === 'story'}
+            >Story</button>
+          </div>
+
+          <!-- Color toggle -->
           <div style="display:flex;gap:4px;">
             <button
               onclick={() => { cardVariant = 'black'; }}
-              style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'black' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#000;cursor:pointer;"
+              style="width:32px;height:32px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'black' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#000;cursor:pointer;transition:border-color 0.2s ease-out;"
               aria-label="Black card"
               aria-pressed={cardVariant === 'black'}
             ></button>
             <button
               onclick={() => { cardVariant = 'white'; }}
-              style="width:28px;height:28px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'white' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#fff;cursor:pointer;"
+              style="width:32px;height:32px;border-radius:var(--radius-sm);border:2px solid {cardVariant === 'white' ? 'var(--text-primary)' : 'var(--border-subtle)'};background:#fff;cursor:pointer;transition:border-color 0.2s ease-out;"
               aria-label="White card"
               aria-pressed={cardVariant === 'white'}
             ></button>
           </div>
         </div>
+
+        <!-- Generate button -->
         <button
           onclick={shareAsImage}
           disabled={cardGenerating}

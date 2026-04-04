@@ -1,15 +1,20 @@
 /**
  * Generates a shareable card image (V2 — "The Attribution").
  *
- * 1080×1350 (4:5) — zero crop on Instagram, Facebook, Twitter, WhatsApp, Telegram, LinkedIn.
- * Statement centered → logo + wordmark as attribution → URL at bottom.
+ * Two formats:
+ *   - "feed"  → 1080×1350 (4:5) — Instagram feed, Facebook, LinkedIn, Twitter, WhatsApp, Telegram
+ *   - "story" → 1080×1920 (9:16) — Instagram Stories, WhatsApp Status, Facebook Stories
  *
- * Uses Canvas API directly for pixel-perfect cross-browser output.
- * Fonts loaded via document.fonts before drawing.
+ * Two colors: "black" (#000) or "white" (#FFF).
+ *
+ * Statement centered → logo + wordmark as attribution → URL at bottom.
+ * Uses Canvas API for pixel-perfect cross-browser output.
  */
 
-const W = 1080;
-const H = 1350;
+const SIZES = {
+  feed:  { w: 1080, h: 1350 },  // 4:5
+  story: { w: 1080, h: 1920 },  // 9:16
+} as const;
 
 function wrapText(ctx: CanvasRenderingContext2D, str: string, maxWidth: number): string[] {
   const words = str.split(' ');
@@ -39,16 +44,18 @@ function loadImg(src: string): Promise<HTMLImageElement> {
 }
 
 export type CardVariant = 'black' | 'white';
+export type CardFormat = 'feed' | 'story';
 
 export async function generateShareCard(
   text: string,
-  variant: CardVariant = 'black'
+  variant: CardVariant = 'black',
+  format: CardFormat = 'feed'
 ): Promise<Blob> {
-  // Ensure fonts are ready
   await document.fonts.load('bold 42px "Manrope"');
   await document.fonts.load('bold 17px "Manrope"');
   await document.fonts.load('13px "Nunito Sans"');
 
+  const { w: W, h: H } = SIZES[format];
   const isBlack = variant === 'black';
   const canvas = document.createElement('canvas');
   canvas.width = W;
@@ -70,8 +77,10 @@ export async function generateShareCard(
   const textH = lines.length * lineH;
   const gap = 52;
   const logoH = 28;
-  const brandH = logoH + 14 + 17 + 22 + 12; // logo + spacing + wordmark + spacing + tagline
+  const brandH = logoH + 14 + 17 + 22 + 12;
   const totalH = textH + gap + brandH;
+
+  // Center the block vertically, shifted slightly up
   let y = (H - totalH) / 2 - 30;
 
   // ── STATEMENT ──
@@ -94,9 +103,6 @@ export async function generateShareCard(
       ctx.drawImage(logo, cx - lw / 2, y, lw, logoH);
       ctx.globalAlpha = 1;
     } else {
-      // Recolor logo white for dark background:
-      // 1. Draw logo to temp canvas
-      // 2. Use source-in compositing to fill visible pixels with white
       const tmp = document.createElement('canvas');
       tmp.width = logo.width;
       tmp.height = logo.height;
@@ -109,9 +115,7 @@ export async function generateShareCard(
       ctx.drawImage(tmp, cx - lw / 2, y, lw, logoH);
       ctx.globalAlpha = 1;
     }
-  } catch {
-    // Logo failed — skip silently
-  }
+  } catch {}
   y += logoH + 14;
 
   // Wordmark
@@ -125,11 +129,6 @@ export async function generateShareCard(
   ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)';
   ctx.fillText('Read past the first telling.', cx, y);
 
-  // ── Legal notice ──
-  ctx.font = '12px "Nunito Sans"';
-  ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.25)';
-  ctx.fillText('Analysis only · Verify: thefourthangle.pages.dev/verify', cx, H - 76);
-
   // ── URL at bottom ──
   ctx.font = '13px "Nunito Sans"';
   ctx.fillStyle = isBlack ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.18)';
@@ -142,18 +141,19 @@ export async function generateShareCard(
   });
 }
 
-export async function shareCardAsImage(text: string, variant: CardVariant = 'black'): Promise<void> {
-  const blob = await generateShareCard(text, variant);
+export async function shareCardAsImage(
+  text: string,
+  variant: CardVariant = 'black',
+  format: CardFormat = 'feed'
+): Promise<void> {
+  const blob = await generateShareCard(text, variant, format);
   const file = new File([blob], 'the-fourth-angle.png', { type: 'image/png' });
 
-  // Try native share with file
   if (navigator.share && navigator.canShare?.({ files: [file] })) {
     try {
       await navigator.share({ files: [file] });
       return;
-    } catch {
-      // User cancelled or share failed — fall through to download
-    }
+    } catch {}
   }
 
   // Fallback: download
