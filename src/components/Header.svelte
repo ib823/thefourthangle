@@ -85,7 +85,7 @@
         <span class="brand-tagline">Read past the first telling.</span>
       </div>
     </a>
-    <div style="display:flex;align-items:center;gap:0;">
+    <div style="display:flex;align-items:center;gap:4px;">
       {#if onSearchToggle}
         <button class="search-icon" onclick={onSearchToggle} style="background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:var(--radius-md);transition:background 0.15s ease;" aria-label="Search" aria-expanded={searchMode}>
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -158,6 +158,12 @@
     .site-header { height: 54px; padding-inline: 12px; }
     .brand { gap: 10px; }
     .brand-name { font-size: var(--text-body); }
+  }
+
+  /* Very small phones (iPhone SE, budget Android): hide brand text to prevent icon overflow */
+  @media (max-width: 360px) {
+    .brand-name { display: none; }
+    .brand { gap: 6px; }
   }
 
   /* ── Desktop: stacked name + tagline beside mark ── */

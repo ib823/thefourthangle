@@ -1037,7 +1037,7 @@
               <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">
                 Library · {libraryLabel(libraryMode)}
               </div>
-              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
+              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.04em;color:var(--text-primary);">{libraryEmptyTitle(libraryMode)}</h1>
               <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:14px 0 0;">
                 {libraryEmptyCopy(libraryMode)}
               </p>
@@ -1053,7 +1053,7 @@
           <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 24%);">
             <div style="max-width:420px;text-align:center;">
               <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · {libraryLabel(libraryMode)}</div>
-              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.02;letter-spacing:-0.04em;color:var(--text-primary);">
+              <h1 style="margin:10px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.04em;color:var(--text-primary);">
                 {libraryMode === 'highlights'
                   ? 'Choose an issue with saved angles.'
                   : libraryMode === 'archive'

@@ -405,7 +405,7 @@
     margin: 10px 0 0;
     font-family: var(--font-display);
     font-size: var(--text-home-title-fluid);
-    line-height: 1.02;
+    line-height: 1.15;
     letter-spacing: -0.045em;
     color: var(--text-primary);
     max-width: 15ch;
@@ -518,7 +518,7 @@
     margin: 0;
     font-family: var(--font-display);
     font-size: var(--text-issue-title-fluid);
-    line-height: 1.02;
+    line-height: 1.15;
     letter-spacing: -0.045em;
     max-width: 15ch;
   }

@@ -96,6 +96,21 @@
     justify-content: center;
   }
 
+  /* Landscape: compact dock to reclaim vertical space */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .mobile-dock {
+      min-height: calc(54px + env(safe-area-inset-bottom, 0px));
+      padding: 6px 14px max(8px, calc(6px + env(safe-area-inset-bottom, 0px)));
+    }
+    .dock-item {
+      min-height: 42px;
+      gap: 2px;
+    }
+    .dock-item span {
+      font-size: 0.5625rem;
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     .mobile-dock {
       background: linear-gradient(180deg, rgba(20, 19, 18, 0.78) 0%, rgba(20, 19, 18, 0.98) 100%);
