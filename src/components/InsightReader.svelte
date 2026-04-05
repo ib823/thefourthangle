@@ -137,8 +137,16 @@
       completionButtonsVisible = [];
       bigTextVisible = true;
       subTextVisible = true;
-      // Auto-fit after Svelte commits DOM updates (tick) + browser paints (rAF)
-      tick().then(() => { requestAnimationFrame(autoFitCardText); });
+    }
+  });
+
+  // Auto-fit whenever the card content element is (re)created (issue change, completed toggle)
+  let lastCardContentEl: HTMLDivElement | undefined;
+  $effect(() => {
+    if (cardContentEl && cardContentEl !== lastCardContentEl) {
+      lastCardContentEl = cardContentEl;
+      // Wait one frame for text content to render, then fit
+      requestAnimationFrame(autoFitCardText);
     }
   });
 
