@@ -227,7 +227,7 @@
           <div class="hero-scrim"></div>
           <div class="hero-grid">
             <div class="hero-copy">
-              <div class="hero-badge">Lead Issue</div>
+              <div class="hero-badge">Editor's Pick</div>
               <h2 id="lead-issue-title" class="hero-headline balance-title">{topIssue.headline}</h2>
               <p class="hero-context pretty-copy">{topIssue.context}</p>
             </div>
