@@ -1421,7 +1421,7 @@ export const ISSUES: Issue[] = [
   id: "1043", opinionShift: 78, status: "new", edition: 2,
   headline: "When states can override environmental law, the environment has no government — and 42 people are dead",
   context: "Malaysia's Constitution does not define 'environment.' DOE can object but states can override. Parliament passed forest protection reforms in 2022. Three years later, only Perlis and Federal Territories have adopted them.",
-  published: false,
+  published: true,
   sourceDate: "2026-04-05",
   stageScores: { pa: 86, ba: 42, fc: 54, af: 62, ct: 48, sr: 76 }, finalScore: 61.3,
   related: ["1971", "1580"],
