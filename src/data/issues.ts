@@ -8511,6 +8511,7 @@ export const ISSUES: Issue[] = [
 },
 {
   id: "1549", published: true, opinionShift: 91, status: null, edition: 1,
+  related: ["1971"],
   headline: "Orang Asli Blockade Stops Logging in Royal Belum for 87 Days",
   context: "In late 2025, 200 Temiar villagers established a blockade on logging roads entering Royal Belum State Park's buffer zone, halting operations for 87 days before police dismantled it.",
   stageScores: { pa: 90, ba: 78, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 72.9,
@@ -8960,6 +8961,7 @@ export const ISSUES: Issue[] = [
 },
 {
   id: "1581", published: true, opinionShift: 94, status: "new", edition: 1, sourceDate: "2026-04-01",
+  related: ["1971"],
   headline: "Orang Asli Dam Resettlement Leaves 340 Families Without Clean Water",
   context: "340 Orang Asli families resettled for the Kelau Dam project in Pahang have been without reliable clean water since 2019, despite resettlement promises of piped supply.",
   stageScores: { pa: 91, ba: 78, fc: 93, af: 75, ct: 64, sr: 86 }, finalScore: 83.7,
@@ -14461,6 +14463,27 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Penang has a sustainable tourism master plan — but nobody is measuring whether it works", sub: "No carrying-capacity study for the UNESCO zone. No displacement tracking. Airport expanding to 12M capacity by 2028, but water, waste, and housing haven't scaled alongside.", lens: "Governance" },
       { t: "reframe", big: "This isn't about Chinese tourists versus heritage — it's about who profits from growth and who pays rent", sub: "" },
       { t: "view", big: "Penang needs a public dashboard tracking residents, rents, and local retention — not just arrivals", sub: "" }
+    ]
+  },
+  {
+    id: "1971",
+    opinionShift: 82,
+    status: "new",
+    edition: 1,
+    headline: "Shah Alam's forest corridor fell to a 22-year-old backdated gazette — and three courts that never asked if it was lawful",
+    context: "The Federal Court dismissed a 2-1 challenge to Selangor's degazettement of 406 hectares from Bukit Cherakah. The gazette referenced a 2000 decision published only in 2022, bypassing the state's own 2011 public inquiry law — which has never been used.",
+    published: true,
+    sourceDate: "2026-04-05",
+    stageScores: { pa: 88, ba: 68, fc: 67, af: 65, ct: 52, sr: 82 },
+    finalScore: 70.3,
+    related: ["1549", "1581"],
+    cards: [
+      { t: "hook", big: "A gazette backdated 22 years bypassed Selangor's public inquiry law — three courts never ruled on whether it was lawful", sub: "Federal Court split 2-1. The state's inquiry law has never been used since 2011. Road is 70% built. Temuan Orang Asli filed a native title claim in 2023 but were not party to this case." },
+      { t: "fact", big: "Selangor's public inquiry law for forest excision has existed since 2011 — and has never been invoked once", sub: "The gazette referenced a 2000 BN-era decision. The state says the land was already excised by 2006. The NGOs say the gazette's effect was to bypass the 2011 law. Three courts dismissed on threshold grounds — none ruled on substance.", lens: "Legal" },
+      { t: "fact", big: "316 species, 40 on IUCN Red List — and a road severing a critical corridor between two major forest fragments", sub: "UNDP-funded survey found tapir, gibbon, leopard cat (all totally protected). Road includes a box culvert for wildlife crossing, but conservation research questions its adequacy for large mammals in fragmented tropical forest.", lens: "Environmental" },
+      { t: "fact", big: "KLNFR drew 45,000 objections and was reversed before gazettement. SACF drew 718 — after the gazette was already published", sub: "The legal difference matters: reversing a published gazette requires new legislation. The class dimension: road benefits affluent Setia Eco Park while ecological services serve wider Shah Alam including B40 residents.", lens: "Governance" },
+      { t: "reframe", big: "This isn't one government's hypocrisy — it's a structural failure where states profit from conversion and conservation pays nothing", sub: "" },
+      { t: "view", big: "Tie standing rules to gazette publication date, enforce Section 12 replacement land, and adopt the NFA 2022 amendment across all states", sub: "" }
     ]
   }
 ];
