@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, tick } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
   import SaveButton from './SaveButton.svelte';
@@ -137,8 +137,8 @@
       completionButtonsVisible = [];
       bigTextVisible = true;
       subTextVisible = true;
-      // Auto-fit after Svelte renders new card content
-      requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
+      // Auto-fit after Svelte commits DOM updates (tick) + browser paints (rAF)
+      tick().then(() => { requestAnimationFrame(autoFitCardText); });
     }
   });
 
