@@ -154,6 +154,7 @@ export async function createAngleCode(): Promise<string> {
   if (!res.ok) throw new Error('Failed to create Angle Code');
   const data = await res.json() as { token: string };
   setAngleCode(data.token);
+  notifyListeners();
 
   // Immediately push current local state
   await pushState();
@@ -170,6 +171,7 @@ export async function linkAngleCode(token: string): Promise<boolean> {
   if (!res.ok) return false;
 
   setAngleCode(cleaned);
+  notifyListeners();
 
   // Merge remote into local
   const remote = await res.json() as SyncState;
