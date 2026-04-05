@@ -38,6 +38,7 @@ export function setAngleCode(token: string): void {
 export function clearAngleCode(): void {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(LAST_SYNC_KEY);
+  notifyListeners();
 }
 
 export function isLinked(): boolean {

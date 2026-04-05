@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { isLinked, getAngleCode, getLastSyncTime } from '../lib/sync';
+  import { isLinked, getAngleCode, getLastSyncTime, onSyncChange } from '../lib/sync';
+  import { onDestroy } from 'svelte';
 
   interface Props {
     onTap: () => void;
@@ -11,20 +12,23 @@
   let code = $state(getAngleCode() || '');
   let lastSync = $state(getLastSyncTime());
 
-  // Refresh on visibility change (sync may have happened)
+  function refresh() {
+    linked = isLinked();
+    code = getAngleCode() || '';
+    lastSync = getLastSyncTime();
+  }
+
+  // Listen for sync state changes (link/unlink/sync)
+  const unsubSync = onSyncChange(refresh);
+  onDestroy(unsubSync);
+
+  // Also refresh on storage events (cross-tab unlink)
   $effect(() => {
-    const refresh = () => {
-      linked = isLinked();
-      code = getAngleCode() || '';
-      lastSync = getLastSyncTime();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'tfa-angle-code') refresh();
     };
-    document.addEventListener('visibilitychange', refresh);
-    // Also poll localStorage changes (cross-tab)
-    const interval = setInterval(refresh, 10_000);
-    return () => {
-      document.removeEventListener('visibilitychange', refresh);
-      clearInterval(interval);
-    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
   });
 
   function syncDot(): string {
