@@ -14,8 +14,11 @@
     onSearchClear?: () => void;
     onHome?: () => void;
     homeActive?: boolean;
+    showSyncIcon?: boolean;
+    syncLinked?: boolean;
+    onSyncTap?: () => void;
   }
-  let { issues = [], onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear, onHome, homeActive = false }: Props = $props();
+  let { issues = [], onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear, onHome, homeActive = false, showSyncIcon = false, syncLinked = false, onSyncTap }: Props = $props();
 
   let readCount = $state(0);
   let readMap: Record<string, string> = $state({});
@@ -94,6 +97,14 @@
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
       {/if}
+      {#if showSyncIcon}
+        <button class="sync-icon" onclick={() => onSyncTap?.()} aria-label={syncLinked ? 'Sync settings' : 'Set up cross-device sync'} style="position:relative;background:none;border:none;cursor:pointer;padding:10px;display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border-radius:var(--radius-md);transition:background 0.2s ease-out;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'none'; }}>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          {#if !syncLinked}
+            <span class="sync-dot"></span>
+          {/if}
+        </button>
+      {/if}
       <NotificationBell />
       <InstallPrompt />
       <a href="/about" aria-label="About" style="text-decoration:none;padding:8px;border-radius:var(--radius-md);min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;transition:background 0.2s ease-out;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-sunken)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary, #6C757D)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></a>
@@ -152,6 +163,18 @@
     display: none;
   }
 
+  /* ── Sync icon: visible on mobile/tablet, hidden on desktop ── */
+  .sync-icon { display: flex; }
+  .sync-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--score-info);
+  }
+
   /* ── Mobile: mark + name only ── */
   @media (max-width: 768px) {
     .search-icon { display: flex !important; }
@@ -205,6 +228,7 @@
     .brand { gap: 16px; }
     .brand-name { font-size: var(--text-reading); }
     .brand-tagline { font-size: var(--text-sm); }
+    .sync-icon { display: none !important; }
   }
 
   @media (min-width: 1440px) {
