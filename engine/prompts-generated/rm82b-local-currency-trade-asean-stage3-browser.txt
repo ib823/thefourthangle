@@ -1,0 +1,111 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia has settled RM82.1 billion in trade using local currencies instead of USD. That sounds like de-dollarization. Over 16 years, it's 2.8% of a single year's trade — and 76% of it is with China.",
+      "sub": "On March 24, 2026, PM Anwar revealed in a written parliamentary reply that cumulative local currency settlements with China, Thailand, and Indonesia reached RM82.1 billion as at November 2025. China accounts for RM62.6 billion (76.2%). The figure has grown 22.8x since the 2009 baseline of RM3.6 billion. But against Malaysia's RM2.879 trillion in annual trade (2024), the cumulative 16-year total represents roughly 2.8% of one year's commerce. The share of Malaysia-China bilateral trade settled in local currencies has reached 25.6% — meaning 74.4% is still in USD. Thailand is at 17.2%, Indonesia at 15.8%. The direction is clear. The distance remaining is vast."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "The RM82.1 billion is cumulative since 2009. Against RM2.9 trillion in annual trade, it's a rounding error presented as a revolution.",
+      "s": "Malaysia's local currency settlement framework (LCSF/LCTF) has been operational since 2009 with China, 2016 with Thailand, and 2018 with Indonesia. The cumulative RM82.1 billion breaks down to: China RM62.6B, Thailand RM10B, Indonesia RM9.5B. Growth is real — 22.8x over 16 years — but the denominator matters. Malaysia's total trade in 2024 was RM2.879 trillion. The 16-year cumulative figure equals roughly one month's trade value. For China specifically, local currency settlement has reached 25.6% of bilateral trade — up from 1.2% in 2009. Cross-border RMB transactions hit a record 102 billion yuan (RM59B) in Q1 2025, up 27% year-on-year. The trajectory is upward. But palm oil, LNG, and petroleum — Malaysia's top commodity exports — are globally priced in USD. Even if you settle in ringgit, the price reference stays dollar-denominated. This is not de-dollarization; it's reduced transaction friction within a dollar-priced system.",
+      "d": "Sources: Parliamentary reply (Mar 24, 2026 — RM82.1B breakdown), MATRADE (2024 trade figure), FMT (Feb 2026 — Q1 2025 RMB data, 27% surge), FMM (82% of global trade still USD-invoiced). The commodity pricing trap is the most underreported gap: Malaysia can settle in ringgit-yuan, but if palm oil is priced in USD, the exchange rate risk simply shifts rather than disappears."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "76% of local currency trade is with China. This isn't diversification away from the dollar — it's concentration toward the yuan.",
+      "s": "Of the RM82.1 billion in local currency settlements, RM62.6 billion (76.2%) is with China. Thailand and Indonesia combined account for RM19.5 billion over 16 years. The BNM-PBOC bilateral swap — CNY180 billion / RM110 billion — dwarfs the BNM-BOK (5 trillion won / RM15 billion) and BNM-BOJ (USD3 billion) arrangements. Malaysia is a BRICS 'partner country' since October 2024 — not a full member, with limited engagement and no decision-making power, but enough association for Trump to threaten 100% tariffs on countries seeking to reduce USD dominance. Anwar told the BRICS Rio Summit in July 2025 that Malaysian businesses should treat BRICS as a 'new frontier.' The rhetorical position is bold. The practical exposure is asymmetric: Malaysia depends on the US for 68% of its semiconductor export revenue (via US-headquartered firms operating in Malaysia), while China is its largest trading partner at USD212 billion annually. De-dollarization rhetoric aimed at Washington carries economic risk that de-dollarization practice with Beijing does not offset.",
+      "d": "Sources: Parliamentary reply (Mar 24, 2026 — country breakdown), BNM (swap arrangements), RSIS (BRICS analysis — 'rhetoric to realignment'), Lowy Institute (Asian Monetary Fund analysis). The BRICS 'partner country' distinction matters: full members participate in governance; partners attend meetings. Malaysia chose the lowest-commitment option available."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The 1998 capital controls that saved the ringgit now prevent its internationalization. Malaysia is promoting a currency it still restricts.",
+      "s": "Mahathir's 1998 capital controls banned offshore ringgit trading and restricted portfolio capital flows. The controls were partially dismantled but core restrictions remain: no standardized MYR options or futures on Bursa Malaysia Derivatives Market, limited offshore ringgit trading, and restricted hedging instruments. These restrictions, designed to prevent speculative attacks, now hobble the infrastructure needed for ringgit internationalization. Malaysian companies face 'severe limitations' accessing hedging instruments for non-USD currency pairs. UCSI University economist Liew Chee Yoong warned Anwar's de-dollarization plan 'will falter unless ringgit trade is simplified' — calling for extended trading hours and faster settlement. Meanwhile, BNM's own history contains a cautionary tale: the RM31.5 billion forex losses of 1992-1994, when the central bank traded currency at 5-10x the norm. The institutional memory of catastrophic forex exposure sits uneasily alongside ambitions to make the ringgit an international settlement currency. BNM ruled out new capital controls in April 2024 — but has not laid out a roadmap for removing the old ones.",
+      "d": "Sources: FMT (Nov 2023 — Liew critique), BNM (Apr 2024 — no capital controls statement), The Edge (2023 — RM31.5B RCI findings), BIS (Jan 2018 — Muhammad Ibrahim speech on LCSF architecture). The 1998 paradox is the most structurally important gap in coverage: you cannot simultaneously restrict your currency and promote it as an international settlement medium."
+    },
+    {
+      "t": "reframe",
+      "h": "The question isn't whether Malaysia should reduce dollar dependency. It's whether it's building yuan dependency instead — without the infrastructure to manage either.",
+      "text": "De-dollarization sounds like sovereignty. In practice, Malaysia's version means settling 76% of local currency trade with one partner (China), while the commodity exports that earn most of its foreign exchange (palm oil, LNG, petroleum) remain priced in USD. The hedging infrastructure needed to manage ringgit-yuan exposure barely exists because the 1998 controls that protect the ringgit from speculation also prevent the deep, liquid markets that would make ringgit settlement practical at scale. India's ringgit-rupee framework (February 2026) is aspirational — no volumes disclosed. ASEAN's LCTF expansion is real but gradual. The BNM-PBOC swap at CNY180B/RM110B provides a liquidity backstop, not a market. What Malaysia needs is not more rhetoric about de-dollarization but a sequenced roadmap: which capital control restrictions will be relaxed, in what order, with what safeguards, to build the market infrastructure that makes local currency settlement commercially viable beyond the handful of appointed dealers currently operating."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's local currency settlement programme is real, growing, and directionally sound. Reducing double-conversion costs saves SMEs up to 2% per transaction. Diversifying settlement currencies reduces vulnerability to USD volatility and sanctions risk. The 22.8x growth since 2009 is genuine progress. But the programme is being sold with a headline (RM82.1 billion) that obscures its scale (2.8% of one year's trade), its concentration (76% China), and its structural constraints (1998-era restrictions on the very currency being promoted). The commodity pricing trap means Malaysia is de-dollarizing settlement while remaining dollar-priced. The BRICS association creates geopolitical friction with the US — which accounts for the majority of Malaysia's semiconductor export revenue — without delivering proportional economic benefit. What would make this credible: publish the annual volumes, not just cumulative totals. Disclose the ASEAN breakdown separately from China. Lay out a sequenced plan to relax offshore ringgit restrictions. And stop conflating reduced transaction costs (real, valuable, incremental) with reduced dollar dependency (aspirational, structural, decades away)."
+    }
+  ],
+  "sources": "Parliamentary reply (Mar 24, 2026 — Malay Mail, FMT, The Star), BNM (swap arrangements, LCSF/LCTF frameworks), FMT (Feb 2026 — RMB data; Nov 2023 — Liew critique), BIS (Feb 2026 — BNM Governor speech; Jan 2018 — Muhammad Ibrahim speech), AMRO (Dec 2023 — expanding LCT), RSIS (BRICS analysis), Lowy Institute (de-dollarization), Carnegie (non-dollar channels), The Diplomat (Apr 2025 — ASEAN dollar revolt), MATRADE (2024 trade data), The Edge (RCI forex losses), FMM (SME transaction costs)",
+  "confidence": "High on RM82.1B figure and country breakdown (official parliamentary reply). High on BNM swap arrangements (central bank publications). High on 1998 capital controls and BNM forex losses (RCI findings). Medium on commodity pricing trap (analytical inference supported by FMM/industry sources). Medium-Low on India ringgit-rupee volumes (framework only, no volumes disclosed).",
+  "lenses_used": ["Economic", "Political", "Governance"],
+  "lenses_applicable_but_unused": ["Regional", "Historical", "Security"]
+}
