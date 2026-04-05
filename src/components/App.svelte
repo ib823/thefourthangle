@@ -11,7 +11,6 @@
   import HighlightsPanel from './HighlightsPanel.svelte';
   import LibraryTabs from './LibraryTabs.svelte';
   import MobileDock from './MobileDock.svelte';
-  import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
   import TodayView from './TodayView.svelte';
   import MobileBrowser from './MobileBrowser.svelte';
@@ -23,7 +22,6 @@
   import { BUILD_ID, getSiteOrigin } from '../lib/build';
   import { startAutoSync, checkUrlSync, linkAngleCode, schedulePush, isLinked as isSyncLinked } from '../lib/sync';
   import AngleCode from './AngleCode.svelte';
-  import AngleCodeBanner from './AngleCodeBanner.svelte';
 
   interface FeedIssue {
     id: string;
@@ -117,6 +115,9 @@
   let isOffline = $state(typeof navigator !== 'undefined' ? !navigator.onLine : false);
   let feedSort: SortMode = $state('latest');
   let angleCodeOpen = $state(false);
+  let syncBannerDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-sync-banner-dismissed') === '1');
+  let showSyncBanner = $derived(!syncBannerDismissed && surfaceMode === 'library');
+  function dismissSyncBanner() { localStorage.setItem('tfa-sync-banner-dismissed', '1'); syncBannerDismissed = true; }
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
 
@@ -815,17 +816,6 @@
               onOpenHighlights={openHighlightsLibrary}
               onOpenArchive={openArchiveLibrary}
             />
-            <div style="padding:0 16px;margin-top:8px;">
-              <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
-            </div>
-          {/if}
-          {#if surfaceMode === 'today' || (surfaceMode === 'library' && libraryMode === 'archive')}
-          <SortToggle
-            sortMode={feedSort}
-            onChange={(mode) => { feedSort = mode; }}
-            panelId={surfaceMode === 'today' ? 'mobile-today-panel' : 'mobile-library-panel'}
-            idPrefix={surfaceMode === 'today' ? 'mobile-today-sort' : 'mobile-library-sort'}
-          />
           {/if}
         </div>
       {/if}
@@ -873,10 +863,10 @@
         tabindex="0"
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
-        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} {showSyncBanner} onSyncBannerTap={() => { angleCodeOpen = true; }} onSyncBannerDismiss={dismissSyncBanner} />
       </div>
     {:else}
-      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
+      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} {showSyncBanner} onSyncBannerTap={() => { angleCodeOpen = true; }} onSyncBannerDismiss={dismissSyncBanner} />
     {/if}
     </main>
     {#if !searchActive && !activeFullIssue}
@@ -933,19 +923,6 @@
             onOpenReading={() => openLibrary('reading', 'replace')}
             onOpenHighlights={() => openLibrary('highlights', 'replace')}
             onOpenArchive={() => openLibrary('archive', 'replace')}
-          />
-          <div style="margin-top:8px;">
-            <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
-          </div>
-        </div>
-      {/if}
-      {#if !isSearching && (surfaceMode === 'today' || (surfaceMode === 'library' && libraryMode === 'archive'))}
-        <div style="margin-bottom:12px;">
-          <SortToggle
-            sortMode={feedSort}
-            onChange={(mode) => { feedSort = mode; }}
-            panelId={surfaceMode === 'today' ? 'tablet-today-panel' : 'tablet-library-panel'}
-            idPrefix={surfaceMode === 'today' ? 'tablet-today-sort' : 'tablet-library-sort'}
           />
         </div>
       {/if}
@@ -1119,11 +1096,6 @@
       </main>
 
       <aside style="display:flex;flex-direction:column;flex-shrink:0;" aria-label="Sidebar">
-      {#if surfaceMode === 'library'}
-        <div style="padding:12px 16px 0;">
-          <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
-        </div>
-      {/if}
       <DesktopFeed
         issues={sortedIssues}
         sections={feedSections}
@@ -1154,6 +1126,9 @@
         {issueHasConnections}
         sortMode={feedSort}
         onSortChange={(mode) => { feedSort = mode; }}
+        {showSyncBanner}
+        onSyncBannerTap={() => { angleCodeOpen = true; }}
+        onSyncBannerDismiss={dismissSyncBanner}
       />
       </aside>
     </div>
@@ -1265,7 +1240,7 @@
 
   .mobile-secondary-bar {
     flex-shrink: 0;
-    padding: 8px 14px 10px;
+    padding: 4px 16px 6px;
     border-bottom: 1px solid var(--border-subtle);
     background:
       linear-gradient(180deg, rgba(248, 249, 250, 0.82) 0%, rgba(248, 249, 250, 0.54) 100%);

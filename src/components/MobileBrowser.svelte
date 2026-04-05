@@ -2,6 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import MobileCard from './MobileCard.svelte';
   import MobileSectionDivider from './MobileSectionDivider.svelte';
+  import AngleCodeBanner from './AngleCodeBanner.svelte';
   import { readIssues, savePosition, reactions } from '../stores/reader';
   import { haptic } from '../lib/animation';
 
@@ -25,6 +26,9 @@
     onSortChange?: (mode: SortMode) => void;
     allowPullRefresh?: boolean;
     onPullRefresh?: () => void;
+    showSyncBanner?: boolean;
+    onSyncBannerTap?: () => void;
+    onSyncBannerDismiss?: () => void;
   }
   let {
     issues,
@@ -38,6 +42,9 @@
     onSortChange,
     allowPullRefresh = false,
     onPullRefresh,
+    showSyncBanner = false,
+    onSyncBannerTap,
+    onSyncBannerDismiss,
   }: Props = $props();
 
   let mounted = $state(false);
@@ -371,6 +378,8 @@
     if (pendingOffsetFrame) cancelAnimationFrame(pendingOffsetFrame);
   });
 
+  let firstDividerIndex = $derived(displayList.findIndex(item => item.type === 'divider'));
+
   // Re-setup observer when display list changes
   $effect(() => {
     void displayList.length;
@@ -409,6 +418,12 @@
       {/if}
     </div>
   {/if}
+  {#if showSyncBanner}
+    <div class="sync-banner-card">
+      <AngleCodeBanner onTap={() => onSyncBannerTap?.()} />
+      <button class="sync-banner-dismiss" onclick={() => onSyncBannerDismiss?.()} aria-label="Dismiss sync banner">&times;</button>
+    </div>
+  {/if}
   {#if displayList.length === 0 && searchQuery}
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size: var(--text-body);">No issues match "{searchQuery}"</div>
   {/if}
@@ -421,7 +436,7 @@
       </div>
     {:else if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
-        <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} />
+        <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} showSort={i === firstDividerIndex} {sortMode} {onSortChange} />
       </div>
     {:else}
       <div class="feed-card-slot" data-idx={i}>
@@ -491,6 +506,31 @@
     .pull-refresh--ready {
       border-color: rgba(200, 150, 58, 0.24);
     }
+  }
+
+  .sync-banner-card {
+    position: relative;
+    padding: 12px 16px;
+    scroll-snap-align: none;
+  }
+
+  .sync-banner-dismiss {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: var(--text-body);
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1;
   }
 
   .feed-card-slot {
