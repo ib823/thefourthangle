@@ -31,6 +31,7 @@ Non-partisan Malaysian issues analysis platform. Every issue goes through a 6-st
     { t: "fact", big: "Second finding from different angle", sub: "Contrasting data point", lens: "Economic" },
     { t: "fact", big: "Third finding — the missing voice", sub: "Perspective that mainstream coverage omits", lens: "Social" },
     { t: "reframe", big: "The real question nobody is asking", sub: "" },
+    { t: "analogy", big: "Think of it like a building inspector who only checks the lobby", sub: "Accessible comparison that reframes the issue for everyday understanding" },
     { t: "view", big: "The considered view — balanced synthesis", sub: "" },
   ]
 }
@@ -40,6 +41,7 @@ Non-partisan Malaysian issues analysis platform. Every issue goes through a 6-st
 - `hook` — "What they said" — the mainstream narrative / surface claim
 - `fact` (×3) — "What we found" — each with a different `lens`
 - `reframe` — "The real question" — reframes the entire issue
+- `analogy` — "Think of it this way" — accessible comparison that makes the issue intuitive (optional, 0 or 1 per issue)
 - `view` — "The considered view" — balanced editorial synthesis
 
 ### Lens values (pick the most relevant for each fact card):
@@ -123,7 +125,7 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
 4. Present brief summary to user. **WAIT** for approval before proceeding.
 
 #### PHASE 2: STAGE 1 — PRIMARY ANALYSIS (Claude runs this)
-1. Using the research brief, generate 6-card analysis
+1. Using the research brief, generate 6-7 card analysis (7 if analogy card is warranted)
 2. Output JSON matching `engine/output/*-stage1.json` schema:
    ```json
    {
@@ -133,6 +135,7 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
        { "t": "fact", "lens": "Political", "h": "...", "s": "...", "d": "..." },
        { "t": "fact", "lens": "Social", "h": "...", "s": "...", "d": "..." },
        { "t": "reframe", "h": "...", "text": "..." },
+       { "t": "analogy", "h": "...", "text": "..." },
        { "t": "mature", "h": "The considered view", "text": "..." }
      ],
      "sources": "comma-separated source list",
@@ -187,7 +190,7 @@ For each stage response:
 1. Transform synthesis into reader format:
    - Condense `h`/`text`/`d` fields → `big`/`sub` format
    - Enforce: big 5-200 chars, sub max 250 chars, big+sub max 350 chars
-   - Map card type `mature` → `view`
+   - Map card type `mature` → `view`, keep `analogy` as-is
    - Capitalize lens names (e.g., `economic` → `Economic`)
    - Generate headline (10-120 chars, topic-first, no clickbait)
    - Generate context (20-350 chars, factual background)

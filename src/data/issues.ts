@@ -1,5 +1,5 @@
 export interface Card {
-  t: "hook" | "fact" | "reframe" | "view";
+  t: "hook" | "fact" | "reframe" | "analogy" | "view";
   big: string;
   sub: string;
   lens?: string;
@@ -33,6 +33,7 @@ export const CARD_TYPES: Record<string, { label: string; color: string; bg: stri
   hook:    { label: "What they said",      color: "var(--card-hook-color)", bg: "var(--card-hook-bg)" },
   fact:    { label: "What we found",       color: "var(--card-fact-color)", bg: "var(--card-fact-bg)" },
   reframe: { label: "The real question",   color: "var(--card-reframe-color)", bg: "var(--card-reframe-bg)" },
+  analogy: { label: "Think of it this way", color: "var(--card-analogy-color)", bg: "var(--card-analogy-bg)" },
   view:    { label: "The considered view",  color: "var(--card-view-color)", bg: "var(--card-view-bg)" },
 };
 
@@ -89,6 +90,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Indonesia passed the same law. Takedowns rose 43%.", sub: "Malaysia's bill bypassed the standard 30-day consultation.", lens: "Rights" },
       { t: "fact", big: "PAS voted yes. DAP voted yes. Bersatu voted no.", sub: "This cuts along religious-secular lines, not coalition lines.", lens: "Political" },
       { t: "reframe", big: "Who defines 'reasonable'?", sub: "When the regulator writes, enforces, and judges the rules without publishing them — that is discretion without accountability." },
+      { t: "analogy", big: "Like a rental agreement where the landlord can change the locks anytime — and 'reasonable notice' means whatever they decide it means", sub: "Platform liability without clear definitions gives regulators blank-cheque enforcement power" },
       { t: "view", big: "Good regulation needs clear rules, independent enforcement, and judicial review. This bill provides the third but not the first two.", sub: "" },
     ]
   },
@@ -299,6 +301,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Platform companies are not legally employers under the Employment Act.", sub: "The 2022 amendment excluded app-based engagement from the employer definition.", lens: "Legal" },
       { t: "fact", big: "One workplace injury costs the average rider 14 months of income.", sub: "Without SOCSO, medical costs come from savings that do not exist.", lens: "Social" },
       { t: "reframe", big: "Voluntary protection for involuntary risk is not protection.", sub: "The worker cannot opt out of injury. Why can the platform opt out of coverage?" },
+      { t: "analogy", big: "Like building a house with no insurance — everything works until the first storm, and then you lose everything", sub: "Voluntary opt-in protection means the most vulnerable workers are the least likely to enroll" },
       { t: "view", big: "The Employment Act was written for factories. The economy moved. The law did not.", sub: "" },
     ]
   },
@@ -359,6 +362,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Toll revenue: RM5.1B in 2025. Government compensation: RM1.2B on top.", sub: "The public pays twice — at the booth and through taxes.", lens: "Economic" },
       { t: "fact", big: "PH promised declassification in 2018. Retracted within 6 months.", sub: "Every government that enters office discovers why secrecy is convenient.", lens: "Political" },
       { t: "reframe", big: "What kind of contract requires secrecy from the people paying for it?", sub: "Classification protects terms, not security. Ask whose interests that serves." },
+      { t: "analogy", big: "Like paying for a gym membership where the terms are classified — you pay every month but cannot see what you signed up for", sub: "Taxpayers fund toll roads but are legally barred from reading the contracts that determine the cost" },
       { t: "view", big: "A contract between government and a private company, paid by the public, classified from the public. The structure answers its own question.", sub: "" },
     ]
   },
@@ -420,6 +424,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Boustead Naval Shipyard: government-linked, politically connected, not technically qualified.", sub: "Original technical partner DCNS withdrew. Replacement arrangements remain unclear.", lens: "Critical" },
       { t: "fact", big: "Malaysia's maritime patrol gap is now a national security risk.", sub: "South China Sea incursions up 340% since 2019. The vessels meant to respond do not exist.", lens: "Regional" },
       { t: "reframe", big: "This is not a procurement scandal. It is a defence capability vacuum.", sub: "While Parliament debates accountability, the ocean is unpatrolled." },
+      { t: "analogy", big: "Like paying a builder RM9 billion for a house, getting an empty lot, and then asking the same builder to explain what happened", sub: "The entity that failed to deliver is the same entity investigating the failure" },
       { t: "view", big: "RM9B bought neither ships nor accountability. The system that approved, funded, and failed to deliver remains structurally unchanged.", sub: "" },
     ]
   },
@@ -585,6 +590,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "MACC recommended campaign finance legislation three times since 2019.", sub: "Each time, the sitting government declined. Every party benefits from opacity.", lens: "Governance" },
       { t: "fact", big: "Indonesia caps spending and requires disclosure. Thailand publishes donor lists.", sub: "Malaysia is the only major ASEAN democracy with zero campaign finance regulation.", lens: "Regional" },
       { t: "reframe", big: "If you do not know who funded the winner, do you know who governs?", sub: "Undisclosed funding is undisclosed influence." },
+      { t: "analogy", big: "Like a football league where teams never publish their spending — you watch the match but never know who bought the result", sub: "Without campaign finance laws, voters cannot distinguish policy from patronage" },
       { t: "view", big: "No party will legislate against its own funding advantage. This requires public pressure, not political goodwill.", sub: "" },
     ]
   },
@@ -660,6 +666,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "NEP redistributed income. It did not redistribute wealth.", sub: "Asset ownership concentration increased across all ethnic groups since 1990.", lens: "Historical" },
       { t: "fact", big: "Property: top 10% hold 45% of residential real estate.", sub: "Affordable housing quotas address flow. The stock problem is untouched.", lens: "Social" },
       { t: "reframe", big: "Income policy cannot fix a wealth problem.", sub: "When the conversation stays on salaries, the balance sheet stays hidden." },
+      { t: "analogy", big: "Like a 10-storey apartment block where two floors hold 70% of the furniture — the other eight floors share what is left", sub: "Wealth concentration means most Malaysians compete for a shrinking share of national prosperity" },
       { t: "view", big: "Malaysia debates income. The crisis is wealth. Until the metric changes, the policy will keep missing.", sub: "" },
     ]
   },
@@ -796,6 +803,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "NRD rejection rates for citizenship applications: estimated over 90%.", sub: "Appeals take 5 to 15 years. Children age out of school while waiting.", lens: "Rights" },
       { t: "fact", big: "Sabah alone accounts for an estimated 40,000 stateless children.", sub: "Legacy of the 1990s IC project and undocumented migration creates generational exclusion.", lens: "Regional" },
       { t: "reframe", big: "A child did not choose where to be born.", sub: "Punishing children for their parents' status is not immigration policy. It is cruelty with paperwork." },
+      { t: "analogy", big: "Like a library card that was never printed — the book exists, the reader exists, but the system says neither qualifies", sub: "Administrative gaps create invisible citizens who exist physically but not legally" },
       { t: "view", big: "No child should be stateless in the country of their birth. The Constitution can fix this. The question is whether Parliament will.", sub: "" },
     ]
   },
@@ -1431,6 +1439,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Satellite forest-loss estimates far exceed official figures — and Johor's largest excision was carried out secretly", sub: "15,011 ha excised in 2014; state forestry couldn't justify it to auditors. Kedah logs Ulu Muda despite federal ban — it supplies 80% of Penang's water.", lens: "Environmental" },
     { t: "fact", big: "States resist NFA reforms because land conversion generates revenue that federal transfers don't replace", sub: "Pahang's bauxite boom: no EIA, RM46.7M royalties, 15km coastline contaminated. The pattern crosses party lines. The 42 dead were overwhelmingly low-income and migrant workers.", lens: "Governance" },
     { t: "reframe", big: "This isn't development versus environment — it's a system where states profit from conversion and the people who die are never the people who approve", sub: "" },
+    { t: "analogy", big: "Like a building code that only applies in the lobby — each floor sets its own rules, and nobody checks the wiring", sub: "Federal environmental standards without state enforcement create a protection gap where disasters concentrate" },
     { t: "view", big: "Either amend the Constitution to give DOE enforcement power, or make conservation more profitable than conversion through fiscal transfers", sub: "" }
   ]
 },
@@ -1515,6 +1524,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM5.4 billion equals 3 years of Sabah's entire development budget", sub: "Missing funds could have transformed infrastructure across Malaysia's poorest state", lens: "Economic" },
     { t: "fact", big: "State AG and federal AG produced conflicting audit figures for same period", sub: "Incompatible accounting systems between federal and state create reconciliation gaps", lens: "Governance" },
     { t: "reframe", big: "When RM5.4 billion can vanish between two sets of government books, the system is the scandal", sub: "" },
+    { t: "analogy", big: "Like a company where the finance department and the warehouse keep different stock counts — and nobody reconciles the books", sub: "Federal allocations and state expenditure records diverge with no mechanism to trace the gap" },
     { t: "view", big: "Should federal-state financial transfers have real-time transparent tracking systems?", sub: "" }
   ]
 },
@@ -1767,6 +1777,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Toll collection exceeded RM7.2 billion in 2025 paid entirely by Malaysian motorists", sub: "Consumers bear full cost but have zero visibility into profit-sharing arrangements", lens: "Economic" },
     { t: "fact", big: "Indonesia publishes all highway concession terms on public procurement portal", sub: "Regional neighbour proves infrastructure concession transparency is achievable", lens: "Critical" },
     { t: "reframe", big: "When the people who pay can't see the contract, the contract isn't serving the people", sub: "" },
+    { t: "analogy", big: "Like hiring a contractor who bills you monthly but locks the invoice in a safe for 30 years", sub: "The public pays through tolls but cannot evaluate whether the terms are fair until 2035" },
     { t: "view", big: "Should all highway concession agreements be declassified and published immediately?", sub: "" }
   ]
 },
@@ -1865,6 +1876,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "International competitive tender typically saves 12-18% on infrastructure mega-projects", sub: "Potential savings of RM2.8-4.1 billion foregone through direct negotiation", lens: "Economic" },
     { t: "fact", big: "Consortium members include companies with political connections to 3 coalition parties", sub: "Direct negotiation raises questions about whether merit or connections drove selection", lens: "Governance" },
     { t: "reframe", big: "RM23 billion of public money deserves the scrutiny of open competition, not the convenience of negotiation", sub: "" },
+    { t: "analogy", big: "Like buying the most expensive car on the lot without checking any other dealer — and then finding out your cousin owns the dealership", sub: "Direct negotiation for RM23 billion bypasses the price discovery that competition provides" },
     { t: "view", big: "Should infrastructure projects above RM1 billion be legally required to undergo international tender?", sub: "" }
   ]
 },
@@ -1907,6 +1919,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Government is Malaysia's single largest advertiser — exceeding Proton and Petronas combined", sub: "Advertising budget gives government enormous leverage over media editorial independence", lens: "Economic" },
     { t: "fact", big: "Critical media outlets report receiving 90% less government advertising than supportive ones", sub: "Advertising allocation appears to correlate with editorial friendliness to government", lens: "Governance" },
     { t: "reframe", big: "Government advertising that rewards friendly media isn't communication — it's purchasing editorial loyalty", sub: "" },
+    { t: "analogy", big: "Like a restaurant that only tips the food critics who gave five stars — the review reads like news but the bill tells a different story", sub: "Government advertising without transparent allocation criteria becomes a reward system for favourable coverage" },
     { t: "view", big: "Should government advertising allocation be published and distributed based on audience reach, not editorial stance?", sub: "" }
   ]
 },
@@ -2257,6 +2270,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM4.2 billion leakage equals the combined allocation for rural roads and bridges", sub: "Subsidy misdirection costs as much as major infrastructure programmes", lens: "Economic" },
     { t: "fact", big: "No independent body audits subsidy delivery — ministries self-report effectiveness", sub: "Agencies implementing subsidies also evaluate whether they're working", lens: "Governance" },
     { t: "reframe", big: "Subsidy reform that leaks 30% hasn't reformed the subsidy — it's reformed who complains about it", sub: "" },
+    { t: "analogy", big: "Like fixing a leaky pipe by redirecting water to a new tap — you save at the meter, but 30% drips out before it reaches anyone", sub: "Headline savings mask delivery failures that leave the intended beneficiaries underserved" },
     { t: "view", big: "Should subsidy delivery be independently audited with results published quarterly?", sub: "" }
   ]
 },
@@ -2439,6 +2453,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Policy changes affected estimated RM45 billion in government spending allocations", sub: "Massive fiscal decisions made without the transparency of parliamentary budget process", lens: "Economic" },
     { t: "fact", big: "Number of cabinet committees grew from 5 in 2020 to 14 in 2025", sub: "Proliferation of committees signals executive preference for governing without Parliament", lens: "Governance" },
     { t: "reframe", big: "Every decision made by cabinet committee instead of Parliament is a decision made without the people's representatives", sub: "" },
+    { t: "analogy", big: "Like a board of directors that makes decisions in a side room and only tells shareholders afterward", sub: "Cabinet committees operate without parliamentary debate, removing elected scrutiny from major policy changes" },
     { t: "view", big: "Should major policy changes above a fiscal threshold require parliamentary debate and approval?", sub: "" }
   ]
 },
@@ -2509,6 +2524,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Open Budget Index score dropped from 68 to 59 — lowest since methodology began in 2012", sub: "Fiscal transparency declining at the same time government spending is increasing", lens: "Economic" },
     { t: "fact", big: "World Governance Indicators showed decline in 5 of 6 dimensions for Malaysia", sub: "Broad-based deterioration across voice, accountability, effectiveness, rule of law, and corruption", lens: "Governance" },
     { t: "reframe", big: "An 8-point decline isn't a blip — it's a trend that tells the world Malaysia is moving backwards on governance", sub: "" },
+    { t: "analogy", big: "Like a student whose grades have dropped every semester for three years — one bad test is a blip, but a trend means something is structurally wrong", sub: "An 8-point decline across multiple indices is not noise — it signals systemic governance erosion" },
     { t: "view", big: "Can Malaysia reverse its governance decline without structural reform of institutions?", sub: "" }
   ]
 },
@@ -2621,6 +2637,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "72% of food delivery riders are aged 18-35 — an entire generation building zero pension rights", sub: "Injury rates among riders hit 14 per 1,000 workers — 3x higher than manufacturing sector", lens: "Social" },
     { t: "fact", big: "Self-Employment Social Security Act 2017 covers only 8 of 20 identified gig work categories", sub: "Human Resources Ministry's i-Saraan voluntary scheme attracted only 145,000 sign-ups by 2025", lens: "Governance" },
     { t: "reframe", big: "Platforms profit from flexibility — workers pay for it with their retirement security and broken bodies", sub: "" },
+    { t: "analogy", big: "Like a factory that hires workers through a temp agency to avoid paying benefits — the work is permanent, only the protection is temporary", sub: "Platforms structure work as independent contracting to avoid the social protection costs of employment" },
     { t: "view", big: "Should gig platforms be required to contribute 13% EPF equivalent for every active worker?", sub: "" }
   ]
 },
@@ -3139,6 +3156,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Goldman Sachs settlement of RM16 billion was largest but bank's 1MDB bond fees of RM2.4 billion were pure profit on fraud", sub: "No Goldman Sachs executive served prison time despite DOJ finding the bank 'knowingly participated' in scheme", lens: "Social" },
     { t: "fact", big: "1MDB task force staffing reduced from 48 to 18 officers since 2022 — recovery momentum clearly declining", sub: "Cross-border asset recovery requires sustained diplomatic pressure that election cycles consistently interrupt", lens: "Governance" },
     { t: "reframe", big: "1MDB isn't just a financial scandal — it's RM42 billion in schools, hospitals, and roads that Malaysians will never have", sub: "" },
+    { t: "analogy", big: "Like recovering 38 cents from every dollar stolen — better than nothing, but you still cannot build the hospital that dollar was meant for", sub: "Partial recovery cannot undo the opportunity cost of a decade of stolen public investment" },
     { t: "view", big: "Should Malaysia establish a permanent asset recovery unit with 10-year funding to pursue remaining RM25.9 billion?", sub: "" }
   ]
 },
@@ -3210,6 +3228,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Genuine Bumiputera contractors compete against commission-seekers who undercut on price then subcontract to lowest bidder", sub: "Quality suffers: Bumiputera-quota projects show 28% higher defect rates than open-tender projects per JKR data", lens: "Social" },
     { t: "fact", big: "MACC prosecuted only 42 Ali Baba cases in 2025 despite estimating 8,000-12,000 such arrangements exist nationwide", sub: "Contract monitoring ends at award stage — no system tracks whether the awarded Bumiputera company actually performs the work", lens: "Governance" },
     { t: "reframe", big: "A quota system that makes more money for middlemen than for actual Bumiputera businesses defeats its own purpose", sub: "" },
+    { t: "analogy", big: "Like a fishing quota where most of the catch goes to the boat broker, not the fisherman — the policy feeds the middleman, not the intended beneficiary", sub: "Ali Baba arrangements redirect procurement value from Bumiputera businesses to rent-seeking intermediaries" },
     { t: "view", big: "Should Bumiputera procurement quotas shift from company ownership to actual workforce composition and capability metrics?", sub: "" }
   ]
 },
@@ -3364,6 +3383,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM82 billion could fund 328,000 affordable homes or 14,000 rural clinics if redirected from blanket to targeted subsidies", sub: "Opportunity cost is invisible — Malaysians don't see the hospitals that were never built because subsidies consumed the budget", lens: "Social" },
     { t: "fact", big: "No single ministry tracks total subsidy expenditure — figure compiled from 8 separate budget line items across 6 ministries", sub: "Subsidy Rationalisation Unit promised in 2023 still not operational — reform constantly deferred before elections", lens: "Governance" },
     { t: "reframe", big: "Spending RM82 billion to keep prices low while infrastructure crumbles is borrowing from the future to subsidise the present", sub: "" },
+    { t: "analogy", big: "Like a household that spends a third of its income keeping grocery prices low while the roof leaks — eventually the roof collapses", sub: "Subsidising consumption at the expense of infrastructure investment creates compounding long-term costs" },
     { t: "view", big: "Should Malaysia legislate a subsidy cap at 20% of revenue with mandatory phase-down schedules for each subsidy category?", sub: "" }
   ]
 },
@@ -3490,6 +3510,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "72% of withdrawals used for debt repayment and daily expenses — not the emergency buffer the facility was designed for", sub: "Members earning below RM3,000 withdrew at 3x the rate of those earning above RM8,000 — desperation, not choice", lens: "Social" },
     { t: "fact", big: "EPF board approved Account 3 under political pressure despite internal projections showing RM45 billion retirement adequacy impact", sub: "No independent retirement security assessment was published before the policy launch — decision made in cabinet, not by actuaries", lens: "Governance" },
     { t: "reframe", big: "Calling it 'flexible savings' doesn't change the math — every ringgit withdrawn today is RM7 lost at retirement", sub: "" },
+    { t: "analogy", big: "Like eating your seed corn in a drought — it solves today's hunger but guarantees next year's famine", sub: "Every ringgit withdrawn from EPF today compounds into RM7 lost at retirement age" },
     { t: "view", big: "Should EPF Account 3 withdrawals require proof of genuine emergency rather than unconditional access?", sub: "" }
   ]
 },
@@ -3644,6 +3665,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Rating downgrade from A- to BBB+ would raise borrowing costs RM8.5 billion annually across government and corporate bonds", sub: "Higher sovereign risk premium cascades to mortgage rates — potentially adding RM180 monthly to average home loan", lens: "Social" },
     { t: "fact", big: "Medium-Term Fiscal Framework sets targets but has no enforcement mechanism or consequence for missing them", sub: "Parliament debates budget allocations but not deficit outcomes — no post-budget accountability hearing exists", lens: "Governance" },
     { t: "reframe", big: "A fiscal target missed 5 years running isn't a target — it's a fiction that markets are starting to see through", sub: "" },
+    { t: "analogy", big: "Like a dieter who sets the same weight target for five years and misses it every time — at some point the target stops being a goal and becomes a fiction", sub: "A fiscal target missed five consecutive years signals structural inability, not temporary deviation" },
     { t: "view", big: "Should Malaysia enact a Fiscal Responsibility Act with legally binding deficit ceilings and mandatory corrective triggers?", sub: "" }
   ]
 },
@@ -3743,6 +3765,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "78% of Malaysians in 2025 Merdeka Center poll believe corruption has worsened or stayed same despite reform promises", sub: "Public cynicism translates to lower tax compliance — perceived corruption reduces voluntary tax payment rates by 12%", lens: "Social" },
     { t: "fact", big: "MACC received 8,400 reports in 2025 but initiated prosecution on only 342 cases — a 4% prosecution rate", sub: "Average time from MACC investigation to court verdict is 4.7 years — allowing accused to hold office throughout proceedings", lens: "Governance" },
     { t: "reframe", big: "Every hospital not built, every road not fixed, every school not equipped — corruption doesn't steal money, it steals the future", sub: "" },
+    { t: "analogy", big: "Like a household losing 3% of its income to theft every month — the family never sees the money, but the missing schools and clinics are visible everywhere", sub: "Corruption costs are invisible in budgets but visible in unbuilt infrastructure and underfunded services" },
     { t: "view", big: "Should Malaysia adopt a guilty-until-proven-innocent standard for unexplained wealth among all elected officials and senior civil servants?", sub: "" }
   ]
 },
@@ -4009,6 +4032,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "87% of political GLC appointees have no professional qualification in the industry their GLC operates in", sub: "Former politicians and party officials appointed to energy, aviation, and technology boards they have no expertise in", lens: "Social" },
     { t: "fact", big: "GLC board appointment process has no public criteria, no competitive selection, and no published performance evaluation", sub: "Same individual can sit on 5 GLC boards simultaneously — averaging 4 hours monthly per board in actual meeting time", lens: "Governance" },
     { t: "reframe", big: "Paying RM680 million to political appointees for 4 hours of monthly meetings isn't corporate governance — it's a political patronage system with a corporate wrapper", sub: "" },
+    { t: "analogy", big: "Like paying a security guard CEO wages to stand in the lobby four hours a month — the cost is corporate, but the purpose is political", sub: "Board fees for minimal oversight create a patronage pipeline disguised as corporate governance" },
     { t: "view", big: "Should all GLC board appointments require open competitive selection with mandatory industry expertise and a 2-board maximum?", sub: "" }
   ]
 },
@@ -4037,6 +4061,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "3,800 Malay families have lived in Kampung Baru for 3 generations — development means displacing a historic community", sub: "Cultural heritage value of KL's last major Malay village is incalculable — once demolished, 125 years of community history disappears", lens: "Social" },
     { t: "fact", big: "PKB (Kampung Baru Development Corporation) spent RM48 million in operational costs since 2012 with zero development output", sub: "Malay Reserve Land status creates legal complexity requiring individual consent from each of 5,300 fragmented lot owners", lens: "Governance" },
     { t: "reframe", big: "Kampung Baru isn't just a land problem — it's the tension between Malay heritage preservation and the logic of real estate capital made physical", sub: "" },
+    { t: "analogy", big: "Like a historic building where the heirs cannot agree on renovation plans — 40 years of blueprints but the walls keep crumbling", sub: "Fragmented land ownership and competing visions have paralysed redevelopment for four decades" },
     { t: "view", big: "Should Kampung Baru be designated a permanent Malay Cultural Heritage Zone with vertical development rights sold to fund community upgrades?", sub: "" }
   ]
 },
@@ -4177,6 +4202,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Average B40 household net worth at RM14,200 hasn't grown in real terms for 15 years — wealth gap is generational and hardening", sub: "Social mobility index ranking fell from 42nd to 58th globally — children born poor in Malaysia increasingly stay poor", lens: "Social" },
     { t: "fact", big: "Malaysia has zero wealth redistribution mechanisms — no inheritance tax abolished in 1991, no capital gains tax on non-property assets", sub: "Progressive income tax tops at 30% but dividend income, capital gains, and inheritance flow untaxed — system taxes effort, not wealth", lens: "Governance" },
     { t: "reframe", big: "A nation where 50 people hold as much wealth as 12 million isn't an economy with inequality — it's two entirely separate economies", sub: "" },
+    { t: "analogy", big: "Like a dinner table where 50 guests have as much food as the other 12 million — same restaurant, different menus entirely", sub: "Extreme concentration means the top and bottom effectively live in parallel economic realities" },
     { t: "view", big: "Should Malaysia reintroduce estate duties on inheritances above RM10 million to fund universal social protection for B40 households?", sub: "" }
   ]
 },
@@ -4205,6 +4231,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Suhakam received 43 complaints about SOSMA abuse in 2025", sub: "Detainees report limited access to legal counsel during detention", lens: "Rights" },
     { t: "fact", big: "Families of 89 detainees reported mental health deterioration", sub: "Prolonged uncertainty and isolation affect entire communities", lens: "Social" },
     { t: "reframe", big: "Security law or unchecked executive power over personal liberty?", sub: "" },
+    { t: "analogy", big: "Like a fire extinguisher that the building manager can use on anyone without explaining why the building is on fire", sub: "Detention powers designed for security emergencies are deployed without demonstrating the emergency" },
     { t: "view", big: "Parliament last reviewed SOSMA oversight mechanisms in 2019", sub: "" },
   ]
 },
@@ -4500,6 +4527,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Both Article 11 and Article 12(4) of Constitution protect religious freedom", sub: "Children's right to religion intersects with parental authority in complex ways", lens: "Rights" },
     { t: "fact", big: "M. Indira Gandhi waited 11 years before Federal Court resolved her case", sub: "Prolonged litigation devastates families emotionally and financially", lens: "Social" },
     { t: "reframe", big: "Dual jurisdiction without coordination means families fall between two systems", sub: "" },
+    { t: "analogy", big: "Like two hospitals with different treatment protocols for the same patient — the patient suffers while the doctors argue jurisdiction", sub: "Families caught between syariah and civil courts face contradictory rulings with no mechanism for resolution" },
     { t: "view", big: "Law Reform Committee proposed mediation framework for dual-court disputes in 2023", sub: "" },
   ]
 },
@@ -4571,6 +4599,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "US TIP Report placed Malaysia on Tier 2 Watch List for 3 consecutive years", sub: "Passport confiscation affects an estimated 1.4 million workers", lens: "Rights" },
     { t: "fact", big: "Migrant workers contribute RM48 billion annually to Malaysian GDP", sub: "Despite economic contribution, 72% report discrimination in daily life", lens: "Economic" },
     { t: "reframe", big: "A RM48 billion contribution deserves protection, not exploitation", sub: "" },
+    { t: "analogy", big: "Like a factory that depends on its workers for 15% of output but considers them disposable parts — essential enough to exploit, not enough to protect", sub: "RM48 billion in economic contribution buys labour access but not basic workplace protections" },
     { t: "view", big: "Government signed MOU with Bangladesh on ethical recruitment in January 2025", sub: "" },
   ]
 },
@@ -4796,6 +4825,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "102,000 Rohingya registered with UNHCR Malaysia as of 2025", sub: "Without legal status, Rohingya cannot report crimes or seek legal protection", lens: "Rights" },
     { t: "fact", big: "Survey found 78% of Rohingya in KL experienced discrimination accessing services", sub: "Hate speech translates to denial of healthcare, housing, and employment", lens: "Social" },
     { t: "reframe", big: "12 incidents per month against people who cannot seek legal protection is systemic", sub: "" },
+    { t: "analogy", big: "Like being attacked 12 times a month in a building where you are not allowed to file a police report", sub: "Refugees facing systematic hate speech cannot access legal protection because their legal status denies it" },
     { t: "view", big: "Suhakam called for anti-discrimination legislation in its 2024 annual report", sub: "" },
   ]
 },
@@ -4923,6 +4953,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Article 5 of Federal Constitution protects right to personal liberty", sub: "POCA's preventive detention regime bypasses criminal justice safeguards entirely", lens: "Rights" },
     { t: "fact", big: "87% of POCA detainees are from lower-income communities per prison data", sub: "Families lose sole breadwinners to indefinite detention without conviction", lens: "Social" },
     { t: "reframe", big: "Detaining 420 people without trial is imprisonment without justice", sub: "" },
+    { t: "analogy", big: "Like a prison sentence decided by a committee rather than a judge — the outcome is the same but the process skips the courtroom entirely", sub: "Preventive detention achieves imprisonment without the constitutional safeguards of a criminal trial" },
     { t: "view", big: "Lawyers for Liberty challenged POCA constitutionality in Federal Court in 2024", sub: "" },
   ]
 },
@@ -5009,6 +5040,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Only 23 of 222 MPs participated in the December 2024 renewal debate", sub: "Low participation suggests security laws face insufficient legislative scrutiny", lens: "Political" },
     { t: "fact", big: "Civil society coalition submitted 15,000-signature petition opposing renewal", sub: "Petition was not acknowledged during the abbreviated parliamentary session", lens: "Social" },
     { t: "reframe", big: "45 minutes to extend 5 years of preventive detention is not democratic oversight", sub: "" },
+    { t: "analogy", big: "Like renewing a building's safety exemption in 45 minutes without inspecting the building — the paperwork moves faster than the scrutiny", sub: "Five more years of preventive detention powers approved with less debate than a single reading of most bills" },
     { t: "view", big: "A law that permits detention without trial deserves more than 45 minutes of scrutiny every five years. Renewal is not review.", sub: "" },
   ]
 },
@@ -5247,6 +5279,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Bar Council described NSC Act as creating a 'mini emergency' without checks", sub: "Fundamental liberties suspended in security areas without judicial oversight", lens: "Rights" },
     { t: "fact", big: "Act used 4 times since 2016 affecting communities in Sabah and Johor", sub: "Residents in declared areas reported restricted movement and property searches", lens: "Social" },
     { t: "reframe", big: "Emergency powers without emergency declaration is constitutional circumvention", sub: "" },
+    { t: "analogy", big: "Like giving the school principal emergency powers that never expire — the emergency is whatever the principal says it is", sub: "Emergency-equivalent powers without emergency declaration remove the constitutional checks that emergencies normally trigger" },
     { t: "view", big: "Opposition filed constitutional challenge against NSC Act in 2023, still pending", sub: "" },
   ]
 },
@@ -5387,6 +5420,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "CEDAW Article 9(2) grants women equal rights with men regarding children's nationality", sub: "Malaysia's CEDAW reservation on nationality withdrawn in 2010", lens: "Rights" },
     { t: "fact", big: "1,800 children of Malaysian mothers born overseas affected by constitutional gap", sub: "Families separated by citizenship bureaucracy while appeals proceed", lens: "Social" },
     { t: "reframe", big: "Appealing gender equality in citizenship rights contradicts constitutional guarantees", sub: "" },
+    { t: "analogy", big: "Like winning a court case and then watching the other side ask the same judge to take it back — the right was established, but the fight continues", sub: "Government appeal against maternal citizenship equality contradicts its own stated commitments to gender parity" },
     { t: "view", big: "Family Frontiers led campaign that generated 56,000 petition signatures by 2024", sub: "" },
   ]
 },
@@ -5933,6 +5967,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Minimum wage of RM1,500 has not changed since May 2022 despite 12% cumulative inflation", sub: "Real purchasing power of entry-level wages continues to erode", lens: "Economic" },
     { t: "fact", big: "ILO reports Malaysia has highest youth NEET rate in ASEAN at 11.3% for 2025", sub: "Not in employment education or training is a leading indicator of social exclusion", lens: "Social" },
     { t: "reframe", big: "A generation locked out of stable work will not build the families and businesses Malaysia needs", sub: "" },
+    { t: "analogy", big: "Like building a pipeline that feeds into a reservoir with no outlet — the graduates accumulate, but the jobs to absorb them do not exist at the same rate", sub: "Education expansion without proportional job creation creates a bottleneck that hits young workers hardest" },
     { t: "view", big: "Should Malaysia introduce a youth employment guarantee program for under-25s", sub: "" },
   ]
 },
@@ -6283,6 +6318,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MOE proposed relocating 8 schools to higher ground in 2022 but funding was not approved", sub: "Relocation cost of RM120 million compares to RM60 million in recurring repairs", lens: "Economic" },
     { t: "fact", big: "Climate projections show Northeast monsoon intensity increasing 15% by 2035", sub: "Flood frequency and severity will worsen without adaptation investment", lens: "Critical" },
     { t: "reframe", big: "Rebuilding the same schools in the same flood zones every year is not resilience—it is denial", sub: "" },
+    { t: "analogy", big: "Like mopping the same floor every day instead of fixing the leak in the ceiling — the mop budget grows but the floor never stays dry", sub: "Annual rebuilding in known flood zones substitutes repetitive repair for permanent relocation or mitigation" },
     { t: "view", big: "Should flood-prone schools be permanently relocated even if it costs more upfront", sub: "" },
   ]
 },
@@ -6927,6 +6963,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Article 5 of the Federal Constitution guarantees right to life interpreted to include healthcare", sub: "Legal scholars debate whether privatization conflicts with constitutional health obligations", lens: "Legal" },
     { t: "fact", big: "UK's PFI hospital program cost NHS 50% more than conventional public procurement", sub: "Long-term PPP costs often exceed initial savings due to profit margins and contract terms", lens: "Critical" },
     { t: "reframe", big: "Healthcare privatization does not improve efficiency—it redirects public money to private profits", sub: "" },
+    { t: "analogy", big: "Like outsourcing school lunches to save money and then wondering why the portions shrink — efficiency gains flow to the operator, not the students", sub: "Healthcare PPPs redirect public funding through private profit structures without guaranteed service improvements" },
     { t: "view", big: "Should Malaysia ban PPP models for essential hospital services in high-demand areas", sub: "" },
   ]
 },
@@ -7067,6 +7104,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "MHTC targets RM5 billion in medical tourism revenue by 2030 requiring more specialist capacity", sub: "Growth targets compete directly with public healthcare human resource needs", lens: "Governance" },
     { t: "fact", big: "India mandates that private hospitals allocate 25% of beds to subsidized local patients", sub: "Cross-subsidization model ensures local communities benefit from medical tourism growth", lens: "Critical" },
     { t: "reframe", big: "Exporting healthcare while citizens queue for months exposes a troubling priority disorder", sub: "" },
+    { t: "analogy", big: "Like a restaurant that serves tourists a five-course meal while the kitchen staff eat leftovers — same building, different service tiers", sub: "Specialist capacity diverted to medical tourists directly extends the wait times for public patients" },
     { t: "view", big: "Should medical tourism hospitals be required to allocate specialist hours to public patients", sub: "" },
   ]
 },
@@ -7431,6 +7469,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Government methadone clinics operate only during office hours excluding working patients", sub: "Rigid scheduling forces patients to choose between treatment and employment", lens: "Governance" },
     { t: "fact", big: "France expanded OST through community pharmacies reaching 180,000 patients since 2018", sub: "Pharmacy-based distribution dramatically increased treatment accessibility and retention", lens: "Critical" },
     { t: "reframe", big: "Making people wait months for addiction treatment is sentencing them to continued suffering", sub: "" },
+    { t: "analogy", big: "Like making diabetics queue 8 months for insulin — the treatment exists, the patients are identified, but the bottleneck is between them", sub: "Addiction is a medical condition with effective treatment; the waitlist converts a treatable condition into preventable suffering" },
     { t: "view", big: "Should opioid substitution therapy be available through community pharmacies not just clinics", sub: "" },
   ]
 },
@@ -7991,6 +8030,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "DVS veterinary surveillance budget was cut 15% in 2025 from already inadequate levels", sub: "Animal health monitoring directly prevents human pandemic threats", lens: "Governance" },
     { t: "fact", big: "WHO One Health approach requires integrated human-animal-environment disease monitoring", sub: "Siloed health and veterinary systems miss cross-species disease emergence signals", lens: "Critical" },
     { t: "reframe", big: "The next pandemic will likely start where a wildlife market meets a surveillance gap", sub: "" },
+    { t: "analogy", big: "Like monitoring 35% of the exits in a building and calling it fire safety — the next fire will start where you are not watching", sub: "Partial surveillance of wildlife markets creates blind spots precisely where zoonotic spillover risk concentrates" },
     { t: "view", big: "Should Malaysia mandate comprehensive disease surveillance at all wildlife trade points", sub: "" },
   ]
 },
@@ -8524,6 +8564,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Royal Belum contains 3,000 species including 14 globally threatened mammals.", sub: "Buffer zone logging has fragmented the northern corridor linking Belum to Thailand's Bang Lang National Park.", lens: "Environmental" },
     { t: "fact", big: "8 Temiar villagers face criminal charges for 'obstructing a public road.'", sub: "The 'public road' was built by the logging company through community farmland without permission.", lens: "Rights" },
     { t: "reframe", big: "When the road is illegal but the blockade is criminal, the law protects the wrong party.", sub: "" },
+    { t: "analogy", big: "Like the tenant changing the locks because the landlord brought in bulldozers — illegal by the rules, but the rules were not protecting them either", sub: "When legal channels consistently fail, communities resort to direct action that criminalises the people the law should protect" },
     { t: "view", big: "Orang Asli land rights exist in Federal Court precedent but not in administrative practice. Until states demarcate customary land, communities will continue to have rights they cannot exercise.", sub: "" },
   ]
 },
@@ -8735,6 +8776,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Prosecution rate for environmental offences fell from 8.2% to 4.1% since 2019.", sub: "Fewer officers means fewer inspections, fewer samples, fewer prosecutable cases.", lens: "Legal" },
     { t: "fact", big: "Singapore's NEA has 2,800 enforcement officers for a country 1/450th Malaysia's size.", sub: "Per-area enforcement density in Malaysia is approximately 0.3% of Singapore's.", lens: "Critical" },
     { t: "reframe", big: "Cutting enforcement while pollution rises is not a budget decision. It is an environmental policy.", sub: "" },
+    { t: "analogy", big: "Like reducing the number of traffic police while accident rates climb — the budget line shrinks, but the cost transfers to hospitals and families", sub: "Enforcement cuts during rising pollution shift the cost from the DOE budget to public health and environmental damage" },
     { t: "view", big: "Environmental law is only as strong as the people who enforce it. Malaysia's pollution problem is not primarily legal — it is an enforcement capacity crisis.", sub: "" },
   ]
 },
@@ -8974,6 +9016,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "RM82M was allocated for the resettlement programme.", sub: "Audit found RM31M spent on road access and administration. RM8M on housing. RM0 on water connection.", lens: "Governance" },
     { t: "fact", big: "The dam supplies 1.1 billion litres daily to 4 million urban consumers.", sub: "340 displaced families need 85,000 litres daily. The dam's output is 12,900 times greater than community need.", lens: "Critical" },
     { t: "reframe", big: "A dam that provides water to 4 million people but not to the 340 families it displaced is development by extraction.", sub: "" },
+    { t: "analogy", big: "Like demolishing a village to build a water treatment plant and then not connecting the village to the water supply", sub: "The dam serves 4 million people but the 340 displaced families receive neither clean water nor adequate compensation" },
     { t: "view", big: "Displacement for infrastructure must meet minimum standards: equivalent or better services, monitored for 10 years. Anything less is state-sanctioned dispossession.", sub: "" },
   ]
 },
@@ -9493,6 +9536,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "The Federal Court ruled in 2021 that Shariah law cannot override civil law.", sub: "State bills that contradict this ruling face constitutional challenge — but must first be enacted and contested.", lens: "Governance" },
     { t: "fact", big: "62% of Malay-Muslims support 'some form of Islamic governance' in surveys.", sub: "But only 18% support full hudud implementation. The gap between 'Islamic values' and 'Islamic state' is 44 points.", lens: "Social" },
     { t: "reframe", big: "The debate frames a binary — secular or Islamic. 62% of Malay-Muslims want neither extreme. The middle ground has no champion.", sub: "" },
+    { t: "analogy", big: "Like asking a country to choose between two rooms in a house that has 15 — the binary framing erases the space where most people actually live", sub: "62% of Malay-Muslims reject both extremes, but no political party represents the constitutional middle ground" },
     { t: "view", big: "Malaysia's constitutional framework already accommodates Islamic law within defined bounds. The real debate is not Islam versus secularism but the scope and limits of dual jurisdiction.", sub: "" },
   ]
 },
@@ -9591,6 +9635,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "No means-testing applies to the Bumiputera discount.", sub: "A T20 Bumiputera household receives the same discount as a B40 household.", lens: "Governance" },
     { t: "fact", big: "Singapore's ethnic housing quotas apply to buyers AND sellers equally.", sub: "Malaysia's system benefits one group at another's direct expense, with no reciprocal obligation.", lens: "Critical" },
     { t: "reframe", big: "A discount funded by non-Bumiputera buyers is not a government subsidy. It is a private tax on one group for another.", sub: "" },
+    { t: "analogy", big: "Like a coupon that one group gets free — except it is funded by charging the other group extra at checkout", sub: "The discount is not a government expenditure; it is a cross-subsidy where non-Bumiputera buyers absorb the cost through higher prices" },
     { t: "view", big: "If Bumiputera housing assistance is a national priority, it should be funded from national revenue, not from cross-subsidy. The current mechanism creates resentment because its costs are visible and unequal.", sub: "" },
   ]
 },
@@ -9817,6 +9862,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Teacher vacancy rate in SJKT is 22% versus 8% nationally.", sub: "Rural SJKT in estates have the highest vacancy rates — up to 34%.", lens: "Social" },
     { t: "fact", big: "Indian Malaysians have a poverty rate of 5.5% — third highest after Orang Asli and Sabah natives.", sub: "Educational underfunding compounds existing economic disadvantage.", lens: "Economic" },
     { t: "reframe", big: "The smallest stream gets the least money per student. Equity is the opposite of this.", sub: "" },
+    { t: "analogy", big: "Like giving the smallest classroom the least funding per student and then blaming the school for underperformance", sub: "Disproportionate under-funding creates the very performance gap that is then used to question the system's viability" },
     { t: "view", big: "Tamil school underfunding is the clearest case of discriminatory allocation in Malaysian education. The gap is measurable, constitutional protection is clear, and the remedy is arithmetic.", sub: "" },
   ]
 },
@@ -10111,6 +10157,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Race-based policies address the inter-ethnic gap (0.34) but ignore the intra-ethnic gap (0.39).", sub: "The larger problem is structurally invisible to the policy framework.", lens: "Political" },
     { t: "fact", big: "B40 households across all races share identical barriers: education, capital, healthcare.", sub: "Race determines access to assistance. Class determines the need. These are different distributions.", lens: "Social" },
     { t: "reframe", big: "The biggest inequality in Malaysia is within communities, not between them. Race-based policy is solving the smaller problem.", sub: "" },
+    { t: "analogy", big: "Like a neighbourhood where one house has 58% of the street's total furniture — the address matters less than which door you walk through", sub: "Intra-community inequality dwarfs inter-ethnic gaps, but policy frameworks target ethnicity rather than class" },
     { t: "view", big: "Malaysia's inequality is primarily class-based. A needs-based framework would help more B40 Bumiputera than the current race-based system — while also helping B40 non-Bumiputera. Both facts matter.", sub: "" },
   ]
 },
@@ -14265,6 +14312,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Proton had 43 years of tariffs and subsidies. It still can't compete on price.", sub: "Every party — BN, PH, PN — has extended the wall. 700,000 jobs includes 53,000 aftermarket shops.", lens: "Political" },
       { t: "fact", big: "Thailand gave BYD zero export quotas and zero price floors. Production started 2024.", sub: "Indonesia and India attach conditions too — but transparent, time-bound, and linked to capability-building.", lens: "Technology" },
       { t: "reframe", big: "After 43 years of protection and zero exit plan, who is the wall actually for?", sub: "" },
+      { t: "analogy", big: "Like building a wall around a garden that stopped growing 20 years ago — the wall keeps competitors out, but it also keeps the garden from getting sunlight", sub: "43 years of tariff protection have not produced a globally competitive national car; they have produced higher prices for everyone else" },
       { t: "view", big: "700,000 jobs deserve an honest transition — not an indefinite regressive tax on the bottom 40%.", sub: "" },
     ]
   },
@@ -14297,6 +14345,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "An estimated 2,500 temples lack registration — but the figure is unaudited and Selangor's official 2026 count is 687.", sub: "No government has run a national audit. Selangor: 388 on government land, 299 on private. Only Penang has a statutory endowments board. PH promised six more in 2018 — unfulfilled.", lens: "Rights" },
       { t: "fact", big: "The demolition was crowdfunded as a movement — but the class dynamics underneath matter more than the religious rhetoric.", sub: "Tanah Malaya raised RM131,000 in one month. Rising Rawang land values make informal sites targets. Many worshippers descend from Tamil estate workers among Malaysia's poorest.", lens: "Social" },
       { t: "reframe", big: "The question is not property versus religion. It is why every party in power since 1965 has chosen inaction — and who profits from the chaos.", sub: "" },
+      { t: "analogy", big: "Like a squatter settlement where every government promises land titles but nobody ever surveys the plots — the ambiguity serves someone", sub: "Unregistered places of worship exist in legal limbo because formalisation would force decisions no party wants to make" },
       { t: "view", big: "Malaysia needs statutory reform for unregistered worship sites — but must confront the class and ethnic power dynamics that make reform politically impossible.", sub: "" },
     ]
   },
@@ -14360,6 +14409,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "The moratorium cited both power and water — but no public data exists on actual water use per data center in Johor", sub: "Johor set a WUE threshold of 1.8, steered operators to alternative water, and planned 4 new treatment plants costing RM1.41B. Orang Asli communities near proposed sites have been absent from development consultations.", lens: "Environmental" },
       { t: "fact", big: "RM182.96B approved in Johor alone — the moratorium protects hyperscalers while local operators face shutdown", sub: "Microsoft, Google, and ByteDance structured investments as AI-focused, bypassing the pause. Smaller Malaysian firms cannot relabel. Working-class residents bear environmental costs while high-skill jobs go to expats.", lens: "Economic" },
       { t: "reframe", big: "The real filter is not sustainability — it is who has the lobbying power to secure an exemption. The ceiling has a hole sized for the biggest players.", sub: "" },
+      { t: "analogy", big: "Like installing a water meter in every house but exempting the swimming pools — the conservation message is real, but the biggest users are not listening", sub: "A moratorium with exemptions for the largest consumers signals sustainability as a constraint for the small, not the powerful" },
       { t: "view", big: "The ambition is not wrong — it is ungoverned. Successive governments prioritise FDI headlines over resource limits. Residents should not have to protest to trigger what the numbers already demanded.", sub: "" }
     ]
   },
