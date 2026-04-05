@@ -77,6 +77,30 @@ function checkRateLimit(request: Request): boolean {
   return entry.count <= RATE_LIMIT;
 }
 
+// Per-endpoint rate limiting (tighter than global)
+const endpointRateLimits = new Map<string, { count: number; resetAt: number }>();
+
+function checkEndpointRateLimit(request: Request, endpoint: string, limit: number, windowMs: number): boolean {
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const key = `${ip}:${endpoint}`;
+  const now = Date.now();
+  const entry = endpointRateLimits.get(key);
+  if (!entry || now > entry.resetAt) {
+    endpointRateLimits.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= limit;
+}
+
+// Known push service hosts — reject subscriptions to unknown endpoints
+const ALLOWED_PUSH_HOSTS = [
+  'fcm.googleapis.com',
+  '.push.services.mozilla.com',
+  '.notify.windows.com',
+  '.push.apple.com',
+];
+
 // ── Web Push (RFC 8291 payload encryption + RFC 8188 content encoding) ──
 // Full implementation using Web Crypto API (ECDH + HKDF + AES-128-GCM)
 
@@ -343,7 +367,8 @@ function reEngagementPayload(topHeadline: string, remaining: number): string {
 
 async function handleSubscribe(request: Request, env: Env): Promise<Response> {
   try {
-    if (!checkRateLimit(request)) {
+    // SECURITY: Subscribe rate-limited to 5/hour/IP to prevent abuse
+    if (!checkEndpointRateLimit(request, 'subscribe', 5, 3600000)) {
       return json({ error: 'Too many requests' }, 429, request);
     }
 
@@ -356,6 +381,13 @@ async function handleSubscribe(request: Request, env: Env): Promise<Response> {
     try {
       const epUrl = new URL(body.endpoint);
       if (epUrl.protocol !== 'https:') {
+        return json({ error: 'Invalid endpoint' }, 400, request);
+      }
+      const host = epUrl.hostname;
+      const isKnownPushService = ALLOWED_PUSH_HOSTS.some(
+        pattern => pattern.startsWith('.') ? host.endsWith(pattern) : host === pattern
+      );
+      if (!isKnownPushService) {
         return json({ error: 'Invalid endpoint' }, 400, request);
       }
     } catch {
@@ -381,7 +413,8 @@ async function handleSubscribe(request: Request, env: Env): Promise<Response> {
 
 async function handleUnsubscribe(request: Request, env: Env): Promise<Response> {
   try {
-    if (!checkRateLimit(request)) {
+    // SECURITY: Unsubscribe rate-limited to 10/hour/IP
+    if (!checkEndpointRateLimit(request, 'unsubscribe', 10, 3600000)) {
       return json({ error: 'Too many requests' }, 429, request);
     }
 
@@ -562,6 +595,29 @@ export default {
         return json({ triggered: true }, 200, request);
       } catch {
         return json({ error: 'Check failed' }, 500, request);
+      }
+    }
+
+    // CSP violation reporting — stores reports in KV for review
+    if (url.pathname === '/api/csp-report' && request.method === 'POST') {
+      if (!checkRateLimit(request)) return json({ error: 'Too many requests' }, 429, request);
+      try {
+        const contentType = request.headers.get('Content-Type') || '';
+        if (!contentType.includes('csp-report') && !contentType.includes('json')) {
+          return new Response(null, { status: 400 });
+        }
+        const report = await request.json() as Record<string, unknown>;
+        const violation = (report['csp-report'] || report) as Record<string, unknown>;
+        const entry = {
+          blockedUri: String(violation['blocked-uri'] || ''),
+          violatedDirective: String(violation['violated-directive'] || ''),
+          documentUri: String(violation['document-uri'] || '').replace(/\?.*$/, ''),
+          ts: Date.now(),
+        };
+        await env.SUBS.put(`csp:${Date.now()}`, JSON.stringify(entry), { expirationTtl: 30 * 86400 });
+        return new Response(null, { status: 204 });
+      } catch {
+        return new Response(null, { status: 204 });
       }
     }
 

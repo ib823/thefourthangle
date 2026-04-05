@@ -20,6 +20,7 @@
   let copied = $state(false);
   let showInput = $state(false);
   let confirmUnlink = $state(false);
+  let confirmClear = $state(false);
 
   let cleanup: (() => void) | undefined;
 
@@ -129,6 +130,19 @@
     return { dot: 'var(--text-muted)', text: `${Math.floor(diff / 3_600_000)}h ago` };
   }
 
+  function handleClearAll() {
+    if (!confirmClear) {
+      confirmClear = true;
+      setTimeout(() => { confirmClear = false; }, 4000);
+      return;
+    }
+    Object.keys(localStorage)
+      .filter(k => k.startsWith('tfa-'))
+      .forEach(k => localStorage.removeItem(k));
+    clearAngleCode();
+    window.location.reload();
+  }
+
   function handleInputKeydown(e: KeyboardEvent) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -183,6 +197,14 @@
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
       No account. No personal data. 90-day auto-delete.
     </div>
+
+    <button
+      class="clear-btn"
+      class:clear-confirm={confirmClear}
+      onclick={handleClearAll}
+    >
+      {confirmClear ? 'Confirm: erase all reading data?' : 'Clear all reading data'}
+    </button>
   {:else}
     <!-- Unlinked: create or enter code -->
     <div class="panel-header">
@@ -461,4 +483,20 @@
     color: var(--text-muted);
     margin-top: 4px;
   }
+
+  .clear-btn {
+    width: 100%;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s;
+  }
+
+  .clear-btn:hover { color: var(--text-secondary); }
+  .clear-btn.clear-confirm { color: var(--score-critical); }
 </style>

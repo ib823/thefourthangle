@@ -94,6 +94,23 @@ function checkRateLimit(request: Request): boolean {
   return entry.count <= RATE_LIMIT;
 }
 
+// SECURITY: Pull endpoint rate-limited more aggressively to prevent Angle Code enumeration
+const pullRateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const PULL_RATE_LIMIT = 5;
+const PULL_RATE_WINDOW = 60_000;
+
+function checkPullRateLimit(request: Request): boolean {
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const now = Date.now();
+  const entry = pullRateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    pullRateLimitMap.set(ip, { count: 1, resetAt: now + PULL_RATE_WINDOW });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= PULL_RATE_LIMIT;
+}
+
 // --- Merge logic ---
 
 function mergeStates(local: SyncState, remote: SyncState): SyncState {
@@ -223,15 +240,20 @@ export default {
 
       // GET /api/sync/pull?token=XXXXXX — Pull state
       if (path === '/api/sync/pull' && request.method === 'GET') {
+        if (!checkPullRateLimit(request)) {
+          return corsResponse(request, JSON.stringify({ error: 'Rate limited', retryAfter: 60 }), 429);
+        }
+
         const token = url.searchParams.get('token');
 
+        // Uniform response for invalid format and not-found to prevent enumeration
         if (!isValidToken(token)) {
-          return corsResponse(request, JSON.stringify({ error: 'Invalid token' }), 400);
+          return corsResponse(request, JSON.stringify({ error: 'Invalid or unknown token' }), 404);
         }
 
         const data = await env.SYNC.get(`angle:${token}`);
         if (!data) {
-          return corsResponse(request, JSON.stringify({ error: 'Token not found' }), 404);
+          return corsResponse(request, JSON.stringify({ error: 'Invalid or unknown token' }), 404);
         }
 
         // Refresh TTL on read
