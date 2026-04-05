@@ -4,7 +4,6 @@
     readingCount?: number;
     highlightCount?: number;
     archiveCount?: number;
-    variant?: 'inline' | 'sidebar';
     panelId?: string;
     idPrefix?: string;
     onOpenReading?: () => void;
@@ -23,7 +22,6 @@
     readingCount = 0,
     highlightCount = 0,
     archiveCount = 0,
-    variant = 'inline',
     panelId = 'library-panel',
     idPrefix = 'library-tab',
     onOpenReading,
@@ -63,10 +61,8 @@
 
 <div
   class="library-tabs"
-  class:library-tabs--sidebar={variant === 'sidebar'}
   role="tablist"
   aria-label="Library views"
-  style={`--library-index:${libraryMode === 'reading' ? 0 : libraryMode === 'highlights' ? 1 : 2};`}
 >
   {#each tabs as tab}
     <button
@@ -88,59 +84,34 @@
 
 <style>
   .library-tabs {
-    position: relative;
     display: inline-grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
-    padding: 4px;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--border-subtle);
-    background: rgba(255, 255, 255, 0.74);
-    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
-    isolation: isolate;
-  }
-
-  .library-tabs::before {
-    content: '';
-    position: absolute;
-    inset: 4px auto 4px 4px;
-    width: calc(33.333% - 4px);
-    border-radius: var(--radius-pill);
-    background: var(--bg-sunken);
-    box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
-    transform: translate3d(calc(var(--library-index, 0) * 100%), 0, 0);
-    transition:
-      transform 420ms cubic-bezier(0.2, 0.85, 0.2, 1),
-      background 180ms ease,
-      box-shadow 180ms ease;
-    will-change: transform;
-    z-index: 0;
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .library-tab {
-    position: relative;
-    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     min-width: 0;
-    min-height: 44px;
-    padding: 0 16px;
-    border-radius: var(--radius-pill);
+    min-height: 36px;
+    padding: 0 12px;
     border: none;
+    border-bottom: 2px solid transparent;
     background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
     font: inherit;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: 700;
-    transition: color 180ms ease, transform 180ms ease;
+    transition: color 180ms ease, border-color 180ms ease;
   }
 
   .library-tab--active {
-    background: transparent;
     color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
   }
 
   .library-count {
@@ -158,30 +129,9 @@
     line-height: 1;
   }
 
-  .library-tabs--sidebar .library-tab {
-    min-height: 44px;
-    padding-inline: 12px;
-    font-size: var(--text-xs);
-  }
-
-  @media (max-width: 767px) {
-    .library-tab {
-      min-height: 44px;
-      padding-inline: 12px;
-      font-size: var(--text-xs);
-    }
-  }
-
   @media (prefers-color-scheme: dark) {
     .library-tabs {
-      background: rgba(34, 31, 27, 0.9);
-      border-color: var(--border-divider);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
-    }
-
-    .library-tabs::before {
-      background: rgba(200, 150, 58, 0.14);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+      border-bottom-color: var(--border-divider);
     }
 
     .library-tab {
@@ -189,8 +139,8 @@
     }
 
     .library-tab--active {
-      background: transparent;
       color: var(--text-primary);
+      border-bottom-color: var(--text-primary);
     }
 
     .library-count {

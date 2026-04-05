@@ -3,8 +3,8 @@
   import FeedRow from './FeedRow.svelte';
   import SectionHeader from './SectionHeader.svelte';
   import LibraryTabs from './LibraryTabs.svelte';
-  import SortToggle from './SortToggle.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
+  import AngleCodeBanner from './AngleCodeBanner.svelte';
   import { reactions } from '../stores/reader';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -34,8 +34,11 @@
     issueHasConnections?: (id: string) => boolean;
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
+    showSyncBanner?: boolean;
+    onSyncBannerTap?: () => void;
+    onSyncBannerDismiss?: () => void;
   }
-  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, archiveCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onOpenArchive, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange }: Props = $props();
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, archiveCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onOpenArchive, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange, showSyncBanner = false, onSyncBannerTap, onSyncBannerDismiss }: Props = $props();
   function libraryHeading(mode: 'reading' | 'highlights' | 'archive') {
     if (mode === 'highlights') return 'Highlights library';
     if (mode === 'archive') return 'Archive library';
@@ -234,7 +237,7 @@
 
 <aside aria-label={feedAriaLabel(surfaceMode, libraryMode)} style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
   <h2 class="sr-only">{surfaceMode === 'today' ? 'Issue list' : libraryHeading(libraryMode)}</h2>
-  <div style="padding:14px 18px 12px;flex-shrink:0;">
+  <div style="padding:10px 18px 8px;flex-shrink:0;">
     <div style="padding:0 0 12px;">
       <SurfaceNav variant="sidebar" {surfaceMode} {libraryCount} onGoToday={onGoToday} onOpenLibrary={onOpenLibrary} />
     </div>
@@ -268,7 +271,6 @@
     {#if !isSearching && surfaceMode === 'library'}
       <div style="padding:10px 0 4px;">
         <LibraryTabs
-          variant="sidebar"
           {libraryMode}
           {readingCount}
           {highlightCount}
@@ -282,17 +284,6 @@
       </div>
     {/if}
 
-    {#if !isSearching && onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
-      <div style="padding:10px 0 4px;">
-        <SortToggle
-          variant="sidebar"
-          {sortMode}
-          onChange={onSortChange}
-          panelId={surfaceMode === 'today' ? 'desktop-today-panel' : 'desktop-library-panel'}
-          idPrefix={surfaceMode === 'today' ? 'desktop-today-sort' : 'desktop-library-sort'}
-        />
-      </div>
-    {/if}
 
     <!-- Section headers or filter bar -->
     {#if isSearching}
@@ -347,6 +338,13 @@
     {/if}
   </div>
 
+  {#if showSyncBanner}
+    <div style="position:relative;padding:8px 18px 4px;">
+      <AngleCodeBanner onTap={() => onSyncBannerTap?.()} />
+      <button onclick={() => onSyncBannerDismiss?.()} aria-label="Dismiss sync banner" style="position:absolute;top:4px;right:14px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-subtle);border-radius:50%;color:var(--text-muted);font-size:var(--text-body);cursor:pointer;line-height:1;z-index:1;">&times;</button>
+    </div>
+  {/if}
+
   <!-- Feed list -->
   <div
     id={surfaceMode === 'library' ? 'desktop-library-panel' : 'desktop-today-panel'}
@@ -368,7 +366,7 @@
   >
     {#if sections.length > 0 && !isSearching}
       <!-- Section-based feed -->
-      {#each sections as section}
+      {#each sections as section, sectionIdx}
         {@const sectionHeadingId = `desktop-feed-section-${section.kind}-heading`}
         {@const sectionPanelId = `desktop-feed-section-${section.kind}-panel`}
         {@const sectionCollapsed = collapsedSections[section.kind] ?? defaultCollapsed(section.kind)}
@@ -381,6 +379,9 @@
             kind={section.kind}
             collapsed={sectionCollapsed}
             onToggle={() => { collapsedSections[section.kind] = !sectionCollapsed; }}
+            showSort={sectionIdx === 0 && !!onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
+            {sortMode}
+            {onSortChange}
           />
           <div id={sectionPanelId} hidden={sectionCollapsed}>
             {#if !sectionCollapsed}
