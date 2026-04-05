@@ -925,9 +925,6 @@
     // Announce initial card for screen readers
     requestAnimationFrame(announceCard);
 
-    // Auto-fit initial card text
-    requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
-
     // Cache dot elements for perf
     requestAnimationFrame(cacheDotElements);
 
@@ -961,7 +958,12 @@
           overlayEl.style.borderRadius = '';
           overlayEl.style.opacity = '';
         }
+        // Auto-fit after entry animation completes (dimensions are final)
+        autoFitCardText();
       });
+    } else {
+      // No entry animation — auto-fit after layout settles
+      requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
     }
   });
 
