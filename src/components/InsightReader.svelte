@@ -1100,9 +1100,6 @@
           {/if}
 
           <div class="completion-buttons">
-            {#if completionButtonsVisible.length > 0}
-              <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }} aria-expanded={shareOpen} aria-haspopup="dialog">Share</button>
-            {/if}
             {#if completionButtonsVisible.length > 1}
               {#if onReturnHome}
                 <button class="btn-done completion-btn-enter" onclick={onReturnHome}>Back to Today</button>
@@ -1116,6 +1113,9 @@
               {#if onNext}
                 <button class="btn-next completion-btn-enter" onclick={onNext}>Next topic</button>
               {/if}
+            {/if}
+            {#if completionButtonsVisible.length > 0}
+              <button class="btn-share completion-btn-enter" onclick={() => { shareCardIndex = null; shareOpen = true; }} aria-expanded={shareOpen} aria-haspopup="dialog">Share</button>
             {/if}
           </div>
           <PushPrompt />
@@ -1616,10 +1616,12 @@
 
   .completion-buttons {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     margin-top: 8px;
+    width: 100%;
+    max-width: 300px;
   }
 
   .completion-btn-enter {
@@ -1638,8 +1640,9 @@
   }
 
   .btn-done {
-    padding: 10px 28px;
-    border-radius: var(--radius-lg);
+    width: 100%;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
     font-size: var(--text-body);
     font-weight: 600;
     cursor: pointer;
@@ -1655,28 +1658,10 @@
     }
   }
 
-  .btn-share {
-    padding: 10px 28px;
-    border-radius: var(--radius-lg);
-    font-size: var(--text-body);
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid var(--border-subtle);
-    background: var(--bg-elevated);
-    color: var(--text-secondary);
-    transition: background var(--duration-fast, 150ms) ease;
-    touch-action: auto;
-  }
-
-  @media (hover: hover) {
-    .btn-share:hover {
-      background: var(--border-subtle);
-    }
-  }
-
   .btn-next {
-    padding: 10px 28px;
-    border-radius: var(--radius-lg);
+    width: 100%;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
     font-size: var(--text-body);
     font-weight: 600;
     cursor: pointer;
@@ -1689,6 +1674,26 @@
   @media (hover: hover) {
     .btn-next:hover {
       background: var(--text-secondary);
+    }
+  }
+
+  .btn-share {
+    width: 100%;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--text-secondary);
+    transition: background var(--duration-fast, 150ms) ease;
+    touch-action: auto;
+  }
+
+  @media (hover: hover) {
+    .btn-share:hover {
+      background: var(--bg-elevated);
     }
   }
 

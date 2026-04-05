@@ -452,22 +452,22 @@
             Back to Today
           </button>
         {/if}
-      </div>
 
-      <button onclick={() => { shareCardIndex = null; shareOpen = true; }} class="completion-utility-btn" aria-expanded={shareOpen} aria-haspopup="dialog">
-        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share issue
-      </button>
-
-      <div class="completion-verify-row">
-        <button
-          onclick={copyForVerification}
-          class="completion-utility-btn"
-          class:completion-utility-btn--copied={copied}
-        >
-          {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}
+        <button onclick={() => { shareCardIndex = null; shareOpen = true; }} class="completion-utility-btn" aria-expanded={shareOpen} aria-haspopup="dialog">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share issue
         </button>
-        <a href="/verify" class="completion-help-link">What is this?</a>
+
+        <div class="completion-verify-row">
+          <button
+            onclick={copyForVerification}
+            class="completion-utility-btn"
+            class:completion-utility-btn--copied={copied}
+          >
+            {copied ? 'Copied — paste into the verifier' : 'Copy for verification'}
+          </button>
+          <a href="/verify" class="completion-help-link">What is this?</a>
+        </div>
       </div>
     </div>
 
@@ -574,15 +574,21 @@
 
   .reader-completion-actions {
     display: flex;
-    align-items: center;
-    margin-bottom: 12px;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
   }
 
   .completion-primary-btn,
   .completion-utility-btn {
+    width: 100%;
     border-radius: var(--radius-pill);
     font: inherit;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     transition:
       background 200ms ease-out,
       border-color 200ms ease-out,
@@ -612,19 +618,14 @@
   }
 
   .completion-utility-btn {
-    width: 100%;
-    min-height: 48px;
+    min-height: 44px;
     padding: 0 20px;
     border: 1px solid var(--border-subtle);
     background: rgba(255, 255, 255, 0.64);
     color: var(--text-secondary);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: var(--text-ui);
-    font-weight: 700;
-    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    box-shadow: none;
   }
 
   @media (hover: hover) {
@@ -633,7 +634,7 @@
       border-color: var(--border-divider);
       color: var(--text-primary);
       transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+      box-shadow: 0 8px 18px rgba(17, 24, 39, 0.06);
     }
   }
 
@@ -646,14 +647,20 @@
   .completion-verify-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
-    margin-bottom: 12px;
+  }
+
+  .completion-verify-row .completion-utility-btn {
+    min-height: 40px;
+    font-size: var(--text-xs);
+    border-color: transparent;
+    background: var(--bg-elevated);
   }
 
   .completion-help-link {
-    font-size: var(--text-sm);
-    font-weight: 700;
+    font-size: var(--text-xs);
+    font-weight: 600;
     color: var(--text-muted);
     text-decoration: none;
   }
@@ -673,7 +680,10 @@
 
     .completion-utility-btn {
       background: rgba(34, 31, 27, 0.74);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .completion-verify-row .completion-utility-btn {
+      background: rgba(30, 28, 24, 0.64);
     }
   }
 
@@ -686,7 +696,7 @@
 
     .completion-utility-btn:hover {
       background: rgba(40, 36, 31, 0.94);
-      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
     }
   }
 
