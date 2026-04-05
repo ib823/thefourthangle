@@ -1418,17 +1418,20 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1043", opinionShift: 54, status: null, edition: 1,
-  headline: "State governments bypass 11 environmental requirements through gazette orders",
-  context: "At least six state governments used emergency gazette orders to bypass 11 federal environmental requirements for development projects between 2023 and 2025.",
-  stageScores: { pa: 82, ba: 70, fc: 84, af: 66, ct: 55, sr: 76 }, finalScore: 75.0,
+  id: "1043", opinionShift: 78, status: "new", edition: 2,
+  headline: "When states can override environmental law, the environment has no government — and 42 people are dead",
+  context: "Malaysia's Constitution does not define 'environment.' DOE can object but states can override. Parliament passed forest protection reforms in 2022. Three years later, only Perlis and Federal Territories have adopted them.",
+  published: true,
+  sourceDate: "2026-04-05",
+  stageScores: { pa: 86, ba: 42, fc: 54, af: 62, ct: 48, sr: 76 }, finalScore: 61.3,
+  related: ["1971", "1580"],
   cards: [
-    { t: "hook", big: "6 states used emergency gazette to skip 11 environmental rules for development", sub: "State land powers weaponised to circumvent federal environmental protections" },
-    { t: "fact", big: "Land and forests fall under state list but EIA requirements are federal law", sub: "Constitutional tension allows states to approve what federal law should prevent", lens: "Legal" },
-    { t: "fact", big: "Projects approved without EIA include RM3.4 billion in hillside developments", sub: "Environmental shortcuts create long-term disaster risk that costs far more than projects generate", lens: "Economic" },
-    { t: "fact", big: "DOE issued objection letters for 8 of 11 cases but had no enforcement mechanism", sub: "Federal environmental agency can object but cannot stop state-approved projects", lens: "Governance" },
-    { t: "reframe", big: "When states can override environmental law, the environment has no government", sub: "" },
-    { t: "view", big: "Should federal environmental standards override state land approval powers?", sub: "" }
+    { t: "hook", big: "42 people dead in landslides linked to EIA bypass — the mechanism is constitutional and most states refuse the reform that would fix it", sub: "DOE rejected the Tanjung Bungah project; 11 died. Batang Kali campsite was in a No-Go Area; 31 died. Parliament passed NFA reforms in 2022. Only Perlis and FT have adopted them." },
+    { t: "fact", big: "The word 'environment' is absent from the Federal Constitution — DOE can object but states can proceed regardless", sub: "NFA enacted under Article 76(1)(b) to promote uniformity but states must voluntarily adopt under Article 76(3). Planning authorities can and do override DOE rejections.", lens: "Legal" },
+    { t: "fact", big: "Satellite forest-loss estimates far exceed official figures — and Johor's largest excision was carried out secretly", sub: "15,011 ha excised in 2014; state forestry couldn't justify it to auditors. Kedah logs Ulu Muda despite federal ban — it supplies 80% of Penang's water.", lens: "Environmental" },
+    { t: "fact", big: "States resist NFA reforms because land conversion generates revenue that federal transfers don't replace", sub: "Pahang's bauxite boom: no EIA, RM46.7M royalties, 15km coastline contaminated. The pattern crosses party lines. The 42 dead were overwhelmingly low-income and migrant workers.", lens: "Governance" },
+    { t: "reframe", big: "This isn't development versus environment — it's a system where states profit from conversion and the people who die are never the people who approve", sub: "" },
+    { t: "view", big: "Either amend the Constitution to give DOE enforcement power, or make conservation more profitable than conversion through fiscal transfers", sub: "" }
   ]
 },
 {
@@ -14476,7 +14479,7 @@ export const ISSUES: Issue[] = [
     sourceDate: "2026-04-05",
     stageScores: { pa: 88, ba: 68, fc: 67, af: 65, ct: 52, sr: 82 },
     finalScore: 70.3,
-    related: ["1549", "1581"],
+    related: ["1549", "1581", "1043"],
     cards: [
       { t: "hook", big: "A gazette backdated 22 years bypassed Selangor's public inquiry law — three courts never ruled on whether it was lawful", sub: "Federal Court split 2-1. The state's inquiry law has never been used since 2011. Road is 70% built. Temuan Orang Asli filed a native title claim in 2023 but were not party to this case." },
       { t: "fact", big: "Selangor's public inquiry law for forest excision has existed since 2011 — and has never been invoked once", sub: "The gazette referenced a 2000 BN-era decision. The state says the land was already excised by 2006. The NGOs say the gazette's effect was to bypass the 2011 law. Three courts dismissed on threshold grounds — none ruled on substance.", lens: "Legal" },
