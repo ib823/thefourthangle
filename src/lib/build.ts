@@ -3,9 +3,7 @@ export const COMMIT_SHA = typeof __COMMIT_SHA__ !== 'undefined' ? __COMMIT_SHA__
 export const FALLBACK_SITE_ORIGIN = 'https://thefourthangle.pages.dev';
 
 export function releaseLabel(): string {
-  if (BUILD_ID === 'dev') return `dev · ${COMMIT_SHA}`;
-  const normalized = BUILD_ID.replace('T', ' ').replace(/\.\d+Z$/, ' UTC');
-  return `${normalized} · ${COMMIT_SHA}`;
+  return BUILD_ID;
 }
 
 export function withBuildId(path: string): string {

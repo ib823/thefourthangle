@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import svelte from '@astrojs/svelte';
 import { execSync } from 'node:child_process';
+import { randomBytes } from 'node:crypto';
 
 let commitSha = 'unknown';
 try {
@@ -23,7 +24,7 @@ export default defineConfig({
   vite: {
     define: {
       __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
-      __BUILD_ID__: JSON.stringify(new Date().toISOString()),
+      __BUILD_ID__: JSON.stringify(randomBytes(4).toString('hex')),
       __COMMIT_SHA__: JSON.stringify(commitSha),
     },
     plugins: [],
