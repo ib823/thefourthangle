@@ -1,0 +1,120 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "ESSCOM marks 13 years of keeping eastern Sabah safe. The government says it's working. The Auditor-General says the forward base is 41% complete after a decade.",
+      "sub": "On the 13th anniversary of the 2013 Lahad Datu incursion — which killed 72 people when 235 armed Sulu militants invaded eastern Sabah — the Eastern Sabah Security Command (ESSCOM) still operates without permanent legislation. It was created by executive directive in March 2013 and has never been codified into law. The proposed permanent security zone bill has been deferred through multiple parliamentary sessions. Meanwhile, the Auditor-General's 2025 report revealed the Pulau Mabul forward operating base — approved in 2016 under the 11th Malaysia Plan — is only 41% complete, with costs nearly doubling from RM41 million to RM81.51 million after contractor failure."
+    },
+    {
+      "t": "fact",
+      "lens": "Security",
+      "h": "ESSCOM has foiled 59 kidnapping attempts and achieved zero kidnap-for-ransom cases since January 2020. But the maritime infrastructure meant to sustain this record keeps failing to materialise.",
+      "s": "Over 12 years, ESSCOM detained 16,000+ illegal immigrants, expelled 500+ foreign fishing vessels, and reduced kidnap-for-ransom incidents to zero since January 2020. Home Minister Saifuddin Nasution confirmed this in March 2025. Travel advisories were lowered — Australia from Level 3 to Level 2, the US to Level 1 (August 2025). But the infrastructure underpinning these operations remains fragile: the RM41 million Pulau Mabul forward operating base, approved in 2016, was only 41% complete when the Auditor-General reported in October 2025. The contractor withdrew in August 2023 and the contract was terminated. A new contractor is being selected. Additional costs of RM28.7 million pushed the total to RM81.51 million — nearly double the original budget. The RM65.28 million Semporna maritime complex was completed in November 2025, but the government is now pivoting to a Mobile Offshore Base (MOB) concept because static infrastructure keeps stalling.",
+      "d": "Sources: AG Report 2025 Series 3 (Oct 2025), FMT (Oct 2025), The Star (Oct 2025), The Edge (Oct 2025), BERNAMA (Mar 2025), CSIS AMTI (May 2025). The Star reported the Semporna maritime complex handover on 2 November 2025. CSIS analysed Malaysia's strategic shift to mobile platforms, noting that unlike Indonesia and the Philippines, Sabah's east coast has limited island distribution for permanent forward posts."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "13 years after a military emergency created ESSCOM, it still has no Act of Parliament. A 'temporary' security command has become permanent in practice but not in law.",
+      "s": "ESSCOM was established by executive directive on 7 March 2013 — a crisis response to the Lahad Datu incursion. It was never intended to be permanent without legislative backing. An ESSCOM 10-year operations plan proposed permanent security zone legislation, but Cabinet has deferred the bill through multiple parliamentary sessions since 2022. Without an Act, ESSCOM's authority depends on executive renewal — it lacks the independent budget lines, statutory powers, and institutional continuity that permanent legislation would provide. The nighttime maritime curfew imposed on ESSZone waters has been continuously in effect since 2013 — 13 years of 'emergency' measures that have become the default. ESSCOM's 2024-2028 Strategic Plan requested RM42.93 million for 8 projects under the 13th Malaysia Plan, but its requests compete against other Home Ministry priorities within the RM21.2 billion overall budget.",
+      "d": "Sources: Borneo Post (Oct 2025), BERNAMA (Oct 2025), Jesselton Times (Mar 2023), The Star (Oct 2024). ESSCOM's strategic plan includes AI-powered surveillance (long-range cameras in Indrasabah and Pulau Banggi), tactical floating barges, Fusion Centre upgrades, and fibre optic border management in Pulau Sebatik. These are operational improvements, not the structural permanence that legislation would provide."
+    },
+    {
+      "t": "fact",
+      "lens": "Regional",
+      "h": "Eastern Sabah's security zone covers 1,400 km of coastline with an estimated 2 million undocumented people in the state. The external threat obscures an internal demographic reality nobody has resolved.",
+      "s": "ESSZone spans 10 districts from Kudat to Tawau — 1,400 km of coastline facing the Sulu Sea and Celebes Sea. The cross-border corridor between the Sulu archipelago and eastern Sabah remains porous. Civil society organisations estimate up to 2 million undocumented or stateless people in Sabah — many of Sulu, Bajau, or Filipino origin, born in Sabah but without citizenship. These communities predate the 2013 incursion but were securitised by it: after Lahad Datu, security scrutiny of coastal communities intensified. The 2013 incursion also led Malaysia to stop paying the annual RM5,300 'cession money' to Sulu heirs — a payment maintained since 1963. Sabah's own political class unanimously supports ESSCOM but Sabah also has unresolved grievances with Kuala Lumpur: infrastructure gaps, development delays, and the sense that eastern Malaysia's security needs are treated as afterthoughts until a crisis forces attention.",
+      "d": "Sources: Borneo Post (Oct 2025), LSE Blog (Nov 2025), The Star (Dec 2025). The LSE analysis documented how 'deportability' has become a commodity in Sabah, with undocumented status creating vulnerability to exploitation. The security dimension and the human dimension are inseparable but are almost never discussed together."
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether ESSCOM works. It does — zero kidnappings since 2020 proves that. The question is why a security command that protects 1,400 km of coastline still doesn't have an Act of Parliament after 13 years, while its forward base costs double and its legal foundation remains an executive memo.",
+      "text": "Crisis-driven institutions that are never formalised tend to atrophy. ESSCOM has not atrophied yet — its operational record is strong. But every year without legislation is another year where its authority depends on political will rather than statutory mandate, its budget competes ad hoc rather than being ringfenced, and its permanence is assumed but not guaranteed."
+    },
+    {
+      "t": "analogy",
+      "h": "Think of it like a hospital built after an earthquake — saving lives for 13 years from a tent while the permanent building sits 41% complete",
+      "text": "ESSCOM was the emergency response. It worked. The patients survived. But 13 years later, the doctors are still operating out of the temporary field hospital because the permanent structure was never finished. The tent holds — for now. But you don't plan a national healthcare system around a tent that was supposed to last 36 months."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "ESSCOM is a genuine security success operating on structurally fragile foundations. Zero kidnappings since 2020, 59 attempts foiled, 16,000 illegal immigrants detained — these are real achievements by real personnel in a real threat environment. But the institution delivering these results has no Act of Parliament, its forward base is 41% complete after a decade at double the cost, and the 1,400 km coastline it patrols is backed by a nighttime curfew that has been 'temporary' for 13 years. The government's pivot to mobile offshore platforms is pragmatic but also an admission that permanent infrastructure keeps failing to materialise. Eastern Sabah's security needs are treated seriously during crises and neglected between them. The 13th anniversary is a reminder that operational success and institutional permanence are not the same thing — and that the people of eastern Sabah deserve both."
+    }
+  ],
+  "sources": "AG Report 2025 Series 3, FMT, The Star, The Edge, BERNAMA, CSIS AMTI, Borneo Post, Daily Express, Malay Mail, Jesselton Times, LSE Southeast Asia Blog, The Sun, NST, SEARCCT, Wikipedia (Lahad Datu standoff, ESSCOM)",
+  "confidence": "High — Auditor-General figures are official government data; ESSCOM operational stats are from BERNAMA and Home Minister statements; cost figures documented in AG report and multiple news sources. Medium on undocumented population estimates (civil society figures, not census data).",
+  "lenses_used": ["Security", "Governance", "Regional"],
+  "lenses_applicable_but_unused": ["Legal", "Economic", "Social", "Political"]
+}
