@@ -40,6 +40,13 @@ const { current } = Astro.props;
       >
         Verify
       </a>
+      <a
+        href="/disclaimer"
+        class={`utility-nav-link${current === 'disclaimer' ? ' utility-nav-link--active' : ''}`}
+        aria-current={current === 'disclaimer' ? 'page' : undefined}
+      >
+        Disclaimer
+      </a>
     </nav>
   </div>
 </header>

@@ -793,7 +793,7 @@
   {#if viewMode === 'mobile'}
   <div class="app-shell app-shell--mobile">
     <Header
-      issueIds={issues.map(i => i.id)}
+      issues={issues.map(i => ({id: i.id, headline: i.headline}))}
       onHome={goToday}
       homeActive={surfaceMode === 'today' && !activeIssue}
       onSearchToggle={() => { searchActive = true; loadSearchIndex(); }}
@@ -824,7 +824,7 @@
               <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
             </div>
           {/if}
-          {#if !(surfaceMode === 'library' && libraryMode === 'highlights')}
+          {#if surfaceMode === 'today' || (surfaceMode === 'library' && libraryMode === 'archive')}
           <SortToggle
             sortMode={feedSort}
             onChange={(mode) => { feedSort = mode; }}
@@ -895,7 +895,7 @@
 
 {:else if viewMode === 'tablet'}
   <div class="app-shell app-shell--tablet">
-    <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
+    <Header issues={issues.map(i => ({id: i.id, headline: i.headline}))} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     <main class="app-main app-main--tablet">
     <div class="tablet-shell">
       {#if surfaceMode !== 'today' && !(surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0)}
@@ -944,7 +944,7 @@
           </div>
         </div>
       {/if}
-      {#if !isSearching && !(surfaceMode === 'library' && libraryMode === 'highlights')}
+      {#if !isSearching && (surfaceMode === 'today' || (surfaceMode === 'library' && libraryMode === 'archive'))}
         <div style="margin-bottom:12px;">
           <SortToggle
             sortMode={feedSort}
@@ -1018,7 +1018,7 @@
 {:else}
   <div class="app-shell app-shell--desktop">
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
-      <Header issueIds={issues.map(i => i.id)} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
+      <Header issues={issues.map(i => ({id: i.id, headline: i.headline}))} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
     <div class="app-main app-main--desktop">
@@ -1258,6 +1258,13 @@
     /* Tighten feed row padding in compact sidebar */
     .app-main--desktop :global(.feed-row) {
       padding: 8px 12px;
+    }
+  }
+
+  /* Mid-range sidebar for 1024-1280px */
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .app-main--desktop :global(aside[aria-label]) {
+      width: 280px !important;
     }
   }
 

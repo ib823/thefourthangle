@@ -34,13 +34,9 @@ body {
   color: var(--text-primary);
   touch-action: manipulation;
   overscroll-behavior-x: none;
-  overscroll-behavior-y: auto;
+  overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body.app-shell-standalone {
-  overscroll-behavior: none;
 }
 
 #main-content {
@@ -64,7 +60,7 @@ body.app-shell-root #main-content {
   text-wrap: balance;
   overflow-wrap: normal;
   word-break: normal;
-  hyphens: auto;
+  hyphens: manual;
 }
 
 .pretty-copy {
@@ -161,9 +157,9 @@ body.app-shell-root #main-content {
 /* ShareModal — all styles must be global because the component is conditionally
    rendered ({#if shareOpen}) and Svelte/Astro CSS code splitting drops scoped
    styles from the initial CSS bundle for conditionally-mounted components */
-.share-backdrop{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;transition:opacity 200ms ease}
+.share-backdrop{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;transition:opacity 200ms ease}
 .share-backdrop--visible{opacity:1}
-@media(min-width:640px){.share-backdrop{align-items:center;padding:24px;background:rgba(0,0,0,.55)}}
+@media(min-width:640px){.share-backdrop{align-items:center;padding:24px;background:rgba(0,0,0,.7)}}
 .share-panel{background:var(--bg);border-radius: var(--radius-lg) var(--radius-lg) 0 0;padding:0 20px max(20px,env(safe-area-inset-bottom,20px));max-width:400px;width:100%;box-shadow:0 -4px 40px rgba(0,0,0,.12);position:relative;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform 300ms var(--ease-out-expo,cubic-bezier(.16,1,.3,1)),opacity 200ms ease;will-change:transform;opacity:0}
 .share-panel--visible{transform:translateY(0);opacity:1}
 .share-panel--closing{transform:translateY(100%);opacity:0;transition:transform 200ms var(--ease-out-expo,cubic-bezier(.16,1,.3,1)),opacity 150ms ease}

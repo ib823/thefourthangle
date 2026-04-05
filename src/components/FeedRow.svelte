@@ -69,9 +69,7 @@
   <div style="width:4px;align-self:stretch;border-radius:var(--radius-pill);background:{scoreColor};opacity:{isActive ? 1 : (isStarted ? 0.7 : 0.28)};"></div>
   <div style="flex:1;min-width:0;">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      {#if issue.status === 'new' && !readState}
-        <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-green-text);background:var(--status-green-bg);padding:4px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">New</span>
-      {:else if issue.status === 'updated'}
+      {#if issue.status === 'updated'}
         <span style="font-size:var(--text-micro);font-weight:700;color:var(--status-blue-text);background:var(--status-blue-bg);padding:4px 8px;border-radius:var(--radius-sm);text-transform:uppercase;flex-shrink:0;">Updated</span>
       {/if}
       {#if hasReaction}

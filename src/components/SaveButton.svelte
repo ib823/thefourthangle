@@ -69,8 +69,8 @@
     <div class="burst-ring"></div>
   {/if}
 
-  <svg aria-hidden="true" class="heart-icon" width="16" height="16" viewBox="0 0 24 24" fill={reacted ? 'var(--highlight-accent, var(--score-warning))' : 'none'} stroke={reacted ? 'var(--highlight-accent, var(--score-warning))' : 'var(--text-faint)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+  <svg aria-hidden="true" class="save-icon" width="16" height="16" viewBox="0 0 24 24" fill={reacted ? 'var(--highlight-accent, var(--score-warning))' : 'none'} stroke={reacted ? 'var(--highlight-accent, var(--score-warning))' : 'var(--text-faint)'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
   </svg>
   <span class="save-label">{reacted ? 'Highlighted' : 'Highlight'}</span>
 </button>
@@ -109,16 +109,16 @@
   }
 
   /* Heart icon animation */
-  .heart-icon {
+  .save-icon {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.2s ease-out;
     flex-shrink: 0;
   }
 
-  .save-btn--burst .heart-icon {
+  .save-btn--burst .save-icon {
     transform: scale(1.4);
   }
 
-  .save-btn--settle .heart-icon {
+  .save-btn--settle .save-icon {
     transform: scale(1);
   }
 
@@ -151,7 +151,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .heart-icon {
+    .save-icon {
       transition: none;
     }
     .burst-ring {

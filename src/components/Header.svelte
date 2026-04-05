@@ -6,7 +6,7 @@
   import { loadSearchIndex, search as doSearch } from '../lib/search';
 
   interface Props {
-    issueIds?: string[];
+    issues?: Array<{id: string; headline: string}>;
     onSearchToggle?: () => void;
     searchMode?: boolean;
     searchQuery?: string;
@@ -15,7 +15,7 @@
     onHome?: () => void;
     homeActive?: boolean;
   }
-  let { issueIds = [], onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear, onHome, homeActive = false }: Props = $props();
+  let { issues = [], onSearchToggle, searchMode = false, searchQuery = '', onSearchInput, onSearchClear, onHome, homeActive = false }: Props = $props();
 
   let readCount = $state(0);
   let readMap: Record<string, string> = $state({});
@@ -55,16 +55,19 @@
   {#if searchMode}
     <form role="search" aria-label="Search issues" onsubmit={(event) => event.preventDefault()} style="flex:1;display:flex;align-items:center;gap:8px;">
       <label class="sr-only" for="header-search">Search issues</label>
-      <input
-        id="header-search"
-        bind:this={searchInputEl}
-        type="text"
-        placeholder="Search issues..."
-        aria-label="Search issues"
-        value={searchQuery}
-        oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
-        style="flex:1;min-height:44px;box-sizing:border-box;padding:8px 12px;font-size:var(--text-body);border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--bg-sunken);color:var(--text-primary);outline:none;"
-      />
+      <div style="position:relative;flex:1;">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input
+          id="header-search"
+          bind:this={searchInputEl}
+          type="text"
+          placeholder="Search issues..."
+          aria-label="Search issues"
+          value={searchQuery}
+          oninput={(e) => onSearchInput?.((e.currentTarget as HTMLInputElement).value)}
+          style="width:100%;min-height:44px;box-sizing:border-box;padding:8px 12px 8px 36px;font-size:var(--text-body);border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--bg-sunken);color:var(--text-primary);outline:none;"
+        />
+      </div>
       <button type="button" onclick={() => onSearchClear?.()} style="background:none;border:none;cursor:pointer;font-size:var(--text-ui);font-weight:600;color:var(--text-tertiary);padding:8px;min-height:44px;">Cancel</button>
     </form>
   {:else}
@@ -97,8 +100,8 @@
     </div>
   {/if}
   <div style="position:absolute;bottom:0;left:0;right:0;display:flex;gap:1px;height:1.5px;">
-    {#each issueIds as id}
-      <div style="flex:1;background:{segmentColor(id)};"></div>
+    {#each issues as issue}
+      <div style="flex:1;background:{segmentColor(issue.id)};" title={issue.headline}></div>
     {/each}
   </div>
 </header>

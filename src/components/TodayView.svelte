@@ -38,15 +38,6 @@
 
   const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
-  let readCount = $derived.by(() => {
-    return Object.values(readMap).filter(v => {
-      if (!v) return false;
-      if (v === 'true') return true;
-      try { return JSON.parse(v).state === 'completed'; } catch { return false; }
-    }).length;
-  });
-
-  let unread = $derived(Math.max(0, issueCount - readCount));
   let hasIssues = $derived(issueCount > 0);
   let continueIssue = $derived(sections.find((section) => section.kind === 'continue')?.issues[0] ?? null);
   let continueProgress = $derived.by(() => {
@@ -77,7 +68,6 @@
     }
     return picked;
   });
-  let readyCount = $derived((continueIssue ? 1 : 0) + briefingIssues.length);
   let readyMinutes = $derived(Math.max(4, briefingIssues.length * 3 + (continueIssue ? 2 : 0)));
   let todayDeckCopy = $derived.by(() => {
     if (continueIssue) return 'Start with the lead, then resume where you stopped.';
@@ -204,8 +194,6 @@
           <p class="today-intro pretty-copy">{todayDeckCopy}</p>
         </div>
         <div class="today-status">
-          <span>{readyCount} issues ready</span>
-          <span class="today-divider"></span>
           <span>about {readyMinutes} min</span>
           <span class="today-divider"></span>
           <span>updated {formatDate(buildDate)}</span>
@@ -247,10 +235,10 @@
       {/if}
 
       <div class="today-grid">
+        {#if continueIssue && onOpenIssue}
         <section class="today-panel" aria-labelledby="continue-reading-heading">
           <div class="panel-kicker">Continue Reading</div>
           <h2 id="continue-reading-heading" class="sr-only">Continue Reading</h2>
-          {#if continueIssue && onOpenIssue}
             <button class="panel-issue" onclick={() => onOpenIssue?.(continueIssue)}>
               <div class="panel-issue-title balance-title">{continueIssue.headline}</div>
               <div class="panel-issue-copy pretty-copy">Next: angle {nextContinueAngle}. Pick up where the argument starts to turn.</div>
@@ -261,13 +249,8 @@
                 <span>Angle {nextContinueAngle} next</span>
               </div>
             </button>
-          {:else}
-            <div class="panel-empty">
-              <div class="panel-empty-title">No unfinished issue waiting.</div>
-              <div class="panel-empty-copy">You are not behind. Start with today’s lead or open the daily briefing below.</div>
-            </div>
-          {/if}
         </section>
+        {/if}
 
         <section class="today-panel" aria-labelledby="daily-briefing-heading">
           <div class="panel-kicker">Daily Briefing</div>
@@ -287,35 +270,7 @@
         </section>
       </div>
 
-      <section class="today-library-strip" aria-labelledby="your-library-heading">
-        <div class="today-library-head">
-          <div class="panel-kicker">Library</div>
-          <h2 id="your-library-heading" class="today-library-title">Keep your place without leaving Today.</h2>
-          <p class="today-library-copy">Reading progress and kept highlights stay here, away from the main feed.</p>
-        </div>
-        <div class="today-library-list">
-          <button class="library-item library-item--compact" onclick={() => onOpenLibraryReading?.()}>
-            <span class="library-label">Reading</span>
-            <span class="library-value">{readingCount}</span>
-            <span class="library-copy">Resume immediately</span>
-          </button>
-          <button class="library-item library-item--compact" onclick={() => onOpenLibraryHighlights?.()}>
-            <span class="library-label">Highlights</span>
-            <span class="library-value">{highlightCount}</span>
-            <span class="library-copy">Angles you marked while reading</span>
-          </button>
-          <button class="library-item library-item--compact" onclick={() => onOpenLibraryArchive?.()}>
-            <span class="library-label">Archive</span>
-            <span class="library-value">{issueCount}</span>
-            <span class="library-copy">Browse every published issue</span>
-          </button>
-        </div>
-      </section>
-
       <footer class="today-footer">
-        <div>
-          <div class="today-note">{unread > 0 ? `${unread} still unexplored in the full archive.` : 'You are fully caught up right now.'}</div>
-        </div>
         <div class="today-quote">"{quote}"</div>
       </footer>
     {:else}
@@ -446,8 +401,7 @@
 
   .hero-card,
   .panel-issue,
-  .brief-item,
-  .library-item {
+  .brief-item {
     width: 100%;
     border: none;
     cursor: pointer;
@@ -459,7 +413,7 @@
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-xl);
-    min-height: 420px;
+    min-height: 340px;
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.94), rgba(28, 28, 28, 0.82));
     color: #fff;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
@@ -489,7 +443,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
     gap: 28px;
-    min-height: 420px;
+    min-height: 340px;
     padding: 32px;
     align-items: end;
   }
@@ -588,8 +542,7 @@
     margin-top: 10px;
     font-size: var(--text-xs);
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.58);
   }
 
@@ -620,41 +573,6 @@
     gap: 14px;
   }
 
-  .today-library-strip {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
-    gap: 16px;
-    padding: 20px;
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border-subtle);
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: 0 12px 28px rgba(20, 20, 20, 0.05);
-    align-items: start;
-  }
-
-  .today-library-head {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-width: 30ch;
-  }
-
-  .today-library-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: var(--text-title);
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
-  }
-
-  .today-library-copy {
-    margin: 0;
-    font-size: var(--text-ui);
-    line-height: 1.6;
-    color: var(--text-secondary);
-  }
-
   .panel-title {
     font-family: var(--font-display);
     font-size: var(--text-title);
@@ -667,8 +585,6 @@
   .panel-empty-copy,
   .panel-issue-copy,
   .brief-context,
-  .library-copy,
-  .today-note,
   .today-quote {
     font-size: var(--text-ui);
     line-height: 1.6;
@@ -676,8 +592,7 @@
   }
 
   .panel-issue,
-  .brief-item,
-  .library-item {
+  .brief-item {
     padding: 16px;
     border-radius: var(--radius-lg);
     background: var(--bg);
@@ -687,8 +602,7 @@
 
   @media (hover: hover) {
     .panel-issue:hover,
-    .brief-item:hover,
-    .library-item:hover {
+    .brief-item:hover {
       transform: translateY(-2px);
     }
 
@@ -727,8 +641,7 @@
     background: var(--score-warning);
   }
 
-  .panel-empty-title,
-  .library-label {
+  .panel-empty-title {
     font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -742,12 +655,6 @@
     gap: 12px;
   }
 
-  .today-library-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
   .brief-item {
     display: grid;
     grid-template-columns: 48px minmax(0, 1fr);
@@ -755,48 +662,11 @@
     align-items: start;
   }
 
-  .brief-score,
-  .library-value {
+  .brief-score {
     font-family: var(--font-display);
     font-size: var(--text-metric);
     line-height: 0.92;
     letter-spacing: -0.05em;
-  }
-
-  .library-item {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 10px 14px;
-    align-items: center;
-  }
-
-  .library-label,
-  .library-copy {
-    grid-column: 1 / -1;
-  }
-
-  .library-item--compact {
-    padding: 14px 16px;
-    border-radius: var(--radius-lg);
-    gap: 8px 10px;
-    align-content: start;
-  }
-
-  .library-item--compact .library-label {
-    grid-column: 1;
-    align-self: center;
-  }
-
-  .library-item--compact .library-value {
-    grid-column: 2;
-    justify-self: end;
-    font-size: var(--text-title-lg);
-  }
-
-  .library-item--compact .library-copy {
-    grid-column: 1 / -1;
-    font-size: var(--text-sm);
-    line-height: 1.45;
   }
 
   .today-footer {
@@ -805,10 +675,6 @@
     justify-content: space-between;
     gap: 20px;
     padding: 0 2px;
-  }
-
-  .today-note {
-    color: var(--text-tertiary);
   }
 
   .today-quote {
@@ -826,8 +692,7 @@
 
   @media (min-width: 1024px) {
     .panel-issue,
-    .brief-item,
-    .library-item {
+    .brief-item {
       padding: 20px;
     }
 
@@ -864,13 +729,6 @@
       align-items: end;
     }
 
-    .today-library-strip {
-      grid-template-columns: 1fr;
-    }
-
-    .today-library-head {
-      max-width: none;
-    }
   }
 
   @media (max-width: 767px) {
@@ -919,21 +777,11 @@
       border-radius: var(--radius-xl);
     }
 
-    .today-library-strip {
-      padding: 16px;
-      border-radius: var(--radius-xl);
-    }
-
-    .today-library-list {
-      grid-template-columns: 1fr;
-    }
-
     .brief-list {
       grid-template-columns: 1fr;
     }
 
-    .brief-score,
-    .library-value {
+    .brief-score {
       font-size: var(--text-title-lg);
     }
 
@@ -967,15 +815,8 @@
       box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
     }
 
-    .today-library-strip {
-      background: rgba(34, 31, 27, 0.92);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
-    }
-
     .panel-issue,
-    .brief-item,
-    .library-item {
+    .brief-item {
       background: rgba(25, 24, 22, 0.96);
       border-color: var(--border-divider);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
@@ -986,12 +827,10 @@
   @media (prefers-color-scheme: dark) and (hover: hover) {
     .hero-card:hover,
     .panel-issue:hover,
-    .brief-item:hover,
-    .library-item:hover {
+    .brief-item:hover {
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
     }
 
-    .today-note,
     .today-quote {
       color: var(--text-muted);
     }
