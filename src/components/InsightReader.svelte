@@ -1186,7 +1186,7 @@
 
         <!-- Card center -->
         <div class="card-center" bind:this={cardContentEl}>
-          <p class="big-text" style="font-size:{card.sub ? 24 : 22}px;opacity:{bigTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.big}</p>
+          <p class="big-text" style="opacity:{bigTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.big}</p>
           {#if card.sub}
             <p class="sub-text" style="opacity:{subTextVisible ? 1 : 0};transition:opacity 250ms ease;">{card.sub}</p>
           {/if}
@@ -1518,6 +1518,7 @@
   }
 
   .big-text {
+    font-size: 24px;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.45;
