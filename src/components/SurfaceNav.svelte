@@ -25,7 +25,7 @@
   <button class="surface-button" class:surface-button--library={surfaceMode === 'library'} onclick={() => onOpenLibrary?.()} aria-current={surfaceMode === 'library' ? 'page' : undefined}>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v15.5A2.5 2.5 0 0 0 17.5 16H3z"></path><path d="M20 18.5A2.5 2.5 0 0 1 17.5 21H6a3 3 0 0 1-3-3V5.5"></path></svg>
     <span>Library</span>
-    <span class="surface-badge" aria-label={`${libraryCount} items in your library`}>{libraryCount}</span>
+    {#if libraryCount > 0}<span class="surface-badge" aria-label={`${libraryCount} items in your library`}>{libraryCount}</span>{/if}
   </button>
 </nav>
 

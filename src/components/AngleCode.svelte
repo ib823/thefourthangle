@@ -194,6 +194,7 @@
         <div class="panel-sub">Pick up where you left off, anywhere</div>
       </div>
     </div>
+    <p class="panel-explain">A 6-character code to sync your reading progress across devices.</p>
 
     {#if !showInput}
       <button class="primary-btn" onclick={handleCreate} disabled={status === 'creating'}>
@@ -279,6 +280,13 @@
     font-size: var(--text-sm);
     color: var(--text-muted);
     margin-top: 1px;
+  }
+
+  .panel-explain {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
   }
 
   .code-display {
