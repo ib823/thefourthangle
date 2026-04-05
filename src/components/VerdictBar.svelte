@@ -96,19 +96,19 @@
   {:else}
     <!-- Full: shaped dots + labels + tap-to-expand tooltips -->
     <div
-      style="display:flex;flex-direction:column;gap:0;padding:10px 14px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius: var(--radius-lg);"
+      style="display:flex;flex-direction:column;gap:0;padding:8px 10px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius: var(--radius-lg);"
       role="group"
       aria-label="6-stage editorial review — Neutrality: {finalScore} out of 100"
     >
       <div style="display:flex;align-items:center;gap:0;">
-        <div style="display:flex;align-items:center;gap:8px;flex:1;">
+        <div style="display:flex;align-items:center;gap:4px;flex:1;">
           {#each stages as stage}
             {@const val = scores[stage.key as keyof StageScores]}
             {@const shape = dotShape(val)}
             <!-- #69: Tap-to-expand tooltip -->
             <button
               onclick={() => toggleExpand(stage.key)}
-              style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 6px;min-width:44px;min-height:44px;justify-content:center;"
+              style="display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 2px;min-width:36px;min-height:44px;justify-content:center;"
               aria-label="{stage.full}: {val}/100 — {scoreLabel(val)}"
               aria-expanded={expandedStage === stage.key}
               aria-controls={auditPanelId}
