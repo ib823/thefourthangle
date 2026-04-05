@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "At least 42 people have died in landslides on projects that bypassed or violated EIA conditions. The mechanism that enables it is not a bug — it's the Constitution.",
+      "sub": "Malaysia's Federal Constitution does not define 'environment.' Land and forestry sit in the State List. The federal Department of Environment can object to projects — but cannot stop them. State planning authorities routinely approve developments that DOE has rejected. In Tanjung Bungah (2017), 11 construction workers died in a landslide on a hillside project DOE explicitly rejected. In Batang Kali (2022), 31 people died at a site operating in violation of EIA conditions. Parliament passed the NFA Amendment Act in September 2022 requiring mandatory public inquiry before forest excision. Three years later, only 3 of 11 Peninsular states have adopted it. The worst offenders — Kelantan, Kedah, Johor — refuse."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "The word 'environment' does not appear in the Federal Constitution. That single omission is the architecture of every bypass.",
+      "s": "Under the 9th Schedule, land and forestry sit in the State List. The Concurrent List covers wildlife protection and town planning. But 'environment' has no constitutional definition and no explicit jurisdictional home. The Environmental Quality Act 1974 is federal law — but DOE's role is advisory. When DOE rejects a project, state One Stop Centre committees can override the rejection. Professor Ainul Jaria Maidin of IIUM documents this explicitly: 'Planning authorities are not required to strictly follow the opinions of other authorities and may choose to ignore the recommendations of the DOE.' The National Forestry Act 1984 attempts federal coordination, but under Article 94(1) it can only 'promote uniformity' — states must voluntarily adopt amendments. Parliament passed the NFA Amendment Act 2022 with mandatory public inquiries and replacement forest requirements. As of 2025, only Perlis, Selangor, and Federal Territories have adopted it. Eight states have not — including Kelantan, Kedah, and Johor, which hold the worst deforestation records and have all lost forest management certification.",
+      "d": "Sources: Federal Constitution 9th Schedule, Prof. Ainul Jaria Maidin/Malaysian Bar (2015 — enforcement challenges), SAM/FOE Malaysia (Mar 2025 — NFA adoption status), Macaranga (excision analysis). The constitutional gap is structural, not political — it exists regardless of which party governs."
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "Satellite data shows 725,613 hectares of primary forest lost in Peninsular Malaysia — three times the official figure of 245,566 hectares.",
+      "s": "Between 2001 and 2019, official forestry statistics recorded 245,566 hectares of forest loss in Peninsular Malaysia. Satellite measurement for the same period shows 725,613 hectares — a 3x discrepancy that reveals systematic underreporting. RimbaWatch's 2024 report found forests at risk of deforestation grew from 2.3 million to 3.2 million hectares in a single year. Johor's 2014 excision of 15,011 hectares from Jemaluang and Tenggaroh forest reserves — the largest one-time excision since 2000 — was 'carried out secretly' according to Macaranga investigations, with the state forestry department unable to justify it to certification auditors. Roughly 21% of cleared land was owned by Sultan Ibrahim Sultan Iskandar. Kedah resumed logging in the 160,000-hectare Ulu Muda water catchment despite a 2003 federal ban, classifying 82.9% as 'production forest.' Ulu Muda supplies 80% of Penang's water — a federal-state conflict with direct public health consequences.",
+      "d": "Sources: RimbaWatch/Borneo Project (2024 — at-risk forests), Macaranga/Pulitzer Center (Johor excision investigation), Mongabay (2022 — Ulu Muda), SCMP/Pulitzer Center (Johor royal connection). The 3x discrepancy between official and satellite figures is the single most damning data point on governance integrity."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Parliament passed forest protection reforms in 2022. Three years later, the states that cut the most forest refuse to adopt them.",
+      "s": "The NFA Amendment Act 2022 introduced two critical reforms: mandatory public inquiry before any forest reserve excision (Section 11), and mandatory replacement forest of equal or greater size (Section 12). Parliament passed it in September 2022. Three years later, only 3 of 11 Peninsular jurisdictions have adopted: Perlis (April 2023), Selangor, and Federal Territories (February 2025). Kelantan lost 14,000 hectares of primary forest in 2024 alone. Kedah continues logging Ulu Muda against a federal ban. Johor executed the largest excision in modern history. Pahang's bauxite boom operated without any EIA for three years, collecting RM46.7 million in royalties while contaminating 15 kilometres of coastline. None of these states have adopted the reforms. The pattern is not ideological — PAS-governed Kelantan, UMNO-linked Johor, and PH-allied Selangor all exploit the same constitutional gap. Forest management certification has been suspended for Kelantan, Kedah, and Johor — but certification is voluntary, with no legal consequence for suspension.",
+      "d": "Sources: SAM/FOE Malaysia (Mar 2025 — adoption status), Mongabay (2022 — Ulu Muda), Wikipedia (Kuantan bauxite disaster), Macaranga (Johor excision, certification). The reform adoption failure is the clearest evidence that this is structural, not partisan."
+    },
+    {
+      "t": "reframe",
+      "h": "This isn't development versus environment. It's a constitutional design where states profit from land conversion and the federal government cannot stop them.",
+      "text": "Every case follows the same pattern: state approves project on state land; DOE objects; state overrides. The mechanism is constitutional, not corrupt — states have legal authority over land. But the consequences are measured in hectares lost, species endangered, and people killed. The SACF backdating — publishing a gazette today referencing a decision from before protective legislation existed — is the most sophisticated version. The Pahang bauxite boom — operating for three years without any EIA — is the crudest. Between them lies every forest reserve in Malaysia, protected only by state self-restraint and voluntary adoption of federal reforms that 8 of 11 states have declined. The question is not whether individual projects should proceed. It is whether a constitutional architecture that allows states to ignore federal environmental law — and profit from doing so — is compatible with 14.3 million hectares of permanent forest that belong to all Malaysians."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's environmental governance has a constitutional hole at its centre. The word 'environment' is absent from the Federal Constitution. Land is a state matter. DOE can advise but not veto. Parliament can pass reforms but cannot compel adoption. The NFA Amendment Act 2022 was the right reform — mandatory public inquiry, mandatory replacement forest. Three years later, the states that cut the most forest refuse to adopt it. At least 42 people have died in landslides on projects that bypassed or violated EIA conditions. Official forest loss figures are one-third of satellite-measured reality. What Malaysia needs is either a constitutional amendment placing environment under the Federal List — giving DOE actual veto power — or a financial mechanism that makes conservation more profitable than conversion for state governments. Ecological Fiscal Transfers exist but remain too small to shift incentives. Until the structural gap is closed, every forest reserve in Malaysia is protected only by the political cost of cutting it down. For Kelantan, Kedah, and Johor, that cost has evidently been acceptable."
+    }
+  ],
+  "sources": "Federal Constitution 9th Schedule, Prof. Ainul Jaria Maidin/Malaysian Bar, SAM/FOE Malaysia (NFA adoption, Tanjung Bungah, EIA overview), Macaranga/Pulitzer Center (excisions, Johor), Mongabay (Ulu Muda, deforestation), RimbaWatch/Borneo Project (2024 report), WWF-Malaysia (SACF), DOE Malaysia (EQA Amendment 2024), Eco-Business (Kenering REE), SCMP/Pulitzer Center (Johor royal link), Wikipedia (Kuantan bauxite)",
+  "confidence": "High on constitutional structure and NFA adoption status (legal texts, SAM/FOE official tracking). High on death toll figures (SCI reports, multiple media). High on satellite vs official forest loss discrepancy (RimbaWatch 2024, Macaranga). Medium on DOE rejection-override pattern (documented in Tanjung Bungah and KLNFR, but comprehensive national data not publicly available). Medium on bauxite royalty figure (media reporting, not audited).",
+  "lenses_used": ["Legal", "Environmental", "Governance"],
+  "lenses_applicable_but_unused": ["Political", "Economic", "Rights", "Social"]
+}
