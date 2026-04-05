@@ -135,6 +135,10 @@
       cancelAnimation = null;
       completionVisible = false;
       completionButtonsVisible = [];
+      bigTextVisible = true;
+      subTextVisible = true;
+      // Auto-fit after Svelte renders new card content
+      requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
     }
   });
 
