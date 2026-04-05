@@ -104,7 +104,7 @@
   {/if}
 
   <!-- Headline -->
-  <h3 class="balance-title" style="font-size:var(--text-body);font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.28;overflow-wrap:normal;">{issue.headline}</h3>
+  <h3 class="balance-title" title={issue.headline} style="font-size:var(--text-body);font-weight:{isCompleted ? 600 : 700};color:{isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)'};margin:10px 0 0;line-height:1.28;overflow-wrap:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{issue.headline}</h3>
   <!-- Context -->
   <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
 

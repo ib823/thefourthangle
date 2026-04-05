@@ -15,7 +15,7 @@
   import { observeScroll, applyFadeGradient, shouldBlockSwipe, type ScrollState } from '../lib/scroll-physics';
 
   interface Card {
-    t: string;
+    t: 'hook' | 'fact' | 'reframe' | 'analogy' | 'view';
     big: string;
     sub: string;
     lens?: string;
@@ -25,6 +25,9 @@
     id: string;
     headline: string;
     opinionShift: number;
+    status: 'new' | 'updated' | null;
+    edition: number;
+    context: string;
     cards: Card[];
     stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
     finalScore?: number;

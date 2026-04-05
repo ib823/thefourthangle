@@ -18,7 +18,7 @@
   import { countHighlights, readIssues, getSavedPosition, savePosition, clearPosition, getReactions, reactions, computeAffinity, scoreIssue } from '../stores/reader';
   import { loadSearchIndex, search as doSearch, isLoaded as searchReady, isLoading as searchLoading } from '../lib/search';
   import { getAnimationTier } from '../lib/animation';
-  import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
+  import { buildFeedSections, type FeedSection, type SortMode, type SectionKind } from '../lib/feed-sections';
   import { BUILD_ID, getSiteOrigin } from '../lib/build';
   import { startAutoSync, checkUrlSync, linkAngleCode, schedulePush, isLinked as isSyncLinked } from '../lib/sync';
   import AngleCode from './AngleCode.svelte';
@@ -114,6 +114,7 @@
   let issueLoading = $state(false);
   let isOffline = $state(typeof navigator !== 'undefined' ? !navigator.onLine : false);
   let feedSort: SortMode = $state('latest');
+  let archiveFilter = $state<'all' | SectionKind>('all');
   let angleCodeOpen = $state(false);
   let syncBannerDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-sync-banner-dismissed') === '1');
   let showSyncBanner = $derived(!syncBannerDismissed && surfaceMode === 'library');
@@ -285,6 +286,21 @@
     return buildFeedSections(sortedIssues, readMap, new Date(), feedSort);
   });
 
+  // Archive grid: filter by sidebar section
+  let archiveIssues = $derived.by(() => {
+    if (archiveFilter === 'all') return sortedIssues;
+    const section = feedSections.find(s => s.kind === archiveFilter);
+    if (!section) return sortedIssues;
+    const ids = new Set(section.issues.map(i => i.id));
+    return sortedIssues.filter(i => ids.has(i.id));
+  });
+
+  function archiveSectionLabel(filter: 'all' | SectionKind): string {
+    if (filter === 'all') return 'Full archive';
+    const section = feedSections.find(s => s.kind === filter);
+    return section?.label ?? 'Full archive';
+  }
+
   // #63: Highest-impact unread issue for empty state hero card
   let topUnreadIssue = $derived.by(() => {
     const unread = issues.filter(i => !readMap[i.id]);
@@ -342,6 +358,9 @@
     window.location.reload();
   }
 
+  const goOffline = () => { isOffline = true; };
+  const goOnline = () => { isOffline = false; };
+
   onMount(() => {
     document.body.classList.add('app-shell-root');
     syncShellModeClass();
@@ -363,8 +382,6 @@
     startAutoSync();
 
     // K2: Offline detection
-    const goOffline = () => { isOffline = true; };
-    const goOnline = () => { isOffline = false; };
     window.addEventListener('offline', goOffline);
     window.addEventListener('online', goOnline);
 
@@ -1048,11 +1065,16 @@
           <div style="flex:1;overflow-y:auto;padding:32px 24px;">
             <div style="margin-bottom:24px;">
               <div style="font-size: var(--text-xs);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);">Library · Archive</div>
-              <h1 style="margin:8px 0 0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.02em;color:var(--text-primary);">Full archive</h1>
-              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:8px 0 0;">{sortedIssues.length} issues published</p>
+              <div style="display:flex;align-items:baseline;gap:12px;margin:8px 0 0;">
+                <h1 style="margin:0;font-family:var(--font-display);font-size: var(--text-title-lg);line-height:1.15;letter-spacing:-0.02em;color:var(--text-primary);">{archiveSectionLabel(archiveFilter)}</h1>
+                {#if archiveFilter !== 'all'}
+                  <button onclick={() => { archiveFilter = 'all'; }} style="background:none;border:none;cursor:pointer;font-size:var(--text-sm);color:var(--score-info);font-weight:600;padding:0;">Show all</button>
+                {/if}
+              </div>
+              <p style="font-size: var(--text-body);line-height:1.6;color:var(--text-secondary);margin:8px 0 0;">{archiveIssues.length}{archiveFilter !== 'all' ? ` of ${sortedIssues.length}` : ''} issues{archiveFilter === 'all' ? ' published' : ''}</p>
             </div>
             <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
-              {#each sortedIssues as issue, i}
+              {#each archiveIssues as issue, i}
                 <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
               {/each}
             </div>
@@ -1126,6 +1148,8 @@
         {issueHasConnections}
         sortMode={feedSort}
         onSortChange={(mode) => { feedSort = mode; }}
+        {archiveFilter}
+        onArchiveFilter={(kind) => { archiveFilter = kind; }}
         {showSyncBanner}
         onSyncBannerTap={() => { angleCodeOpen = true; }}
         onSyncBannerDismiss={dismissSyncBanner}

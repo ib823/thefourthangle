@@ -10,6 +10,8 @@
   import type { IssueSummary } from '../lib/issues-loader';
   import type { FeedSection, SectionKind, SortMode } from '../lib/feed-sections';
 
+  type ArchiveFilter = 'all' | SectionKind;
+
   interface Props {
     issues: IssueSummary[];
     sections?: FeedSection[];
@@ -34,11 +36,13 @@
     issueHasConnections?: (id: string) => boolean;
     sortMode?: SortMode;
     onSortChange?: (mode: SortMode) => void;
+    archiveFilter?: ArchiveFilter;
+    onArchiveFilter?: (kind: ArchiveFilter) => void;
     showSyncBanner?: boolean;
     onSyncBannerTap?: () => void;
     onSyncBannerDismiss?: () => void;
   }
-  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, archiveCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onOpenArchive, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange, showSyncBanner = false, onSyncBannerTap, onSyncBannerDismiss }: Props = $props();
+  let { issues, sections = [], activeId, readMap, surfaceMode = 'today', libraryMode = 'reading', readingCount = 0, highlightCount = 0, archiveCount = 0, libraryCount = 0, onGoToday, onOpenLibrary, onOpenReading, onOpenHighlights, onOpenArchive, onSelectIssue, searchQuery = '', onSearchInput, onSearchFocus, onSearchClear, issueHasConnections, sortMode = 'latest', onSortChange, archiveFilter = 'all' as ArchiveFilter, onArchiveFilter, showSyncBanner = false, onSyncBannerTap, onSyncBannerDismiss }: Props = $props();
   function libraryHeading(mode: 'reading' | 'highlights' | 'archive') {
     if (mode === 'highlights') return 'Highlights library';
     if (mode === 'archive') return 'Archive library';
@@ -56,7 +60,7 @@
     return kind === 'completed' || kind === 'explore';
   }
 
-  function issueReadState(id: string): { state: string; progress: number } | null {
+  function issueReadState(id: string): { state: 'started' | 'completed'; progress: number } | null {
     const raw = readMap[id];
     if (!raw) return null;
     if (raw === 'true') return { state: 'completed', progress: 6 };
@@ -152,7 +156,6 @@
   let focusedIndex = $state(-1);
 
   function onFeedKeyDown(e: KeyboardEvent) {
-    if (sortMode === 'topic') return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       e.stopPropagation();
@@ -370,7 +373,8 @@
         {@const sectionHeadingId = `desktop-feed-section-${section.kind}-heading`}
         {@const sectionPanelId = `desktop-feed-section-${section.kind}-panel`}
         {@const sectionCollapsed = collapsedSections[section.kind] ?? defaultCollapsed(section.kind)}
-        <div role="group" aria-labelledby={sectionHeadingId}>
+        {@const isActiveArchiveFilter = surfaceMode === 'library' && libraryMode === 'archive' && archiveFilter === section.kind}
+        <div role="group" aria-labelledby={sectionHeadingId} style={isActiveArchiveFilter ? 'background:var(--bg-sunken);' : ''}>
           <SectionHeader
             id={sectionHeadingId}
             controlsId={sectionPanelId}
@@ -378,7 +382,15 @@
             count={section.count}
             kind={section.kind}
             collapsed={sectionCollapsed}
-            onToggle={() => { collapsedSections[section.kind] = !sectionCollapsed; }}
+            onToggle={() => {
+              if (surfaceMode === 'library' && libraryMode === 'archive') {
+                const nextFilter = archiveFilter === section.kind ? 'all' : section.kind;
+                onArchiveFilter?.(nextFilter);
+                collapsedSections[section.kind] = !sectionCollapsed;
+              } else {
+                collapsedSections[section.kind] = !sectionCollapsed;
+              }
+            }}
             showSort={sectionIdx === 0 && !!onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
             {sortMode}
             {onSortChange}
