@@ -39,7 +39,7 @@ try {
 }
 
 // ── Validation rules ──
-const VALID_CARD_TYPES = ['hook', 'fact', 'reframe', 'view'];
+const VALID_CARD_TYPES = ['hook', 'fact', 'reframe', 'analogy', 'view'];
 const VALID_STATUSES = ['new', 'updated', null];
 const VALID_LENSES = [
   'Legal', 'Rights', 'Economic', 'Governance', 'Technology',
@@ -57,7 +57,7 @@ const LIMITS = {
   opinionShift: { min: 0, max: 100 },
   stageScore: { min: 0, max: 100 },
   finalScore: { min: 0, max: 100 },
-  cardCount: { min: 5, max: 7 },  // typically 6, allow 5-7
+  cardCount: { min: 5, max: 8 },  // typically 6-7, allow 5-8
   edition: { min: 1, max: 99 },
 };
 
@@ -211,6 +211,20 @@ for (const issue of issues) {
   if (factCount < 2 || factCount > 4) err(id, 'cards', `Must have 2-4 fact cards (found ${factCount})`);
   if (reframeCount !== 1) err(id, 'cards', `Must have exactly 1 reframe card (found ${reframeCount})`);
   if (viewCount !== 1) err(id, 'cards', `Must have exactly 1 view card (found ${viewCount})`);
+
+  const analogyCount = types.filter(t => t === 'analogy').length;
+  if (analogyCount > 1) warn(id, 'cards', `Multiple analogy cards (found ${analogyCount})`);
+
+  // Analogy ordering: must come after reframe, before view
+  const analogyIdx = types.lastIndexOf('analogy');
+  const reframeIdx = types.lastIndexOf('reframe');
+  const viewIdx = types.lastIndexOf('view');
+  if (analogyIdx !== -1 && reframeIdx !== -1 && analogyIdx < reframeIdx) {
+    warn(id, 'cards', 'analogy card should come after reframe');
+  }
+  if (analogyIdx !== -1 && viewIdx !== -1 && analogyIdx > viewIdx) {
+    warn(id, 'cards', 'analogy card should come before view');
+  }
 
   // First card should be hook, last should be view
   if (types[0] !== 'hook') {

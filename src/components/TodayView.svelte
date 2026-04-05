@@ -56,7 +56,7 @@
     if (raw === 'true') return 6;
     try { return JSON.parse(raw).progress ?? 0; } catch { return 0; }
   });
-  let nextContinueAngle = $derived(Math.min(continueProgress + 1, 6));
+  let nextContinueAngle = $derived(Math.min(continueProgress + 1, continueIssue?.cards.length ?? 6));
   let newIssues = $derived(sections.find((section) => section.kind === 'new')?.issues ?? []);
   let briefingIssues = $derived.by(() => {
     const picked: IssueSummary[] = [];
@@ -256,7 +256,7 @@
               <div class="panel-issue-copy pretty-copy">Next: angle {nextContinueAngle}. Pick up where the argument starts to turn.</div>
               <div class="panel-progress-row">
                 <div class="panel-progress-track">
-                  <div class="panel-progress-fill" style="width:{Math.min(100, (continueProgress / 6) * 100)}%;"></div>
+                  <div class="panel-progress-fill" style="width:{Math.min(100, (continueProgress / (continueIssue?.cards.length ?? 6)) * 100)}%;"></div>
                 </div>
                 <span>Angle {nextContinueAngle} next</span>
               </div>

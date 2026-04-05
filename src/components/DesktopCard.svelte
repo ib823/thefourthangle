@@ -20,6 +20,7 @@
   let isCompleted = $derived(readState?.state === 'completed');
   let isStarted = $derived(readState?.state === 'started');
   let progress = $derived(readState?.progress ?? 0);
+  let totalAngles = $derived(issue.cards.length || 6);
 
   let visible = $state(false);
   let hovered = $state(false);
@@ -123,7 +124,7 @@
   <!-- Progress bar: orange for reading, dim green for done -->
   {#if isStarted && progress > 0}
     <div style="margin-top:10px;height:3px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
-      <div style="height:100%;width:{(progress / 6) * 100}%;background:var(--score-warning);border-radius: var(--radius-pill);"></div>
+      <div style="height:100%;width:{(progress / totalAngles) * 100}%;background:var(--score-warning);border-radius: var(--radius-pill);"></div>
     </div>
   {:else if isCompleted}
     <div style="margin-top:10px;height:3px;background:var(--status-green);border-radius: var(--radius-pill);opacity:0.3;"></div>

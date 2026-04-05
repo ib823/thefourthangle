@@ -35,11 +35,12 @@
   let isStarted = $derived(readState?.state === 'started');
   let progress = $derived(readState?.progress ?? 0);
   let savedLabel = $derived(reactionCount > 0 ? `${reactionCount} saved angle${reactionCount === 1 ? '' : 's'}` : '');
+  let totalAngles = $derived(issue.cards.length || 6);
 
   // Visual weight: bold unread → medium reading → light done
   let headlineWeight = $derived(isCompleted ? '600' : (isStarted ? '600' : '700'));
   let headlineColor = $derived(isCompleted ? 'var(--text-tertiary)' : 'var(--text-primary)');
-  let progressLabel = $derived(isStarted && progress > 0 ? `Resume from insight ${Math.min(progress + 1, 6)} of 6` : (savedLabel || (isCompleted ? 'Done' : '')));
+  let progressLabel = $derived(isStarted && progress > 0 ? `Resume from insight ${Math.min(progress + 1, totalAngles)} of ${totalAngles}` : (savedLabel || (isCompleted ? 'Done' : '')));
   let optionLabel = $derived(
     `${issue.headline}. Opinion Shift ${issue.opinionShift}. ${isCompleted ? 'Finished.' : progressLabel || 'Not started.'}`
   );

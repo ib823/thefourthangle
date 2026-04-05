@@ -52,6 +52,7 @@ const CARD_LABELS = {
   hook: 'What they said',
   fact: 'What we found',
   reframe: 'The real question',
+  analogy: 'Think of it this way',
   view: 'The considered view',
 };
 
@@ -100,7 +101,7 @@ function buildReadableText(issue) {
   }
 
   lines.push('');
-  lines.push('All 6 perspectives read');
+  lines.push(`All ${issue.cards.length} perspectives read`);
   const viewCard = [...issue.cards].reverse().find(card => card.t === 'view');
   if (viewCard) lines.push(viewCard.big);
 

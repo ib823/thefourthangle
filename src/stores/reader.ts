@@ -28,8 +28,8 @@ export function updateProgress(id: string, progress: number) {
   readIssues.setKey(id, JSON.stringify({ state: 'started', progress }));
 }
 
-export function markCompleted(id: string) {
-  readIssues.setKey(id, JSON.stringify({ state: 'completed', progress: 6 }));
+export function markCompleted(id: string, cardCount: number = 7) {
+  readIssues.setKey(id, JSON.stringify({ state: 'completed', progress: cardCount }));
 }
 
 // Reactions — "this insight hit hard"

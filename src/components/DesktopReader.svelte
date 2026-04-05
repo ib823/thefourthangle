@@ -173,7 +173,7 @@
     if (!completionMarker) return;
     const obs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        markCompleted(issue.id);
+        markCompleted(issue.id, issue.cards.length);
       }
     }, { threshold: 0.5 });
     obs.observe(completionMarker);
@@ -360,6 +360,8 @@
                     <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-3.5-3.5"></path></svg>
                   {:else if card.t === 'reframe'}
                     <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 1 1 5.82 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                  {:else if card.t === 'analogy'}
+                    <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
                   {:else}
                     <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={meta.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="m14.5 9.5-3 7-1-4-4-1z"></path></svg>
                   {/if}
