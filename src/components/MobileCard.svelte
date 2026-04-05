@@ -152,7 +152,7 @@
         </div>
       </div>
     </div>
-    <div style="margin-top:10px;height:6px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+    <div style="margin-top:10px;height:3px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
       <div class="bar-fill" style="height:100%;width:{barFillPercent}%;background:{scoreColor};border-radius: var(--radius-pill);"></div>
     </div>
   </div>

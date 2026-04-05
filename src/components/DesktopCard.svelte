@@ -109,8 +109,8 @@
   <p style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.55;margin:6px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
 
   <!-- Score row -->
-  <div style="margin-top:14px;display:flex;align-items:center;gap:8px;">
-    <div style="flex:1;height:4px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
+  <div style="margin-top:14px;display:flex;align-items:center;gap:8px;" title="{issue.opinionShift} — {opinionLabel(issue.opinionShift)}">
+    <div style="flex:1;height:2px;background:var(--bg-sunken);border-radius: var(--radius-pill);overflow:hidden;">
       <div style="height:100%;width:{issue.opinionShift}%;background:{scoreColor};border-radius: var(--radius-pill);"></div>
     </div>
     <span style="font-size:var(--text-body);font-weight:700;color:{scoreColor};min-width:24px;text-align:right;font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
