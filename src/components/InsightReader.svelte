@@ -140,14 +140,36 @@
     }
   });
 
-  // Auto-fit whenever the card content element is (re)created (issue change, completed toggle)
-  let lastCardContentEl: HTMLDivElement | undefined;
+  // Auto-fit via ResizeObserver: fires when card-center is created, resized, or re-laid out.
+  // Handles all entry paths: initial mount, "Next topic", swipe, orientation change.
+  let autoFitObserver: ResizeObserver | null = null;
+  let lastObservedEl: HTMLDivElement | undefined;
   $effect(() => {
-    if (cardContentEl && cardContentEl !== lastCardContentEl) {
-      lastCardContentEl = cardContentEl;
-      // Wait one frame for text content to render, then fit
-      requestAnimationFrame(autoFitCardText);
+    if (cardContentEl && cardContentEl !== lastObservedEl) {
+      // Disconnect old observer
+      autoFitObserver?.disconnect();
+      lastObservedEl = cardContentEl;
+
+      // Observe the new card-center element
+      let firstCallback = true;
+      autoFitObserver = new ResizeObserver(() => {
+        // Skip the initial synchronous callback (element just connected, may not be laid out)
+        if (firstCallback) {
+          firstCallback = false;
+          requestAnimationFrame(autoFitCardText);
+          return;
+        }
+        autoFitCardText();
+      });
+      autoFitObserver.observe(cardContentEl);
     }
+
+    // Cleanup on unmount
+    return () => {
+      autoFitObserver?.disconnect();
+      autoFitObserver = null;
+      lastObservedEl = undefined;
+    };
   });
 
   function cardLabel(c: Card): string {
@@ -970,23 +992,9 @@
           overlayEl.style.borderRadius = '';
           overlayEl.style.opacity = '';
         }
-        // Auto-fit after entry animation completes (dimensions are final)
-        autoFitCardText();
       });
-    } else {
-      // CSS overlayEnter animation runs for 300ms starting at opacity:0.
-      // Wait for it to finish so layout dimensions are accurate.
-      if (overlayEl && !prefersReducedMotion) {
-        const onEnd = () => {
-          overlayEl!.removeEventListener('animationend', onEnd);
-          autoFitCardText();
-        };
-        overlayEl.addEventListener('animationend', onEnd);
-      } else {
-        // Reduced motion or no overlay — fit immediately after layout
-        requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
-      }
     }
+    // Auto-fit is handled by ResizeObserver on cardContentEl — no manual call needed here
   });
 
   onDestroy(() => {
