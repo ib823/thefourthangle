@@ -962,8 +962,18 @@
         autoFitCardText();
       });
     } else {
-      // No entry animation — auto-fit after layout settles
-      requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
+      // CSS overlayEnter animation runs for 300ms starting at opacity:0.
+      // Wait for it to finish so layout dimensions are accurate.
+      if (overlayEl && !prefersReducedMotion) {
+        const onEnd = () => {
+          overlayEl!.removeEventListener('animationend', onEnd);
+          autoFitCardText();
+        };
+        overlayEl.addEventListener('animationend', onEnd);
+      } else {
+        // Reduced motion or no overlay — fit immediately after layout
+        requestAnimationFrame(() => { requestAnimationFrame(autoFitCardText); });
+      }
     }
   });
 
