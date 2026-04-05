@@ -21,6 +21,9 @@
   import { getAnimationTier } from '../lib/animation';
   import { buildFeedSections, type FeedSection, type SortMode } from '../lib/feed-sections';
   import { BUILD_ID, COMMIT_SHA, getSiteOrigin, releaseLabel } from '../lib/build';
+  import { startAutoSync, checkUrlSync, linkAngleCode, schedulePush, isLinked as isSyncLinked } from '../lib/sync';
+  import AngleCode from './AngleCode.svelte';
+  import AngleCodeBanner from './AngleCodeBanner.svelte';
 
   interface FeedIssue {
     id: string;
@@ -113,6 +116,7 @@
   let issueLoading = $state(false);
   let isOffline = $state(typeof navigator !== 'undefined' ? !navigator.onLine : false);
   let feedSort: SortMode = $state('latest');
+  let angleCodeOpen = $state(false);
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
 
@@ -156,14 +160,20 @@
   }
 
   $effect(() => {
-    const unsub = readIssues.subscribe(v => { readMap = { ...v }; });
+    const unsub = readIssues.subscribe(v => {
+      readMap = { ...v };
+      schedulePush(); // Angle Code: sync on reading state change
+    });
     return unsub;
   });
 
   // Reactions subscription for real-time heart indicators
   let reactionRaw = $state('{}');
   $effect(() => {
-    const unsub = reactions.subscribe(v => { reactionRaw = v; });
+    const unsub = reactions.subscribe(v => {
+      reactionRaw = v;
+      schedulePush(); // Angle Code: sync on reaction change
+    });
     return unsub;
   });
   let appReactionMap: Record<string, number[]> = $derived.by(() => {
@@ -346,6 +356,13 @@
       syncSurfaceUrl(surfaceMode, 'replace', libraryMode);
     }
     window.addEventListener('resize', debouncedResize);
+
+    // Angle Code: check URL param and start auto-sync
+    const syncToken = checkUrlSync();
+    if (syncToken) {
+      linkAngleCode(syncToken);
+    }
+    startAutoSync();
 
     // K2: Offline detection
     const goOffline = () => { isOffline = true; };
@@ -803,6 +820,9 @@
               onOpenHighlights={openHighlightsLibrary}
               onOpenArchive={openArchiveLibrary}
             />
+            <div style="padding:0 16px;margin-top:8px;">
+              <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
+            </div>
           {/if}
           {#if !(surfaceMode === 'library' && libraryMode === 'highlights')}
           <SortToggle
@@ -919,6 +939,9 @@
             onOpenHighlights={() => openLibrary('highlights', 'replace')}
             onOpenArchive={() => openLibrary('archive', 'replace')}
           />
+          <div style="margin-top:8px;">
+            <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
+          </div>
         </div>
       {/if}
       {#if !isSearching && !(surfaceMode === 'library' && libraryMode === 'highlights')}
@@ -1100,6 +1123,12 @@
         {/if}
       </main>
 
+      <aside style="display:flex;flex-direction:column;flex-shrink:0;" aria-label="Sidebar">
+      {#if surfaceMode === 'library'}
+        <div style="padding:12px 16px 0;">
+          <AngleCodeBanner onTap={() => { angleCodeOpen = true; }} />
+        </div>
+      {/if}
       <DesktopFeed
         issues={sortedIssues}
         sections={feedSections}
@@ -1131,6 +1160,23 @@
         sortMode={feedSort}
         onSortChange={(mode) => { feedSort = mode; }}
       />
+      </aside>
+    </div>
+  </div>
+{/if}
+
+<!-- Angle Code panel (bottom sheet on mobile/tablet, overlay on desktop) -->
+{#if angleCodeOpen}
+  <div
+    class="angle-overlay"
+    onclick={(e) => { if (e.target === e.currentTarget) angleCodeOpen = false; }}
+    role="dialog"
+    aria-modal="true"
+    aria-label="Angle Code — cross-device sync"
+  >
+    <div class="angle-sheet">
+      <div class="angle-sheet-handle"></div>
+      <AngleCode onClose={() => { angleCodeOpen = false; }} />
     </div>
   </div>
 {/if}
@@ -1244,6 +1290,63 @@
       border-bottom-color: rgba(255, 255, 255, 0.08);
       background:
         linear-gradient(180deg, rgba(22, 20, 18, 0.94) 0%, rgba(22, 20, 18, 0.78) 100%);
+    }
+  }
+
+  /* Angle Code overlay */
+  .angle-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.15s ease;
+  }
+
+  .angle-sheet {
+    width: 100%;
+    max-width: 420px;
+    background: var(--bg-elevated);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.16);
+    animation: slideUp 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .angle-sheet-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--border-divider);
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  /* Desktop: center the sheet instead of bottom-anchoring */
+  @media (min-width: 769px) {
+    .angle-overlay {
+      align-items: center;
+    }
+
+    .angle-sheet {
+      border-radius: var(--radius-xl);
+      max-height: 70vh;
+    }
+
+    .angle-sheet-handle {
+      display: none;
     }
   }
 </style>

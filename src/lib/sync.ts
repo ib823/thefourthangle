@@ -9,7 +9,7 @@ import { readIssues, getReadState, getReactions, getSavedPosition, reactions, ty
 
 // --- Config ---
 
-const SYNC_API = 'https://tfa-sync.thefourthangle.workers.dev';
+const SYNC_API = 'https://tfa-sync.4thangle.workers.dev';
 const DEBOUNCE_MS = 5_000;
 const STALE_THRESHOLD_MS = 5 * 60 * 1000; // 5 minutes — pull on refocus after this
 
