@@ -417,7 +417,7 @@ export const ISSUES: Issue[] = [
     context: "The PAC's eighth report on the Littoral Combat Ship programme confirmed RM6.08B spent with zero vessels delivered, while Boustead Naval Shipyard's accounts remain qualified.",
     stageScores: { pa: 85, ba: 64, fc: 87, af: 56, ct: 40, sr: 72 },
     finalScore: 68.4,
-    related: ["1962"],
+    related: ["1962", "1871"],
   cards: [
       { t: "hook", big: "Six billion spent. Zero ships delivered. The contract continues.", sub: "LCS programme: started 2011, first delivery due 2019, none delivered by 2026." },
       { t: "fact", big: "PAC found RM1.4B in payments without matching work milestones.", sub: "Progress payments were disbursed based on timelines, not completion. MACC investigation: ongoing since 2022.", lens: "Governance" },
@@ -1518,6 +1518,7 @@ export const ISSUES: Issue[] = [
   headline: "RM5.4 billion development fund missing from Sabah state accounts",
   context: "Sabah's state accounts showed a RM5.4 billion discrepancy between federal development allocations received and expenditures recorded between 2019-2024.",
   stageScores: { pa: 91, ba: 85, fc: 94, af: 79, ct: 74, sr: 87 }, finalScore: 88.0,
+  related: ["1871"],
   cards: [
     { t: "hook", big: "RM5.4 billion gap between federal allocation and Sabah's spending records", sub: "Money sent to Sabah cannot be traced through to completed projects" },
     { t: "fact", big: "State financial procedure requires reconciliation with federal treasury annually", sub: "Five consecutive years of discrepancy suggest systemic rather than incidental failure", lens: "Legal" },
@@ -5273,6 +5274,7 @@ export const ISSUES: Issue[] = [
   headline: "National Security Council Act grants PM unchecked emergency powers",
   context: "The National Security Council Act 2016 allows the Prime Minister to declare security areas without parliamentary approval, raising constitutional concerns.",
   stageScores: { pa: 89, ba: 80, fc: 92, af: 76, ct: 70, sr: 85 }, finalScore: 86.2,
+  related: ["1871"],
   cards: [
     { t: "hook", big: "NSC Act 2016 lets PM declare security zones without parliamentary approval", sub: "Security forces gain arrest and seizure powers bypassing normal legal process" },
     { t: "fact", big: "NSC Act Section 18 authorises arrest without warrant in declared security areas", sub: "Act bypasses Article 150 emergency provisions that require Agong's proclamation", lens: "Legal" },
@@ -5330,6 +5332,7 @@ export const ISSUES: Issue[] = [
   headline: "Preventive detention laws total 7 across Malaysian statutes",
   context: "Malaysia maintains 7 separate laws allowing preventive detention without trial, more than any other ASEAN nation as of 2025.",
   stageScores: { pa: 87, ba: 77, fc: 90, af: 73, ct: 66, sr: 83 }, finalScore: 83.0,
+  related: ["1871"],
   cards: [
     { t: "hook", big: "7 separate Malaysian laws allow detention without trial as of 2025", sub: "SOSMA, POCA, DDA, POTA, NSC Act, Immigration Act, and EO all permit preventive detention" },
     { t: "fact", big: "Article 149 of Federal Constitution specifically enables preventive detention laws", sub: "Constitutional provision drafted during Emergency period remains unchanged", lens: "Legal" },
@@ -13075,17 +13078,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1871", opinionShift: 88, status: null, edition: 1,
-  headline: "Lahad Datu Anniversary Marks 13 Years Without Security Resolution",
-  context: "The 13th anniversary of the 2013 Lahad Datu incursion passed with ESSCOM still operating without permanent legal mandate.",
-  stageScores: { pa: 76, ba: 81, fc: 83, af: 68, ct: 51, sr: 75 }, finalScore: 91.5,
+  id: "1871", published: true, opinionShift: 85, status: "new", edition: 1, sourceDate: "2026-04-05",
+  headline: "Lahad Datu Anniversary: 13 Years Without Permanent Security Legislation",
+  context: "The 2013 Lahad Datu incursion killed at least 68 people. ESSCOM was created in response but still operates under executive instruments — no Act of Parliament in 13 years. Its forward base is 41% complete at 54% over budget.",
+  stageScores: { pa: 82, ba: 72, fc: 57, af: 68, ct: 55, sr: 78 }, finalScore: 68.7,
+  related: ["1315", "1319", "1049", "0154"],
   cards: [
-    { t: "hook", big: "Lahad Datu anniversary marks 13 years without permanent security solution", sub: "ESSCOM still operates under temporary provisions renewed annually" },
-    { t: "fact", big: "Sulu armed group killed 8 Malaysian security forces and 52 intruders in 2013", sub: "Incident exposed critical gaps in eastern Sabah maritime surveillance", lens: "Political" },
-    { t: "fact", big: "ESSCOM 10-year operations plan proposed permanent security zone legislation", sub: "Cabinet has deferred the bill through 4 parliamentary sessions since 2022", lens: "Social" },
-    { t: "fact", big: "Eastern Sabah security zone covers 1.4 million sq km of sea territory", sub: "Permanent base infrastructure in Semporna is only 45% complete", lens: "Critical" },
-    { t: "reframe", big: "Anniversary tests whether crisis-driven security measures become permanent institutions", sub: "" },
-    { t: "view", big: "13 years after Lahad Datu without security resolution. Eastern Sabah's vulnerability persists despite ESSCOM.", sub: "" },
+    { t: "hook", big: "ESSCOM marks 13 years: zero kidnappings since 2020, but its forward base is 41% complete and it still has no Act of Parliament", sub: "The 2013 Lahad Datu incursion killed at least 68 people. ESSCOM was created by executive directive on 1 April 2013 and has never been codified into law" },
+    { t: "fact", big: "59 kidnapping attempts foiled and zero cases since January 2020 — though decline also reflects Philippine ops against Abu Sayyaf and COVID border closures", sub: "Pulau Mabul forward base only 41% complete after a decade, costs rose from RM52.81M to RM81.51M after contractor failure", lens: "Security" },
+    { t: "fact", big: "Three successive administrations have kept ESSCOM on executive instruments without passing a dedicated Act of Parliament", sub: "The maritime curfew began July 2014 and has been in effect for nearly 12 years, affecting B40 fishermen and women traders in coastal economies", lens: "Governance" },
+    { t: "fact", big: "The security zone covers 1,400 km of coastline alongside 1.04 million non-citizens in a state where poverty runs at 19.5% versus the national 6.2%", sub: "Communities of Sulu, Bajau, and Filipino origin face heightened scrutiny while Sabah leaders argue federal commitments remain unfulfilled", lens: "Regional" },
+    { t: "reframe", big: "The question is not whether ESSCOM works — it does. The question is why no government has given it the permanent legal mandate its mission demands", sub: "" },
+    { t: "view", big: "ESSCOM is a genuine security success on structurally fragile foundations. Three administrations have maintained its temporary status — that is a system failure, not one government's neglect", sub: "" },
   ]
 },
 {
