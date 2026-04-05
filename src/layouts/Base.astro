@@ -13,7 +13,6 @@ const canonicalPath = Astro.url.pathname
   .replace(/\.html$/, '') || '/';
 const canonicalUrl = `${siteUrl}${canonicalPath === '/' ? '/' : canonicalPath}`;
 const buildId = typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : new Date().toISOString();
-const commitSha = typeof __COMMIT_SHA__ !== 'undefined' ? __COMMIT_SHA__ : 'unknown';
 const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
 ---
 <!DOCTYPE html>
@@ -41,7 +40,6 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
   <meta property="og:site_name" content="The Fourth Angle" />
   <meta property="og:locale" content="en_MY" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@fourthangle" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
@@ -59,13 +57,13 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
   <link rel="icon" type="image/png" href={`/favicon.png?v=${encodeURIComponent(buildId)}`} />
   <link rel="apple-touch-icon" sizes="180x180" href={`/icons/apple-touch-icon.png?v=${encodeURIComponent(buildId)}`} />
 </head>
-<body data-build-id={buildId} data-commit-sha={commitSha}>
+<body data-build-id={buildId}>
   <a href="#main-content" class="sr-only">Skip to content</a>
   <div id="main-content" tabindex="-1">
     <slot />
   </div>
-  <script is:inline define:vars={{ buildId, commitSha }}>
-    window.__TFA_RELEASE__ = { buildId, commitSha };
+  <script is:inline define:vars={{ buildId }}>
+    window.__TFA_RELEASE__ = { buildId };
     if ('serviceWorker' in navigator) {
       const currentBuild = String(buildId);
       const priorBuild = sessionStorage.getItem('tfa-sw-build');

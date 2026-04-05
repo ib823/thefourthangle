@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tfa-static-v12';
+const CACHE_NAME = 'tfa-static-v13';
 const PRECACHE = ['/offline.html', '/icons/icon-192.png', '/icons/badge-96.png'];
 
 function freshRequest(request) {
