@@ -1072,7 +1072,7 @@
           <p class="completion-title">All {totalCards} perspectives</p>
 
           <!-- Trust summary: Opinion Shift + Editorial Audit -->
-          <div style="width:100%;max-width:300px;margin:4px 0;">
+          <div style="width:100%;max-width:340px;margin:4px 0;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
               <div style="flex:1;"><OpinionBar score={issue.opinionShift} height={4} showLabel={false} /></div>
               <span style="font-size: var(--text-sm);font-weight:700;color:var(--text-secondary);">{issue.opinionShift}%</span>
@@ -1093,7 +1093,7 @@
 
           <!-- C6: Next issue preview -->
           {#if nextIssueHeadline}
-            <div style="width:100%;max-width:300px;padding:10px 14px;background:var(--bg-sunken);border-radius: var(--radius-md);margin:4px 0;">
+            <div style="width:100%;max-width:340px;padding:10px 14px;background:var(--bg-sunken);border-radius: var(--radius-md);margin:4px 0;">
               <div style="font-size: var(--text-micro);font-weight:600;color:var(--text-faint);text-transform:uppercase;">Up next</div>
               <div style="font-size: var(--text-sm);font-weight:600;color:var(--text-secondary);line-height:1.35;margin-top:2px;">{nextIssueHeadline}</div>
             </div>
@@ -1621,7 +1621,7 @@
     gap: 10px;
     margin-top: 8px;
     width: 100%;
-    max-width: 300px;
+    max-width: 340px;
   }
 
   .completion-btn-enter {
