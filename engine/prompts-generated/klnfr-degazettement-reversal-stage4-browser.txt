@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "45,423 formal objections saved Kuala Langat's 8,000-year-old peat forest. The developer who would have received 607 hectares was linked to the Selangor royal family. The state reversed — but only after PKR's own leader intervened.",
+      "sub": "In August 2021, the Selangor state government degazetted 536.7 hectares of the Kuala Langat North Forest Reserve — a peat swamp classified ESA Rank 1 (no development). The decision was gazetted despite a unanimous state assembly motion to protect forest reserves, despite 45,423 objections, and despite the original developer (Titian Jutaria) being linked to the then-Crown Prince of Selangor. After massive backlash and direct intervention by Anwar Ibrahim, MB Amirudin Shari reversed the decision on September 8, 2021. Regazettement was finalised in June 2023. But the reserve had already lost 87% of its original 7,247 hectares before the controversy began. And the Orang Asli community displaced for KLIA in 1994 was promised 404.7 hectares — they received 42."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The state degazetted the forest despite a unanimous assembly motion against it. The developer chain ran from a royal-linked firm to an RM1 shell company owned by a Sarawak logging conglomerate.",
+      "s": "In November 2020, the Selangor State Assembly unanimously passed a motion to protect and preserve gazetted forest reserves. Six months later, the EXCO degazetted 536.7 hectares of KLNFR. The original developer — Titian Jutaria Sdn Bhd — would have received 607 hectares. Its directors included Tengku Amir Shah (now Sultan of Selangor, then Crown Prince) and his cousin Syed Budriz. After the connection was exposed, the Sultan transferred his 40% stake; TJSB was later dissolved. A replacement developer appeared: Gabungan Indah Sdn Bhd, incorporated November 2020 with RM1 paid-up capital, single director a former Johor UMNO Youth chief. Its ownership chain: Vibrantscape (RM1 capital) → Perdana Parkcity → Samling Group, a Sarawak-based logging and plantation conglomerate. MBI Selangor, the state's investment arm, would have received 364 hectares. The corporate structure — royal-linked entity replaced by a timber conglomerate's RM1 shell — has never been officially investigated.",
+      "d": "Sources: The Vibes (royal firm exposé), Sarawak Report (Sultan ownership), Malaysiakini (RM1 company chain), C4 Center (privatising profits analysis), Malay Mail (degazettement/reversal). The transition from a royal developer to a logging conglomerate's shell company is the most underreported dimension."
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "8,000 years of peat formation stores 1.5 million tonnes of carbon. Clearing it would release 5.5 million tonnes of CO2. It's classified ESA Rank 1 — no development allowed.",
+      "s": "KLNFR is peat swamp forest with 2-4 metres of peat formed over approximately 8,000 years. It stores more than 1.5 million tonnes of carbon; clearing and draining would release an estimated 5.5 million tonnes of CO2. The National Physical Plan classifies it as Environmentally Sensitive Area Rank 1 — the highest protection level, where no development, agriculture, or logging is permitted. The Selangor Structure Plan 2035 classifies it as a Disaster Risk ESA. It functions as a critical flood buffer — absorbing heavy rainfall and releasing moisture slowly. Key species include Meranti Bakau, Malayan Sun Bear, and Selangor Pygmy Flying Squirrel. Despite regazettement, peat fire risk is growing: in February 2026, a fire at the neighbouring Kuala Langat South reserve affected 22.66 hectares. GEC has installed 12 canal blocks and 9 piezometers for hydrology management, with local communities trained in maintenance. But KLNFR remains a permanent forest reserve — not a national park — meaning a future EXCO could degazette it again using the same mechanism.",
+      "d": "Sources: Greenpeace Malaysia (peat data, carbon estimates), GEC (fire prevention, canal blocks), Mongabay (Apr 2021 — peat forest analysis), Malay Mail (Feb 2026 — KL South fire). ESA Rank 1 designation prohibits development, yet degazettement overrides classification."
+    },
+    {
+      "t": "fact",
+      "lens": "Rights",
+      "h": "The Orang Asli were promised 404.7 hectares when their land was taken for KLIA in 1994. Thirty years later, they received 42 hectares — 10% of the promise.",
+      "s": "Four Temuan settlements exist within KLNFR: Bukit Kecil, Bukit Cheeding, Busut Baru, and Pulau Kempas. The Temuan have used this forest since at least 1886. The 1927 colonial gazette expressly admitted Orang Asli rights and conceded privileges. When Busut Baru was relocated for KLIA construction in 1993-1994, the community was promised 404.7 hectares as compensation. That promise was never honoured. The 2021 reversal exempted 42 hectares (~104 acres) from regazettement for the Busut Baru land entitlement — roughly 10% of the original promise. Courts have recognised Orang Asli foraging land rights as constitutionally protected property under Article 13. The Malaysian Bar called on Selangor to consider the full extent of Orang Asli rights under the Aboriginal Peoples Act 1954. Amnesty International issued an urgent action for Temuan land rights at risk. The Temuan community remains wary: 'We've been burned before,' one resident told The Vibes.",
+      "d": "Sources: Amnesty Malaysia (urgent action), Malaysian Bar (press release — Aboriginal Peoples Act), The Vibes (Orang Asli wary of promise), Mongabay (Apr 2021 — ~2,000 affected), Wikipedia/KLNFR (1927 gazette provisions). The 404.7-to-42 hectare gap is a 30-year broken promise that predates and outlasts the degazettement controversy."
+    },
+    {
+      "t": "reframe",
+      "h": "KLNFR was saved by political pressure, not by law. The same mechanism that degazetted it still exists — and was used on Shah Alam's forest with no reversal.",
+      "text": "The KLNFR reversal is celebrated as a conservation victory. It was not. It was a political calculation. PKR's leader intervened because the decision was made without party knowledge, the royal connection created toxicity, and 45,423 objections created electoral risk. When the same MB faced 718 objections over the Shah Alam Community Forest — where PKNS owns 70% of the land and no royal scandal attached — the state pressed ahead. The road is 70% built. The Federal Court dismissed the challenge 2-1 on standing. KLNFR proves that forests can be saved in Malaysia. It also proves the conditions required: a scandal, a party leader willing to overrule his own MB, and tens of thousands of objections. Without those, the law provides no protection — because the mechanism that allows degazettement is constitutional, and the NFA Amendment Act 2022 that would close it has been adopted by only 3 of 11 Peninsular states."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "KLNFR's reversal shows what Malaysian conservation activism can achieve at its best: 45,423 objections, a unified coalition, investigative journalism exposing royal and corporate connections, and party leadership willing to overrule a sitting MB. The forest is regazetted. The peat is intact. The canal blocks are working. But the victory is fragile. KLNFR remains a permanent forest reserve, not a national park — meaning a future EXCO can degazette it again. The original reserve was 7,247 hectares; 87% was already lost before 2020. The Busut Baru Orang Asli received 42 hectares of a 30-year-old promise of 404.7. No one was held accountable for proceeding despite a unanimous assembly motion against degazettement. The RM1 developer chain was never investigated. And in Shah Alam, where the same MB faced the same type of challenge with fewer objections and no royal scandal, the forest was not saved. The lesson of KLNFR is not that the system works. It is that the system only works when the political cost of inaction exceeds the political cost of reversal — and that threshold is set by scandal and volume, not by law."
+    }
+  ],
+  "sources": "Malay Mail (Sep 8, 2021 — reversal; Jun 3, 2023 — regazettement; Feb 2026 — fire), FMT (Jun 2023 — regazettement), Mongabay (Apr 2021 — peat forest; Sep 2021 — win), C4 Center (KLNFR analysis), Macaranga (lessons learned), The Vibes (royal firm; Orang Asli wary), Sarawak Report (Sultan ownership), Malaysiakini (RM1 company), Greenpeace Malaysia (environmental data), Amnesty Malaysia (Temuan urgent action), Malaysian Bar (Orang Asli rights), GEC (fire prevention), SAM/FOE Malaysia (43,502 objections)",
+  "confidence": "High on reversal timeline and regazettement (multiple media, official announcements). High on developer connections (The Vibes, Sarawak Report, Malaysiakini investigations). High on environmental data (Greenpeace, GEC, Mongabay). Medium on carbon/CO2 estimates (Greenpeace figures, not independently audited). High on Orang Asli 404.7 ha promise (Amnesty, Malaysian Bar, The Vibes).",
+  "lenses_used": ["Governance", "Environmental", "Rights"],
+  "lenses_applicable_but_unused": ["Political", "Legal", "Economic", "Social"]
+}
