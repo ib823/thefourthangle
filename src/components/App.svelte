@@ -1228,6 +1228,12 @@
     width: 100%;
   }
 
+  @media (min-width: 1600px) {
+    .app-main--desktop {
+      max-width: 1680px;
+    }
+  }
+
   .desktop-main-panel {
     order: 2;
     flex: 1;

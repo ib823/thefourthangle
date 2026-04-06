@@ -238,7 +238,7 @@
   });
 </script>
 
-<aside aria-label={feedAriaLabel(surfaceMode, libraryMode)} style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
+<aside class="desktop-sidebar" aria-label={feedAriaLabel(surfaceMode, libraryMode)} style="width:320px;height:100%;min-height:0;overflow-y:auto;overscroll-behavior:contain;border-right:1px solid var(--bg-sunken);flex-shrink:0;background:linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 18%);display:flex;flex-direction:column;">
   <h2 class="sr-only">{surfaceMode === 'today' ? 'Issue list' : libraryHeading(libraryMode)}</h2>
   <div style="padding:10px 18px 8px;flex-shrink:0;">
     <div style="padding:0 0 12px;">
@@ -438,3 +438,11 @@
   </div>
   </div>
 </aside>
+
+<style>
+  @media (min-width: 1600px) {
+    .desktop-sidebar {
+      width: 380px !important;
+    }
+  }
+</style>

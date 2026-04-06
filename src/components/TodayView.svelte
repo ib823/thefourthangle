@@ -1055,6 +1055,28 @@
     }
   }
 
+  /* Widescreen: use the extra space on 27"+ monitors */
+  @media (min-width: 1600px) {
+    .today-wrap {
+      max-width: 1200px;
+    }
+
+    .brief-list {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .hero-entry {
+      max-width: 100%;
+    }
+
+    .topic-issues {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+  }
+
   /* Tablet: increase body text for arm's-length reading */
   @media (min-width: 769px) and (max-width: 1023px) {
     .today-intro,
