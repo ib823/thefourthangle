@@ -1230,8 +1230,7 @@
 
   @media (min-width: 1600px) {
     .app-main--desktop {
-      max-width: none;
-      padding: 0 32px;
+      max-width: 1920px;
     }
   }
 

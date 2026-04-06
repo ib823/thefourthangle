@@ -1058,7 +1058,7 @@
   /* Widescreen: use the extra space on 27"+ monitors */
   @media (min-width: 1600px) {
     .today-wrap {
-      max-width: none;
+      max-width: 1400px;
     }
 
     .today-grid {
