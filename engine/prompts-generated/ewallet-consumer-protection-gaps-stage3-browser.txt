@@ -1,0 +1,116 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "28 million Malaysians now store money in e-wallets — but their funds have none of the protections that a RM1 bank deposit automatically receives.",
+      "sub": "Malaysia's e-wallet transaction volume surpassed RM48 billion in 2025, with Touch 'n Go, GrabPay, and Boost processing the bulk of daily payments for transport, food, and bills. The government itself accelerated adoption by disbursing over RM2 billion through six national e-wallet subsidy schemes since 2020, including eTunai Rakyat and eMADANI, which onboarded millions of B40 first-time users onto commercial platforms. But the consumer protection framework governing these platforms remains dramatically weaker than traditional banking. E-wallet balances are not covered by PIDM deposit insurance. Accounts can be frozen without warning or clear recourse. Of RM2.77 billion lost to online fraud in 2025, only RM6.7 million was recovered — a 0.24% recovery rate. And 70% of scam victims never report at all. The convenience is real. The safety net is not."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "E-wallet funds carry zero deposit insurance. If your e-wallet operator collapses tomorrow, PIDM will not return a single sen — unlike a bank account, where the first RM250,000 is guaranteed.",
+      "s": "Perbadanan Insurans Deposit Malaysia (PIDM) explicitly does not cover e-wallet balances held by non-bank issuers like Touch 'n Go Digital, Boost, or GrabPay. PIDM only protects funds indirectly — through deposits that e-wallet companies place in trust accounts at licensed banks. But this protection flows to the company, not the consumer. If an issuer becomes insolvent, consumers become unsecured creditors. This is not hypothetical: Digi's Vcash e-wallet shut down in November 2019 after just two years, and users had to manually submit refund forms to recover their balances — there was no automatic protection. BNM's revised January 2025 e-money policy requires issuers to hold customer funds in trust accounts, but the Consumer Protection Act 1999 contains no e-wallet-specific provisions. The IMF has flagged that e-money products are disproportionately used by unsophisticated, low-income households most vulnerable to losses from issuer failure.",
+      "d": "Sources: PIDM Act 2011 (exclusion of non-bank e-money); BNM e-money policy document (Jan 2025); Vcash shutdown (Nov 2019, Digi); IMF Technical Note on Deposit Insurance Treatment of E-Money (2019); Consumer Protection Act 1999. There are currently 48 non-bank e-money issuers licensed by BNM — many operating at a loss. E-wallet operators collectively lost RM1.8 billion in 2025 as cashback subsidies exceeded transaction revenue. BNM expects consolidation from 48 to 8-12 viable providers by 2028 — meaning dozens of closures are anticipated."
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Of RM2.77 billion lost to e-payment fraud in 2025, only RM6.7 million was recovered. That is a 0.24% recovery rate — meaning for every RM100 stolen, victims got back 24 sen.",
+      "s": "The Home Ministry confirmed that online fraud losses hit RM2.77 billion in 2025, the highest in three years, with 67,735 cases recorded between January and November. E-wallets now account for 22% of scammer extraction methods, up from negligible levels before 2023, as fraudsters shifted from traditional mule bank accounts to digital wallets and cryptocurrency. The National Scam Response Centre returned RM6.7 million to victims in 2025 — a recovery rate of approximately 0.24%. Meanwhile, the State of Scam Report 2024 estimated total scam losses at RM54 billion (US$12.8 billion), equivalent to 3% of GDP, with 70% of victims never filing reports. Unlike credit card transactions, which offer chargeback rights under card network rules, e-wallet transactions have no equivalent reversal mechanism. BNM's 2025 policy mandates a 14-day refund window for disputed transactions, but this applies only to unauthorized transactions where the user can prove they did not initiate the payment — social engineering victims have no such protection.",
+      "d": "Sources: Home Ministry (Malay Mail, Jan 2026); National Scam Response Centre recovery data; State of Scam Report 2024 (ScamWatchHQ); BNM e-money policy (Jan 2025) Section on dispute resolution; Q1 2025: 12,110 cases, RM573.7 million losses. Touch 'n Go eWallet introduced a Money-Back Guarantee for verified fraudulent transactions — 100% credit within 5 working days — but it is the first and only Malaysian e-wallet to fully implement all 5 BNM safety measures."
+    },
+    {
+      "t": "fact",
+      "lens": "Social",
+      "h": "Government subsidy programs onboarded millions of B40 users onto commercial e-wallet platforms — with no financial literacy safeguards and a behavioral design that eliminates the pain of paying.",
+      "s": "Since 2020, six national e-wallet subsidy programs — eTunai Rakyat, ePENJANA, eMADANI, and others — disbursed over RM2 billion, requiring recipients to download commercial e-wallet apps to receive government aid. The eMADANI program alone targeted 10 million B40/M40 adults with RM100 each. But on launch day, server crashes left thousands unable to redeem; those who had not filed 2022 tax returns were excluded entirely — punishing the most marginalized. Once onboarded, these users entered an ecosystem engineered to reduce spending friction. Peer-reviewed Malaysian research shows e-wallets trigger impulse buying among Gen-Y and Gen-Z users because digital transactions eliminate the psychological 'pain of paying' that cash creates. Meanwhile, 53,000 Malaysians under 30 are drowning in RM1.9 billion of debt, partly driven by Buy Now Pay Later features integrated into the same e-wallet platforms. The 3.9 million elderly Malaysians (11.6% of the population) face the opposite problem: medical clinics and services dropping cash acceptance leave them unable to pay at all.",
+      "d": "Sources: eMADANI program data (MOF); server crash reports (NST, Dec 2023); PMC peer-reviewed study on e-wallet impulse buying (Gen-Y/Gen-Z); SAGE journals (2025) on elderly e-wallet adoption barriers; Federation of Malaysian Consumers Associations (2025) on elderly exclusion; BenarNews (Jan 2025) on BNPL youth debt; BNM Consumer Credit Act 2025 (brings BNPL under regulatory oversight). Rural cash reliance: 63.5% in non-urban areas vs 36.2% in urban areas."
+    },
+    {
+      "t": "reframe",
+      "h": "The real question is not whether Malaysia should go cashless — it is why the government built a RM2 billion onramp to commercial platforms without building consumer protections first.",
+      "text": "Malaysia spent over RM2 billion pushing citizens onto commercial e-wallet platforms through subsidy programs. It set a target of 90% cashless transactions. It celebrated 28 million users and RM48 billion in volume. But it did not extend deposit insurance to e-wallet balances. It did not create chargeback rights equivalent to credit cards. It did not mandate that operators maintain dedicated consumer protection funds. It did not require financial literacy programs before onboarding B40 recipients onto platforms designed to maximize spending. The result is a two-tier financial system: bank customers have deposit insurance, chargeback rights, mandatory cooling-off periods, and regulated dispute resolution. E-wallet users — disproportionately young, low-income, and first-time digital users — have a 14-day complaint window and a 0.24% fraud recovery rate. The infrastructure was built for speed, not safety. The question now is whether regulation can catch up before the next platform closure, the next mass account freeze, or the next RM2.77 billion fraud year."
+    },
+    {
+      "t": "analogy",
+      "h": "Think of it like a government that built highways before requiring seatbelts — and then wondered why the crash statistics were so bad.",
+      "text": "Malaysia poured billions into building the digital payments highway — subsidizing adoption, setting ambitious cashless targets, onboarding millions. But it forgot the seatbelts. Bank accounts come with deposit insurance, chargeback rights, and regulated dispute resolution — the financial equivalent of airbags, crumple zones, and safety glass. E-wallets come with a terms-of-service agreement and a customer service hotline. Both vehicles travel the same road. Only one has safety features. When the crash comes — a frozen account, a fraud loss, an operator shutdown — the e-wallet passenger discovers they were riding unprotected the whole time."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's e-wallet adoption is a genuine success story — 28 million users, RM48 billion in transactions, a cashless infrastructure that rivals regional peers. The government deserves credit for accelerating financial inclusion through subsidy programs that brought millions of unbanked Malaysians into the digital economy. But success in adoption has outpaced success in protection. E-wallet users today operate in a regulatory grey zone where their funds are not insured, their fraud recovery rate is 0.24%, their accounts can be frozen without meaningful recourse, and the platforms they use are engineered to reduce spending friction for users who may lack financial literacy. The BNM 2025 e-money policy and PDPA amendments are steps forward — mandatory 14-day refunds, 72-hour breach notification, Financial Ombudsman Scheme membership. But they address symptoms, not the structural gap: e-wallet users have fundamentally fewer protections than bank customers, and the users most exposed to this gap — B40, young adults, the elderly — are the ones least equipped to navigate it. The honest path forward requires three things: extending some form of deposit protection to e-wallet balances, creating chargeback-equivalent rights for digital transactions, and mandating financial literacy components in any future government subsidy program that routes through commercial platforms. The highway is built. It is time to install the seatbelts."
+    }
+  ],
+  "sources": "Home Ministry (RM2.77B fraud 2025), PIDM Act 2011, BNM e-money policy (Jan 2025), PDPA amendments (2025), State of Scam Report 2024, National Scam Response Centre, The Rakyat Post (TNG account freezes Dec 2025), Malay Mail (system design critique Mar 2026), PMC/SAGE peer-reviewed studies on overspending, BenarNews (BNPL youth debt), Federation of Malaysian Consumers Associations (elderly exclusion 2025), eMADANI program data, PayNet/DuitNow statistics, Vcash shutdown precedent (2019)",
+  "confidence": "High — Core statistics from BNM, Home Ministry, PIDM are authoritative government sources. PIDM non-coverage of e-wallets is explicit in legislation. Fraud recovery rate calculated from official NSRC data. Academic research on behavioral overspending is peer-reviewed. Medium confidence on exact operator loss figures (RM1.8B) which come from industry analysis rather than audited accounts.",
+  "lenses_used": ["Legal", "Economic", "Social"],
+  "lenses_applicable_but_unused": ["Governance", "Technology", "Security", "Political"]
+}

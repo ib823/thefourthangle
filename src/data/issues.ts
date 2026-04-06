@@ -2885,6 +2885,7 @@ export const ISSUES: Issue[] = [
   headline: "E-Wallet Transactions Surpass RM48 Billion in 2025",
   context: "Bank Negara reported that e-wallet transactions reached RM48.3 billion in 2025 across 56 licensed providers, with Touch 'n Go eWallet, GrabPay, and Boost commanding 82% market share.",
   stageScores: { pa: 76, ba: 62, fc: 76, af: 57, ct: 42, sr: 68 }, finalScore: 68.4,
+  related: ["1975", "1887"],
   cards: [
     { t: "hook", big: "RM48 billion in e-wallet transactions — but 56 licensed providers means market is dangerously fragmented", sub: "Top 3 platforms hold 82% of volume while 42 small providers collectively handle less than 5%" },
     { t: "fact", big: "E-wallet operators collectively lost RM1.8 billion in 2025 as cashback subsidies exceed transaction revenue", sub: "Consolidation inevitable — BNM expects only 8-12 viable providers by 2028 from current 56", lens: "Economic" },
@@ -13307,6 +13308,7 @@ export const ISSUES: Issue[] = [
   headline: "Cashless Payments Reach 68% of Malaysian Transactions",
   context: "Bank Negara reported 68% of retail transactions were cashless in 2025 up from 42% in 2020 led by DuitNow QR.",
   stageScores: { pa: 88, ba: 68, fc: 90, af: 76, ct: 69, sr: 86 }, finalScore: 79.1,
+  related: ["1975", "1146"],
   cards: [
     { t: "hook", big: "Cashless payments reach 68% of retail transactions in 2025", sub: "DuitNow QR processed 1.2 billion transactions worth RM85 billion" },
     { t: "fact", big: "e-Wallet users grew to 28 million with Touch n Go and GrabPay at 62% share", sub: "Average Malaysian makes 4.2 cashless transactions daily up from 1.8 in 2020", lens: "Regional" },
@@ -14596,6 +14598,23 @@ export const ISSUES: Issue[] = [
       { t: "view", big: "The 1:55 ratio is not a staffing accident — it is a structural choice every coalition has maintained. The fix is not more staff for a captured regulator. It is independent environmental courts and community standing to challenge approvals.", sub: "" }
     ]
   }
+,
+{
+  id: "1975", published: true, opinionShift: 74, status: "new", edition: 1, sourceDate: "2026-04-06",
+  headline: "E-wallet funds carry zero deposit insurance for 28 million users",
+  context: "Malaysia's e-wallet market processes billions in transactions annually, but PIDM deposit insurance explicitly excludes non-bank e-wallet balances. Of RM2.77 billion lost to online fraud in 2025, total recoveries reached RM34 million — just 1.2% of reported losses.",
+  stageScores: { pa: 82, ba: 42, fc: 58, af: 72, ct: 58, sr: 78 }, finalScore: 65.0,
+  related: ["1146", "1887"],
+  cards: [
+    { t: "hook", big: "28 million Malaysians store money in e-wallets — with none of the deposit insurance a RM1 bank balance gets", sub: "Government subsidies worth RM2 billion onboarded millions onto commercial platforms since 2020. Online fraud hit RM2.77 billion in 2025; total recoveries reached just RM34 million — 1.2% of reported losses." },
+    { t: "fact", big: "PIDM does not cover e-wallet balances. If an operator collapses, no automatic payout — and there is no minimum capital requirement for issuers.", sub: "BNM requires trust accounts but e-money issuers face no capital adequacy ratio, unlike banks' 8-10%. Digi's Vcash shut down in 2019 with manual refunds only.", lens: "Legal" },
+    { t: "fact", big: "RM2.77 billion lost to fraud in 2025. Only RM6.7 million returned to victims so far, with RM17.5 million frozen and 120 cyber investigators for all of Malaysia.", sub: "Credit cards offer standardised chargeback frameworks built over decades. E-wallets have no equivalent. Social engineering victims have no protection at all.", lens: "Economic" },
+    { t: "fact", big: "Subsidies delivered real utility but no literacy safeguards. East Malaysia has 35% e-wallet penetration versus 78% in Klang Valley. Women face targeted scam exposure.", sub: "4.1 million elderly excluded as services drop cash. 53,000 under-30s carry RM1.9 billion in debt. Rural Sabahans traveled hours for signal to redeem eMADANI.", lens: "Social" },
+    { t: "reframe", big: "Every coalition rushed e-wallet subsidies for visible wins. The question is why protections were not built before the onramp.", sub: "" },
+    { t: "analogy", big: "Think of it like a toll highway where motorcyclists and car drivers pay the same fare but only cars get crash barriers and insurance", sub: "Bank customers have deposit insurance, chargebacks, and capital adequacy. E-wallet users have a terms-of-service agreement. Both use the same digital road." },
+    { t: "view", big: "The achievement is real but the blind spot is structural. Three fixes: deposit protection for e-wallet balances, capital adequacy for issuers, literacy safeguards in subsidies.", sub: "" }
+  ]
+}
 ];
 /** Published issues only — shown in the feed. Unpublished issues still accessible by direct URL. */
 export const PUBLISHED_ISSUES: Issue[] = ISSUES.filter(i => i.published === true);

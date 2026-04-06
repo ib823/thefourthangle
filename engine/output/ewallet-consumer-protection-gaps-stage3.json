@@ -1,0 +1,78 @@
+{
+  "factual_accuracy_score": 58,
+  "source_diversity_estimate": 0.43,
+  "claims": [
+    {
+      "claim": "E-wallet balances held with non-bank issuers are not protected by PIDM, unlike eligible bank deposits which are protected up to RM250,000 per depositor per member bank.",
+      "status": "VERIFIED",
+      "m_true": 0.9,
+      "m_false": 0.03,
+      "m_unknown": 0.07,
+      "source": "PIDM Act 2011; BNM Financial Sector Participants Directory",
+      "correction": "The contrast with bank deposits is accurate."
+    },
+    {
+      "claim": "Consumers become unsecured creditors if an e-wallet issuer becomes insolvent.",
+      "status": "MISLEADING",
+      "m_true": 0.38,
+      "m_false": 0.27,
+      "m_unknown": 0.35,
+      "source": "BNM Revised Electronic Money Policy Document dated 31 January 2025",
+      "correction": "Overstated. BNM requires customer funds in designated trust or safeguarded arrangements, which materially changes the legal position."
+    },
+    {
+      "claim": "Only RM6.7 million was returned to victims in 2025, producing a 0.24% recovery rate.",
+      "status": "MISLEADING",
+      "m_true": 0.48,
+      "m_false": 0.22,
+      "m_unknown": 0.3,
+      "source": "Bernama report dated 27 January 2026",
+      "correction": "RM34 million had been recovered and RM17.5 million frozen for investigation. 0.24% is too aggressive."
+    },
+    {
+      "claim": "E-wallets account for 22% of scammer extraction methods.",
+      "status": "UNVERIFIED",
+      "m_true": 0.08,
+      "m_false": 0.22,
+      "m_unknown": 0.7,
+      "source": "No primary official source located",
+      "correction": "Do not use without a primary source."
+    },
+    {
+      "claim": "28 million Malaysians now store money in e-wallets and transaction volume surpassed RM48 billion in 2025.",
+      "status": "UNVERIFIED",
+      "m_true": 0.14,
+      "m_false": 0.21,
+      "m_unknown": 0.65,
+      "source": "No primary official source located for exact pair",
+      "correction": "Should not anchor the hook without a primary source."
+    },
+    {
+      "claim": "Malaysia set a target of 90% cashless transactions.",
+      "status": "UNVERIFIED",
+      "m_true": 0.11,
+      "m_false": 0.24,
+      "m_unknown": 0.65,
+      "source": "No authoritative primary source located",
+      "correction": "Should be sourced or removed."
+    },
+    {
+      "claim": "E-wallet operators collectively lost RM1.8 billion in 2025 and BNM expects consolidation to 8-12 providers by 2028.",
+      "status": "UNVERIFIED",
+      "m_true": 0.12,
+      "m_false": 0.18,
+      "m_unknown": 0.7,
+      "source": "No primary BNM or audited source located",
+      "correction": "Should not be stated as fact without primary source."
+    }
+  ],
+  "omitted_facts": [
+    "BNM's 31 January 2025 Revised Electronic Money Policy materially strengthened safeguarding requirements.",
+    "Malaysia's Consumer Credit Act 2025 was passed, gazetted 31 December 2025, came into force 1 March 2026, bringing BNPL under regulatory oversight.",
+    "FMOS began 1 January 2025 as consolidated dispute-resolution body.",
+    "The RM6.7 million returned sits within a larger RM34 million recovery figure, with RM17.5 million frozen.",
+    "DOSM's 2025 estimate shows elderly population at 4.1 million (12.0%), not 3.9 million."
+  ],
+  "source_assessment": "The analysis mixes strong and weak sourcing. Strongest on PIDM, BNM, MOF, DOSM. Several high-impact numbers rely on secondary media reports or unsourced industry assertions.",
+  "overall_assessment": "Directionally persuasive on core legal point but overstates or weakly sources several market-size, behavioural, and fraud-recovery claims. Strongest on regulatory structure, weakest on headline numbers and causal leaps."
+}
