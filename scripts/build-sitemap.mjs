@@ -14,14 +14,12 @@ const staticRoutes = [
 
 const issueRoutes = issues.map((issue) => ({
   loc: `/issue/${issue.id}`,
-  lastmod: issue.sourceDate || null,
   priority: '0.8',
 }));
 
 const urls = [...staticRoutes, ...issueRoutes]
-  .map(({ loc, lastmod, priority }) => {
-    const lastmodTag = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : '';
-    return `  <url>\n    <loc>${siteUrl}${loc}</loc>${lastmodTag}\n    <changefreq>daily</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+  .map(({ loc, priority }) => {
+    return `  <url>\n    <loc>${siteUrl}${loc}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
   })
   .join('\n');
 

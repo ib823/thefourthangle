@@ -240,7 +240,7 @@ async function main() {
   const allFiles = await walk(DIST);
   let violations = 0;
   for (const f of allFiles) {
-    if (f.endsWith('.png') || f.endsWith('.woff2') || f.endsWith('.ico')) continue;
+    if (f.endsWith('.png') || f.endsWith('.woff2') || f.endsWith('.ico') || basename(f) === 'robots.txt') continue;
     const content = await readFile(f, 'utf8');
     for (const { term, regex } of DANGEROUS) {
       regex.lastIndex = 0;
