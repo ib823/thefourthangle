@@ -27,9 +27,8 @@
     onInstallDismiss,
   }: Props = $props();
 
-  // Sync prompt: 7-day dismissal, never when linked or standalone
+  // Sync prompt: permanent dismissal, never when linked or standalone
   const SYNC_DISMISS_KEY = 'tfa-sync-prompt-dismissed';
-  const SYNC_COOLDOWN = 7 * 24 * 60 * 60 * 1000;
 
   let syncDismissed = $state(false);
   let isStandalone = $state(false);
@@ -42,8 +41,7 @@
 
   onMount(() => {
     isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    const dismissedAt = localStorage.getItem(SYNC_DISMISS_KEY);
-    syncDismissed = !!dismissedAt && Date.now() - parseInt(dismissedAt) < SYNC_COOLDOWN;
+    syncDismissed = localStorage.getItem(SYNC_DISMISS_KEY) === '1';
 
     // Stagger entrance animations
     requestAnimationFrame(() => {
@@ -59,7 +57,7 @@
     syncLeaving = true;
     setTimeout(() => {
       syncDismissed = true;
-      localStorage.setItem(SYNC_DISMISS_KEY, String(Date.now()));
+      localStorage.setItem(SYNC_DISMISS_KEY, '1');
       syncLeaving = false;
     }, 200);
   }

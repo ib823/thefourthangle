@@ -12,7 +12,6 @@ let _listeners: Array<() => void> = [];
 let _initialized = false;
 
 const DISMISS_KEY = 'tfa-install-dismissed';
-const DISMISS_COOLDOWN = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 function notify() {
   for (const fn of _listeners) fn();
@@ -30,8 +29,7 @@ export function initInstallState(): void {
   const ua = navigator.userAgent;
   _isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  const dismissedAt = localStorage.getItem(DISMISS_KEY);
-  _dismissed = !!dismissedAt && Date.now() - parseInt(dismissedAt) < DISMISS_COOLDOWN;
+  _dismissed = localStorage.getItem(DISMISS_KEY) === '1';
 
   if (_isIOS) {
     _canInstall = !_dismissed;
@@ -81,7 +79,7 @@ export async function triggerInstall(): Promise<void> {
 export function dismissInstall(): void {
   _canInstall = false;
   _dismissed = true;
-  localStorage.setItem(DISMISS_KEY, String(Date.now()));
+  localStorage.setItem(DISMISS_KEY, '1');
   notify();
 }
 
