@@ -102,9 +102,10 @@ async function main() {
     // Strip HTML comments
     html = html.replace(/<!--[\s\S]*?-->/g, '');
 
-    // Rename data-astro-* attributes to generic names (not strip — JS references them)
+    // Rename data-astro-* attributes: strip "astro-" prefix but preserve unique cid hashes for scoping
     html = html.replace(/data-astro-template/g, 'data-t');
-    html = html.replace(/data-astro-[a-z-]+/g, 'data-x');
+    html = html.replace(/data-astro-cid-/g, 'data-c-');
+    html = html.replace(/data-astro-[a-z0-9-]+/g, 'data-x');
 
     // Strip component names from opts
     html = html.replace(/"name":"[A-Za-z]+"/g, '"name":"c"');
@@ -149,8 +150,8 @@ async function main() {
     const f = join(jsDir, base);
     let css = await readFile(f, 'utf8');
     css = css.replace(/svelte-[a-z0-9]+/g, (m) => '_' + shortHash(m));
-    // Rename Astro scoped attribute selectors: [data-astro-cid-xxx] → [data-x]
-    css = css.replace(/\[data-astro-[a-z0-9-]+\]/g, '[data-x]');
+    // Rename Astro scoped attribute selectors: preserve unique cid hashes for scoping
+    css = css.replace(/data-astro-cid-/g, 'data-c-');
     css = css.replace(/data-astro-[a-z0-9-]+/g, 'data-x');
     css = css.replace(/\/\*[\s\S]*?\*\//g, '');
     await writeFile(f, css, 'utf8');
