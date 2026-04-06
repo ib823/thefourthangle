@@ -210,7 +210,7 @@
     transition: color var(--duration-normal, 250ms) var(--ease-out-cubic, cubic-bezier(0.33, 1, 0.68, 1));
     overflow-wrap: normal;
     hyphens: auto;
-    max-width: 15ch;
+    max-width: 20ch;
   }
 
   .bar-fill {

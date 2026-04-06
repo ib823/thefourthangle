@@ -553,7 +553,7 @@
     color: var(--text-primary);
     letter-spacing: -0.02em;
     line-height: 1.01;
-    max-width: 17ch;
+    max-width: 24ch;
   }
 
   .reader-actions {

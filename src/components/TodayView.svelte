@@ -363,7 +363,7 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    max-width: 15ch;
+    max-width: 20ch;
   }
 
   .today-intro {
@@ -475,7 +475,7 @@
     font-size: var(--text-issue-title-fluid);
     line-height: 1.15;
     letter-spacing: -0.02em;
-    max-width: 15ch;
+    max-width: 20ch;
   }
 
   .hero-context,
