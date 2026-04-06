@@ -1212,7 +1212,7 @@
           {#if showSwipeHint && current === 0}
             <span class="swipe-hint" class:swipe-hint-fade={swipeHintFaded}>Swipe or tap arrows</span>
           {:else if card.t === 'fact' && connections.length > 0}
-            <span style="font-size: var(--text-xs);color:var(--text-muted);">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
+            <button onclick={(e) => { e.stopPropagation(); patternSheetOpen = true; }} style="font-size:var(--text-xs);font-weight:600;color:var(--score-info);background:none;border:none;cursor:pointer;padding:0;font-family:inherit;">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'} &rsaquo;</button>
           {:else if current === totalCards - 2 && !completed}
             <span style="font-size: var(--text-sm);font-weight:600;color:var(--text-tertiary);">Almost done</span>
           {:else if current === totalCards - 1 && !completed}

@@ -81,7 +81,7 @@
     <p style="font-size:var(--text-sm);color:var(--text-tertiary);line-height:1.45;margin:4px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{issue.context}</p>
   </div>
   <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;min-width:54px;">
-    <span style="font-size:var(--text-body);font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;">{issue.opinionShift}</span>
+    <span style="font-size:var(--text-body);font-weight:700;color:{scoreColor};font-variant-numeric:tabular-nums;" title="{issue.opinionShift} — {label}: Reading only the headline would hide about {issue.opinionShift}% of the story">{issue.opinionShift}</span>
     <span style="font-size:var(--text-xs);font-weight:600;color:var(--text-muted);">{label}</span>
     {#if progressLabel}
       <span style="font-size:var(--text-micro);color:var(--text-muted);">{progressLabel}</span>

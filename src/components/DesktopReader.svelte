@@ -292,13 +292,17 @@
         <div class="reader-progress-kicker">Reading path</div>
         <div class="reader-progress-label balance-title">{activeStageLabel}</div>
       </div>
-      <div class="reader-progress-track" style="--steps:{issue.cards.length};" aria-hidden="true">
-        {#each issue.cards as _, i}
-          <span
+      <div class="reader-progress-track" style="--steps:{issue.cards.length};" role="navigation" aria-label="Reading path — click to jump to a card">
+        {#each issue.cards as card, i}
+          {@const cardMeta = CARD_TYPES[card.t] ?? CARD_TYPES.hook}
+          <button
             class="reader-progress-segment"
             class:reader-progress-segment--done={i < activeStep}
             class:reader-progress-segment--active={i === activeStep}
-          ></span>
+            onclick={() => { const el = cardEls[i]; if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+            title="{cardMeta.label}{card.lens ? ' · ' + card.lens : ''}"
+            aria-label="Card {i + 1}: {cardMeta.label}{card.lens ? ' — ' + card.lens : ''}"
+          ></button>
         {/each}
       </div>
     </div>
@@ -332,6 +336,17 @@
         <div style="margin-top:16px;"><OpinionBar score={issue.opinionShift} height={8} showLabel={false} /></div>
       </div>
     </div>
+
+    {#if issue.finalScore}
+      {@const nsColor = issue.finalScore >= 75 ? 'var(--score-info)' : issue.finalScore >= 50 ? 'var(--score-warning)' : 'var(--score-critical, var(--score-strong))'}
+      <div style="display:flex;align-items:center;gap:12px;margin:12px 0 0;padding:12px 16px;border-radius:var(--radius-lg);border:1px solid var(--border-subtle);background:var(--bg-elevated);">
+        <span style="font-family:var(--font-display);font-size:var(--text-title);font-weight:800;color:{nsColor};font-variant-numeric:tabular-nums;">{Math.round(issue.finalScore)}</span>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Editorial Quality Score</div>
+          <div style="font-size:var(--text-sm);color:var(--text-secondary);margin-top:2px;">Combined score across all six review stages. Higher means more balanced and thorough analysis.</div>
+        </div>
+      </div>
+    {/if}
 
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0 32px;">
       {#if issue.status === 'new'}
@@ -377,7 +392,9 @@
             <p style="font-size: var(--text-reading);color:var(--text-secondary);line-height:1.65;margin:12px 0 0;max-width:52ch;">{card.sub}</p>
           {/if}
           {#if card.t === 'fact' && connections.length > 0}
-            <span style="font-size: var(--text-xs);font-weight:700;color:var(--text-muted);margin-top:16px;display:block;">Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'}</span>
+            <button onclick={() => completionMarker?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style="font-size:var(--text-xs);font-weight:700;color:var(--score-info);margin-top:16px;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;transition:color 0.15s ease;" onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }} onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--score-info)'; }}>
+              Tracked in {connections.length} {connections.length === 1 ? 'issue' : 'issues'} <span aria-hidden="true">↓</span>
+            </button>
           {/if}
         </div>
       </div>
@@ -444,8 +461,13 @@
       {/if}
 
       <div class="reader-completion-actions">
+        {#if onNext}
+          <button onclick={onNext} class="completion-primary-btn">
+            {nextHeadline ? `Next: ${nextHeadline.length > 50 ? nextHeadline.slice(0, 50) + '...' : nextHeadline}` : 'Read next issue'}
+          </button>
+        {/if}
         {#if onReturnHome}
-          <button onclick={onReturnHome} class="completion-primary-btn">
+          <button onclick={onReturnHome} class={onNext ? 'completion-secondary-btn' : 'completion-primary-btn'}>
             Back to Today
           </button>
         {/if}
@@ -521,7 +543,14 @@
     border-radius: var(--radius-pill);
     background: var(--bg-elevated);
     border: 1px solid var(--border-subtle);
-    transition: background 0.2s ease-out, border-color 0.2s ease-out;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s ease;
+  }
+
+  .reader-progress-segment:hover {
+    transform: scaleY(1.4);
+    border-color: var(--text-muted);
   }
 
   .reader-progress-segment--done {
@@ -572,6 +601,7 @@
   }
 
   .completion-primary-btn,
+  .completion-secondary-btn,
   .completion-utility-btn {
     width: 100%;
     border-radius: var(--radius-pill);
@@ -598,6 +628,23 @@
     font-size: var(--text-ui);
     font-weight: 700;
     box-shadow: 0 14px 28px rgba(210, 140, 40, 0.08);
+  }
+
+  .completion-secondary-btn {
+    min-height: 48px;
+    padding: 0 24px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    font-size: var(--text-ui);
+    font-weight: 700;
+  }
+
+  @media (hover: hover) {
+    .completion-secondary-btn:hover {
+      border-color: var(--border-divider);
+      background: var(--bg-sunken);
+    }
   }
 
   @media (hover: hover) {

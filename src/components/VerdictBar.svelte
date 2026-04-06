@@ -28,6 +28,7 @@
 
   // #69: Tap-to-expand tooltip state
   let expandedStage: string | null = $state(null);
+  let legendOpen = $state(false);
 
   const stages = [
     { key: 'pa', label: 'PA', full: 'Primary Analysis', description: 'Checks whether the core claim is framed clearly before interpretation starts.' },
@@ -128,7 +129,27 @@
           <span style="font-family:var(--font-display);font-size: var(--text-body-lg);font-weight:700;color:var(--text-primary);">{finalScore}</span>
           <span style="font-family:var(--font-display);font-size: var(--text-micro);font-weight: 600;color:var(--text-tertiary);">/100</span>
         </div>
+        <button onclick={() => { legendOpen = !legendOpen; }} aria-label="How to read the audit" aria-expanded={legendOpen} style="width:24px;height:24px;border-radius:var(--radius-round);border:1px solid var(--border-subtle);background:var(--bg-elevated);color:var(--text-muted);font-size:var(--text-xs);font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:4px;">?</button>
       </div>
+
+      {#if legendOpen}
+        <div style="margin-top:8px;padding:8px 0 2px;border-top:1px solid var(--border-light);display:flex;flex-direction:column;gap:6px;">
+          <div style="font-size:var(--text-xs);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">How to read this</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:var(--text-xs);color:var(--text-secondary);">
+            <div style="width:10px;height:10px;border-radius:var(--radius-round);background:var(--status-green);flex-shrink:0;"></div>
+            <span><strong>Circle</strong> — Balanced (75+)</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:var(--text-xs);color:var(--text-secondary);">
+            <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:10px solid var(--score-warning);flex-shrink:0;"></div>
+            <span><strong>Triangle</strong> — Flagged (50–74)</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:var(--text-xs);color:var(--text-secondary);">
+            <div style="width:8px;height:8px;background:var(--score-strong);transform:rotate(45deg);flex-shrink:0;"></div>
+            <span><strong>Diamond</strong> — Alert (&lt;50)</span>
+          </div>
+          <div style="font-size:var(--text-xs);color:var(--text-muted);line-height:1.5;margin-top:2px;">Tap any stage label above to see its score and what it tested.</div>
+        </div>
+      {/if}
 
       <!-- #69: Expanded tooltip -->
       <div

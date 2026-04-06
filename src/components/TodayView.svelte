@@ -1,5 +1,6 @@
 <script lang="ts">
   import { QUOTES } from '../data/quotes';
+  import { opinionLabel } from '../data/issues';
   import IssueImage from './IssueImage.svelte';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -85,6 +86,10 @@
   let touchStartScrollTop = 0;
   let pullDistance = $state(0);
   let pullRefreshState = $state<'idle' | 'pulling' | 'ready' | 'refreshing'>('idle');
+
+  // Welcome card — shown once for first-time visitors
+  let welcomeDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-welcome-dismissed') === '1');
+  function dismissWelcome() { localStorage.setItem('tfa-welcome-dismissed', '1'); welcomeDismissed = true; }
 
   function resetPullRefresh() {
     if (pullRefreshState === 'refreshing') return;
@@ -200,6 +205,17 @@
         </div>
       </div>
 
+      {#if !welcomeDismissed}
+        <div class="welcome-card" role="note" aria-label="Welcome to The Fourth Angle">
+          <div class="welcome-content">
+            <p class="welcome-text"><strong>The Fourth Angle</strong> is a non-partisan Malaysian issues platform. We show you what every side left out — then let you decide.</p>
+            <p class="welcome-text">The <strong>Opinion Shift</strong> number on each issue tells you how much you would miss by reading only the headline. Higher means more hidden complexity.</p>
+            <a href="/about" class="welcome-link">How this works <span aria-hidden="true">→</span></a>
+          </div>
+          <button class="welcome-dismiss" onclick={dismissWelcome} aria-label="Dismiss welcome message">&times;</button>
+        </div>
+      {/if}
+
       {#if topIssue && onOpenIssue}
         <article class="hero-entry" aria-labelledby="lead-issue-title">
         <button
@@ -218,6 +234,10 @@
               <div class="hero-badge">Editor's Pick</div>
               <h2 id="lead-issue-title" class="hero-headline balance-title">{topIssue.headline}</h2>
               <p class="hero-context pretty-copy">{topIssue.context}</p>
+              <div class="hero-inline-score" title="Opinion Shift: reading only the headline would hide about {topIssue.opinionShift}% of the story">
+                <span class="hero-inline-number" style="color:{opinionColor(topIssue.opinionShift)};">{topIssue.opinionShift}</span>
+                <span class="hero-inline-label">Opinion Shift &middot; {opinionLabel(topIssue.opinionShift)}</span>
+              </div>
             </div>
             <div class="hero-shift">
               <div class="hero-shift-kicker">Opinion Shift</div>
@@ -259,7 +279,7 @@
           <div class="brief-list">
             {#each briefingIssues as issue}
               <button class="brief-item" onclick={() => onOpenIssue?.(issue)}>
-                <div class="brief-score" style="color:{opinionColor(issue.opinionShift)};">{issue.opinionShift}</div>
+                <div class="brief-score" style="color:{opinionColor(issue.opinionShift)};" title="{issue.opinionShift} — {opinionLabel(issue.opinionShift)}: Reading only the headline would hide about {issue.opinionShift}% of the story">{issue.opinionShift}</div>
                 <div class="brief-copy">
                   <div class="brief-headline balance-title">{issue.headline}</div>
                   <div class="brief-context pretty-copy">{issue.context}</div>
@@ -272,6 +292,14 @@
 
       <footer class="today-footer">
         <div class="today-quote">"{quote}"</div>
+        <div class="today-ethos">Editorial ethos</div>
+        <nav class="today-footer-links" aria-label="Footer navigation">
+          <a href="/about">How This Works</a>
+          <span class="footer-dot" aria-hidden="true">&middot;</span>
+          <a href="/disclaimer">Disclaimer</a>
+          <span class="footer-dot" aria-hidden="true">&middot;</span>
+          <a href="/verify">Verify Content</a>
+        </nav>
       </footer>
     {:else}
       <div class="coming-soon">
@@ -337,6 +365,54 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  /* ── Welcome card ── */
+  .welcome-card {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--bg-elevated);
+  }
+
+  .welcome-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .welcome-text {
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .welcome-link {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--score-medium);
+    text-decoration: none;
+  }
+
+  .welcome-dismiss {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--text-body);
+    color: var(--text-muted);
+    padding: 4px 8px;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
   }
 
   .today-topline {
@@ -489,6 +565,30 @@
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.78);
     max-width: 56ch;
+  }
+
+  .hero-inline-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-inline-number {
+    font-family: var(--font-display);
+    font-size: var(--text-reading);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-inline-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .hero-shift {
@@ -671,16 +771,50 @@
 
   .today-footer {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 0 2px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 2px 0;
+    border-top: 1px solid var(--border-subtle);
   }
 
   .today-quote {
     font-style: italic;
     max-width: 44ch;
-    text-align: right;
+    text-align: center;
+  }
+
+  .today-ethos {
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .today-footer-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .today-footer-links a {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .today-footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-dot {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
   }
 
   .coming-soon {
@@ -737,8 +871,7 @@
       gap: 16px;
     }
 
-    .today-topline,
-    .today-footer {
+    .today-topline {
       flex-direction: column;
       align-items: flex-start;
     }
@@ -786,7 +919,7 @@
     }
 
     .today-quote {
-      text-align: left;
+      text-align: center;
       max-width: none;
     }
   }

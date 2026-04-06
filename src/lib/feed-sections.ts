@@ -79,7 +79,7 @@ export function buildFeedSections(
     sections.push({ kind: 'new', label: 'New This Week', issues: newThisWeek, count: newThisWeek.length });
   }
   if (explore.length > 0) {
-    sections.push({ kind: 'explore', label: 'Explore', issues: explore, count: explore.length });
+    sections.push({ kind: 'explore', label: 'Earlier Issues', issues: explore, count: explore.length });
   }
   if (completed.length > 0) {
     sections.push({ kind: 'completed', label: 'Completed', issues: completed, count: completed.length });

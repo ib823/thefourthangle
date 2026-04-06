@@ -137,7 +137,7 @@
     </div>
   {/if}
 
-  <div class="score-panel">
+  <div class="score-panel" title="{issue.opinionShift} — {label}: Reading only the headline would hide about {issue.opinionShift}% of the story">
     <div class="score-panel-kicker">Opinion Shift</div>
     <div class="score-panel-main">
       <span class="score-number score-number--hero" style="color:{scoreColor};">{displayScore}</span>
