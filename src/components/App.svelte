@@ -21,6 +21,7 @@
   import { buildFeedSections, type FeedSection, type SortMode, type SectionKind } from '../lib/feed-sections';
   import { BUILD_ID, getSiteOrigin } from '../lib/build';
   import { startAutoSync, checkUrlSync, linkAngleCode, schedulePush, isLinked as isSyncLinked, onSyncChange } from '../lib/sync';
+  import { initInstallState, canInstall as canInstallCheck, isIOS as isIOSCheck, triggerInstall, dismissInstall, onInstallChange } from '../lib/install-state';
   import AngleCode from './AngleCode.svelte';
 
   interface FeedIssue {
@@ -117,14 +118,17 @@
   let archiveFilter = $state<'all' | SectionKind>('all');
   let angleCodeOpen = $state(false);
   let syncLinked = $state(isSyncLinked());
+  let showInstall = $state(false);
+  let installIsIOS = $state(false);
   let syncBannerDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-sync-banner-dismissed') === '1');
   let showSyncBanner = $derived(!syncBannerDismissed && surfaceMode === 'library');
   function dismissSyncBanner() { localStorage.setItem('tfa-sync-banner-dismissed', '1'); syncBannerDismissed = true; }
 
-  // Keep syncLinked reactive via sync change listener
+  // Keep syncLinked and install state reactive
   $effect(() => {
-    const unsub = onSyncChange(() => { syncLinked = isSyncLinked(); });
-    return unsub;
+    const unsubSync = onSyncChange(() => { syncLinked = isSyncLinked(); });
+    const unsubInstall = onInstallChange(() => { showInstall = canInstallCheck(); installIsIOS = isIOSCheck(); });
+    return () => { unsubSync(); unsubInstall(); };
   });
 
   let isSearching = $derived(searchQuery.trim().length >= 2);
@@ -371,6 +375,9 @@
   onMount(() => {
     document.body.classList.add('app-shell-root');
     syncShellModeClass();
+    initInstallState();
+    showInstall = canInstallCheck();
+    installIsIOS = isIOSCheck();
     document.body.dataset.buildId = BUILD_ID;
     checkViewport();
     const currentState = locationAppState();
@@ -821,9 +828,6 @@
       {searchQuery}
       onSearchInput={(q) => { searchQuery = q; }}
       onSearchClear={onSearchClear}
-      showSyncIcon={true}
-      {syncLinked}
-      onSyncTap={() => { angleCodeOpen = true; }}
     />
     <main class="app-main">
       {#if !searchActive}
@@ -890,14 +894,14 @@
         tabindex="0"
         style="flex:1;min-height:0;display:flex;flex-direction:column;"
       >
-        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} {showSyncBanner} onSyncBannerTap={() => { angleCodeOpen = true; }} onSyncBannerDismiss={dismissSyncBanner} />
+        <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
       </div>
     {:else}
-      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} {showSyncBanner} onSyncBannerTap={() => { angleCodeOpen = true; }} onSyncBannerDismiss={dismissSyncBanner} />
+      <MobileBrowser issues={sortedIssues} sections={feedSections} onOpenIssue={openIssue} onPrefetch={prefetchIssue} {initialFeedIndex} {issueHasConnections} searchQuery={isSearching ? searchQuery : ''} sortMode={feedSort} onSortChange={(mode) => { feedSort = mode; }} allowPullRefresh={allowBrowserPullRefresh} onPullRefresh={refreshApp} />
     {/if}
     </main>
     {#if !searchActive && !activeFullIssue}
-      <MobileDock surfaceMode={surfaceMode} {libraryCount} onGoToday={goToday} onOpenLibrary={() => openLibrary()} />
+      <MobileDock surfaceMode={surfaceMode} {libraryCount} onGoToday={goToday} onOpenLibrary={() => openLibrary()} {syncLinked} onSyncTap={() => { angleCodeOpen = true; }} {showInstall} {installIsIOS} onInstallTap={triggerInstall} onInstallDismiss={dismissInstall} />
     {/if}
   </div>
 
@@ -907,17 +911,7 @@
 
 {:else if viewMode === 'tablet'}
   <div class="app-shell app-shell--tablet">
-    <Header issues={issues.map(i => ({id: i.id, headline: i.headline}))} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} showSyncIcon={true} {syncLinked} onSyncTap={() => { angleCodeOpen = true; }} />
-    {#if showSyncBanner && !syncLinked}
-      <div class="tablet-sync-strip" role="status">
-        <button onclick={() => { angleCodeOpen = true; }} style="flex:1;display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0;text-align:left;">
-          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          <span style="font-size:var(--text-xs);font-weight:600;color:var(--text-secondary);">Sync your reading progress across devices</span>
-          <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <button onclick={dismissSyncBanner} aria-label="Dismiss" style="background:none;border:none;cursor:pointer;padding:6px;color:var(--text-muted);font-size:var(--text-sm);line-height:1;display:flex;align-items:center;justify-content:center;min-width:32px;min-height:32px;">&times;</button>
-      </div>
-    {/if}
+    <Header issues={issues.map(i => ({id: i.id, headline: i.headline}))} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     <main class="app-main app-main--tablet">
     <div class="tablet-shell">
       {#if surfaceMode !== 'today' && !(surfaceMode === 'library' && libraryMode === 'highlights' && sortedIssues.length > 0)}
@@ -1252,15 +1246,6 @@
     overflow-y: auto;
   }
 
-  .tablet-sync-strip {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 20px;
-    background: var(--bg-elevated);
-    border-bottom: 1px solid var(--border-subtle);
-    flex-shrink: 0;
-  }
 
   .tablet-shell {
     max-width: 960px;
