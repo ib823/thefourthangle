@@ -1061,8 +1061,12 @@
       max-width: none;
     }
 
+    .today-grid {
+      grid-template-columns: 1fr;
+    }
+
     .brief-list {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
