@@ -986,6 +986,14 @@
         </div>
       {:else if surfaceMode === 'library'}
         <div id="tablet-library-panel" role="tabpanel" aria-labelledby={`tablet-library-${libraryMode}`} tabindex="0">
+          {#if libraryMode !== 'highlights'}
+            <div style="display:flex;align-items:center;justify-content:flex-end;padding:0 0 12px;">
+              <button onclick={() => { feedSort = feedSort === 'latest' ? 'shift' : 'latest'; }} style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border-subtle);border-radius:var(--radius-pill);background:var(--bg-elevated);color:var(--text-secondary);font:inherit;font-size:var(--text-xs);font-weight:700;cursor:pointer;transition:color 180ms ease,border-color 180ms ease;" aria-label="Sort issues: currently {feedSort === 'latest' ? 'Latest' : 'Biggest Shift'}">
+                {feedSort === 'latest' ? 'Latest' : 'Biggest Shift'}
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+          {/if}
           {#each feedSections as section}
             <div style="margin-bottom:32px;">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">

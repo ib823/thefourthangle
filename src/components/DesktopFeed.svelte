@@ -339,6 +339,16 @@
         <span style="font-size: var(--text-micro);color:var(--text-muted);">{issues.length} issues</span>
       </div>
     {/if}
+
+    {#if !isSearching && !!onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0 2px;border-top:1px solid var(--bg-sunken);">
+        <span style="font-size:var(--text-micro);color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;">Sort</span>
+        <button onclick={() => onSortChange?.(sortMode === 'latest' ? 'shift' : 'latest')} style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--border-subtle);border-radius:var(--radius-pill);background:var(--bg-elevated);color:var(--text-secondary);font:inherit;font-size:var(--text-xs);font-weight:700;cursor:pointer;transition:color 180ms ease,border-color 180ms ease;" aria-label="Sort issues: currently {sortMode === 'latest' ? 'Latest' : 'Biggest Shift'}">
+          {sortMode === 'latest' ? 'Latest' : 'Biggest Shift'}
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+    {/if}
   </div>
 
   {#if showSyncBanner}
@@ -391,9 +401,6 @@
                 collapsedSections[section.kind] = !sectionCollapsed;
               }
             }}
-            showSort={sectionIdx === 0 && !!onSortChange && !(surfaceMode === 'library' && libraryMode === 'highlights')}
-            {sortMode}
-            {onSortChange}
           />
           <div id={sectionPanelId} hidden={sectionCollapsed}>
             {#if !sectionCollapsed}

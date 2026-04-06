@@ -10,8 +10,7 @@
 
   type DisplayItem =
     | { type: 'issue'; issue: IssueSummary }
-    | { type: 'divider'; label: string; count: number; kind: FeedSection['kind'] }
-    | { type: 'sort-toggle' };
+    | { type: 'divider'; label: string; count: number; kind: FeedSection['kind'] };
 
   interface Props {
     issues: IssueSummary[];
@@ -371,7 +370,6 @@
     if (pendingOffsetFrame) cancelAnimationFrame(pendingOffsetFrame);
   });
 
-  let firstDividerIndex = $derived(displayList.findIndex(item => item.type === 'divider'));
 
   // Re-setup observer when display list changes
   $effect(() => {
@@ -411,19 +409,20 @@
       {/if}
     </div>
   {/if}
+  {#if sections.length > 0 && !searchQuery && onSortChange}
+    <div style="display:flex;align-items:center;justify-content:center;gap:2px;padding:10px 20px 4px;font-size:var(--text-sm);font-weight:600;">
+      <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:var(--radius-pill);color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;min-height:36px;" aria-label="Sort by latest" aria-pressed={sortMode === 'latest'}>Latest</button>
+      <span style="color:var(--border-divider);">&middot;</span>
+      <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:var(--radius-pill);color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size:var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;min-height:36px;" aria-label="Sort by biggest shift" aria-pressed={sortMode === 'shift'}>Most Hidden</button>
+    </div>
+  {/if}
   {#if displayList.length === 0 && searchQuery}
     <div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-size: var(--text-body);">No issues match "{searchQuery}"</div>
   {/if}
   {#each displayList as item, i}
-    {#if item.type === 'sort-toggle'}
-      <div style="display:flex;align-items:center;gap:2px;padding:8px 20px 4px;font-size: var(--text-sm);font-weight:600;">
-        <button onclick={() => onSortChange?.('latest')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'latest' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;">Latest</button>
-        <span style="color:var(--border-divider);">·</span>
-        <button onclick={() => onSortChange?.('shift')} style="background:none;border:none;cursor:pointer;padding:4px 10px;border-radius: var(--radius-sm);color:{sortMode === 'shift' ? 'var(--text-primary)' : 'var(--text-faint)'};font-size: var(--text-sm);font-weight:600;transition:color 0.2s ease-out;font-family:inherit;">Most Hidden</button>
-      </div>
-    {:else if item.type === 'divider'}
+    {#if item.type === 'divider'}
       <div class="feed-card-slot" data-idx={i} data-divider="true">
-        <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} showSort={i === firstDividerIndex} {sortMode} {onSortChange} />
+        <MobileSectionDivider label={item.label} count={item.count} kind={item.kind} />
       </div>
     {:else}
       <div class="feed-card-slot" data-idx={i}>
