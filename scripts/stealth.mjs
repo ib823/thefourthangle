@@ -149,6 +149,9 @@ async function main() {
     const f = join(jsDir, base);
     let css = await readFile(f, 'utf8');
     css = css.replace(/svelte-[a-z0-9]+/g, (m) => '_' + shortHash(m));
+    // Rename Astro scoped attribute selectors: [data-astro-cid-xxx] → [data-x]
+    css = css.replace(/\[data-astro-[a-z0-9-]+\]/g, '[data-x]');
+    css = css.replace(/data-astro-[a-z0-9-]+/g, 'data-x');
     css = css.replace(/\/\*[\s\S]*?\*\//g, '');
     await writeFile(f, css, 'utf8');
   }

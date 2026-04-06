@@ -24,6 +24,12 @@ const { current } = Astro.props;
       <span class="utility-wordmark">The Fourth Angle</span>
     </a>
 
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
     <nav class="utility-nav" aria-label="Main navigation">
       <a href="/" class="utility-nav-link">Today</a>
       <a
@@ -48,8 +54,47 @@ const { current } = Astro.props;
         Disclaimer
       </a>
     </nav>
+
+    <div class="nav-backdrop"></div>
   </div>
 </header>
+
+<script>
+  const hamburger = document.querySelector('.nav-hamburger');
+  const nav = document.querySelector('.utility-nav');
+  const backdrop = document.querySelector('.nav-backdrop');
+
+  if (hamburger && nav && backdrop) {
+    function openMenu() {
+      hamburger!.setAttribute('aria-expanded', 'true');
+      hamburger!.setAttribute('aria-label', 'Close menu');
+      nav!.classList.add('is-open');
+      backdrop!.classList.add('is-visible');
+    }
+
+    function closeMenu() {
+      hamburger!.setAttribute('aria-expanded', 'false');
+      hamburger!.setAttribute('aria-label', 'Open menu');
+      nav!.classList.remove('is-open');
+      backdrop!.classList.remove('is-visible');
+    }
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hamburger.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
+    });
+
+    nav.querySelectorAll('.utility-nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    backdrop.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+</script>
 
 <style>
   .utility-header {
@@ -95,6 +140,7 @@ const { current } = Astro.props;
     font-weight: 700;
   }
 
+  /* ── Desktop nav pill ── */
   .utility-nav {
     margin-left: auto;
     display: inline-flex;
@@ -135,28 +181,179 @@ const { current } = Astro.props;
     }
   }
 
+  /* ── Hamburger button — hidden on desktop ── */
+  .nav-hamburger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 60;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger → X animation */
+  .nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-hamburger[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ── Backdrop overlay — hidden on desktop ── */
+  .nav-backdrop {
+    display: none;
+  }
+
+  /* ── Desktop: hamburger and backdrop never shown ── */
+  @media (min-width: 721px) {
+    .nav-hamburger { display: none !important; }
+    .nav-backdrop { display: none !important; }
+  }
+
+  /* ── Mobile & Tablet ≤ 720px ── */
   @media (max-width: 720px) {
+    .nav-hamburger {
+      display: flex;
+    }
+
     .utility-header-inner {
-      padding: 0 12px;
-      gap: 12px;
+      min-height: 52px;
+      padding: 0 16px;
     }
 
     .utility-logo {
-      width: 42px;
+      width: 38px;
     }
 
     .utility-wordmark {
       display: none;
     }
 
+    /* Dropdown sheet (closed) */
+    .utility-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 6px 0 14px;
+      border: none;
+      border-radius: 0 0 16px 16px;
+      background: var(--bg);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      opacity: 0;
+      pointer-events: none;
+      clip-path: inset(0 0 100% 0);
+      transition:
+        opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        clip-path 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dropdown sheet (open) */
+    .utility-nav.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* Nav links — spacious, left-aligned */
     .utility-nav-link {
-      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 2px 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    .utility-nav-link:active {
+      color: var(--text-primary);
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .utility-nav-link--active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Backdrop overlay */
+    .nav-backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 39;
+      background: rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .nav-backdrop.is-visible {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 
+  @media (max-width: 720px) and (hover: hover) {
+    .utility-nav-link:hover {
+      color: var(--text-primary);
+      background: rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  /* ── Dark mode ── */
   @media (prefers-color-scheme: dark) {
     .utility-nav {
       background: rgba(34, 31, 27, 0.7);
+    }
+  }
+
+  @media (max-width: 720px) and (prefers-color-scheme: dark) {
+    .utility-nav {
+      background: #1e1c19;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .utility-nav-link:active {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-backdrop {
+      background: rgba(0, 0, 0, 0.4);
     }
   }
 </style>
