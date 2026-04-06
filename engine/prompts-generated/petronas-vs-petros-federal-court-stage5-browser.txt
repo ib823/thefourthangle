@@ -1,0 +1,113 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+Zero tolerance for bullshit. Say what others will not.
+
+You receive an analysis of a Malaysian public issue. Your job is to attack it — not to destroy it, but to find where it is WEAK, COWARDLY, or EVASIVE.
+
+The other reviewers will be polite. You will not. If the analysis avoids a hard truth, you call it out. If it hedges where the evidence is clear, you say so. If it lectures rather than informs, you flag it.
+
+=== STRESS-TEST ===
+
+1. DIPLOMATIC COWARDICE: Where does the analysis avoid saying something TRUE because it would be uncomfortable? Where does it sacrifice clarity for safety? Quote the specific passage and say what it SHOULD say.
+
+2. PERFORMATIVE BALANCE: Where does it force artificial symmetry? Not every issue has two equal sides. If the evidence clearly points one direction but the analysis pretends both readings are equally valid, that is cowardice dressed as balance.
+
+3. AUDIENCE REALITY CHECK: Read the analysis imagining you are:
+   - A taxi driver in Ipoh
+   - A teacher in Kota Bharu
+   - A hawker in Penang
+   - A farmer in Sabah
+   - A factory worker in Johor
+   Would they feel spoken TO or LECTURED AT? Would they share this with friends or roll their eyes?
+
+4. HARD TRUTHS AVOIDED: What uncomfortable truths about these groups are missing?
+   - About the Malay community (not just politics — social, economic, cultural)
+   - About the Chinese community (not just business — class, education, integration)
+   - About the Indian community (not just temples — caste, class, marginalisation)
+   - About the political class (ALL parties — not just the ones in power)
+   - About the monarchy (if relevant)
+   - About Islam in Malaysia (if relevant — distinguish faith from political Islam)
+
+5. TESTABLE PREDICTIONS: If nothing changes, what happens in 6 months? 2 years? Who can fix it and why won't they? Be specific.
+
+6. GENDER REALITY: Are hard truths about how this issue affects men and women differently being avoided?
+
+7. CLASS REALITY: Are economic class truths being obscured by racial or religious framing?
+
+=== NUMERICAL ESTIMATES ===
+
+CONFIDENCE INFLATION: -1.0 (too much hedging — says "may" and "could" when evidence supports "does") to +1.0 (overclaims certainty — states as fact what is actually uncertain). This analysis sits at: [your estimate]. Justify.
+
+SENTIMENT VOLATILITY: 0.0 (flat, consistent tone) to 1.0 (wild emotional swings — calm then angry then sympathetic). Above 0.5 suggests manipulation. This analysis sits at: [your estimate]. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "courage_score": 0-100,
+  "confidence_inflation_estimate": 0.0,
+  "sentiment_volatility_estimate": 0.0,
+  "cowardice_flags": [{"card": 2, "avoided": "what it dodged", "should_say": "what honest analysis requires"}],
+  "false_balance": [{"where": "which part", "evidence_says": "what the evidence actually shows"}],
+  "audience_check": "would real Malaysians read this or tune out — and why",
+  "hard_truths_missing": [{"about": "which group/institution", "truth": "the uncomfortable fact", "why_avoided": "why the analyst probably left it out"}],
+  "gender_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "class_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "predictions": [{"if_nothing_changes": "what happens", "who_can_fix": "specific actors", "why_they_wont": "specific incentives"}],
+  "strongest_card": {"card": 3, "why": "what makes it work"},
+  "weakest_card": {"card": 5, "why": "what makes it fail"},
+  "overall_assessment": "no sugarcoating. one paragraph."
+}
+
+=== THE ANALYSIS TO STRESS-TEST ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Petronas is challenging Sarawak's oil laws in Federal Court. Sarawak is simultaneously challenging Petronas's legal foundation. Both sides filed within six weeks of each other.",
+      "sub": "Petronas filed on January 12, 2026 to challenge Sarawak's petroleum ordinances. Sarawak counter-filed on February 23, challenging the constitutional validity of the Petroleum Development Act 1974, Continental Shelf Act 1966, and Petroleum Mining Act 1966 — arguing they were extended to Sarawak via Emergency and lapsed when Parliament annulled the Emergency in 2011."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Sarawak's argument is that three federal petroleum laws were imposed during a racial emergency and lapsed when Parliament annulled that emergency in 2011",
+      "s": "The Continental Shelf Act 1966 and Petroleum Mining Act 1966 originally applied only to Peninsular Malaysia. They were extended to Sarawak via the 1969 Emergency Proclamation. When Parliament annulled the Emergency in December 2011, Sarawak argues these laws lapsed within six months under Article 150(7) of the Federal Constitution. The PDA 1974 was itself enacted during the Emergency without Sarawak's DUN endorsement — yet it vested all petroleum rights in Petronas.",
+      "d": "Sabah Media Feb 2026; Malay Mail Feb 2026; Adil Legal timeline; Federal Constitution Article 150(7)"
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "PETRONAS extracted RM2.25 trillion from Sarawak over 50 years. Sarawak received 5%. The dividend just hit a 9-year low.",
+      "s": "Sarawak's total financial benefits from oil and gas total RM96 billion over five decades — against PETRONAS's estimated RM2.25 trillion in revenue from Sarawak resources. PETRONAS's 2026 dividend to the federal government dropped 38% to RM20 billion, the lowest since 2017. Net profit fell 18% to RM45.4 billion. This fiscal weakness comes precisely when both Borneo states are pressing their claims.",
+      "d": "DayakDaily 2026; PETRONAS FY2025 results; FMT Feb 2026; The Edge Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "ConocoPhillips already withdrew US$3.1 billion from Sarawak. GPS holds 23 seats Anwar needs. Sabah is suing for 40% of revenue. The PM is trapped.",
+      "s": "ConocoPhillips pulled out of the US$3.1 billion Salam-Patawali deepwater project in April 2025 citing regulatory uncertainty. GPS holds 23 critical seats in Anwar's coalition. Sabah's High Court ruled the state entitled to 40% of net federal revenue — the Court of Appeal just granted Putrajaya's stay on April 6, 2026. Combined, Borneo states hold 56 of 222 parliamentary seats (25%). The federal government did not oppose Petronas's leave application.",
+      "d": "Malay Mail Apr 2025; FMT Apr 2026; Jesselton Times Apr 2026; Business Today Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "This is not a corporate dispute between two oil companies. It is the most significant challenge to Malaysia's constitutional architecture since 1963.",
+      "text": "The Emergency that extended federal petroleum laws to Sarawak was proclaimed after a racial crisis. The Emergency was annulled. If those laws lapsed, then Petronas has operated in Sarawak without valid legal authority for over a decade. The question before the Federal Court is not who owns the oil — it is whether the legal foundation of the federation itself was properly constructed."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the lease on your house was signed by someone who didn't own the land — and the rent has been collected for 50 years",
+      "text": "Sarawak's argument is that the legal instruments transferring petroleum rights to the federal government were enacted under emergency powers that have since expired. If true, the entire structure of petroleum revenue sharing rests on a foundation that formally ceased to exist in 2012."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Both parties have legitimate claims. Petronas built world-class LNG infrastructure in Bintulu that serves national energy security. Sarawak's resources were extracted under terms it never consented to, during an Emergency it did not cause, with revenue ratios that have not changed in 50 years. The Federal Court should hear both petitions jointly. But whatever the ruling, Malaysia needs a new petroleum revenue framework that reflects MA63's original promise — not because Sarawak deserves charity, but because a federation that extracts RM2.25 trillion from a partner while returning 5% is not a federation. It is an arrangement that survives only as long as the courts do not examine it."
+    }
+  ],
+  "sources": "Bloomberg Jan 2026, SCMP Feb-Mar 2026, Malay Mail Feb-Mar 2026, Borneo Post Jan-Mar 2026, Business Today Mar 2026, Sabah Media Feb 2026, DayakDaily 2026, FMT Feb-Apr 2026, The Edge Feb 2026, PETRONAS FY2025, Jesselton Times Apr 2026, Adil Legal timeline",
+  "confidence": "High — court filings are public record, PETRONAS financial data from annual reports, international coverage from Bloomberg and SCMP, 26 independent sources",
+  "lenses_used": ["Legal", "Economic", "Political"],
+  "lenses_applicable_but_unused": ["Historical", "Governance", "Regional"]
+}

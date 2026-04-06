@@ -1,0 +1,112 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "1.2 million CIMB customer records were listed for sale on a cybercrime forum. CIMB denied it with a tweet. One month later, four regulators have said nothing.",
+      "sub": "On March 2, 2026, a user on Breachforums listed 1.2 million CIMB records — names, account numbers, card data, mobile numbers. CIMB denied the breach on X two days later, stating 'all systems are secure.' As of April 6: no independent forensic audit, no statement from Bank Negara, NACSA, MCMC, or the Personal Data Protection Commissioner."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Malaysia's mandatory 72-hour breach notification law has been in effect since June 2025. The CIMB incident is its first real test — and nobody is checking.",
+      "s": "The PDPA Amendment Act 2024 requires breach notification to the Commissioner within 72 hours and to affected individuals within 7 days if significant harm is likely. The Cyber Security Act 2024 requires NCII entities (including banks) to report incidents to NACSA within 6 hours. If CIMB determined no breach occurred, the question is what investigation methodology was used — and whether any regulator validated it. Bank Negara ordered an independent forensic investigation when iPay88 was breached in 2022. No equivalent action has been taken here.",
+      "d": "PDPA Amendment 2024; Cyber Security Act 2024; BNM iPay88 directive 2022; Malay Mail Mar 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "Malaysia's average breach detection time is 277 days. Only 2% of organisations are at 'Mature' cybersecurity readiness. A denial is not a diagnosis.",
+      "s": "IBM's Cost of a Data Breach Report found Malaysian organisations take an average of 277 days to identify and contain a breach — 83 days longer than the global average. Cisco's 2024 Cybersecurity Readiness Index found only 2% of Malaysian organisations at 'Mature' readiness; 66% were at 'Formative' or 'Beginner' stage. Reported data breach cases surged 1,192% from 50 in 2022 to 646 in 2023.",
+      "d": "IBM 2022; Cisco 2024; Digital Ministry Oct 2024; CyberSecurity Malaysia 2025"
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "MySejahtera: denied, then confirmed. Maybank 2022: denied, never verified. CIMB 2026: denied, no audit. The pattern is the policy.",
+      "s": "In 2023, the Auditor-General confirmed 3 million MySejahtera user records were downloaded by a 'Super Admin' — after the government denied any breach. In December 2022, Maybank denied a breach when 13 million records surfaced online; no independent verification was ever conducted. CIMB's denial follows the same template: assert security, provide no evidence, face no regulatory consequence. Malaysia has passed world-class data protection laws. It has not changed institutional behaviour.",
+      "d": "Auditor-General Feb 2023; Malay Mail Dec 2022; The Star Mar 2026; DLA Piper 2025"
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether the breach is real. It is whether Malaysia's new data protection framework works when the entity denying it is a systemically important bank.",
+      "text": "Breachforums has a history of both genuine and fabricated listings. The data may or may not be authentic. But that uncertainty is precisely why independent verification matters. A bank with 8 million Malaysian customers cannot be judge and jury of its own data security — not when the law requires 72-hour notification and four regulators have the authority to demand proof."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's PDPA amendments and Cyber Security Act 2024 are genuine progress — mandatory notification, enhanced penalties, DPO requirements. But the CIMB incident reveals the enforcement gap: when a Tier-1 bank denies a breach, who verifies the denial? The iPay88 precedent in 2022 showed BNM can order independent audits. The silence since March 2026 shows it chooses not to. Until regulators treat denial-without-evidence as a red flag rather than a resolution, Malaysia's data protection framework will remain impressive on paper and absent in practice."
+    }
+  ],
+  "sources": "The Star Mar 2026, The Edge Mar 2026, FMT Mar 2026, Bernama Mar 2026, Lowyat Mar 2026, Business Today Mar 2026, Darknetsearch Mar 2026, IBM 2022/2025, Cisco 2024, Digital Ministry Oct 2024, CyberSecurity Malaysia 2025, BNM iPay88 2022, DLA Piper 2025, Chambers PDPA 2026",
+  "confidence": "Medium — the breach claim itself is unverified and platform has documented fabricated listings; however the regulatory silence and verification gap are independently verifiable facts",
+  "lenses_used": ["Legal", "Technology", "Governance"],
+  "lenses_applicable_but_unused": ["Economic", "Rights"]
+}

@@ -1,0 +1,116 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's top two environmental regulators have been charged with corruption — the director-general for selling an EIA exemption on a road that already killed nine people.",
+      "sub": "DOE Director-General Wan Abdul Latiff took RM100,000 to consider bypassing an Environmental Impact Assessment for the Bukit Kukus paired road in Penang — where a 2018 landslide killed 9 workers. His deputy funnelled bribes through her daughter's bank account from a waste company she was supposed to regulate. Both charged in April 2026."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The DG publicly asked for 3,000 more staff to fight pollution. He was allegedly taking bribes at the time.",
+      "s": "In November 2023, DOE DG Wan Abdul Latiff told media the department needed 3,000 additional enforcement officers on top of the existing 1,100 to monitor nearly 60,000 factories. Two months later, in January 2025, he allegedly received RM100,000 in cash at his Putrajaya office to consider an EIA exemption. The DOE operates at a 1:55 ratio of officers to monitored facilities.",
+      "d": "FMT Nov 2023; Malay Mail Apr 2026; Malaysiakini Apr 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "The e-waste corruption ran for years — it took the arrests of the DG and deputy to trigger a nationwide import ban",
+      "s": "MACC detained six e-waste company owners in January 2026, freezing RM7.2 million and RM10.2 million in 16 bank accounts. Seven Selangor companies were linked to illegal e-waste operations spanning five years. Only after the DOE leadership was arrested on January 29 did Malaysia impose an immediate nationwide ban on e-waste imports on February 4 — reclassifying it under 'absolute prohibition.' 800+ containers of e-waste remain stranded at Port Klang.",
+      "d": "Eco-Business Jan 2026; Euronews Feb 2026; The Star Apr 2026; Malay Mail Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "The DG faces 20 years under the MACC Act. The deputy faces 2 years under the Penal Code. Same institution, vastly different accountability.",
+      "s": "Wan Abdul Latiff was charged under MACC Act Section 16(a)(B) — corruptly receiving gratification — carrying up to 20 years imprisonment. Dr. Norhazni was charged under Penal Code Section 165 — obtaining valuable thing without consideration — carrying up to 2 years. The disparity reflects different alleged conduct but raises questions about whether the deputy's charges are proportionate to years of payments from a company she regulated.",
+      "d": "Bernama Apr 2026; The Star Apr 2026; FMT Apr 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "Every EIA approval, every e-waste licence, every environmental exemption granted during their tenure is now under a cloud — but nobody is reviewing them",
+      "text": "The charges focus on one bribe for one road and payments from one waste company. But these officials oversaw all environmental approvals nationwide. How many other EIAs were compromised? How many e-waste exemptions were sold? No systematic review has been announced."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the building inspector was paid to skip the fire exits — after the building burned down",
+      "text": "The Bukit Kukus road already killed 9 people in a 2018 landslide. The EIA exemption would have allowed resumed construction without proper environmental assessment. The regulator was not just failing to enforce — he was actively dismantling the safeguard designed to prevent the next disaster."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The prosecution is necessary but insufficient. One DG's bribe does not explain decades of DOE under-enforcement — 1,100 officers for 60,000 facilities is a structural choice, not a staffing accident. Every EIA approved during the charged period should be independently reviewed. The e-waste ban, triggered only by arrests, should have been imposed years earlier based on known smuggling data. Malaysia cannot credibly oversee data centre environmental impact, rare earth waste, or river pollution while its environmental regulator operates at a 1:55 officer-to-facility ratio and its leadership was for sale."
+    }
+  ],
+  "sources": "Malay Mail Apr 2026, FMT Apr 2026, Bernama Apr 2026, The Star Apr 2026, Malaysiakini Apr 2026, The Vibes Apr 2026, Eco-Business Jan 2026, Borneo Post Jan 2026, Euronews Feb 2026, Sahabat Alam Malaysia Apr 2026, Aliran Feb 2026, FMT Nov 2023, The Star Jan 2026, The Edge Mar 2026, NST Apr 2026",
+  "confidence": "High — charge sheets are public record, MACC statements on record, multiple court reporting sources, 25 independent sources",
+  "lenses_used": ["Governance", "Environmental", "Legal"],
+  "lenses_applicable_but_unused": ["Economic", "Political", "Health"]
+}

@@ -1,0 +1,113 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+Zero tolerance for bullshit. Say what others will not.
+
+You receive an analysis of a Malaysian public issue. Your job is to attack it — not to destroy it, but to find where it is WEAK, COWARDLY, or EVASIVE.
+
+The other reviewers will be polite. You will not. If the analysis avoids a hard truth, you call it out. If it hedges where the evidence is clear, you say so. If it lectures rather than informs, you flag it.
+
+=== STRESS-TEST ===
+
+1. DIPLOMATIC COWARDICE: Where does the analysis avoid saying something TRUE because it would be uncomfortable? Where does it sacrifice clarity for safety? Quote the specific passage and say what it SHOULD say.
+
+2. PERFORMATIVE BALANCE: Where does it force artificial symmetry? Not every issue has two equal sides. If the evidence clearly points one direction but the analysis pretends both readings are equally valid, that is cowardice dressed as balance.
+
+3. AUDIENCE REALITY CHECK: Read the analysis imagining you are:
+   - A taxi driver in Ipoh
+   - A teacher in Kota Bharu
+   - A hawker in Penang
+   - A farmer in Sabah
+   - A factory worker in Johor
+   Would they feel spoken TO or LECTURED AT? Would they share this with friends or roll their eyes?
+
+4. HARD TRUTHS AVOIDED: What uncomfortable truths about these groups are missing?
+   - About the Malay community (not just politics — social, economic, cultural)
+   - About the Chinese community (not just business — class, education, integration)
+   - About the Indian community (not just temples — caste, class, marginalisation)
+   - About the political class (ALL parties — not just the ones in power)
+   - About the monarchy (if relevant)
+   - About Islam in Malaysia (if relevant — distinguish faith from political Islam)
+
+5. TESTABLE PREDICTIONS: If nothing changes, what happens in 6 months? 2 years? Who can fix it and why won't they? Be specific.
+
+6. GENDER REALITY: Are hard truths about how this issue affects men and women differently being avoided?
+
+7. CLASS REALITY: Are economic class truths being obscured by racial or religious framing?
+
+=== NUMERICAL ESTIMATES ===
+
+CONFIDENCE INFLATION: -1.0 (too much hedging — says "may" and "could" when evidence supports "does") to +1.0 (overclaims certainty — states as fact what is actually uncertain). This analysis sits at: [your estimate]. Justify.
+
+SENTIMENT VOLATILITY: 0.0 (flat, consistent tone) to 1.0 (wild emotional swings — calm then angry then sympathetic). Above 0.5 suggests manipulation. This analysis sits at: [your estimate]. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "courage_score": 0-100,
+  "confidence_inflation_estimate": 0.0,
+  "sentiment_volatility_estimate": 0.0,
+  "cowardice_flags": [{"card": 2, "avoided": "what it dodged", "should_say": "what honest analysis requires"}],
+  "false_balance": [{"where": "which part", "evidence_says": "what the evidence actually shows"}],
+  "audience_check": "would real Malaysians read this or tune out — and why",
+  "hard_truths_missing": [{"about": "which group/institution", "truth": "the uncomfortable fact", "why_avoided": "why the analyst probably left it out"}],
+  "gender_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "class_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "predictions": [{"if_nothing_changes": "what happens", "who_can_fix": "specific actors", "why_they_wont": "specific incentives"}],
+  "strongest_card": {"card": 3, "why": "what makes it work"},
+  "weakest_card": {"card": 5, "why": "what makes it fail"},
+  "overall_assessment": "no sugarcoating. one paragraph."
+}
+
+=== THE ANALYSIS TO STRESS-TEST ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's migrant worker visa system is run by a single company whose founder is wanted by Interpol — and the government just extended his contract through 2031.",
+      "sub": "Bloomberg's 10-month investigation found Bestinet founder Aminul Islam's companies pocketed RM400 million in a decade. Workers pay up to RM25,000 each — more than double what they paid before Bestinet. MACC cleared the company in September 2024, the same month Cabinet finalised a 6-year contract extension worth an estimated RM3.2 billion."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The government ran the system for six years without a signed contract — then doubled the per-worker fee to RM215 when it finally signed one",
+      "s": "PAC chastised the government in July 2024 for operating FWCMS since 2018 with only a Letter of Acceptance. The formalised contract (September 2024) set fees at RM215 per permit — exceeding the RM86 rate approved by the PM's own Public-Private Partnership Unit and the RM120 Bestinet itself originally requested. The government has no access to the system's source code.",
+      "d": "Bloomberg Jan 2026; PAC Jul 2024; The Edge Nov 2024; Malaysiakini Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Rights",
+      "h": "Interpol requested Aminul Islam's arrest. Malaysia asked Bangladesh to drop its trafficking probes instead.",
+      "s": "In October 2024, Interpol's NCB Bangladesh wrote to NCB Malaysia requesting arrest and extradition of Aminul Islam and Ruhul Amin Swapan for trafficking and extortion. In May 2025, Malaysia's Human Resources Ministry wrote to Bangladesh asking it to withdraw 'unsubstantiated allegations' to protect Malaysia's US TIP Report ranking. By July 2025, Bangladesh agreed to stop investigating.",
+      "d": "Bloomberg Nov 2024; Bloomberg May 2025; Malaysiakini Jul 2025; Malay Mail Nov 2024"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Zahid set it up. Anwar extended it. No coalition will dismantle it because the fees flow across party lines.",
+      "s": "Zahid Hamidi was Home Minister in 2015 when Bestinet's system was adopted and the 10-agency cartel imposed. Six Bloomberg sources say he 'handled the politics.' Anwar's Cabinet extended the contract in 2024 despite a Madani Research Centre memo warning costs had doubled. MACC, whose chief is himself under separate investigation, declared 'no further action.' The system survives coalition changes because everyone benefits.",
+      "d": "Bloomberg Jan 2026; C4 Center Jul 2024; Bestinet.com.my Sep 2024; MalaysiaNow Jan 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "This is not a migrant worker problem. It is a government procurement scandal where the product being sold is human beings.",
+      "text": "A syndicate siphoned US$1 billion from Bangladesh. Workers arrive in debt bondage. The UN and HRW have sounded alarms. Bestinet's response to Bloomberg's investigation was not to reform — it was to file a RM1 billion libel suit against 10 defendants including media and politicians."
+    },
+    {
+      "t": "analogy",
+      "h": "Like outsourcing passport control to a toll booth operator — and then discovering the operator charges five times the posted rate, has no contract, and is wanted in another country",
+      "text": "The government handed control of its entire migrant worker processing system to a private company, lost access to the source code, paid more than its own approved rate, and continued the arrangement after Interpol flagged the founder for trafficking."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Digital migration systems are legitimate governance tools. But Bestinet's FWCMS is a monopoly that enriches connected individuals while trapping workers in debt bondage. The fix requires open-tendering the system with government-owned source code, capping recruitment fees at ILO standards, and cooperating with Bangladesh's criminal investigation instead of suppressing it. Every month of delay costs workers RM25,000 each and costs Malaysia its credibility on human rights."
+    }
+  ],
+  "sources": "Bloomberg Jan 2026, Bloomberg May 2025, Bloomberg Nov 2024, MalaysiaNow Jan 2026, MalaysiaNow Feb 2026, The Edge Nov 2024, The Edge Feb 2026, PAC Jul 2024, OHCHR Nov 2025, HRW Nov 2025, Malay Mail Nov 2024, Malaysiakini Jul 2025, FMT Apr 2025, FMT May 2025, Daily Star May 2024, C4 Center Jul 2024, US TIP Report 2025, Andy Hall documentation",
+  "confidence": "High — Bloomberg's 10-month investigation corroborated by PAC findings, OHCHR alarms, HRW documentation, Interpol extradition request, court proceedings, and 26 independent sources",
+  "lenses_used": ["Governance", "Rights", "Political"],
+  "lenses_applicable_but_unused": ["Economic", "Legal", "Regional"]
+}

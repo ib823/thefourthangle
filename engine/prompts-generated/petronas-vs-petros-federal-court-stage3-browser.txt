@@ -1,0 +1,116 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Petronas is challenging Sarawak's oil laws in Federal Court. Sarawak is simultaneously challenging Petronas's legal foundation. Both sides filed within six weeks of each other.",
+      "sub": "Petronas filed on January 12, 2026 to challenge Sarawak's petroleum ordinances. Sarawak counter-filed on February 23, challenging the constitutional validity of the Petroleum Development Act 1974, Continental Shelf Act 1966, and Petroleum Mining Act 1966 — arguing they were extended to Sarawak via Emergency and lapsed when Parliament annulled the Emergency in 2011."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Sarawak's argument is that three federal petroleum laws were imposed during a racial emergency and lapsed when Parliament annulled that emergency in 2011",
+      "s": "The Continental Shelf Act 1966 and Petroleum Mining Act 1966 originally applied only to Peninsular Malaysia. They were extended to Sarawak via the 1969 Emergency Proclamation. When Parliament annulled the Emergency in December 2011, Sarawak argues these laws lapsed within six months under Article 150(7) of the Federal Constitution. The PDA 1974 was itself enacted during the Emergency without Sarawak's DUN endorsement — yet it vested all petroleum rights in Petronas.",
+      "d": "Sabah Media Feb 2026; Malay Mail Feb 2026; Adil Legal timeline; Federal Constitution Article 150(7)"
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "PETRONAS extracted RM2.25 trillion from Sarawak over 50 years. Sarawak received 5%. The dividend just hit a 9-year low.",
+      "s": "Sarawak's total financial benefits from oil and gas total RM96 billion over five decades — against PETRONAS's estimated RM2.25 trillion in revenue from Sarawak resources. PETRONAS's 2026 dividend to the federal government dropped 38% to RM20 billion, the lowest since 2017. Net profit fell 18% to RM45.4 billion. This fiscal weakness comes precisely when both Borneo states are pressing their claims.",
+      "d": "DayakDaily 2026; PETRONAS FY2025 results; FMT Feb 2026; The Edge Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "ConocoPhillips already withdrew US$3.1 billion from Sarawak. GPS holds 23 seats Anwar needs. Sabah is suing for 40% of revenue. The PM is trapped.",
+      "s": "ConocoPhillips pulled out of the US$3.1 billion Salam-Patawali deepwater project in April 2025 citing regulatory uncertainty. GPS holds 23 critical seats in Anwar's coalition. Sabah's High Court ruled the state entitled to 40% of net federal revenue — the Court of Appeal just granted Putrajaya's stay on April 6, 2026. Combined, Borneo states hold 56 of 222 parliamentary seats (25%). The federal government did not oppose Petronas's leave application.",
+      "d": "Malay Mail Apr 2025; FMT Apr 2026; Jesselton Times Apr 2026; Business Today Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "This is not a corporate dispute between two oil companies. It is the most significant challenge to Malaysia's constitutional architecture since 1963.",
+      "text": "The Emergency that extended federal petroleum laws to Sarawak was proclaimed after a racial crisis. The Emergency was annulled. If those laws lapsed, then Petronas has operated in Sarawak without valid legal authority for over a decade. The question before the Federal Court is not who owns the oil — it is whether the legal foundation of the federation itself was properly constructed."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the lease on your house was signed by someone who didn't own the land — and the rent has been collected for 50 years",
+      "text": "Sarawak's argument is that the legal instruments transferring petroleum rights to the federal government were enacted under emergency powers that have since expired. If true, the entire structure of petroleum revenue sharing rests on a foundation that formally ceased to exist in 2012."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Both parties have legitimate claims. Petronas built world-class LNG infrastructure in Bintulu that serves national energy security. Sarawak's resources were extracted under terms it never consented to, during an Emergency it did not cause, with revenue ratios that have not changed in 50 years. The Federal Court should hear both petitions jointly. But whatever the ruling, Malaysia needs a new petroleum revenue framework that reflects MA63's original promise — not because Sarawak deserves charity, but because a federation that extracts RM2.25 trillion from a partner while returning 5% is not a federation. It is an arrangement that survives only as long as the courts do not examine it."
+    }
+  ],
+  "sources": "Bloomberg Jan 2026, SCMP Feb-Mar 2026, Malay Mail Feb-Mar 2026, Borneo Post Jan-Mar 2026, Business Today Mar 2026, Sabah Media Feb 2026, DayakDaily 2026, FMT Feb-Apr 2026, The Edge Feb 2026, PETRONAS FY2025, Jesselton Times Apr 2026, Adil Legal timeline",
+  "confidence": "High — court filings are public record, PETRONAS financial data from annual reports, international coverage from Bloomberg and SCMP, 26 independent sources",
+  "lenses_used": ["Legal", "Economic", "Political"],
+  "lenses_applicable_but_unused": ["Historical", "Governance", "Regional"]
+}

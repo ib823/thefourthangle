@@ -1,0 +1,120 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's top two environmental regulators have been charged with corruption — the director-general for selling an EIA exemption on a road that already killed nine people.",
+      "sub": "DOE Director-General Wan Abdul Latiff took RM100,000 to consider bypassing an Environmental Impact Assessment for the Bukit Kukus paired road in Penang — where a 2018 landslide killed 9 workers. His deputy funnelled bribes through her daughter's bank account from a waste company she was supposed to regulate. Both charged in April 2026."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "The DG publicly asked for 3,000 more staff to fight pollution. He was allegedly taking bribes at the time.",
+      "s": "In November 2023, DOE DG Wan Abdul Latiff told media the department needed 3,000 additional enforcement officers on top of the existing 1,100 to monitor nearly 60,000 factories. Two months later, in January 2025, he allegedly received RM100,000 in cash at his Putrajaya office to consider an EIA exemption. The DOE operates at a 1:55 ratio of officers to monitored facilities.",
+      "d": "FMT Nov 2023; Malay Mail Apr 2026; Malaysiakini Apr 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Environmental",
+      "h": "The e-waste corruption ran for years — it took the arrests of the DG and deputy to trigger a nationwide import ban",
+      "s": "MACC detained six e-waste company owners in January 2026, freezing RM7.2 million and RM10.2 million in 16 bank accounts. Seven Selangor companies were linked to illegal e-waste operations spanning five years. Only after the DOE leadership was arrested on January 29 did Malaysia impose an immediate nationwide ban on e-waste imports on February 4 — reclassifying it under 'absolute prohibition.' 800+ containers of e-waste remain stranded at Port Klang.",
+      "d": "Eco-Business Jan 2026; Euronews Feb 2026; The Star Apr 2026; Malay Mail Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "The DG faces 20 years under the MACC Act. The deputy faces 2 years under the Penal Code. Same institution, vastly different accountability.",
+      "s": "Wan Abdul Latiff was charged under MACC Act Section 16(a)(B) — corruptly receiving gratification — carrying up to 20 years imprisonment. Dr. Norhazni was charged under Penal Code Section 165 — obtaining valuable thing without consideration — carrying up to 2 years. The disparity reflects different alleged conduct but raises questions about whether the deputy's charges are proportionate to years of payments from a company she regulated.",
+      "d": "Bernama Apr 2026; The Star Apr 2026; FMT Apr 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "Every EIA approval, every e-waste licence, every environmental exemption granted during their tenure is now under a cloud — but nobody is reviewing them",
+      "text": "The charges focus on one bribe for one road and payments from one waste company. But these officials oversaw all environmental approvals nationwide. How many other EIAs were compromised? How many e-waste exemptions were sold? No systematic review has been announced."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the building inspector was paid to skip the fire exits — after the building burned down",
+      "text": "The Bukit Kukus road already killed 9 people in a 2018 landslide. The EIA exemption would have allowed resumed construction without proper environmental assessment. The regulator was not just failing to enforce — he was actively dismantling the safeguard designed to prevent the next disaster."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "The prosecution is necessary but insufficient. One DG's bribe does not explain decades of DOE under-enforcement — 1,100 officers for 60,000 facilities is a structural choice, not a staffing accident. Every EIA approved during the charged period should be independently reviewed. The e-waste ban, triggered only by arrests, should have been imposed years earlier based on known smuggling data. Malaysia cannot credibly oversee data centre environmental impact, rare earth waste, or river pollution while its environmental regulator operates at a 1:55 officer-to-facility ratio and its leadership was for sale."
+    }
+  ],
+  "sources": "Malay Mail Apr 2026, FMT Apr 2026, Bernama Apr 2026, The Star Apr 2026, Malaysiakini Apr 2026, The Vibes Apr 2026, Eco-Business Jan 2026, Borneo Post Jan 2026, Euronews Feb 2026, Sahabat Alam Malaysia Apr 2026, Aliran Feb 2026, FMT Nov 2023, The Star Jan 2026, The Edge Mar 2026, NST Apr 2026",
+  "confidence": "High — charge sheets are public record, MACC statements on record, multiple court reporting sources, 25 independent sources",
+  "lenses_used": ["Governance", "Environmental", "Legal"],
+  "lenses_applicable_but_unused": ["Economic", "Political", "Health"]
+}

@@ -1,0 +1,115 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "1.2 million CIMB customer records were listed for sale on a cybercrime forum. CIMB denied it with a tweet. One month later, four regulators have said nothing.",
+      "sub": "On March 2, 2026, a user on Breachforums listed 1.2 million CIMB records — names, account numbers, card data, mobile numbers. CIMB denied the breach on X two days later, stating 'all systems are secure.' As of April 6: no independent forensic audit, no statement from Bank Negara, NACSA, MCMC, or the Personal Data Protection Commissioner."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Malaysia's mandatory 72-hour breach notification law has been in effect since June 2025. The CIMB incident is its first real test — and nobody is checking.",
+      "s": "The PDPA Amendment Act 2024 requires breach notification to the Commissioner within 72 hours and to affected individuals within 7 days if significant harm is likely. The Cyber Security Act 2024 requires NCII entities (including banks) to report incidents to NACSA within 6 hours. If CIMB determined no breach occurred, the question is what investigation methodology was used — and whether any regulator validated it. Bank Negara ordered an independent forensic investigation when iPay88 was breached in 2022. No equivalent action has been taken here.",
+      "d": "PDPA Amendment 2024; Cyber Security Act 2024; BNM iPay88 directive 2022; Malay Mail Mar 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Technology",
+      "h": "Malaysia's average breach detection time is 277 days. Only 2% of organisations are at 'Mature' cybersecurity readiness. A denial is not a diagnosis.",
+      "s": "IBM's Cost of a Data Breach Report found Malaysian organisations take an average of 277 days to identify and contain a breach — 83 days longer than the global average. Cisco's 2024 Cybersecurity Readiness Index found only 2% of Malaysian organisations at 'Mature' readiness; 66% were at 'Formative' or 'Beginner' stage. Reported data breach cases surged 1,192% from 50 in 2022 to 646 in 2023.",
+      "d": "IBM 2022; Cisco 2024; Digital Ministry Oct 2024; CyberSecurity Malaysia 2025"
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "MySejahtera: denied, then confirmed. Maybank 2022: denied, never verified. CIMB 2026: denied, no audit. The pattern is the policy.",
+      "s": "In 2023, the Auditor-General confirmed 3 million MySejahtera user records were downloaded by a 'Super Admin' — after the government denied any breach. In December 2022, Maybank denied a breach when 13 million records surfaced online; no independent verification was ever conducted. CIMB's denial follows the same template: assert security, provide no evidence, face no regulatory consequence. Malaysia has passed world-class data protection laws. It has not changed institutional behaviour.",
+      "d": "Auditor-General Feb 2023; Malay Mail Dec 2022; The Star Mar 2026; DLA Piper 2025"
+    },
+    {
+      "t": "reframe",
+      "h": "The question is not whether the breach is real. It is whether Malaysia's new data protection framework works when the entity denying it is a systemically important bank.",
+      "text": "Breachforums has a history of both genuine and fabricated listings. The data may or may not be authentic. But that uncertainty is precisely why independent verification matters. A bank with 8 million Malaysian customers cannot be judge and jury of its own data security — not when the law requires 72-hour notification and four regulators have the authority to demand proof."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Malaysia's PDPA amendments and Cyber Security Act 2024 are genuine progress — mandatory notification, enhanced penalties, DPO requirements. But the CIMB incident reveals the enforcement gap: when a Tier-1 bank denies a breach, who verifies the denial? The iPay88 precedent in 2022 showed BNM can order independent audits. The silence since March 2026 shows it chooses not to. Until regulators treat denial-without-evidence as a red flag rather than a resolution, Malaysia's data protection framework will remain impressive on paper and absent in practice."
+    }
+  ],
+  "sources": "The Star Mar 2026, The Edge Mar 2026, FMT Mar 2026, Bernama Mar 2026, Lowyat Mar 2026, Business Today Mar 2026, Darknetsearch Mar 2026, IBM 2022/2025, Cisco 2024, Digital Ministry Oct 2024, CyberSecurity Malaysia 2025, BNM iPay88 2022, DLA Piper 2025, Chambers PDPA 2026",
+  "confidence": "Medium — the breach claim itself is unverified and platform has documented fabricated listings; however the regulatory silence and verification gap are independently verifiable facts",
+  "lenses_used": ["Legal", "Technology", "Governance"],
+  "lenses_applicable_but_unused": ["Economic", "Rights"]
+}

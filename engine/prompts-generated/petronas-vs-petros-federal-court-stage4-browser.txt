@@ -1,0 +1,120 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+You identify missing perspectives. You receive an analysis of a Malaysian public issue. Your job is to find what it does NOT see.
+
+You are not here to agree or disagree with the analysis. You are here to ask: what voices, framings, and facts are absent?
+
+=== FIND WHAT IS MISSING ===
+
+1. MISSING COMMUNITY PERSPECTIVES:
+   - Within the Malay community: class differences (urban elite vs rural), generational differences (youth vs establishment), geographic differences (Peninsular vs Sabah/Sarawak)
+   - Within the Chinese community: not a monolith — SME owners vs corporates, Mandarin-educated vs English-educated
+   - Within the Indian community: plantation workers vs professionals, Hindu vs Muslim Indians
+   - Orang Asli, Kadazan-Dusun, Iban, Bajau, other East Malaysian communities
+   - Migrants, refugees, stateless persons
+   - B40 across ALL communities
+   - Youth (under 30) vs establishment
+   - Women's specific experiences and perspectives
+   - Rural vs urban across all communities
+
+2. ALTERNATIVE CAUSAL FRAMINGS:
+   - Is what looks racial actually economic?
+   - Is what looks like conspiracy actually bureaucratic incompetence?
+   - Is what looks ideological actually generational?
+   - Is what looks like policy failure actually implementation failure?
+   - What structural incentives create this problem regardless of which party is in power?
+
+3. INTERNATIONAL COMPARISONS:
+   - India (Ayodhya for religious issues, reservation system for affirmative action)
+   - Indonesia (Pancasila interfaith model, decentralisation)
+   - Singapore (managed harmony, GLS system, multiracialism model)
+   - Turkey (secular-religious tension)
+   - South Africa (post-apartheid reconciliation, land reform)
+   - Others relevant to this specific issue
+
+4. COUNTER-ARGUMENTS the reader deserves to hear even if uncomfortable.
+
+5. STRUCTURAL SOLUTIONS already proposed by Malaysian civil society, academics, or international bodies.
+
+6. GENDER DIMENSIONS: Are women's experiences or impacts absent from the analysis?
+
+7. ECONOMIC DIMENSIONS: Is class analysis being masked by racial or religious framing?
+
+8. GEOGRAPHIC DIMENSIONS: Is East Malaysia, rural Malaysia, or non-KL perspective missing?
+
+=== LIST ALL OMITTED FACTS ===
+
+Search for facts that ARE publicly available but MISSING from the analysis:
+- The specific fact
+- Why it matters for understanding the issue
+- Where it can be found (source)
+- Importance score: 0.0 (minor context) to 1.0 (changes the entire analysis)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "completeness_score": 0-100,
+  "missing_perspectives": [{"who": "...", "what": "their likely view", "why": "why this perspective matters"}],
+  "alternative_framings": [{"current": "how the analysis frames it", "alternative": "different framing", "evidence": "what supports the alternative"}],
+  "international_parallels": [{"country": "...", "lesson": "what Malaysia can learn"}],
+  "counter_arguments": [{"to_card": 2, "counter": "the counter-argument", "source": "..."}],
+  "missing_facts": [{"fact": "...", "importance": 0.8, "source": "..."}],
+  "gender_gaps": [{"missing": "...", "why_matters": "..."}],
+  "economic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "geographic_gaps": [{"missing": "...", "why_matters": "..."}],
+  "overall_assessment": "one paragraph on completeness"
+}
+
+=== THE ANALYSIS TO REVIEW ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Petronas is challenging Sarawak's oil laws in Federal Court. Sarawak is simultaneously challenging Petronas's legal foundation. Both sides filed within six weeks of each other.",
+      "sub": "Petronas filed on January 12, 2026 to challenge Sarawak's petroleum ordinances. Sarawak counter-filed on February 23, challenging the constitutional validity of the Petroleum Development Act 1974, Continental Shelf Act 1966, and Petroleum Mining Act 1966 — arguing they were extended to Sarawak via Emergency and lapsed when Parliament annulled the Emergency in 2011."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Sarawak's argument is that three federal petroleum laws were imposed during a racial emergency and lapsed when Parliament annulled that emergency in 2011",
+      "s": "The Continental Shelf Act 1966 and Petroleum Mining Act 1966 originally applied only to Peninsular Malaysia. They were extended to Sarawak via the 1969 Emergency Proclamation. When Parliament annulled the Emergency in December 2011, Sarawak argues these laws lapsed within six months under Article 150(7) of the Federal Constitution. The PDA 1974 was itself enacted during the Emergency without Sarawak's DUN endorsement — yet it vested all petroleum rights in Petronas.",
+      "d": "Sabah Media Feb 2026; Malay Mail Feb 2026; Adil Legal timeline; Federal Constitution Article 150(7)"
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "PETRONAS extracted RM2.25 trillion from Sarawak over 50 years. Sarawak received 5%. The dividend just hit a 9-year low.",
+      "s": "Sarawak's total financial benefits from oil and gas total RM96 billion over five decades — against PETRONAS's estimated RM2.25 trillion in revenue from Sarawak resources. PETRONAS's 2026 dividend to the federal government dropped 38% to RM20 billion, the lowest since 2017. Net profit fell 18% to RM45.4 billion. This fiscal weakness comes precisely when both Borneo states are pressing their claims.",
+      "d": "DayakDaily 2026; PETRONAS FY2025 results; FMT Feb 2026; The Edge Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "ConocoPhillips already withdrew US$3.1 billion from Sarawak. GPS holds 23 seats Anwar needs. Sabah is suing for 40% of revenue. The PM is trapped.",
+      "s": "ConocoPhillips pulled out of the US$3.1 billion Salam-Patawali deepwater project in April 2025 citing regulatory uncertainty. GPS holds 23 critical seats in Anwar's coalition. Sabah's High Court ruled the state entitled to 40% of net federal revenue — the Court of Appeal just granted Putrajaya's stay on April 6, 2026. Combined, Borneo states hold 56 of 222 parliamentary seats (25%). The federal government did not oppose Petronas's leave application.",
+      "d": "Malay Mail Apr 2025; FMT Apr 2026; Jesselton Times Apr 2026; Business Today Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "This is not a corporate dispute between two oil companies. It is the most significant challenge to Malaysia's constitutional architecture since 1963.",
+      "text": "The Emergency that extended federal petroleum laws to Sarawak was proclaimed after a racial crisis. The Emergency was annulled. If those laws lapsed, then Petronas has operated in Sarawak without valid legal authority for over a decade. The question before the Federal Court is not who owns the oil — it is whether the legal foundation of the federation itself was properly constructed."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the lease on your house was signed by someone who didn't own the land — and the rent has been collected for 50 years",
+      "text": "Sarawak's argument is that the legal instruments transferring petroleum rights to the federal government were enacted under emergency powers that have since expired. If true, the entire structure of petroleum revenue sharing rests on a foundation that formally ceased to exist in 2012."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Both parties have legitimate claims. Petronas built world-class LNG infrastructure in Bintulu that serves national energy security. Sarawak's resources were extracted under terms it never consented to, during an Emergency it did not cause, with revenue ratios that have not changed in 50 years. The Federal Court should hear both petitions jointly. But whatever the ruling, Malaysia needs a new petroleum revenue framework that reflects MA63's original promise — not because Sarawak deserves charity, but because a federation that extracts RM2.25 trillion from a partner while returning 5% is not a federation. It is an arrangement that survives only as long as the courts do not examine it."
+    }
+  ],
+  "sources": "Bloomberg Jan 2026, SCMP Feb-Mar 2026, Malay Mail Feb-Mar 2026, Borneo Post Jan-Mar 2026, Business Today Mar 2026, Sabah Media Feb 2026, DayakDaily 2026, FMT Feb-Apr 2026, The Edge Feb 2026, PETRONAS FY2025, Jesselton Times Apr 2026, Adil Legal timeline",
+  "confidence": "High — court filings are public record, PETRONAS financial data from annual reports, international coverage from Bloomberg and SCMP, 26 independent sources",
+  "lenses_used": ["Legal", "Economic", "Political"],
+  "lenses_applicable_but_unused": ["Historical", "Governance", "Regional"]
+}
