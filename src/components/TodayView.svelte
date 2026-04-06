@@ -1,6 +1,6 @@
 <script lang="ts">
   import { QUOTES } from '../data/quotes';
-  import { opinionLabel } from '../data/issues';
+  import { opinionLabel, opinionColor as issueOpinionColor } from '../data/issues';
   import IssueImage from './IssueImage.svelte';
 
   import type { IssueSummary } from '../lib/issues-loader';
@@ -69,6 +69,39 @@
     }
     return picked;
   });
+  // Topic clusters: derive primary lens per issue, group into browsable topics
+  interface TopicCluster {
+    topic: string;
+    count: number;
+    issues: IssueSummary[];
+  }
+
+  let topicClusters = $derived.by((): TopicCluster[] => {
+    const topicMap = new Map<string, IssueSummary[]>();
+    for (const issue of issues) {
+      const lensCounts = new Map<string, number>();
+      for (const card of issue.cards) {
+        if (card.lens) lensCounts.set(card.lens, (lensCounts.get(card.lens) ?? 0) + 1);
+      }
+      if (lensCounts.size === 0) continue;
+      const primary = [...lensCounts.entries()].sort((a, b) => b[1] - a[1])[0][0];
+      const list = topicMap.get(primary) ?? [];
+      list.push(issue);
+      topicMap.set(primary, list);
+    }
+    return [...topicMap.entries()]
+      .map(([topic, issues]) => ({ topic, count: issues.length, issues: issues.sort((a, b) => b.opinionShift - a.opinionShift) }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 8);
+  });
+
+  let activeTopic = $state<string | null>(null);
+  let activeTopicIssues = $derived.by(() => {
+    if (!activeTopic) return [];
+    const cluster = topicClusters.find(c => c.topic === activeTopic);
+    return cluster?.issues.slice(0, 5) ?? [];
+  });
+
   let readyMinutes = $derived(Math.max(4, briefingIssues.length * 3 + (continueIssue ? 2 : 0)));
   let todayDeckCopy = $derived.by(() => {
     if (continueIssue) return 'Start with the lead, then resume where you stopped.';
@@ -289,6 +322,43 @@
           </div>
         </section>
       </div>
+
+      {#if topicClusters.length > 0}
+        <section class="topic-section" aria-labelledby="topic-heading">
+          <div class="topic-header">
+            <div class="panel-kicker">Browse by Topic</div>
+            <h2 id="topic-heading" class="panel-title">{issues.length} issues across {topicClusters.length} topics.</h2>
+          </div>
+          <div class="topic-chips" role="tablist" aria-label="Topic filters">
+            {#each topicClusters as cluster}
+              <button
+                class="topic-chip"
+                class:topic-chip--active={activeTopic === cluster.topic}
+                onclick={() => { activeTopic = activeTopic === cluster.topic ? null : cluster.topic; }}
+                role="tab"
+                aria-selected={activeTopic === cluster.topic}
+                aria-label="{cluster.topic}: {cluster.count} issues"
+              >
+                <span class="topic-chip-name">{cluster.topic}</span>
+                <span class="topic-chip-count">{cluster.count}</span>
+              </button>
+            {/each}
+          </div>
+          {#if activeTopic && activeTopicIssues.length > 0}
+            <div class="topic-issues" role="tabpanel" aria-label="{activeTopic} issues">
+              {#each activeTopicIssues as issue}
+                <button class="topic-issue" onclick={() => onOpenIssue?.(issue)}>
+                  <span class="topic-issue-score" style="color:{issueOpinionColor(issue.opinionShift)};">{issue.opinionShift}</span>
+                  <div class="topic-issue-copy">
+                    <div class="topic-issue-headline balance-title">{issue.headline}</div>
+                    <div class="topic-issue-context pretty-copy">{issue.context}</div>
+                  </div>
+                </button>
+              {/each}
+            </div>
+          {/if}
+        </section>
+      {/if}
 
       <footer class="today-footer">
         <div class="today-quote">"{quote}"</div>
@@ -767,6 +837,145 @@
     font-size: var(--text-metric);
     line-height: 0.92;
     letter-spacing: -0.05em;
+  }
+
+  /* ── Browse by topic ── */
+  .topic-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .topic-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .topic-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .topic-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
+    cursor: pointer;
+    font: inherit;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .topic-chip-name {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .topic-chip-count {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .topic-chip--active {
+    border-color: var(--score-medium);
+    background: rgba(210, 140, 40, 0.08);
+  }
+
+  .topic-chip--active .topic-chip-name {
+    color: var(--text-primary);
+  }
+
+  .topic-chip--active .topic-chip-count {
+    color: var(--score-medium);
+  }
+
+  @media (hover: hover) {
+    .topic-chip:hover {
+      border-color: var(--border-divider);
+      background: var(--bg-sunken);
+    }
+  }
+
+  .topic-issues {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .topic-issue {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    width: 100%;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .topic-issue:hover {
+      border-color: var(--border-divider);
+      transform: translateY(-1px);
+    }
+  }
+
+  .topic-issue-score {
+    font-family: var(--font-display);
+    font-size: var(--text-reading);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    min-width: 32px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .topic-issue-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .topic-issue-headline {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .topic-issue-context {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .topic-chip {
+      background: rgba(34, 31, 27, 0.7);
+    }
+    .topic-chip--active {
+      background: rgba(210, 140, 40, 0.14);
+    }
   }
 
   .today-footer {
