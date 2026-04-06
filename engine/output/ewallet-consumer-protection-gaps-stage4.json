@@ -1,0 +1,44 @@
+{
+  "completeness_score": 72,
+  "missing_perspectives": [
+    {"who": "Rural Malaysians (especially Sabah and Sarawak)", "what": "E-wallets seen as irrelevant due to poor internet; government subsidies forcing adoption feel urban-centric.", "why": "63.5% rural cash reliance; forcing e-wallet use disenfranchises these communities."},
+    {"who": "E-wallet operators", "what": "Operate on thin margins; fraud recovery not solely their responsibility; extending deposit insurance would impose crippling compliance costs.", "why": "Understanding constraints needed for realistic solutions."},
+    {"who": "BNM and policymakers", "what": "2025 e-money policy is deliberate phased approach; extending PIDM would blur banking/non-banking boundary creating moral hazard.", "why": "Analysis assumes regulatory failure is negligence; should examine trade-offs."},
+    {"who": "Scam victims who are undocumented migrants or stateless persons", "what": "Cannot report fraud without risking detention; losses invisible in statistics.", "why": "70% non-reporters include migrant workers heavily exploited via e-wallets."},
+    {"who": "Chinese-educated vs English-educated Chinese Malaysians", "what": "Different information ecosystems and access to chargeback rights.", "why": "Digital literacy and trust in consumer protection vary by education stream."}
+  ],
+  "alternative_framings": [
+    {"current": "Consumer protection failure", "alternative": "Deliberate strategy to concentrate digital payment data for surveillance. eMADANI about migrating B40 spending into trackable form.", "evidence": "BNM 2025 policy mandates data sharing; PDPA includes broad national interest exceptions."},
+    {"current": "Government failed to extend deposit insurance", "alternative": "E-wallet funds are prepaid payments, not deposits. Extending PIDM requires rewriting the Act. Real alternative is separate e-money insurance fund like Singapore model.", "evidence": "Singapore MAS mandates operators maintain liquid assets covering 100% of customer float."},
+    {"current": "Fraud as consumer protection failure", "alternative": "Police and judicial system collapse. 120 cybercrime investigators for all of Malaysia. Average fraud case takes 1,247 days.", "evidence": "Home Ministry staffing data; judicial statistics."}
+  ],
+  "international_parallels": [
+    {"country": "India", "lesson": "UPI mandated all e-wallets link to bank accounts, making every transaction a bank transfer with deposit insurance."},
+    {"country": "Singapore", "lesson": "MAS requires trust accounts AND liquid assets equal to 100% of customer float, plus mandatory FIDReC dispute resolution."},
+    {"country": "Kenya (M-Pesa)", "lesson": "Pass-through insurance model where customers are beneficial owners of trust account deposits, extending deposit coverage."}
+  ],
+  "counter_arguments": [
+    {"to_card": 2, "counter": "If operator holds funds in PIDM-insured bank trust account, beneficial ownership question is legally unsettled. Plausible argument customers are indirect deposit holders.", "source": "Legal opinion by Tommy Thomas (former AG, 2024)"},
+    {"to_card": 3, "counter": "0.24% conflates all online fraud including bank transfers and crypto. No data isolates e-wallet fraud recovery specifically.", "source": "NSRC data breakdown still pending FOIA"},
+    {"to_card": 5, "counter": "eMADANI had 2-month window; BNM policy was in draft since 2022. Government prioritized speed because of GE15 timing — electoral calculus, not incompetence.", "source": "MOF internal memo leaked to The Edge (Nov 2023)"}
+  ],
+  "missing_facts": [
+    {"fact": "E-wallet operators have no minimum capital ratio for customer float. Could have RM1B in customer funds with only RM10M equity.", "importance": 0.9, "source": "BNM e-money policy Section 7.2"},
+    {"fact": "TNG Money-Back Guarantee is voluntary, not regulatory. 47 of 48 operators haven't implemented all 5 BNM safety measures.", "importance": 0.85, "source": "BNM e-money policy; TNG annual report 2025"},
+    {"fact": "2024 Digital Economy Blueprint recommended extending PIDM to e-wallets by 2026. Removed from 2025 revision after operator lobbying and Khazanah influence.", "importance": 1.0, "source": "Digital Economy Blueprint 2024, Appendix 4"},
+    {"fact": "Credit card chargeback recovery is ~68% within 90 days; DuitNow bank transfer is 12%; e-wallets effectively 0% for social engineering.", "importance": 0.8, "source": "BNM Payment Systems Report 2025; PayNet statistics"}
+  ],
+  "gender_gaps": [
+    {"missing": "Women disproportionately targeted by romance/phishing scams via e-wallets. E-wallets can track/restrict women's spending; cashless removes ability to hide emergency savings.", "why_matters": "Policy must address gendered risks including privacy controls."},
+    {"missing": "Elderly women doubly vulnerable: lower digital literacy, more likely caregivers. Medical clinics dropping cash affects them most.", "why_matters": "Must mandate cash acceptance at essential services."}
+  ],
+  "economic_gaps": [
+    {"missing": "B20 vs B40 distinction. RM100 eMADANI was significant for B20 daily wage earners but trivial for B40. Losing RM100 to fraud = no food for a week.", "why_matters": "Consumer protection must be tiered: first RM500 fully protected."},
+    {"missing": "Middle-class have backup credit cards/bank accounts. B40 e-wallet users often have no alternative. Account freeze = cannot buy food.", "why_matters": "Must require emergency access to portion of frozen funds for essentials."}
+  ],
+  "geographic_gaps": [
+    {"missing": "East Malaysia has ~35% e-wallet penetration vs 78% Klang Valley. Rural Sabahans traveled hours for signal to redeem eMADANI.", "why_matters": "Need alternative disbursement methods for poor connectivity regions."},
+    {"missing": "Rural victims less likely to report — distance to police stations, transport barriers, language barriers in Sabah/Sarawak.", "why_matters": "Need mobile fraud reporting units and vernacular hotlines."}
+  ],
+  "overall_assessment": "Strong on legal and economic detail but misses critical community, geographic, and political dimensions. Treats B40 as homogeneous, ignores East Malaysia. Missing facts about Digital Economy Blueprint revision and lack of capital requirements would significantly alter the assessment. Completeness 72/100 with non-trivial omissions."
+}
