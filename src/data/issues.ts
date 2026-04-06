@@ -2885,7 +2885,6 @@ export const ISSUES: Issue[] = [
   headline: "E-Wallet Transactions Surpass RM48 Billion in 2025",
   context: "Bank Negara reported that e-wallet transactions reached RM48.3 billion in 2025 across 56 licensed providers, with Touch 'n Go eWallet, GrabPay, and Boost commanding 82% market share.",
   stageScores: { pa: 76, ba: 62, fc: 76, af: 57, ct: 42, sr: 68 }, finalScore: 68.4,
-  related: ["1975", "1887"],
   cards: [
     { t: "hook", big: "RM48 billion in e-wallet transactions — but 56 licensed providers means market is dangerously fragmented", sub: "Top 3 platforms hold 82% of volume while 42 small providers collectively handle less than 5%" },
     { t: "fact", big: "E-wallet operators collectively lost RM1.8 billion in 2025 as cashback subsidies exceed transaction revenue", sub: "Consolidation inevitable — BNM expects only 8-12 viable providers by 2028 from current 56", lens: "Economic" },
@@ -13308,7 +13307,6 @@ export const ISSUES: Issue[] = [
   headline: "Cashless Payments Reach 68% of Malaysian Transactions",
   context: "Bank Negara reported 68% of retail transactions were cashless in 2025 up from 42% in 2020 led by DuitNow QR.",
   stageScores: { pa: 88, ba: 68, fc: 90, af: 76, ct: 69, sr: 86 }, finalScore: 79.1,
-  related: ["1975", "1146"],
   cards: [
     { t: "hook", big: "Cashless payments reach 68% of retail transactions in 2025", sub: "DuitNow QR processed 1.2 billion transactions worth RM85 billion" },
     { t: "fact", big: "e-Wallet users grew to 28 million with Touch n Go and GrabPay at 62% share", sub: "Average Malaysian makes 4.2 cashless transactions daily up from 1.8 in 2020", lens: "Regional" },
@@ -14604,7 +14602,6 @@ export const ISSUES: Issue[] = [
   headline: "E-wallet funds carry zero deposit insurance for 28 million users",
   context: "Malaysia's e-wallet market processes billions in transactions annually, but PIDM deposit insurance explicitly excludes non-bank e-wallet balances. Of RM2.77 billion lost to online fraud in 2025, total recoveries reached RM34 million — just 1.2% of reported losses.",
   stageScores: { pa: 82, ba: 42, fc: 58, af: 72, ct: 58, sr: 78 }, finalScore: 65.0,
-  related: ["1146", "1887"],
   cards: [
     { t: "hook", big: "28 million Malaysians store money in e-wallets — with none of the deposit insurance a RM1 bank balance gets", sub: "Government subsidies worth RM2 billion onboarded millions onto commercial platforms since 2020. Online fraud hit RM2.77 billion in 2025; total recoveries reached just RM34 million — 1.2% of reported losses." },
     { t: "fact", big: "PIDM does not cover e-wallet balances. If an operator collapses, no automatic payout — and there is no minimum capital requirement for issuers.", sub: "BNM requires trust accounts but e-money issuers face no capital adequacy ratio, unlike banks' 8-10%. Digi's Vcash shut down in 2019 with manual refunds only.", lens: "Legal" },
