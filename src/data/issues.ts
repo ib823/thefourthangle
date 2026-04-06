@@ -14406,7 +14406,7 @@ export const ISSUES: Issue[] = [
     sourceDate: "2026-04-03",
     stageScores: { pa: 85, ba: 52, fc: 43, af: 65, ct: 48, sr: 76 },
     finalScore: 61.5,
-    related: ["1564"],
+    related: ["1564", "1974"],
     cards: [
       { t: "hook", big: "Malaysia is betting its future on data centers. Johor residents are asking who will be left with water.", sub: "Gelang Patah residents protested a China-based data center. The moratorium was already in effect — but 11,000MW in applications, effective demand ~7.5GW, still dwarfs the peninsular grid. Johor has RM182.96B approved." },
       { t: "fact", big: "11,000MW applied, ~7.5GW effective demand — and the moratorium exempts AI centers, the most power-hungry category", sub: "AI facilities consume 3-10x more power per rack. The exemption was lobbied for by PIKOM and AMCHAM. Sarawak courts diverted investment with surplus hydropower. Singapore reopened after its own moratorium with strict PUE requirements.", lens: "Technology" },
@@ -14449,7 +14449,7 @@ export const ISSUES: Issue[] = [
     sourceDate: "2026-04-03",
     stageScores: { pa: 82, ba: 65, fc: 42, af: 65, ct: 55, sr: 80 },
     finalScore: 64.8,
-    related: ["1957", "1956"],
+    related: ["1957", "1956", "1973"],
     cards: [
       { t: "hook", big: "Malaysia celebrated the Supreme Court striking down Trump's tariffs. The replacement regime may be worse.", sub: "SCOTUS voided the 24% IEEPA tariff and the ART deal. Trump imposed a 10% blanket tariff within days and launched two Section 301 probes across up to 60 economies — legally unchallengeable infrastructure for targeted tariffs with no rate cap." },
       { t: "fact", big: "IEEPA tariffs had a constitutional weakness. Section 301 tariffs do not — court challenges are nearly impossible.", sub: "Section 301 targets solar, steel, aluminum, and EVs — not semiconductors directly. But Malaysia's finished electronics could fall within scope. White House exempted computers, smartphones, and SSDs under specific HTS headings.", lens: "Legal" },
@@ -14470,7 +14470,7 @@ export const ISSUES: Issue[] = [
     sourceDate: "2026-04-03",
     stageScores: { pa: 80, ba: 70, fc: 58, af: 65, ct: 48, sr: 78 },
     finalScore: 66.5,
-    related: ["1267", "1283", "0179"],
+    related: ["1267", "1283", "0179", "1973"],
     cards: [
       { t: "hook", big: "Malaysia launches its first refugee registration system. Work permits are announced but not yet issued. Thailand has already moved ahead.", sub: "The DPP screened 37,000+ since January 2026, starting with detention centre populations. The government promised employment, education, and healthcare access, but permits remain policy direction, not reality." },
       { t: "fact", big: "A 2019 study estimated RM3B in GDP gains — but B40 workers of all races face real wage competition in the same sectors.", sub: "Employers sought documented workers for shortage sectors. Registration creates a market for permits risking labour broker capture. Centres are only in major cities, leaving rural refugees unable to register.", lens: "Economic" },
@@ -14533,7 +14533,7 @@ export const ISSUES: Issue[] = [
     sourceDate: "2026-04-05",
     stageScores: { pa: 88, ba: 68, fc: 67, af: 65, ct: 52, sr: 82 },
     finalScore: 70.3,
-    related: ["1549", "1581", "1043"],
+    related: ["1549", "1581", "1043", "1974"],
     cards: [
       { t: "hook", big: "A gazette backdated 22 years bypassed Selangor's public inquiry law — three courts never ruled on whether it was lawful", sub: "Federal Court split 2-1. The state's inquiry law has never been used since 2011. Road is 70% built. Temuan Orang Asli filed a native title claim in 2023 but were not party to this case." },
       { t: "fact", big: "Selangor's public inquiry law for forest excision has existed since 2011 — and has never been invoked once", sub: "The gazette referenced a 2000 BN-era decision. The state says the land was already excised by 2006. The NGOs say the gazette's effect was to bypass the 2011 law. Three courts dismissed on threshold grounds — none ruled on substance.", lens: "Legal" },
@@ -14562,6 +14562,38 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "The 1998 capital controls that saved the ringgit now block its internationalization — and the incentives to keep them run deeper than economics", sub: "No deep MYR currency-derivatives ecosystem. Retail payment linkages (DuitNow-PromptPay-QRIS) progress faster than wholesale. BNM ruled out new controls but has no roadmap for relaxing old ones.", lens: "Governance" },
       { t: "reframe", big: "The question isn't whether to reduce dollar dependency — it's whether Malaysia is building yuan dependency instead, and who bears the cost", sub: "" },
       { t: "view", big: "Publish annual volumes by country, build the hedging infrastructure exporters need, and stop conflating transaction savings with structural independence", sub: "" }
+    ]
+  },
+  {
+    id: "1973", published: true, opinionShift: 85, status: "new", edition: 1, sourceDate: "2026-04-06",
+    headline: "Bestinet pocketed RM400M running Malaysia's visa system — with no contract, no oversight, and an Interpol arrest request",
+    context: "Bloomberg's 10-month investigation found Bestinet founder Aminul Islam's companies generated over RM400 million in profit from Malaysia's Foreign Workers Centralised Management System. Workers pay up to RM25,000 in recruitment costs. MACC closed its probe in September 2024. Cabinet extended the contract through 2031.",
+    stageScores: { pa: 82, ba: 45, fc: 66, af: 60, ct: 65, sr: 80 }, finalScore: 66.3,
+    related: ["1966", "1965"],
+    cards: [
+      { t: "hook", big: "One company runs Malaysia's migrant visa system. Its founder faces an Interpol-channel arrest request. The government just extended his contract through 2031.", sub: "Bloomberg found Bestinet's founder generated RM400M in profit. Workers pay RM25,000 each. MACC closed its probe in September 2024. Cabinet approved the extension the month before." },
+      { t: "fact", big: "Six years with no signed contract. Then the per-worker fee was set at RM215 — more than double the government's own approved rate of RM86.", sub: "PAC found 24 unauthorized users approved employer applications. The government had no access to the source code. The contract now requires handover before 2031 expiry.", lens: "Governance" },
+      { t: "fact", big: "Bangladesh requested arrest through Interpol channels. Malaysia asked Bangladesh to drop its trafficking probes to protect its own TIP ranking.", sub: "29% of migrant domestic workers — predominantly women excluded from Employment Act protections — met ILO forced-labour indicators. Employers must legally pay permit fees but workers bear the cost.", lens: "Rights" },
+      { t: "fact", big: "Zahid created the 10-agency restriction. Anwar extended the contract despite his own research centre's warning. A 2023 open tender attracted only two bidders.", sub: "The system processes visas in 14 days versus 120 before. Every coalition has left it in place because dismantling it is costly, risky, and would disrupt labour supply.", lens: "Political" },
+      { t: "reframe", big: "Malaysian businesses across all communities profit from bonded cheap labour while working-class Malaysians bear the wage suppression", sub: "US$1 billion siphoned from Bangladesh. Sabah and Sarawak have a separate, equally severe crisis with 1 million undocumented migrants outside this system entirely." },
+      { t: "analogy", big: "Like outsourcing passport control to a toll booth operator who cut wait times — then discovering the operator charges five times the rate, has no contract, and faces an arrest request", sub: "Speed built on worker debt bondage is not efficiency. It is exploitation with a dashboard." },
+      { t: "view", big: "The system persists because Malaysia's political and business elites across every community profit from depressed labour costs. The fix exists — open tendering, employer-pays enforcement, cooperation with Bangladesh. No coalition will accept the disruption.", sub: "" }
+    ]
+  },
+  {
+    id: "1974", published: true, opinionShift: 82, status: "new", edition: 1, sourceDate: "2026-04-06",
+    headline: "DOE chief charged with taking RM100K to bypass an EIA — on a road that already killed nine workers",
+    context: "Both the Director-General and Deputy Director-General of Malaysia's Department of Environment were charged with corruption in April 2026. The DG allegedly received RM100,000 to consider an EIA exemption for the Bukit Kukus paired road in Penang, where a 2018 landslide killed 9 foreign workers. The deputy received payments from a waste company she regulated.",
+    stageScores: { pa: 82, ba: 80, fc: 61, af: 58, ct: 40, sr: 78 }, finalScore: 66.5,
+    related: ["1971", "1963"],
+    cards: [
+      { t: "hook", big: "Malaysia's top two environmental regulators face corruption charges — the DG for receiving RM100,000 to consider an EIA bypass on a road where nine workers died", sub: "His deputy received payments through a child's bank account from a waste company she regulated. Both charged April 2026. The victims were Bangladeshi, Indonesian, and Myanmar nationals." },
+      { t: "fact", big: "The DG asked for 3,000 more staff to fight pollution. Fourteen months later, he allegedly took RM100,000 in cash at his Putrajaya office.", sub: "DOE has 1,100 officers for 60,000 facilities — a 1:55 ratio. Singapore operates at 1:15. E-waste exemption power sat at the DG's personal discretion.", lens: "Governance" },
+      { t: "fact", big: "E-waste smuggling ran for five years across Customs, ports, police, and DOE — only the DG's arrest triggered a nationwide import ban", sub: "RM7.2M frozen on Jan 22, RM10.2M four days later. Ban announced Feb 4 but gazetted Apr 1. 800+ containers stranded at Port Klang. The regulator was one compromised node, not the whole chain.", lens: "Environmental" },
+      { t: "fact", big: "The DG faces 20 years under the MACC Act. The deputy faces 2 years under the Penal Code. No systematic audit of their approvals has been announced.", sub: "The deputy received payments over two years from a company she regulated. Six e-waste company owners face separate proceedings. But the approvals these officials signed remain unreviewed.", lens: "Legal" },
+      { t: "reframe", big: "The nine who died at Bukit Kukus were foreign workers with no voice in the EIA process. Communities near e-waste sites bear health costs no one measures.", sub: "B40 communities including Orang Asli live near unregulated waste with no health monitoring. Women and children face the highest exposure risk. Every coalition has shielded regulators." },
+      { t: "analogy", big: "Like discovering the building inspector was paid to skip the fire exits — after the building burned down, and then learning nobody checked the other buildings he signed off on", sub: "The question the charges don't answer is how many other approvals were compromised — and whether Sabah and Sarawak face the same risks under separate frameworks." },
+      { t: "view", big: "The 1:55 ratio is not a staffing accident — it is a structural choice every coalition has maintained. The fix is not more staff for a captured regulator. It is independent environmental courts and community standing to challenge approvals.", sub: "" }
     ]
   }
 ];
