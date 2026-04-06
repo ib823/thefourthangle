@@ -47,12 +47,14 @@ Non-partisan Malaysian issues analysis platform. Every issue goes through a 6-st
 ### Lens values (pick the most relevant for each fact card):
 Legal, Rights, Economic, Governance, Technology, Social, Political, Health, Environmental, Regional, Historical, Critical, Theological, Security
 
+**Lens choice affects topic browsing.** The Today page groups issues by their primary lens (most common lens across fact cards). Choose diverse lenses to spread issues across topics. Avoid using the same lens on all 3 fact cards unless the issue genuinely warrants it.
+
 ### Score guidelines:
 - `opinionShift` 80-100: Fundamental (most people would completely change their view)
 - `opinionShift` 60-79: Significant (important missing context)
 - `opinionShift` 40-59: Partial (some gaps in mainstream coverage)
 - `opinionShift` 0-39: Surface (mostly well-covered, minor additions)
-- `finalScore`: average quality across 6 stages (higher = more balanced)
+- `finalScore`: editorial quality score across 6 stages (higher = more balanced). Visible to readers in the desktop reader and share card as "Editorial Quality Score"
 - `stageScores`: each 0-100, independently assessed
 
 ### To publish/unpublish:
@@ -73,6 +75,19 @@ Legal, Rights, Economic, Governance, Technology, Social, Political, Health, Envi
 - Respect 3R: Race, Religion, Royalty — critique policy, not communities/beliefs
 - Only use publicly available information
 - Cite specific numbers, dates, sources in context
+
+## UI Features That Depend on Issue Data
+- **Welcome card**: One-time inline card for first visitors explaining T4A and Opinion Shift. Dismissed permanently via localStorage.
+- **Browse by Topic**: Today page groups issues by primary lens. Each issue's primary topic = most common lens across its fact cards. 6-8 topic chips expand inline to show top 5 issues.
+- **Hero card score badge**: Inline Opinion Shift score visible without scrolling on all viewports.
+- **Opinion Shift tooltips**: All score numbers show "{score} — {tier}: Reading only the headline would hide about {score}% of the story" on hover.
+- **Editorial Quality Score**: `finalScore` displayed in desktop reader below Opinion Shift box with explanation.
+- **Tracked in X issues**: Clickable label on fact cards linking to connected issues (desktop scrolls to completion section, mobile opens pattern sheet).
+- **Read next**: Desktop completion shows "Read next issue" button when a next issue exists.
+- **Reading path navigation**: Desktop progress segments are clickable with hover labels showing card type and lens.
+- **Audit legend**: "?" button in VerdictBar explains circle/triangle/diamond shapes inline.
+- **Homepage footer**: Trust links (About, Disclaimer, Verify) below editorial quote.
+- **Section label**: "Earlier Issues" (not "Explore") for older issues in sidebar/feed.
 
 ## Architecture
 - `src/data/issues.ts` — all issue content
