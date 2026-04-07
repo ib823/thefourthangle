@@ -14598,18 +14598,18 @@ export const ISSUES: Issue[] = [
   }
 ,
 {
-  id: "1975", published: true, opinionShift: 74, status: "new", edition: 1, sourceDate: "2026-04-06",
-  headline: "E-wallet funds carry zero deposit insurance for 28 million users",
-  context: "Malaysia's e-wallet market processes billions in transactions annually, but PIDM deposit insurance explicitly excludes non-bank e-wallet balances. Of RM2.77 billion lost to online fraud in 2025, total recoveries reached RM34 million — just 1.2% of reported losses.",
-  stageScores: { pa: 82, ba: 42, fc: 58, af: 72, ct: 58, sr: 78 }, finalScore: 65.0,
+  id: "1975", published: true, opinionShift: 72, status: "updated", edition: 2, sourceDate: "2026-04-07",
+  headline: "E-wallet balances carry no PIDM deposit insurance as adoption hits 18.4 billion transactions",
+  context: "BNM's 2025 Annual Report shows e-payment transactions grew 25% to 18.4 billion in 2025. PIDM deposit insurance does not extend to e-wallet balances. Online fraud losses hit RM2.77 billion, the highest in three years — and FMOS resolved only 22% of e-wallet complaints in the consumer's favour.",
+  stageScores: { pa: 82, ba: 22, fc: 54, af: 75, ct: 55, sr: 80 }, finalScore: 68.0,
   cards: [
-    { t: "hook", big: "28 million Malaysians store money in e-wallets — with none of the deposit insurance a RM1 bank balance gets", sub: "Government subsidies worth RM2 billion onboarded millions onto commercial platforms since 2020. Online fraud hit RM2.77 billion in 2025; total recoveries reached just RM34 million — 1.2% of reported losses." },
-    { t: "fact", big: "PIDM does not cover e-wallet balances. If an operator collapses, no automatic payout — and there is no minimum capital requirement for issuers.", sub: "BNM requires trust accounts but e-money issuers face no capital adequacy ratio, unlike banks' 8-10%. Digi's Vcash shut down in 2019 with manual refunds only.", lens: "Legal" },
-    { t: "fact", big: "RM2.77 billion lost to fraud in 2025. Only RM6.7 million returned to victims so far, with RM17.5 million frozen and 120 cyber investigators for all of Malaysia.", sub: "Credit cards offer standardised chargeback frameworks built over decades. E-wallets have no equivalent. Social engineering victims have no protection at all.", lens: "Economic" },
-    { t: "fact", big: "Subsidies delivered real utility but no literacy safeguards. East Malaysia has 35% e-wallet penetration versus 78% in Klang Valley. Women face targeted scam exposure.", sub: "4.1 million elderly excluded as services drop cash. 53,000 under-30s carry RM1.9 billion in debt. Rural Sabahans traveled hours for signal to redeem eMADANI.", lens: "Social" },
-    { t: "reframe", big: "Every coalition rushed e-wallet subsidies for visible wins. The question is why protections were not built before the onramp.", sub: "" },
-    { t: "analogy", big: "Think of it like a toll highway where motorcyclists and car drivers pay the same fare but only cars get crash barriers and insurance", sub: "Bank customers have deposit insurance, chargebacks, and capital adequacy. E-wallet users have a terms-of-service agreement. Both use the same digital road." },
-    { t: "view", big: "The achievement is real but the blind spot is structural. Three fixes: deposit protection for e-wallet balances, capital adequacy for issuers, literacy safeguards in subsidies.", sub: "" }
+    { t: "hook", big: "Malaysians made 18.4 billion e-payment transactions in 2025 — funds inside e-wallets carry no PIDM deposit insurance at all", sub: "BNM confirms e-payment transactions grew 25% to 18.4 billion. Government subsidies worth RM2 billion onboarded millions since 2020. Online fraud hit RM2.77 billion in 2025, the highest in three years." },
+    { t: "fact", big: "PIDM covers bank deposits up to RM250,000. E-wallet balances get none of it — trust account protections remain untested in Malaysian insolvency court.", sub: "BNM's 2025 e-money policy requires trust accounts rooted in Re Kayford common law, but these have not been stress-tested. Vcash's 2019 shutdown used manual refund forms.", lens: "Legal" },
+    { t: "fact", big: "FMOS received 1,843 e-wallet complaints in 2025 — only 22% resolved in the consumer's favour, averaging 89 days against a 45-day target.", sub: "Of RM2.77B lost to online fraud, the scam pipeline recovered RM34M and returned RM6.7M to victims. Credit cards offer chargeback protection; e-wallets do not.", lens: "Economic" },
+    { t: "fact", big: "BNM data: 63% of e-wallet accounts hold less than RM50 — trivial for T20 but critical for B40. Consumer Credit Act 2025 excludes e-wallet credit features.", sub: "eMADANI's RM1 billion went to STR recipients and those earning under RM100K. Women managing household micro-payments face targeted scam exposure.", lens: "Social" },
+    { t: "reframe", big: "Every coalition — PH, PN, BN — rushed e-wallet subsidies for voter wins before protections were built. The political incentive has not changed.", sub: "" },
+    { t: "analogy", big: "Think of it like issuing driving licences to millions before building guardrails — and counting the pile-ups as an unlucky coincidence", sub: "Bank customers have deposit insurance, chargebacks, and decades of tested supervision. E-wallet users have trust accounts untested in Malaysian insolvency and a dispute service where 78% of their complaints fail." },
+    { t: "view", big: "Three fixes would close the gap: tiered deposit protection for e-wallet balances, capital requirements scaling with operator float, and mandatory literacy in subsidies.", sub: "" }
   ]
 }
 ];
