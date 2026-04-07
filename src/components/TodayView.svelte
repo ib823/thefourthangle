@@ -1153,6 +1153,75 @@
     }
   }
 
+  /* 4K @ 100% scaling — 6 columns */
+  @media (min-width: 3840px) {
+    .today-wrap {
+      max-width: 3400px;
+      padding: 80px 96px 88px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 40px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+  }
+
+  /* 49" super-ultrawide / 5K — 7 columns */
+  @media (min-width: 5120px) {
+    .today-wrap {
+      max-width: 4000px;
+      padding: 88px 120px 96px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 44px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 36px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px;
+    }
+  }
+
+  /* 8K / 57" dual-4K — 8 column ceiling */
+  @media (min-width: 7680px) {
+    .today-wrap {
+      max-width: 5200px;
+      padding: 96px 144px 104px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 48px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(7, 1fr);
+      gap: 40px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+    }
+  }
+
   /* Tablet: increase body text for arm's-length reading */
   @media (min-width: 769px) and (max-width: 1023px) {
     .today-intro,

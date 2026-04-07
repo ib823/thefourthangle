@@ -1250,6 +1250,7 @@
   .app-shell--mobile,
   .app-shell--desktop {
     height: 100vh;
+    height: -webkit-fill-available; /* Safari 15.0–15.3 fallback */
     height: 100dvh;
     display: flex;
     flex-direction: column;
@@ -1437,6 +1438,24 @@
   @media (min-width: 3440px) {
     .app-main--desktop {
       max-width: 3200px;
+    }
+  }
+
+  @media (min-width: 3840px) {
+    .app-main--desktop {
+      max-width: 3600px;
+    }
+  }
+
+  @media (min-width: 5120px) {
+    .app-main--desktop {
+      max-width: 4200px;
+    }
+  }
+
+  @media (min-width: 7680px) {
+    .app-main--desktop {
+      max-width: 5400px;
     }
   }
 

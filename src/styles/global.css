@@ -25,6 +25,18 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Distance-viewing font bumps for very large displays.
+   Uses percentage so the user's browser-default font-size is preserved. */
+@media (min-width: 3840px) {
+  html { font-size: 106.25%; } /* 17/16 */
+}
+@media (min-width: 5120px) {
+  html { font-size: 112.5%; }  /* 18/16 */
+}
+@media (min-width: 7680px) {
+  html { font-size: 118.75%; } /* 19/16 */
+}
+
 body {
   min-height: 100vh;
   min-height: 100dvh;
