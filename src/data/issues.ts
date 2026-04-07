@@ -13304,17 +13304,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1887", opinionShift: 48, status: null, edition: 1,
-  headline: "Cashless Payments Reach 68% of Malaysian Transactions",
-  context: "Bank Negara reported 68% of retail transactions were cashless in 2025 up from 42% in 2020 led by DuitNow QR.",
-  stageScores: { pa: 88, ba: 68, fc: 90, af: 76, ct: 69, sr: 86 }, finalScore: 79.1,
+  id: "1887", published: true, opinionShift: 62, status: "updated", edition: 2, sourceDate: "2026-04-07",
+  headline: "18.4 billion e-payment transactions in 2025 — but 63% of non-urban Malaysians still use cash daily",
+  context: "BNM Annual Report 2025 confirms 18.4 billion e-payment transactions and RM831 billion retail value. PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash for daily expenses. Most fraud losses are now from authorised social-engineering scams, not unauthorised account takeovers.",
+  stageScores: { pa: 75, ba: 18, fc: 24, af: 48, ct: 45, sr: 78 }, finalScore: 56.0,
+  related: ["1975", "1146"],
   cards: [
-    { t: "hook", big: "Cashless payments reach 68% of retail transactions in 2025", sub: "DuitNow QR processed 1.2 billion transactions worth RM85 billion" },
-    { t: "fact", big: "e-Wallet users grew to 28 million with Touch n Go and GrabPay at 62% share", sub: "Average Malaysian makes 4.2 cashless transactions daily up from 1.8 in 2020", lens: "Regional" },
-    { t: "fact", big: "Rural cashless adoption lags at 35% versus 78% in urban areas", sub: "Limited merchant coverage and internet reliability constrain rural uptake", lens: "Security" },
-    { t: "fact", big: "Bank Negara identified RM2.8 billion in e-wallet fraud up 85% from prior year", sub: "Unauthorized transactions and social engineering are fastest growing categories", lens: "Legal" },
-    { t: "reframe", big: "Cashless growth tests whether financial inclusion and fraud prevention scale together", sub: "" },
-    { t: "view", big: "68% cashless transactions. Financial inclusion requires that the 32% using cash are not left behind.", sub: "" },
+    { t: "hook", big: "18.4 billion e-payment transactions in 2025 — about 538 per Malaysian. The headline growth is real. The framing of the divide is not.", sub: "BNM AR 2025: e-payments grew 25%, retail value RM831 billion, DuitNow QR doubled to 3 billion transactions. PayNet 2022: 48.4% of daily expenses still paid in cash." },
+    { t: "fact", big: "DuitNow QR doubled to 3 billion transactions in 2025 with nearly 3 million touchpoints. Average e-money transaction size rose to RM43 from RM33.", sub: "BNM AR 2024: end-2024 DuitNow QR value RM31.1 billion. ReDI registered tens of thousands of small traders. East Malaysia onboarding still lags.", lens: "Economic" },
+    { t: "fact", big: "PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash daily. BNM's 2025 Basic Banking policy mandates cash access stays available.", sub: "BNM Financial Inclusion Framework 2023-2026: cash reliance persists among low-income, elderly, and rural communities. Sarawak's S Pay Global runs as state alternative.", lens: "Social" },
+    { t: "fact", big: "RM2.8 billion is the 2025 scam impact across all channels, not e-wallet fraud. BNM averted RM1.2 billion before it left. Social engineering is rising; unauthorised takeovers are falling.", sub: "BNM Financial Stability Review 1H 2025 says authorised scams (victim-approved) up while unauthorised cases curbed. NSRC handled 146,167 calls, recovered RM34.5M.", lens: "Legal" },
+    { t: "reframe", big: "The real question is not how fast we reach 100% cashless — it is who gets left without working alternatives when the cash window closes.", sub: "" },
+    { t: "view", big: "Malaysia has the rails. The next decade is about whether consumer protection catches up before more vulnerable users are pushed onto a system that cannot protect them.", sub: "" }
   ]
 },
 {
