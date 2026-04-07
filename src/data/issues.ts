@@ -1427,14 +1427,14 @@ export const ISSUES: Issue[] = [
 },
 {
   id: "1043", opinionShift: 78, status: "new", edition: 2,
-  headline: "When states can override environmental law, the environment has no government — and 42 people are dead",
+  headline: "When states override environmental law, the environment has no government — and 42 are dead",
   context: "Malaysia's Constitution does not define 'environment.' DOE can object but states can override. Parliament passed forest protection reforms in 2022. Three years later, only Perlis and Federal Territories have adopted them.",
   published: true,
   sourceDate: "2026-04-05",
   stageScores: { pa: 86, ba: 42, fc: 54, af: 62, ct: 48, sr: 76 }, finalScore: 61.3,
   related: ["1971", "1580"],
   cards: [
-    { t: "hook", big: "42 people dead in landslides linked to EIA bypass — the mechanism is constitutional and most states refuse the reform that would fix it", sub: "DOE rejected the Tanjung Bungah project; 11 died. Batang Kali campsite was in a No-Go Area; 31 died. Parliament passed NFA reforms in 2022. Only Perlis and FT have adopted them." },
+    { t: "hook", big: "42 people dead in landslides linked to EIA bypass — the mechanism is constitutional and most states refuse the reform that would fix it", sub: "DOE rejected Tanjung Bungah; 11 died. Batang Kali campsite was in a No-Go Area; 31 died. Parliament's 2022 NFA reforms have been adopted only by Perlis and FT." },
     { t: "fact", big: "The word 'environment' is absent from the Federal Constitution — DOE can object but states can proceed regardless", sub: "NFA enacted under Article 76(1)(b) to promote uniformity but states must voluntarily adopt under Article 76(3). Planning authorities can and do override DOE rejections.", lens: "Legal" },
     { t: "fact", big: "Satellite forest-loss estimates far exceed official figures — and Johor's largest excision was carried out secretly", sub: "15,011 ha excised in 2014; state forestry couldn't justify it to auditors. Kedah logs Ulu Muda despite federal ban — it supplies 80% of Penang's water.", lens: "Environmental" },
     { t: "fact", big: "States resist NFA reforms because land conversion generates revenue that federal transfers don't replace", sub: "Pahang's bauxite boom: no EIA, RM46.7M royalties, 15km coastline contaminated. The pattern crosses party lines. The 42 dead were overwhelmingly low-income and migrant workers.", lens: "Governance" },
@@ -2883,14 +2883,14 @@ export const ISSUES: Issue[] = [
 {
   id: "1146", published: true, opinionShift: 58, status: "updated", edition: 2, sourceDate: "2026-04-07",
   headline: "18.4 billion e-payment transactions in 2025 — but 48 e-money issuers face very different economics",
-  context: "BNM Annual Report 2025 confirms total e-payment transactions grew 25% to 18.4 billion in 2025, with retail e-payment value reaching RM831 billion. DuitNow QR is already Malaysia's national interoperable standard. The unfinished agenda is consumer protection across 48 licensed issuers with different economics.",
+  context: "BNM Annual Report 2025 shows e-payments grew 25% to 18.4 billion in 2025; retail value RM831 billion. DuitNow QR is now the national interoperable standard. The unfinished agenda is consumer protection across 48 licensed e-money issuers.",
   stageScores: { pa: 75, ba: 28, fc: 27, af: 35, ct: 48, sr: 78 }, finalScore: 56.0,
   related: ["1975", "1887"],
   cards: [
-    { t: "hook", big: "Malaysia made 18.4 billion e-payment transactions in 2025 — averaging 538 per Malaysian — but 48 e-money issuers face very different economics", sub: "BNM AR 2025: retail e-payment value reached RM831 billion (up 19%), average e-money transaction size rose to RM43 from RM33, DuitNow QR doubled to 3 billion transactions." },
-    { t: "fact", big: "FATF/APG: Malaysia has 48 licensed e-money issuers. Touch 'n Go reports 24M verified users and profitability since Q3 2024. Smaller players have no such cushion.", sub: "Sarawak's S Pay Global runs as a state-government alternative with around 1.56 million users — proof that local ecosystems can coexist where politics demands.", lens: "Economic" },
-    { t: "fact", big: "ReDI initiative registered 22,368 traders for e-wallets by May 2025 — only 1,120 in Sabah and 1,799 in Sarawak. The headline figures hide where adoption is stuck.", sub: "TNG eWallet was approved by JTK Sabah for migrant worker salaries — RM3.5B disbursed in 2025. B40 use wallets for government handouts but fall back to cash daily.", lens: "Social" },
-    { t: "fact", big: "PDPA covers banking and financing — there is no carve-out. But the consent you give on signup is the door through which transaction data flows.", sub: "TNG and Grab privacy notices permit disclosure to affiliates, marketing partners, and credit-related entities. The PDPA does not provide a financial-services exemption.", lens: "Legal" },
+    { t: "hook", big: "Malaysia made 18.4 billion e-payment transactions in 2025 — averaging 538 per Malaysian — but 48 e-money issuers face very different economics", sub: "BNM AR 2025: retail e-payment value reached RM831B (up 19%), average e-money transaction rose to RM43 from RM33, DuitNow QR doubled to 3 billion." },
+    { t: "fact", big: "FATF/APG: Malaysia has 48 licensed e-money issuers. Touch 'n Go reports 24M verified users and profitability since Q3 2024. Smaller players have no such cushion.", sub: "Sarawak's S Pay Global runs as a state alternative with ~1.56M users — proof local ecosystems can coexist where politics demands.", lens: "Economic" },
+    { t: "fact", big: "ReDI registered 22,368 traders for e-wallets by May 2025 — only 1,120 in Sabah and 1,799 in Sarawak. Adoption is stuck where it matters.", sub: "TNG eWallet was approved by JTK Sabah for migrant worker salaries — RM3.5B disbursed in 2025. B40 use wallets for government handouts but fall back to cash daily.", lens: "Social" },
+    { t: "fact", big: "PDPA covers banking with no carve-out — but the consent you sign at signup is the door through which your transaction data flows.", sub: "TNG and Grab privacy notices permit disclosure to affiliates, marketing partners, and credit-related entities. The PDPA does not provide a financial-services exemption.", lens: "Legal" },
     { t: "reframe", big: "The interoperability question is already half-answered — DuitNow QR is the national standard. The harder questions are about fees, BNPL exposure, and who is left out.", sub: "" },
     { t: "view", big: "Adoption is not protection. The infrastructure works. The guardrails on merchant fees, BNPL supervision, and meaningful consent are still being assembled.", sub: "" }
   ]
@@ -8569,7 +8569,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "8 Temiar villagers face criminal charges for 'obstructing a public road.'", sub: "The 'public road' was built by the logging company through community farmland without permission.", lens: "Rights" },
     { t: "reframe", big: "When the road is illegal but the blockade is criminal, the law protects the wrong party.", sub: "" },
     { t: "analogy", big: "Like the tenant changing the locks because the landlord brought in bulldozers — illegal by the rules, but the rules were not protecting them either", sub: "When legal channels consistently fail, communities resort to direct action that criminalises the people the law should protect" },
-    { t: "view", big: "Orang Asli land rights exist in Federal Court precedent but not in administrative practice. Until states demarcate customary land, communities will continue to have rights they cannot exercise.", sub: "" },
+    { t: "view", big: "Orang Asli land rights exist in Federal Court precedent, not in administrative practice. Until states demarcate customary land, communities hold rights they cannot exercise.", sub: "" },
   ]
 },
 {
@@ -9541,7 +9541,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "62% of Malay-Muslims support 'some form of Islamic governance' in surveys.", sub: "But only 18% support full hudud implementation. The gap between 'Islamic values' and 'Islamic state' is 44 points.", lens: "Social" },
     { t: "reframe", big: "The debate frames a binary — secular or Islamic. 62% of Malay-Muslims want neither extreme. The middle ground has no champion.", sub: "" },
     { t: "analogy", big: "Like asking a country to choose between two rooms in a house that has 15 — the binary framing erases the space where most people actually live", sub: "62% of Malay-Muslims reject both extremes, but no political party represents the constitutional middle ground" },
-    { t: "view", big: "Malaysia's constitutional framework already accommodates Islamic law within defined bounds. The real debate is not Islam versus secularism but the scope and limits of dual jurisdiction.", sub: "" },
+    { t: "view", big: "Malaysia's constitution already accommodates Islamic law within bounds. The real debate is not Islam versus secularism, but the scope and limits of dual jurisdiction.", sub: "" },
   ]
 },
 {
@@ -9640,7 +9640,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Singapore's ethnic housing quotas apply to buyers AND sellers equally.", sub: "Malaysia's system benefits one group at another's direct expense, with no reciprocal obligation.", lens: "Critical" },
     { t: "reframe", big: "A discount funded by non-Bumiputera buyers is not a government subsidy. It is a private tax on one group for another.", sub: "" },
     { t: "analogy", big: "Like a coupon that one group gets free — except it is funded by charging the other group extra at checkout", sub: "The discount is not a government expenditure; it is a cross-subsidy where non-Bumiputera buyers absorb the cost through higher prices" },
-    { t: "view", big: "If Bumiputera housing assistance is a national priority, it should be funded from national revenue, not from cross-subsidy. The current mechanism creates resentment because its costs are visible and unequal.", sub: "" },
+    { t: "view", big: "If Bumiputera housing is a national priority, fund it from national revenue, not cross-subsidy. The current mechanism creates resentment because its costs are visible and unequal.", sub: "" },
   ]
 },
 {
@@ -9655,7 +9655,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "UMNO's version centres on Article 153 and Malay sovereignty.", sub: "DAP's version centres on Article 8 and equal citizenship. Both claim the same 'social contract.'", lens: "Political" },
     { t: "fact", big: "The Reid Commission's 1957 report describes a 'bargain' but not a 'contract.'", sub: "The distinction matters: bargains can evolve. Contracts imply fixed, enforceable terms.", lens: "Historical" },
     { t: "reframe", big: "A foundational agreement that nobody defines the same way is not a foundation. It is a Rorschach test.", sub: "" },
-    { t: "view", big: "Malaysia needs to have the conversation it has been avoiding: what does the social contract mean in 2026? A nation cannot be governed by a concept its citizens interpret in 7 different ways.", sub: "" },
+    { t: "view", big: "Malaysia needs to have the conversation it has avoided: what does the social contract mean in 2026? A concept read 7 different ways cannot govern a nation.", sub: "" },
   ]
 },
 {
@@ -9867,7 +9867,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Indian Malaysians have a poverty rate of 5.5% — third highest after Orang Asli and Sabah natives.", sub: "Educational underfunding compounds existing economic disadvantage.", lens: "Economic" },
     { t: "reframe", big: "The smallest stream gets the least money per student. Equity is the opposite of this.", sub: "" },
     { t: "analogy", big: "Like giving the smallest classroom the least funding per student and then blaming the school for underperformance", sub: "Disproportionate under-funding creates the very performance gap that is then used to question the system's viability" },
-    { t: "view", big: "Tamil school underfunding is the clearest case of discriminatory allocation in Malaysian education. The gap is measurable, constitutional protection is clear, and the remedy is arithmetic.", sub: "" },
+    { t: "view", big: "Tamil school underfunding is the clearest case of discriminatory allocation in Malaysian education. The gap is measurable, the protection clear, the remedy arithmetic.", sub: "" },
   ]
 },
 {
@@ -10162,7 +10162,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "B40 households across all races share identical barriers: education, capital, healthcare.", sub: "Race determines access to assistance. Class determines the need. These are different distributions.", lens: "Social" },
     { t: "reframe", big: "The biggest inequality in Malaysia is within communities, not between them. Race-based policy is solving the smaller problem.", sub: "" },
     { t: "analogy", big: "Like a neighbourhood where one house has 58% of the street's total furniture — the address matters less than which door you walk through", sub: "Intra-community inequality dwarfs inter-ethnic gaps, but policy frameworks target ethnicity rather than class" },
-    { t: "view", big: "Malaysia's inequality is primarily class-based. A needs-based framework would help more B40 Bumiputera than the current race-based system — while also helping B40 non-Bumiputera. Both facts matter.", sub: "" },
+    { t: "view", big: "Malaysia's inequality is primarily class-based. A needs-based framework would help more B40 Bumiputera than the current race-based system — while also helping B40 non-Bumiputera.", sub: "" },
   ]
 },
 {
@@ -13090,7 +13090,7 @@ export const ISSUES: Issue[] = [
     { t: "fact", big: "Three successive administrations have kept ESSCOM on executive instruments without passing a dedicated Act of Parliament", sub: "The maritime curfew began July 2014 and has been in effect for nearly 12 years, affecting B40 fishermen and women traders in coastal economies", lens: "Governance" },
     { t: "fact", big: "The security zone covers 1,400 km of coastline alongside 1.04 million non-citizens in a state where poverty runs at 19.5% versus the national 6.2%", sub: "Communities of Sulu, Bajau, and Filipino origin face heightened scrutiny while Sabah leaders argue federal commitments remain unfulfilled", lens: "Regional" },
     { t: "reframe", big: "The question is not whether ESSCOM works — it does. The question is why no government has given it the permanent legal mandate its mission demands", sub: "" },
-    { t: "view", big: "ESSCOM is a genuine security success on structurally fragile foundations. Three administrations have maintained its temporary status — that is a system failure, not one government's neglect", sub: "" },
+    { t: "view", big: "ESSCOM is a genuine security success on structurally fragile foundations. Three administrations kept its temporary status — that's a system failure, not one government's neglect", sub: "" },
   ]
 },
 {
@@ -13306,14 +13306,14 @@ export const ISSUES: Issue[] = [
 {
   id: "1887", published: true, opinionShift: 62, status: "updated", edition: 2, sourceDate: "2026-04-07",
   headline: "18.4 billion e-payment transactions in 2025 — but 63% of non-urban Malaysians still use cash daily",
-  context: "BNM Annual Report 2025 confirms 18.4 billion e-payment transactions and RM831 billion retail value. PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash for daily expenses. Most fraud losses are now from authorised social-engineering scams, not unauthorised account takeovers.",
+  context: "BNM Annual Report 2025 confirms 18.4 billion e-payment transactions and RM831 billion retail value. PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash daily. Most fraud losses now come from social-engineering scams.",
   stageScores: { pa: 75, ba: 18, fc: 24, af: 48, ct: 45, sr: 78 }, finalScore: 56.0,
   related: ["1975", "1146"],
   cards: [
     { t: "hook", big: "18.4 billion e-payment transactions in 2025 — about 538 per Malaysian. The headline growth is real. The framing of the divide is not.", sub: "BNM AR 2025: e-payments grew 25%, retail value RM831 billion, DuitNow QR doubled to 3 billion transactions. PayNet 2022: 48.4% of daily expenses still paid in cash." },
     { t: "fact", big: "DuitNow QR doubled to 3 billion transactions in 2025 with nearly 3 million touchpoints. Average e-money transaction size rose to RM43 from RM33.", sub: "BNM AR 2024: end-2024 DuitNow QR value RM31.1 billion. ReDI registered tens of thousands of small traders. East Malaysia onboarding still lags.", lens: "Economic" },
-    { t: "fact", big: "PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash daily. BNM's 2025 Basic Banking policy mandates cash access stays available.", sub: "BNM Financial Inclusion Framework 2023-2026: cash reliance persists among low-income, elderly, and rural communities. Sarawak's S Pay Global runs as state alternative.", lens: "Social" },
-    { t: "fact", big: "RM2.8 billion is the 2025 scam impact across all channels, not e-wallet fraud. BNM averted RM1.2 billion before it left. Social engineering is rising; unauthorised takeovers are falling.", sub: "BNM Financial Stability Review 1H 2025 says authorised scams (victim-approved) up while unauthorised cases curbed. NSRC handled 146,167 calls, recovered RM34.5M.", lens: "Legal" },
+    { t: "fact", big: "PayNet found 36.2% of urban and 63.5% of non-urban Malaysians still use cash daily. BNM's 2025 Basic Banking policy mandates cash access stays available.", sub: "BNM Financial Inclusion Framework 2023-26: cash reliance persists among low-income, elderly and rural users. Sarawak runs S Pay Global.", lens: "Social" },
+    { t: "fact", big: "RM2.8B is the 2025 scam impact across all channels, not e-wallet fraud. BNM averted RM1.2B before it left. Social engineering rises; account takeovers fall.", sub: "BNM 1H 2025: authorised scams up while unauthorised cases curbed. NSRC handled 146,167 calls and recovered RM34.5M.", lens: "Legal" },
     { t: "reframe", big: "The real question is not how fast we reach 100% cashless — it is who gets left without working alternatives when the cash window closes.", sub: "" },
     { t: "view", big: "Malaysia has the rails. The next decade is about whether consumer protection catches up before more vulnerable users are pushed onto a system that cannot protect them.", sub: "" }
   ]
@@ -14213,10 +14213,10 @@ export const ISSUES: Issue[] = [
   cards: [
     { t: "hook", big: "Seven Malaysian tankers cleared to pass Hormuz after PM Anwar's call to Iran's president.", sub: "Three Petronas, two MISC, one Sapura, one Sepadu vessel were awaiting clearance. Iran initially granted blanket passage only to China, Russia, India, Iraq and Pakistan. Malaysia was not on the list." },
     { t: "fact", big: "Malaysia is a CMF member on paper but has no deployed naval assets in the Gulf — and was left off Iran's safe list.", sub: "Japan runs an SDF mission near Hormuz without joining the US coalition. South Korea maintains a permanent Cheonghae Unit in the Gulf of Aden. Malaysia contributes nothing operational.", lens: "Security" },
-    { t: "fact", big: "Brent crude hit $126/barrel. The subsidy bill jumped to RM4 billion per month. Working households absorb the cost first.", sub: "Higher crude boosts Petronas revenue. But the RM4B subsidy, rising transport costs, and fertiliser-driven grocery inflation land on B40 households, hawkers, fishers, and rural commuters.", lens: "Economic" },
-    { t: "fact", big: "Malaysia banned US warships from its ports while seeking Iran's goodwill — a non-alignment stance that delivered passage but no structural security.", sub: "Non-alignment preserves diplomatic flexibility. But when ~2,000 ships are blocked globally and maritime traffic drops 90%, flexibility without capability means waiting for a phone call to be answered.", lens: "Political" },
+    { t: "fact", big: "Brent crude hit $126/barrel. The subsidy bill jumped to RM4 billion per month. Working households absorb the cost first.", sub: "Higher crude boosts Petronas revenue. But the RM4B subsidy and rising costs land on B40 households, hawkers, fishers and rural commuters.", lens: "Economic" },
+    { t: "fact", big: "Malaysia banned US warships while seeking Iran's goodwill — non-alignment that bought passage but no structural security.", sub: "Non-alignment preserves diplomatic flexibility. But when ~2,000 ships are blocked globally and traffic drops 90%, flexibility without capability means waiting for a phone call.", lens: "Political" },
     { t: "reframe", big: "The question is not whether the ships got through. It is whether a trade-dependent nation can keep relying on personal calls when the next strait closes.", sub: "" },
-    { t: "view", big: "Diplomacy works until it doesn't. Japan and South Korea built institutional Gulf presence without abandoning independent foreign policy. Malaysia chose neither alliance nor capability — and the gap showed.", sub: "" },
+    { t: "view", big: "Diplomacy works until it doesn't. Japan and South Korea built institutional Gulf presence without abandoning independent policy. Malaysia chose neither — and the gap showed.", sub: "" },
   ]
 },
 {
@@ -14229,11 +14229,11 @@ export const ISSUES: Issue[] = [
   related: ["1951", "1953", "1954", "1964"],
   cards: [
     { t: "hook", big: "RON95 stays at RM1.99. The government says 90% of users won't notice.", sub: "The quota drops from 300 to 200 litres per month on 1 April. The 90% figure has no published methodology, sample period, or source — it is a government assertion, not a verified statistic." },
-    { t: "fact", big: "Above-quota fuel costs 68% more. The burden falls on those who drive farthest with the fewest alternatives.", sub: "Rural B40 commuters, plantation workers, and gig riders have no public transport fallback. But universal subsidies are regressive — T20 with larger cars benefit most. The quota cut is milder than full liberalisation.", lens: "Economic" },
-    { t: "fact", big: "Indonesia paired identical subsidy cuts with direct cash transfers. Malaysia offers no transitional support.", sub: "India targeted LPG subsidies through direct benefit transfers. Thailand used diesel stabilisation for transport inflation. Malaysia's cut arrives two days after Hari Raya price controls end — compounding cost pressure with no cushion.", lens: "Governance" },
-    { t: "fact", big: "Sixty years of car-centric planning left rural and East Malaysia with zero public transport. The quota cut punishes the result.", sub: "Outside the Klang Valley, no buses, no trains, no alternatives. Women managing households — school runs, clinic trips, elder care — absorb shocks through trip rationing invisible in consumption data.", lens: "Social" },
+    { t: "fact", big: "Above-quota fuel costs 68% more. The burden falls on those who drive farthest with the fewest alternatives.", sub: "Rural B40 commuters, plantation workers and gig riders have no public-transport fallback. T20 with larger cars benefit most.", lens: "Economic" },
+    { t: "fact", big: "Indonesia paired identical subsidy cuts with direct cash transfers. Malaysia offers no transitional support.", sub: "India targeted LPG via direct transfers. Thailand stabilised diesel. Malaysia's cut arrives two days after Hari Raya price controls end — no cushion.", lens: "Governance" },
+    { t: "fact", big: "Sixty years of car-centric planning left rural and East Malaysia with zero public transport. The quota cut punishes the result.", sub: "Outside the Klang Valley: no buses, no trains, no alternatives. Women absorb shocks through trip rationing invisible in consumption data.", lens: "Social" },
     { t: "reframe", big: "The policy question is not whether 90% are unaffected. It is whether a country with no rural public transport can cut fuel access without first building alternatives.", sub: "" },
-    { t: "view", big: "Subsidy reform is necessary. But reform without compensation, without transport alternatives, and without even a published basis for the '90% unaffected' claim is not reform — it is cost-shifting to those with the least voice.", sub: "" },
+    { t: "view", big: "Reform without compensation, alternatives or a published basis for the '90% unaffected' claim is not reform — it is cost-shifting to those with the least voice.", sub: "" },
   ]
 },
 {
@@ -14245,12 +14245,12 @@ export const ISSUES: Issue[] = [
   finalScore: 76.8,
   related: ["1951", "1952"],
   cards: [
-    { t: "hook", big: "Food prices are rising because of the Middle East conflict. That is the convenient headline.", sub: "The chain runs from Hormuz through fertiliser ships to Cameron Highlands to your pasar malam — but also through decades of policy failure that left Malaysia with no fertiliser stockpile and no domestic production." },
-    { t: "fact", big: "23 fertiliser vessels blocked at Hormuz. Nitrogen fertiliser jumped from RM240 to RM305/25kg in two weeks — projected RM350 by mid-April.", sub: "Wholesaler-to-wet-market margins already extract 30-50%. A farmer sells kangkung at 30 sen/kg; you pay RM3 at pasar. The supply chain was broken before any strait closed.", lens: "Economic" },
-    { t: "fact", big: "B40 spend over 40% of income on food; T20 about 15%. A 50% vegetable hike is a rounding error for one group and a meal skipped for the other.", sub: "Women manage 80% of household food purchasing. They absorb shocks through smaller portions, cheaper substitutes, and fewer meals — invisible in inflation statistics but visible in children's nutrition.", lens: "Social" },
-    { t: "fact", big: "Indonesia stockpiles fertiliser via Pupuk Indonesia; Vietnam's price law covers fertilisers. Malaysia has neither.", sub: "Thailand declared fertiliser a controlled good with monitored reserves. Malaysia imports nearly all fertiliser, holds no strategic stock, and has no stabilisation framework. FAMA and MARDI have failed on input-cost resilience.", lens: "Governance" },
+    { t: "hook", big: "Food prices are rising because of the Middle East conflict. That is the convenient headline.", sub: "The chain runs from Hormuz through fertiliser ships to Cameron Highlands to your pasar — but also through decades of policy that left Malaysia with no stockpile and no domestic production." },
+    { t: "fact", big: "23 fertiliser vessels blocked at Hormuz. Nitrogen fertiliser jumped from RM240 to RM305/25kg in two weeks — projected RM350 by mid-April.", sub: "Wholesaler margins already extract 30-50%. A farmer sells kangkung at 30 sen/kg; you pay RM3. The supply chain was broken before any strait closed.", lens: "Economic" },
+    { t: "fact", big: "B40 spend 40%+ of income on food; T20 about 15%. A 50% vegetable hike is a rounding error for one group, a skipped meal for the other.", sub: "Women manage 80% of household food purchases — absorbing shocks through smaller portions, fewer meals. Invisible in inflation stats, visible in child nutrition.", lens: "Social" },
+    { t: "fact", big: "Indonesia stockpiles fertiliser via Pupuk Indonesia; Vietnam's price law covers fertilisers. Malaysia has neither.", sub: "Thailand declared fertiliser a controlled good with monitored reserves. Malaysia imports nearly all fertiliser, holds no strategic stock and has no stabilisation framework.", lens: "Governance" },
     { t: "reframe", big: "The question is not why prices are rising. It is why a country that knew Hormuz was a chokepoint for fertiliser never stockpiled a single bag.", sub: "" },
-    { t: "view", big: "Hormuz exposed the fragility. But the fragility was built at home — by palm-oil monoculture priorities, absent fertiliser reserves, and a supply chain where middlemen take more than farmers. The war made it visible. The policy failure made it inevitable.", sub: "" },
+    { t: "view", big: "Hormuz exposed the fragility, but home built it: palm-oil priorities, no fertiliser reserves, middlemen taking more than farmers. War made it visible; policy made it inevitable.", sub: "" },
   ]
 },
 {
@@ -14273,18 +14273,18 @@ export const ISSUES: Issue[] = [
 {
   id: "1955", published: true, opinionShift: 68, status: "new", edition: 1,
   headline: "No Raya Open Houses — Symbolic Savings, Real Losses, Honest Questions",
-  context: "Cabinet banned all government and GLC Hari Raya open houses and restricted ministers' overseas travel as a cost-saving measure. The savings are a fraction of the RM4 billion monthly fuel subsidy bill. The tradition is simultaneously Malaysia's most cross-racial political event and a patronage vehicle.",
+  context: "Cabinet banned all government and GLC Hari Raya open houses and restricted ministers' overseas travel as cost-saving. The savings are a fraction of the RM4B monthly fuel subsidy. The tradition is both Malaysia's most cross-racial event and a patronage vehicle.",
   sourceDate: "2026-03-30",
   stageScores: { pa: 82, ba: 72, fc: 82, af: 66, ct: 60, sr: 77 },
   finalScore: 74.0,
   related: ["1954", "1952"],
   cards: [
     { t: "hook", big: "Government cancels all Raya open houses for fiscal discipline. The savings fund 1.8 minutes of the daily fuel subsidy.", sub: "The arithmetic is untenable. But austerity signalling asks whether leaders tighten first before asking the public to. That question is legitimate even if the savings are not." },
-    { t: "fact", big: "Open houses are Malaysia's most cross-racial political tradition and a taxpayer-funded patronage vehicle.", sub: "A Malay MP hosting diverse guests is real muhibbah — and contract signalling. Caterers, tent suppliers, and event firms receive bookings worth RM15-25M. Mourning only the unity while ignoring patronage is incomplete.", lens: "Political" },
-    { t: "fact", big: "Female caterers and women-led food SMEs lose real income. Rural constituents lose their one annual face-to-face access to their YB.", sub: "Catering is 50-60% of open house budgets and female-dominated. The kampung auntie loses her one day of direct access to the MB. T20 networkers lose a convenience, not a lifeline.", lens: "Social" },
-    { t: "fact", big: "A simpler open house — smaller tent, potluck — could have preserved the tradition at near-zero cost. The government chose a total ban.", sub: "Other Muslim-majority governments scaled down festive hospitality rather than eliminated it. Malaysia's all-or-nothing approach signals optics, not optimisation. The ban covers public funds only.", lens: "Governance" },
-    { t: "reframe", big: "The honest question is not whether open houses matter. It is whether Malaysia can distinguish between the tradition worth preserving and the patronage worth cutting — and whether any party in power would make that distinction.", sub: "" },
-    { t: "view", big: "Every party plays this game when in power, and mourns it when out. The ban will return the moment oil prices drop or an election approaches. What would be genuinely new is a government that kept the community gathering and cut the patronage — nobody has tried that yet.", sub: "" },
+    { t: "fact", big: "Open houses are Malaysia's most cross-racial political tradition and a taxpayer-funded patronage vehicle.", sub: "A Malay MP hosting diverse guests is real muhibbah — and contract signalling. Caterers and tent firms book RM15-25M. Mourning the unity while ignoring patronage is incomplete.", lens: "Political" },
+    { t: "fact", big: "Female caterers and women-led food SMEs lose real income. Rural constituents lose their one annual face-to-face access to their YB.", sub: "Catering is 50-60% of budgets and female-dominated. The kampung auntie loses her one day of direct access; T20 networkers lose only a convenience.", lens: "Social" },
+    { t: "fact", big: "A simpler open house — smaller tent, potluck — could have preserved the tradition at near-zero cost. The government chose a total ban.", sub: "Other Muslim states scaled down festive hospitality rather than eliminating it. Malaysia's all-or-nothing approach signals optics, not optimisation.", lens: "Governance" },
+    { t: "reframe", big: "The honest question is whether Malaysia can tell the tradition worth preserving from the patronage worth cutting — and whether any party in power would.", sub: "" },
+    { t: "view", big: "Every party plays this in power and mourns it out. The ban returns when oil drops or an election nears. What would be new is keeping the gathering and cutting the patronage.", sub: "" },
   ]
 },
 {
@@ -14297,18 +14297,18 @@ export const ISSUES: Issue[] = [
   related: ["1965"],
   cards: [
     { t: "hook", big: "Malaysia doubles the expat salary floor to RM20,000. The message: hire Malaysians first.", sub: "RM10,000 was too low and undercut locals. A higher floor can attract quality investment and force knowledge transfer. But is the system ready?" },
-    { t: "fact", big: "Semiconductor target: 60,000 workers by 2030. Pipeline: 3,000 graduates/year — many leave for Singapore within five years.", sub: "Malaysia loses thousands of skilled professionals annually to neighbours offering higher pay and clearer meritocracy. Raising the price of foreign replacements does not fix why Malaysians leave.", lens: "Economic" },
+    { t: "fact", big: "Semiconductor target: 60,000 workers by 2030. Pipeline: 3,000 graduates/year — many leave for Singapore within five years.", sub: "Malaysia loses skilled professionals to neighbours offering higher pay and clearer meritocracy. Raising the price of foreign replacements doesn't fix why Malaysians leave.", lens: "Economic" },
     { t: "fact", big: "GLCs and MNCs absorb the RM20K floor easily. SMEs and startups — the actual growth engine — cannot.", sub: "A Penang semiconductor startup now faces double the floor for a foreign engineer. Succession planning is mandatory on paper but rarely enforced. The burden falls hardest on firms least able to bear it.", lens: "Governance" },
     { t: "fact", big: "Malaysia's new RM20K floor exceeds Singapore's EP minimum of SGD5,000 (~RM16,600).", sub: "Multinationals choosing between Penang and Batam now see Malaysia as the more expensive jurisdiction. Thailand and Vietnam offer alternatives with lower barriers.", lens: "Regional" },
     { t: "reframe", big: "The real talent equation: pipeline quality, brain drain, and enforcement. This policy addresses none — it adjusts the price tag on a problem that is not about price.", sub: "" },
-    { t: "view", big: "Protecting Malaysian jobs is the right instinct. But protection without pipeline investment produces paper compliance — not Malaysian specialists. The ladder must come before the bar.", sub: "" },
+    { t: "view", big: "Protecting Malaysian jobs is right. But protection without pipeline investment produces paper compliance, not specialists. The ladder must come before the bar.", sub: "" },
   ]
 }
 ,
   {
     id: "1957", published: true, opinionShift: 82, status: "new", edition: 1,
     headline: "BYD Blocked, Proton Shielded, B40 Priced Out — Who Wins?",
-    context: "MITI's conditions for BYD's Tanjung Malim EV plant — 80% export and RM200K domestic price floor — have stalled the world's largest EV maker's Malaysia plans while protecting Proton (49.9% Geely-owned) and Perodua (25.2% Daihatsu-owned) behind a wall that prices B40 consumers out of the EV transition.",
+    context: "MITI's conditions for BYD's Tanjung Malim EV plant — 80% export and an RM200K price floor — stalled the world's largest EV maker's Malaysia plans, shielding Proton (49.9% Geely) and Perodua (25.2% Daihatsu) and pricing B40 out of the EV transition.",
     sourceDate: "2026-03-30",
     stageScores: { pa: 88, ba: 60, fc: 96, af: 58, ct: 38, sr: 82 }, finalScore: 83.7,
     related: ["1965"],
@@ -14325,16 +14325,16 @@ export const ISSUES: Issue[] = [
   {
     id: "1958", published: true, opinionShift: 89, status: "new", edition: 1,
     headline: "One Death, Six Proposals, Zero Data — Malaysia's Drunk Driving Blind Spot",
-    context: "A man in his 20s, positive for alcohol and drugs, killed Lalamove rider Amirul Hafiz Omar, 33, in Klang on 29 March 2026. Politicians demanded the death penalty. The penalty is already 10-15 years. Only 149 DUI crash cases were prosecuted in three years. Malaysia does not mandate post-crash alcohol testing.",
+    context: "A driver positive for alcohol and drugs killed Lalamove rider Amirul Hafiz Omar, 33, in Klang on 29 March 2026. Politicians demanded the death penalty. The current penalty is already 10-15 years. Only 149 DUI crash cases were prosecuted in three years.",
     sourceDate: "2026-03-31",
     stageScores: { pa: 90, ba: 65, fc: 88, af: 73, ct: 62, sr: 82 }, finalScore: 75.3,
     cards: [
-      { t: "hook", big: "A drunk, drugged driver killed a father of three. Politicians demanded the death penalty. The penalty is already 10-15 years.", sub: "On 29 March 2026 in Klang, a driver positive for alcohol and drugs struck motorcyclist Amirul Hafiz Omar, 33, head-on. He worked two jobs to support three children. He had left home to buy a maths book." },
+      { t: "hook", big: "A drunk, drugged driver killed a father of three. Politicians demanded the death penalty. The penalty is already 10-15 years.", sub: "On 29 March 2026 in Klang, a driver positive for alcohol and drugs struck motorcyclist Amirul Hafiz Omar, 33, head-on. He worked two jobs to support three children." },
       { t: "fact", big: "149 DUI crash cases prosecuted in three years. 1,261 DUI convictions in one year. Different laws, same silence.", sub: "149 covers Section 44 only (injury/death). The 1,261 spans all DUI sections. Malaysia publishes no data on breath tests administered or roadblocks conducted.", lens: "Governance" },
       { t: "fact", big: "12 DUI fatalities per year — 0.2% of crashes. Testing is discretionary. The real number is unknown.", sub: "Police test on 'reasonable cause' only. In Australia, mandatory testing reveals alcohol in 25-30% of fatal crashes. Malaysia's 0.2% measures enforcement, not prevalence.", lens: "Legal" },
       { t: "fact", big: "4,340 motorcyclists killed in 2025. 13.7% of accidents, 66.4% of deaths. The gig economy's youngest workers on the deadliest vehicles.", sub: "73.98% of riders rely on it as main income. His widow is pursuing separate legal action. The MMA called for a victim compensation fund. None exists.", lens: "Social" },
-      { t: "reframe", big: "The question is not whether penalties are harsh enough. The question is whether Malaysia has built any system to detect a drunk driver before they kill someone — and whether alcohol is even the main thing killing motorcyclists.", sub: "" },
-      { t: "view", big: "Deterrence requires detection. Compensation requires architecture. And 4,340 motorcyclists died in 2025 — most of them sober, on roads not built for them, riding because they had no other way to earn.", sub: "" },
+      { t: "reframe", big: "Penalties already exist. The real question is whether Malaysia detects drunk drivers before they kill — and whether alcohol is even the main killer of motorcyclists.", sub: "" },
+      { t: "view", big: "Deterrence requires detection. Compensation requires architecture. 4,340 motorcyclists died in 2025 — most sober, on roads not built for them, riding because they had no other way.", sub: "" },
     ]
   },
   {
@@ -14381,12 +14381,12 @@ export const ISSUES: Issue[] = [
     finalScore: 58.8,
     related: ["1208", "1170"],
     cards: [
-      { t: "hook", big: "Malaysia's anti-corruption chief is under investigation — but the system investigating him answers to those who appointed him", sub: "Bloomberg alleged Azam Baki colluded with businessmen. He sued for RM100 million. The PM deferred an RCI to an AG committee. Two months on: no timeline, no findings, no disclosure of committee members." },
-      { t: "fact", big: "The MACC Act created four oversight bodies — none can criminally investigate its own chief", sub: "Advisory Board, Special Committee, Complaints Committee, and Operations Review Panel all lack teeth. The AG committee's composition remains undisclosed. The UNCAC 2024 review recommended Malaysia build an independent oversight body. It has not.", lens: "Governance" },
-      { t: "fact", big: "Anthony Loke demanded an RCI. He was overruled in 72 hours. Every government since 2009 has preserved this power structure", sub: "Four administrations — Najib's BN, Muhyiddin's PN, Ismail Sabri's BN, Anwar's PH-BN — kept the same MACC appointment architecture. No PM has proposed independent confirmation. The design serves whoever holds executive power.", lens: "Political" },
-      { t: "fact", big: "Corruption costs RM277 billion over five years — the burden falls hardest on B40 families paying bribes for basic services", sub: "The NACS 2024-2028 estimates 3.4% of GDP lost. Malaysia's CPI improved to 54th (score 52) — but that preceded the Bloomberg revelations. The RM100 million suit signals investigating corruption carries a price.", lens: "Economic" },
+      { t: "hook", big: "Malaysia's anti-corruption chief is under investigation — but the system investigating him answers to those who appointed him", sub: "Bloomberg alleged Azam Baki colluded with businessmen. He sued for RM100M. The PM deferred an RCI to an AG committee. No timeline, no findings, no disclosure." },
+      { t: "fact", big: "The MACC Act created four oversight bodies — none can criminally investigate its own chief", sub: "Advisory Board, Special Committee, Complaints Committee and Operations Review Panel all lack teeth. UNCAC 2024 recommended an independent oversight body. Malaysia has not built one.", lens: "Governance" },
+      { t: "fact", big: "Anthony Loke demanded an RCI. He was overruled in 72 hours. Every government since 2009 has preserved this power structure", sub: "Najib's BN, Muhyiddin's PN, Ismail Sabri's BN, Anwar's PH-BN — all kept the same MACC appointment architecture. No PM has proposed independent confirmation.", lens: "Political" },
+      { t: "fact", big: "Corruption costs RM277 billion over five years — the burden falls hardest on B40 families paying bribes for basic services", sub: "NACS 2024-2028 estimates 3.4% of GDP lost. CPI improved to 54th before the Bloomberg revelations. The RM100M suit signals investigating corruption carries a price.", lens: "Economic" },
       { t: "reframe", big: "The question is not whether Azam Baki is guilty — it is whether any institution can answer that independently when every government has chosen not to build one", sub: "" },
-      { t: "view", big: "The fix is a permanent independent oversight body for MACC, as the UNCAC recommended. But building it requires a government to surrender power over its own watchdog. No government has.", sub: "" }
+      { t: "view", big: "The fix is a permanent independent oversight body for MACC, as UNCAC recommended. But that requires a government to surrender power over its own watchdog. None has.", sub: "" }
     ]
   },
   {
@@ -14394,20 +14394,20 @@ export const ISSUES: Issue[] = [
     opinionShift: 76,
     status: "new",
     edition: 1,
-    headline: "Military Generals Charged — Historic Prosecution, but the 4,679-Contract Cartel System Remains Intact",
-    context: "Former Army Chief Muhammad Hafizuddeain Jantan and former Defence Forces Chief Mohamad Nizam Jaafar face corruption charges. MACC's Ops Parasit seized RM52 million. A 26-firm cartel — including firms owned by relatives of serving officers — operated across 4,679 contracts while 12 auditors oversaw the entire defence portfolio.",
+    headline: "Generals charged at last — but the 4,679-contract cartel system remains intact",
+    context: "Former Army Chief Hafizuddeain Jantan and former Defence Forces Chief Mohamad Nizam Jaafar face corruption charges. MACC's Ops Parasit seized RM52M. A 26-firm cartel ran 4,679 contracts while just 12 auditors oversaw the entire defence portfolio.",
     published: true,
     sourceDate: "2026-04-03",
     stageScores: { pa: 83, ba: 38, fc: 52, af: 65, ct: 52, sr: 76 },
     finalScore: 61,
     related: ["0154", "1805"],
     cards: [
-      { t: "hook", big: "Two former military chiefs charged with corruption — Malaysia's first prosecution of its top brass", sub: "Hafizuddeain faces money laundering; Nizam faces abuse of power, CBT, and receipt of a valuable item. His wife was also charged. MACC seized RM52 million. An external activist, not internal oversight, triggered the probe." },
-      { t: "fact", big: "A 26-firm cartel ran 4,679 contracts while 12 auditors watched — an external activist triggered the probe", sub: "The Whistleblower Protection Act excludes material covered by the Official Secrets Act. Military procurement is classified by default. Defence spending at 1.1% GDP means corruption takes an outsized bite from a thin budget.", lens: "Security" },
-      { t: "fact", big: "The LCS scandal ended in DNAA. Then the same procurement system produced a new cartel on this government's watch", sub: "RM6.1 billion spent on warships that do not exist. Contracts over RM500K required MOF approval — civilian bureaucrats either colluded or failed. Every coalition has fingerprints on defence graft.", lens: "Governance" },
-      { t: "fact", big: "The King warned the Ministry was 'full of agents' — constitutionally grounded but potentially prejudicial to fair trial", sub: "As Supreme Commander under Article 41, the Agong has a legitimate role. But 'hunt' language on active cases risks defence challenges. The intervention may serve both accountability and reassertion of royal influence.", lens: "Legal" },
+      { t: "hook", big: "Two former military chiefs charged with corruption — Malaysia's first prosecution of its top brass", sub: "Hafizuddeain faces money laundering; Nizam faces abuse of power, CBT and receipt of a valuable item. His wife was charged. MACC seized RM52M. An external activist triggered the probe." },
+      { t: "fact", big: "A 26-firm cartel ran 4,679 contracts while 12 auditors watched — an external activist triggered the probe", sub: "The Whistleblower Act excludes OSA material. Military procurement is classified by default. Defence at 1.1% of GDP means corruption takes an outsized bite of a thin budget.", lens: "Security" },
+      { t: "fact", big: "The LCS scandal ended in DNAA. Then the same procurement system produced a new cartel on this government's watch", sub: "RM6.1B spent on warships that don't exist. Contracts above RM500K required MOF approval — civilian bureaucrats either colluded or failed.", lens: "Governance" },
+      { t: "fact", big: "The King warned the Ministry was 'full of agents' — constitutionally grounded but potentially prejudicial to fair trial", sub: "As Supreme Commander under Article 41, the Agong has a legitimate role. But 'hunt' language on active cases risks defence challenges to fair trial.", lens: "Legal" },
       { t: "reframe", big: "These are not the first generals caught — they are the first charged. The system that enabled a 4,679-contract cartel has been announced reformed but not actually changed", sub: "" },
-      { t: "view", big: "The prosecution is historic and substantive. But soldiers in substandard barracks while chiefs hoarded gold deserve more than accountability theatre — they deserve a system that cannot be captured.", sub: "" }
+      { t: "view", big: "The prosecution is historic. But soldiers in substandard barracks while chiefs hoarded gold deserve more than theatre — they deserve a system that cannot be captured.", sub: "" }
     ]
   },
   {
@@ -14438,19 +14438,19 @@ export const ISSUES: Issue[] = [
     status: "new",
     edition: 1,
     headline: "Fuel Fake News Crackdown: Only 8 of 96 Flagged Posts Were Fabrications",
-    context: "MCMC investigated 17 individuals and flagged 96 posts after PM Anwar called spreading false fuel information a betrayal. Only 8 posts involved fabricated graphics — 88 were reposts or speculation. The amended Section 233 now carries up to RM500,000 and 2 years. The RM4B monthly subsidy confirms the anxiety being targeted.",
+    context: "MCMC investigated 17 individuals and flagged 96 posts after PM Anwar called false fuel claims a betrayal. Only 8 posts were fabricated graphics — 88 were reposts or speculation. Section 233 now carries up to RM500,000 and 2 years.",
     published: true,
     sourceDate: "2026-04-03",
     stageScores: { pa: 82, ba: 47, fc: 48, af: 62, ct: 52, sr: 74 },
     finalScore: 60.8,
     related: ["0142", "1940", "1950", "1952"],
     cards: [
-      { t: "hook", big: "The government is cracking down on fake news about fuel and electricity prices to protect Malaysians from misinformation.", sub: "MCMC investigated 17 individuals and flagged 96 posts. Only 8 involved fabricated graphics — the remaining 88 were reposts or speculation. The amended Section 233 now carries up to RM500,000 and 2 years." },
-      { t: "fact", big: "Section 233 penalties jumped to RM500,000 and 2 years — yet MCMC's conviction rate is just 3.8% across 1,243 investigations", sub: "The process is the punishment. A Parliamentary committee recommended narrowing it in 2024; ignored. Singapore's POFMA requires corrections before prosecution. Indonesia's ITE Law shows where unchecked enforcement leads.", lens: "Rights" },
-      { t: "fact", big: "Every PM — Mahathir, Badawi, Najib, Muhyiddin, Ismail Sabri, Anwar — has used these laws against critics. The pattern is systemic.", sub: "PAS and PN weaponise cost-of-living anger into ethnic grievance. Subsidy entitlement combined with low savings creates acute panic when cuts loom. No ruling party voluntarily narrows tools it may need.", lens: "Political" },
-      { t: "fact", big: "The fuel subsidy hit RM4 billion per month — the public's anxiety is rational, but so is the government's fiscal alarm", sub: "Brent crude above $109/barrel. RON95 quota cut from 300 to 200 litres. The subsidy is regressive — T20 households benefit more than B40 families. Informal economy workers rely on social media as their only price intelligence.", lens: "Economic" },
+      { t: "hook", big: "The government is cracking down on fake news about fuel and electricity prices to protect Malaysians from misinformation.", sub: "MCMC investigated 17 individuals and flagged 96 posts. Only 8 involved fabricated graphics — 88 were reposts or speculation." },
+      { t: "fact", big: "Section 233 penalties jumped to RM500K and 2 years — yet MCMC's conviction rate is 3.8% across 1,243 investigations", sub: "The process is the punishment. A 2024 Parliamentary committee recommended narrowing it — ignored. Singapore's POFMA requires corrections first; Indonesia's ITE Law shows the endgame.", lens: "Rights" },
+      { t: "fact", big: "Every PM — Mahathir, Badawi, Najib, Muhyiddin, Ismail Sabri, Anwar — has used these laws against critics. The pattern is systemic.", sub: "PAS and PN turn cost-of-living anger into ethnic grievance. No ruling party voluntarily narrows tools it may itself need.", lens: "Political" },
+      { t: "fact", big: "The fuel subsidy hit RM4 billion per month — the public's anxiety is rational, but so is the government's fiscal alarm", sub: "Brent above $109/barrel. RON95 quota cut from 300 to 200 litres. The subsidy is regressive — T20 households benefit more. Informal workers rely on social media for price intel.", lens: "Economic" },
       { t: "reframe", big: "A government that signals fuel prices must rise cannot criminally investigate citizens for saying the same thing. That is not fighting fake news — it is punishing premature truth.", sub: "" },
-      { t: "view", big: "Fabricated graphics deserve investigation. But when only 8 of 96 flagged posts are fabrications, enforcement has expanded into suppression — a pattern every PM inherits and none will fix.", sub: "" }
+      { t: "view", big: "Fabricated graphics deserve investigation. But when only 8 of 96 flagged posts are fabrications, enforcement has become suppression — a pattern every PM inherits.", sub: "" }
     ]
   },
   {
@@ -14459,17 +14459,17 @@ export const ISSUES: Issue[] = [
     status: "new",
     edition: 1,
     headline: "US tariff reset after Supreme Court ruling leaves Malaysia worse off",
-    context: "The US Supreme Court struck down IEEPA tariffs in February 2026, but replacement Section 301 investigations target solar, steel, aluminum, and EVs across 60 economies. Malaysia walked out of the ART deal with no bilateral framework and 68% of semiconductor exports controlled by US firms.",
+    context: "The US Supreme Court struck down IEEPA tariffs in February 2026, but Section 301 investigations now target solar, steel, aluminium and EVs across 60 economies. Malaysia walked out of the ART deal with no bilateral framework — 68% of its chip exports come from US firms.",
     published: true,
     sourceDate: "2026-04-03",
     stageScores: { pa: 82, ba: 65, fc: 42, af: 65, ct: 55, sr: 80 },
     finalScore: 64.8,
     related: ["1957", "1956", "1973"],
     cards: [
-      { t: "hook", big: "Malaysia celebrated the Supreme Court striking down Trump's tariffs. The replacement regime may be worse.", sub: "SCOTUS voided the 24% IEEPA tariff and the ART deal. Trump imposed a 10% blanket tariff within days and launched two Section 301 probes across up to 60 economies — legally unchallengeable infrastructure for targeted tariffs with no rate cap." },
-      { t: "fact", big: "IEEPA tariffs had a constitutional weakness. Section 301 tariffs do not — court challenges are nearly impossible.", sub: "Section 301 targets solar, steel, aluminum, and EVs — not semiconductors directly. But Malaysia's finished electronics could fall within scope. White House exempted computers, smartphones, and SSDs under specific HTS headings.", lens: "Legal" },
-      { t: "fact", big: "68% of semiconductor exports come from US firms. The 180,000 ATP workers are 65% women. R&D flatlined at 1% of GDP for a decade.", sub: "RM60.6B in semiconductors within RM120.2B total E&E exports to US. The NSSP commits RM25B, but Silterra — the one wafer fab attempt — failed. The CHIPS Act excludes ATP, reinforcing Malaysia's role by luck.", lens: "Economic" },
-      { t: "fact", big: "A forced labor probe across 60 economies gives the US a second front. Every coalition chose patronage over reform.", sub: "Some Chinese manufacturing involves minimal value-add to circumvent tariffs. The ~7,200 local suppliers face scrutiny. Sabah and Sarawak have zero chip plants but bear full tariff exposure on commodities.", lens: "Political" },
+      { t: "hook", big: "Malaysia celebrated the Supreme Court striking down Trump's tariffs. The replacement regime may be worse.", sub: "SCOTUS voided the 24% IEEPA tariff and the ART deal. Trump imposed a 10% blanket tariff within days and launched two Section 301 probes — legally unchallengeable, with no rate cap." },
+      { t: "fact", big: "IEEPA tariffs had a constitutional weakness. Section 301 tariffs do not — court challenges are nearly impossible.", sub: "Section 301 targets solar, steel, aluminium and EVs — not chips directly. But Malaysia's finished electronics could fall in scope. The White House exempted computers, phones and SSDs.", lens: "Legal" },
+      { t: "fact", big: "68% of semiconductor exports come from US firms. The 180,000 ATP workers are 65% women. R&D flatlined at 1% of GDP for a decade.", sub: "RM60.6B in chips within RM120.2B E&E exports to US. NSSP commits RM25B, but Silterra — the one wafer-fab attempt — failed. The CHIPS Act excludes ATP.", lens: "Economic" },
+      { t: "fact", big: "A forced-labour probe across 60 economies hands the US a second front. Every coalition chose patronage over reform.", sub: "Some China manufacturing adds minimal value to dodge tariffs. 7,200 local suppliers face scrutiny. Sabah and Sarawak bear full commodity exposure with zero chip plants.", lens: "Political" },
       { t: "reframe", big: "The court victory was a trap. Every government since Mahathir 1.0 chose procurement preferences over a US trade deal. Those consequences are arriving.", sub: "" },
       { t: "view", big: "The vulnerability is real but leverage is underestimated. Malaysia lacks not options but political will to convert CPTPP, RCEP, and the NSSP into actual strategy.", sub: "" }
     ]
@@ -14480,17 +14480,17 @@ export const ISSUES: Issue[] = [
     status: "new",
     edition: 1,
     headline: "Refugee registration system launched but work permits remain unissued",
-    context: "Malaysia launched the DPP on 1 January 2026, screening 37,000+ individuals with the first phase targeting detention centres holding 21,000+ people including 3,200 children. Work permits restricted to 3D sectors are announced but not yet operative. Thailand has moved ahead by piloting actual permits.",
+    context: "Malaysia launched the DPP on 1 January 2026, screening 37,000+ refugees with the first phase in detention centres holding 21,000+ people including 3,200 children. Work permits in 3D sectors are announced but not yet operative. Thailand has moved ahead on actual permits.",
     published: true,
     sourceDate: "2026-04-03",
     stageScores: { pa: 80, ba: 70, fc: 58, af: 65, ct: 48, sr: 78 },
     finalScore: 66.5,
     related: ["1267", "1283", "0179", "1973"],
     cards: [
-      { t: "hook", big: "Malaysia launches its first refugee registration system. Work permits are announced but not yet issued. Thailand has already moved ahead.", sub: "The DPP screened 37,000+ since January 2026, starting with detention centre populations. The government promised employment, education, and healthcare access, but permits remain policy direction, not reality." },
-      { t: "fact", big: "A 2019 study estimated RM3B in GDP gains — but B40 workers of all races face real wage competition in the same sectors.", sub: "Employers sought documented workers for shortage sectors. Registration creates a market for permits risking labour broker capture. Centres are only in major cities, leaving rural refugees unable to register.", lens: "Economic" },
-      { t: "fact", big: "Over 21,000 detained including 3,200 children under 12. The Employment Act covers them by case law, but the Immigration Act has not changed.", sub: "Indonesia achieved a more comprehensive refugee framework without signing the 1951 Convention. Malaysia's DPP is executive action because no coalition will seek parliamentary reform of immigration law.", lens: "Rights" },
-      { t: "fact", big: "Sabah has 50,000+ refugees but DPP rollout faces state objections. Political Islam drives selective sympathy for Muslim refugees only.", sub: "Domestic work and plantations are excluded despite forced labour flags. Anti-refugee sentiment is mainstream across all races, driven by genuine economic anxiety among lower-income communities.", lens: "Social" },
+      { t: "hook", big: "Malaysia's first refugee registration system is live. Work permits are announced but unissued. Thailand has already moved ahead.", sub: "The DPP screened 37,000+ since January, starting in detention centres. Promises of employment, education and healthcare remain policy direction, not reality." },
+      { t: "fact", big: "A 2019 study estimated RM3B in GDP gains — but B40 workers of all races face real wage competition.", sub: "Employers want documented workers in shortage sectors. Registration risks labour-broker capture. Centres exist only in major cities — rural refugees can't reach them.", lens: "Economic" },
+      { t: "fact", big: "21,000+ detained, including 3,200 children. Case law extends the Employment Act to refugees; the Immigration Act has not changed.", sub: "Indonesia built a comprehensive framework without joining the 1951 Convention. Malaysia's DPP is executive action — parliamentary reform is off-limits.", lens: "Rights" },
+      { t: "fact", big: "Sabah has 50,000+ refugees but DPP rollout faces state objections. Political Islam drives selective sympathy for Muslim refugees only.", sub: "Domestic work and plantations are excluded despite forced-labour flags. Anti-refugee sentiment is mainstream, driven by genuine economic anxiety.", lens: "Social" },
       { t: "reframe", big: "Registration serves the state and employers first. No coalition will expand beyond this. The DPP is likely both the floor and the ceiling.", sub: "" },
       { t: "view", big: "The DPP is the political maximum Malaysian democracy can produce now. The task is making this registration exercise function as actual protection.", sub: "" }
     ]
@@ -14508,10 +14508,10 @@ export const ISSUES: Issue[] = [
     finalScore: 70.8,
     related: ["0179", "1641"],
     cards: [
-      { t: "hook", big: "The vernacular school fight is stuck on unity vs culture — the courts settled the law, but parents keep leaving", sub: "The Federal Court refused leave to appeal in February 2024, preserving vernacular schools' constitutionality. Yet the real forces driving school choice have little to do with heritage or national identity." },
-      { t: "fact", big: "69% of middle-class Malay parents preferred SJKC for academic quality — but no data proves SJKC is actually better", sub: "An ISEAS survey of 928 Malay respondents found quality, discipline, and location drove the choice. SJKC and SK share the same syllabus — the gap is perceived, rooted in community governance and fundraising, not proven pedagogy.", lens: "Social" },
-      { t: "fact", big: "Tamil schools are collapsing: 37 have 10 or fewer students, and 67% sit in rural areas the Indian community has left behind", sub: "SJKT enrolment fell from over 100,000 in 2011 to 72,080 by 2025. Funding fluctuated from RM50M (2020) to RM19M (2025) before restoration in 2026. No Tamil secondary schools exist.", lens: "Economic" },
-      { t: "fact", big: "Malaysian enrolment in international schools rose 34% in five years — class is reshaping education faster than ethnicity", sub: "MOE data shows 88,951 citizens in international schools by 2024. But the deeper class divide is the RM7-billion tuition industry and hidden costs that stratify outcomes within public schools.", lens: "Political" },
+      { t: "hook", big: "The vernacular school fight is stuck on unity vs culture — the courts settled the law, but parents keep leaving", sub: "The Federal Court refused leave to appeal in February 2024, preserving constitutionality. Yet the real drivers of school choice have little to do with heritage." },
+      { t: "fact", big: "69% of middle-class Malay parents preferred SJKC for academic quality — but no data proves SJKC is actually better", sub: "An ISEAS survey of 928 Malay respondents found quality, discipline and location drove the choice. SJKC and SK share the same syllabus — the gap is perceived, not proven.", lens: "Social" },
+      { t: "fact", big: "Tamil schools are collapsing: 37 have 10 or fewer students, and 67% sit in rural areas the Indian community has left behind", sub: "SJKT enrolment fell from over 100,000 in 2011 to 72,080 by 2025. Funding fluctuated from RM50M (2020) to RM19M (2025). No Tamil secondary schools exist.", lens: "Economic" },
+      { t: "fact", big: "Malaysian enrolment in international schools rose 34% in five years — class is reshaping education faster than ethnicity", sub: "MOE: 88,951 citizens in international schools by 2024. The deeper class divide is the RM7B tuition industry that stratifies outcomes within public schools.", lens: "Political" },
       { t: "reframe", big: "The real question: what specifically is driving parents away — governance rigidity, curriculum imbalance, or discipline failures?", sub: "" },
       { t: "view", big: "Stop debating whether vernacular schools should exist — start asking why national schools keep losing the families they serve", sub: "" }
     ]
@@ -14529,9 +14529,9 @@ export const ISSUES: Issue[] = [
     finalScore: 63.7,
     related: [],
     cards: [
-      { t: "hook", big: "520% more Chinese tourists landed in Penang — but the success story has a rent bill attached", sub: "Penang runs 61 weekly flights to China, projects 8 million airport passengers for 2026. The 520% surge uses a low 2023 base of 26,056. George Town's heritage core has shrunk from 50,000 to 9,000 residents since UNESCO listing." },
+      { t: "hook", big: "520% more Chinese tourists landed in Penang — but the success story has a rent bill attached", sub: "Penang runs 61 weekly flights to China and projects 8M airport passengers in 2026. The 520% surge uses a low 2023 base of 26,056. The heritage core has shrunk from 50,000 to 9,000 residents." },
       { t: "fact", big: "China generated RM20.87B in tourism receipts nationally — the 'low-value tourist' claim doesn't survive the data", sub: "Post-pandemic Chinese FITs spend 40% more than pre-pandemic group tourists. The real gap is segment, not nationality. MOTAC has no Penang-specific spending breakdown published.", lens: "Economic" },
-      { t: "fact", big: "Heritage core lost 80% of residents since 2008 — renters of every ethnicity, not one community", sub: "B40 renters, women hawkers, Indian Muslim traders, Chinese clan tenants all face the same economics: a tourist night earns more than a month's rent. GTWHI's repair fund exists but can't match market pressure.", lens: "Social" },
+      { t: "fact", big: "Heritage core lost 80% of residents since 2008 — renters of every ethnicity, not one community", sub: "B40 renters, women hawkers, Indian Muslim traders and Chinese clan tenants face the same economics: a tourist night earns more than a month's rent.", lens: "Social" },
       { t: "fact", big: "Penang has a sustainable tourism master plan — but nobody is measuring whether it works", sub: "No carrying-capacity study for the UNESCO zone. No displacement tracking. Airport expanding to 12M capacity by 2028, but water, waste, and housing haven't scaled alongside.", lens: "Governance" },
       { t: "reframe", big: "This isn't about Chinese tourists versus heritage — it's about who profits from growth and who pays rent", sub: "" },
       { t: "view", big: "Penang needs a public dashboard tracking residents, rents, and local retention — not just arrivals", sub: "" }
@@ -14542,7 +14542,7 @@ export const ISSUES: Issue[] = [
     opinionShift: 82,
     status: "new",
     edition: 1,
-    headline: "Shah Alam's forest corridor fell to a 22-year-old backdated gazette — and three courts that never asked if it was lawful",
+    headline: "Shah Alam's forest corridor fell to a backdated gazette — courts never asked if it was lawful",
     context: "The Federal Court dismissed a 2-1 challenge to Selangor's degazettement of 406 hectares from Bukit Cherakah. The gazette referenced a 2000 decision published only in 2022, bypassing the state's own 2011 public inquiry law — which has never been used.",
     published: true,
     sourceDate: "2026-04-05",
@@ -14550,10 +14550,10 @@ export const ISSUES: Issue[] = [
     finalScore: 70.3,
     related: ["1549", "1581", "1043", "1974"],
     cards: [
-      { t: "hook", big: "A gazette backdated 22 years bypassed Selangor's public inquiry law — three courts never ruled on whether it was lawful", sub: "Federal Court split 2-1. The state's inquiry law has never been used since 2011. Road is 70% built. Temuan Orang Asli filed a native title claim in 2023 but were not party to this case." },
-      { t: "fact", big: "Selangor's public inquiry law for forest excision has existed since 2011 — and has never been invoked once", sub: "The gazette referenced a 2000 BN-era decision. The state says the land was already excised by 2006. The NGOs say the gazette's effect was to bypass the 2011 law. Three courts dismissed on threshold grounds — none ruled on substance.", lens: "Legal" },
-      { t: "fact", big: "316 species, 40 on IUCN Red List — and a road severing a critical corridor between two major forest fragments", sub: "UNDP-funded survey found tapir, gibbon, leopard cat (all totally protected). Road includes a box culvert for wildlife crossing, but conservation research questions its adequacy for large mammals in fragmented tropical forest.", lens: "Environmental" },
-      { t: "fact", big: "KLNFR drew 45,000 objections and was reversed before gazettement. SACF drew 718 — after the gazette was already published", sub: "The legal difference matters: reversing a published gazette requires new legislation. The class dimension: road benefits affluent Setia Eco Park while ecological services serve wider Shah Alam including B40 residents.", lens: "Governance" },
+      { t: "hook", big: "A gazette backdated 22 years bypassed Selangor's public inquiry law — three courts never ruled on whether it was lawful", sub: "Federal Court split 2-1. The state's inquiry law has never been used since 2011. The road is 70% built. Temuan Orang Asli filed a 2023 native title claim — not party." },
+      { t: "fact", big: "Selangor's public inquiry law for forest excision has existed since 2011 — and has never been invoked once", sub: "The gazette cited a 2000 BN-era decision. The state says the land was excised by 2006; NGOs say it bypassed the 2011 law. Three courts dismissed on threshold, not substance.", lens: "Legal" },
+      { t: "fact", big: "316 species, 40 on IUCN Red List — and a road severing a critical corridor between two major forest fragments", sub: "A UNDP-funded survey found tapir, gibbon and leopard cat — all totally protected. The road includes a wildlife box culvert, but research questions its adequacy for large mammals.", lens: "Environmental" },
+      { t: "fact", big: "KLNFR drew 45,000 objections and was reversed before gazettement. SACF drew 718 — after the gazette was already published", sub: "Reversing a published gazette requires new legislation. The road benefits affluent Setia Eco Park; ecological services serve wider Shah Alam, including B40.", lens: "Governance" },
       { t: "reframe", big: "This isn't one government's hypocrisy — it's a structural failure where states profit from conversion and conservation pays nothing", sub: "" },
       { t: "view", big: "Tie standing rules to gazette publication date, enforce Section 12 replacement land, and adopt the NFA 2022 amendment across all states", sub: "" }
     ]
@@ -14571,10 +14571,10 @@ export const ISSUES: Issue[] = [
     finalScore: 66.3,
     related: [],
     cards: [
-      { t: "hook", big: "RM82.1B in local currency trade over 16 years — real growth, but 76% is with China and the hedging infrastructure barely exists", sub: "Local currency settlement with China has reached 25.6% of bilateral trade, up from 1.2% in 2009. Thailand is at 17.2%, Indonesia 15.8%. But 74.4% of Malaysia-China trade is still in USD." },
-      { t: "fact", big: "The 16-year cumulative equals roughly one month of annual trade — but within the China corridor, a quarter now bypasses the dollar", sub: "SMEs save up to 2% in transaction fees. But palm oil, LNG, and petroleum remain USD-benchmarked. B40 households feel ringgit weakness through imported inflation, not settlement currencies.", lens: "Economic" },
+      { t: "hook", big: "RM82.1B in local currency trade over 16 years — real growth, but 76% is with China and the hedging infrastructure barely exists", sub: "Local currency settlement with China reached 25.6% of bilateral trade, up from 1.2% in 2009. Thailand 17.2%, Indonesia 15.8%. 74.4% of Malaysia-China trade is still in USD." },
+      { t: "fact", big: "The 16-year cumulative equals roughly one month of annual trade — but within the China corridor, a quarter now bypasses the dollar", sub: "SMEs save up to 2% in fees. Palm oil, LNG and petroleum stay USD-benchmarked. B40 feels ringgit weakness through imported inflation.", lens: "Economic" },
       { t: "fact", big: "76% concentration in China isn't diversification — and BRICS partner status carries tariff risk without decision-making power", sub: "BNM-PBOC swap at CNY180B/RM110B dwarfs all others. 68% of E&E exports to the US are semiconductors, ~65% from US firms. The geopolitical risk is asymmetric.", lens: "Political" },
-      { t: "fact", big: "The 1998 capital controls that saved the ringgit now block its internationalization — and the incentives to keep them run deeper than economics", sub: "No deep MYR currency-derivatives ecosystem. Retail payment linkages (DuitNow-PromptPay-QRIS) progress faster than wholesale. BNM ruled out new controls but has no roadmap for relaxing old ones.", lens: "Governance" },
+      { t: "fact", big: "The 1998 capital controls that saved the ringgit now block its internationalisation — incentives to keep them run deeper than economics", sub: "No deep MYR derivatives. Retail links (DuitNow-PromptPay-QRIS) outpace wholesale. BNM ruled out new controls but has no roadmap to relax old ones.", lens: "Governance" },
       { t: "reframe", big: "The question isn't whether to reduce dollar dependency — it's whether Malaysia is building yuan dependency instead, and who bears the cost", sub: "" },
       { t: "view", big: "Publish annual volumes by country, build the hedging infrastructure exporters need, and stop conflating transaction savings with structural independence", sub: "" }
     ]
