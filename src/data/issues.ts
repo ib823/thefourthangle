@@ -2881,17 +2881,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1146", opinionShift: 36, status: null, edition: 1,
-  headline: "E-Wallet Transactions Surpass RM48 Billion in 2025",
-  context: "Bank Negara reported that e-wallet transactions reached RM48.3 billion in 2025 across 56 licensed providers, with Touch 'n Go eWallet, GrabPay, and Boost commanding 82% market share.",
-  stageScores: { pa: 76, ba: 62, fc: 76, af: 57, ct: 42, sr: 68 }, finalScore: 68.4,
+  id: "1146", published: true, opinionShift: 58, status: "updated", edition: 2, sourceDate: "2026-04-07",
+  headline: "18.4 billion e-payment transactions in 2025 — but 48 e-money issuers face very different economics",
+  context: "BNM Annual Report 2025 confirms total e-payment transactions grew 25% to 18.4 billion in 2025, with retail e-payment value reaching RM831 billion. DuitNow QR is already Malaysia's national interoperable standard. The unfinished agenda is consumer protection across 48 licensed issuers with different economics.",
+  stageScores: { pa: 75, ba: 28, fc: 27, af: 35, ct: 48, sr: 78 }, finalScore: 56.0,
+  related: ["1975", "1887"],
   cards: [
-    { t: "hook", big: "RM48 billion in e-wallet transactions — but 56 licensed providers means market is dangerously fragmented", sub: "Top 3 platforms hold 82% of volume while 42 small providers collectively handle less than 5%" },
-    { t: "fact", big: "E-wallet operators collectively lost RM1.8 billion in 2025 as cashback subsidies exceed transaction revenue", sub: "Consolidation inevitable — BNM expects only 8-12 viable providers by 2028 from current 56", lens: "Economic" },
-    { t: "fact", big: "Rural e-wallet adoption at 28% versus 74% in urban areas — 4.2 million rural residents remain cash-dependent", sub: "Hawker stalls and wet markets in East Malaysia report 85% cash transactions despite QR availability", lens: "Social" },
-    { t: "fact", big: "Data protection framework for e-wallets allows platforms to share transaction data with 14 categories of third parties", sub: "PDPA exemptions mean financial spending patterns of 22 million users flow to marketers and credit agencies", lens: "Governance" },
-    { t: "reframe", big: "Cashless convenience is real — but 22 million Malaysians are paying with their data, not just their money", sub: "" },
-    { t: "view", big: "Should BNM force interoperability between all e-wallets through a single DuitNow QR standard by 2027?", sub: "" }
+    { t: "hook", big: "Malaysia made 18.4 billion e-payment transactions in 2025 — averaging 538 per Malaysian — but 48 e-money issuers face very different economics", sub: "BNM AR 2025: retail e-payment value reached RM831 billion (up 19%), average e-money transaction size rose to RM43 from RM33, DuitNow QR doubled to 3 billion transactions." },
+    { t: "fact", big: "FATF/APG: Malaysia has 48 licensed e-money issuers. Touch 'n Go reports 24M verified users and profitability since Q3 2024. Smaller players have no such cushion.", sub: "Sarawak's S Pay Global runs as a state-government alternative with around 1.56 million users — proof that local ecosystems can coexist where politics demands.", lens: "Economic" },
+    { t: "fact", big: "ReDI initiative registered 22,368 traders for e-wallets by May 2025 — only 1,120 in Sabah and 1,799 in Sarawak. The headline figures hide where adoption is stuck.", sub: "TNG eWallet was approved by JTK Sabah for migrant worker salaries — RM3.5B disbursed in 2025. B40 use wallets for government handouts but fall back to cash daily.", lens: "Social" },
+    { t: "fact", big: "PDPA covers banking and financing — there is no carve-out. But the consent you give on signup is the door through which transaction data flows.", sub: "TNG and Grab privacy notices permit disclosure to affiliates, marketing partners, and credit-related entities. The PDPA does not provide a financial-services exemption.", lens: "Legal" },
+    { t: "reframe", big: "The interoperability question is already half-answered — DuitNow QR is the national standard. The harder questions are about fees, BNPL exposure, and who is left out.", sub: "" },
+    { t: "view", big: "Adoption is not protection. The infrastructure works. The guardrails on merchant fees, BNPL supervision, and meaningful consent are still being assembled.", sub: "" }
   ]
 },
 {
@@ -14602,6 +14603,7 @@ export const ISSUES: Issue[] = [
   headline: "E-wallet balances carry no PIDM deposit insurance as adoption hits 18.4 billion transactions",
   context: "BNM's 2025 Annual Report shows e-payment transactions grew 25% to 18.4 billion in 2025. PIDM deposit insurance does not extend to e-wallet balances. Online fraud losses hit RM2.77 billion, the highest in three years — and FMOS resolved only 22% of e-wallet complaints in the consumer's favour.",
   stageScores: { pa: 82, ba: 22, fc: 54, af: 75, ct: 55, sr: 80 }, finalScore: 68.0,
+  related: ["1146", "1887"],
   cards: [
     { t: "hook", big: "Malaysians made 18.4 billion e-payment transactions in 2025 — funds inside e-wallets carry no PIDM deposit insurance at all", sub: "BNM confirms e-payment transactions grew 25% to 18.4 billion. Government subsidies worth RM2 billion onboarded millions since 2020. Online fraud hit RM2.77 billion in 2025, the highest in three years." },
     { t: "fact", big: "PIDM covers bank deposits up to RM250,000. E-wallet balances get none of it — trust account protections remain untested in Malaysian insolvency court.", sub: "BNM's 2025 e-money policy requires trust accounts rooted in Re Kayford common law, but these have not been stress-tested. Vcash's 2019 shutdown used manual refund forms.", lens: "Legal" },
