@@ -68,6 +68,41 @@ Legal, Rights, Economic, Governance, Technology, Social, Political, Health, Envi
 3. Change `status: "updated"`, increment `edition`
 4. Commit and push
 
+## Length Budget — Bite-Size Standard
+
+Issues must be **scannable in 60–90 seconds on a phone**. That window is when a new visitor decides whether to subscribe. Drift toward longer copy is the single most common quality regression — every published issue must fit the budget below.
+
+### Per-field budget (characters, not words)
+| Field         | Min | **Target** | Hard max | Notes |
+|---------------|----:|-----------:|---------:|-------|
+| `headline`    |  10 |     **75** |      100 | One line on mobile. Topic-first. No clickbait. (~10–14 words) |
+| `context`     |  20 |    **200** |      280 | 1–2 sentences. Sets up the gap between claim and reality. |
+| `card.big`    |   5 |    **120** |      180 | One claim per card. One sentence preferred. |
+| `card.sub`    |   — |    **160** |      220 | One supporting sentence with the specific number/source. |
+| `card.big+sub`|   — |    **240** |      300 | Combined cap — must fit a mobile card at readable font size. |
+| Total content |   — | **~1300**  |   ~1700  | context + all cards combined. Outliers ≥2000 are wordy. |
+
+The validator enforces these as **warnings** (not build errors) so editorial drift surfaces immediately. Aim for the target column; treat the hard max as a wall, not a goal.
+
+### Why this budget — the research
+- **Axios Smart Brevity**: most updates are ~40% shorter than typical writing while preserving every essential fact. Target headline length ≤6 words; one bold claim per chunk.
+- **News headline CTR**: optimum click-through sits at **60–100 characters**; AP mobile guideline is even tighter at ≤55. We split the difference at 75.
+- **Mobile attention span**: drops sharply after ~8 seconds per chunk. One claim per card = one breath of attention.
+- **Microcontent principle**: visuals process 60,000× faster than text. The card layout is the visual; text is the caption — keep it caption-length.
+- **Subscription conversion**: 80% of visitors only read the hook. Spend the editorial effort on the headline + hook card big text. If those two don't earn the next swipe, nothing else matters.
+
+### Hook engineering rules (the conversion-critical surface)
+The `hook` card and the `headline` it amplifies must do four things in under ~280 combined characters:
+1. **Name the surface claim** — what mainstream coverage said.
+2. **Plant the gap** — hint that something important is missing, without giving the answer away.
+3. **Use one specific number, name, or date** — concreteness beats abstraction every time.
+4. **Promise a payoff in one swipe** — the reader should feel "I'll lose something if I don't read the next card."
+
+Avoid in hook copy: "explores", "examines", "looks at", "raises questions about", "sparks debate". These are abstraction words — they signal a thinkpiece, not a discovery. Use verbs of action and finding: *found, charged, voted, paid, hid, exempted, killed*.
+
+### Card sub fields are optional
+Better to leave `sub: ""` than to pad. The `reframe` and `view` cards typically need no `sub` at all — the big claim is the whole point.
+
 ## Content Rules
 - NO references to AI, models, Claude, GPT, or any AI provider
 - Use "6 independent review stages" not "AI models"

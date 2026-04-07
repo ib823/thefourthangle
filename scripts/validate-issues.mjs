@@ -48,16 +48,23 @@ const VALID_LENSES = [
 ];
 const STAGE_KEYS = ['pa', 'ba', 'fc', 'af', 'ct', 'sr'];
 
+// Length budget — derived from research on mobile attention, microcontent, and
+// Smart Brevity (see CLAUDE.md "Length Budget" section). Two bands per field:
+//   target → ideal bite-size; exceeding emits a WARNING (drift signal to editor)
+//   max    → hard ceiling; exceeding emits an ERROR (build breaks)
+// Targets are tuned so a typical 6-card issue lands at ~1200–1500 chars total —
+// readable in under 90 seconds on a phone, the window where new readers decide
+// whether to subscribe.
 const LIMITS = {
-  headline: { min: 10, max: 120 },
-  context: { min: 20, max: 350 },
-  cardBig: { min: 5, max: 200 },
-  cardSub: { max: 250 },
-  cardTotal: { max: 350 },  // big + sub combined — must fit mobile screen at readable font
+  headline: { min: 10, target: 75, max: 100 },     // Axios: ≤6 words; news CTR optimum 60–100 chars
+  context: { min: 20, target: 200, max: 280 },     // 1–2 sentences setting up the gap
+  cardBig: { min: 5, target: 120, max: 180 },      // one punchy claim per card
+  cardSub: { target: 160, max: 220 },              // one supporting sentence
+  cardTotal: { target: 240, max: 300 },            // big + sub — must fit mobile viewport
   opinionShift: { min: 0, max: 100 },
   stageScore: { min: 0, max: 100 },
   finalScore: { min: 0, max: 100 },
-  cardCount: { min: 5, max: 8 },  // typically 6-7, allow 5-8
+  cardCount: { min: 5, max: 8 },                   // typically 6-7, allow 5-8
   edition: { min: 1, max: 99 },
 };
 
@@ -154,13 +161,15 @@ for (const issue of issues) {
     }
   }
 
-  // ── Text lengths ──
+  // ── Text lengths (bite-size budget) ──
   if (issue.headline) {
     if (issue.headline.length < LIMITS.headline.min) {
       err(id, 'headline', `Too short: ${issue.headline.length} chars (min ${LIMITS.headline.min})`);
     }
     if (issue.headline.length > LIMITS.headline.max) {
-      warn(id, 'headline', `Long: ${issue.headline.length} chars (recommended max ${LIMITS.headline.max})`);
+      warn(id, 'headline', `Over hard max: ${issue.headline.length} chars (max ${LIMITS.headline.max}) — trim to fit mobile preview`);
+    } else if (issue.headline.length > LIMITS.headline.target) {
+      warn(id, 'headline', `Over bite-size target: ${issue.headline.length} chars (target ${LIMITS.headline.target})`);
     }
   }
   if (issue.context) {
@@ -168,7 +177,9 @@ for (const issue of issues) {
       err(id, 'context', `Too short: ${issue.context.length} chars (min ${LIMITS.context.min})`);
     }
     if (issue.context.length > LIMITS.context.max) {
-      warn(id, 'context', `Long: ${issue.context.length} chars (recommended max ${LIMITS.context.max})`);
+      warn(id, 'context', `Over hard max: ${issue.context.length} chars (max ${LIMITS.context.max}) — break into a fact card`);
+    } else if (issue.context.length > LIMITS.context.target) {
+      warn(id, 'context', `Over bite-size target: ${issue.context.length} chars (target ${LIMITS.context.target})`);
     }
   }
 
@@ -252,7 +263,9 @@ for (const issue of issues) {
         err(id, `${cardLabel}.big`, `Too short: ${card.big.length} chars (min ${LIMITS.cardBig.min})`);
       }
       if (card.big.length > LIMITS.cardBig.max) {
-        warn(id, `${cardLabel}.big`, `Long: ${card.big.length} chars (recommended max ${LIMITS.cardBig.max})`);
+        warn(id, `${cardLabel}.big`, `Over hard max: ${card.big.length} chars (max ${LIMITS.cardBig.max}) — one claim per card`);
+      } else if (card.big.length > LIMITS.cardBig.target) {
+        warn(id, `${cardLabel}.big`, `Over bite-size target: ${card.big.length} chars (target ${LIMITS.cardBig.target})`);
       }
     }
 
@@ -261,13 +274,17 @@ for (const issue of issues) {
       err(id, `${cardLabel}.sub`, 'Missing sub field (use "" for empty)');
     }
     if (card.sub && card.sub.length > LIMITS.cardSub.max) {
-      warn(id, `${cardLabel}.sub`, `Long: ${card.sub.length} chars (recommended max ${LIMITS.cardSub.max})`);
+      warn(id, `${cardLabel}.sub`, `Over hard max: ${card.sub.length} chars (max ${LIMITS.cardSub.max}) — one supporting sentence`);
+    } else if (card.sub && card.sub.length > LIMITS.cardSub.target) {
+      warn(id, `${cardLabel}.sub`, `Over bite-size target: ${card.sub.length} chars (target ${LIMITS.cardSub.target})`);
     }
 
     // Combined big+sub length — must fit mobile card at readable font size
     const totalLen = (card.big?.length ?? 0) + (card.sub?.length ?? 0);
     if (totalLen > LIMITS.cardTotal.max) {
-      err(id, `${cardLabel}`, `Card text too long for mobile: ${totalLen} chars (max ${LIMITS.cardTotal.max}). Trim big+sub to fit.`);
+      warn(id, `${cardLabel}`, `Over hard max: ${totalLen} chars (max ${LIMITS.cardTotal.max}) — overflows mobile card`);
+    } else if (totalLen > LIMITS.cardTotal.target) {
+      warn(id, `${cardLabel}`, `Over bite-size target: ${totalLen} chars (target ${LIMITS.cardTotal.target})`);
     }
 
     // Lens required on fact cards
