@@ -102,7 +102,20 @@
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
   let viewportWidth = $state(typeof window !== 'undefined' ? window.innerWidth : 1440);
   let cinemaPeek = $state(false);
-  let cinemaDismissed = $state(false);
+  // Cinema Mode dismissal persists for the entire tab session via sessionStorage:
+  // first issue per session gets the wow moment, dismissing keeps the sidebar
+  // visible for every subsequent issue until the tab closes.
+  let cinemaDismissed = $state(
+    typeof sessionStorage !== 'undefined' && sessionStorage.getItem('tfa-cinema-dismissed') === '1'
+  );
+
+  function dismissCinema() {
+    cinemaDismissed = true;
+    cinemaPeek = false;
+    if (typeof sessionStorage !== 'undefined') {
+      try { sessionStorage.setItem('tfa-cinema-dismissed', '1'); } catch {}
+    }
+  }
   let allowBrowserPullRefresh = $state(false);
   let searchQuery = $state('');
   let searchActive = $state(false);
@@ -664,7 +677,6 @@
     activeIssue = issue;
     readerOriginRect = originRect ?? null;
     restoredCardIndex = 0; // Clear resume position — only used once on return
-    cinemaDismissed = false;
     cinemaPeek = false;
     loadAndOpenIssue(issue.id, 'push');
   }
@@ -674,7 +686,6 @@
     readerOriginRect = null;
     restoredCardIndex = Math.max(0, Math.min(cardIndex, Math.max(issue.cards.length - 1, 0)));
     savePosition(issue.id, restoredCardIndex);
-    cinemaDismissed = false;
     cinemaPeek = false;
     loadAndOpenIssue(issue.id, 'push');
   }
@@ -716,7 +727,6 @@
     activeIssue = null;
     activeFullIssue = null;
     readerHistoryPushed = false;
-    cinemaDismissed = false;
     cinemaPeek = false;
     syncSurfaceUrl(surfaceMode, historyMode, libraryMode);
   }
@@ -771,10 +781,10 @@
       if (e.key === 'Escape' && searchActive) { onSearchClear(); return; }
       if (viewMode !== 'desktop') return;
       if (e.key === 'Escape' && activeIssue) {
-        // First Escape in cinema mode: dismiss focus mode (sidebar returns)
+        // First Escape in cinema mode: dismiss focus mode (sidebar returns
+        // for the rest of this tab session)
         if (activeFullIssue && viewportWidth >= 1920 && !cinemaDismissed) {
-          cinemaDismissed = true;
-          cinemaPeek = false;
+          dismissCinema();
           return;
         }
         closeReader();
@@ -1064,8 +1074,8 @@
         type="button"
         class="cinema-exit"
         aria-label="Exit focus mode"
-        title="Exit focus mode (Esc)"
-        onclick={() => { cinemaDismissed = true; cinemaPeek = false; }}
+        title="Exit focus mode (Esc) — sidebar stays visible for the rest of this session"
+        onclick={dismissCinema}
       >Exit focus</button>
     {/if}
     <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);position:relative;z-index:2;">
