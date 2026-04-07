@@ -286,7 +286,7 @@
   style="flex:1;overflow-y:auto;background:var(--bg);transition:opacity var(--duration-fast, 150ms) ease-out, transform var(--duration-fast, 150ms) ease-out;">
   <!-- Screen reader announcement for issue change -->
   <div class="sr-only" aria-live="polite" aria-atomic="true">Now reading: {issue.headline}</div>
-  <div style="max-width:760px;margin:0 auto;padding:32px 24px 56px;">
+  <div class="reader-content-wrap">
     <div class="reader-progress-shell">
       <div class="reader-progress-copy">
         <div class="reader-progress-kicker">Reading path</div>
@@ -496,6 +496,44 @@
 {/if}
 
 <style>
+  .reader-content-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+  }
+
+  /* Slightly more breathing room past 1600px */
+  @media (min-width: 1600px) {
+    .reader-content-wrap {
+      max-width: 800px;
+      padding: 40px 32px 64px;
+    }
+  }
+
+  /* QHD 27" — wider prose comfort + generous flanks */
+  @media (min-width: 1920px) {
+    .reader-content-wrap {
+      max-width: 840px;
+      padding: 48px 40px 72px;
+    }
+  }
+
+  /* Large QHD — push max prose width slightly, more padding */
+  @media (min-width: 2560px) {
+    .reader-content-wrap {
+      max-width: 880px;
+      padding: 56px 48px 80px;
+    }
+  }
+
+  /* 34" ultra-wide */
+  @media (min-width: 3440px) {
+    .reader-content-wrap {
+      max-width: 920px;
+      padding: 64px 56px 88px;
+    }
+  }
+
   .reader-switching {
     opacity: 0;
     transform: translateY(8px);

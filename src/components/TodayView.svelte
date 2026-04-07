@@ -1058,11 +1058,14 @@
   /* Widescreen: use the extra space on 27"+ monitors */
   @media (min-width: 1600px) {
     .today-wrap {
-      max-width: 1400px;
+      max-width: 1560px;
+      padding: clamp(32px, 3vw, 48px) clamp(24px, 2.5vw, 40px) 56px;
+      gap: clamp(24px, 2vw, 32px);
     }
 
     .today-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(20px, 1.6vw, 28px);
     }
 
     .brief-list {
@@ -1078,6 +1081,75 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+    }
+  }
+
+  /* QHD 27" — 3-column card grids */
+  @media (min-width: 1920px) {
+    .today-wrap {
+      max-width: 1820px;
+      padding: clamp(36px, 2.6vw, 56px) clamp(32px, 2.4vw, 56px) 64px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+  }
+
+  /* Entry ultra-wide / large QHD — 4 columns */
+  @media (min-width: 2560px) {
+    .today-wrap {
+      max-width: 2280px;
+      padding: clamp(44px, 2.4vw, 64px) clamp(40px, 2.4vw, 72px) 72px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  /* 34" ultra-wide — 5 columns */
+  @media (min-width: 3440px) {
+    .today-wrap {
+      max-width: 3040px;
+      padding: clamp(52px, 2.2vw, 80px) clamp(56px, 2.4vw, 96px) 80px;
+    }
+
+    .today-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 36px;
+    }
+
+    .brief-list {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px;
+    }
+
+    .topic-issues {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
   }
 

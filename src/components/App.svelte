@@ -100,6 +100,9 @@
   }
 
   let viewMode = $state<'mobile' | 'tablet' | 'desktop'>('desktop');
+  let viewportWidth = $state(typeof window !== 'undefined' ? window.innerWidth : 1440);
+  let cinemaPeek = $state(false);
+  let cinemaDismissed = $state(false);
   let allowBrowserPullRefresh = $state(false);
   let searchQuery = $state('');
   let searchActive = $state(false);
@@ -342,6 +345,7 @@
     const h = window.innerHeight;
     const compactLandscape = w < 960 && h < 640;
 
+    viewportWidth = w;
     if (w < 768 || compactLandscape) viewMode = 'mobile';
     else viewMode = 'desktop';
   }
@@ -660,6 +664,8 @@
     activeIssue = issue;
     readerOriginRect = originRect ?? null;
     restoredCardIndex = 0; // Clear resume position — only used once on return
+    cinemaDismissed = false;
+    cinemaPeek = false;
     loadAndOpenIssue(issue.id, 'push');
   }
 
@@ -668,6 +674,8 @@
     readerOriginRect = null;
     restoredCardIndex = Math.max(0, Math.min(cardIndex, Math.max(issue.cards.length - 1, 0)));
     savePosition(issue.id, restoredCardIndex);
+    cinemaDismissed = false;
+    cinemaPeek = false;
     loadAndOpenIssue(issue.id, 'push');
   }
 
@@ -708,6 +716,8 @@
     activeIssue = null;
     activeFullIssue = null;
     readerHistoryPushed = false;
+    cinemaDismissed = false;
+    cinemaPeek = false;
     syncSurfaceUrl(surfaceMode, historyMode, libraryMode);
   }
 
@@ -760,7 +770,16 @@
       }
       if (e.key === 'Escape' && searchActive) { onSearchClear(); return; }
       if (viewMode !== 'desktop') return;
-      if (e.key === 'Escape' && activeIssue) { closeReader(); return; }
+      if (e.key === 'Escape' && activeIssue) {
+        // First Escape in cinema mode: dismiss focus mode (sidebar returns)
+        if (activeFullIssue && viewportWidth >= 1920 && !cinemaDismissed) {
+          cinemaDismissed = true;
+          cinemaPeek = false;
+          return;
+        }
+        closeReader();
+        return;
+      }
       if (e.key === 'j' || e.key === 'ArrowDown') {
         e.preventDefault();
         if (!activeIssue && issues.length) { openIssue(issues[0]); return; }
@@ -1027,12 +1046,36 @@
   {/if}
 
 {:else}
-  <div class="app-shell app-shell--desktop">
-    <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);">
+  {@const cinemaActive = !!activeFullIssue && viewportWidth >= 1920 && !cinemaDismissed}
+  {@const cinemaCollapsed = cinemaActive && !cinemaPeek}
+  <div class="app-shell app-shell--desktop" class:cinema={cinemaActive} class:cinema-collapsed={cinemaCollapsed}>
+    {#if cinemaActive && activeFullIssue}
+      <div
+        class="cinema-stage"
+        aria-hidden="true"
+        style="background-image:url(/og/backgrounds/issue-{activeFullIssue.id}-bg.png);"
+      ></div>
+      <div
+        class="cinema-peek-zone"
+        aria-hidden="true"
+        onmouseenter={() => { cinemaPeek = true; }}
+      ></div>
+      <button
+        type="button"
+        class="cinema-exit"
+        aria-label="Exit focus mode"
+        title="Exit focus mode (Esc)"
+        onclick={() => { cinemaDismissed = true; cinemaPeek = false; }}
+      >Exit focus</button>
+    {/if}
+    <div style="flex-shrink:0;border-bottom:1px solid var(--bg-sunken);position:relative;z-index:2;">
       <Header issues={issues.map(i => ({id: i.id, headline: i.headline}))} onHome={goToday} homeActive={surfaceMode === 'today' && !activeIssue} />
     </div>
 
-    <div class="app-main app-main--desktop">
+    <div
+      class="app-main app-main--desktop"
+      onmouseleave={() => { if (cinemaActive) cinemaPeek = false; }}
+    >
       <main class="desktop-main-panel">
         {#if issueLoadError}
           <!-- I1: Error state with offline differentiation -->
@@ -1213,6 +1256,151 @@
     overflow: hidden;
   }
 
+  /* ─────────────────────────────────────────────────────────────────
+     Cinema Mode — focused reader at ≥1920px
+     The sidebar retreats, the issue's background art tints the flanks
+     at very low opacity, the prose stays at readable width.
+     Hover the left edge to peek the sidebar; press Esc to exit.
+     ───────────────────────────────────────────────────────────────── */
+  .app-shell--desktop.cinema {
+    position: relative;
+  }
+
+  .cinema-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(96px) saturate(1.45);
+    opacity: 0.11;
+    pointer-events: none;
+    /* Vignette: keep the centre clean (where prose lives), let the
+       blurred art tint only the flanks */
+    -webkit-mask-image: radial-gradient(ellipse 880px 110% at center, transparent 0%, transparent 24%, rgba(0,0,0,0.85) 72%, black 100%);
+    mask-image: radial-gradient(ellipse 880px 110% at center, transparent 0%, transparent 24%, rgba(0,0,0,0.85) 72%, black 100%);
+    animation: cinema-stage-in 720ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+
+  @keyframes cinema-stage-in {
+    from { opacity: 0; filter: blur(120px) saturate(1.45); }
+    to   { opacity: 0.11; filter: blur(96px) saturate(1.45); }
+  }
+
+  /* Hover-edge sentinel: invisible 18px strip on the left.
+     When the cursor enters it, peek the sidebar back. */
+  .cinema-peek-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 100vh;
+    z-index: 8;
+    pointer-events: auto;
+  }
+
+  /* Subtle "Exit focus" affordance: small ghost pill, top-right.
+     Visible only when not actively reading the centre column. */
+  .cinema-exit {
+    position: fixed;
+    top: 78px;
+    right: 24px;
+    z-index: 11;
+    padding: 7px 14px;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-tertiary);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 320ms ease, transform 320ms cubic-bezier(0.32, 0.72, 0, 1), background 200ms ease;
+    animation: cinema-exit-in 720ms 480ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+
+  @keyframes cinema-exit-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (hover: hover) {
+    .cinema-exit:hover {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-primary);
+    }
+  }
+
+  /* Collapsed sidebar: width animates to 0, content fades */
+  .app-shell--desktop.cinema-collapsed :global(aside[aria-label="Sidebar"]) {
+    width: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition:
+      width 480ms cubic-bezier(0.32, 0.72, 0, 1),
+      opacity 320ms ease;
+  }
+
+  /* Peek state: sidebar floats back over the content (does not reflow) */
+  .app-shell--desktop.cinema:not(.cinema-collapsed) :global(aside[aria-label="Sidebar"]) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 7;
+    box-shadow: 0 24px 64px rgba(15, 15, 35, 0.22);
+    transition:
+      transform 420ms cubic-bezier(0.32, 0.72, 0, 1),
+      box-shadow 320ms ease;
+  }
+
+  /* Sidebar transition baseline (so collapse/peek animate smoothly both ways) */
+  .app-shell--desktop.cinema :global(aside[aria-label="Sidebar"]) {
+    transition:
+      width 480ms cubic-bezier(0.32, 0.72, 0, 1),
+      opacity 320ms ease;
+    will-change: width, opacity;
+  }
+
+  /* Header and main content sit above the cinema-stage */
+  .app-shell--desktop.cinema .app-main--desktop {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Dark mode: the tint is naturally warmer/darker; bump opacity slightly */
+  @media (prefers-color-scheme: dark) {
+    .cinema-stage {
+      opacity: 0.18;
+      filter: blur(96px) saturate(1.6) brightness(1.15);
+    }
+    .cinema-exit {
+      background: rgba(28, 28, 32, 0.55);
+      color: var(--text-secondary);
+    }
+    .cinema-exit:hover {
+      background: rgba(28, 28, 32, 0.85);
+      color: var(--text-primary);
+    }
+  }
+
+  /* Reduced motion: no animations, instant transitions */
+  @media (prefers-reduced-motion: reduce) {
+    .cinema-stage,
+    .cinema-exit,
+    .app-shell--desktop.cinema :global(aside[aria-label="Sidebar"]) {
+      animation: none !important;
+      transition: none !important;
+    }
+    .cinema-exit { opacity: 1; transform: none; }
+  }
+
   .app-main {
     flex: 1;
     display: flex;
@@ -1230,7 +1418,25 @@
 
   @media (min-width: 1600px) {
     .app-main--desktop {
+      max-width: 1720px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .app-main--desktop {
       max-width: 1920px;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .app-main--desktop {
+      max-width: 2400px;
+    }
+  }
+
+  @media (min-width: 3440px) {
+    .app-main--desktop {
+      max-width: 3200px;
     }
   }
 

@@ -445,4 +445,22 @@
       width: 380px !important;
     }
   }
+
+  @media (min-width: 1920px) {
+    .desktop-sidebar {
+      width: 400px !important;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .desktop-sidebar {
+      width: 440px !important;
+    }
+  }
+
+  @media (min-width: 3440px) {
+    .desktop-sidebar {
+      width: 480px !important;
+    }
+  }
 </style>
