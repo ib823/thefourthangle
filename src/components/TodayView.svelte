@@ -728,7 +728,9 @@
 
   .today-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* auto-fit so 1 panel fills the row, 2 panels sit side-by-side.
+       brief-list inside each panel adapts independently via its own auto-fit. */
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 18px;
   }
 
@@ -1055,22 +1057,15 @@
     }
   }
 
-  /* Widescreen: use the extra space on 27"+ monitors */
+  /* Widescreen tiers — only adjust full-width sections (today-wrap padding,
+     topic-issues grid). today-grid and brief-list use auto-fit at the base
+     and adapt to their container width without manual column overrides. */
+
   @media (min-width: 1600px) {
     .today-wrap {
       max-width: 1560px;
       padding: clamp(32px, 3vw, 48px) clamp(24px, 2.5vw, 40px) 56px;
       gap: clamp(24px, 2vw, 32px);
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(20px, 1.6vw, 28px);
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
     }
 
     .hero-entry {
@@ -1084,21 +1079,10 @@
     }
   }
 
-  /* QHD 27" — 3-column card grids */
   @media (min-width: 1920px) {
     .today-wrap {
       max-width: 1820px;
       padding: clamp(36px, 2.6vw, 56px) clamp(32px, 2.4vw, 56px) 64px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
     }
 
     .topic-issues {
@@ -1107,21 +1091,10 @@
     }
   }
 
-  /* Entry ultra-wide / large QHD — 4 columns */
   @media (min-width: 2560px) {
     .today-wrap {
       max-width: 2280px;
       padding: clamp(44px, 2.4vw, 64px) clamp(40px, 2.4vw, 72px) 72px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 32px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
     }
 
     .topic-issues {
@@ -1130,21 +1103,10 @@
     }
   }
 
-  /* 34" ultra-wide — 5 columns */
   @media (min-width: 3440px) {
     .today-wrap {
       max-width: 3040px;
       padding: clamp(52px, 2.2vw, 80px) clamp(56px, 2.4vw, 96px) 80px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 36px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 28px;
     }
 
     .topic-issues {
@@ -1153,21 +1115,10 @@
     }
   }
 
-  /* 4K @ 100% scaling — 6 columns */
   @media (min-width: 3840px) {
     .today-wrap {
       max-width: 3400px;
       padding: 80px 96px 88px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 40px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 32px;
     }
 
     .topic-issues {
@@ -1176,21 +1127,10 @@
     }
   }
 
-  /* 49" super-ultrawide / 5K — 7 columns */
   @media (min-width: 5120px) {
     .today-wrap {
       max-width: 4000px;
       padding: 88px 120px 96px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 44px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(6, 1fr);
-      gap: 36px;
     }
 
     .topic-issues {
@@ -1199,21 +1139,10 @@
     }
   }
 
-  /* 8K / 57" dual-4K — 8 column ceiling */
   @media (min-width: 7680px) {
     .today-wrap {
       max-width: 5200px;
       padding: 96px 144px 104px;
-    }
-
-    .today-grid {
-      grid-template-columns: repeat(8, minmax(0, 1fr));
-      gap: 48px;
-    }
-
-    .brief-list {
-      grid-template-columns: repeat(7, 1fr);
-      gap: 40px;
     }
 
     .topic-issues {
