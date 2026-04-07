@@ -1,0 +1,132 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the pipeline.
+
+For every fact you check, you MUST independently verify it using web search against a primary source: an official government document, regulator publication, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+
+If you cannot find a primary source for a claim, label it UNVERIFIED and set m_unknown >= 0.7. Do not guess. Do not approximate. Do not "round up" your confidence.
+
+If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source and explain why.
+
+If a claim references a law, regulation, or court case, verify the exact section number, date, and scope. Legal misstatements have publication consequences.
+
+It is far better to write "I could not verify this within reasonable effort" than to state something that is wrong. You will not be graded on speed.
+
+=== YOUR ROLE ===
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The Prime Minister's own former senior political secretary is on trial for taking bribes to help fix Sabah mineral exploration licences. The structural problem is that one person — the Sabah Chief Minister — still holds sole legal authority to issue them.",
+      "sub": "Datuk Seri Shamsul Iskandar Mohd Akin pleaded not guilty in December 2025 to five charges totalling RM241,753 under MACC Act Section 17(a). The bribes allegedly came from businessman Albert Tei in exchange for help securing Sabah mineral exploration licences. The licensing pipeline at the centre of the case is governed by a 1960 Sabah Mining Ordinance that vests sole authority in the Chief Minister — a 1999 modernisation passed by Sabah's own assembly was never brought into force."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Sabah's mining licences are still issued under a 1960 ordinance that gives one person sole authority",
+      "s": "Section 6 of the Sabah Mining Ordinance 1960 vests sole legal authority to grant mining and prospecting licences in the Chief Minister of Sabah. Sabah Mineral Management Sdn Bhd, the state-owned coordination agency, is explicitly NOT a licensing authority. The Sabah Mineral Enactment 1999 — passed by the Sabah State Assembly to modernise mineral tenement law — was never brought into force. So 65 years after independence, Sabah's mining sector still runs on a one-person discretion model that the state itself voted to replace 27 years ago.",
+      "d": "Sabah Mining Ordinance 1960 §6; Sabah Mineral Enactment 1999 (gazetted, never enforced); FMT opinion Aug 2025; Daily Express 2025"
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Five charges, RM241,753, MACC Act Section 17(a) — and the prosecution says it's still investigating",
+      "s": "Shamsul Iskandar @ Yusre Mohd Akin was charged on 4 December 2025 at the Kuala Lumpur Sessions Court before Judge Suzana Hussin with four counts (RM176,829.03), then a fifth on 5 December (RM64,924). Charges include a RM100,000 cash bribe at a Jalan Sultan Hishamuddin hotel car park (Nov 24, 2023), RM40,000 cash (Jan 29, 2024), and gratification in furniture, electrical items and rental payments. All under MACC Act §17(a) — maximum 20 years and a fine of at least 5x the gratification value. On 11 March 2026 the Deputy Public Prosecutor confirmed at court that MACC's investigation can continue despite charges being filed. A High Court transfer hearing is set for 9 April 2026.",
+      "d": "Bernama Dec 2025; Malay Mail Dec 2025; Borneo Post Dec 2025; FMT Mar 2026; The Star Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Critical",
+      "h": "The same businessman whose videos triggered the wider Sabah scandal is now testifying against the PM's aide",
+      "s": "Albert Tei Jiann Cheing released video clips through Malaysiakini in December 2024 implicating more than a dozen Sabah state assemblymen in bribes-for-licences allegations. He was charged in his own right in July 2025 alongside Sabah assemblymen Yusof Yacob and Andi Suryady Bandy over RM350,000 in mining-permit bribes. Then he became the alleged briber of Shamsul Iskandar. He is simultaneously witness, accused and political accelerant. On 27 March 2026, after four months of public silence, Sabah elected representatives demanded MACC update them on the broader probe. As of early April, no update had been given.",
+      "d": "MalaysiaNow Nov 2025; FMT Jul 2025; FULCRUM ISEAS 2025; MalaysiaNow Mar 27 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "Is prosecuting an Anwar insider proof the system works, or proof of how compromised it became?",
+      "text": "Both readings hold. The fact that the Prime Minister's senior political secretary is in the dock is, on one reading, evidence MACC can move against power. On another, it is evidence that one of Anwar's closest political operators allegedly trafficked in mineral licences for years before the scandal forced his resignation. The honest answer is that both are true and neither cancels the other."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the locksmith was selling skeleton keys — to a building where only one person legally holds the master key",
+      "text": "Five different alleged bribes, three different forms — cash, furniture, rental — all aimed at fixing licences that, by the letter of the 1960 ordinance, can only be granted by the Sabah Chief Minister. The licensing bottleneck is the structural vulnerability the alleged corruption was designed to exploit."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Charging Shamsul Iskandar is necessary. So is charging Albert Tei. So was charging the Sabah assemblymen in July 2025. None of these prosecutions, individually or together, fixes the structural fact that Sabah's mineral licences are still issued under a 1960 ordinance that concentrates legal authority in one office, while the modernised 1999 statute that the Sabah State Assembly itself passed has been left dormant for 27 years. Until the Sabah Mineral Enactment 1999 is brought into force — or replaced with something that distributes the licensing decision across an independent board — every future Sabah mining licence remains exposed to the same single point of failure that this case has put on trial."
+    }
+  ],
+  "sources": "Bernama Dec 2025 (multiple), Malay Mail Dec 2025, Borneo Post Dec 2025, The Star Dec 2025-Feb 2026, The Edge Malaysia Dec 2025, Sarawak Tribune Dec 2025, FMT Mar 2026, MalaysiaNow Nov 2025-Mar 2026, FULCRUM ISEAS 2025 (×2), FMT Aug 2025 (SMM opinion), Sabah Mineral Enactment 1999 gazette PDF, Daily Express 2025",
+  "confidence": "High — court records, charge sheets, multiple wire and broadsheet sources, regional analysis (FULCRUM ISEAS), 20 sources cross-verified",
+  "lenses_used": ["Governance", "Legal", "Critical"],
+  "lenses_applicable_but_unused": ["Political", "Regional", "Economic"]
+}

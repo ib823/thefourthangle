@@ -1,0 +1,132 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the pipeline.
+
+For every fact you check, you MUST independently verify it using web search against a primary source: an official government document, regulator publication, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+
+If you cannot find a primary source for a claim, label it UNVERIFIED and set m_unknown >= 0.7. Do not guess. Do not approximate. Do not "round up" your confidence.
+
+If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source and explain why.
+
+If a claim references a law, regulation, or court case, verify the exact section number, date, and scope. Legal misstatements have publication consequences.
+
+It is far better to write "I could not verify this within reasonable effort" than to state something that is wrong. You will not be graded on speed.
+
+=== YOUR ROLE ===
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "FIFA proved Malaysia's football association used forged ancestry documents for seven naturalised players. The forgeries got past the National Registration Department first.",
+      "sub": "On 5 March 2026, the Court of Arbitration for Sport upheld FIFA's CHF 350,000 fine on the Football Association of Malaysia after finding the citizenship documents submitted for seven foreign-born players contained doctored grandparent records. AFC then forfeited Malaysia's qualifying matches against Vietnam and Nepal. The story reported as a sports scandal is, at its institutional core, a verification failure inside Malaysia's citizenship apparatus."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Seven foreign-born players received Malaysian citizenship documents that an international body could disprove with public records",
+      "s": "FAM submitted birth certificates establishing supposedly Malaysian-born grandparents for Facundo Garcés, Rodrigo Holgado, Imanol Machuca, João Figueiredo, Gabriel Arrocha, Jon Irazabal and Hector Hevel. FIFA cross-checked against original civil registries and found discrepancies that the National Registration Department, which issued the citizenship paperwork in Malaysia, did not catch — or did not look for. There has been no public disclosure of NRD's verification protocol for ancestry-based citizenship claims under Article 14.",
+      "d": "CAS Media Release №11990 Mar 2026; NST Nov 2025; FIFA Disciplinary decision Sep 2025"
+    },
+    {
+      "t": "fact",
+      "lens": "Critical",
+      "h": "DHRRA has documented 16,392 stateless persons in Peninsular Malaysia. Most cannot get NRD recognition. The same Article 14 governs both groups.",
+      "s": "Between 2016 and June 2023, the NGO DHRRA Malaysia identified 16,392 stateless persons in Peninsular Malaysia alone. After years of accompaniment and case work, 7,000 were recognised as citizens; 9,392 remain in limbo. Civil society estimates put Malaysia's total stateless population at 50,000–100,000. The legal pathway is the same Federal Constitution Article 14 used by the seven naturalised footballers — but the NRD process for stateless Malaysian-born children has been documented by SUHAKAM and Malay Mail as inconsistent district-to-district and, in some cases, openly hostile.",
+      "d": "DHRRA Recommendation Mar 2022; SUHAKAM portfolio; Malay Mail Oct 2023; T4A Issue 0179"
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Forgery of public documents is a Penal Code offence — but no domestic charges have been laid against anyone in the FAM case",
+      "s": "Sections 463–471 of the Penal Code criminalise forgery of public documents, including birth certificates governed by the Births and Deaths Registration Act 1957. FIFA has formally found that doctored documents were submitted; CAS upheld the finding. As of early April 2026, no public investigation has been announced under Malaysian law against any person who prepared, submitted, or accepted those documents at the NRD or any other agency. The international sport regulator has acted; the domestic state apparatus has not.",
+      "d": "Federal Constitution Art 14, 19; Births and Deaths Registration Act 1957; CAS Mar 2026; The Diplomat Nov 2025"
+    },
+    {
+      "t": "reframe",
+      "h": "If FIFA could verify Malaysian birth records from Zurich, why couldn't the NRD verify them from Putrajaya?",
+      "text": "The agencies that issued the citizenship paperwork sit inside the Ministry of Home Affairs. The agency that exposed the forgery sits in Switzerland. Asking why FIFA's compliance team had access to verifiable Malaysian civil registry data that Malaysia's own NRD apparently did not consult is the question Parliament has not yet pressed."
+    },
+    {
+      "t": "analogy",
+      "h": "Like a bank that opened millions in accounts overnight for one VIP client while turning away ordinary customers for missing a single document",
+      "text": "The contrast is not metaphorical. NRD reportedly processed the seven players' Malaysian citizenship within roughly a year. Some Malaysian-born children of irregular marriages have waited a decade or more for the same recognition under the same Article 14."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "FAM is being punished by FIFA, CAS and AFC for the documents it submitted. That is appropriate. But the document forgery had to be processed and accepted somewhere upstream — and that somewhere is the National Registration Department under the Ministry of Home Affairs. Until Parliament publishes the NRD verification protocol for ancestry-based citizenship claims, until an independent inquiry traces who approved each of the seven applications, and until the disparity with the 9,000+ documented stateless persons is explained, the football scandal remains the symptom and the citizenship apparatus remains the unexamined cause."
+    }
+  ],
+  "sources": "CAS Media Release №11990 Mar 2026, Conventus Law Mar 2026, Richard Wee Chambers Mar 2026, The Star Mar 2026, FMT Mar 2026, Wikipedia Malaysian football naturalisation scandal, NST Nov 2025, The Diplomat Nov 2025, Daily Sabah Nov 2025, Malay Mail Nov 2025, SCMP 2025, ESPN, SUHAKAM stateless children, DHRRA Mar 2022, Malay Mail Oct 2023, New Naratif, Global Human Rights Defence, Lawyerment, ConstitutionNet, Federal Constitution Art 14",
+  "confidence": "High — CAS public release, FIFA decisions on record, statelessness data from DHRRA and SUHAKAM, 20 independent sources cross-verified",
+  "lenses_used": ["Governance", "Critical", "Legal"],
+  "lenses_applicable_but_unused": ["Rights", "Political", "Historical"]
+}

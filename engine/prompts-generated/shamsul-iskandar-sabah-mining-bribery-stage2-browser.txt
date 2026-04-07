@@ -1,0 +1,129 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is.
+
+If you reference any fact from public knowledge, your training data, or the internet, you MUST independently verify it before using it in your audit. Do not state any number, date, name, law, or institutional fact unless you have cross-checked it against a primary source (government document, official report, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source).
+
+If you cannot verify a claim with confidence, say so explicitly. It is better to write "I cannot verify this independently" than to state something that turns out to be wrong. Errors in this audit propagate to publication and harm real readers.
+
+When in doubt: search again, check twice, and only then commit the claim to your output.
+
+=== YOUR ROLE ===
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "The Prime Minister's own former senior political secretary is on trial for taking bribes to help fix Sabah mineral exploration licences. The structural problem is that one person — the Sabah Chief Minister — still holds sole legal authority to issue them.",
+      "sub": "Datuk Seri Shamsul Iskandar Mohd Akin pleaded not guilty in December 2025 to five charges totalling RM241,753 under MACC Act Section 17(a). The bribes allegedly came from businessman Albert Tei in exchange for help securing Sabah mineral exploration licences. The licensing pipeline at the centre of the case is governed by a 1960 Sabah Mining Ordinance that vests sole authority in the Chief Minister — a 1999 modernisation passed by Sabah's own assembly was never brought into force."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Sabah's mining licences are still issued under a 1960 ordinance that gives one person sole authority",
+      "s": "Section 6 of the Sabah Mining Ordinance 1960 vests sole legal authority to grant mining and prospecting licences in the Chief Minister of Sabah. Sabah Mineral Management Sdn Bhd, the state-owned coordination agency, is explicitly NOT a licensing authority. The Sabah Mineral Enactment 1999 — passed by the Sabah State Assembly to modernise mineral tenement law — was never brought into force. So 65 years after independence, Sabah's mining sector still runs on a one-person discretion model that the state itself voted to replace 27 years ago.",
+      "d": "Sabah Mining Ordinance 1960 §6; Sabah Mineral Enactment 1999 (gazetted, never enforced); FMT opinion Aug 2025; Daily Express 2025"
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "Five charges, RM241,753, MACC Act Section 17(a) — and the prosecution says it's still investigating",
+      "s": "Shamsul Iskandar @ Yusre Mohd Akin was charged on 4 December 2025 at the Kuala Lumpur Sessions Court before Judge Suzana Hussin with four counts (RM176,829.03), then a fifth on 5 December (RM64,924). Charges include a RM100,000 cash bribe at a Jalan Sultan Hishamuddin hotel car park (Nov 24, 2023), RM40,000 cash (Jan 29, 2024), and gratification in furniture, electrical items and rental payments. All under MACC Act §17(a) — maximum 20 years and a fine of at least 5x the gratification value. On 11 March 2026 the Deputy Public Prosecutor confirmed at court that MACC's investigation can continue despite charges being filed. A High Court transfer hearing is set for 9 April 2026.",
+      "d": "Bernama Dec 2025; Malay Mail Dec 2025; Borneo Post Dec 2025; FMT Mar 2026; The Star Feb 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Critical",
+      "h": "The same businessman whose videos triggered the wider Sabah scandal is now testifying against the PM's aide",
+      "s": "Albert Tei Jiann Cheing released video clips through Malaysiakini in December 2024 implicating more than a dozen Sabah state assemblymen in bribes-for-licences allegations. He was charged in his own right in July 2025 alongside Sabah assemblymen Yusof Yacob and Andi Suryady Bandy over RM350,000 in mining-permit bribes. Then he became the alleged briber of Shamsul Iskandar. He is simultaneously witness, accused and political accelerant. On 27 March 2026, after four months of public silence, Sabah elected representatives demanded MACC update them on the broader probe. As of early April, no update had been given.",
+      "d": "MalaysiaNow Nov 2025; FMT Jul 2025; FULCRUM ISEAS 2025; MalaysiaNow Mar 27 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "Is prosecuting an Anwar insider proof the system works, or proof of how compromised it became?",
+      "text": "Both readings hold. The fact that the Prime Minister's senior political secretary is in the dock is, on one reading, evidence MACC can move against power. On another, it is evidence that one of Anwar's closest political operators allegedly trafficked in mineral licences for years before the scandal forced his resignation. The honest answer is that both are true and neither cancels the other."
+    },
+    {
+      "t": "analogy",
+      "h": "Like discovering the locksmith was selling skeleton keys — to a building where only one person legally holds the master key",
+      "text": "Five different alleged bribes, three different forms — cash, furniture, rental — all aimed at fixing licences that, by the letter of the 1960 ordinance, can only be granted by the Sabah Chief Minister. The licensing bottleneck is the structural vulnerability the alleged corruption was designed to exploit."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "Charging Shamsul Iskandar is necessary. So is charging Albert Tei. So was charging the Sabah assemblymen in July 2025. None of these prosecutions, individually or together, fixes the structural fact that Sabah's mineral licences are still issued under a 1960 ordinance that concentrates legal authority in one office, while the modernised 1999 statute that the Sabah State Assembly itself passed has been left dormant for 27 years. Until the Sabah Mineral Enactment 1999 is brought into force — or replaced with something that distributes the licensing decision across an independent board — every future Sabah mining licence remains exposed to the same single point of failure that this case has put on trial."
+    }
+  ],
+  "sources": "Bernama Dec 2025 (multiple), Malay Mail Dec 2025, Borneo Post Dec 2025, The Star Dec 2025-Feb 2026, The Edge Malaysia Dec 2025, Sarawak Tribune Dec 2025, FMT Mar 2026, MalaysiaNow Nov 2025-Mar 2026, FULCRUM ISEAS 2025 (×2), FMT Aug 2025 (SMM opinion), Sabah Mineral Enactment 1999 gazette PDF, Daily Express 2025",
+  "confidence": "High — court records, charge sheets, multiple wire and broadsheet sources, regional analysis (FULCRUM ISEAS), 20 sources cross-verified",
+  "lenses_used": ["Governance", "Legal", "Critical"],
+  "lenses_applicable_but_unused": ["Political", "Regional", "Economic"]
+}

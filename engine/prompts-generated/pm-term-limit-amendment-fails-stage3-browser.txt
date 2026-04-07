@@ -1,0 +1,132 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the pipeline.
+
+For every fact you check, you MUST independently verify it using web search against a primary source: an official government document, regulator publication, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+
+If you cannot find a primary source for a claim, label it UNVERIFIED and set m_unknown >= 0.7. Do not guess. Do not approximate. Do not "round up" your confidence.
+
+If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source and explain why.
+
+If a claim references a law, regulation, or court case, verify the exact section number, date, and scope. Legal misstatements have publication consequences.
+
+It is far better to write "I could not verify this within reasonable effort" than to state something that is wrong. You will not be graded on speed.
+
+=== YOUR ROLE ===
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found",
+      "correction": "if needed, what should be corrected or added"
+    }
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's prime ministerial term-limit Bill failed by two votes. Not because anyone voted against it — because forty-four MPs abstained and thirty-two did not show up.",
+      "sub": "On 2 March 2026 the Dewan Rakyat held a bloc vote on the Constitution (Amendment) Bill 2026 to cap a Prime Minister's tenure at 10 years. 146 voted yes. Zero voted no. 44 abstained. 32 were absent. Article 159(3) requires 148. The Bill fell two votes short. The story is not about opposition — it is about absence."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Malaysia's two-thirds amendment threshold turns abstention into a veto",
+      "s": "Article 159(3) of the Federal Constitution requires constitutional amendments to pass by not less than two-thirds of the total members of the House — 148 of 222 Dewan Rakyat seats. Perikatan Nasional whipped its bloc to abstain rather than vote against. Combined with absences, this killed the Bill without anyone formally opposing it. The whole PN bloc that attended chose abstention as a politics of plausible deniability — visible 'neutrality' that functions as a no.",
+      "d": "Federal Constitution Art 159(3); FMT Mar 2026; The Edge Mar 2026; Sinar Daily Mar 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Eight government backbenchers were absent. Pakatan Harapan turned out 100 percent.",
+      "s": "FMT and Bernama identified the eight absent government MPs: Hishammuddin Hussein (UMNO–Sembrong), M Saravanan (MIC–Tapah), Suhaimi Nasir (Libaran), Larry Sng (Julau), Syed Abu Hussin (Bukit Gantang, said openly he disagreed with the law), Henry Sum Agong (GPS–Lawas), Riduan Rubin (GRS–Tenom) and Jeffrey Kitingan (STAR-GRS–Keningau). Every Pakatan Harapan MP attended and voted yes. The two-vote shortfall is the unity government's whip discipline gap.",
+      "d": "FMT Mar 4 2026; Bernama Mar 4 2026; The Edge Mar 4 2026; The Star Mar 3 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Historical",
+      "h": "This is the third attempt at the same reform — and the third failure",
+      "s": "The pledge first appeared in Pakatan Harapan's GE14 manifesto in 2018. Liew Vui Keong tabled the original Constitution (Amendment) Bill 2019 on 3 December 2019. Takiyuddin Hassan withdrew it on 26 August 2020 under the Muhyiddin Yassin PN cabinet. The 2026 version, tabled by Azalina Othman Said on 23 February, is the third attempt — and now the third to fail. Communications Minister Fahmi Fadzil has announced a fourth attempt for the June 2026 sitting.",
+      "d": "The Malaysian Reserve Dec 2019; Wikipedia Constitution Amendment Bill 2026; Bernama Mar 2026; FMT Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "If no MP would vote no on the record, why is the Bill dead?",
+      "text": "Zero recorded opposition. A majority of those present voting yes. A reform pledged by the manifesto of the largest government coalition. And still it failed. The structural question is whether Article 159(3) — designed in 1957 as a check on hasty constitutional change — has become an instrument by which any reform can be killed without anyone owning the kill."
+    },
+    {
+      "t": "analogy",
+      "h": "Like a board meeting where the resolution dies because half the directors stepped out for coffee at exactly the right time",
+      "text": "On 2 March, 32 MPs were not in the chamber and 44 were sitting on their hands. Together they outnumbered the 'yes' votes' margin of need by a factor of 38. The arithmetic of absence — not the politics of opposition — was what closed the door."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "A self-imposed 10-year cap on the office of Prime Minister is, on its face, a modest institutional reform. The fact that Malaysia cannot pass it — three times across three governments and three coalitions — says less about the merits of term limits and more about the architecture of constitutional change in this country. The Article 159(3) two-thirds bar means any opposition bloc large enough to abstain can functionally veto reform without ever having to defend a 'no' vote in public. Until that arithmetic changes, or until cross-bloc consensus is built before tabling rather than during it, the June 2026 retabling is likely to fail the same way for the same structural reason."
+    }
+  ],
+  "sources": "The Diplomat Mar 2026, Malay Mail Jan 2026, Wikipedia Constitution Amendment Bill 2026, US News/Reuters Mar 2026, Bloomberg Jan 2026, Manila Times Mar 2026, The Star Mar 2026, Business Today Feb 2026, FMT Mar 2026 (multiple), Malaysiakini Mar 2026, The Edge Malaysia Mar 2026, Sinar Daily Mar 2026, ConstitutionNet Mar 2026, Bernama Feb-Mar 2026, The Malaysian Reserve Dec 2019, FULCRUM ISEAS 2026",
+  "confidence": "High — vote tally is public record from Hansard and Speaker's announcement; 25 sources cross-corroborate including international wire (Reuters, Bloomberg, Diplomat) and constitutional analysis (ConstitutionNet, FULCRUM)",
+  "lenses_used": ["Governance", "Political", "Historical"],
+  "lenses_applicable_but_unused": ["Legal", "Critical", "Rights"]
+}

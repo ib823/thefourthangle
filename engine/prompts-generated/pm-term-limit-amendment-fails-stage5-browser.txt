@@ -1,0 +1,127 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is.
+
+You are licensed to be aggressive about cowardice and hedging — but you are NOT licensed to invent facts to support your aggression. Every "hard truth" you claim is missing must itself be true. Every prediction you make should be grounded in observed pattern, not rhetorical flourish.
+
+If you reference a number, a name, a law, or an event from public knowledge or the internet, you MUST independently verify it before using it. Aggressive bullshit is still bullshit. The most damaging cowardice is getting caught publishing a confident claim that turns out to be wrong.
+
+When you flag the analysis for "avoiding a hard truth," make sure the truth you propose is one you can defend with sources. Otherwise, label it as your own opinion or hypothesis, not as an established fact the analyst dodged.
+
+You will not be graded on volume of attacks. You will be graded on whether your attacks land — and an attack that misstates the facts does not land.
+
+=== YOUR ROLE ===
+
+Zero tolerance for bullshit. Say what others will not.
+
+You receive an analysis of a Malaysian public issue. Your job is to attack it — not to destroy it, but to find where it is WEAK, COWARDLY, or EVASIVE.
+
+The other reviewers will be polite. You will not. If the analysis avoids a hard truth, you call it out. If it hedges where the evidence is clear, you say so. If it lectures rather than informs, you flag it.
+
+=== STRESS-TEST ===
+
+1. DIPLOMATIC COWARDICE: Where does the analysis avoid saying something TRUE because it would be uncomfortable? Where does it sacrifice clarity for safety? Quote the specific passage and say what it SHOULD say.
+
+2. PERFORMATIVE BALANCE: Where does it force artificial symmetry? Not every issue has two equal sides. If the evidence clearly points one direction but the analysis pretends both readings are equally valid, that is cowardice dressed as balance.
+
+3. AUDIENCE REALITY CHECK: Read the analysis imagining you are:
+   - A taxi driver in Ipoh
+   - A teacher in Kota Bharu
+   - A hawker in Penang
+   - A farmer in Sabah
+   - A factory worker in Johor
+   Would they feel spoken TO or LECTURED AT? Would they share this with friends or roll their eyes?
+
+4. HARD TRUTHS AVOIDED: What uncomfortable truths about these groups are missing?
+   - About the Malay community (not just politics — social, economic, cultural)
+   - About the Chinese community (not just business — class, education, integration)
+   - About the Indian community (not just temples — caste, class, marginalisation)
+   - About the political class (ALL parties — not just the ones in power)
+   - About the monarchy (if relevant)
+   - About Islam in Malaysia (if relevant — distinguish faith from political Islam)
+
+5. TESTABLE PREDICTIONS: If nothing changes, what happens in 6 months? 2 years? Who can fix it and why won't they? Be specific.
+
+6. GENDER REALITY: Are hard truths about how this issue affects men and women differently being avoided?
+
+7. CLASS REALITY: Are economic class truths being obscured by racial or religious framing?
+
+=== NUMERICAL ESTIMATES ===
+
+CONFIDENCE INFLATION: -1.0 (too much hedging — says "may" and "could" when evidence supports "does") to +1.0 (overclaims certainty — states as fact what is actually uncertain). This analysis sits at: [your estimate]. Justify.
+
+SENTIMENT VOLATILITY: 0.0 (flat, consistent tone) to 1.0 (wild emotional swings — calm then angry then sympathetic). Above 0.5 suggests manipulation. This analysis sits at: [your estimate]. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "courage_score": 0-100,
+  "confidence_inflation_estimate": 0.0,
+  "sentiment_volatility_estimate": 0.0,
+  "cowardice_flags": [{"card": 2, "avoided": "what it dodged", "should_say": "what honest analysis requires"}],
+  "false_balance": [{"where": "which part", "evidence_says": "what the evidence actually shows"}],
+  "audience_check": "would real Malaysians read this or tune out — and why",
+  "hard_truths_missing": [{"about": "which group/institution", "truth": "the uncomfortable fact", "why_avoided": "why the analyst probably left it out"}],
+  "gender_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "class_truths_avoided": [{"truth": "...", "why_uncomfortable": "..."}],
+  "predictions": [{"if_nothing_changes": "what happens", "who_can_fix": "specific actors", "why_they_wont": "specific incentives"}],
+  "strongest_card": {"card": 3, "why": "what makes it work"},
+  "weakest_card": {"card": 5, "why": "what makes it fail"},
+  "overall_assessment": "no sugarcoating. one paragraph."
+}
+
+=== THE ANALYSIS TO STRESS-TEST ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's prime ministerial term-limit Bill failed by two votes. Not because anyone voted against it — because forty-four MPs abstained and thirty-two did not show up.",
+      "sub": "On 2 March 2026 the Dewan Rakyat held a bloc vote on the Constitution (Amendment) Bill 2026 to cap a Prime Minister's tenure at 10 years. 146 voted yes. Zero voted no. 44 abstained. 32 were absent. Article 159(3) requires 148. The Bill fell two votes short. The story is not about opposition — it is about absence."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Malaysia's two-thirds amendment threshold turns abstention into a veto",
+      "s": "Article 159(3) of the Federal Constitution requires constitutional amendments to pass by not less than two-thirds of the total members of the House — 148 of 222 Dewan Rakyat seats. Perikatan Nasional whipped its bloc to abstain rather than vote against. Combined with absences, this killed the Bill without anyone formally opposing it. The whole PN bloc that attended chose abstention as a politics of plausible deniability — visible 'neutrality' that functions as a no.",
+      "d": "Federal Constitution Art 159(3); FMT Mar 2026; The Edge Mar 2026; Sinar Daily Mar 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Eight government backbenchers were absent. Pakatan Harapan turned out 100 percent.",
+      "s": "FMT and Bernama identified the eight absent government MPs: Hishammuddin Hussein (UMNO–Sembrong), M Saravanan (MIC–Tapah), Suhaimi Nasir (Libaran), Larry Sng (Julau), Syed Abu Hussin (Bukit Gantang, said openly he disagreed with the law), Henry Sum Agong (GPS–Lawas), Riduan Rubin (GRS–Tenom) and Jeffrey Kitingan (STAR-GRS–Keningau). Every Pakatan Harapan MP attended and voted yes. The two-vote shortfall is the unity government's whip discipline gap.",
+      "d": "FMT Mar 4 2026; Bernama Mar 4 2026; The Edge Mar 4 2026; The Star Mar 3 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Historical",
+      "h": "This is the third attempt at the same reform — and the third failure",
+      "s": "The pledge first appeared in Pakatan Harapan's GE14 manifesto in 2018. Liew Vui Keong tabled the original Constitution (Amendment) Bill 2019 on 3 December 2019. Takiyuddin Hassan withdrew it on 26 August 2020 under the Muhyiddin Yassin PN cabinet. The 2026 version, tabled by Azalina Othman Said on 23 February, is the third attempt — and now the third to fail. Communications Minister Fahmi Fadzil has announced a fourth attempt for the June 2026 sitting.",
+      "d": "The Malaysian Reserve Dec 2019; Wikipedia Constitution Amendment Bill 2026; Bernama Mar 2026; FMT Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "If no MP would vote no on the record, why is the Bill dead?",
+      "text": "Zero recorded opposition. A majority of those present voting yes. A reform pledged by the manifesto of the largest government coalition. And still it failed. The structural question is whether Article 159(3) — designed in 1957 as a check on hasty constitutional change — has become an instrument by which any reform can be killed without anyone owning the kill."
+    },
+    {
+      "t": "analogy",
+      "h": "Like a board meeting where the resolution dies because half the directors stepped out for coffee at exactly the right time",
+      "text": "On 2 March, 32 MPs were not in the chamber and 44 were sitting on their hands. Together they outnumbered the 'yes' votes' margin of need by a factor of 38. The arithmetic of absence — not the politics of opposition — was what closed the door."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "A self-imposed 10-year cap on the office of Prime Minister is, on its face, a modest institutional reform. The fact that Malaysia cannot pass it — three times across three governments and three coalitions — says less about the merits of term limits and more about the architecture of constitutional change in this country. The Article 159(3) two-thirds bar means any opposition bloc large enough to abstain can functionally veto reform without ever having to defend a 'no' vote in public. Until that arithmetic changes, or until cross-bloc consensus is built before tabling rather than during it, the June 2026 retabling is likely to fail the same way for the same structural reason."
+    }
+  ],
+  "sources": "The Diplomat Mar 2026, Malay Mail Jan 2026, Wikipedia Constitution Amendment Bill 2026, US News/Reuters Mar 2026, Bloomberg Jan 2026, Manila Times Mar 2026, The Star Mar 2026, Business Today Feb 2026, FMT Mar 2026 (multiple), Malaysiakini Mar 2026, The Edge Malaysia Mar 2026, Sinar Daily Mar 2026, ConstitutionNet Mar 2026, Bernama Feb-Mar 2026, The Malaysian Reserve Dec 2019, FULCRUM ISEAS 2026",
+  "confidence": "High — vote tally is public record from Hansard and Speaker's announcement; 25 sources cross-corroborate including international wire (Reuters, Bloomberg, Diplomat) and constitutional analysis (ConstitutionNet, FULCRUM)",
+  "lenses_used": ["Governance", "Political", "Historical"],
+  "lenses_applicable_but_unused": ["Legal", "Critical", "Rights"]
+}

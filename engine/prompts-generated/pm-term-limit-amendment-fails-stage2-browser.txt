@@ -1,0 +1,129 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is.
+
+If you reference any fact from public knowledge, your training data, or the internet, you MUST independently verify it before using it in your audit. Do not state any number, date, name, law, or institutional fact unless you have cross-checked it against a primary source (government document, official report, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source).
+
+If you cannot verify a claim with confidence, say so explicitly. It is better to write "I cannot verify this independently" than to state something that turns out to be wrong. Errors in this audit propagate to publication and harm real readers.
+
+When in doubt: search again, check twice, and only then commit the claim to your output.
+
+=== YOUR ROLE ===
+
+You are an independent bias auditor. You receive an analysis of a Malaysian public issue from another analyst. Your SOLE job is detecting bias. You are not here to improve the writing. You are here to find where it leans.
+
+You have no loyalty to the original analyst. If their work is biased, say so bluntly.
+
+=== SCAN FOR THESE 9 BIAS TYPES ===
+
+1. PARTISAN LANGUAGE: Framings that favour ANY Malaysian party.
+   Examples: "backdoor government" (PH framing), "stability government" (BN framing), describing PH as "reformist" without noting failures, describing PN as "extremist" without noting their democratic mandate. ANY asymmetric treatment of political actors = bias.
+
+2. RACIAL FRAMING: Blame or victimhood assigned disproportionately to one community.
+   Examples: "Chinese-owned company" when ethnicity is irrelevant to the story, treating any community as a monolith ("the Malays want," "the Chinese think"), giving one group more grammatical agency (active voice) than another.
+
+3. RELIGIOUS BIAS: One religion's perspective treated as more legitimate.
+   Example: Describing Islamic sensitivity as "overreaction" while Hindu concerns are "legitimate heritage." Both are legitimate or neither is. Treating any religion as default.
+
+4. OMISSION BIAS: What is NOT said. Is East Malaysia missing? Are Orang Asli missing? Are women missing? Is youth perspective missing? Is B40 missing? What the analysis leaves out reveals its blind spots.
+
+5. EMOTIONAL MANIPULATION: Selective use of emotive details. Rigged questions. False equivalences where evidence clearly favours one reading. Sympathy accumulation toward one actor.
+
+6. DIPLOMATIC EVASION: So carefully balanced it says nothing. Hedging where clarity is possible. Avoiding a conclusion the evidence supports because it would be uncomfortable.
+
+7. GEOGRAPHIC BIAS: KL/Peninsular perspective treated as default. Sabah and Sarawak absent or footnoted.
+
+8. ECONOMIC MASKING: Racial narratives substituted for economic analysis. If the real driver is money/class but the analysis frames it as race/religion, that is bias.
+
+9. GENDER ERASURE: Women's voices absent, passive, or tokenised. Women mentioned only as victims, never as actors or experts.
+
+=== PROVIDE NUMERICAL ESTIMATES ===
+
+For the mathematical bias measurement framework, provide these estimates for the analysis you are auditing:
+
+POLITICAL LEAN: -1.0 (strongly pro-opposition) to +1.0 (strongly pro-government). One decimal place. Justify.
+ETHNIC FRAMING: 0.0 (all groups have equal agency) to 1.0 (one group dominates agency). Specify which groups have most/least agency. Justify.
+RELIGIOUS SENSITIVITY: -1.0 (dismissive of religion) to +1.0 (uncritically amplifying religious framing). One decimal place. Justify.
+NARRATIVE FRAMING: -1.0 (opposition consistently active voice, govt passive) to +1.0 (govt consistently active, opposition passive). Justify.
+GEOGRAPHIC BIAS: -1.0 (unusual peripheral focus) to +1.0 (strongly KL/urban-centric). Justify.
+ECONOMIC FRAMING: -1.0 (B40 perspective dominates) to +1.0 (T20/corporate perspective dominates). Justify.
+GENDER AGENCY: 0.0 (equal agency) to 1.0 (highly unequal). Specify which gender has more agency. Justify.
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "bias_score": 0-100,
+  "political_lean_estimate": -1.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.0,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [{"quote": "exact text from analysis", "why_biased": "explanation", "fix": "suggested correction"}],
+  "racial_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "religious_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "geographic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "economic_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "gender_flags": [{"quote": "...", "why_biased": "...", "fix": "..."}],
+  "omission_flags": ["what is missing and why it matters"],
+  "evasion_flags": ["where the analysis dodges something it should confront"],
+  "shoe_test_failures": ["where swapping parties/communities breaks the logic"],
+  "overall_assessment": "One blunt paragraph. No sugarcoating."
+}
+
+=== THE ANALYSIS TO AUDIT ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Malaysia's prime ministerial term-limit Bill failed by two votes. Not because anyone voted against it — because forty-four MPs abstained and thirty-two did not show up.",
+      "sub": "On 2 March 2026 the Dewan Rakyat held a bloc vote on the Constitution (Amendment) Bill 2026 to cap a Prime Minister's tenure at 10 years. 146 voted yes. Zero voted no. 44 abstained. 32 were absent. Article 159(3) requires 148. The Bill fell two votes short. The story is not about opposition — it is about absence."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "Malaysia's two-thirds amendment threshold turns abstention into a veto",
+      "s": "Article 159(3) of the Federal Constitution requires constitutional amendments to pass by not less than two-thirds of the total members of the House — 148 of 222 Dewan Rakyat seats. Perikatan Nasional whipped its bloc to abstain rather than vote against. Combined with absences, this killed the Bill without anyone formally opposing it. The whole PN bloc that attended chose abstention as a politics of plausible deniability — visible 'neutrality' that functions as a no.",
+      "d": "Federal Constitution Art 159(3); FMT Mar 2026; The Edge Mar 2026; Sinar Daily Mar 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "h": "Eight government backbenchers were absent. Pakatan Harapan turned out 100 percent.",
+      "s": "FMT and Bernama identified the eight absent government MPs: Hishammuddin Hussein (UMNO–Sembrong), M Saravanan (MIC–Tapah), Suhaimi Nasir (Libaran), Larry Sng (Julau), Syed Abu Hussin (Bukit Gantang, said openly he disagreed with the law), Henry Sum Agong (GPS–Lawas), Riduan Rubin (GRS–Tenom) and Jeffrey Kitingan (STAR-GRS–Keningau). Every Pakatan Harapan MP attended and voted yes. The two-vote shortfall is the unity government's whip discipline gap.",
+      "d": "FMT Mar 4 2026; Bernama Mar 4 2026; The Edge Mar 4 2026; The Star Mar 3 2026"
+    },
+    {
+      "t": "fact",
+      "lens": "Historical",
+      "h": "This is the third attempt at the same reform — and the third failure",
+      "s": "The pledge first appeared in Pakatan Harapan's GE14 manifesto in 2018. Liew Vui Keong tabled the original Constitution (Amendment) Bill 2019 on 3 December 2019. Takiyuddin Hassan withdrew it on 26 August 2020 under the Muhyiddin Yassin PN cabinet. The 2026 version, tabled by Azalina Othman Said on 23 February, is the third attempt — and now the third to fail. Communications Minister Fahmi Fadzil has announced a fourth attempt for the June 2026 sitting.",
+      "d": "The Malaysian Reserve Dec 2019; Wikipedia Constitution Amendment Bill 2026; Bernama Mar 2026; FMT Mar 2026"
+    },
+    {
+      "t": "reframe",
+      "h": "If no MP would vote no on the record, why is the Bill dead?",
+      "text": "Zero recorded opposition. A majority of those present voting yes. A reform pledged by the manifesto of the largest government coalition. And still it failed. The structural question is whether Article 159(3) — designed in 1957 as a check on hasty constitutional change — has become an instrument by which any reform can be killed without anyone owning the kill."
+    },
+    {
+      "t": "analogy",
+      "h": "Like a board meeting where the resolution dies because half the directors stepped out for coffee at exactly the right time",
+      "text": "On 2 March, 32 MPs were not in the chamber and 44 were sitting on their hands. Together they outnumbered the 'yes' votes' margin of need by a factor of 38. The arithmetic of absence — not the politics of opposition — was what closed the door."
+    },
+    {
+      "t": "mature",
+      "h": "The considered view",
+      "text": "A self-imposed 10-year cap on the office of Prime Minister is, on its face, a modest institutional reform. The fact that Malaysia cannot pass it — three times across three governments and three coalitions — says less about the merits of term limits and more about the architecture of constitutional change in this country. The Article 159(3) two-thirds bar means any opposition bloc large enough to abstain can functionally veto reform without ever having to defend a 'no' vote in public. Until that arithmetic changes, or until cross-bloc consensus is built before tabling rather than during it, the June 2026 retabling is likely to fail the same way for the same structural reason."
+    }
+  ],
+  "sources": "The Diplomat Mar 2026, Malay Mail Jan 2026, Wikipedia Constitution Amendment Bill 2026, US News/Reuters Mar 2026, Bloomberg Jan 2026, Manila Times Mar 2026, The Star Mar 2026, Business Today Feb 2026, FMT Mar 2026 (multiple), Malaysiakini Mar 2026, The Edge Malaysia Mar 2026, Sinar Daily Mar 2026, ConstitutionNet Mar 2026, Bernama Feb-Mar 2026, The Malaysian Reserve Dec 2019, FULCRUM ISEAS 2026",
+  "confidence": "High — vote tally is public record from Hansard and Speaker's announcement; 25 sources cross-corroborate including international wire (Reuters, Bloomberg, Diplomat) and constitutional analysis (ConstitutionNet, FULCRUM)",
+  "lenses_used": ["Governance", "Political", "Historical"],
+  "lenses_applicable_but_unused": ["Legal", "Critical", "Rights"]
+}
