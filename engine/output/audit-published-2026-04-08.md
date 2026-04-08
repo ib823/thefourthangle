@@ -63,10 +63,10 @@ These published issues have no brief, no stage outputs, no reader.json. They pre
 - **1170** — Bumiputera Contract Quota System Loses RM12B to Rent-Seeking
 - **1181** — Subsidy Bill Reaches RM82B — One-Third of Federal Revenue
 - **1190** — EPF Flexible Account 3 Withdrawals Reach RM14.79B in 15 Months
-- **1201** — Fiscal Deficit Target of 3.5% Missed for Fifth Consecutive Year
+- **1201** — Malaysia's 2024 Deficit Came In at 4.1% — 2025 Forecast Risks Slipping Past the 3.8% Target
 - **1208** — Corruption Costs Malaysia RM47B Annually — 3% of GDP
 - **1227** — Political Appointees in GLCs Earn RM680M Combined
-- **1229** — Kampung Baru Redevelopment Stalls Again After 40 Years of Plans
+- **1229** — Kampung Baru Master Redevelopment Still Stalled After 40 Years
 - **1239** — Richest 50 Malaysians' Wealth Equals Bottom 12 Million Citizens
 - **1241** — SOSMA detentions hit 5-year high in 2025
 - **1247** — Stateless children exceed 12,000 in Sabah alone
@@ -87,7 +87,7 @@ These published issues have no brief, no stage outputs, no reader.json. They pre
 - **1389** — 17 Schools in Kelantan Flood Zones Damaged for 4th Consecutive Year
 - **1401** — Sijil Kemahiran Malaysia Holders Earn 40% Less Than Degree Holders
 - **1435** — Health Privatization Debate Reignited by 3 Hospital PPP Proposals
-- **1445** — Medical Tourism Revenue Hits RM2.4 Billion While Public System Struggles
+- **1445** — Medical Tourism Hit RM2.72B in 2024, Targeting RM3B in 2025 — While Public Specialists Stretch Thin
 - **1471** — Opioid Substitution Therapy Waitlist Grows to 8,500 Patients
 - **1511** — Zoonotic Disease Surveillance Covers Only 35% of Wildlife Markets
 - **1520** — Public Health Budget Transparency Ranks 42nd of 54 Countries Assessed

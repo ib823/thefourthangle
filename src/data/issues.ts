@@ -3657,18 +3657,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1201", published: true, opinionShift: 85, status: null, edition: 1,
-  headline: "Fiscal Deficit Target of 3.5% Missed for Fifth Consecutive Year",
-  context: "The Finance Ministry confirmed Malaysia's 2025 fiscal deficit at 4.1% of GDP, missing the 3.5% target for the fifth straight year, as revenue shortfalls from lower petroleum prices offset spending discipline efforts.",
+  id: "1201", published: true, opinionShift: 75, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Malaysia's 2024 Deficit Came In at 4.1% — 2025 Forecast Risks Slipping Past the 3.8% Target",
+  context: "Malaysia narrowed its 2024 fiscal deficit to 4.1% of GDP — better than the 4.3% original target but still high. The 2025 official target is 3.8%; analyst forecasts pegged the actual outturn closer to 4.0%. The trajectory matters for the country's credit rating outlook.",
   stageScores: { pa: 88, ba: 82, fc: 89, af: 75, ct: 67, sr: 84 }, finalScore: 80.8,
   cards: [
-    { t: "hook", big: "4.1% deficit — 5 straight years of broken fiscal promises mean Malaysia's credibility with rating agencies is eroding", sub: "Fitch and S&P both issued negative outlook warnings citing persistent deficit overshoots and reform delays" },
-    { t: "fact", big: "Cumulative fiscal deficit over 5 years totals RM342 billion — all financed by debt that future generations must service", sub: "At 4.1% deficit, Malaysia adds RM68 billion in new debt annually — RM186 million every single day", lens: "Economic" },
-    { t: "fact", big: "Rating downgrade from A- to BBB+ would raise borrowing costs RM8.5 billion annually across government and corporate bonds", sub: "Higher sovereign risk premium cascades to mortgage rates — potentially adding RM180 monthly to average home loan", lens: "Social" },
-    { t: "fact", big: "Medium-Term Fiscal Framework sets targets but has no enforcement mechanism or consequence for missing them", sub: "Parliament debates budget allocations but not deficit outcomes — no post-budget accountability hearing exists", lens: "Governance" },
-    { t: "reframe", big: "A fiscal target missed 5 years running isn't a target — it's a fiction that markets are starting to see through", sub: "" },
-    { t: "analogy", big: "Like a dieter who sets the same weight target for five years and misses it every time — at some point the target stops being a goal and becomes a fiction", sub: "A fiscal target missed five consecutive years signals structural inability, not temporary deviation" },
-    { t: "view", big: "Should Malaysia enact a Fiscal Responsibility Act with legally binding deficit ceilings and mandatory corrective triggers?", sub: "" }
+    { t: "hook", big: "Malaysia narrowed its deficit to 4.1% in 2024 — but 2025 is forecast to slip past the 3.8% target as revenue softens.", sub: "The IMF and analyst houses note rising risks from weaker tax collection, lower oil prices, and SST expansion delays." },
+    { t: "fact", big: "Every 1 percentage point of deficit adds tens of billions to annual borrowing.", sub: "Long-term sustainability requires revenue mobilisation (broader SST, CGT) or sustained spending discipline. Both have political costs.", lens: "Economic" },
+    { t: "fact", big: "Credit rating outlooks are sensitive to consistent target overshoots — even a one-notch downgrade raises borrowing costs across the sovereign curve.", sub: "Higher sovereign risk premium cascades through corporate bond markets and ultimately to mortgage rates and household credit costs.", lens: "Social" },
+    { t: "fact", big: "The Medium-Term Fiscal Framework sets targets but has no statutory enforcement mechanism for missing them.", sub: "Parliament debates budget allocations but does not hold a structured post-budget accountability hearing on deficit outcomes.", lens: "Governance" },
+    { t: "reframe", big: "The story is not 'target missed' — it is whether Malaysia can establish a credible glide path before rating agencies decide consolidation is no longer credible.", sub: "" },
+    { t: "analogy", big: "Like a dieter who keeps just over the goal weight every quarter — the trend is right, the credibility eroding.", sub: "Persistent small overshoots accumulate into a credibility gap that markets eventually price in." },
+    { t: "view", big: "A statutory Fiscal Responsibility framework with binding ceilings and corrective triggers — beyond the current MTFF — is the structural fix.", sub: "" }
   ]
 },
 {
@@ -4053,18 +4053,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1229", published: true, opinionShift: 63, status: null, edition: 2,
-  headline: "Kampung Baru Redevelopment Stalls Again After 40 Years of Plans",
-  context: "The proposed RM45 billion redevelopment of Kampung Baru in central KL stalled again in 2025 as only 34% of the 5,300 landowners agreed to the government's compensation framework, extending a deadlock that has persisted through 8 prime ministers.",
+  id: "1229", published: true, opinionShift: 63, status: "updated", edition: 3, sourceDate: "2026-04-08",
+  headline: "Kampung Baru Master Redevelopment Still Stalled After 40 Years",
+  context: "The Kampung Baru master redevelopment plan — a 121-hectare project costed at around RM43 billion — remains stalled. PKB's separate Kampung Sungai Baru sub-project (328 owners) finally moved forward in 2025 after years of dispute, but the larger Kampung Baru proper has not begun.",
   stageScores: { pa: 84, ba: 75, fc: 84, af: 69, ct: 58, sr: 79 }, finalScore: 75.0,
   cards: [
-    { t: "hook", big: "40 years, 8 prime ministers, zero progress — Kampung Baru's 5,300 owners sit on RM45 billion of undeveloped KL prime land", sub: "Land valued at RM1,200 per sq ft surrounded by KLCC towers — but fragmented ownership blocks any development" },
-    { t: "fact", big: "Kampung Baru's 220 acres in the heart of KL generate RM42 million in annual economic activity versus potential RM8.4 billion if developed", sub: "Opportunity cost of RM8.4 billion yearly makes this Malaysia's most expensive planning failure in GDP terms", lens: "Economic" },
-    { t: "fact", big: "3,800 Malay families have lived in Kampung Baru for 3 generations — development means displacing a historic community", sub: "Cultural heritage value of KL's last major Malay village is incalculable — once demolished, 125 years of community history disappears", lens: "Social" },
-    { t: "fact", big: "PKB (Kampung Baru Development Corporation) spent RM48 million in operational costs since 2012 with zero development output", sub: "Malay Reserve Land status creates legal complexity requiring individual consent from each of 5,300 fragmented lot owners", lens: "Governance" },
-    { t: "reframe", big: "Kampung Baru isn't just a land problem — it's the tension between Malay heritage preservation and the logic of real estate capital made physical", sub: "" },
-    { t: "analogy", big: "Like a historic building where the heirs cannot agree on renovation plans — 40 years of blueprints but the walls keep crumbling", sub: "Fragmented land ownership and competing visions have paralysed redevelopment for four decades" },
-    { t: "view", big: "Should Kampung Baru be designated a permanent Malay Cultural Heritage Zone with vertical development rights sold to fund community upgrades?", sub: "" }
+    { t: "hook", big: "40 years, zero ground broken on main Kampung Baru — even as Kampung Sungai Baru sub-project finally moved forward in 2025.", sub: "PKB's master plan envisages ~RM43 billion across 121 hectares with 17,500 residential units. Fragmented Malay Reserve Land ownership slows consolidation." },
+    { t: "fact", big: "121 hectares of Kampung Baru sit beside the KLCC core — economically prime but legally complicated by Malay Reserve Land status.", sub: "Land in Kampung Baru is some of the most valuable in KL on a per-square-foot basis, yet the master plan has not produced a single completed redevelopment block.", lens: "Economic" },
+    { t: "fact", big: "Thousands of Malay families have lived in Kampung Baru for generations — any redevelopment means displacing a historic community.", sub: "Cultural heritage value is real and is the central reason consolidation has been politically difficult across multiple administrations.", lens: "Social" },
+    { t: "fact", big: "PKB (Perbadanan Pembangunan Kampong Bharu), set up in 2012, has not delivered the master redevelopment despite years of operational spending.", sub: "Malay Reserve Land status creates legal complexity requiring individual consent from a large number of fragmented lot owners.", lens: "Governance" },
+    { t: "reframe", big: "Kampung Baru is not a real estate problem. It is the unresolved question of whether Malay heritage and KLCC-grade land economics can coexist in the same blocks.", sub: "" },
+    { t: "analogy", big: "Like a historic building where the heirs cannot agree on renovation — 40 years of blueprints but the walls keep crumbling.", sub: "Fragmented ownership and competing visions have paralysed redevelopment for four decades. The Kg Sungai Baru breakthrough shows it can move when terms are right." },
+    { t: "view", big: "The path forward is not a bigger plan — it is structured smaller-block consolidation like Kg Sungai Baru, with cultural heritage protections built into each phase.", sub: "" }
   ]
 },
 {
@@ -7097,18 +7097,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1445", published: true, opinionShift: 86, status: null, edition: 1,
-  headline: "Medical Tourism Revenue Hits RM2.4 Billion While Public System Struggles",
-  context: "Malaysia's medical tourism industry generated RM2.4 billion in 2025 as resources are directed toward international patients.",
+  id: "1445", published: true, opinionShift: 78, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Medical Tourism Hit RM2.72B in 2024, Targeting RM3B in 2025 — While Public Specialists Stretch Thin",
+  context: "MHTC reported RM2.72 billion in 2024 medical-tourism revenue from 1.6 million healthcare travellers and projects RM3 billion in 2025. The 2030 target is RM12 billion. Public hospitals continue to face specialist shortages.",
   stageScores: { pa: 83, ba: 71, fc: 83, af: 68, ct: 54, sr: 78 }, finalScore: 75.1,
   cards: [
-    { t: "hook", big: "Medical tourism earned RM2.4 billion in 2025 while public hospitals face specialist shortages", sub: "1.3 million international patients treated at private Malaysian hospitals last year" },
-    { t: "fact", big: "68% of medical tourists use private hospitals that employ 42% of Malaysia's specialists", sub: "Specialist concentration in private tourism-focused hospitals drains public system capacity", lens: "Economic" },
-    { t: "fact", big: "MHTC targets RM5 billion in medical tourism revenue by 2030 requiring more specialist capacity", sub: "Growth targets compete directly with public healthcare human resource needs", lens: "Governance" },
-    { t: "fact", big: "India mandates that private hospitals allocate 25% of beds to subsidized local patients", sub: "Cross-subsidization model ensures local communities benefit from medical tourism growth", lens: "Critical" },
-    { t: "reframe", big: "Exporting healthcare while citizens queue for months exposes a troubling priority disorder", sub: "" },
-    { t: "analogy", big: "Like a restaurant that serves tourists a five-course meal while the kitchen staff eat leftovers — same building, different service tiers", sub: "Specialist capacity diverted to medical tourists directly extends the wait times for public patients" },
-    { t: "view", big: "Should medical tourism hospitals be required to allocate specialist hours to public patients", sub: "" },
+    { t: "hook", big: "Medical tourism earned RM2.72 billion in 2024 — and is targeting RM12 billion by 2030 — while public hospitals queue patients for specialist care.", sub: "MHTC: 1.6 million healthcare travellers in 2024, +14% year-on-year. The 2025 target is RM3 billion." },
+    { t: "fact", big: "Most medical tourists are treated at the same private hospitals where the country's senior specialists concentrate.", sub: "The Flagship Medical Tourism Hospital programme recognises Institut Jantung Negara, Island Hospital Penang, Mahkota Medical Centre and Subang Jaya Medical Centre.", lens: "Economic" },
+    { t: "fact", big: "MHTC's 2030 target is roughly four times the 2024 actual — implying continued specialist concentration in private hospitals.", sub: "Growth targets compete with public healthcare human-resource needs unless specialist supply also expands.", lens: "Governance" },
+    { t: "fact", big: "Other countries with active medical tourism use cross-subsidy mechanisms to ensure local patients benefit.", sub: "India's Charitable Hospital obligations require some private hospitals to reserve beds for low-income local patients. Malaysia has no equivalent mandate.", lens: "Critical" },
+    { t: "reframe", big: "The growth story is real. The structural question is whether the specialist supply expands fast enough that public-sector waits do not lengthen as exports rise.", sub: "" },
+    { t: "analogy", big: "Like a restaurant that serves tourists a five-course meal while the kitchen staff eat leftovers — same building, different service tiers.", sub: "Without parallel investment in specialist training, every export patient has an opportunity cost in the public queue." },
+    { t: "view", big: "Medical tourism is legitimate. The fix is to expand specialist supply alongside it — and to require local cross-subsidy at high-volume hospitals.", sub: "" },
   ]
 },
 {
