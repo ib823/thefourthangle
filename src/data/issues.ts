@@ -1825,7 +1825,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1071", published: true, opinionShift: 86, status: null, edition: 1,
+  id: "1071", published: false, opinionShift: 86, status: null, edition: 1,
   headline: "Putrajaya's RM1.4 billion smart city project has zero measurable outcomes",
   context: "The Putrajaya Smart City Initiative launched in 2021 with RM1.4 billion allocation has produced no published outcome metrics, KPIs, or measurable improvements after four years.",
   stageScores: { pa: 87, ba: 79, fc: 89, af: 73, ct: 65, sr: 82 }, finalScore: 82.4,
@@ -1910,7 +1910,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1077", published: true, opinionShift: 60, status: null, edition: 1,
+  id: "1077", published: false, opinionShift: 60, status: null, edition: 1,
   headline: "Government's RM680 million advertising spend lacks transparency",
   context: "Federal government spent RM680 million on advertising and media campaigns in 2025, with no publicly accessible breakdown of which media outlets received what amounts.",
   stageScores: { pa: 82, ba: 70, fc: 83, af: 65, ct: 54, sr: 76 }, finalScore: 75.9,
@@ -2261,18 +2261,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1102", published: true, opinionShift: 82, status: null, edition: 2,
-  headline: "Subsidy rationalisation saved RM14 billion but delivery mechanism leaks 30%",
-  context: "Malaysia's 2024-2025 subsidy rationalisation saved RM14 billion on paper, but implementation audits show 30% of targeted subsidies still reached non-eligible recipients.",
-  stageScores: { pa: 87, ba: 79, fc: 89, af: 74, ct: 65, sr: 83 }, finalScore: 82.0,
+  id: "1102", published: true, opinionShift: 70, status: "updated", edition: 3, sourceDate: "2026-04-08",
+  headline: "Subsidy Rationalisation Targets ~RM8 Billion Annual Savings — Delivery Mechanism Still Untested",
+  context: "The Anwar government targets approximately RM8 billion in annual savings from electricity, diesel, and the planned RON95 rationalisation. The PADU database (~30.4 million profiles) is the targeting backbone, but no independent audit of delivery accuracy has been published.",
+  stageScores: { pa: 87, ba: 79, fc: 89, af: 74, ct: 65, sr: 83 }, finalScore: 78.0,
   cards: [
-    { t: "hook", big: "Subsidy reform saved RM14 billion on paper — but 30% still went to wrong people", sub: "Implementation failure means RM4.2 billion in subsidies missed their intended targets" },
-    { t: "fact", big: "PADU database used for targeting has 2.8 million incomplete or outdated records", sub: "Targeting system's data quality undermines the entire rationalisation exercise", lens: "Legal" },
-    { t: "fact", big: "RM4.2 billion leakage equals the combined allocation for rural roads and bridges", sub: "Subsidy misdirection costs as much as major infrastructure programmes", lens: "Economic" },
-    { t: "fact", big: "No independent body audits subsidy delivery — ministries self-report effectiveness", sub: "Agencies implementing subsidies also evaluate whether they're working", lens: "Governance" },
-    { t: "reframe", big: "Subsidy reform that leaks 30% hasn't reformed the subsidy — it's reformed who complains about it", sub: "" },
-    { t: "analogy", big: "Like fixing a leaky pipe by redirecting water to a new tap — you save at the meter, but 30% drips out before it reaches anyone", sub: "Headline savings mask delivery failures that leave the intended beneficiaries underserved" },
-    { t: "view", big: "Should subsidy delivery be independently audited with results published quarterly?", sub: "" }
+    { t: "hook", big: "Targeted subsidy reform aims to save ~RM8 billion a year — but no independent audit yet shows whether the targeting actually works.", sub: "Diesel rationalisation (June 2024) and electricity tariff restructuring contributed the bulk of savings to date. RON95 targeting begins in the second half of 2025." },
+    { t: "fact", big: "PADU (Pangkalan Data Utama) holds about 30.4 million individual profiles and is the official targeting backbone.", sub: "Public reporting has flagged data-quality and security concerns since launch. Rafizi Ramli, the minister who built PADU, resigned over disagreements about how it would be used.", lens: "Governance" },
+    { t: "fact", big: "Verified savings figures so far come from electricity (~RM4B) and diesel (~RM4B). Headline 'rationalisation savings' should be read against these components.", sub: "The Ministry of Finance has cited an ~RM8 billion annual savings target overall.", lens: "Economic" },
+    { t: "fact", big: "No independent body publishes audited results on whether targeting reaches the right households.", sub: "Subsidy effectiveness reporting is still done by the implementing ministries themselves. Independent evaluation infrastructure remains the gap.", lens: "Legal" },
+    { t: "reframe", big: "The story is no longer the savings number — it is whether targeting accuracy will ever be measured by anyone other than the ministries delivering it.", sub: "" },
+    { t: "analogy", big: "Like fixing a leaky pipe and announcing the savings before anyone has measured the new flow rate.", sub: "Headline savings mean little until delivery accuracy is independently audited." },
+    { t: "view", big: "Subsidy rationalisation needs an independent audit body publishing results per cohort, not the implementing ministries grading themselves.", sub: "" }
   ]
 },
 {
@@ -2444,7 +2444,7 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1115", published: true, opinionShift: 74, status: null, edition: 1,
+  id: "1115", published: false, opinionShift: 74, status: null, edition: 1,
   headline: "Cabinet committees bypass parliament on 23 policy decisions",
   context: "Twenty-three major policy decisions in 2025 were made through cabinet committees rather than parliamentary debate, including changes affecting taxation, education, and environmental standards.",
   stageScores: { pa: 83, ba: 71, fc: 84, af: 67, ct: 55, sr: 77 }, finalScore: 76.4,
@@ -2628,18 +2628,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1128", published: true, opinionShift: 42, status: null, edition: 1,
-  headline: "Gig Workers Exceed 1.3 Million Without Social Protection",
-  context: "DOSM reported that gig economy workers in Malaysia surpassed 1.3 million in 2025, with over 78% lacking EPF contributions, SOCSO coverage, or any form of employment insurance.",
+  id: "1128", published: true, opinionShift: 42, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Gig Workers Bill 2025 Brings ~1.2 Million Into SOCSO — Retirement Coverage Still Missing",
+  context: "Malaysia's Gig Workers Bill 2025, passed by Parliament in August-September 2025, brings ~1.2 million platform workers into SOCSO accident protection. EPF retirement coverage is not extended.",
   stageScores: { pa: 83, ba: 72, fc: 82, af: 65, ct: 55, sr: 76 }, finalScore: 72.8,
   cards: [
-    { t: "hook", big: "1.3 million gig workers — Grab, Foodpanda, Lalamove — have zero retirement savings from work", sub: "Average gig rider earns RM1,800 monthly but spends RM600 on fuel and vehicle maintenance" },
-    { t: "fact", big: "Gig economy contributes RM50 billion to GDP but platforms pay zero employer social contributions", sub: "Companies classify workers as 'partners' to avoid RM3.2 billion in potential EPF/SOCSO obligations", lens: "Economic" },
-    { t: "fact", big: "72% of food delivery riders are aged 18-35 — an entire generation building zero pension rights", sub: "Injury rates among riders hit 14 per 1,000 workers — 3x higher than manufacturing sector", lens: "Social" },
-    { t: "fact", big: "Self-Employment Social Security Act 2017 covers only 8 of 20 identified gig work categories", sub: "Human Resources Ministry's i-Saraan voluntary scheme attracted only 145,000 sign-ups by 2025", lens: "Governance" },
-    { t: "reframe", big: "Platforms profit from flexibility — workers pay for it with their retirement security and broken bodies", sub: "" },
-    { t: "analogy", big: "Like a factory that hires workers through a temp agency to avoid paying benefits — the work is permanent, only the protection is temporary", sub: "Platforms structure work as independent contracting to avoid the social protection costs of employment" },
-    { t: "view", big: "Should gig platforms be required to contribute 13% EPF equivalent for every active worker?", sub: "" }
+    { t: "hook", big: "Malaysia's first gig-worker law brings ~1.2 million riders and freelancers into SOCSO accident protection — for the first time.", sub: "The Gig Workers Bill 2025 passed the Dewan Rakyat in August and the Dewan Negara on 9 September 2025. A 1.25% per-ride deduction funds the SOCSO contribution." },
+    { t: "fact", big: "Mandatory SOCSO accident and disability protection — platforms must register workers and remit contributions on their behalf.", sub: "Coverage spans e-hailing, p-hailing, freelancers and digital content creators. Grab, Foodpanda and other platforms must provide written terms.", lens: "Legal" },
+    { t: "fact", big: "EPF retirement contributions are NOT included in this first phase — the long-tail income gap remains unaddressed.", sub: "Voluntary i-Saraan covered ~10.7% of self-employed workers by 2022. The new mandatory scheme does not extend to retirement.", lens: "Economic" },
+    { t: "fact", big: "Of Malaysia's 16.7 million labour force in Q1 2025, about 3.45 million work informally — gig workers are a subset of that universe.", sub: "DOSM and ILO sources put the gig-worker count at ~1.2 million; the Bill's coverage figure tracks the same population.", lens: "Social" },
+    { t: "reframe", big: "The 'no protection' framing is now obsolete. The remaining gap is retirement adequacy — the most expensive piece of social insurance, and the one platforms still do not fund.", sub: "" },
+    { t: "analogy", big: "Like adding seatbelts but skipping the crumple zone — the cheapest accident protection is in place; the expensive long-term protection is not.", sub: "Accident insurance is the easiest gig-economy reform. Retirement adequacy is the hardest, and the new framework does not touch it." },
+    { t: "view", big: "Phase 1 closed the accident gap. The Phase 2 question is whether EPF mandatory contributions reach platform workers — and which government dares to legislate it.", sub: "" }
   ]
 },
 {
@@ -5414,18 +5414,17 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1325", published: true, opinionShift: 66, status: null, edition: 1,
-  headline: "Suriani ruling on maternal citizenship rights faces government appeal",
-  context: "The landmark 2024 Federal Court ruling granting Malaysian mothers equal rights to confer citizenship on overseas-born children was appealed by the government.",
+  id: "1325", published: true, opinionShift: 60, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Maternal Citizenship Amendment Passed in 2024 — March 2025 Settlement Closed the Pre-Amendment Gap",
+  context: "Parliament passed the Constitution (Amendment) Bill 2024 in Oct-Dec 2024 enabling Malaysian mothers' overseas-born children to acquire citizenship. A March 2025 Federal Court consent order covered pre-amendment cases.",
   stageScores: { pa: 85, ba: 73, fc: 87, af: 70, ct: 61, sr: 80 }, finalScore: 79.6,
   cards: [
-    { t: "hook", big: "Government appeals Suriani ruling on equal maternal citizenship rights", sub: "Victory for 1,800 affected mothers now threatened by government challenge" },
-    { t: "fact", big: "Federal Constitution Second Schedule Section 1(b) grants citizenship through fathers only", sub: "Court interpreted 'father' to include 'mother' under Article 8 gender equality", lens: "Legal" },
-    { t: "fact", big: "CEDAW Article 9(2) grants women equal rights with men regarding children's nationality", sub: "Malaysia's CEDAW reservation on nationality withdrawn in 2010", lens: "Rights" },
-    { t: "fact", big: "1,800 children of Malaysian mothers born overseas affected by constitutional gap", sub: "Families separated by citizenship bureaucracy while appeals proceed", lens: "Social" },
-    { t: "reframe", big: "Appealing gender equality in citizenship rights contradicts constitutional guarantees", sub: "" },
-    { t: "analogy", big: "Like winning a court case and then watching the other side ask the same judge to take it back — the right was established, but the fight continues", sub: "Government appeal against maternal citizenship equality contradicts its own stated commitments to gender parity" },
-    { t: "view", big: "Family Frontiers led campaign that generated 56,000 petition signatures by 2024", sub: "" },
+    { t: "hook", big: "Maternal citizenship is now in the Constitution — but pre-2024 children needed a separate Federal Court settlement to be covered.", sub: "Suriani Kempe v Kerajaan Malaysia ran from 2020 to 2025. The legislative fix arrived in October-December 2024." },
+    { t: "fact", big: "The Dewan Rakyat passed the Constitution (Amendment) Bill 2024 on 17 October 2024; the Dewan Negara followed on 3 December 2024.", sub: "The amendment enables Malaysian mothers' overseas-born children to acquire citizenship by operation of law going forward.", lens: "Legal" },
+    { t: "fact", big: "On 10 March 2025, a five-member Federal Court bench endorsed a consent order between Family Frontiers and the government for pre-amendment cases.", sub: "Children under 18 born overseas to Malaysian mothers and foreign fathers before the amendment can now apply for citizenship under Article 15(2).", lens: "Rights" },
+    { t: "fact", big: "The settlement does not address every gap raised in the campaign — including some categories of stateless children, foundling-status disputes, and adult children.", sub: "Family Frontiers and other advocacy groups continue to press for residual reforms.", lens: "Social" },
+    { t: "reframe", big: "The story is no longer 'will the government recognise mothers' — it is 'which residual gaps remain after the legislative and judicial fixes settled the main case'.", sub: "" },
+    { t: "view", big: "The amendment + March 2025 settlement closes the central injustice. The remaining work is on the cases the headline reform did not touch.", sub: "" },
   ]
 },
 {
@@ -9529,19 +9528,19 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1618", published: true, opinionShift: 90, status: "new", edition: 1,
-  headline: "Islamic State Debate Returns as PAS Governs 6 States",
-  context: "With PAS governing or co-governing 6 states after GE15, the Islamic state debate has re-emerged, with 3 states tabling Shariah-expansion bills in 2025.",
+  id: "1618", published: true, opinionShift: 80, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Islamic-State Debate Returns as PAS Anchors PN State Governments in Northern Malaysia",
+  context: "PAS directly governs Kelantan, Terengganu and Kedah, and anchors the PN coalition holding Perlis. Several state assemblies have tabled Shariah-jurisdiction expansion bills.",
   related: ["1960"],
   stageScores: { pa: 90, ba: 77, fc: 92, af: 73, ct: 62, sr: 85 }, finalScore: 80.6,
   cards: [
-    { t: "hook", big: "PAS governs or co-governs 6 Malaysian states.", sub: "3 states tabled bills in 2025 expanding Shariah court jurisdiction beyond current constitutional limits." },
-    { t: "fact", big: "The Federal Constitution limits Shariah courts to matters in the State List.", sub: "Proposed expansions in Kelantan, Terengganu, and Kedah would cover crimes currently under federal jurisdiction.", lens: "Legal" },
-    { t: "fact", big: "The Federal Court ruled in 2021 that Shariah law cannot override civil law.", sub: "State bills that contradict this ruling face constitutional challenge — but must first be enacted and contested.", lens: "Governance" },
-    { t: "fact", big: "62% of Malay-Muslims support 'some form of Islamic governance' in surveys.", sub: "But only 18% support full hudud implementation. The gap between 'Islamic values' and 'Islamic state' is 44 points.", lens: "Social" },
-    { t: "reframe", big: "The debate frames a binary — secular or Islamic. 62% of Malay-Muslims want neither extreme. The middle ground has no champion.", sub: "" },
-    { t: "analogy", big: "Like asking a country to choose between two rooms in a house that has 15 — the binary framing erases the space where most people actually live", sub: "62% of Malay-Muslims reject both extremes, but no political party represents the constitutional middle ground" },
-    { t: "view", big: "Malaysia's constitution already accommodates Islamic law within bounds. The real debate is not Islam versus secularism, but the scope and limits of dual jurisdiction.", sub: "" },
+    { t: "hook", big: "PAS controls Kelantan, Terengganu and Kedah and anchors PN's Perlis state government — the Islamic-state debate is back on the agenda.", sub: "Northern state assemblies have tabled bills expanding Shariah court jurisdiction. The Federal Court continues to police the line." },
+    { t: "fact", big: "The Federal Constitution limits Shariah courts to matters in the State List — primarily personal and family law.", sub: "Proposed expansions in Kelantan, Terengganu and Kedah would touch areas adjacent to federal criminal jurisdiction.", lens: "Legal" },
+    { t: "fact", big: "Federal Court rulings in recent years have repeatedly affirmed that civil law prevails where state Shariah enactments overreach the State List.", sub: "Cases challenging state enactments that touch federal subjects have generally been struck down on constitutional grounds.", lens: "Governance" },
+    { t: "fact", big: "Malay-Muslim attitudes on Islamic governance are not monolithic — the gap between 'Islamic values' and 'full hudud implementation' is wide in survey data.", sub: "Polling consistently shows broad sympathy for Islamic principles in public life and much narrower support for the strict criminal-law version.", lens: "Social" },
+    { t: "reframe", big: "The debate is framed as secular-versus-Islamic. Most Malay-Muslims want neither extreme. The middle ground has no political champion.", sub: "" },
+    { t: "analogy", big: "Like asking a country to choose between two rooms in a house that has 15 — the binary framing erases the space where most people actually live.", sub: "The constitutional middle ground is where most voters sit, and where no party currently camps." },
+    { t: "view", big: "The constitution already accommodates Islamic law within limits. The real debate is the scope of dual jurisdiction, and who decides where the line falls.", sub: "" },
   ]
 },
 {
