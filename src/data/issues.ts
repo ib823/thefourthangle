@@ -290,19 +290,19 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0146", published: true, opinionShift: 78, status: "new", edition: 1,
-    headline: "2.5 Million Workers With Zero Safety Net",
-    context: "DOSM estimates 2.5 million gig and informal workers lack EPF, SOCSO, or EIS coverage, while Parliament debates a voluntary opt-in framework.",
+    id: "0146", published: true, opinionShift: 72, status: "updated", edition: 2, sourceDate: "2026-04-08",
+    headline: "Gig Workers Got SOCSO in 2025 — Retirement Floor Still Missing",
+    context: "The Gig Workers Bill 2025 brings ~1.2 million platform riders into SOCSO accident and disability coverage for the first time. EPF retirement contributions, sick leave, and broader informal-sector coverage remain outside the framework.",
     stageScores: { pa: 82, ba: 70, fc: 84, af: 60, ct: 49, sr: 76 },
     finalScore: 72.1,
     cards: [
-      { t: "hook", big: "No EPF. No SOCSO. No sick leave. No floor.", sub: "Grab drivers, Foodpanda riders, Shopee freelancers — 2.5 million people outside the system." },
-      { t: "fact", big: "Voluntary opt-in schemes achieve 8–12% uptake globally.", sub: "Malaysia's i-Saraan voluntary EPF programme: 6% take-up after five years.", lens: "Economic" },
+      { t: "hook", big: "Gig workers got SOCSO accident cover in 2025 — but still no retirement floor.", sub: "The Gig Workers Bill 2025 brings ~1.2 million riders into SOCSO accident protection. EPF retirement coverage and sick leave remain outside the framework." },
+      { t: "fact", big: "Voluntary opt-in schemes typically struggle to reach the workers most exposed to income shocks.", sub: "Malaysia's i-Saraan voluntary EPF programme covered 10.7% of self-employed workers in 2022, eight years after launch.", lens: "Economic" },
       { t: "fact", big: "Platform companies are not legally employers under the Employment Act.", sub: "The 2022 amendment excluded app-based engagement from the employer definition.", lens: "Legal" },
-      { t: "fact", big: "One workplace injury costs the average rider 14 months of income.", sub: "Without SOCSO, medical costs come from savings that do not exist.", lens: "Social" },
-      { t: "reframe", big: "Voluntary protection for involuntary risk is not protection.", sub: "The worker cannot opt out of injury. Why can the platform opt out of coverage?" },
-      { t: "analogy", big: "Like building a house with no insurance — everything works until the first storm, and then you lose everything", sub: "Voluntary opt-in protection means the most vulnerable workers are the least likely to enroll" },
-      { t: "view", big: "The Employment Act was written for factories. The economy moved. The law did not.", sub: "" },
+      { t: "fact", big: "Accident SOCSO is mandatory under the new bill; medical leave and retirement remain unprotected.", sub: "The first phase covers workplace injury and disability. Income smoothing during illness, and any retirement floor, fall outside the scheme.", lens: "Social" },
+      { t: "reframe", big: "Accident coverage closes the cheapest gap. The expensive gaps — retirement, illness, income volatility — remain unaddressed.", sub: "" },
+      { t: "analogy", big: "Like fitting seatbelts but not building roads — the protection is real, the missing infrastructure is bigger.", sub: "Workplace accidents are the easiest risk to insure. Long-tail risks like outliving savings are the hardest, and the framework does not touch them." },
+      { t: "view", big: "The Employment Act was written for factories. The 2025 bill is the first real adaptation. It is a floor, not a ceiling.", sub: "" },
     ]
   },
   {
@@ -655,7 +655,7 @@ export const ISSUES: Issue[] = [
     ]
   },
   {
-    id: "0170", published: true, opinionShift: 85, status: "new", edition: 1,
+    id: "0170", published: false, opinionShift: 85, status: null, edition: 1,
     headline: "The Top 20% Own Nearly Everything",
     context: "DOSM's 2023 Household Income Survey shows the top 20% of Malaysian households control approximately 70% of national wealth while the bottom 40% hold under 8%.",
     stageScores: { pa: 86, ba: 68, fc: 88, af: 60, ct: 44, sr: 76 },
@@ -1434,7 +1434,7 @@ export const ISSUES: Issue[] = [
   stageScores: { pa: 86, ba: 42, fc: 54, af: 62, ct: 48, sr: 76 }, finalScore: 61.3,
   related: ["1971", "1580"],
   cards: [
-    { t: "hook", big: "42 people dead in landslides linked to EIA bypass — the mechanism is constitutional and most states refuse the reform that would fix it", sub: "DOE rejected Tanjung Bungah; 11 died. Batang Kali campsite was in a No-Go Area; 31 died. Parliament's 2022 NFA reforms have been adopted only by Perlis and FT." },
+    { t: "hook", big: "42 died at sites where EIA rules were overridden — the mechanism is constitutional and most states refuse the reform that would fix it", sub: "DOE rejected Tanjung Bungah; 11 died. Batang Kali campsite was in a No-Go Area; 31 died. Parliament's 2022 NFA reforms have been adopted only by Perlis and FT." },
     { t: "fact", big: "The word 'environment' is absent from the Federal Constitution — DOE can object but states can proceed regardless", sub: "NFA enacted under Article 76(1)(b) to promote uniformity but states must voluntarily adopt under Article 76(3). Planning authorities can and do override DOE rejections.", lens: "Legal" },
     { t: "fact", big: "Satellite forest-loss estimates far exceed official figures — and Johor's largest excision was carried out secretly", sub: "15,011 ha excised in 2014; state forestry couldn't justify it to auditors. Kedah logs Ulu Muda despite federal ban — it supplies 80% of Penang's water.", lens: "Environmental" },
     { t: "fact", big: "States resist NFA reforms because land conversion generates revenue that federal transfers don't replace", sub: "Pahang's bauxite boom: no EIA, RM46.7M royalties, 15km coastline contaminated. The pattern crosses party lines. The 42 dead were overwhelmingly low-income and migrant workers.", lens: "Governance" },
@@ -3502,18 +3502,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1190", published: true, opinionShift: 59, status: null, edition: 1,
-  headline: "EPF Account 3 Withdrawals Hit RM12B in First 8 Months",
-  context: "The new EPF Account 3 flexible withdrawal facility saw RM12 billion withdrawn in its first 8 months since April 2025, with 6.2 million members accessing funds primarily for debt repayment and daily expenses rather than emergencies.",
+  id: "1190", published: true, opinionShift: 59, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "EPF Flexible Account 3 Withdrawals Reach RM14.79B in 15 Months",
+  context: "The Ministry of Finance reported that RM14.79 billion had been withdrawn from EPF Flexible Account 3 by 4.63 million members as of August 2025 — about 35% of EPF's 13.2 million members under 55 — since the facility launched in May 2024.",
   stageScores: { pa: 85, ba: 76, fc: 85, af: 69, ct: 57, sr: 79 }, finalScore: 75.2,
   cards: [
-    { t: "hook", big: "RM12 billion drained from EPF Account 3 in 8 months — 6.2 million Malaysians raiding retirement savings for current expenses", sub: "Average withdrawal of RM1,935 suggests most members emptied their Account 3 balance completely" },
-    { t: "fact", big: "Post-pandemic EPF withdrawals now total RM157 billion since 2020 — permanently reducing compound growth on retirement savings", sub: "A RM2,000 withdrawal at age 30 costs RM14,200 in retirement wealth at age 60 at 5% compound growth", lens: "Economic" },
-    { t: "fact", big: "72% of withdrawals used for debt repayment and daily expenses — not the emergency buffer the facility was designed for", sub: "Members earning below RM3,000 withdrew at 3x the rate of those earning above RM8,000 — desperation, not choice", lens: "Social" },
-    { t: "fact", big: "EPF board approved Account 3 under political pressure despite internal projections showing RM45 billion retirement adequacy impact", sub: "No independent retirement security assessment was published before the policy launch — decision made in cabinet, not by actuaries", lens: "Governance" },
-    { t: "reframe", big: "Calling it 'flexible savings' doesn't change the math — every ringgit withdrawn today is RM7 lost at retirement", sub: "" },
-    { t: "analogy", big: "Like eating your seed corn in a drought — it solves today's hunger but guarantees next year's famine", sub: "Every ringgit withdrawn from EPF today compounds into RM7 lost at retirement age" },
-    { t: "view", big: "Should EPF Account 3 withdrawals require proof of genuine emergency rather than unconditional access?", sub: "" }
+    { t: "hook", big: "RM14.79 billion withdrawn from EPF Flexible Account in 15 months — 4.63 million members accessing retirement savings for current expenses", sub: "Account 3 launched May 2024 as a permanent flexible-withdrawal facility. By August 2025 it had been used by 35% of all EPF members under age 55." },
+    { t: "fact", big: "Post-pandemic EPF withdrawal facilities have permanently reduced the compound growth base for millions of retirement accounts.", sub: "The 2020-2022 special withdrawals (i-Lestari, i-Sinar, i-Citra) plus Flexible Account 3 collectively pulled tens of billions from members' long-term savings.", lens: "Economic" },
+    { t: "fact", big: "Account 3 was framed as an emergency facility — but its design allows withdrawal at any time, for any reason, with no eligibility test.", sub: "Members on the lowest incomes use the facility most heavily; Bank Negara has separately warned that household-debt-to-disposable-income remains elevated.", lens: "Social" },
+    { t: "fact", big: "EPF members aged 55 with savings below the RM240,000 basic-savings target remain the majority — Account 3 withdrawals add to that gap.", sub: "Around 36% of active formal members met the RM240,000 basic savings benchmark in 2024 per EPF; the new RIA framework targets RM390,000 as the new basic floor.", lens: "Governance" },
+    { t: "reframe", big: "Calling it 'flexible savings' does not change the math — every ringgit withdrawn today compounds into a larger gap at retirement.", sub: "" },
+    { t: "analogy", big: "Like eating your seed corn in a drought — it solves today's hunger but guarantees next year's famine.", sub: "Every ringgit withdrawn from EPF today compounds into a larger gap at retirement age." },
+    { t: "view", big: "Account 3 may help short-term liquidity, but its scale signals a household-finance crisis that policy should address upstream of EPF — not by raiding it.", sub: "" }
   ]
 },
 {
@@ -4590,19 +4590,19 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1267", published: true, opinionShift: 79, status: null, edition: 1,
-  headline: "Migrant worker exploitation affects 2.1 million documented workers",
-  context: "Malaysia's 2.1 million documented migrant workers face systemic rights violations including passport confiscation and wage theft, per a 2025 ILO report.",
+  id: "1267", published: true, opinionShift: 75, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Malaysia Has 2.5 Million Documented Migrant Workers — and Persistent Tier 2 Trafficking Concerns",
+  context: "ILO data placed registered migrant workers in Malaysia at ~2.5 million in August 2024. The US 2025 TIP Report kept Malaysia at Tier 2, citing forced-labour concerns in palm oil and gloves.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 81.4,
   related: ["1966"],
   cards: [
-    { t: "hook", big: "2.1 million documented migrant workers face systemic exploitation in Malaysia", sub: "ILO found 68% experienced at least one forced labour indicator" },
-    { t: "fact", big: "Employment Act 1955 amendments in 2022 extended protections to foreign workers", sub: "Enforcement remains weak with only 23 prosecutions for worker abuse in 2024", lens: "Legal" },
-    { t: "fact", big: "US TIP Report placed Malaysia on Tier 2 Watch List for 3 consecutive years", sub: "Passport confiscation affects an estimated 1.4 million workers", lens: "Rights" },
-    { t: "fact", big: "Migrant workers contribute RM48 billion annually to Malaysian GDP", sub: "Despite economic contribution, 72% report discrimination in daily life", lens: "Economic" },
-    { t: "reframe", big: "A RM48 billion contribution deserves protection, not exploitation", sub: "" },
-    { t: "analogy", big: "Like a factory that depends on its workers for 15% of output but considers them disposable parts — essential enough to exploit, not enough to protect", sub: "RM48 billion in economic contribution buys labour access but not basic workplace protections" },
-    { t: "view", big: "Government signed MOU with Bangladesh on ethical recruitment in January 2025", sub: "" },
+    { t: "hook", big: "Malaysia hosts ~2.5 million documented migrant workers — and the US TIP Report keeps flagging the same forced-labour patterns.", sub: "ILO 2024 figure. Malaysia retained Tier 2 status in the 2025 TIP Report, with the State Department citing weak prosecution in palm oil and disposable glove manufacturing." },
+    { t: "fact", big: "Employment Act 1955 amendments in 2022 extended core protections to foreign workers — enforcement remains the gap.", sub: "Forced-labour indicators (passport confiscation, wage theft, debt bondage) appear across sectors. Enforcement targets individual workplaces, not systemic chains.", lens: "Legal" },
+    { t: "fact", big: "The US TIP Report's Tier 2 status reflects increasing efforts but unmet minimum standards in several key areas.", sub: "The 2025 report noted fewer trafficker convictions and no labour-trafficking prosecutions in palm oil or glove manufacturing despite ongoing reports.", lens: "Rights" },
+    { t: "fact", big: "Migrant workers anchor palm oil, electronics assembly, construction and plantations — the export base.", sub: "Their total economic contribution is not aggregated in any single published figure. Main source countries: Bangladesh, Indonesia, Nepal, Myanmar.", lens: "Economic" },
+    { t: "reframe", big: "Tier 2 is not a passing grade — it is a multi-year warning that the system documented in successive TIP reports has not been structurally fixed.", sub: "" },
+    { t: "analogy", big: "Like a factory that treats its workers' welfare as a compliance line item — essential to hire, not to protect.", sub: "Documentation buys access to labour but not enforcement of the protections already in law." },
+    { t: "view", big: "MOUs and the 2022 Employment Act amendments are necessary but not sufficient. Tier 1 requires sectoral prosecutions in palm oil and gloves.", sub: "" },
   ]
 },
 {
@@ -11398,17 +11398,17 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1751", published: true, opinionShift: 79, status: null, edition: 1,
-  headline: "MRT3 Circle Line Budget Balloons to RM45 Billion",
-  context: "MRT3 Circle Line cost increased from RM31 billion to RM45 billion in latest revision presented to Cabinet in February 2026.",
+  id: "1751", published: true, opinionShift: 70, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "MRT3 Circle Line Capped at RM45 Billion — Down from RM68 Billion in 2018",
+  context: "MRT3 received final approval in 2025 with a budget cap of approximately RM45 billion — about RM31 billion for construction and RM6-7 billion for land acquisition. The 2018 estimate had been RM68 billion before cancellation and revival.",
   stageScores: { pa: 76, ba: 70, fc: 83, af: 64, ct: 72, sr: 87 }, finalScore: 68.7,
   cards: [
-    { t: "hook", big: "MRT3 Circle Line cost jumps 45% from RM31 billion to RM45 billion", sub: "Latest revision makes it Malaysia most expensive single infrastructure project" },
-    { t: "fact", big: "Original 2017 estimate was RM22 billion before cancellation and revival in 2023", sub: "Project underwent 4 major cost revisions in under a decade", lens: "Social" },
-    { t: "fact", big: "40km elevated circle connecting 26 stations now projected for 2033 completion", sub: "Timeline slipped 3 years from original 2030 target due to land acquisition", lens: "Rights" },
-    { t: "fact", big: "Cost per km at RM1.1 billion exceeds Singapore MRT at RM850 million per km", sub: "PAC demanded independent audit of engineering and procurement cost assumptions", lens: "Historical" },
-    { t: "reframe", big: "Cost escalation tests whether mega-project governance can control spending", sub: "" },
-    { t: "view", big: "RM45 billion for MRT3 — cost overruns reward contractors while taxpayers absorb the risk premium.", sub: "" },
+    { t: "hook", big: "MRT3 Circle Line capped at RM45 billion — reduced from the RM68 billion 2018 estimate before cancellation and revival.", sub: "Construction allocation about RM31 billion plus RM6-7 billion for land acquisition. Final approval received in 2025." },
+    { t: "fact", big: "The project was cancelled in 2018 over cost concerns and revived in 2023 — every revival round adds review layers without binding caps.", sub: "Land acquisition is targeted for completion in 2026; construction expected from 2027.", lens: "Social" },
+    { t: "fact", big: "51.6km elevated circle with 10 interchange stations linking existing MRT, LRT, KTM and Monorail lines.", sub: "Designed to close the Klang Valley rail loop. Operational target: 2032.", lens: "Governance" },
+    { t: "fact", big: "Even at the reduced cap, MRT3 remains Malaysia's largest single rail project — fiscal scrutiny continues at every revision.", sub: "Independent audit of engineering and procurement cost assumptions has been called for at multiple cost-revision rounds.", lens: "Economic" },
+    { t: "reframe", big: "The story is not 'budget ballooning' — it is whether even the reduced cap holds through construction.", sub: "" },
+    { t: "view", big: "Reducing the headline figure does not eliminate cost-overrun risk. The discipline test is whether 2027-2032 construction stays within RM45 billion.", sub: "" },
   ]
 },
 {
@@ -12154,18 +12154,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1805", published: true, opinionShift: 83, status: null, edition: 1,
-  headline: "Abandoned LCS Programme Wastes RM6.1 Billion on Zero Ships",
-  context: "Littoral Combat Ship programme delivered 0 of 6 contracted vessels after RM6.1 billion in payments to Boustead Naval Shipyard.",
+  id: "1805", published: true, opinionShift: 78, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "LCS Cost Now RM11.2 Billion — First Ship in Sea Trials, Programme Cut From 6 to 5",
+  context: "The Littoral Combat Ship programme's total cost rose from RM6 billion to RM11.22 billion. Maharaja Lela began sea trials in January 2026; first delivery is now scheduled for December 2026. The programme was reduced from six ships to five.",
   stageScores: { pa: 76, ba: 61, fc: 83, af: 56, ct: 45, sr: 69 }, finalScore: 77.8,
   related: ["1962"],
   cards: [
-    { t: "hook", big: "LCS programme delivered zero ships after RM6.1 billion spent", sub: "Malaysia costliest defence procurement failure now under criminal investigation" },
-    { t: "fact", big: "First vessel was 60% complete when work halted in 2022 due to fund depletion", sub: "PAC found RM1.4 billion diverted to non-LCS activities within the shipyard", lens: "Political" },
-    { t: "fact", big: "6 admirals and senior officials referred to MACC for investigation", sub: "Boustead directors face charges of criminal breach of trust in ongoing trial", lens: "Social" },
-    { t: "fact", big: "Navy has zero new combat vessels while regional neighbours added 28 since 2020", sub: "Malaysian maritime patrol capability gap widened critically during programme failure", lens: "Critical" },
-    { t: "reframe", big: "LCS failure tests whether defence procurement accountability can be enforced", sub: "" },
-    { t: "view", big: "RM6.1 billion spent, zero ships delivered. LCS is Malaysia's costliest procurement failure to date.", sub: "" },
+    { t: "hook", big: "LCS cost has reached RM11.22 billion — and delivery is finally arriving, more than a decade late.", sub: "Maharaja Lela began sea trials on 28 January 2026. First delivery is scheduled for December 2026. The programme was cut from six ships to five." },
+    { t: "fact", big: "Original 2011 budget was RM6 billion; the ceiling escalated to RM9 billion late that year and finally to RM11.22 billion.", sub: "PAC's 2022 report documented severe mismanagement and financial issues at Boustead Naval Shipyard before MOF Inc acquired and renamed it Lumut Naval Shipyard in 2024.", lens: "Political" },
+    { t: "fact", big: "Multiple senior officers and former Boustead directors have faced MACC investigation and criminal proceedings.", sub: "The 2022 PAC findings and subsequent referrals form the basis for ongoing accountability cases.", lens: "Governance" },
+    { t: "fact", big: "Even with first delivery imminent, the Royal Malaysian Navy has spent more than a decade waiting for vessels Singapore and Indonesia commissioned years ago.", sub: "The capability gap during the delay forms the most damaging legacy of the procurement failure.", lens: "Security" },
+    { t: "reframe", big: "The programme is no longer 'zero ships' — it is 'first ship 15 years late at twice the budget'. The accountability test is whether the 2022 PAC findings produce convictions.", sub: "" },
+    { t: "view", big: "RM11.22 billion and 15 years for the first hull is the real benchmark — not a story of total failure, but of a procurement system that delivers eventually at unacceptable cost.", sub: "" },
   ]
 },
 {
@@ -13023,17 +13023,17 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1867", published: true, opinionShift: 77, status: null, edition: 1,
-  headline: "MACC Investigation Into 1MDB Asset Recovery Reaches RM12 Billion",
-  context: "MACC reported cumulative 1MDB-related asset recovery of RM12 billion by February 2026 against estimated total losses of RM30 billion.",
+  id: "1867", published: true, opinionShift: 65, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "1MDB Asset Recovery Has Reached Over RM20.7 Billion",
+  context: "The Ministry of Finance reported in October 2025 that Malaysia had recovered more than RM20.73 billion through settlements with financial institutions involved in the 1MDB scandal — substantially more than earlier official tallies suggested.",
   stageScores: { pa: 82, ba: 61, fc: 76, af: 80, ct: 66, sr: 88 }, finalScore: 78.1,
   cards: [
-    { t: "hook", big: "1MDB asset recovery reaches RM12 billion of estimated RM30 billion lost", sub: "Investigation entering 11th year with RM18 billion still unaccounted for" },
-    { t: "fact", big: "Goldman Sachs settlement of USD3.9 billion in 2020 was largest single recovery", sub: "Former PM Najib conviction upheld but SRC International case is RM42 million of total", lens: "Technology" },
-    { t: "fact", big: "Property seizures across 6 countries yielded RM2.8 billion in assets", sub: "Yacht Equanimity sold for USD126 million returned to Malaysian government", lens: "Legal" },
-    { t: "fact", big: "Remaining RM18 billion involves assets in 12 jurisdictions with ongoing litigation", sub: "Some recovery blocked by sovereign immunity and statute of limitation issues", lens: "Governance" },
-    { t: "reframe", big: "1MDB recovery tests whether accountability mechanisms can retrieve stolen public wealth", sub: "" },
-    { t: "view", big: "RM12 billion in 1MDB asset recovery. The investigation succeeds only if recovered assets reach public accounts.", sub: "" },
+    { t: "hook", big: "1MDB asset recovery has surpassed RM20.7 billion — a decade in, the headline number is now bigger than most people remember.", sub: "MOF figure as of October 2025. The Goldman Sachs 2020 settlement alone returned USD3.9 billion to Malaysia." },
+    { t: "fact", big: "Goldman Sachs paid USD3.9 billion in 2020 — the largest single 1MDB-related recovery to date.", sub: "The settlement included a USD2.5 billion cash payment plus a guarantee to help recover at least USD1.4 billion in misappropriated assets.", lens: "Legal" },
+    { t: "fact", big: "Recovery flows from settlements with financial institutions, asset seizures across multiple jurisdictions, and criminal prosecutions.", sub: "The US Department of Justice has separately recovered and returned about USD1.4 billion in assets to Malaysia by mid-2024.", lens: "Governance" },
+    { t: "fact", big: "Total scandal losses remain disputed — figures cited range from USD4.5 billion (DOJ) up to RM30+ billion in broader Malaysian estimates.", sub: "Recovery comparisons depend on which loss baseline is used. Multiple jurisdictions have ongoing litigation that may produce further recoveries.", lens: "Economic" },
+    { t: "reframe", big: "The recovery story is no longer 'how little came back' — it is whether the recovered funds reach public accounts and reform follows.", sub: "" },
+    { t: "view", big: "RM20.7 billion is the largest financial-crime recovery in Malaysian history. The remaining test is whether the institutions that enabled the scandal have been structurally changed.", sub: "" },
   ]
 },
 {
@@ -14331,7 +14331,7 @@ export const ISSUES: Issue[] = [
     cards: [
       { t: "hook", big: "A drunk, drugged driver killed a father of three. Politicians demanded the death penalty. The penalty is already 10-15 years.", sub: "On 29 March 2026 in Klang, a driver positive for alcohol and drugs struck motorcyclist Amirul Hafiz Omar, 33, head-on. He worked two jobs to support three children." },
       { t: "fact", big: "149 DUI crash cases prosecuted in three years. 1,261 DUI convictions in one year. Different laws, same silence.", sub: "149 covers Section 44 only (injury/death). The 1,261 spans all DUI sections. Malaysia publishes no data on breath tests administered or roadblocks conducted.", lens: "Governance" },
-      { t: "fact", big: "12 DUI fatalities per year — 0.2% of crashes. Testing is discretionary. The real number is unknown.", sub: "Police test on 'reasonable cause' only. In Australia, mandatory testing reveals alcohol in 25-30% of fatal crashes. Malaysia's 0.2% measures enforcement, not prevalence.", lens: "Legal" },
+      { t: "fact", big: "12 DUI fatalities per year — 0.2% of crashes. Testing is discretionary. The real number is unknown.", sub: "Police test on 'reasonable cause' only. Australia mandates blood-testing of all fatal-crash drivers; Malaysia does not. The 0.2% measures enforcement, not prevalence.", lens: "Legal" },
       { t: "fact", big: "4,340 motorcyclists killed in 2025. 13.7% of accidents, 66.4% of deaths. The gig economy's youngest workers on the deadliest vehicles.", sub: "73.98% of riders rely on it as main income. His widow is pursuing separate legal action. The MMA called for a victim compensation fund. None exists.", lens: "Social" },
       { t: "reframe", big: "Penalties already exist. The real question is whether Malaysia detects drunk drivers before they kill — and whether alcohol is even the main killer of motorcyclists.", sub: "" },
       { t: "view", big: "Deterrence requires detection. Compensation requires architecture. 4,340 motorcyclists died in 2025 — most sober, on roads not built for them, riding because they had no other way.", sub: "" },
@@ -14510,7 +14510,7 @@ export const ISSUES: Issue[] = [
     cards: [
       { t: "hook", big: "The vernacular school fight is stuck on unity vs culture — the courts settled the law, but parents keep leaving", sub: "The Federal Court refused leave to appeal in February 2024, preserving constitutionality. Yet the real drivers of school choice have little to do with heritage." },
       { t: "fact", big: "69% of middle-class Malay parents preferred SJKC for academic quality — but no data proves SJKC is actually better", sub: "An ISEAS survey of 928 Malay respondents found quality, discipline and location drove the choice. SJKC and SK share the same syllabus — the gap is perceived, not proven.", lens: "Social" },
-      { t: "fact", big: "Tamil schools are collapsing: 37 have 10 or fewer students, and 67% sit in rural areas the Indian community has left behind", sub: "SJKT enrolment fell from over 100,000 in 2011 to 72,080 by 2025. Funding fluctuated from RM50M (2020) to RM19M (2025). No Tamil secondary schools exist.", lens: "Economic" },
+      { t: "fact", big: "Tamil schools are collapsing: 37 have 10 or fewer students, and 67% sit in rural areas the Indian community has left behind", sub: "SJKT enrolment fell from over 100,000 in 2011 to 72,080 by 2025. Funding peaked at RM50M in 2020 and has not been restored to that level. No Tamil secondary schools exist.", lens: "Economic" },
       { t: "fact", big: "Malaysian enrolment in international schools rose 34% in five years — class is reshaping education faster than ethnicity", sub: "MOE: 88,951 citizens in international schools by 2024. The deeper class divide is the RM7B tuition industry that stratifies outcomes within public schools.", lens: "Political" },
       { t: "reframe", big: "The real question: what specifically is driving parents away — governance rigidity, curriculum imbalance, or discipline failures?", sub: "" },
       { t: "view", big: "Stop debating whether vernacular schools should exist — start asking why national schools keep losing the families they serve", sub: "" }
