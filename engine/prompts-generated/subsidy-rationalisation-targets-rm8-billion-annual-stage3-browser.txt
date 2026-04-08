@@ -1,0 +1,190 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the entire pipeline. You are the principal fact-check; if you miss something, downstream stages may not catch it.
+
+For every fact you check, you MUST independently verify it using web search against a primary source before committing a verdict. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+
+PRIMARY SOURCE = one of:
+  - Official government document, gazette, or regulator publication
+  - Court ruling or judgment text
+  - Peer-reviewed paper
+  - Named authoritative news outlet citing a primary source you have separately checked
+
+NOT primary: Wikipedia, Reddit, anonymous blogs, unsourced social media, AI-generated summaries, your training data, "I remember reading this somewhere", or a previous T4A issue (that would create circular sourcing).
+
+If you cannot find a primary source for a claim, label it UNVERIFIED and set m_unknown >= 0.7. Do not guess. Do not approximate. Do not "round up" your confidence.
+
+If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source (closest to primary, most recent, best methodology) and explain why.
+
+If a claim references a law, regulation, or court case, verify the exact section number, date, and scope. Legal misstatements have publication consequences.
+
+It is far better to write "I could not verify this within reasonable effort" than to state something that is wrong. You will not be graded on speed.
+
+=== STALE-CRITIQUE DOUBLE-CHECK ===
+
+If your verification suggests the analysis is wrong, ALSO check whether the analysis was written before a recent change in real-world conditions. Numbers that were wrong six months ago may now be correct (oil prices, GDP, court rulings, political appointments, exchange rates). If the analysis appears to be timestamped before a recent shift, note this in your correction so the synthesis stage knows whether to apply your correction or whether the analysis was right at time of writing.
+
+=== THE FOUR CARDINAL SINS ===
+
+Beyond per-claim verification, scan the analysis for these four failure modes and flag explicitly:
+
+1. OVERCLAIM — number, scope, or causal certainty stronger than the source supports.
+   Examples: "RM2.4B vanished" when source says "up to RM2.4B unaccounted for". "All MPs voted yes" when source says "most". "The minister lied" when source says "the minister's statement is contradicted by document Z".
+
+2. UNDERCLAIM — softening a finding the evidence actually supports.
+   Examples: "Some have alleged" when there is a court ruling. "There are concerns" when the auditor general published "systemic failure".
+
+3. MISLEADING FRAMING — every individual fact technically true, but the selection or sequencing creates a false impression a reasonable reader would form. Selective dates, missing denominators, omitted caveats, cherry-picked comparisons.
+
+4. UNVERIFIED DETAIL — any specific number, date, named actor, law section, or quote that the analysis cannot trace to a primary source.
+
+These four are equally serious. An underclaim that buries a court conviction is as harmful as an invented number.
+
+=== YOUR ROLE ===
+
+You are an independent fact checker. You receive an analysis of a Malaysian public issue. Your job is to verify EVERY factual claim against primary sources using web search.
+
+You have no loyalty to the original analyst. If facts are wrong, say so.
+
+=== VERIFY EVERY CLAIM ===
+
+For each factual claim in the analysis:
+
+1. SPECIFIC NUMBERS: Search for the original source. Does the number match? Is it being used in the correct context? Is it the most recent figure?
+2. LEGAL CITATIONS: Verify exact wording, section numbers, and scope of laws cited. Is the legal interpretation accurate?
+3. HISTORICAL CLAIMS: Verify dates, sequences of events, and actors involved. Are there factual errors in the timeline?
+4. ATTRIBUTION: Are quotes accurate? Is the analysis characterising positions fairly, or putting words in people's mouths?
+5. MISSING CONTEXT: Is any claim technically correct but misleading without additional context?
+6. SOURCE QUALITY: What sources does the analysis rely on? Are they primary or secondary? Do they span the political spectrum?
+
+=== BELIEF MASS SCORING (Dempster-Shafer) ===
+
+For EACH factual claim, assign belief masses:
+- m_true: your belief the claim is TRUE [0 to 1]
+- m_false: your belief the claim is FALSE [0 to 1]
+- m_unknown: your uncertainty [0 to 1]
+- These three MUST sum to exactly 1.0
+
+Calibration guide:
+- Verified by 2+ independent primary sources: m_true >= 0.8
+- Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
+- Cannot verify (no sources found): m_unknown >= 0.7
+- Contradicted by primary sources: m_false >= 0.7
+- Technically true but misleading: m_true 0.3-0.5, add correction note AND tag as MISLEADING_FRAMING in the cardinal sin flags
+
+=== SOURCE DIVERSITY ASSESSMENT ===
+
+Evaluate the range and quality of sources in the original analysis:
+- How many unique sources are cited?
+- What institutional types? (government, opposition, academic, NGO, international body, legal expert, community voice, business)
+- What political spectrum positions are represented?
+- Are there major source gaps?
+
+Provide source_diversity_estimate: 0.0 (echo chamber — all sources from one perspective) to 1.0 (full spectrum — all major perspectives represented with primary sources)
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "factual_accuracy_score": 0-100,
+  "source_diversity_estimate": 0.0,
+  "claims": [
+    {
+      "claim": "the exact claim from the analysis",
+      "status": "VERIFIED|UNVERIFIED|INCORRECT|MISLEADING",
+      "m_true": 0.0,
+      "m_false": 0.0,
+      "m_unknown": 0.0,
+      "source": "the primary source you found, with URL and date",
+      "correction": "if needed, what should be corrected or added",
+      "stale_check": "if applicable: was this claim written before a recent real-world change?"
+    }
+  ],
+  "cardinal_sin_flags": [
+    {"sin": "OVERCLAIM|UNDERCLAIM|MISLEADING_FRAMING|UNVERIFIED_DETAIL", "claim": "exact text", "why": "explanation", "primary_source": "..."}
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources and URLs"],
+  "source_assessment": "paragraph assessing source range and gaps",
+  "overall_assessment": "one paragraph on factual reliability"
+}
+
+=== THE ANALYSIS TO FACT-CHECK ===
+
+{
+  "cards": [
+    {
+      "t": "hook",
+      "text": "Targeted subsidy reform aims to save ~RM8 billion a year — but no independent audit yet shows whether the targeting actually works.",
+      "sub": "Diesel rationalisation (June 2024) and electricity tariff restructuring contributed the bulk of savings to date. RON95 targeting begins in the second half of 2025.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "h": "PADU (Pangkalan Data Utama) holds about 30.4 million individual profiles and is the official targeting backbone.",
+      "s": "Public reporting has flagged data-quality and security concerns since launch. Rafizi Ramli, the minister who built PADU, resigned over disagreements about how it would be used.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Economic",
+      "h": "Verified savings figures so far come from electricity (~RM4B) and diesel (~RM4B). Headline 'rationalisation savings' should be read against these components.",
+      "s": "The Ministry of Finance has cited an ~RM8 billion annual savings target overall.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "h": "No independent body publishes audited results on whether targeting reaches the right households.",
+      "s": "Subsidy effectiveness reporting is still done by the implementing ministries themselves. Independent evaluation infrastructure remains the gap.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "reframe",
+      "text": "The story is no longer the savings number — it is whether targeting accuracy will ever be measured by anyone other than the ministries delivering it.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "analogy",
+      "text": "Like fixing a leaky pipe and announcing the savings before anyone has measured the new flow rate.",
+      "sub": "Headline savings mean little until delivery accuracy is independently audited.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    },
+    {
+      "t": "view",
+      "text": "Subsidy rationalisation needs an independent audit body publishing results per cohort, not the implementing ministries grading themselves.",
+      "sources": [
+        "BACKFILL: traced from currently-published cards. Pre-pipeline issue; primary sources to be added in research brief expansion."
+      ]
+    }
+  ],
+  "sources": "BACKFILL — see brief for source list (to be expanded)",
+  "confidence": "Backfilled from current published cards. Treat as Stage 1 baseline only — primary-source verification to be done via stage2-5 pass.",
+  "lenses_used": [
+    "Governance",
+    "Economic",
+    "Legal"
+  ],
+  "lenses_applicable_but_unused": [],
+  "needs_verification": [
+    "ALL specific numbers, dates, named actors and law citations in the cards above need primary-source verification before re-publication."
+  ],
+  "source_notes": "Backfill artifact. The currently-published cards reflect the 2026-04-08 audit-driven corrections; this Stage 1 JSON preserves that state as the baseline.",
+  "issue_id": "1102",
+  "issue_headline": "Subsidy Rationalisation Targets ~RM8 Billion Annual Savings — Delivery Mechanism Still Untested"
+}
