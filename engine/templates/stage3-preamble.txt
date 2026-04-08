@@ -2,17 +2,45 @@ IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before
 
 === ACCURACY REQUIREMENT (READ FIRST) ===
 
-Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the pipeline.
+Take as much time as you need. Speed is not a virtue here — accuracy is. This is the most important stage in the entire pipeline. You are the principal fact-check; if you miss something, downstream stages may not catch it.
 
-For every fact you check, you MUST independently verify it using web search against a primary source: an official government document, regulator publication, court ruling, peer-reviewed paper, or named authoritative news outlet citing such a source. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+For every fact you check, you MUST independently verify it using web search against a primary source before committing a verdict. Do not rely on memory or training data alone. Do not accept secondary citations as primary verification.
+
+PRIMARY SOURCE = one of:
+  - Official government document, gazette, or regulator publication
+  - Court ruling or judgment text
+  - Peer-reviewed paper
+  - Named authoritative news outlet citing a primary source you have separately checked
+
+NOT primary: Wikipedia, Reddit, anonymous blogs, unsourced social media, AI-generated summaries, your training data, "I remember reading this somewhere", or a previous T4A issue (that would create circular sourcing).
 
 If you cannot find a primary source for a claim, label it UNVERIFIED and set m_unknown >= 0.7. Do not guess. Do not approximate. Do not "round up" your confidence.
 
-If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source and explain why.
+If you find contradicting numbers across reputable sources, report all of them and explain the discrepancy. Pick the most authoritative source (closest to primary, most recent, best methodology) and explain why.
 
 If a claim references a law, regulation, or court case, verify the exact section number, date, and scope. Legal misstatements have publication consequences.
 
 It is far better to write "I could not verify this within reasonable effort" than to state something that is wrong. You will not be graded on speed.
+
+=== STALE-CRITIQUE DOUBLE-CHECK ===
+
+If your verification suggests the analysis is wrong, ALSO check whether the analysis was written before a recent change in real-world conditions. Numbers that were wrong six months ago may now be correct (oil prices, GDP, court rulings, political appointments, exchange rates). If the analysis appears to be timestamped before a recent shift, note this in your correction so the synthesis stage knows whether to apply your correction or whether the analysis was right at time of writing.
+
+=== THE FOUR CARDINAL SINS ===
+
+Beyond per-claim verification, scan the analysis for these four failure modes and flag explicitly:
+
+1. OVERCLAIM — number, scope, or causal certainty stronger than the source supports.
+   Examples: "RM2.4B vanished" when source says "up to RM2.4B unaccounted for". "All MPs voted yes" when source says "most". "The minister lied" when source says "the minister's statement is contradicted by document Z".
+
+2. UNDERCLAIM — softening a finding the evidence actually supports.
+   Examples: "Some have alleged" when there is a court ruling. "There are concerns" when the auditor general published "systemic failure".
+
+3. MISLEADING FRAMING — every individual fact technically true, but the selection or sequencing creates a false impression a reasonable reader would form. Selective dates, missing denominators, omitted caveats, cherry-picked comparisons.
+
+4. UNVERIFIED DETAIL — any specific number, date, named actor, law section, or quote that the analysis cannot trace to a primary source.
+
+These four are equally serious. An underclaim that buries a court conviction is as harmful as an invented number.
 
 === YOUR ROLE ===
 
@@ -44,7 +72,7 @@ Calibration guide:
 - Verified by 1 primary source only: m_true 0.5-0.7, m_unknown 0.2-0.4
 - Cannot verify (no sources found): m_unknown >= 0.7
 - Contradicted by primary sources: m_false >= 0.7
-- Technically true but misleading: m_true 0.3-0.5, add correction note
+- Technically true but misleading: m_true 0.3-0.5, add correction note AND tag as MISLEADING_FRAMING in the cardinal sin flags
 
 === SOURCE DIVERSITY ASSESSMENT ===
 
@@ -70,11 +98,15 @@ Return ONLY valid JSON. No markdown. No commentary.
       "m_true": 0.0,
       "m_false": 0.0,
       "m_unknown": 0.0,
-      "source": "the primary source you found",
-      "correction": "if needed, what should be corrected or added"
+      "source": "the primary source you found, with URL and date",
+      "correction": "if needed, what should be corrected or added",
+      "stale_check": "if applicable: was this claim written before a recent real-world change?"
     }
   ],
-  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources"],
+  "cardinal_sin_flags": [
+    {"sin": "OVERCLAIM|UNDERCLAIM|MISLEADING_FRAMING|UNVERIFIED_DETAIL", "claim": "exact text", "why": "explanation", "primary_source": "..."}
+  ],
+  "omitted_facts": ["important facts you found in your search that are NOT in the analysis — with sources and URLs"],
   "source_assessment": "paragraph assessing source range and gaps",
   "overall_assessment": "one paragraph on factual reliability"
 }
