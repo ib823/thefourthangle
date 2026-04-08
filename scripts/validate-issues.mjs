@@ -68,6 +68,35 @@ const LIMITS = {
   edition: { min: 1, max: 99 },
 };
 
+// ── Concreteness helpers (research: identifiable victim / Slovic psychic numbing) ──
+// A fact card is "concrete enough" if it contains ANY of:
+//   - a digit
+//   - a spelled-out number / quantifier
+//   - a proper noun (capitalized word that isn't sentence-initial)
+// This drastically reduces false positives vs a pure /\d/ check.
+const SPELLED_NUM = /\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozen|hundred|thousand|million|billion|trillion|RM|USD|MYR|first|second|third|fourth|fifth|half|quarter|both|all|none|every|each|several|many)\b/i;
+const SENTENCE_STARTERS = new Set([
+  'The','A','An','And','But','Or','If','When','Where','Why','How','What','Who',
+  'This','That','These','Those','Is','Are','Was','Were','Be','Been','Being',
+  'Has','Have','Had','Do','Does','Did','Will','Would','Could','Should','May',
+  'Might','Must','Can','Not','No','Yes','It','Its','Their','They','We','You',
+  'He','She','His','Her','Our','Your','My','To','From','For','With','Without',
+  'In','On','At','By','As','Of','About','After','Before','During','Under','Over',
+  'Through','Across','Between','Among','Then','Than','So','Such','While',
+  'Because','Since','Although','Even','Just','Only','Also','Now','Here','There',
+]);
+function hasProperNoun(text) {
+  const words = text.split(/\s+/);
+  for (let i = 1; i < words.length; i++) {
+    const w = words[i].replace(/[^a-zA-Z]/g, '');
+    if (w.length > 1 && /^[A-Z]/.test(w) && !SENTENCE_STARTERS.has(w)) return true;
+  }
+  return false;
+}
+function isConcrete(text) {
+  return /\d/.test(text) || SPELLED_NUM.test(text) || hasProperNoun(text);
+}
+
 // ── Collector ──
 const errors = [];
 const warnings = [];
@@ -294,11 +323,27 @@ for (const issue of issues) {
       } else if (!VALID_LENSES.includes(card.lens)) {
         err(id, `${cardLabel}.lens`, `Unknown lens: "${card.lens}" — valid: ${VALID_LENSES.join(', ')}`);
       }
+
+      // Concreteness floor — flag fact cards with NO digit, NO spelled-out number,
+      // and NO mid-sentence proper noun. Catches genuinely abstract drafts only.
+      // Refined from a pure /\d/ check (which had ~96% false positives on the
+      // existing corpus). See docs/research/bite-size-reading.md.
+      const factText = (card.big || '') + ' ' + (card.sub || '');
+      if (!isConcrete(factText)) {
+        warn(id, `${cardLabel}`, 'Fact card has no number, named actor, or spelled quantity — likely abstract. Add a concrete anchor (Slovic concreteness floor).');
+      }
     }
 
     // Lens should NOT be on non-fact cards
     if (card.t !== 'fact' && card.lens) {
       warn(id, `${cardLabel}.lens`, `Lens "${card.lens}" on non-fact card type "${card.t}" — will be ignored`);
+    }
+
+    // Reframe sub: empty or short button only. Long discursive subs dilute the
+    // aha spike (Kounios-Beeman). Threshold 80 chars: short punchlines (≤80) work
+    // as "buttons"; longer subs are evidence and belong on a fact card.
+    if (card.t === 'reframe' && card.sub && card.sub.trim().length > 80) {
+      warn(id, `${cardLabel}.sub`, `Reframe sub is ${card.sub.trim().length} chars — discursive subs dilute the insight. Compress to ≤80 chars (a button) or move the evidence to a fact card.`);
     }
   }
 
