@@ -68,17 +68,17 @@ These published issues have no brief, no stage outputs, no reader.json. They pre
 - **1227** — Political Appointees in GLCs Earn RM680M Combined
 - **1229** — Kampung Baru Master Redevelopment Still Stalled After 40 Years
 - **1239** — Richest 50 Malaysians' Wealth Equals Bottom 12 Million Citizens
-- **1241** — SOSMA detentions hit 5-year high in 2025
-- **1247** — Stateless children exceed 12,000 in Sabah alone
+- **1241** — Suaram: Up to 28% of SOSMA Detainees Released Without Charge, From Nearly 7,000 Arrests Since 2018
+- **1247** — SUHAKAM Estimates Half a Million to One Million Stateless Children in Sabah
 - **1248** — Death penalty moratorium covers 1,337 inmates since 2018
 - **1262** — Syariah-civil jurisdiction clash affects 4,200 families
-- **1265** — Citizenship by operation of law denied to 9,400 applicants
+- **1265** — Article 15A Citizenship Applications Are Decided Without Published Criteria — Many Wait Years
 - **1267** — Malaysia Has 2.5 Million Documented Migrant Workers — and Persistent Tier 2 Trafficking Concerns
 - **1283** — Rohingya community faces 12 hate speech incidents monthly
 - **1288** — Emergency Ordinance detainees exceed 600 under remand
-- **1292** — POCA preventive detention holds 420 without trial
+- **1292** — POCA Allows 2-Year Renewable Detention With No Judicial Review — Decided by an Appointed Board
 - **1294** — Unilateral child conversion ban enforcement lacking in 6 states
-- **1298** — SOSMA renewal passed without parliamentary debate in 2024
+- **1298** — SOSMA Renewal Cycles Operate With Minimal Public Debate — Section 4(5) Requires It Every 5 Years
 - **1315** — National Security Council Act grants PM unchecked emergency powers
 - **1319** — Preventive detention laws total 7 across Malaysian statutes
 - **1325** — Maternal Citizenship Amendment Passed in 2024 — March 2025 Settlement Closed the Pre-Amendment Gap

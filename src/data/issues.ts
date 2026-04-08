@@ -4223,18 +4223,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1241", published: true, opinionShift: 78, status: null, edition: 1,
-  headline: "SOSMA detentions hit 5-year high in 2025",
-  context: "Home Ministry data revealed 147 individuals detained under SOSMA in 2025, the highest since the law's enactment in 2012.",
+  id: "1241", published: true, opinionShift: 75, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Suaram: Up to 28% of SOSMA Detainees Released Without Charge, From Nearly 7,000 Arrests Since 2018",
+  context: "Suaram's 2025 report documented 6,892 SOSMA arrests between 2018 and 2023. Up to 28% were eventually released without being charged — the 28-day no-charge detention is used at scale on people never prosecuted.",
   stageScores: { pa: 88, ba: 76, fc: 90, af: 72, ct: 65, sr: 82 }, finalScore: 82.1,
   cards: [
-    { t: "hook", big: "147 people detained without trial under SOSMA in 2025 alone", sub: "28-day detention without judicial review remains standard practice" },
-    { t: "fact", big: "SOSMA Section 4 allows 28-day detention without charge since 2012", sub: "Replaced the ISA but retained preventive detention powers", lens: "Legal" },
-    { t: "fact", big: "Suhakam received 43 complaints about SOSMA abuse in 2025", sub: "Detainees report limited access to legal counsel during detention", lens: "Rights" },
-    { t: "fact", big: "Families of 89 detainees reported mental health deterioration", sub: "Prolonged uncertainty and isolation affect entire communities", lens: "Social" },
-    { t: "reframe", big: "Security law or unchecked executive power over personal liberty?", sub: "" },
-    { t: "analogy", big: "Like a fire extinguisher that the building manager can use on anyone without explaining why the building is on fire", sub: "Detention powers designed for security emergencies are deployed without demonstrating the emergency" },
-    { t: "view", big: "Parliament last reviewed SOSMA oversight mechanisms in 2019", sub: "" },
+    { t: "hook", big: "Suaram: 6,892 SOSMA arrests in 5 years — up to 28% released without ever being charged.", sub: "Of arrests under the Security Offences (Special Measures) Act 2012 between 2018 and 2023, roughly one in four did not result in any charge being filed at all." },
+    { t: "fact", big: "SOSMA Section 4 allows 28 days of detention without charge since 2012 — replacing the ISA but retaining preventive-detention powers.", sub: "The 28-day window can be used while authorities decide whether to charge. The 28% release-without-charge figure shows how often the answer is 'no'.", lens: "Legal" },
+    { t: "fact", big: "SUHAKAM has run public inquiries into custodial conditions — most recently a 28-day inquiry into torture and death in custody at Taiping Prison.", sub: "Custodial-death inquiries provide one of the few public windows into how preventive detention functions in practice.", lens: "Rights" },
+    { t: "fact", big: "Suaram's annual reports remain the most consistent civil-society source on SOSMA usage — official Home Ministry figures are not released in disaggregated form.", sub: "The asymmetry between civil-society reporting and government disclosure is itself a structural transparency gap.", lens: "Social" },
+    { t: "reframe", big: "SOSMA is no longer a rare emergency tool — it is a routine pre-charge detention regime that releases one in four detainees uncharged.", sub: "" },
+    { t: "analogy", big: "Like a 28-day holding cell where one in four occupants is released with no charge — and there is no public log of who entered or why.", sub: "Pre-charge detention used at scale, with limited public accountability for the cases that never produce charges." },
+    { t: "view", big: "Genuine SOSMA reform requires disaggregated public reporting on arrests, durations, charges and outcomes — not just renewal debates every five years.", sub: "" },
   ]
 },
 {
@@ -4308,17 +4308,17 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1247", published: true, opinionShift: 75, status: null, edition: 1,
-  headline: "Stateless children exceed 12,000 in Sabah alone",
-  context: "A 2025 study by Sabah-based NGOs estimated over 12,000 stateless children in the state, many born to undocumented parents.",
+  id: "1247", published: true, opinionShift: 80, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "SUHAKAM Estimates Half a Million to One Million Stateless Children in Sabah",
+  context: "SUHAKAM estimates 500,000 to 1 million stateless children in Sabah — far higher than commonly cited figures. Tens of thousands are excluded from schooling. The Bajau Laut community is the most visible affected group.",
   stageScores: { pa: 86, ba: 73, fc: 87, af: 69, ct: 60, sr: 78 }, finalScore: 79.1,
   cards: [
-    { t: "hook", big: "12,000 stateless children in Sabah denied birth certificates and identity", sub: "Without citizenship, they cannot access healthcare or education" },
-    { t: "fact", big: "Federal Constitution Article 14 grants citizenship by birth under conditions", sub: "Stateless children fall through gaps in jus soli and jus sanguinis provisions", lens: "Legal" },
-    { t: "fact", big: "Malaysia has not ratified the 1961 Convention on Reduction of Statelessness", sub: "Suhakam recommended ratification in its 2023 annual report", lens: "Rights" },
-    { t: "fact", big: "Over 60% of stateless children in Sabah are of Bajau Laut descent", sub: "Sea nomad communities have faced documentation barriers for generations", lens: "Social" },
-    { t: "reframe", big: "Are 12,000 children invisible because of paperwork or political will?", sub: "" },
-    { t: "view", big: "NRD processed only 340 late birth registrations from Sabah in 2024", sub: "" },
+    { t: "hook", big: "SUHAKAM: 500,000 to 1 million stateless children in Sabah — among the largest statelessness concentrations in Southeast Asia.", sub: "Tens of thousands are excluded from formal schooling per UNICEF. Official statistics structurally underplay the true scale." },
+    { t: "fact", big: "Federal Constitution Article 14 grants citizenship by birth under specific conditions — stateless children fall through gaps in jus soli and jus sanguinis.", sub: "The conditions assume documentation that the children's parents often do not have, perpetuating statelessness across generations.", lens: "Legal" },
+    { t: "fact", big: "Malaysia has not ratified the 1961 Convention on the Reduction of Statelessness — leaving no treaty obligation to provide a path to citizenship.", sub: "SUHAKAM has repeatedly recommended ratification. The recommendation has not been acted upon by successive governments.", lens: "Rights" },
+    { t: "fact", big: "The Bajau Laut (Sea Gypsy) community is the most visible affected group — described by researchers as 'genuinely stateless' across Malaysia, Indonesia and the Philippines.", sub: "Many Bajau Laut children were born in Sabah and have never set foot in another country, but no state recognises them as citizens.", lens: "Social" },
+    { t: "reframe", big: "The story is not 12,000 invisible children — it is potentially a million, and the official enumeration system cannot see them at all.", sub: "" },
+    { t: "view", big: "Statelessness in Sabah is structural exclusion — it needs citizenship-pathway legislation and the will to count the population honestly.", sub: "" },
   ]
 },
 {
@@ -4562,17 +4562,17 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1265", published: true, opinionShift: 71, status: null, edition: 1,
-  headline: "Citizenship by operation of law denied to 9,400 applicants",
-  context: "The National Registration Department denied 9,400 citizenship applications under Article 15A of the Federal Constitution between 2020 and 2024.",
+  id: "1265", published: true, opinionShift: 70, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "Article 15A Citizenship Applications Are Decided Without Published Criteria — Many Wait Years",
+  context: "Article 15A of the Federal Constitution grants the federal government discretion to register minors as citizens. The criteria are not published; published outcome statistics are not disaggregated by NRD; civil-society advocates report multi-year wait times for many applications.",
   stageScores: { pa: 83, ba: 71, fc: 86, af: 68, ct: 58, sr: 78 }, finalScore: 77.6,
   cards: [
-    { t: "hook", big: "9,400 citizenship applications rejected under Article 15A since 2020", sub: "Foundlings and stateless children among those denied Malaysian citizenship" },
-    { t: "fact", big: "Article 15A grants federal government discretion to register minors as citizens", sub: "No statutory criteria published for approval or rejection decisions", lens: "Legal" },
-    { t: "fact", big: "2024 Federal Court ruled mothers can confer citizenship to overseas-born children", sub: "Landmark Suriani ruling expanded citizenship rights but government appealed", lens: "Rights" },
-    { t: "fact", big: "Average wait time for Article 15A applications exceeds 5 years", sub: "Children grow up without identity documents, schooling, or healthcare access", lens: "Social" },
-    { t: "reframe", big: "9,400 denials without published criteria means citizenship is arbitrary favour", sub: "" },
-    { t: "view", big: "Constitutional amendment on maternal citizenship rights tabled in October 2024", sub: "" },
+    { t: "hook", big: "Article 15A is the citizenship pathway for foundlings and stateless children — and the government decides each case without published criteria.", sub: "There is no statutory checklist for what makes an application succeed. Civil-society casework shows decisions taking years and outcomes varying widely." },
+    { t: "fact", big: "Article 15A grants federal government discretion to register minors as citizens — by design, not by oversight failure.", sub: "The discretion was constitutional from the start. The transparency question is whether the criteria for exercising it should be published.", lens: "Legal" },
+    { t: "fact", big: "The 2024 Constitution (Amendment) Bill resolved the maternal-citizenship gap for overseas-born children — but did not address the broader Article 15A discretion.", sub: "Pre-amendment cases were closed via the March 2025 Federal Court consent order in Suriani Kempe v Kerajaan Malaysia.", lens: "Rights" },
+    { t: "fact", big: "For children waiting on 15A decisions, the wait itself is the harm: no identity documents, no school enrolment, no healthcare access.", sub: "Family Frontiers and other advocacy groups have documented multi-year cases where the wait outlasts the child's primary-school years.", lens: "Social" },
+    { t: "reframe", big: "Citizenship granted by undocumented discretion is not citizenship — it is favour. The fix is publishing criteria, not just amending the constitution.", sub: "" },
+    { t: "view", big: "After the 2024 maternal-citizenship amendment, Article 15A discretion is the next reform: published criteria, statutory deadlines, and disaggregated outcome reporting.", sub: "" },
   ]
 },
 {
@@ -4945,18 +4945,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1292", published: true, opinionShift: 86, status: null, edition: 1,
-  headline: "POCA preventive detention holds 420 without trial",
-  context: "The Prevention of Crime Act 1959, amended in 2014, held 420 individuals under preventive detention without trial as of January 2025.",
+  id: "1292", published: true, opinionShift: 80, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "POCA Allows 2-Year Renewable Detention With No Judicial Review — Decided by an Appointed Board",
+  context: "The Prevention of Crime Act 1959, amended in 2014, lets an appointed Prevention Board impose 2-year detention orders renewable indefinitely. The 2014 amendment removed judicial review of Board decisions.",
   stageScores: { pa: 87, ba: 76, fc: 89, af: 72, ct: 64, sr: 82 }, finalScore: 82.5,
   cards: [
-    { t: "hook", big: "420 individuals detained under POCA without trial as of January 2025", sub: "Prevention Board can renew 2-year detention orders indefinitely" },
-    { t: "fact", big: "POCA 2014 amendment removed judicial review of Prevention Board decisions", sub: "Board members appointed by Yang di-Pertuan Agong on minister's advice", lens: "Legal" },
-    { t: "fact", big: "Article 5 of Federal Constitution protects right to personal liberty", sub: "POCA's preventive detention regime bypasses criminal justice safeguards entirely", lens: "Rights" },
-    { t: "fact", big: "87% of POCA detainees are from lower-income communities per prison data", sub: "Families lose sole breadwinners to indefinite detention without conviction", lens: "Social" },
-    { t: "reframe", big: "Detaining 420 people without trial is imprisonment without justice", sub: "" },
-    { t: "analogy", big: "Like a prison sentence decided by a committee rather than a judge — the outcome is the same but the process skips the courtroom entirely", sub: "Preventive detention achieves imprisonment without the constitutional safeguards of a criminal trial" },
-    { t: "view", big: "Lawyers for Liberty challenged POCA constitutionality in Federal Court in 2024", sub: "" },
+    { t: "hook", big: "POCA detention orders run 2 years and renew indefinitely — and the 2014 amendment removed judicial review of the appointed Board's decisions.", sub: "Detainees enter via 60-day police investigation periods (24h initial + 21-day + 38-day extensions) before the Prevention Board hearing." },
+    { t: "fact", big: "POCA 2014 amendment removed judicial review of Prevention Board decisions — the Board's reasoning is not subject to High Court scrutiny.", sub: "Board members are appointed by the Yang di-Pertuan Agong on the minister's advice. There is no public reasoning standard.", lens: "Legal" },
+    { t: "fact", big: "Article 5 protects personal liberty — POCA operates as a constitutional carve-out under Article 149.", sub: "Article 149 specifically enables Parliament to enact preventive-detention laws notwithstanding other liberty protections.", lens: "Rights" },
+    { t: "fact", big: "Civil-society reports indicate POCA detainees are disproportionately drawn from lower-income communities — though disaggregated official data is not published.", sub: "The asymmetry between civil-society reporting and official disclosure is itself a structural transparency gap.", lens: "Social" },
+    { t: "reframe", big: "POCA is not an emergency power that has been reluctantly retained — it is an active, routine detention regime, just one without a courtroom.", sub: "" },
+    { t: "analogy", big: "Like a prison sentence decided by an appointed committee — same outcome, no courtroom, no published reasoning.", sub: "Preventive detention achieves imprisonment without the constitutional safeguards of a criminal trial." },
+    { t: "view", big: "POCA reform requires either restoring judicial review of Board decisions or publishing disaggregated outcome data — preferably both.", sub: "" },
   ]
 },
 {
@@ -5031,19 +5031,18 @@ export const ISSUES: Issue[] = [
   ]
 },
 {
-  id: "1298", published: true, opinionShift: 88, status: null, edition: 1,
-  headline: "SOSMA renewal passed without parliamentary debate in 2024",
-  context: "SOSMA's 5-year renewal was passed by Parliament in December 2024 with minimal debate, extending the security law until 2029.",
+  id: "1298", published: true, opinionShift: 80, status: "updated", edition: 2, sourceDate: "2026-04-08",
+  headline: "SOSMA Renewal Cycles Operate With Minimal Public Debate — Section 4(5) Requires It Every 5 Years",
+  context: "Section 4(5) of SOSMA 2012 requires Parliament to renew the preventive-detention provisions every 5 years. Renewal motions produce shorter debates than the law's original passage. Civil society has called for substantive reform alongside renewal.",
   stageScores: { pa: 88, ba: 77, fc: 90, af: 73, ct: 66, sr: 83 }, finalScore: 83.3,
   cards: [
-    { t: "hook", big: "SOSMA renewed until 2029 with only 45 minutes of parliamentary debate", sub: "Law enabling detention without trial extended with minimal scrutiny" },
-    { t: "fact", big: "SOSMA Section 4(5) requires parliamentary renewal every 5 years", sub: "2024 renewal motion allocated 45 minutes compared to 12 hours for original 2012 debate", lens: "Legal" },
-    { t: "fact", big: "147 SOSMA detainees in 2025 had no opportunity to challenge renewal process", sub: "Affected individuals have no standing in parliamentary renewal proceedings", lens: "Rights" },
-    { t: "fact", big: "Only 23 of 222 MPs participated in the December 2024 renewal debate", sub: "Low participation suggests security laws face insufficient legislative scrutiny", lens: "Political" },
-    { t: "fact", big: "Civil society coalition submitted 15,000-signature petition opposing renewal", sub: "Petition was not acknowledged during the abbreviated parliamentary session", lens: "Social" },
-    { t: "reframe", big: "45 minutes to extend 5 years of preventive detention is not democratic oversight", sub: "" },
-    { t: "analogy", big: "Like renewing a building's safety exemption in 45 minutes without inspecting the building — the paperwork moves faster than the scrutiny", sub: "Five more years of preventive detention powers approved with less debate than a single reading of most bills" },
-    { t: "view", big: "A law that permits detention without trial deserves more than 45 minutes of scrutiny every five years. Renewal is not review.", sub: "" },
+    { t: "hook", big: "SOSMA's 5-year renewal cycle produces a recurring legislative ritual — short debate, narrow attendance, no substantive review.", sub: "Section 4(5) requires renewal every 5 years. The 2012 original received hours of debate; renewals have been substantially shorter." },
+    { t: "fact", big: "SOSMA Section 4(5) requires parliamentary renewal of the preventive-detention provisions every 5 years.", sub: "The renewal mechanism is procedurally simple: a motion put to a vote, with debate time allocated by the Speaker and government business managers.", lens: "Legal" },
+    { t: "fact", big: "Suaram's data on SOSMA arrests (6,892 between 2018 and 2023, ~28% released without charge) is the strongest civil-society evidence on how the law actually operates.", sub: "Much of that data is not part of the formal renewal-debate record because it post-dates the original 2012 passage.", lens: "Rights" },
+    { t: "fact", big: "Civil-society petitions have been submitted at multiple renewal moments — but renewal procedure does not require parliamentary acknowledgement of public submissions.", sub: "The Bar Council, Suaram, Lawyers for Liberty and others have all documented their interventions in successive renewal cycles.", lens: "Social" },
+    { t: "reframe", big: "The story is not how short any single renewal debate was — it is that the renewal mechanism itself is not designed to revisit whether the law should still exist.", sub: "" },
+    { t: "analogy", big: "Like renewing an annual licence with a tick-box form — the paperwork advances, the underlying decision is never re-examined.", sub: "Renewal procedure is not the same as substantive review." },
+    { t: "view", big: "A law permitting detention without trial deserves substantive review at every renewal — anchored on Suaram's arrest and release-without-charge data.", sub: "" },
   ]
 },
 {
