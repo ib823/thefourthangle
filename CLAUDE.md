@@ -87,7 +87,7 @@ The validator enforces these as **warnings** (not build errors) so editorial dri
 ### Why this budget — the research
 - **Axios Smart Brevity**: most updates are ~40% shorter than typical writing while preserving every essential fact. Target headline length ≤6 words; one bold claim per chunk.
 - **News headline CTR**: optimum click-through sits at **60–100 characters**; AP mobile guideline is even tighter at ≤55. We split the difference at 75.
-- **Mobile attention span**: drops sharply after ~8 seconds per chunk. One claim per card = one breath of attention.
+- **Working memory limit (Cowan 2001)**: ~4 chunks of novel content survive a session. Across 7 cards, only 3–4 distinct ideas land — bias editorial effort toward making sure those are the *right* ones (hook + reframe + one fact + view).
 - **Microcontent principle**: visuals process 60,000× faster than text. The card layout is the visual; text is the caption — keep it caption-length.
 - **Subscription conversion**: 80% of visitors only read the hook. Spend the editorial effort on the headline + hook card big text. If those two don't earn the next swipe, nothing else matters.
 
@@ -101,7 +101,84 @@ The `hook` card and the `headline` it amplifies must do four things in under ~28
 Avoid in hook copy: "explores", "examines", "looks at", "raises questions about", "sparks debate". These are abstraction words — they signal a thinkpiece, not a discovery. Use verbs of action and finding: *found, charged, voted, paid, hid, exempted, killed*.
 
 ### Card sub fields are optional
-Better to leave `sub: ""` than to pad. The `reframe` and `view` cards typically need no `sub` at all — the big claim is the whole point.
+Better to leave `sub: ""` than to pad. The `reframe` and `view` cards typically need no `sub` at all — the big claim is the whole point. The validator now warns when `reframe.sub` is non-empty (it dilutes the aha spike).
+
+### High-leverage editorial rules (research-grounded)
+
+These rules come from a deep research synthesis (full citations and rationale in [`docs/research/bite-size-reading.md`](docs/research/bite-size-reading.md)). They are *not* validator-enforced because they are subjective — they are the editorial brain T4A should aim for.
+
+**Per-card structural rules**
+
+1. **First-clause concreteness rule.** The most concrete element of `card.big` (a number, a named actor, a date, OR an action verb of finding) must appear in the **first clause** — typically the first 6–8 words before the first comma or period. NN/G F-pattern + Reber-Schwarz processing fluency: the brain decides whether to keep reading in the first half-second, anchored on the first fixation. The element doesn't need to be a noun — *"Putrajaya called…"* and *"Bestinet pocketed…"* are concrete because the verb names a specific action by a specific actor.
+2. **Cliffhanger button** on cards 1–6. The last ~6 words of every card except the view should preview the next card honestly — never bait. Borrowed from screenwriting "buttons" and YouTube retention editing.
+3. **Concreteness floor on fact cards.** Every fact card must contain at least one named entity OR one number with a denominator. Raw percentages without bases ("up 40%") are inert; raw statistics without identifiable cases trigger psychic numbing (Slovic).
+4. **Identifiable case leads fact card 1.** Lead with the named individual / specific instance, then bracket with the statistic — never the other way. Identifiable victim effect (Small, Loewenstein & Slovic 2007).
+5. **Reframe restructures, never adds.** A real reframe rotates the reader's mental model. Three forms all qualify:
+   - **Causal restructuring:** *"The leak isn't the scandal. The audit's six-month delay is."*
+   - **Value restructuring** — moves the issue from one moral category to another: *"Floods are not natural disasters when the causes are policy choices."*
+   - **Question restructuring** — reframes what the issue is *about*: *"The question is not whether to regulate. It is who writes the rules."*
+   What does NOT count: *"There are also concerns about…"* (additive). *"Perhaps the real issue is…"* (hedged). *"So what now?"* (rhetorical without restructuring). Adding evidence belongs on fact cards.
+6. **View card must pass the WhatsApp-quote test.** Read only `view.big` with no context — does it stand as a sentence a thoughtful reader would paste into a WhatsApp group with no commentary? If not, it's a hedge, not a view.
+
+**Per-issue rules**
+
+7. **Repeat key terms across cards within an issue.** Don't elegant-vary "the contract" → "the deal" → "the agreement." Pick one phrase per entity per issue. Re-encountering a phrase boosts processing fluency, and processing fluency is misattributed to truth (Reber-Schwarz-Winkielman 2004).
+8. **Middle fact card carries the most shocking number.** Pacing — Berger-Milkman (2012) showed physiological arousal drives sharing more than valence. The arousal peak should land on fact 2, earning the swipe through to the reframe.
+9. **Vary the rhetorical shape of the reframe across issues.** Track the last 10 reframes. If they're all "X is not the story, Y is," prediction-error dopamine flatlines. Force variation: question, paradox, hard sentence, re-anchored number.
+10. **Anger/anxiety check on every hook.** Berger-Milkman: sad issues are shared ~50% less even when they're the most important. If the hook's dominant emotion is sadness or generalized concern, reframe to anger-at-process or anxiety-of-precedent before publishing. The same facts, different emotion.
+
+**Editorial-effort allocation (since 80% only read the hook)**
+- Headline + hook card: ~50% of editing time
+- Reframe card: ~20%
+- View card: ~15%
+- Three fact cards combined: ~15%
+
+**Ethical lines that distinguish T4A from engagement-farms**
+- The cliffhanger button must tease a real finding in the next card, not bait an emotional payoff that doesn't arrive.
+- No algorithmic personalization of the feed. Every reader sees the same issues.
+- No notification frequency above 3/week (Tue/Thu/Sat). Push fatigue is real.
+- Anger at *processes* (no tender, missing audit, ignored petition) is non-partisan. Anger at *people* or *groups* is not. The reframe card is the highest-risk slot for crossing this line.
+
+## Accuracy Standard
+
+T4A's editorial brand is non-partisan trust. A single wrong number, misattributed quote, or overstated claim costs more credibility than ten accurate findings earn. Every published issue must clear this bar.
+
+### The core rule
+Every number, date, named actor, law citation, court case, and quote in a published issue MUST be **independently verified against a primary source** by at least one stage of the pipeline. Memory and training data do not count as verification.
+
+**Primary source = one of:**
+- Official government document, gazette, or regulator publication
+- Court ruling or judgment text
+- Peer-reviewed paper
+- Named authoritative news outlet *citing* such a source (the citation must be checkable)
+
+**NOT primary:** Wikipedia, Reddit, anonymous blogs, unsourced social media, your own training data, AI-generated summaries, "I remember reading this somewhere," or a previous T4A issue (that would be circular).
+
+### The four cardinal sins (zero tolerance — block publication if any are present)
+1. **Overclaim** — stating a number, scope, or causal certainty stronger than the source supports. *"RM2.4B vanished"* when the source says *"up to RM2.4B unaccounted for."* *"All MPs voted yes"* when the source says *"most."* *"The minister lied"* when the source says *"the minister's statement is contradicted by document Z."*
+2. **Underclaim** — softening a finding the source actually supports. *"Some have alleged"* when there is a court ruling. *"There are concerns"* when the auditor general published *"systemic failure."*
+3. **Misleading framing** — every individual fact technically true, but the selection or sequencing creates a false impression a reasonable reader would form. Selective dates, missing denominators, omitted caveats, cherry-picked comparisons.
+4. **Unverified detail** — any specific number, date, named actor, law section, or quote that cannot be traced to a primary source listed in the research brief or a Stage 2/3/4/5 verification.
+
+### Verification responsibility is shared across all 6 stages
+Verification is NOT concentrated in Stage 3. Stage 3 has finite token budget — anything Stage 3 doesn't happen to check passes through unverified unless another stage caught it.
+
+| Stage | Role | Accuracy duty |
+|---|---|---|
+| Phase 1 — Research brief | Claude | Use ≥8 primary sources of 15-25 total; flag every contradiction explicitly |
+| Phase 2 — Stage 1 Primary Analysis | Claude | Read `engine/templates/stage1-preamble.txt`. Verify every claim before writing it. |
+| Stages 2-5 — Cross-LLM review | External LLMs | Each has its own preamble in `engine/templates/`. Do not relax these. |
+| Phase 5 — Stage 6 Synthesis | Claude | Read `engine/templates/stage6-preamble.txt`. Re-verify any wording you introduce — do not assume Stage 3 covered it. |
+| Phase 6 — Legal + Accuracy Check | Claude | Walk every specific in the final text, trace each to a primary source. Block if any cannot be traced. |
+
+### When in doubt
+"I could not verify this within reasonable effort" is always better than a confident wrong claim. **Drop the claim, soften the framing, or hold the issue.** Reputational damage from a single wrong number is greater than the loss from one delayed publication.
+
+### When sources contradict
+Report all of them in the research brief, identify which is most authoritative (closest to primary, most recent, best methodology), use the authoritative one in the cards, and note the discrepancy in the brief's CONTRADICTIONS section. **Never silently choose the most favorable number.**
+
+### 3R + accuracy interaction
+The most dangerous overclaims are ones that implicate race, religion, or royalty. The verification bar is **higher** for these claims, not lower, because the harm from a wrong one is greater. If a claim about a 3R-adjacent topic cannot be verified to two independent primary sources, drop it.
 
 ## Content Rules
 - NO references to AI, models, Claude, GPT, or any AI provider
@@ -110,6 +187,8 @@ Better to leave `sub: ""` than to pad. The `reframe` and `view` cards typically 
 - Respect 3R: Race, Religion, Royalty — critique policy, not communities/beliefs
 - Only use publicly available information
 - Cite specific numbers, dates, sources in context
+- **Every published claim must trace to a primary source** — see the Accuracy Standard section above. Memory and training data are not sources.
+- **No overclaim, no underclaim, no misleading framing** — when the evidence is softer than the claim, soften the claim. When the framing is technically true but creates a false impression, rewrite or drop it.
 
 ## UI Features That Depend on Issue Data
 - **Welcome card**: One-time inline card for first visitors explaining T4A and Opinion Shift. Dismissed permanently via localStorage.
@@ -167,16 +246,22 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
    - ISSUE, PERIOD, CONTEXT (timeline with dates and sources)
    - ACTORS (all people/institutions with roles)
    - RELEVANT LAW (legislation, constitutional articles)
-   - KEY STATISTICS (quantified data with sources)
+   - KEY STATISTICS (quantified data with sources — every number must have a primary-source citation, including URL, document title, and page/section number)
    - 12-DIMENSION RISK ASSESSMENT: sentiment, political, ethnic, religious, narrative, completeness, temporal, confidence, sources, geographic, economic, gender — each with risk level (LOW/MEDIUM/HIGH/CRITICAL) and justification
    - RECOMMENDED LENSES
-   - SOURCES (numbered bibliography, 15-25 citations)
+   - SOURCES (numbered bibliography, 15-25 citations) — must satisfy ALL of:
+     - **At least 8 are PRIMARY sources** (official government documents, gazettes, court rulings, regulator publications, peer-reviewed papers). News articles count as secondary unless they directly cite and link a primary source you have separately opened.
+     - **Sources span the political spectrum** (government-aligned, opposition-aligned, independent, international body, community voice, business). Single-spectrum coverage is an automatic CRITICAL on the "sources" risk dimension.
+     - For every quantitative claim: exact source URL, document title, page or section number, and publication date. *"BNM 2024"* is not a citation; *"BNM Annual Report 2024, Table 3.2, p. 47, https://..."* is.
+   - **CONTRADICTIONS** — any time two reputable sources gave different numbers, dates, or characterizations of the same fact, list both with citations and identify which you judged authoritative and why. Never silently choose the most favorable number.
+   - **SOURCE SPECTRUM CHECK** — note explicitly which side of the political spectrum each major source comes from; flag if all sources are from one side.
 3. Save to `engine/briefs/{slug}.md`
 4. Present brief summary to user. **WAIT** for approval before proceeding.
 
 #### PHASE 2: STAGE 1 — PRIMARY ANALYSIS (Claude runs this)
-1. Using the research brief, generate 6-7 card analysis (7 if analogy card is warranted)
-2. Output JSON matching `engine/output/*-stage1.json` schema:
+1. **Read `engine/templates/stage1-preamble.txt` first** and follow its accuracy contract throughout this phase. This is non-negotiable — Stage 1 is the factual foundation everything else rests on.
+2. Using the research brief, generate 6-7 card analysis (7 if analogy card is warranted)
+3. Output JSON matching `engine/output/*-stage1.json` schema:
    ```json
    {
      "cards": [
@@ -194,8 +279,8 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
      "lenses_applicable_but_unused": ["Legal", "Regional"]
    }
    ```
-3. Save to `engine/output/{slug}-stage1.json`
-4. Score PA (0-100): how thoroughly were primary sources used?
+4. Save to `engine/output/{slug}-stage1.json`
+5. Score PA (0-100): how thoroughly were primary sources used?
 
 #### PHASE 3: GENERATE BROWSER PROMPTS
 1. Run: `node scripts/generate-stage-prompts.mjs {slug}`
@@ -226,15 +311,17 @@ For each stage response:
 4. After all 4 are collected, proceed to Phase 5.
 
 #### PHASE 5: STAGE 6 — SYNTHESIS (Claude runs this)
-1. Read all 5 stage outputs (stage1 through stage5)
-2. Integrate all critiques:
+1. **Read `engine/templates/stage6-preamble.txt` first** and follow its accuracy contract throughout this phase. Synthesis is exactly when overclaim, underclaim, and unverified-detail sneak in — the preamble exists to prevent that.
+2. Read all 5 stage outputs (stage1 through stage5)
+3. Integrate all critiques:
    - Apply fact corrections from Stage 3 (e.g., wrong numbers, dates, ages)
    - Address bias flags from Stage 2 (rephrase flagged quotes, balance perspectives)
    - Incorporate missing perspectives from Stage 4 (add missing community voices, international parallels)
    - Strengthen courage per Stage 5 flags (remove hedging, add hard truths)
-3. Track every revision: `"CORRECTED (Stage 3): ...", "ADDED (Stage 4): ..."`
-4. Save synthesis to `engine/output/{slug}-stage6-synthesis.json`
-5. Score SR (0-100): quality of integrated synthesis
+4. **Re-verify any wording you introduce** during synthesis (rephrases, tightened headlines, sharper claims). Tag every change with one of: `CORRECTED (Stage 3)`, `REPHRASED (Stage 2)`, `ADDED (Stage 4)`, `STRENGTHENED (Stage 5)`, or `INTRODUCED (Stage 6 self-verified)`. If you cannot tag a change with one of these five categories, you have introduced something you should not have.
+5. Track every revision in the synthesis output's notes
+6. Save synthesis to `engine/output/{slug}-stage6-synthesis.json`
+7. Score SR (0-100): quality of integrated synthesis
 
 #### PHASE 6: READER OUTPUT + LEGAL CHECK
 1. Transform synthesis into reader format:
@@ -248,7 +335,7 @@ For each stage response:
    - Assemble stageScores: `{ pa, ba, fc, af, ct, sr }`
    - Compute finalScore (weighted average of 6 stage scores)
 2. Save to `engine/output/{slug}-reader.json`
-3. Run **LEGAL CHECK** on all final text (headline, context, card big/sub):
+3. Run **LEGAL + ACCURACY CHECK** on all final text (headline, context, card big/sub):
    - [ ] No 3R violations (Race, Religion, Royalty — critique policy, not communities)
    - [ ] No defamation risk (fair comment on public interest, no personal attacks)
    - [ ] No Official Secrets Act breach (only publicly available sources)
@@ -257,7 +344,14 @@ For each stage response:
    - [ ] Content framed as analysis/opinion, not statements of fact
    - [ ] Consistent with `/disclaimer` page claims
    - [ ] **STEALTH CHECK**: No banned terms — AI, model, Claude, GPT, DeepSeek, Gemini, Grok, LLM, language model, Anthropic, OpenAI, ChatGPT
-4. Present legal clearance report to user
+   - [ ] **FACT TRACE**: every number, date, named actor, law citation, and direct quote in the final text traces to either (a) a primary source listed in `engine/briefs/{slug}.md`, or (b) a VERIFIED claim in `engine/output/{slug}-stage{2,3,4,5}.json`, or (c) a Stage 6 self-verified entry tagged `INTRODUCED`. Walk each specific and confirm. Any specific that cannot be traced must be removed before publication.
+   - [ ] **FOUR CARDINAL SINS CHECK** on final headline, context, and every card big/sub:
+     - No OVERCLAIM (stronger than source supports)
+     - No UNDERCLAIM (softer than source supports)
+     - No MISLEADING FRAMING (selection or sequencing distorts the picture a reasonable reader would form)
+     - No UNVERIFIED DETAIL (any specific not traced above)
+   - [ ] **NO DRIFT FROM STAGE 6**: every wording change introduced during synthesis (Phase 5) was either applied from a stage critique with explicit traceability, or independently re-verified per stage6-preamble. No silent rephrasings that change meaning.
+4. Present legal + accuracy clearance report to user
 5. Present complete issue object (ready for `issues.ts`)
 
 #### PHASE 7: SHERLOCK + IMAGE
