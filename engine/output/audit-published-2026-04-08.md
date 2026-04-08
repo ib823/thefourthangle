@@ -10,10 +10,10 @@ Audit of all 90 published issues against the new accuracy + editorial criteria f
 | With full pipeline (≥7 of 8 artifacts) | 18 |
 | Partially audited (1-6 artifacts) | 3 |
 | **Unauditable (zero artifacts)** | **69** |
-| Phase 1 structural flags | 4 issues |
+| Phase 1 structural flags | 2 issues |
 | Phase 3 low-confidence (FAS<70 or m_true<0.7) | 19 issues |
-| Phase 4 anti-pattern hits | 1 hits across 1 issues |
-| Tier 1 review (highest priority) | 3 issues |
+| Phase 4 anti-pattern hits | 0 hits across 0 issues |
+| Tier 1 review (highest priority) | 0 issues |
 | Tier 2 review (low confidence) | 19 issues |
 | Tier 3 review (anti-pattern only) | 0 issues |
 
@@ -27,13 +27,7 @@ Hard-max length violations, concreteness floor, reframe.sub > 80, missing backgr
 ### Concreteness floor flags (0)
 *None.* All published fact cards have a concrete anchor.
 
-### Reframe.sub > 80 chars (4)
-- **0142** (126 chars)
-  - big: Who defines 'reasonable'?
-  - sub: When the regulator writes, enforces, and judges the rules without publishing them — that is discretion without accountability.
-- **0179** (101 chars)
-  - big: A child did not choose where to be born.
-  - sub: Punishing children for their parents' status is not immigration policy. It is cruelty with paperwork.
+### Reframe.sub > 80 chars (2)
 - **1973** (154 chars)
   - big: Malaysian businesses across all communities profit from bonded cheap labour while working-class Malaysians bear the wage suppression.
   - sub: US$1 billion has been siphoned from Bangladesh. Sabah and Sarawak run a separate crisis with 1 million undocumented migrants outside this system entirely.
@@ -190,26 +184,21 @@ Greps published issue text for known anti-patterns from the CLAUDE.md hook engin
 
 ### Hits by category
 
-| Category | Hits |
-|---|---:|
-| hook | 1 |
+*No hits across all 90 published issues.* (Note: this means the published corpus is already clean of these specific phrases — surprising and worth verifying the patterns are correctly tuned.)
 
-### All anti-pattern hits (1)
+### All anti-pattern hits (0)
 
-- **1074** `cards[3].sub (fact)` — *hook*: "raises questions"
-  > Direct negotiation raises questions about whether merit or connections drove selection
+*None.*
 
 ## Prioritized Review Queue
 
 Three tiers, ordered by review priority. Tier 1 issues need immediate attention; Tier 3 are minor edits.
 
-### Tier 1 — Unauditable AND has flag (3)
+### Tier 1 — Unauditable AND has flag (0)
 
 These issues have no audit trail AND show structural or anti-pattern flags. Highest priority.
 
-- **0142** [structural] — The Clause Nobody Mentioned in the Amendment
-- **0179** [structural] — Born Here, Documented Nowhere
-- **1074** [anti-pattern] — RM23 billion MRT3 project awarded without competitive international tender
+*None.*
 
 ### Tier 2 — Low Stage 3 confidence (19)
 
@@ -263,7 +252,7 @@ Issues with no other flags but anti-pattern phrases in copy. Minor copy edits.
 ## Recommendations
 
 1. **Tier 1 first** — these are the highest-leverage fixes (unauditable + at least one mechanical flag).
-2. **For unauditable issues without other flags** (count: 66) — editorial decision per issue: backfill audit trail (re-run pipeline), keep as legacy with disclaimer, or unpublish. Do NOT auto-act.
+2. **For unauditable issues without other flags** (count: 69) — editorial decision per issue: backfill audit trail (re-run pipeline), keep as legacy with disclaimer, or unpublish. Do NOT auto-act.
 3. **Tier 2 issues need source review** — Stage 3 already flagged them. Re-read the Stage 3 output and either correct the cards or hold the issue.
 4. **Tier 3 are copy edits** — fix the flagged phrases in place; no source review needed.
 5. **Going forward** — the new accuracy rules in CLAUDE.md will prevent these gaps from recurring on new issues. This audit covers retroactive content only.

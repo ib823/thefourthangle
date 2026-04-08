@@ -89,7 +89,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "The term 'reasonable steps' is never defined.", sub: "MCMC decides what platforms must do — without publishing any standard. Three previous actions overturned by High Court.", lens: "Legal" },
       { t: "fact", big: "Indonesia passed the same law. Takedowns rose 43%.", sub: "Malaysia's bill bypassed the standard 30-day consultation.", lens: "Rights" },
       { t: "fact", big: "PAS voted yes. DAP voted yes. Bersatu voted no.", sub: "This cuts along religious-secular lines, not coalition lines.", lens: "Political" },
-      { t: "reframe", big: "Who defines 'reasonable'?", sub: "When the regulator writes, enforces, and judges the rules without publishing them — that is discretion without accountability." },
+      { t: "reframe", big: "Who defines 'reasonable'?", sub: "" },
       { t: "analogy", big: "Like a rental agreement where the landlord can change the locks anytime — and 'reasonable notice' means whatever they decide it means", sub: "Platform liability without clear definitions gives regulators blank-cheque enforcement power" },
       { t: "view", big: "Good regulation needs clear rules, independent enforcement, and judicial review. This bill provides the third but not the first two.", sub: "" },
     ]
@@ -802,7 +802,7 @@ export const ISSUES: Issue[] = [
       { t: "fact", big: "Article 14 grants citizenship by birth — but not to all births.", sub: "Children of Malaysian mothers married to foreign fathers were excluded until the 2024 amendment stalled.", lens: "Legal" },
       { t: "fact", big: "NRD rejection rates for citizenship applications: estimated over 90%.", sub: "Appeals take 5 to 15 years. Children age out of school while waiting.", lens: "Rights" },
       { t: "fact", big: "Sabah alone accounts for an estimated 40,000 stateless children.", sub: "Legacy of the 1990s IC project and undocumented migration creates generational exclusion.", lens: "Regional" },
-      { t: "reframe", big: "A child did not choose where to be born.", sub: "Punishing children for their parents' status is not immigration policy. It is cruelty with paperwork." },
+      { t: "reframe", big: "A child did not choose where to be born.", sub: "Punishing children for their parents' status is cruelty with paperwork." },
       { t: "analogy", big: "Like a library card that was never printed — the book exists, the reader exists, but the system says neither qualifies", sub: "Administrative gaps create invisible citizens who exist physically but not legally" },
       { t: "view", big: "No child should be stateless in the country of their birth. The Constitution can fix this. The question is whether Parliament will.", sub: "" },
     ]
@@ -1875,7 +1875,7 @@ export const ISSUES: Issue[] = [
     { t: "hook", big: "RM23 billion MRT3 awarded without open tender — Malaysia's largest direct negotiation deal", sub: "Consortium selected through closed process for the nation's biggest rail project" },
     { t: "fact", big: "Government Procurement Act 2024 Section 12 requires open tender for projects above RM500 million", sub: "RM23 billion project exempted through cabinet directive overriding standard procurement", lens: "Legal" },
     { t: "fact", big: "International competitive tender typically saves 12-18% on infrastructure mega-projects", sub: "Potential savings of RM2.8-4.1 billion foregone through direct negotiation", lens: "Economic" },
-    { t: "fact", big: "Consortium members include companies with political connections to 3 coalition parties", sub: "Direct negotiation raises questions about whether merit or connections drove selection", lens: "Governance" },
+    { t: "fact", big: "Consortium members include companies with political connections to 3 coalition parties", sub: "Direct negotiation meant no tender and no published evaluation scores", lens: "Governance" },
     { t: "reframe", big: "RM23 billion of public money deserves the scrutiny of open competition, not the convenience of negotiation", sub: "" },
     { t: "analogy", big: "Like buying the most expensive car on the lot without checking any other dealer — and then finding out your cousin owns the dealership", sub: "Direct negotiation for RM23 billion bypasses the price discovery that competition provides" },
     { t: "view", big: "Should infrastructure projects above RM1 billion be legally required to undergo international tender?", sub: "" }
