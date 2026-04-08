@@ -10,7 +10,7 @@ Audit of all 86 published issues against the new accuracy + editorial criteria f
 | With full pipeline (≥7 of 8 artifacts) | 18 |
 | Partially audited (1-6 artifacts) | 3 |
 | **Unauditable (zero artifacts)** | **65** |
-| Phase 1 structural flags | 2 issues |
+| Phase 1 structural flags | 4 issues |
 | Phase 3 low-confidence (FAS<70 or m_true<0.7) | 19 issues |
 | Phase 4 anti-pattern hits | 0 hits across 0 issues |
 | Tier 1 review (highest priority) | 0 issues |
@@ -21,8 +21,9 @@ Audit of all 86 published issues against the new accuracy + editorial criteria f
 
 Hard-max length violations, concreteness floor, reframe.sub > 80, missing background images.
 
-### Length hard-max violations (0)
-*None.* All published issues respect the hard-max budget.
+### Length hard-max violations (2)
+- **1967** `cards[2]` — 316 chars (max 300)
+- **1970** `cards[0]` — 305 chars (max 300)
 
 ### Concreteness floor flags (0)
 *None.* All published fact cards have a concrete anchor.
