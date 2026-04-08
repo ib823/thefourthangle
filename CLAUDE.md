@@ -180,6 +180,17 @@ Report all of them in the research brief, identify which is most authoritative (
 ### 3R + accuracy interaction
 The most dangerous overclaims are ones that implicate race, religion, or royalty. The verification bar is **higher** for these claims, not lower, because the harm from a wrong one is greater. If a claim about a 3R-adjacent topic cannot be verified to two independent primary sources, drop it.
 
+### Audit history and tooling
+Past audit snapshots live in [`docs/audits/`](docs/audits/) — each is dated and immutable. Before making editorial decisions on any published issue, check whether it appears in a recent audit report. The audit toolchain:
+
+- `node scripts/audit-published.mjs` — main audit (structural, traceability, source quality, anti-pattern scan)
+- `node scripts/triage-unauditable.mjs` — categorise zero-artifact issues into FALLBACK / LEGACY / ORPHAN
+- `node scripts/confirm-tier2.mjs` — confirm whether Tier 2 corrections are reflected in current cards
+- `node scripts/view-stage3.mjs <id>` — pretty-print any Stage 3 critique cross-referenced with current cards
+- `node scripts/backfill-orphan-pipeline.mjs <id>` — generate research brief stub + Stage 1 JSON + Stage 2-5 browser prompts for any edited issue
+
+The pipeline preambles in `engine/templates/stage{1-6}-preamble.txt` enforce this Accuracy Standard at every stage of generation and review. Future Claude sessions running the publishing pipeline must read the relevant preamble before generating that stage.
+
 ## Content Rules
 - NO references to AI, models, Claude, GPT, or any AI provider
 - Use "6 independent review stages" not "AI models"

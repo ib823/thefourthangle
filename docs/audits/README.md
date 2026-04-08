@@ -6,7 +6,7 @@ Historical snapshots of published-issue audits run via `scripts/audit-published.
 
 | Date | Files | Notes |
 |---|---|---|
-| 2026-04-08 | [audit-published](./audit-published-2026-04-08.md), [tier2-confirmation](./tier2-confirmation-2026-04-08.md), [triage-unauditable](./triage-unauditable-2026-04-08.md) | First full audit pass after the new Accuracy Standard landed in CLAUDE.md. Major editorial cleanup of orphaned legacy issues. |
+| 2026-04-08 | [audit-published](./audit-published-2026-04-08.md), [tier2-confirmation](./tier2-confirmation-2026-04-08.md), [triage-unauditable](./triage-unauditable-2026-04-08.md), [action-sheet](./2026-04-08-action-sheet.md) | First full audit pass after the new Accuracy Standard landed in CLAUDE.md. Major editorial cleanup of orphaned legacy issues. The action sheet is the prioritised manual Stage 2-5 re-review queue. |
 
 ## How to read these reports
 
