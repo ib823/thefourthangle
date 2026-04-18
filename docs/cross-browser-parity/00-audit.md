@@ -6,6 +6,36 @@
 
 ---
 
+## Resolutions from agent escalation (2026-04-18)
+
+The three findings flagged below (see "TL;DR") went to the engagement owner for decision. The audit doc is preserved as the honest point-in-time discovery; this section records what was *decided*, separately from what was *found*. Amendments to the brief live in `docs/cross-browser-parity/brief-v3.md` (PR pending); ADRs live under `docs/adr/`.
+
+### Item 1 — Font budget
+**Decision:** approved. Raise ceiling from 20 KB brotli → **60 KB brotli**. CI measures on-the-wire bytes (`content-encoding: br` if negotiated, raw woff2 otherwise). Keep `font-display: swap` and preload one critical weight per family; lazy-load the rest. Recorded in ADR-0001.
+
+### Item 2 — SSG shell vs SSG content
+**Decision:** Phase 8 is real SSG content-rendering work, not validation. Split into two branches:
+- **`parity/phase-8a-ssg-content`** — move issue body, headline, deck, hero `<picture>`, Opinion Shift score into the Astro frontmatter+template so the static HTML contains the article as real DOM. Svelte island switches from `client:load` → `client:idle` and enhances rather than replaces. **Correctness fix — prerequisite for Phase 8.5 and Phase 9's first-HTML smoke test.**
+- **`parity/phase-8b-image-pipeline`** — AVIF + WebP + JPEG `<picture>` pipeline with responsive widths. Parallel/optional work; ships after 8a.
+
+Phase 8.5's JS-disabled path is promoted from "verify" → **"acceptance criterion for Phase 8a."**
+
+Phase priority order after amendments: Phase 1 → **Phase 8a** (ahead of 2-7 because it's correctness) → Phases 2-7 → Phase 8b → Phase 8.5 validation → Phase 9 → Phase 10.
+
+Client-island hydration policy: prefer `client:idle` over `client:load` for any island sitting on top of content that must be present in the static HTML. Recorded in ADR-0002.
+
+### Item 3 — Sidebar groups
+**Decision:** the invariant is **"four canonical feed sections from `buildFeedSections`, always rendered with count ≥ 0, in canonical order, locked to a `FEED_SECTIONS` const"**, plus **"`Today` is a separate always-rendered surface."**
+
+The v2 brief's "five groups" language is corrected throughout brief-v3: Phase 1 scope, Phase 9 smoke tests, Deliverables checklist, Definition of Done all move to four canonical sections + `Today` sibling.
+
+Phase 1's headline deliverable is this fix. Testing: Vitest unit (empty / partial / fully-populated state returns four entries each), Playwright smoke (all four headers + count badges visible on clean and heavily-used profiles), manual verification in PR (two browsers, different storage states, sidebar structure identical).
+
+### Lighthouse + axe baselines
+**Decision:** approved deferral to first Phase 9 CI run (no Chrome binary in Codespaces dev container). The baseline numbers are explicitly recorded as **TBD — Phase 9** rather than silently missing. Phase 9's PR must check a first baseline into `/docs/cross-browser-parity/baselines/` so future regressions have a comparator.
+
+---
+
 ## TL;DR — escalation items for decision before Phase 1
 
 Three findings contradict the v2 brief's assumed facts and require a decision before work begins.
@@ -334,11 +364,20 @@ Vitest only. 4 test files, all unit:
 
 Playwright: absent. axe: absent. Visual regression: absent. All to be set up from scratch in Phase 9.
 
-## O. Baseline Lighthouse / axe measurements — DEFERRED
+## O. Baseline Lighthouse / axe measurements — TBD (Phase 9)
 
 No Chrome/Chromium binary available in this Codespaces environment (`which chrome chromium` returns empty). `npx lighthouse` and `npx @axe-core/cli` both require a browser runner. Installing Chrome in the dev container is a non-trivial side-effect that I will not take in a read-only audit phase.
 
-**Proposal:** perform initial Lighthouse + axe measurements in the first Phase 9 CI run (GitHub Actions has Chrome available). Those results become the baseline against which subsequent phases are measured. Document baseline in `docs/cross-browser-parity/09-ci.md` at that time.
+**Metrics status:**
+- LCP on `/` (Mobile 3G): **TBD — Phase 9**
+- LCP on `/issue/0146` (Mobile 3G): **TBD — Phase 9**
+- INP on `/` and `/issue/0146`: **TBD — Phase 9**
+- CLS on `/` and `/issue/0146`: **TBD — Phase 9**
+- Lighthouse Performance (Mobile + Desktop): **TBD — Phase 9**
+- Lighthouse Accessibility / Best Practices / SEO: **TBD — Phase 9**
+- `axe-core` serious/critical violations: **TBD — Phase 9**
+
+**Resolution (per Item 3 in Resolutions section above):** Phase 9's PR must produce a first baseline run using the GitHub Actions runner (which has Chrome) and check the resulting reports into **`docs/cross-browser-parity/baselines/`** — at minimum `baselines/lighthouse-home-YYYY-MM-DD.json`, `baselines/lighthouse-issue-YYYY-MM-DD.json`, `baselines/axe-home-YYYY-MM-DD.json`, `baselines/axe-issue-YYYY-MM-DD.json`. These become the comparator for every later phase's regression checks.
 
 ## P. Stable hooks cheatsheet for tests
 
