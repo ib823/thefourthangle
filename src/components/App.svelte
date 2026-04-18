@@ -1024,16 +1024,20 @@
             </div>
           {/if}
           {#each feedSections as section}
-            <div style="margin-bottom:32px;">
+            <div style="margin-bottom:32px;" data-section={section.kind}>
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
                 <span style="font-size: var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:{section.kind === 'continue' ? 'var(--score-warning)' : section.kind === 'new' ? 'var(--status-green)' : section.kind === 'completed' ? 'var(--text-muted)' : 'var(--text-tertiary)'};">{section.label}</span>
-                <span style="font-size: var(--text-micro);color:var(--text-faint);">{section.count}</span>
+                <span style="font-size: var(--text-micro);color:var(--text-faint);" data-section-count>{section.count}</span>
               </div>
-              <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
-                {#each section.issues as issue, i}
-                  <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
-                {/each}
-              </div>
+              {#if section.count === 0}
+                <p style="font-size:var(--text-sm);color:var(--text-muted);margin:0;padding:12px 0;font-style:italic;">Nothing here yet.</p>
+              {:else}
+                <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:16px;">
+                  {#each section.issues as issue, i}
+                    <DesktopCard {issue} index={i} readState={getState(issue.id)} onOpen={() => openIssue(issue)} onPrefetch={() => prefetchIssue(issue)} hasReaction={hasReaction(issue.id)} hasConnections={issueHasConnections(issue.id)} />
+                  {/each}
+                </div>
+              {/if}
             </div>
           {/each}
         </div>
