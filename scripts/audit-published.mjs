@@ -21,18 +21,12 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-// ── Load issues ──
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-if (!issuesMatch) {
-  console.error('FATAL: Could not find ISSUES array in issues.ts');
-  process.exit(1);
-}
-const issues = eval('(' + issuesMatch[1].replace(/;\s*$/, '') + ')');
+const issues = loadIssues();
 const published = issues.filter(i => i.published);
 
 // ── Build slug ↔ id mapping from reader.json files ──

@@ -5,7 +5,7 @@
   import SaveButton from './SaveButton.svelte';
   import ShareModal from './ShareModal.svelte';
   import PushPrompt from './PushPrompt.svelte';
-  import { CARD_TYPES, opinionColor } from '../data/issues';
+  import { CARD_TYPES, opinionColor } from '../data/issue-types';
   import { markCompleted, updateProgress, savePosition } from '../stores/reader';
   import { createSpring, animateSpring, SPRING_DEFAULT, SPRING_SNAPPY, SPRING_RUBBER, type SpringConfig } from '../lib/spring';
   import { createVelocityTracker, classifyGesture, rubberBand } from '../lib/velocity';

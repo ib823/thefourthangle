@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import IssueImage from './IssueImage.svelte';
-  import { opinionLabel } from '../data/issues';
+  import { opinionLabel } from '../data/issue-types';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';

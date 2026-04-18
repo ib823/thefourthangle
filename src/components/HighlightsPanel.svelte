@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { CARD_TYPES } from '../data/issues';
+  import { CARD_TYPES } from '../data/issue-types';
   import { loadFullIssue } from '../lib/issues-loader';
   import SaveButton from './SaveButton.svelte';
 
-  import type { Issue } from '../data/issues';
+  import type { Issue } from '../data/issue-types';
   import type { IssueSummary } from '../lib/issues-loader';
 
   interface Props {

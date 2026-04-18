@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { opinionLabel, CARD_TYPES } from '../data/issues';
+  import { opinionLabel, CARD_TYPES } from '../data/issue-types';
   import { pressAction } from '../lib/actions/press';
   import { tween, countUp, ease } from '../lib/animation';
 

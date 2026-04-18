@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { opinionLabel } from '../data/issues';
+  import { opinionLabel } from '../data/issue-types';
 
   import type { IssueSummary } from '../lib/issues-loader';
   import type { ReadState } from '../stores/reader';

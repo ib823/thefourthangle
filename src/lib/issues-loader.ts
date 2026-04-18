@@ -3,7 +3,7 @@
  * Feed summaries are fetched once on app init.
  * Full issue data is fetched on demand when the reader opens.
  */
-import type { Issue } from '../data/issues';
+import type { Issue } from '../data/issue-types';
 import { freshFetch } from './build';
 
 /** Feed summary — same as Issue but cards lack big/sub text */

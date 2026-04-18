@@ -7,14 +7,12 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const engineOutDir = join(root, 'engine', 'output');
 
-// Load issues
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const m = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-const issues = eval('(' + m[1].replace(/;\s*$/, '') + ')');
+const issues = loadIssues();
 
 // id -> slug
 const idToSlug = {};

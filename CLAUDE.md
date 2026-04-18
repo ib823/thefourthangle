@@ -7,35 +7,48 @@ Non-partisan Malaysian issues analysis platform. Every issue goes through a 6-st
 
 ### To create a new issue:
 1. Research the topic thoroughly from multiple sources
-2. Create the issue object in `src/data/issues.ts` following the exact format below
-3. Set `published: true` to make it visible in the feed
+2. Create a new file `src/data/issues/{id}.json` following the exact format below (id is the 4-digit string)
+3. Set `"published": true` to make it visible in the feed
 4. Commit and push to `main` — GitHub Actions auto-builds and deploys
 
-### Issue format (add to the ISSUES array in `src/data/issues.ts`):
-```typescript
+Issues are stored one-per-file in `src/data/issues/`. The loader in `src/data/issues.ts` aggregates them at build time (alphanumeric by filename). Do NOT put issue content back into `src/data/issues.ts` — that file is now a thin loader. Types and helpers (`Issue`, `Card`, `CARD_TYPES`, `opinionLabel`, `opinionColor`, `issueCategory`) live in `src/data/issue-types.ts`.
+
+### Issue format (new file `src/data/issues/{id}.json`):
+```json
 {
-  id: "XXXX",              // 4-digit string, unique, sequential
-  opinionShift: 73,        // 0-100: how much reader would miss from headline alone
-  status: "new",           // "new" | "updated" | null
-  edition: 1,              // increment on updates
-  headline: "...",         // max 80 chars, topic-first, no clickbait
-  context: "...",          // 1-2 sentences of factual background
-  published: true,         // true = visible in feed, false = hidden
-  stageScores: { pa: 85, ba: 72, fc: 88, af: 65, ct: 52, sr: 78 },
-  finalScore: 73.2,        // 0-100 neutrality score
-  related: ["0142"],       // IDs of connected issues (optional)
-  sourceDate: "2026-03-28", // when source info was retrieved
-  cards: [
-    { t: "hook", big: "What they said — the surface claim", sub: "Context that sets up the gap between claim and reality" },
-    { t: "fact", big: "What we found — first factual finding", sub: "Supporting evidence with specific numbers", lens: "Legal" },
-    { t: "fact", big: "Second finding from different angle", sub: "Contrasting data point", lens: "Economic" },
-    { t: "fact", big: "Third finding — the missing voice", sub: "Perspective that mainstream coverage omits", lens: "Social" },
-    { t: "reframe", big: "The real question nobody is asking", sub: "" },
-    { t: "analogy", big: "Think of it like a building inspector who only checks the lobby", sub: "Accessible comparison that reframes the issue for everyday understanding" },
-    { t: "view", big: "The considered view — balanced synthesis", sub: "" },
+  "id": "XXXX",
+  "opinionShift": 73,
+  "status": "new",
+  "edition": 1,
+  "headline": "...",
+  "context": "...",
+  "published": true,
+  "stageScores": { "pa": 85, "ba": 72, "fc": 88, "af": 65, "ct": 52, "sr": 78 },
+  "finalScore": 73.2,
+  "related": ["0142"],
+  "sourceDate": "2026-03-28",
+  "cards": [
+    { "t": "hook", "big": "What they said — the surface claim", "sub": "Context that sets up the gap between claim and reality" },
+    { "t": "fact", "big": "What we found — first factual finding", "sub": "Supporting evidence with specific numbers", "lens": "Legal" },
+    { "t": "fact", "big": "Second finding from different angle", "sub": "Contrasting data point", "lens": "Economic" },
+    { "t": "fact", "big": "Third finding — the missing voice", "sub": "Perspective that mainstream coverage omits", "lens": "Social" },
+    { "t": "reframe", "big": "The real question nobody is asking", "sub": "" },
+    { "t": "analogy", "big": "Think of it like a building inspector who only checks the lobby", "sub": "Accessible comparison that reframes the issue for everyday understanding" },
+    { "t": "view", "big": "The considered view — balanced synthesis", "sub": "" }
   ]
 }
 ```
+
+Field notes:
+- `id`: 4-digit string, unique, sequential. Must match the filename (`{id}.json`).
+- `headline`: max 80 chars, topic-first, no clickbait.
+- `context`: 1-2 sentences of factual background.
+- `published`: `true` = visible in feed; `false` or absent = hidden.
+- `opinionShift`: 0–100, how much reader would miss from headline alone.
+- `status`: `"new"`, `"updated"`, or `null`.
+- `finalScore`: 0–100 editorial quality score.
+- `related`: array of connected issue IDs (optional).
+- `sourceDate`: ISO date when source info was retrieved.
 
 ### Card types:
 - `hook` — "What they said" — the mainstream narrative / surface claim
@@ -63,9 +76,9 @@ Legal, Rights, Economic, Governance, Technology, Social, Political, Health, Envi
 - Unpublished issues still accessible via direct URL
 
 ### To update an existing issue:
-1. Find the issue by ID in `src/data/issues.ts`
+1. Open `src/data/issues/{id}.json`
 2. Update the content
-3. Change `status: "updated"`, increment `edition`
+3. Change `"status": "updated"`, increment `edition`
 4. Commit and push
 
 ## Length Budget — Bite-Size Standard
@@ -215,7 +228,10 @@ The pipeline preambles in `engine/templates/stage{1-6}-preamble.txt` enforce thi
 - **Section label**: "Earlier Issues" (not "Explore") for older issues in sidebar/feed.
 
 ## Architecture
-- `src/data/issues.ts` — all issue content
+- `src/data/issues/{id}.json` — one file per issue (canonical content source)
+- `src/data/issues.ts` — thin loader that aggregates the per-issue JSONs via `import.meta.glob`
+- `src/data/issue-types.ts` — shared types and helpers (`Issue`, `Card`, `CARD_TYPES`, `opinionLabel`, `opinionColor`, `issueCategory`)
+- `scripts/lib/load-issues.mjs` — shared loader used by all Node build scripts
 - `src/components/` — Svelte 5 UI components
 - `scripts/` — build pipeline (OG images, search index, verification)
 - `workers/notify/` — Cloudflare Worker for push notifications
@@ -247,7 +263,7 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
 
 #### PHASE 0: INIT
 1. `git pull --rebase origin main` — sync with remote
-2. Scan `src/data/issues.ts` for the highest issue ID → next ID = max + 1
+2. Scan `src/data/issues/` filenames for the highest issue ID → next ID = max + 1
 3. Derive slug from topic (kebab-case, e.g., `temple-demolition-hate-crime`)
 4. Ensure `engine/briefs/`, `engine/output/`, `engine/prompts-generated/` directories exist
 
@@ -363,7 +379,7 @@ For each stage response:
      - No UNVERIFIED DETAIL (any specific not traced above)
    - [ ] **NO DRIFT FROM STAGE 6**: every wording change introduced during synthesis (Phase 5) was either applied from a stage critique with explicit traceability, or independently re-verified per stage6-preamble. No silent rephrasings that change meaning.
 4. Present legal + accuracy clearance report to user
-5. Present complete issue object (ready for `issues.ts`)
+5. Present complete issue object (ready to write to `src/data/issues/{id}.json`)
 
 #### PHASE 7: SHERLOCK + IMAGE
 **Sherlock Connection Scan:**
@@ -400,9 +416,9 @@ Save as: public/og/backgrounds/issue-{ID}-bg.png
 
 #### PHASE 8: VALIDATE + REVIEW
 1. Process uploaded image → move to `public/og/backgrounds/issue-{ID}-bg.png`
-2. Insert issue into `src/data/issues.ts` (append before closing `];`)
-3. Update `related[]` on connected issues (bidirectional)
-4. Set `published: true`, `sourceDate` to today's date
+2. Write issue to `src/data/issues/{ID}.json`
+3. Update `related[]` on connected issues (bidirectional — edit each connected issue's JSON file)
+4. Set `"published": true` and `"sourceDate"` to today's date
 5. Run `node scripts/validate-issues.mjs` — **must exit 0**
 6. Verify background image exists at expected path
 7. Grep all issue text for stealth banned terms (must find zero)
@@ -419,10 +435,11 @@ Save as: public/og/backgrounds/issue-{ID}-bg.png
 #### PHASE 9: DEPLOY
 After user says "Publish":
 1. `git pull --rebase origin main` — handle parallel worker changes
-2. If rebase conflict in `issues.ts`: resolve by keeping both entries (they're independent array items), re-run validation
+2. If rebase conflict in a related issue's JSON (because multiple workers added connections): resolve by merging the `related` arrays, re-run validation. New issue JSONs rarely conflict because each is its own file.
 3. If conflict in other files: alert user
 4. Stage all files:
-   - `src/data/issues.ts` (modified)
+   - `src/data/issues/{ID}.json` (new)
+   - `src/data/issues/{related-ID}.json` for each bidirectional connection update
    - `public/og/backgrounds/issue-{ID}-bg.png` (new)
    - `engine/briefs/{slug}.md` (new)
    - `engine/output/{slug}-stage*.json` (7 files)

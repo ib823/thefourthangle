@@ -3,23 +3,15 @@
  * - public/issues-feed.json  — feed summaries (no card text)
  * - public/issues/[id].json  — full issue per file
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-// Extract ISSUES from TypeScript (same pattern as other build scripts)
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-if (!issuesMatch) { console.error('Could not find ISSUES'); process.exit(1); }
-
-let issues;
-try {
-  let arr = issuesMatch[1].replace(/;\s*$/, '');
-  issues = eval('(' + arr + ')');
-} catch (e) { console.error('Parse error:', e.message); process.exit(1); }
+const issues = loadIssues();
 
 // --- Filter to published issues only for the feed ---
 const publishedIssues = issues.filter(i => i.published === true);

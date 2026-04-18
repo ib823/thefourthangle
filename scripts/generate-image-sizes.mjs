@@ -5,9 +5,10 @@
  * Source:  issue-{ID}-bg.{jpg,png}          — original art (uploaded)
  * Output:  manifest.json                    — list of IDs with source art
  */
-import { readdirSync, mkdirSync, writeFileSync, readFileSync, unlinkSync } from 'node:fs';
+import { readdirSync, mkdirSync, writeFileSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -15,15 +16,7 @@ const dir = join(root, 'public', 'og', 'backgrounds');
 
 mkdirSync(dir, { recursive: true });
 
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-if (!issuesMatch) { console.error('Could not find ISSUES'); process.exit(1); }
-
-let issues;
-try {
-  let arr = issuesMatch[1].replace(/;\s*$/, '');
-  issues = eval('(' + arr + ')');
-} catch (e) { console.error('Parse error:', e.message); process.exit(1); }
+const issues = loadIssues();
 
 const publishedIds = new Set(issues.filter(issue => issue.published === true).map(issue => issue.id));
 const files = readdirSync(dir).filter(file => /^issue-\d+-bg\.(jpg|jpeg|png)$/i.test(file));

@@ -1,7 +1,8 @@
 ---
 import '../../styles/global.css';
 import App from '../../components/App.svelte';
-import { ISSUES, opinionLabel } from '../../data/issues';
+import { ISSUES } from '../../data/issues';
+import { opinionLabel } from '../../data/issue-types';
 
 export function getStaticPaths() {
   return ISSUES.filter(issue => issue.published === true).map(issue => ({

@@ -4,22 +4,15 @@
  * then wraps them in a consistent T4A brand style prompt.
  * Output: public/og/prompts.json — feed to AI image generator.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-// ── Parse issues ──
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-if (!issuesMatch) { console.error('Could not find ISSUES'); process.exit(1); }
-let issues;
-try {
-  let arr = issuesMatch[1].replace(/;\s*$/, '');
-  issues = eval('(' + arr + ')');
-} catch (e) { console.error('Parse error:', e.message); process.exit(1); }
+const issues = loadIssues();
 
 // ── Master style prompt (T4A trademark) ──
 const MASTER_STYLE = `Abstract minimalist editorial illustration. Deep dark navy background (#0f0f23). Single symbolic object as the focal point, centered-left in frame. Muted warm color palette: amber highlights, steel blue accents, earth brown tones. Soft photographic grain texture throughout. Subtle dark vignette at edges. Dramatic single-source low-key lighting from upper left, amber-tinted. No text, no words, no letters, no logos, no watermarks. No human faces. Clean negative space on the right 60% of the frame. Atmospheric, contemplative, journalistic mood. Slight bird's-eye perspective. Ultra-high quality, 8K detail. Aspect ratio exactly 1.91:1 wide landscape format.`;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Issue } from '../data/issues';
+  import type { Issue } from '../data/issue-types';
   import { onMount, onDestroy } from 'svelte';
   import { stagger, haptic } from '../lib/animation';
   import { createSpring, animateSpring } from '../lib/spring';

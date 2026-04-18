@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import OpinionBar from './OpinionBar.svelte';
   import VerdictBar from './VerdictBar.svelte';
-  import { CARD_TYPES, opinionColor, opinionLabel } from '../data/issues';
+  import { CARD_TYPES, opinionColor, opinionLabel } from '../data/issue-types';
   import { getReadState, markCompleted, updateProgress } from '../stores/reader';
   import { countUp } from '../lib/animation';
   import SaveButton from './SaveButton.svelte';
@@ -11,7 +11,7 @@
   import IssueImage from './IssueImage.svelte';
   import { withBuildId } from '../lib/build';
 
-  import type { Issue } from '../data/issues';
+  import type { Issue } from '../data/issue-types';
 
   interface Connection {
     id: string;

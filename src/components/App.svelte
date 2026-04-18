@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { Issue } from '../data/issues';
-  import { issueCategory, CARD_TYPES } from '../data/issues';
+  import type { Issue } from '../data/issue-types';
+  import { issueCategory, CARD_TYPES } from '../data/issue-types';
   import { addNotification } from '../stores/notifications';
   import { loadFeedIssues, loadFullIssue, loadFactGraph, getConnections, getConnectionCount, isFactGraphLoaded } from '../lib/issues-loader';
   import Header from './Header.svelte';

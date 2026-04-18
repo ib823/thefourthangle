@@ -2,6 +2,7 @@ import { createHash, createPrivateKey, createPublicKey, sign } from 'node:crypto
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -108,27 +109,7 @@ function buildReadableText(issue) {
   return lines.join('\n');
 }
 
-// Extract ISSUES array from the TypeScript file
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-if (!issuesMatch) {
-  console.error('Could not find ISSUES array in issues.ts');
-  process.exit(1);
-}
-
-// Evaluate the array (it's pure JSON-compatible data literals)
-let issues;
-try {
-  // Clean up TypeScript-specific syntax for eval
-  let arrayStr = issuesMatch[1];
-  // Remove trailing semicolons
-  arrayStr = arrayStr.replace(/;\s*$/, '');
-  issues = eval('(' + arrayStr + ')');
-} catch (e) {
-  console.error('Failed to parse ISSUES array:', e.message);
-  process.exit(1);
-}
-
+const issues = loadIssues();
 const publishedIssues = issues.filter(issue => issue.published === true);
 
 const manifest = {

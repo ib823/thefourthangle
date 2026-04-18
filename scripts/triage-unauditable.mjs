@@ -19,16 +19,14 @@
 import { readFileSync, existsSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const engineOutDir = join(root, 'engine', 'output');
 const engineBriefDir = join(root, 'engine', 'briefs');
 
-// ── Load issues ──
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const issuesMatch = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-const issues = eval('(' + issuesMatch[1].replace(/;\s*$/, '') + ')');
+const issues = loadIssues();
 const published = issues.filter(i => i.published);
 
 // ── Load fallback rotation ──

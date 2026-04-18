@@ -1,6 +1,6 @@
 <script lang="ts">
   import { QUOTES } from '../data/quotes';
-  import { opinionLabel, opinionColor as issueOpinionColor } from '../data/issues';
+  import { opinionLabel, opinionColor as issueOpinionColor } from '../data/issue-types';
   import IssueImage from './IssueImage.svelte';
 
   import type { IssueSummary } from '../lib/issues-loader';

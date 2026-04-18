@@ -20,6 +20,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -33,10 +34,7 @@ if (ids.length === 0) {
   process.exit(1);
 }
 
-// Load issues
-const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-const m = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-const issues = eval('(' + m[1].replace(/;\s*$/, '') + ')');
+const issues = loadIssues();
 
 // Existing slug mapping (so we reuse slug if one already exists)
 const idToSlug = {};

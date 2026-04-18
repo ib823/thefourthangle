@@ -16,6 +16,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadIssues } from './lib/load-issues.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -90,9 +91,7 @@ const stage3 = JSON.parse(readFileSync(stage3Path, 'utf8'));
 // ── Load currently-published issue cards (for cross-reference) ──
 let currentIssue = null;
 try {
-  const tsContent = readFileSync(join(root, 'src', 'data', 'issues.ts'), 'utf8');
-  const m = tsContent.match(/export const ISSUES:\s*Issue\[\]\s*=\s*(\[[\s\S]*\]);?\s*$/m);
-  const issues = eval('(' + m[1].replace(/;\s*$/, '') + ')');
+  const issues = loadIssues();
   currentIssue = issues.find(i => i.id === id);
 } catch (_) {}
 
