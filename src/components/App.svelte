@@ -390,6 +390,10 @@
   const goOnline = () => { isOffline = false; };
 
   onMount(() => {
+    // Signal to the static /issue/[id] article CSS that the interactive
+    // reader has mounted — the SSG fallback hides itself via a CSS rule
+    // keyed on this class. See src/pages/issue/[id].astro and ADR-0002.
+    document.documentElement.classList.add('js-reader-mounted');
     document.body.classList.add('app-shell-root');
     syncShellModeClass();
     initInstallState();
