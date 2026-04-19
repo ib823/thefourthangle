@@ -70,8 +70,11 @@ jobs:
         # under the 30-minute job timeout. See docs/cross-browser-parity/09-ci.md.
         run: npx playwright install --with-deps chromium
 
-      - name: Playwright e2e (chromium matrix only)
-        run: npm run e2e:chromium
+      - name: Playwright e2e (chromium-desktop baseline)
+        # Deliberately narrow for the first green CI. Widen to chromium-mobile
+        # / tablet and firefox / webkit engines in follow-up PRs once this
+        # baseline is stable. See docs/cross-browser-parity/09-ci.md.
+        run: npm run e2e:ci
         env:
           CI: 'true'
 

@@ -10,12 +10,19 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests/e2e',
-  timeout: 30_000,
+  // Shorter per-test wall-clock — most of our tests are DOM assertions or
+  // raw HTML fetches that should complete in seconds. A hang here is a bug
+  // to surface, not something to retry around.
+  timeout: 20_000,
   expect: { timeout: 5_000 },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // No CI retries — retry-masked green hides real flakes. A flake gets a
+  // specific fix in a follow-up PR, not a blanket retry.
+  retries: 0,
+  // GH Actions ubuntu-latest has 4 cores; 2 parallel browsers keeps headroom
+  // for the Svelte hydration + http-server process. Locally, use defaults.
+  workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI ? [['html'], ['github']] : 'list',
 
   use: {
