@@ -7,11 +7,11 @@
 Six amendments, applied in-repo before Phase 1 opens:
 
 1. **Phase 4 font budget:** 20 KB brotli → **60 KB brotli** (woff2 is already brotli-compressed internally; wrapping with HTTP brotli gains nothing). Measured on-the-wire. ADR-0001.
-2. **Phase 8 split:** **Phase 8a — SSG content migration** (correctness; prerequisite for Phase 8.5 and Phase 9's raw-HTML smoke test) + **Phase 8b — responsive image pipeline** (AVIF/WebP/JPEG `<picture>`). 8a lands immediately after Phase 1, ahead of Phases 2-7.
+2. **Phase 8 split (ADR-0002):** **Phase 8a — SSG content migration** (correctness; prerequisite for Phase 8.5 and Phase 9's raw-HTML smoke test) + **Phase 8b — responsive image pipeline** (AVIF/WebP/JPEG `<picture>`). 8a lands immediately after Phase 1, ahead of Phases 2-7.
 3. **Phase 8.5 JS-disabled path:** "verify" → **"acceptance criterion for Phase 8a."**
 4. **Phase 1 sidebar invariant:** "five groups" → **"four canonical `buildFeedSections` sections, always rendered with count ≥ 0, locked to a `FEED_SECTIONS` const" + "`Today` is a separate always-rendered surface."** `buildFeedSections` produces four; `Today` lives elsewhere by design.
 5. **Lighthouse / axe baselines:** marked **TBD — Phase 9**. Phase 9's PR must land first baselines into `docs/cross-browser-parity/baselines/`.
-6. **Svelte island hydration:** prefer `client:idle` over `client:load` for any island sitting on top of content that should be in the static HTML. ADR-0002.
+6. **Svelte island hydration:** prefer `client:idle` over `client:load` for any island sitting on top of content that should be in the static HTML. ADR-0003.
 
 Phase priority order after amendments:
 
@@ -99,7 +99,7 @@ See [`00-audit.md`](./00-audit.md). All three escalation items resolved via the 
    - **Import**: accepts JSON, validates, merges with conflict resolution (`max(progress)` per read-state, latest `ts` wins for position).
    - **Clear on this device** with confirm dialog.
 4. Storage-blocked path: single-line banner "Reading progress isn't being saved in this browser. Export manually or open in another browser."
-5. No accounts in this phase. File ADR-0003 "future sync via passkey-signed JSON on Cloudflare KV" for later discussion.
+5. No accounts in this phase. File ADR-0004 "future sync via passkey-signed JSON on Cloudflare KV" for later discussion.
 6. Vitest coverage:
    - `buildFeedSections()` returns **exactly 4 entries** on: empty state, partial state, fully populated state, over-populated state.
    - Canonical order preserved.
@@ -112,7 +112,7 @@ See [`00-audit.md`](./00-audit.md). All three escalation items resolved via the 
 
 ## Phase 8a — SSG content migration (prerequisite for 8.5 and 9)
 
-**Rationale:** `00-audit.md` § 2 found `/issue/[id]` raw HTML contains only the Svelte island placeholder. JS-disabled readers see nothing. Webviews that strip JS, throttled 3G before hydration, and strict content blockers all hit the same failure mode.
+**Rationale:** `00-audit.md` § 2 found `/issue/[id]` raw HTML contains only the Svelte island placeholder. JS-disabled readers see nothing. Webviews that strip JS, throttled 3G before hydration, and strict content blockers all hit the same failure mode. Scope and alternatives recorded in [ADR-0002](../adr/0002-phase-8-split-ssg-content-vs-image-pipeline.md); hydration-directive policy in [ADR-0003](../adr/0003-client-idle-for-content-islands.md).
 
 1. Move content rendering into `src/pages/issue/[id].astro` frontmatter + template:
    - `<article>` landmark (currently absent).
@@ -214,7 +214,7 @@ Explicitly out of scope: `unicode-range` subsetting beyond what's already in pla
 
 ## Phase 8b — Responsive image pipeline
 
-Lands after 8a; parallelizable but not blocking.
+Lands after 8a; parallelizable but not blocking. See [ADR-0002](../adr/0002-phase-8-split-ssg-content-vs-image-pipeline.md) for the split rationale.
 
 1. Generate **AVIF + WebP + JPEG** fallback at 1x/2x/3x for hero illustrations.
 2. `<picture>` with correctly ordered `<source>` elements.
@@ -279,7 +279,7 @@ Update `README.md` "Cross-browser support" section. Update `CONTRIBUTING.md` "Pa
 
 - Pixel-identical rendering across browsers, OSes, viewports.
 - Identical font metrics, scrollbar chrome, native picker chrome, or emoji glyph shapes.
-- A new auth or account system (deferred to ADR-0003).
+- A new auth or account system (deferred to ADR-0004).
 - A native app; PWA rework beyond install metadata.
 - A new CMS, content pipeline, or framework migration.
 - Progressive-enhancement scaffolding for CSS features not currently in use.

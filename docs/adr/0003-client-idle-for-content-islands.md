@@ -1,7 +1,7 @@
-# ADR-0002: Prefer `client:idle` over `client:load` for content-bearing Svelte islands
+# ADR-0003: Prefer `client:idle` over `client:load` for content-bearing Svelte islands
 
 **Status:** Accepted (2026-04-18)
-**Related:** `docs/cross-browser-parity/00-audit.md` § 2 (SSG shell vs content finding); `docs/cross-browser-parity/brief-v3.md` Phase 8a.
+**Related:** ADR-0002 (Phase 8 split); `docs/cross-browser-parity/00-audit.md` § 2 (SSG shell vs content finding); `docs/cross-browser-parity/brief-v3.md` Phase 8a.
 
 ## Context
 
