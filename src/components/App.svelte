@@ -9,6 +9,7 @@
   import DesktopFeed from './DesktopFeed.svelte';
   import DesktopReader from './DesktopReader.svelte';
   import HighlightsPanel from './HighlightsPanel.svelte';
+  import StorageBlockedBanner from './StorageBlockedBanner.svelte';
   import LibraryTabs from './LibraryTabs.svelte';
   import MobileDock from './MobileDock.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
@@ -860,6 +861,7 @@
 {#if isOffline}
   <div role="status" aria-live="polite" style="background:var(--score-warning);color:#fff;text-align:center;padding:6px;font-family:var(--font-body);font-size: var(--text-sm);font-weight:600;position:sticky;top:0;left:0;right:0;z-index:9999;flex-shrink:0;">You're offline — reading cached content</div>
 {/if}
+<StorageBlockedBanner />
 
   {#if viewMode === 'mobile'}
   <div class="app-shell app-shell--mobile">
