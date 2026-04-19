@@ -321,7 +321,11 @@
     <p style="font-size: var(--text-reading-lg);color:var(--text-secondary);font-weight: 400;line-height:1.65;margin:16px 0 0;max-width:62ch;">{issue.context}</p>
 
     <div style="margin:24px -24px 0;overflow:hidden;background:var(--bg-sunken);border-radius: var(--radius-xl);">
-      <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="sync" fetchpriority="high" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+      <picture>
+        <source type="image/avif" srcset={`${withBuildId(`/og/issue-${issue.id}-640w.avif`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.avif`)} 960w, ${withBuildId(`/og/issue-${issue.id}-1200w.avif`)} 1200w`} sizes="(min-width: 70rem) 700px, 100vw" />
+        <source type="image/webp" srcset={`${withBuildId(`/og/issue-${issue.id}-640w.webp`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.webp`)} 960w, ${withBuildId(`/og/issue-${issue.id}-1200w.webp`)} 1200w`} sizes="(min-width: 70rem) 700px, 100vw" />
+        <img src={withBuildId(`/og/issue-${issue.id}-1200w.jpg`)} srcset={`${withBuildId(`/og/issue-${issue.id}-640w.jpg`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.jpg`)} 960w, ${withBuildId(`/og/issue-${issue.id}-1200w.jpg`)} 1200w`} sizes="(min-width: 70rem) 700px, 100vw" alt="" width="1200" height="630" loading="eager" decoding="sync" fetchpriority="high" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+      </picture>
     </div>
 
     <div style="margin:24px 0 0;padding:20px 24px;border-radius: var(--radius-xl);border:1px solid var(--border-subtle);background:linear-gradient(135deg, rgba(210,140,40,0.08) 0%, rgba(255,255,255,0.9) 55%);display:grid;grid-template-columns:minmax(110px, 0.4fr) minmax(0, 1fr);gap:20px;align-items:center;">
@@ -426,7 +430,11 @@
                 onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
               >
                 <div style="width:36px;height:36px;flex-shrink:0;border-radius: var(--radius-sm);overflow:hidden;background:var(--bg-sunken);">
-                  <img src={withBuildId(`/og/issue-${conn.id}.png`)} alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" onerror={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }} />
+                  <picture>
+                    <source type="image/avif" srcset={withBuildId(`/og/issue-${conn.id}-640w.avif`)} />
+                    <source type="image/webp" srcset={withBuildId(`/og/issue-${conn.id}-640w.webp`)} />
+                    <img src={withBuildId(`/og/issue-${conn.id}-640w.jpg`)} alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" onerror={(e) => { (e.currentTarget as HTMLElement).style.display = 'none'; }} />
+                  </picture>
                 </div>
                 <div style="flex:1;min-width:0;">
                   <div style="display:flex;align-items:center;gap:8px;">

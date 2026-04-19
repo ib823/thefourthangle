@@ -377,7 +377,11 @@
       <!-- Preview card -->
       <div class="preview-card">
         <div style="margin:-12px -14px 10px;border-radius: var(--radius-md) var(--radius-md) 0 0;overflow:hidden;background:var(--bg-sunken);">
-          <img src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(BUILD_ID)}`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+          <picture>
+            <source type="image/avif" srcset={`/og/issue-${issue.id}-640w.avif?v=${encodeURIComponent(BUILD_ID)}`} />
+            <source type="image/webp" srcset={`/og/issue-${issue.id}-640w.webp?v=${encodeURIComponent(BUILD_ID)}`} />
+            <img src={`/og/issue-${issue.id}-640w.jpg?v=${encodeURIComponent(BUILD_ID)}`} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+          </picture>
         </div>
         <div class="preview-headline">{issue.headline}</div>
         <div class="preview-context">{previewText}</div>

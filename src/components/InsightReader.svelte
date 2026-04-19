@@ -1085,7 +1085,11 @@
   {#if current === 0 && !completed}
     <div class="reader-hero" style="padding:0 20px;margin-bottom:8px;">
       <div style="border-radius: var(--radius-md);overflow:hidden;background:var(--bg-sunken);max-width:440px;margin:0 auto;">
-          <img src={withBuildId(`/og/issue-${issue.id}.png`)} alt="" loading="eager" decoding="async" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+        <picture>
+          <source type="image/avif" srcset={`${withBuildId(`/og/issue-${issue.id}-640w.avif`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.avif`)} 960w`} sizes="(max-width: 460px) 100vw, 440px" />
+          <source type="image/webp" srcset={`${withBuildId(`/og/issue-${issue.id}-640w.webp`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.webp`)} 960w`} sizes="(max-width: 460px) 100vw, 440px" />
+          <img src={withBuildId(`/og/issue-${issue.id}-960w.jpg`)} srcset={`${withBuildId(`/og/issue-${issue.id}-640w.jpg`)} 640w, ${withBuildId(`/og/issue-${issue.id}-960w.jpg`)} 960w`} sizes="(max-width: 460px) 100vw, 440px" alt="" width="960" height="504" loading="eager" decoding="async" fetchpriority="high" style="width:100%;aspect-ratio:1.91/1;object-fit:cover;display:block;" onerror={(e) => { const w = (e.currentTarget as HTMLElement)?.parentElement?.parentElement?.parentElement; if (w) w.style.display = 'none'; }} />
+        </picture>
       </div>
     </div>
   {/if}

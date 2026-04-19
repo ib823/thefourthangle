@@ -19,8 +19,11 @@ const outDir = join(root, 'public', 'og');
 const bgDir = join(root, 'public', 'og', 'backgrounds');
 mkdirSync(outDir, { recursive: true });
 
+// Clean regenerable artefacts for all formats. We keep the /og/backgrounds/
+// source art, which is checked into the repo and hand-authored.
 for (const file of readdirSync(outDir)) {
-  if (file.startsWith('issue-') && file.endsWith('.png')) {
+  if (!file.startsWith('issue-')) continue;
+  if (/\.(png|webp|avif|jpg|jpeg)$/i.test(file)) {
     unlinkSync(join(outDir, file));
   }
 }
@@ -47,20 +50,27 @@ for (const issue of published) {
 
     const outPath = join(outDir, `issue-${issue.id}.png`);
 
-    // The art IS the OG — resize to 1200×630 with center crop
+    // The art IS the OG — resize to 1200×630 with center crop.
+    // This PNG is kept at canonical 1200×630 because it is the URL that
+    // goes into <meta property="og:image"> for social scrapers, which do
+    // not all understand <picture>.
     await sharp(bgPath)
       .resize(1200, 630, { fit: 'cover', position: 'centre' })
       .png({ compressionLevel: 9 })
       .toFile(outPath);
 
-    // Generate WebP variants at 640w, 960w, 1200w for responsive srcset
+    // Responsive variants for <picture> delivery. See ADR-0002 Phase 8b.
+    // Widths target 1x / 2x / 3x scenarios: small phone portrait (~375 CSS
+    // px × 1.7 DPR), medium (~700 CSS px), and large (~1200 CSS px).
+    // Encode order per width: AVIF → WebP → JPEG.
     const widths = [640, 960, 1200];
     for (const w of widths) {
       const h = Math.round(w / 1.9047619); // maintain 1.91:1 aspect
-      await sharp(bgPath)
-        .resize(w, h, { fit: 'cover', position: 'centre' })
-        .webp({ quality: 80 })
-        .toFile(join(outDir, `issue-${issue.id}-${w}w.webp`));
+      const sized = sharp(bgPath).resize(w, h, { fit: 'cover', position: 'centre' });
+      // Clone the resized pipeline per encoder; sharp pipelines are single-use.
+      await sized.clone().avif({ quality: 55, effort: 6 }).toFile(join(outDir, `issue-${issue.id}-${w}w.avif`));
+      await sized.clone().webp({ quality: 80 }).toFile(join(outDir, `issue-${issue.id}-${w}w.webp`));
+      await sized.clone().jpeg({ quality: 82, mozjpeg: true }).toFile(join(outDir, `issue-${issue.id}-${w}w.jpg`));
     }
 
     count++;
