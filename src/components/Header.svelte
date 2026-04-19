@@ -82,7 +82,7 @@
       }}
     >
       <Logo size={72} />
-      <div class="brand-text-block">
+      <div class="brand-text-block" translate="no">
         <span class="brand-name">The Fourth Angle</span>
         <span class="brand-tagline">Read past the first telling.</span>
       </div>
