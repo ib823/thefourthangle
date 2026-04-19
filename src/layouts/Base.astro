@@ -36,6 +36,23 @@ const ogImage = `${siteUrl}/og-image.png?v=${encodeURIComponent(buildId)}`;
   */}
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <script is:inline>
+    // Phase 8.5 — in-app webview detection. Runs before any other script
+    // so dataset.env is set when Phase 3's view-transition click handler
+    // checks it. Pattern covers Facebook/Messenger (FBAN/FBAV), Instagram,
+    // Line, TikTok, WeChat (MicroMessenger), X/Twitter (generic Twitter),
+    // and the Android wv token. False positives are benign: webview-gated
+    // features degrade gracefully (View Transitions → instant navigation,
+    // nested backdrop-filter → solid background).
+    (function () {
+      try {
+        var ua = navigator.userAgent || '';
+        if (/FBAN|FBAV|Instagram|Line|TikTok|\bwv\b|MicroMessenger|Twitter/i.test(ua)) {
+          document.documentElement.dataset.env = 'webview';
+        }
+      } catch (_) { /* leave unset */ }
+    })();
+  </script>
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImage} />
