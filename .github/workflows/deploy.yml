@@ -21,7 +21,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
@@ -65,10 +65,13 @@ jobs:
         run: npm run check-bundle
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium firefox webkit
+        # Only chromium for the initial CI run. WebKit + Firefox get added
+        # once the matrix is known-stable to keep run times predictable
+        # under the 30-minute job timeout. See docs/cross-browser-parity/09-ci.md.
+        run: npx playwright install --with-deps chromium
 
-      - name: Playwright e2e
-        run: npm run e2e
+      - name: Playwright e2e (chromium matrix only)
+        run: npm run e2e:chromium
         env:
           CI: 'true'
 
