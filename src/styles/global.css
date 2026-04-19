@@ -240,7 +240,7 @@ body.app-shell-root #main-content {
 .pattern-panel{background:var(--bg);border-radius: var(--radius-lg) var(--radius-lg) 0 0;padding:0 20px max(20px,env(safe-area-inset-bottom,20px));max-width:400px;width:100%;box-shadow:0 -4px 40px rgba(0,0,0,.12);position:relative;max-height:80vh;overflow-y:auto;transform:translateY(100%);transition:transform 300ms var(--ease-out-expo,cubic-bezier(.16,1,.3,1)),opacity 200ms ease;will-change:transform;opacity:0}
 .pattern-panel--visible{transform:translateY(0);opacity:1}
 @media(min-width:640px){.pattern-panel{border-radius: var(--radius-lg);box-shadow:0 24px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06);max-height:max-content;margin:auto 0;padding:0 24px 24px;transform:scale(.95) translateY(8px);opacity:0}.pattern-panel--visible{transform:scale(1) translateY(0);opacity:1}}
-.pattern-issue-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius: var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--border-subtle);cursor:pointer;width:100%;text-align:left;transition:background var(--duration-fast,150ms) ease}
+.pattern-issue-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius: var(--radius-lg);background:var(--bg-elevated);border:1px solid var(--border-subtle);cursor:pointer;width:100%;text-align:start;transition:background var(--duration-fast,150ms) ease}
 .pattern-issue-card:hover{background:var(--bg-sunken)}
 
 .sr-only {
@@ -336,6 +336,20 @@ body.app-shell-root #main-content {
     font-size: max(1rem, var(--text-body)) !important;
   }
 }
+
+/*
+  Foldable handling — experimental media query (MSFT proposal, limited
+  support as of 2026-04). The existing sidebar + main-content layout
+  already adapts to wide viewports via the component-level media queries,
+  so dual-screen foldables see a serviceable layout even without
+  explicit viewport-segment env() reads. When a browser ships full
+  viewport-segment support, we can pad around the hinge here.
+
+  @media (spanning: single-fold-vertical) { ... }
+
+  Not applying rules today: would introduce untested behavior on a very
+  small audience. Leaving the hook documented instead.
+*/
 
 /* P1: Gate hover styles behind pointer capability — prevents sticky hover on touch */
 @media (hover: none) {

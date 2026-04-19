@@ -97,7 +97,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     flex: 1;
-    text-align: left;
+    text-align: start;
   }
 
   .section-count {

@@ -194,7 +194,7 @@
     border-top: 1px solid rgba(17, 24, 39, 0.06);
     border-radius: 0;
     cursor: pointer;
-    text-align: left;
+    text-align: start;
     font: inherit;
     color: inherit;
     opacity: 0;
