@@ -113,7 +113,7 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
       <h1 id="ssg-headline" class="ssg-article__headline">{issue.headline}</h1>
       <p class="ssg-article__deck">{issue.context}</p>
       {issue.sourceDate && (
-        <p class="ssg-article__date">Sources retrieved <time datetime={issue.sourceDate}>{issue.sourceDate}</time></p>
+        <p class="ssg-article__date">Sources retrieved <time datetime={issue.sourceDate} translate="no">{issue.sourceDate}</time></p>
       )}
     </header>
 
@@ -152,8 +152,8 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
     <aside class="ssg-article__score" aria-label="Opinion Shift score">
       <p class="ssg-article__score-label">Opinion Shift</p>
       <p class="ssg-article__score-value" data-score={issue.opinionShift}>
-        <span class="ssg-article__score-number">{issue.opinionShift}</span>
-        <span class="ssg-article__score-outof">/ 100</span>
+        <span class="ssg-article__score-number" translate="no">{issue.opinionShift}</span>
+        <span class="ssg-article__score-outof" translate="no">/ 100</span>
       </p>
       <p class="ssg-article__score-severity" data-severity={opinionLabel(issue.opinionShift).toLowerCase()}>{opinionLabel(issue.opinionShift)}</p>
       <p class="ssg-article__score-note">Reading only the headline would hide about {issue.opinionShift}% of the story.</p>
@@ -177,7 +177,7 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
       <footer class="ssg-article__footer">
         <p class="ssg-article__quality">
           <span class="ssg-article__quality-label">Editorial Quality Score</span>
-          <span class="ssg-article__quality-value"><span>{Math.round(issue.finalScore)}</span> / 100</span>
+          <span class="ssg-article__quality-value" translate="no"><span>{Math.round(issue.finalScore)}</span> / 100</span>
         </p>
         <p class="ssg-article__quality-note">Reviewed across 6 independent editorial stages.</p>
       </footer>

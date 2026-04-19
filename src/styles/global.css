@@ -454,6 +454,24 @@ body.app-shell-root #main-content {
 }
 
 /*
+  Phase 7 — Google Translate defensive rule.
+
+  Google Translate wraps translated text in <font> elements with
+  `style="vertical-align: inherit;"` and arbitrary color/size attributes
+  that can break line-height and hero-card alignment. Scope the reset to
+  the article tree so brand-mark text outside the article is unaffected.
+  Elements with translate="no" (brand name, numeric scores, dates) are
+  skipped by Translate entirely.
+*/
+.ssg-article font,
+[class*="reader"] font,
+.feed-row font {
+  all: unset;
+  font: inherit;
+  color: inherit;
+}
+
+/*
   prefers-reduced-transparency — users who opt out of translucency for
   legibility or accessibility. Disable every backdrop-filter site-wide and
   promote translucent surfaces to opaque. Covers the progressive-enhancement
