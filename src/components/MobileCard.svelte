@@ -221,7 +221,7 @@
     font-size: var(--text-body);
     font-weight: 700;
     min-width: 24px;
-    text-align: right;
+    text-align: end;
     font-variant-numeric: tabular-nums;
   }
 
@@ -231,7 +231,7 @@
     line-height: 0.92;
     letter-spacing: -0.05em;
     min-width: 54px;
-    text-align: left;
+    text-align: start;
   }
 
   .score-panel {

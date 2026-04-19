@@ -1867,7 +1867,7 @@
     .card-center {
       justify-content: flex-start;
       overflow-y: auto;
-      padding-right: 4px;
+      padding-inline-end: 4px;
     }
 
     .card-bottom {

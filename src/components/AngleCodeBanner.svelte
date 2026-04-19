@@ -63,7 +63,7 @@
     background: var(--bg-elevated);
     cursor: pointer;
     transition: background 0.15s;
-    text-align: left;
+    text-align: start;
   }
 
   .angle-banner:hover {
