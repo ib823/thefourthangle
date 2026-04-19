@@ -54,6 +54,16 @@
 
   /* Focus/link */
   --focus: #1971C2;
+  /* Alias used by the single global :focus-visible rule. Adding a named
+     semantic token (per ADR-0001 / brief-v3 Phase 2) keeps the intent
+     grep-able even though it resolves to --focus today. */
+  --color-focus-ring: var(--focus);
+
+  /* Semantic aliases for values the brief names explicitly. Point at existing
+     tokens rather than duplicating hex values, so a single change to the
+     underlying token propagates consistently. */
+  --color-danger: var(--status-red);
+  --color-hero-bg: #0f0f23;
 
   /* Lens tag backgrounds */
   --lens-legal: #52525B;
@@ -127,6 +137,21 @@
   /* Touch targets */
   --tap-min: 44px;
 
+  /* Z-index scale — replaces scattered magic numbers (previous range
+     5…5000). Keep the values ordered and monotonic so stacking is
+     predictable. Components mount into one of these layers; inline
+     z-index within a component is fine for sibling ordering but must
+     not collide across components. */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-dock: 15;
+  --z-sidebar: 20;
+  --z-header: 40;
+  --z-dropdown: 60;
+  --z-overlay: 1500;
+  --z-modal: 2000;
+  --z-toast: 5000;
+
   /* Overlay */
   --overlay-bg: rgba(255,255,255,0.96);
   --header-bg: rgba(248,249,250,0.85);
@@ -199,8 +224,26 @@
   --card-analogy-bg: #F0F9FF;
 }
 
+/*
+  Dark mode resolution order:
+    1. [data-theme="dark"] on <html> — explicit user opt-in overrides
+       everything.
+    2. @media (prefers-color-scheme: dark) — OS preference, suppressed when
+       [data-theme="light"] is set so the user can force light against an OS
+       dark preference.
+    3. Default (:root above) — light.
+
+  Today there is no UI that sets data-theme; the attribute hook exists so a
+  future preference-panel toggle is a one-line wire-up in JS. The dark-token
+  block below is duplicated below for the explicit selector; the two blocks
+  must stay in lock-step.
+
+  (Vanilla CSS has no way to share a token block across a media query AND a
+  selector, so duplication is unavoidable. An alternative postcss plugin is
+  not worth the dep. See brief-v3 Phase 2.)
+*/
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #1A1A1A;
     --bg-elevated: #242420;
     --bg-sunken: #1F1C18;
@@ -280,6 +323,89 @@
     --card-analogy-color: #38BDF8;
     --card-analogy-bg: rgba(56,189,248,0.1);
   }
+}
+
+/*
+  Explicit-opt-in dark theme. Token values are the same as the OS-preference
+  block above. Keeps them in lock-step: if you edit a dark token, edit it in
+  both places. See comment above the @media block for why CSS requires this
+  duplication today.
+*/
+:root[data-theme="dark"] {
+  --bg: #1A1A1A;
+  --bg-elevated: #242420;
+  --bg-sunken: #1F1C18;
+  --card: #242420;
+  --card-dark: #1F1A14;
+  --card-dark-end: #2B231B;
+  --text-primary: #E8E4DF;
+  --text-secondary: #B5AFA6;
+  --text-tertiary: #A5A098;
+  --text-muted: #968F87;
+  --text-faint: #5C5650;
+  --text-on-dark: #F8F5EF;
+  --text-on-dark-muted: rgba(248,245,239,0.9);
+  --amber: #C8963A;
+  --amber-light: #4A3D24;
+  --amber-bg: rgba(200,150,58,0.08);
+  --score-critical: #F87171;
+  --score-warning: #FBBF24;
+  --score-info: #60A5FA;
+  --score-neutral: #8C8478;
+  --score-strong: #F5C451;
+  --score-medium: #FBBF24;
+  --score-partial: #60A5FA;
+  --highlight-accent: #F5C451;
+  --highlight-bg: rgba(245, 196, 81, 0.12);
+  --highlight-bg-strong: rgba(245, 196, 81, 0.18);
+  --status-green: #4ADE80;
+  --status-green-text: #4ADE80;
+  --status-green-bg: rgba(74,222,128,0.1);
+  --status-blue-text: #60A5FA;
+  --status-blue-bg: rgba(96,165,250,0.1);
+  --status-red: #F87171;
+  --status-red-bg: rgba(248,113,113,0.1);
+  --status-red-border: rgba(248,113,113,0.3);
+  --verdict-green-bg: rgba(74,222,128,0.1);
+  --verdict-amber-bg: rgba(251,191,36,0.1);
+  --verdict-red-bg: rgba(248,113,113,0.1);
+  --focus: #60A5FA;
+  --lens-legal: #9CA3AF;
+  --lens-social: #A78BBF;
+  --lens-economic: #C8A95C;
+  --lens-historical: #C8A33A;
+  --lens-theological: #A89878;
+  --lens-critical: #9CA3AF;
+  --border: #3D3830;
+  --border-light: rgba(255,255,255,0.06);
+  --border-subtle: #3D3830;
+  --border-divider: #4A4136;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+  --elevation-0: none;
+  --elevation-1: 0 1px 3px rgba(0,0,0,0.2);
+  --elevation-2: 0 4px 12px rgba(0,0,0,0.2);
+  --elevation-3: 0 12px 28px rgba(0,0,0,0.3);
+  --elevation-4: 0 24px 60px rgba(0,0,0,0.4);
+  --hover-tint: rgba(255, 255, 255, 0.06);
+  --overlay-bg: rgba(26,26,26,0.96);
+  --header-bg: rgba(26,26,26,0.85);
+  --surface-glass: rgba(34, 31, 27, 0.9);
+  --surface-glass-hover: rgba(41, 37, 32, 0.98);
+  --surface-active: rgba(200, 150, 58, 0.14);
+  --surface-toggle: rgba(40, 36, 30, 0.74);
+  --card-hook-color: #9CA3AF;
+  --card-hook-bg: #2A2620;
+  --card-fact-color: #60A5FA;
+  --card-fact-bg: rgba(96,165,250,0.1);
+  --card-reframe-color: #FBBF24;
+  --card-reframe-bg: rgba(251,191,36,0.12);
+  --card-view-color: #A78BFA;
+  --card-view-bg: rgba(167,139,250,0.1);
+  --card-analogy-color: #38BDF8;
+  --card-analogy-bg: rgba(56,189,248,0.1);
 }
 
 /* High contrast mode — progressive enhancement */
