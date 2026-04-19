@@ -1,46 +1,47 @@
-[32m2026-04-19 16:15:05[0m | [1mINFO    [0m | [36mmain                [0m | T4A Radar starting
-[32m2026-04-19 16:15:05[0m | [33m[1mWARNING [0m | [36msource_aggregator   [0m | TWITTER_BEARER_TOKEN not set — skipping Twitter source
-[32m2026-04-19 16:15:05[0m | [1mINFO    [0m | [36msource_aggregator   [0m | Initialized 5 source connectors: ['news_rss', 'reddit', 'gdelt', 'parliament', 'court']
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0001 [bill_reading] "Parliament second session session opens" importance=0.46
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0002 [bill_reading] "Parliament budget session session opens" importance=0.51
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0003 [budget_allocation] "Budget 2027 presentation" importance=0.54
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36mstreams             [0m | Initialized 6/6 streams: ['volume_monitor', 'cascade_tracker', 'polarization', 'narrative_fragmentation', 'network_bridge', 'silence_detector']
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36mstate               [0m | Loaded state from /home/runner/work/thefourthangle/thefourthangle/radar/output/state.json
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36mfusion              [0m | Loaded 1916 topics from state
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36mmain                [0m | Running single cycle (--once)
-[32m2026-04-19 16:15:06[0m | [1mINFO    [0m | [36mcycle               [0m | Cycle started at 2026-04-19T16:15:06.348116+00:00
-[32m2026-04-19 16:15:07[0m | [33m[1mWARNING [0m | [36msource.news_rss     [0m | Feed The Star returned no entries (bozo=1)
-[32m2026-04-19 16:15:07[0m | [1mINFO    [0m | [36msource.news_rss     [0m | Fetched 100 events
-[32m2026-04-19 16:15:07[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia hot: bozo=1
-[32m2026-04-19 16:15:07[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia new: bozo=1
-[32m2026-04-19 16:15:08[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia rising: bozo=1
-[32m2026-04-19 16:15:08[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysians hot: bozo=1
-[32m2026-04-19 16:15:08[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/bolehland hot: bozo=1
-[32m2026-04-19 16:15:08[0m | [1mINFO    [0m | [36msource.reddit       [0m | Fetched 0 events
-[32m2026-04-19 16:15:12[0m | [33m[1mWARNING [0m | [36msource.gdelt        [0m | GDELT rate limited (429) — skipping this cycle
-[32m2026-04-19 16:15:12[0m | [1mINFO    [0m | [36msource.gdelt        [0m | Fetched 0 events
-[32m2026-04-19 16:15:13[0m | [1mINFO    [0m | [36msource.parliament   [0m | Fetched 10 events
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msource.court        [0m | Fetched 5 events
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msource_aggregator   [0m | Aggregated 115 events from 5 sources
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36mcycle               [0m | Fetched 115 events
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0004 [bill_reading] "DPM Zahid: Central disaster committee to coordinate aid for 9,000 displaced in Kampung Bahagia fire. KUALA LUMPUR, April 19 &mdash; The Central Disaster Management Committee will coordinate efforts wi" importance=0.41
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0005 [high_court_ruling] "DPM Zahid: Central disaster committee to coordinate aid for 9,000 displaced in Kampung Bahagia fire. KUALA LUMPUR, April 19 &mdash; The Central Disaster Management Committee will coordinate efforts wi" importance=0.31
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0006 [bill_reading] "Malaysian delegation to carry protest voice on Palestine issue in Brussels. KUALA LUMPUR April 19 &mdash; &nbsp;Malaysia will send a cross-party delegation of Members of Parliament to an internati..." importance=0.51
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0007 [high_court_ruling] "Zahid: New ‘green rubber fuel’ could ease rising energy costs. SHAH ALAM, April 19 &mdash; Malaysia currently has 19 biofuel production plants based on rubber waste, with a monthly ca..." importance=0.36
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0008 [bill_reading] "AGC reviewing tribunal plan to standardise compensation for victims’ families. KUALA LUMPUR, April 19 &mdash; The Attorney General&rsquo;s Chambers (AGC) is studying a proposal to set up a special tr." importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0009 [bill_reading] "PKR Tuaran usul pecat Rafizi. Ketua PKR Tuaran Razeef Rakimin berkata parti perlu berani ambil tindakan sekiranya Ahli Parlimen Pandan itu langgar perlembagaan parti." importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0010 [bill_reading] "Just sack Rafizi, says Tuaran PKR chief. Divisional chief Razeef Rakimin says no action has been taken against the Pandan MP despite two show-cause letters being issued." importance=0.41
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0011 [high_court_ruling] "MACC urges tighter safeguards to curb smuggling and corruption in high-risk regions. ALOR SETAR, April 19 &mdash; Prevention and public awareness must be strengthened alongside enforcement in high-ris" importance=0.36
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0012 [high_court_ruling] "Zahid: 6,252 former members apply to rejoin Umno in sign of resurgence. KUALA LUMPUR, April 19 &mdash; More than 6,200 former Umno members have applied to rejoin the party, its president Datuk..." importance=0.31
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0013 [high_court_ruling] "Shelton wins fifth ATP title with victory in Munich. Second seed Ben Shelton won the ATP 500 clay-court tournament in Munich for the first time with a 6–2, 7–5 victory over Italian Flavio Cobolli." importance=0.36
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0014 [bill_reading] "Penang teen sets Malaysian record for memorising 300 digits of pi. K Poonyamitra, 14, achieved the feat on Feb 9 after consistent practice over two months." importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0015 [bill_reading] "PM orders urgent govt aid after fire guts 200 homes in Sandakan. KUALA LUMPUR, April 19 &mdash; The federal government and the Sabah state government are coordinating basic assistance a..." importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0016 [bill_reading] "Sabah takes over RM4.06b water projects in major power shift to speed up repairs. KOTA KINABALU, April 19 &mdash; The transfer of authority for 83 Rural Water Supply (BALB) projects worth RM4.06 billi" importance=0.61
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0017 [bill_reading] "Loke orders probe after KLIA baggage chaos, says standards ‘clearly failed’ (VIDEO). PUTRAJAYA, April 19 &mdash; The government has ordered an investigation into a baggage handling breakdown at Kuala " importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0018 [bill_reading] "Delegasi Ahli Parlimen akan sertai sidang Brussels, bantah kezaliman Israel. Naib Presiden PKR Amirudin Shari berkata, parti itu hantar 2 Ahli Parlimen sebagai wakil." importance=0.46
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36mcycle               [0m | Streams processed: {'polarization': 'ok', 'network_bridge': 'ok', 'volume_monitor': 'ok', 'narrative_fragmentation': 'ok', 'cascade_tracker': 'ok', 'silence_detector': 'ok'}
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36mcycle               [0m | Matched 19 config keywords in events. Top: [('malay', 10), ('government', 8), ('pas', 8), ('minister', 7), ('pkr', 7), ('dap', 6), ('menteri', 5), ('parlimen', 4), ('umno', 4), ('isa', 3)]
-[32m2026-04-19 16:15:15[0m | [1mINFO    [0m | [36mcycle               [0m | Silence detector: 13 events monitored, 13 flagged
-[32m2026-04-19 16:15:16[0m | [1mINFO    [0m | [36mcycle               [0m | Issue queue: 1919 active topics
-[32m2026-04-19 16:15:16[0m | [1mINFO    [0m | [36moutput              [0m | 670 active issues, 1253 new, 1249 pruned
-[32m2026-04-19 16:15:16[0m | [1mINFO    [0m | [36mcycle               [0m | Cycle complete. 1919 active topics. Top: parliament budget session session opens (score: 0.93)
+[32m2026-04-19 18:17:57[0m | [1mINFO    [0m | [36mmain                [0m | T4A Radar starting
+[32m2026-04-19 18:17:57[0m | [33m[1mWARNING [0m | [36msource_aggregator   [0m | TWITTER_BEARER_TOKEN not set — skipping Twitter source
+[32m2026-04-19 18:17:57[0m | [1mINFO    [0m | [36msource_aggregator   [0m | Initialized 5 source connectors: ['news_rss', 'reddit', 'gdelt', 'parliament', 'court']
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0001 [bill_reading] "Parliament second session session opens" importance=0.46
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0002 [bill_reading] "Parliament budget session session opens" importance=0.51
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0003 [budget_allocation] "Budget 2027 presentation" importance=0.54
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36mstreams             [0m | Initialized 6/6 streams: ['volume_monitor', 'cascade_tracker', 'polarization', 'narrative_fragmentation', 'network_bridge', 'silence_detector']
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36mstate               [0m | Loaded state from /home/runner/work/thefourthangle/thefourthangle/radar/output/state.json
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36mfusion              [0m | Loaded 1919 topics from state
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36mmain                [0m | Running single cycle (--once)
+[32m2026-04-19 18:17:58[0m | [1mINFO    [0m | [36mcycle               [0m | Cycle started at 2026-04-19T18:17:58.561396+00:00
+[32m2026-04-19 18:17:59[0m | [33m[1mWARNING [0m | [36msource.news_rss     [0m | Feed The Star returned no entries (bozo=1)
+[32m2026-04-19 18:17:59[0m | [1mINFO    [0m | [36msource.news_rss     [0m | Fetched 100 events
+[32m2026-04-19 18:17:59[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia hot: bozo=1
+[32m2026-04-19 18:18:00[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia new: bozo=1
+[32m2026-04-19 18:18:00[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysia rising: bozo=1
+[32m2026-04-19 18:18:00[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/malaysians hot: bozo=1
+[32m2026-04-19 18:18:00[0m | [33m[1mWARNING [0m | [36msource.reddit       [0m | Reddit feed r/bolehland hot: bozo=1
+[32m2026-04-19 18:18:00[0m | [1mINFO    [0m | [36msource.reddit       [0m | Fetched 0 events
+[32m2026-04-19 18:18:00[0m | [33m[1mWARNING [0m | [36msource.gdelt        [0m | GDELT rate limited (429) — skipping this cycle
+[32m2026-04-19 18:18:00[0m | [1mINFO    [0m | [36msource.gdelt        [0m | Fetched 0 events
+[32m2026-04-19 18:18:02[0m | [1mINFO    [0m | [36msource.parliament   [0m | Fetched 10 events
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msource.court        [0m | Fetched 5 events
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msource_aggregator   [0m | Aggregated 115 events from 5 sources
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Fetched 115 events
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0004 [bill_reading] "DPM Zahid: Central disaster committee to coordinate aid for 9,000 displaced in Kampung Bahagia fire. KUALA LUMPUR, April 19 &mdash; The Central Disaster Management Committee will coordinate efforts wi" importance=0.41
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0005 [high_court_ruling] "DPM Zahid: Central disaster committee to coordinate aid for 9,000 displaced in Kampung Bahagia fire. KUALA LUMPUR, April 19 &mdash; The Central Disaster Management Committee will coordinate efforts wi" importance=0.31
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0006 [bill_reading] "Malaysian delegation to carry protest voice on Palestine issue in Brussels. KUALA LUMPUR April 19 &mdash; &nbsp;Malaysia will send a cross-party delegation of Members of Parliament to an internati..." importance=0.51
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0007 [high_court_ruling] "Zahid: New ‘green rubber fuel’ could ease rising energy costs. SHAH ALAM, April 19 &mdash; Malaysia currently has 19 biofuel production plants based on rubber waste, with a monthly ca..." importance=0.36
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0008 [bill_reading] "AGC reviewing tribunal plan to standardise compensation for victims’ families. KUALA LUMPUR, April 19 &mdash; The Attorney General&rsquo;s Chambers (AGC) is studying a proposal to set up a special tr." importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0009 [bill_reading] "PKR Tuaran usul pecat Rafizi. Ketua PKR Tuaran Razeef Rakimin berkata parti perlu berani ambil tindakan sekiranya Ahli Parlimen Pandan itu langgar perlembagaan parti." importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0010 [bill_reading] "Just sack Rafizi, says Tuaran PKR chief. Divisional chief Razeef Rakimin says no action has been taken against the Pandan MP despite two show-cause letters being issued." importance=0.41
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0011 [high_court_ruling] "MACC urges tighter safeguards to curb smuggling and corruption in high-risk regions. ALOR SETAR, April 19 &mdash; Prevention and public awareness must be strengthened alongside enforcement in high-ris" importance=0.36
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0012 [high_court_ruling] "Zahid: 6,252 former members apply to rejoin Umno in sign of resurgence. KUALA LUMPUR, April 19 &mdash; More than 6,200 former Umno members have applied to rejoin the party, its president Datuk..." importance=0.31
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0013 [high_court_ruling] "Shelton wins fifth ATP title with victory in Munich. Second seed Ben Shelton won the ATP 500 clay-court tournament in Munich for the first time with a 6–2, 7–5 victory over Italian Flavio Cobolli." importance=0.36
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0014 [bill_reading] "Penang teen sets Malaysian record for memorising 300 digits of pi. K Poonyamitra, 14, achieved the feat on Feb 9 after consistent practice over two months." importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0015 [bill_reading] "PM orders urgent govt aid after fire guts 200 homes in Sandakan. KUALA LUMPUR, April 19 &mdash; The federal government and the Sabah state government are coordinating basic assistance a..." importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0016 [bill_reading] "Sabah takes over RM4.06b water projects in major power shift to speed up repairs. KOTA KINABALU, April 19 &mdash; The transfer of authority for 83 Rural Water Supply (BALB) projects worth RM4.06 billi" importance=0.61
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0017 [bill_reading] "Loke orders probe after KLIA baggage chaos, says standards ‘clearly failed’ (VIDEO). PUTRAJAYA, April 19 &mdash; The government has ordered an investigation into a baggage handling breakdown at Kuala " importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36msilence_detector    [0m | Tracking: INST-0018 [bill_reading] "Delegasi Ahli Parlimen akan sertai sidang Brussels, bantah kezaliman Israel. Naib Presiden PKR Amirudin Shari berkata, parti itu hantar 2 Ahli Parlimen sebagai wakil." importance=0.46
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Streams processed: {'cascade_tracker': 'ok', 'network_bridge': 'ok', 'polarization': 'ok', 'narrative_fragmentation': 'ok', 'volume_monitor': 'ok', 'silence_detector': 'ok'}
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Matched 19 config keywords in events. Top: [('malay', 10), ('government', 8), ('pas', 8), ('minister', 7), ('pkr', 7), ('dap', 6), ('menteri', 5), ('parlimen', 4), ('umno', 4), ('isa', 3)]
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Silence detector: 13 events monitored, 13 flagged
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mfusion              [0m | Archived 1 low-score topics
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Issue queue: 1918 active topics
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36moutput              [0m | 670 active issues, 1249 new, 1249 pruned
+[32m2026-04-19 18:18:04[0m | [1mINFO    [0m | [36mcycle               [0m | Cycle complete. 1918 active topics. Top: parliament budget session session opens (score: 0.93)
