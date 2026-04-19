@@ -9,6 +9,11 @@ on:
       - '*.md'
       - 'logo-concepts/**'
       - 'audit/**'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
 
 permissions:
   contents: read
@@ -87,6 +92,7 @@ jobs:
           COMMIT_MSG: ${{ github.event.head_commit.message }}
 
       - name: Deploy to Cloudflare Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
