@@ -372,6 +372,43 @@ body.app-shell-root #main-content {
   }
 }
 
+/*
+  prefers-reduced-transparency — users who opt out of translucency for
+  legibility or accessibility. Disable every backdrop-filter site-wide and
+  promote translucent surfaces to opaque. Covers the progressive-enhancement
+  sites from Phase 3 (Header, UtilityHeader, MobileDock × 2) and the
+  decorative sites in App/TodayView/InsightReader.
+*/
+@media (prefers-reduced-transparency: reduce) {
+  *,
+  *::before,
+  *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .site-header,
+  .utility-header,
+  .dock-prompts,
+  .mobile-dock {
+    background: var(--bg-elevated, #F8F9FA) !important;
+  }
+}
+
+/*
+  prefers-reduced-data — Save-Data request mode (Android Chrome, Opera, etc.)
+  or UA explicitly signalling "prefer less data." CSS-only levers are narrow
+  (the <link rel="preload"> fonts have already fired by the time CSS parses).
+  What we CAN do here: suppress non-essential decorative surfaces.
+
+  Today there are no decorative-only images or autoplay videos to disable;
+  the hero AVIF at 3.4 KB mobile is already minimal. Block reserved as a
+  hook for when future decorations ship and need to be gated. See ADR-0001
+  for font-preload reasoning.
+*/
+@media (prefers-reduced-data: reduce) {
+  /* reserved: future decoration suppression */
+}
+
 /* P1: Windows High Contrast Mode — ensure borders and text remain visible */
 @media (forced-colors: active) {
   * {
