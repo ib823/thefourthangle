@@ -2,7 +2,7 @@
 import '../../styles/global.css';
 import App from '../../components/App.svelte';
 import { ISSUES } from '../../data/issues';
-import { opinionLabel } from '../../data/issue-types';
+import { CARD_TYPES, opinionLabel } from '../../data/issue-types';
 
 export function getStaticPaths() {
   return ISSUES.filter(issue => issue.published === true).map(issue => ({
@@ -83,9 +83,251 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
+
+  {/*
+    Static article — the SSG content baseline.
+
+    Rendered into every /issue/[id] HTML file at build time so that:
+      (a) JS-disabled readers, webviews that strip JS, throttled 3G readers
+          before hydration, and content-blockers that kill the App bundle
+          all still get the full article (ADR-0002 Phase 8a acceptance).
+      (b) Edge Immersive Reader, Safari Reader, Firefox Reader, and search
+          engines have an <article> landmark to extract.
+
+    On hydration, App.svelte adds `js-reader-mounted` to <html>, which hides
+    this element via the CSS rule below so the interactive reader is the
+    only visible surface. Kept in the DOM for screen readers and for graceful
+    fallback if the island fails to hydrate (Safari content blockers, rare
+    webview crashes).
+  */}
+  <article class="ssg-article" data-issue-id={issue.id} aria-labelledby="ssg-headline">
+    <header class="ssg-article__header">
+      {issue.status === 'new' && <span class="ssg-article__badge ssg-article__badge--new">New</span>}
+      {issue.status === 'updated' && <span class="ssg-article__badge ssg-article__badge--updated">Updated · Edition {issue.edition}</span>}
+      <h1 id="ssg-headline" class="ssg-article__headline">{issue.headline}</h1>
+      <p class="ssg-article__deck">{issue.context}</p>
+      {issue.sourceDate && (
+        <p class="ssg-article__date">Sources retrieved <time datetime={issue.sourceDate}>{issue.sourceDate}</time></p>
+      )}
+    </header>
+
+    <figure class="ssg-article__hero">
+      <img
+        src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(buildId)}`}
+        alt={imageAlt}
+        width="1200"
+        height="630"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
+    </figure>
+
+    <aside class="ssg-article__score" aria-label="Opinion Shift score">
+      <p class="ssg-article__score-label">Opinion Shift</p>
+      <p class="ssg-article__score-value" data-score={issue.opinionShift}>
+        <span class="ssg-article__score-number">{issue.opinionShift}</span>
+        <span class="ssg-article__score-outof">/ 100</span>
+      </p>
+      <p class="ssg-article__score-severity" data-severity={opinionLabel(issue.opinionShift).toLowerCase()}>{opinionLabel(issue.opinionShift)}</p>
+      <p class="ssg-article__score-note">Reading only the headline would hide about {issue.opinionShift}% of the story.</p>
+    </aside>
+
+    <div class="ssg-article__cards">
+      {issue.cards.map((card, i) => {
+        const cardType = CARD_TYPES[card.t];
+        const label = card.t === 'fact' && card.lens ? `${cardType.label} · ${card.lens}` : cardType.label;
+        return (
+          <section class={`ssg-card ssg-card--${card.t}`} data-card-index={i} data-card-type={card.t}>
+            <p class="ssg-card__label">{label}</p>
+            <p class="ssg-card__big">{card.big}</p>
+            {card.sub && <p class="ssg-card__sub">{card.sub}</p>}
+          </section>
+        );
+      })}
+    </div>
+
+    {issue.finalScore != null && (
+      <footer class="ssg-article__footer">
+        <p class="ssg-article__quality">
+          <span class="ssg-article__quality-label">Editorial Quality Score</span>
+          <span class="ssg-article__quality-value"><span>{Math.round(issue.finalScore)}</span> / 100</span>
+        </p>
+        <p class="ssg-article__quality-note">Reviewed across 6 independent editorial stages.</p>
+      </footer>
+    )}
+  </article>
+
   <div id="main-content" tabindex="-1">
-    <App client:load initialIssueId={issue.id} />
+    <App client:idle initialIssueId={issue.id} />
   </div>
+  <style is:global>
+    /*
+      SSG article styles — see ADR-0002 (Phase 8 split).
+      Baseline is readable WITHOUT any design system or token variables
+      loaded, because this must work for readers whose CSS bundle was
+      blocked (ITP, Brave Shields, uBlock custom filters). Uses plain
+      hex values and system fonts for maximum robustness.
+
+      When the App island mounts, it adds `js-reader-mounted` to <html>.
+      The rule at the bottom hides the static article so only the
+      interactive reader is visible — kept in the DOM for screen readers
+      and for graceful fallback if the island fails to hydrate.
+    */
+    .ssg-article {
+      max-width: 70ch;
+      margin: 0 auto;
+      padding: 24px max(16px, env(safe-area-inset-left)) 48px max(16px, env(safe-area-inset-right));
+      font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+      color: var(--text-primary, #1a1a1a);
+      background: var(--bg-primary, #ffffff);
+      line-height: 1.55;
+    }
+    .ssg-article__header { margin-bottom: 24px; }
+    .ssg-article__badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .ssg-article__badge--new { background: #1a7a2a; color: #ffffff; }
+    .ssg-article__badge--updated { background: #1a5a8a; color: #ffffff; }
+    .ssg-article__headline {
+      font-family: var(--font-display, 'Manrope', system-ui, sans-serif);
+      font-size: clamp(1.75rem, 4vw + 1rem, 2.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 12px;
+      text-wrap: balance;
+    }
+    .ssg-article__deck {
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: var(--text-secondary, #444);
+      margin: 0 0 8px;
+    }
+    .ssg-article__date {
+      font-size: 0.875rem;
+      color: var(--text-tertiary, #666);
+      margin: 8px 0 0;
+    }
+    .ssg-article__hero { margin: 24px 0; }
+    .ssg-article__hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      background: #0f0f23;
+      aspect-ratio: 1200 / 630;
+    }
+    .ssg-article__score {
+      border: 1px solid var(--border-subtle, #e0e0e0);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+      background: var(--bg-elevated, #f8f9fa);
+    }
+    .ssg-article__score-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--text-muted, #888);
+      margin: 0 0 8px;
+    }
+    .ssg-article__score-value {
+      font-family: var(--font-display, 'Manrope', system-ui, sans-serif);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .ssg-article__score-outof {
+      font-size: 1rem;
+      color: var(--text-muted, #888);
+      font-weight: 500;
+    }
+    .ssg-article__score-severity {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 4px 0 12px;
+    }
+    .ssg-article__score-severity[data-severity="fundamental"] { color: #b52727; }
+    .ssg-article__score-severity[data-severity="significant"] { color: #b85c00; }
+    .ssg-article__score-severity[data-severity="partial"] { color: #8a6d00; }
+    .ssg-article__score-severity[data-severity="surface"] { color: #5a5a5a; }
+    .ssg-article__score-note {
+      font-size: 0.875rem;
+      color: var(--text-secondary, #444);
+      margin: 0;
+      font-style: italic;
+    }
+    .ssg-article__cards { display: flex; flex-direction: column; gap: 20px; }
+    .ssg-card {
+      border-left: 3px solid var(--border-subtle, #e0e0e0);
+      padding: 4px 0 4px 16px;
+    }
+    .ssg-card--hook { border-left-color: #5a5a5a; }
+    .ssg-card--fact { border-left-color: #1a5a8a; }
+    .ssg-card--reframe { border-left-color: #b85c00; }
+    .ssg-card--analogy { border-left-color: #6a4a8a; }
+    .ssg-card--view { border-left-color: #1a7a2a; }
+    .ssg-card__label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      font-weight: 700;
+      color: var(--text-muted, #888);
+      margin: 0 0 6px;
+    }
+    .ssg-card__big {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0;
+      color: var(--text-primary, #1a1a1a);
+    }
+    .ssg-card__sub {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin: 8px 0 0;
+      color: var(--text-secondary, #444);
+    }
+    .ssg-article__footer {
+      border-top: 1px solid var(--border-subtle, #e0e0e0);
+      margin-top: 32px;
+      padding-top: 16px;
+    }
+    .ssg-article__quality {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 0;
+      font-size: 0.875rem;
+    }
+    .ssg-article__quality-label {
+      font-weight: 600;
+      color: var(--text-secondary, #444);
+    }
+    .ssg-article__quality-value {
+      font-weight: 700;
+      color: var(--text-primary, #1a1a1a);
+      font-variant-numeric: tabular-nums;
+    }
+    .ssg-article__quality-note {
+      font-size: 0.8125rem;
+      color: var(--text-muted, #888);
+      margin: 4px 0 0;
+    }
+
+    /* Hide static article once the interactive island mounts. See App.svelte onMount. */
+    html.js-reader-mounted .ssg-article { display: none; }
+  </style>
+
   <script is:inline define:vars={{ buildId }}>
     if ('serviceWorker' in navigator) {
       const currentBuild = String(buildId);

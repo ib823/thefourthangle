@@ -520,6 +520,21 @@
     standaloneMedia.addEventListener('change', syncShellModeClass);
     fullscreenMedia.addEventListener('change', syncShellModeClass);
 
+    // Signal to the /issue/[id] SSG article CSS that the interactive reader
+    // has successfully mounted — the static article hides via a CSS rule keyed
+    // on this class. Deferred to the next frame, and placed AFTER all setup
+    // above, so any synchronous error earlier in onMount leaves the static
+    // article visible. An island crash must never produce a blank page.
+    // See ADR-0002 + ADR-0003, and src/pages/issue/[id].astro.
+    requestAnimationFrame(() => {
+      try {
+        document.documentElement.classList.add('js-reader-mounted');
+      } catch {
+        // If even this throws, the static article remains visible — the
+        // resilience story holds.
+      }
+    });
+
     return () => {
       window.removeEventListener('resize', debouncedResize);
       window.removeEventListener('popstate', onPopState);
