@@ -170,10 +170,17 @@
     flex-direction: column;
     gap: 0;
     padding: 0 14px;
+    /* Baseline: solid gradient, readable without backdrop-filter support. */
     background:
       linear-gradient(180deg, rgba(248, 249, 250, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+  }
+  /* Enhancement: blur the content behind the dock. Safari 14-16 uses the
+     -webkit- prefix; either clause triggers the rule. */
+  @supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+    .dock-prompts {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
   }
 
   .dock-prompt-card {
@@ -256,9 +263,13 @@
     border-top: 1px solid rgba(17, 24, 39, 0.08);
     background:
       linear-gradient(180deg, rgba(248, 249, 250, 0.72) 0%, rgba(255, 255, 255, 0.96) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 -12px 30px rgba(17, 24, 39, 0.08);
+  }
+  @supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+    .mobile-dock {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
   }
 
   .dock-item {

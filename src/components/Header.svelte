@@ -115,11 +115,15 @@
     flex-shrink: 0;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: var(--z-header, 40);
     background: var(--header-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(17, 24, 39, 0.05);
+  }
+  @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+    .site-header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
   }
 
   /* ── Brand block: mark + text ── */
