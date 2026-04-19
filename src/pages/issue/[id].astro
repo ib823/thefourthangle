@@ -112,15 +112,35 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
     </header>
 
     <figure class="ssg-article__hero">
-      <img
-        src={`/og/issue-${issue.id}.png?v=${encodeURIComponent(buildId)}`}
-        alt={imageAlt}
-        width="1200"
-        height="630"
-        loading="eager"
-        fetchpriority="high"
-        decoding="sync"
-      />
+      {/*
+        <picture> with AVIF → WebP → JPEG (Phase 8b, ADR-0002 split).
+        The hero is the LCP element — eager + fetchpriority=high + sync decode
+        + explicit width/height to reserve space and prevent CLS.
+        Sizes: up to 70ch reading column on desktop, full-viewport on mobile.
+      */}
+      <picture>
+        <source
+          type="image/avif"
+          srcset={`/og/issue-${issue.id}-640w.avif?v=${encodeURIComponent(buildId)} 640w, /og/issue-${issue.id}-960w.avif?v=${encodeURIComponent(buildId)} 960w, /og/issue-${issue.id}-1200w.avif?v=${encodeURIComponent(buildId)} 1200w`}
+          sizes="(min-width: 70rem) 70ch, 100vw"
+        />
+        <source
+          type="image/webp"
+          srcset={`/og/issue-${issue.id}-640w.webp?v=${encodeURIComponent(buildId)} 640w, /og/issue-${issue.id}-960w.webp?v=${encodeURIComponent(buildId)} 960w, /og/issue-${issue.id}-1200w.webp?v=${encodeURIComponent(buildId)} 1200w`}
+          sizes="(min-width: 70rem) 70ch, 100vw"
+        />
+        <img
+          src={`/og/issue-${issue.id}-1200w.jpg?v=${encodeURIComponent(buildId)}`}
+          srcset={`/og/issue-${issue.id}-640w.jpg?v=${encodeURIComponent(buildId)} 640w, /og/issue-${issue.id}-960w.jpg?v=${encodeURIComponent(buildId)} 960w, /og/issue-${issue.id}-1200w.jpg?v=${encodeURIComponent(buildId)} 1200w`}
+          sizes="(min-width: 70rem) 70ch, 100vw"
+          alt={imageAlt}
+          width="1200"
+          height="630"
+          loading="eager"
+          fetchpriority="high"
+          decoding="sync"
+        />
+      </picture>
     </figure>
 
     <aside class="ssg-article__score" aria-label="Opinion Shift score">
