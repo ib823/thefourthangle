@@ -33,7 +33,9 @@ test.describe('prefers-reduced-motion', () => {
 test.describe('forced-colors', () => {
   test('forced-colors: active applies the forced-colors block', async ({ page }) => {
     await page.emulateMedia({ forcedColors: 'active' });
-    await page.goto('/issue/0146');
+    // domcontentloaded — same reasoning as ssg-article.spec.ts: we need
+    // the static HTML parsed, not every resource loaded.
+    await page.goto('/issue/0146', { waitUntil: 'domcontentloaded' });
     // Opinion Shift severity label renders as text (not color-only). Static
     // SSG element from Phase 8a — doesn't depend on hydration.
     const severity = page.locator('.ssg-article__score-severity').first();

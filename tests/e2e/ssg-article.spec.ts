@@ -28,12 +28,12 @@ test.describe('SSG article raw-HTML content', () => {
   });
 
   test('/issue/0146 contains the static article element after navigation', async ({ page }) => {
-    await page.goto('/issue/0146');
-    // Static <article> is always attached to the DOM. It is deliberately
-    // display:none once `js-reader-mounted` applies (hydrated reader takes
-    // over), so we check attachment, not visibility. Visibility of the
-    // hydrated reader's heading is reader-component-specific and is out of
-    // scope for this smoke — Phase 5.5 AT sessions verify that path.
+    // waitUntil: 'domcontentloaded' — we only care that the HTML has
+    // parsed. The default `load` event waits for every image, font, and
+    // deferred island bundle to finish, which on image-heavy pages with
+    // the Phase 8b <picture>/AVIF pipeline has been flaking headless
+    // chromium. Parsing the DOM is all this test needs.
+    await page.goto('/issue/0146', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('article.ssg-article')).toBeAttached();
     await expect(page.locator('#ssg-headline')).toBeAttached();
   });
