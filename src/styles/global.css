@@ -68,15 +68,34 @@ body.app-shell-root #main-content {
   overflow: hidden;
 }
 
+/*
+  Phase 3 progressive enhancement (per brief-v3).
+
+  Baseline: sensible wrapping with manual hyphens and no aggressive
+  word-breaking — readable in every browser. The `max-inline-size` cap
+  on reading columns lives at the component level (70ch on article
+  columns) so lines wrap at a comfortable measure regardless of
+  whether text-wrap: balance is supported.
+
+  Enhanced (inside @supports): Chrome/Edge 114+, Firefox 121+, Safari 17.4+
+  get automatic line-balancing for headings. Older engines fall back to
+  the baseline wrapping with no visible regression.
+*/
 .balance-title {
-  text-wrap: balance;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: manual;
 }
+@supports (text-wrap: balance) {
+  .balance-title {
+    text-wrap: balance;
+  }
+}
 
-.pretty-copy {
-  text-wrap: pretty;
+@supports (text-wrap: pretty) {
+  .pretty-copy {
+    text-wrap: pretty;
+  }
 }
 
 ::selection {
