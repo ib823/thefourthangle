@@ -340,6 +340,87 @@ body.app-shell-root #main-content {
   }
 }
 
+/*
+  Phase 6 — Print stylesheet.
+
+  Target: a reader printing /issue/[id] for reference or offline archive.
+  Strip everything interactive (sidebar, dock, reader UI, buttons). Keep:
+  the SSG <article> (from Phase 8a) which is the canonical content surface.
+
+  URLs are expanded in footnotes via `a::after { content: " (" attr(href) ")" }`
+  so a printed copy is still traceable.
+
+  Page size honours the user's printer defaults via @page (no fixed size).
+*/
+@media print {
+  /* Hide every interactive shell and overlay. */
+  .site-header,
+  .utility-header,
+  .mobile-dock,
+  .dock-prompts,
+  header[class],
+  nav[class],
+  aside[class],
+  .share-backdrop,
+  .pattern-backdrop,
+  .notifications-backdrop,
+  button,
+  [role="button"],
+  .app-main [class*="reader"]:not(.ssg-article),
+  d-island {
+    display: none !important;
+  }
+
+  /* The SSG article from Phase 8a is the print surface. */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  .ssg-article {
+    display: block !important;
+    max-inline-size: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Hero image: keep, sized for print. */
+  .ssg-article__hero img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Expand URLs as footnote-style references. */
+  a[href]:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* Cards stay on the same page as their heading where possible. */
+  .ssg-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border-left-color: #888;
+  }
+
+  /* Opinion Shift: keep as a boxed note. */
+  .ssg-article__score {
+    border: 1px solid #888;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
+
 /* P0: Prevent iOS Safari auto-zoom on input focus (requires ≥ 16px) */
 @media (max-width: 1023px) {
   input, select, textarea {
