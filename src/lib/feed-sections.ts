@@ -1,11 +1,31 @@
 /**
  * Feed section computation.
- * Pure function: issues + readMap → 4 sections.
- * No side effects, no tracking, no profiling.
+ *
+ * Pure function: `issues` + `readMap` → exactly four sections, in canonical
+ * order, always. Empty sections have `count: 0` and `issues: []` — they are
+ * never omitted.
+ *
+ * This invariant is the fix for the "Edge renders differently" report: the
+ * sidebar structure must not depend on localStorage state. See
+ * docs/cross-browser-parity/brief-v3.md Phase 1.
+ *
+ * `Today` is not a feed section — it is a separate sibling surface handled
+ * elsewhere in the UI. It is always rendered too.
  */
 import type { IssueSummary } from './issues-loader';
 
 export type SectionKind = 'continue' | 'new' | 'explore' | 'completed';
+
+/**
+ * Canonical section order and labels. Single source of truth: import from here
+ * into the sidebar component, the tests, and the docs. Do not re-declare.
+ */
+export const FEED_SECTIONS = [
+  { kind: 'continue',  label: 'Continue Reading' },
+  { kind: 'new',       label: 'New This Week' },
+  { kind: 'explore',   label: 'Earlier Issues' },
+  { kind: 'completed', label: 'Completed' },
+] as const satisfies ReadonlyArray<{ kind: SectionKind; label: string }>;
 
 export interface FeedSection {
   kind: SectionKind;
@@ -25,10 +45,6 @@ function parseReadState(raw: string | undefined): ReadState | null {
   try { return JSON.parse(raw); } catch { return null; }
 }
 
-/**
- * Build feed sections from a flat issue list and read state map.
- * Empty sections are omitted.
- */
 export type SortMode = 'latest' | 'shift';
 
 export function buildFeedSections(
@@ -37,53 +53,42 @@ export function buildFeedSections(
   now: Date = new Date(),
   sortMode: SortMode = 'latest',
 ): FeedSection[] {
-  const continueReading: IssueSummary[] = [];
-  const newThisWeek: IssueSummary[] = [];
-  const explore: IssueSummary[] = [];
-  const completed: IssueSummary[] = [];
+  const buckets: Record<SectionKind, IssueSummary[]> = {
+    continue: [],
+    new: [],
+    explore: [],
+    completed: [],
+  };
 
   const sevenDaysAgo = new Date(now);
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  const cutoff = sevenDaysAgo.toISOString().slice(0, 10); // YYYY-MM-DD
+  const cutoff = sevenDaysAgo.toISOString().slice(0, 10);
 
   for (const issue of issues) {
     const rs = parseReadState(readMap[issue.id]);
-
     if (rs?.state === 'completed') {
-      completed.push(issue);
+      buckets.completed.push(issue);
     } else if (rs?.state === 'started') {
-      continueReading.push(issue);
+      buckets.continue.push(issue);
     } else if (issue.sourceDate && issue.sourceDate >= cutoff) {
-      newThisWeek.push(issue);
+      buckets.new.push(issue);
     } else {
-      explore.push(issue);
+      buckets.explore.push(issue);
     }
   }
 
-  // Sort within each bucket
   const sortFn = sortMode === 'shift'
     ? (a: IssueSummary, b: IssueSummary) => b.opinionShift - a.opinionShift
     : (a: IssueSummary, b: IssueSummary) => (b.sourceDate ?? '').localeCompare(a.sourceDate ?? '');
 
-  continueReading.sort(sortFn);
-  newThisWeek.sort(sortFn);
-  explore.sort(sortFn);
-  completed.sort(sortFn);
-
-  const sections: FeedSection[] = [];
-
-  if (continueReading.length > 0) {
-    sections.push({ kind: 'continue', label: 'Continue Reading', issues: continueReading, count: continueReading.length });
-  }
-  if (newThisWeek.length > 0) {
-    sections.push({ kind: 'new', label: 'New This Week', issues: newThisWeek, count: newThisWeek.length });
-  }
-  if (explore.length > 0) {
-    sections.push({ kind: 'explore', label: 'Earlier Issues', issues: explore, count: explore.length });
-  }
-  if (completed.length > 0) {
-    sections.push({ kind: 'completed', label: 'Completed', issues: completed, count: completed.length });
+  for (const kind of Object.keys(buckets) as SectionKind[]) {
+    buckets[kind].sort(sortFn);
   }
 
-  return sections;
+  return FEED_SECTIONS.map(({ kind, label }) => ({
+    kind,
+    label,
+    issues: buckets[kind],
+    count: buckets[kind].length,
+  }));
 }

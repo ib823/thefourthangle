@@ -20,12 +20,16 @@
   class="section-divider"
   role="separator"
   aria-label="{label}, {count} {count === 1 ? 'issue' : 'issues'}"
+  data-section={kind}
   tabindex="-1"
 >
   <div class="divider-line"></div>
   <div class="divider-content">
     <span class="divider-label" style="color:{kindColor};">{label}</span>
-    <span class="divider-count">{count}</span>
+    <span class="divider-count" data-section-count>{count}</span>
+    {#if count === 0}
+      <span class="divider-empty">Nothing here yet</span>
+    {/if}
   </div>
   <div class="divider-line"></div>
 </div>
@@ -70,4 +74,11 @@
     color: var(--text-muted);
   }
 
+  .divider-empty {
+    font-family: var(--font-body, 'Nunito Sans', system-ui, sans-serif);
+    font-size: var(--text-micro);
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 4px;
+  }
 </style>
