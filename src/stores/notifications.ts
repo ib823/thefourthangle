@@ -13,7 +13,7 @@ export interface NotificationItem {
   read: boolean;
 }
 
-const STORAGE_KEY = 'tfa-notifications';
+const STORAGE_KEY = 'tfa:v1:notifications';
 const MAX_ITEMS = 50;
 
 function load(): NotificationItem[] {

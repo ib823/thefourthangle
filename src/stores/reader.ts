@@ -5,7 +5,7 @@ export interface ReadState {
   progress: number;
 }
 
-export const readIssues = persistentMap<Record<string, string>>('tfa-read:', {});
+export const readIssues = persistentMap<Record<string, string>>('tfa:v1:read:', {});
 
 export function getReadState(id: string): ReadState | null {
   const raw = readIssues.get()[id];
@@ -33,7 +33,7 @@ export function markCompleted(id: string, cardCount: number = 7) {
 }
 
 // Reactions — "this insight hit hard"
-export const reactions = persistentAtom<string>('tfa-reactions', '{}');
+export const reactions = persistentAtom<string>('tfa:v1:reactions', '{}');
 
 export function getReactions(): Record<string, number[]> {
   try { return JSON.parse(reactions.get()); } catch { return {}; }
@@ -82,7 +82,7 @@ export function countHighlights(reactionMap: Record<string, number[]> = getReact
 }
 
 // Position persistence — resume reading
-const savedPosition = persistentAtom<string>('tfa-pos', '');
+const savedPosition = persistentAtom<string>('tfa:v1:pos', '');
 
 export function savePosition(feedIssueId: string, cardIndex: number) {
   savedPosition.set(JSON.stringify({ feedIssueId, cardIndex, ts: Date.now() }));

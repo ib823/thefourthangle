@@ -25,7 +25,7 @@
   // Also refresh on storage events (cross-tab unlink)
   $effect(() => {
     const onStorage = (e: StorageEvent) => {
-      if (e.key === 'tfa-angle-code') refresh();
+      if (e.key === 'tfa:v1:angle-code') refresh();
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);

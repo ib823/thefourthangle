@@ -15,9 +15,9 @@ const STALE_THRESHOLD_MS = 5 * 60 * 1000; // 5 minutes — pull on refocus after
 
 // --- Local storage keys ---
 
-const TOKEN_KEY = 'tfa-angle-code';
-const LAST_SYNC_KEY = 'tfa-last-sync';
-const DEVICE_ID_KEY = 'tfa-device-id';
+const TOKEN_KEY = 'tfa:v1:angle-code';
+const LAST_SYNC_KEY = 'tfa:v1:last-sync';
+const DEVICE_ID_KEY = 'tfa:v1:device-id';
 
 // --- State ---
 
@@ -135,7 +135,7 @@ function applyRemoteState(remote: SyncState): void {
   const localPos = getSavedPosition();
   if (remote.position) {
     if (!localPos || remote.position.ts > localPos.ts) {
-      localStorage.setItem('tfa-pos', JSON.stringify(remote.position));
+      localStorage.setItem('tfa:v1:pos', JSON.stringify(remote.position));
     }
   }
 

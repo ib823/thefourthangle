@@ -28,7 +28,7 @@
   }: Props = $props();
 
   // Sync prompt: permanent dismissal, never when linked or standalone
-  const SYNC_DISMISS_KEY = 'tfa-sync-prompt-dismissed';
+  const SYNC_DISMISS_KEY = 'tfa:v1:sync-prompt-dismissed';
 
   let syncDismissed = $state(false);
   let isStandalone = $state(false);
