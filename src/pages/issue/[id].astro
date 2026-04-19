@@ -80,6 +80,12 @@ const imageAlt = `${issue.headline} — ${os}% Opinion Shift · Neutrality ${ns}
   <link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${encodeURIComponent(buildId)}`} />
   <link rel="icon" type="image/png" href={`/favicon.png?v=${encodeURIComponent(buildId)}`} />
   <link rel="apple-touch-icon" sizes="180x180" href={`/icons/apple-touch-icon.png?v=${encodeURIComponent(buildId)}`} />
+  {/*
+    Phase 4 font preload — same as Base.astro. Crossorigin required even for
+    same-origin fetches so the @font-face fetch hits the preload cache.
+  */}
+  <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin />
 </head>
 <body>
   <a href="#main-content" class="sr-only">Skip to content</a>
