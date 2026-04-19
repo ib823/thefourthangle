@@ -9,6 +9,11 @@ on:
       - '*.md'
       - 'logo-concepts/**'
       - 'audit/**'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
 
 permissions:
   contents: read
@@ -16,7 +21,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
@@ -56,6 +61,31 @@ jobs:
           TFA_PRIVATE_KEY_B64: ${{ secrets.TFA_PRIVATE_KEY_B64 || secrets.SIGNING_KEY_BASE64 }}
           TFA_PRIVATE_KEY_PEM: ${{ secrets.TFA_PRIVATE_KEY_PEM }}
 
+      - name: Bundle-size budget
+        run: npm run check-bundle
+
+      - name: Install Playwright browsers
+        # Only chromium for the initial CI run. WebKit + Firefox get added
+        # once the matrix is known-stable to keep run times predictable
+        # under the 30-minute job timeout. See docs/cross-browser-parity/09-ci.md.
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright e2e (chromium-desktop baseline)
+        # Deliberately narrow for the first green CI. Widen to chromium-mobile
+        # / tablet and firefox / webkit engines in follow-up PRs once this
+        # baseline is stable. See docs/cross-browser-parity/09-ci.md.
+        run: npm run e2e:ci
+        env:
+          CI: 'true'
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
       - name: Verify published signatures
         run: npm run check-signatures
 
@@ -68,6 +98,7 @@ jobs:
           COMMIT_MSG: ${{ github.event.head_commit.message }}
 
       - name: Deploy to Cloudflare Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
