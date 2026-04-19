@@ -76,7 +76,7 @@
   </button>
 
   {#if showIOSGuide}
-    <div style="position:absolute;top:100%;right:0;width:280px;background:var(--bg);border:1px solid var(--border-subtle);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg);z-index:2000;margin-top:4px;padding:16px;">
+    <div style="position:absolute;top:100%;right:0;width:280px;background:var(--bg);border:1px solid var(--border-subtle);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg);z-index:var(--z-modal, 2000);margin-top:4px;padding:16px;">
       <p style="font-family:var(--font-display);font-size: var(--text-body);font-weight:700;color:var(--text-primary);margin:0 0 8px 0;">Install The Fourth Angle</p>
       <p style="font-family:var(--font-body);font-size: var(--text-ui);color:var(--text-secondary);margin:0 0 12px 0;line-height:1.5;">
         Tap the share button <span style="font-size: var(--text-body-lg);">&#x2191;</span> in Safari, then tap <strong>"Add to Home Screen"</strong>.

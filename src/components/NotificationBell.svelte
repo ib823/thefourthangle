@@ -237,7 +237,7 @@
       onclick={close}
       aria-label="Close notifications panel"
     ></button>
-    <div bind:this={panelEl} id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" tabindex="-1" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:2000;margin-top:4px;">
+    <div bind:this={panelEl} id={panelId} role="dialog" aria-modal="false" aria-label="Notifications" tabindex="-1" style="position:absolute;top:100%;right:0;width:min(320px, calc(100vw - 16px));max-height:min(400px, 50vh);overflow-y:auto;background:var(--bg, #fff);border:1px solid var(--border-subtle, #E9ECEF);border-radius: var(--radius-lg);box-shadow:var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.08));z-index:var(--z-modal, 2000);margin-top:4px;">
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border-subtle, #E9ECEF);">
         <span style="font-family:var(--font-display, sans-serif);font-size: var(--text-body);font-weight:700;color:var(--text-primary, #212529);">Notifications</span>
@@ -334,7 +334,8 @@
   .notifications-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1999;
+    /* Just below the z-modal panel so clicks on the backdrop close it. */
+    z-index: calc(var(--z-modal, 2000) - 1);
     border: 0;
     background: transparent;
     padding: 0;
