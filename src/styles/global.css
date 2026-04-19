@@ -47,8 +47,18 @@ body {
   touch-action: manipulation;
   overscroll-behavior-x: none;
   overscroll-behavior: none;
+  /*
+    Phase 4 typography rules per brief-v3. text-rendering:
+    optimizeLegibility enables kerning + ligatures on all text.
+    font-feature-settings explicitly requests kern/liga/calt. Tabular
+    figures on body so count badges, scores, and timestamps align in
+    vertical stacks without per-component overrides.
+  */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "calt";
+  font-variant-numeric: tabular-nums;
 }
 
 #main-content {
