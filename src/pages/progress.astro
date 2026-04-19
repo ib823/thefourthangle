@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import UtilityHeader from '../components/UtilityHeader.astro';
+import ReadingProgressPanel from '../components/ReadingProgressPanel.svelte';
+---
+<Base title="Reading progress — The Fourth Angle" description="Export, import, or clear your reading progress on this device.">
+  <UtilityHeader />
+  <main style="max-width: 560px; margin: 0 auto; padding: 24px 18px 80px;">
+    <p style="font-family: var(--font-body); font-size: var(--text-body); line-height: 1.65; color: var(--text-secondary); margin: 0 0 20px;">
+      Your reading progress is stored locally in this browser. You can export a JSON snapshot, re-import it on another device, or clear everything on this device. Nothing is transmitted unless you explicitly opt into Angle Code sync.
+    </p>
+    <ReadingProgressPanel client:idle />
+    <p style="font-family: var(--font-body); font-size: var(--text-xs); line-height: 1.5; color: var(--text-muted); margin: 20px 0 0;">
+      <a href="/disclaimer" style="color: inherit;">Disclaimer</a> · <a href="/about" style="color: inherit;">How this works</a>
+    </p>
+  </main>
+</Base>
