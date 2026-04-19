@@ -28,18 +28,18 @@
 
     // Check current browser permission (not localStorage — allows recovery)
     if (Notification.permission === 'denied') { denied = true; return; }
-    if (Notification.permission === 'granted' || localStorage.getItem('tfa-push-subscribed') === 'true') {
+    if (Notification.permission === 'granted' || localStorage.getItem('tfa:v1:push-subscribed') === 'true') {
       subscribed = true;
       return;
     }
 
     // Cooldown after dismiss
-    const dismissed = localStorage.getItem('tfa-push-dismissed');
+    const dismissed = localStorage.getItem('tfa:v1:push-dismissed');
     if (dismissed && Date.now() - parseInt(dismissed, 10) < 7 * 24 * 60 * 60 * 1000) return;
 
     // Only show after user has completed at least 1 issue
     try {
-      const readKeys = Object.keys(localStorage).filter(k => k.startsWith('tfa-read:'));
+      const readKeys = Object.keys(localStorage).filter(k => k.startsWith('tfa:v1:read:'));
       const completedCount = readKeys.filter(k => {
         try { return JSON.parse(localStorage.getItem(k) || '').state === 'completed'; } catch { return false; }
       }).length;
@@ -92,8 +92,8 @@
 
       subscribed = true;
       try {
-        localStorage.setItem('tfa-push-subscribed', 'true');
-        localStorage.setItem('tfa-push-endpoint', subscription.endpoint);
+        localStorage.setItem('tfa:v1:push-subscribed', 'true');
+        localStorage.setItem('tfa:v1:push-endpoint', subscription.endpoint);
       } catch {}
       showPrompt = false;
     } catch (e) {
@@ -103,7 +103,7 @@
 
   function dismiss() {
     showPrompt = false;
-    try { localStorage.setItem('tfa-push-dismissed', String(Date.now())); } catch {}
+    try { localStorage.setItem('tfa:v1:push-dismissed', String(Date.now())); } catch {}
   }
 </script>
 

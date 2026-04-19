@@ -121,8 +121,8 @@
   let pullRefreshState = $state<'idle' | 'pulling' | 'ready' | 'refreshing'>('idle');
 
   // Welcome card — shown once for first-time visitors
-  let welcomeDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-welcome-dismissed') === '1');
-  function dismissWelcome() { localStorage.setItem('tfa-welcome-dismissed', '1'); welcomeDismissed = true; }
+  let welcomeDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa:v1:welcome-dismissed') === '1');
+  function dismissWelcome() { localStorage.setItem('tfa:v1:welcome-dismissed', '1'); welcomeDismissed = true; }
 
   function resetPullRefresh() {
     if (pullRefreshState === 'refreshing') return;

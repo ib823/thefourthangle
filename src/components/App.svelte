@@ -10,6 +10,7 @@
   import DesktopReader from './DesktopReader.svelte';
   import HighlightsPanel from './HighlightsPanel.svelte';
   import StorageBlockedBanner from './StorageBlockedBanner.svelte';
+  import { migrate as migrateReadingState } from '../lib/reading-state';
   import LibraryTabs from './LibraryTabs.svelte';
   import MobileDock from './MobileDock.svelte';
   import SurfaceNav from './SurfaceNav.svelte';
@@ -137,9 +138,9 @@
   let syncLinked = $state(isSyncLinked());
   let showInstall = $state(false);
   let installIsIOS = $state(false);
-  let syncBannerDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa-sync-banner-dismissed') === '1');
+  let syncBannerDismissed = $state(typeof localStorage !== 'undefined' && localStorage.getItem('tfa:v1:sync-banner-dismissed') === '1');
   let showSyncBanner = $derived(!syncBannerDismissed && surfaceMode === 'library');
-  function dismissSyncBanner() { localStorage.setItem('tfa-sync-banner-dismissed', '1'); syncBannerDismissed = true; }
+  function dismissSyncBanner() { localStorage.setItem('tfa:v1:sync-banner-dismissed', '1'); syncBannerDismissed = true; }
 
   // Keep syncLinked and install state reactive
   $effect(() => {
@@ -391,6 +392,11 @@
   const goOnline = () => { isOffline = false; };
 
   onMount(() => {
+    // Phase 1 migration: copy legacy tfa-* keys → tfa:v1:*. Idempotent; short-
+    // circuits after first successful pass via the tfa:v1:migrated sentinel.
+    // Must run before any other code reads state, so we do it first here and
+    // before the storage-availability probe used by StorageBlockedBanner.
+    try { migrateReadingState(); } catch { /* storage unavailable; banner handles UI */ }
     document.body.classList.add('app-shell-root');
     syncShellModeClass();
     initInstallState();
@@ -470,7 +476,7 @@
 
         // Heartbeat
         try {
-          const endpoint = localStorage.getItem('tfa-push-endpoint');
+          const endpoint = localStorage.getItem('tfa:v1:push-endpoint');
           if (endpoint) sw.postMessage({ type: 'HEARTBEAT', endpoint });
         } catch {}
 

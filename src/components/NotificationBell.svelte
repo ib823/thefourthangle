@@ -64,7 +64,7 @@
 
     pushSupported = true;
     if (Notification.permission === 'denied') { pushDenied = true; return; }
-    if (Notification.permission === 'granted' || localStorage.getItem('tfa-push-subscribed') === 'true') {
+    if (Notification.permission === 'granted' || localStorage.getItem('tfa:v1:push-subscribed') === 'true') {
       pushSubscribed = true;
     }
   }
@@ -103,8 +103,8 @@
 
       pushSubscribed = true;
       try {
-        localStorage.setItem('tfa-push-subscribed', 'true');
-        localStorage.setItem('tfa-push-endpoint', subscription.endpoint);
+        localStorage.setItem('tfa:v1:push-subscribed', 'true');
+        localStorage.setItem('tfa:v1:push-endpoint', subscription.endpoint);
       } catch {}
     } catch {
       // Silent failure — user can retry
@@ -132,8 +132,8 @@
 
       pushSubscribed = false;
       try {
-        localStorage.removeItem('tfa-push-subscribed');
-        localStorage.removeItem('tfa-push-endpoint');
+        localStorage.removeItem('tfa:v1:push-subscribed');
+        localStorage.removeItem('tfa:v1:push-endpoint');
       } catch {}
     } catch {
       // Silent failure

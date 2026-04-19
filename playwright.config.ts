@@ -29,6 +29,14 @@ export default defineConfig({
     baseURL: 'http://localhost:4321',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    // --disable-dev-shm-usage is the canonical Chromium-in-Docker fix.
+    // GH Actions ubuntu-latest runs Chromium inside a container with a
+    // tiny default /dev/shm; without this flag, pages that exceed the
+    // default ~64 MB shared-memory budget crash silently mid-load. See
+    // https://playwright.dev/docs/ci#docker
+    launchOptions: {
+      args: ['--disable-dev-shm-usage'],
+    },
   },
 
   webServer: {

@@ -11,7 +11,7 @@ let _dismissed = false;
 let _listeners: Array<() => void> = [];
 let _initialized = false;
 
-const DISMISS_KEY = 'tfa-install-dismissed';
+const DISMISS_KEY = 'tfa:v1:install-dismissed';
 
 function notify() {
   for (const fn of _listeners) fn();

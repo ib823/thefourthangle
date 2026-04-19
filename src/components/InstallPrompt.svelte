@@ -20,7 +20,7 @@
 
     if (isIOS) {
       // Only show iOS guide if not already dismissed recently
-      const dismissed = localStorage.getItem('tfa-install-dismissed');
+      const dismissed = localStorage.getItem('tfa:v1:install-dismissed');
       if (!dismissed || Date.now() - parseInt(dismissed) > 30 * 24 * 60 * 60 * 1000) {
         showButton = true;
       }
@@ -57,7 +57,7 @@
 
   function dismiss() {
     showButton = false;
-    localStorage.setItem('tfa-install-dismissed', String(Date.now()));
+    localStorage.setItem('tfa:v1:install-dismissed', String(Date.now()));
   }
 </script>
 
