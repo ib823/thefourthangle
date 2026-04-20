@@ -86,7 +86,7 @@ For every numerical or named-entity claim in the analysis, log whether you indep
 Return ONLY valid JSON. No markdown. No commentary.
 
 {
-  "bias_score": 0-100,
+  "bias_score": 0-100,   // amount of bias detected. 0 = no bias found, 100 = heavily biased. LOWER IS BETTER. Downstream: VerdictBar displays quality where higher=better, so the pipeline inverts this to ba = 100 - bias_score. Your job here is to report bias AMOUNT accurately, not to pre-invert.
   "political_lean_estimate": -1.0,
   "ethnic_framing_estimate": 0.0,
   "religious_sensitivity_estimate": 0.0,
