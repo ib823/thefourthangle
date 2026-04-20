@@ -648,6 +648,16 @@
     backdrop-filter: blur(8px);
   }
 
+  /* Hide the inline score once the hero-grid is side-by-side and the
+     right-side shift panel is visible above the fold. Kept on phones
+     (<768px) where the hero stacks vertically and the shift panel
+     falls below the fold without this inline indicator. */
+  @media (min-width: 768px) {
+    .hero-inline-score {
+      display: none;
+    }
+  }
+
   .hero-inline-number {
     font-family: var(--font-display);
     font-size: var(--text-reading);
