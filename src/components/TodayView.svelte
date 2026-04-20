@@ -267,10 +267,6 @@
               <div class="hero-badge">Editor's Pick</div>
               <h2 id="lead-issue-title" class="hero-headline balance-title">{topIssue.headline}</h2>
               <p class="hero-context pretty-copy">{topIssue.context}</p>
-              <div class="hero-inline-score" title="Opinion Shift: reading only the headline would hide about {topIssue.opinionShift}% of the story">
-                <span class="hero-inline-number" style="color:{opinionColor(topIssue.opinionShift)};">{topIssue.opinionShift}</span>
-                <span class="hero-inline-label">Opinion Shift &middot; {opinionLabel(topIssue.opinionShift)}</span>
-              </div>
             </div>
             <div class="hero-shift">
               <div class="hero-shift-kicker">Opinion Shift</div>
@@ -635,40 +631,6 @@
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.78);
     max-width: 56ch;
-  }
-
-  .hero-inline-score {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 12px;
-    padding: 6px 14px;
-    border-radius: var(--radius-pill);
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-  }
-
-  /* Hide the inline score once the hero-grid is side-by-side and the
-     right-side shift panel is visible above the fold. Kept on phones
-     (<768px) where the hero stacks vertically and the shift panel
-     falls below the fold without this inline indicator. */
-  @media (min-width: 768px) {
-    .hero-inline-score {
-      display: none;
-    }
-  }
-
-  .hero-inline-number {
-    font-family: var(--font-display);
-    font-size: var(--text-reading);
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .hero-inline-label {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
   }
 
   .hero-shift {
