@@ -34,7 +34,7 @@
     edition: number;
     headline: string;
     context: string;
-    stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
+    stageScores?: { pa: number; ba: number; fc: number; sr: number; af?: number; ct?: number };
     finalScore?: number;
     cards: Array<{ t: string; lens?: string }>;
   }

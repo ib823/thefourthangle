@@ -1,7 +1,7 @@
 # The Fourth Angle — Claude Code Instructions
 
 ## What This Is
-Non-partisan Malaysian issues analysis platform. Every issue goes through a 6-stage editorial pipeline, scored for neutrality and opinion shift. Static site on Cloudflare Pages.
+Non-partisan Malaysian issues analysis platform. Every issue goes through a 4-stage editorial pipeline (Stages 1+2+3+6 — see `engine/templates/publish-playbook.md`), scored for neutrality and opinion shift. Stages 4 (DeepSeek Alt-Framing) and 5 (Grok Contrarian Stress-Test) are retired; legacy issues retain their `af`/`ct` scores. Static site on Cloudflare Pages.
 
 ## Publishing Workflow
 
@@ -23,7 +23,7 @@ Issues are stored one-per-file in `src/data/issues/`. The loader in `src/data/is
   "headline": "...",
   "context": "...",
   "published": true,
-  "stageScores": { "pa": 85, "ba": 72, "fc": 88, "af": 65, "ct": 52, "sr": 78 },
+  "stageScores": { "pa": 85, "ba": 72, "fc": 88, "sr": 78 },
   "finalScore": 73.2,
   "related": ["0142"],
   "sourceDate": "2026-03-28",
@@ -68,7 +68,7 @@ Legal, Rights, Economic, Governance, Technology, Social, Political, Health, Envi
 - `opinionShift` 40-59: Partial (some gaps in mainstream coverage)
 - `opinionShift` 0-39: Surface (mostly well-covered, minor additions)
 - `finalScore`: editorial quality score across 6 stages (higher = more balanced). Visible to readers in the desktop reader and share card as "Editorial Quality Score"
-- `stageScores`: each 0-100, independently assessed
+- `stageScores`: 4 required keys — `pa` (Stage 1 Primary Analysis), `ba` (Stage 2 Bias Audit — Gemini), `fc` (Stage 3 Fact Verification — ChatGPT), `sr` (Stage 6 Synthesis Review). Each 0-100, independently assessed. `af` and `ct` are optional and only present on legacy 6-stage issues (Stages 4/5 retired — see `engine/templates/publish-playbook.md`).
 
 ### To publish/unpublish:
 - Set `published: true` on issues you want visible
@@ -206,7 +206,7 @@ The pipeline preambles in `engine/templates/stage{1-6}-preamble.txt` enforce thi
 
 ## Content Rules
 - NO references to AI, models, Claude, GPT, or any AI provider
-- Use "6 independent review stages" not "AI models"
+- Use "4 independent review stages" (or "multi-stage editorial review") not "AI models"
 - All analysis framed as editorial methodology
 - Respect 3R: Race, Religion, Royalty — critique policy, not communities/beliefs
 - Only use publicly available information
@@ -217,7 +217,6 @@ The pipeline preambles in `engine/templates/stage{1-6}-preamble.txt` enforce thi
 ## UI Features That Depend on Issue Data
 - **Welcome card**: One-time inline card for first visitors explaining T4A and Opinion Shift. Dismissed permanently via localStorage.
 - **Browse by Topic**: Today page groups issues by primary lens. Each issue's primary topic = most common lens across its fact cards. 6-8 topic chips expand inline to show top 5 issues.
-- **Hero card score badge**: Inline Opinion Shift score visible without scrolling on all viewports.
 - **Opinion Shift tooltips**: All score numbers show "{score} — {tier}: Reading only the headline would hide about {score}% of the story" on hover.
 - **Editorial Quality Score**: `finalScore` displayed in desktop reader below Opinion Shift box with explanation.
 - **Tracked in X issues**: Clickable label on fact cards linking to connected issues (desktop scrolls to completion section, mobile opens pattern sheet).
@@ -315,8 +314,8 @@ When the user provides a topic (e.g., "Add new issue: [topic]"), execute this 10
 3. Produces 4 ready-to-paste prompt files in `engine/prompts-generated/`:
    - `{slug}-stage2-browser.txt` — for **Gemini** (Bias Audit)
    - `{slug}-stage3-browser.txt` — for **ChatGPT** (Fact Verification)
-   - `{slug}-stage4-browser.txt` — for **DeepSeek/ChatGPT** (Alternative Framing)
-   - `{slug}-stage5-browser.txt` — for **Grok** (Contrarian Stress-Test)
+   - `{slug}-stage4-browser.txt` — *retired (DeepSeek/Alt Framing)*, still generated for legacy tooling but not used
+   - `{slug}-stage5-browser.txt` — *retired (Grok/Contrarian)*, still generated for legacy tooling but not used
 4. Present each prompt to user with clear label:
    ```
    === STAGE 2: BIAS AUDIT ===
@@ -333,9 +332,8 @@ For each stage response:
 3. Extract key score:
    - Stage 2: `bias_score` → BA
    - Stage 3: `factual_accuracy_score` → FC
-   - Stage 4: `completeness_score` → AF
-   - Stage 5: `courage_score` → CT
-4. After all 4 are collected, proceed to Phase 5.
+   - *Stages 4/5 retired — skip collection.*
+4. After Stages 2 and 3 are collected, proceed to Phase 5.
 
 #### PHASE 5: STAGE 6 — SYNTHESIS (Claude runs this)
 1. **Read `engine/templates/stage6-preamble.txt` first** and follow its accuracy contract throughout this phase. Synthesis is exactly when overclaim, underclaim, and unverified-detail sneak in — the preamble exists to prevent that.
@@ -343,9 +341,8 @@ For each stage response:
 3. Integrate all critiques:
    - Apply fact corrections from Stage 3 (e.g., wrong numbers, dates, ages)
    - Address bias flags from Stage 2 (rephrase flagged quotes, balance perspectives)
-   - Incorporate missing perspectives from Stage 4 (add missing community voices, international parallels)
-   - Strengthen courage per Stage 5 flags (remove hedging, add hard truths)
-4. **Re-verify any wording you introduce** during synthesis (rephrases, tightened headlines, sharper claims). Tag every change with one of: `CORRECTED (Stage 3)`, `REPHRASED (Stage 2)`, `ADDED (Stage 4)`, `STRENGTHENED (Stage 5)`, or `INTRODUCED (Stage 6 self-verified)`. If you cannot tag a change with one of these five categories, you have introduced something you should not have.
+   - *Stages 4/5 retired — their contributions (missing perspectives, contrarian courage) are now the responsibility of the brief author in Phase 1 and of the synthesizer in this phase.*
+4. **Re-verify any wording you introduce** during synthesis (rephrases, tightened headlines, sharper claims). Tag every change with one of: `CORRECTED (Stage 3)`, `REPHRASED (Stage 2)`, or `INTRODUCED (Stage 6 self-verified)`. If you cannot tag a change with one of these three categories, you have introduced something you should not have.
 5. Track every revision in the synthesis output's notes
 6. Save synthesis to `engine/output/{slug}-stage6-synthesis.json`
 7. Score SR (0-100): quality of integrated synthesis

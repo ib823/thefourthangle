@@ -32,7 +32,13 @@ const VALID_LENSES = [
   'Social', 'Political', 'Health', 'Environmental', 'Regional',
   'Historical', 'Critical', 'Theological', 'Security',
 ];
-const STAGE_KEYS = ['pa', 'ba', 'fc', 'af', 'ct', 'sr'];
+// Required stages: Stage 1 (Primary Analysis), Stage 2 (Bias Audit — Gemini),
+// Stage 3 (Fact Verification — ChatGPT), Stage 6 (Synthesis Review).
+// Optional stages (preserved for legacy 6-stage issues): af (Stage 4 Alt.
+// Framing), ct (Stage 5 Contrarian Stress-Test).
+const STAGE_KEYS_REQUIRED = ['pa', 'ba', 'fc', 'sr'];
+const STAGE_KEYS_OPTIONAL = ['af', 'ct'];
+const STAGE_KEYS = [...STAGE_KEYS_REQUIRED, ...STAGE_KEYS_OPTIONAL];
 
 // Length budget — derived from research on mobile attention, microcontent, and
 // Smart Brevity (see CLAUDE.md "Length Budget" section). Two bands per field:
@@ -200,11 +206,20 @@ for (const issue of issues) {
 
   // ── Stage scores ──
   if (issue.stageScores) {
-    for (const key of STAGE_KEYS) {
+    // Required stages: error if missing or invalid.
+    for (const key of STAGE_KEYS_REQUIRED) {
       const val = issue.stageScores[key];
       if (val == null) {
         err(id, `stageScores.${key}`, 'Missing stage score');
       } else if (typeof val !== 'number' || val < LIMITS.stageScore.min || val > LIMITS.stageScore.max) {
+        err(id, `stageScores.${key}`, `Invalid: ${val} (must be number ${LIMITS.stageScore.min}-${LIMITS.stageScore.max})`);
+      }
+    }
+    // Optional stages: validate only when present; skip silently when absent.
+    for (const key of STAGE_KEYS_OPTIONAL) {
+      const val = issue.stageScores[key];
+      if (val == null) continue;
+      if (typeof val !== 'number' || val < LIMITS.stageScore.min || val > LIMITS.stageScore.max) {
         err(id, `stageScores.${key}`, `Invalid: ${val} (must be number ${LIMITS.stageScore.min}-${LIMITS.stageScore.max})`);
       }
     }

@@ -12,8 +12,8 @@
     pa: number;
     ba: number;
     fc: number;
-    af: number;
-    ct: number;
+    af?: number;   // optional: legacy 6-stage issues
+    ct?: number;   // optional: legacy 6-stage issues
     sr: number;
   }
 
@@ -38,6 +38,13 @@
     { key: 'ct', label: 'CT', full: 'Stress Test', description: 'Pushes the argument against the strongest counter-case available.' },
     { key: 'sr', label: 'SR', full: 'Synthesis Review', description: 'Assesses whether the final view stays fair after the earlier checks.' },
   ] as const;
+
+  // Show only stages that actually have a score. Legacy issues carry all 6;
+  // new issues carry 4 (pa/ba/fc/sr) after the af/ct stages were retired.
+  const visibleStages = $derived(
+    stages.filter((s) => scores?.[s.key as keyof StageScores] !== undefined)
+  );
+  const stageCount = $derived(visibleStages.length);
 
   function dotColor(score: number | undefined): string {
     if (score === undefined) return 'var(--border-divider)';
@@ -79,9 +86,9 @@
     <div
       style="display:flex;align-items:center;gap:4px;"
       role="group"
-      aria-label="Neutrality: {finalScore} out of 100 — 6-stage editorial review"
+      aria-label="Neutrality: {finalScore} out of 100 — {stageCount}-stage editorial review"
     >
-      {#each stages as stage}
+      {#each visibleStages as stage}
         {@const val = scores[stage.key as keyof StageScores]}
         {@const shape = dotShape(val)}
         {#if shape === 'circle'}
@@ -99,11 +106,11 @@
     <div
       style="display:flex;flex-direction:column;gap:0;padding:8px 10px;background:var(--amber-bg);border:1px solid var(--border-light);border-radius: var(--radius-lg);"
       role="group"
-      aria-label="6-stage editorial review — Neutrality: {finalScore} out of 100"
+      aria-label="{stageCount}-stage editorial review — Neutrality: {finalScore} out of 100"
     >
       <div style="display:flex;align-items:center;gap:0;">
         <div style="display:flex;align-items:center;gap:4px;flex:1;">
-          {#each stages as stage}
+          {#each visibleStages as stage}
             {@const val = scores[stage.key as keyof StageScores]}
             {@const shape = dotShape(val)}
             <!-- #69: Tap-to-expand tooltip -->

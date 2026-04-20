@@ -29,7 +29,7 @@
     edition: number;
     context: string;
     cards: Card[];
-    stageScores?: { pa: number; ba: number; fc: number; af: number; ct: number; sr: number };
+    stageScores?: { pa: number; ba: number; fc: number; sr: number; af?: number; ct?: number };
     finalScore?: number;
   }
 

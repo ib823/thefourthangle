@@ -9,8 +9,8 @@ export interface StageScores {
   pa: number;
   ba: number;
   fc: number;
-  af: number;
-  ct: number;
+  af?: number;   // Stage 4 (Alternative Framing) — optional; legacy 6-stage issues
+  ct?: number;   // Stage 5 (Contrarian Stress-Test) — optional; legacy 6-stage issues
   sr: number;
 }
 
