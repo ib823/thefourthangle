@@ -1,0 +1,154 @@
+{
+  "slug": "najib-1mdb-tanore",
+  "issue_id": "1944",
+  "created_at": "2026-04-20T03:35:50.006Z",
+  "paths": {
+    "brief": "engine/briefs/najib-1mdb-tanore.md",
+    "stage1": "engine/output/najib-1mdb-tanore-stage1.json",
+    "stage2": "engine/output/najib-1mdb-tanore-stage2.json",
+    "stage3": "engine/output/najib-1mdb-tanore-stage3.json",
+    "stage6": "engine/output/najib-1mdb-tanore-stage6-synthesis.json",
+    "reader": "engine/output/najib-1mdb-tanore-reader.json",
+    "issue": "src/data/issues/1944.json",
+    "og_background": "public/og/backgrounds/issue-1944-bg.png",
+    "stage4": "engine/output/najib-1mdb-tanore-stage4.json",
+    "stage5": "engine/output/najib-1mdb-tanore-stage5.json"
+  },
+  "phases": {
+    "0_init": {
+      "done": true,
+      "at": "2026-04-20T03:35:50.006Z"
+    },
+    "1_research": {
+      "done": true,
+      "at": "2026-04-20T03:35:50.048Z",
+      "brief": "engine/briefs/najib-1mdb-tanore.md",
+      "size_kb": 14,
+      "primary_sources": 26
+    },
+    "2_stage1": {
+      "done": true,
+      "at": "2026-04-20T03:35:50.091Z",
+      "pa": 85,
+      "confidence": "High",
+      "stage1": "engine/output/najib-1mdb-tanore-stage1.json"
+    },
+    "3_browser_prompts": {
+      "done": true,
+      "at": "2026-04-20T03:46:05.992Z",
+      "prompts": {
+        "stage2": "engine/prompts-generated/najib-1mdb-tanore-stage2-browser.txt",
+        "stage3": "engine/prompts-generated/najib-1mdb-tanore-stage3-browser.txt"
+      }
+    },
+    "4_stage2_collected": {
+      "done": true,
+      "at": "2026-04-20T04:21:39.031Z",
+      "path": "engine/output/najib-1mdb-tanore-stage2.json",
+      "bias_score": 65
+    },
+    "4_stage3_collected": {
+      "done": true,
+      "at": "2026-04-20T04:21:39.073Z",
+      "path": "engine/output/najib-1mdb-tanore-stage3.json",
+      "factual_accuracy_score": 64
+    },
+    "5_synthesis": {
+      "done": true,
+      "at": "2026-04-20T03:35:50.297Z",
+      "sr": 84,
+      "composite_audit_score": 82.4,
+      "final_score": 83.1,
+      "publish_ready": true,
+      "stage6": "engine/output/najib-1mdb-tanore-stage6-synthesis.json"
+    },
+    "6_legal_check": {
+      "done": true,
+      "at": "2026-04-20T05:12:39.764Z",
+      "reader": "src/data/issues/1944.json",
+      "audit_round": "v2 post-browser-audits",
+      "corrections_applied": [
+        "REBALANCED (Stage 2): hook — 76 witnesses is TOTAL not one side",
+        "REBALANCED (Stage 2+3): economic big — dropped sharpest-cost overclaim",
+        "CORRECTED (Stage 3): economic sub — only RM9.02B sukuk explicitly runs to 2039",
+        "REBALANCED (Stage 2+4): social big — added GPS+GRS East Malaysian coalitions",
+        "STRENGTHENED (Stage 2+5): social sub — named Anwar unity government explicitly",
+        "CORRECTED (Stage 3): reframe — patronage-untouched softened; 2016 reforms exist",
+        "REBALANCED (Stage 2+3): view — removed sharpest-cost framing",
+        "CORRECTED: context — dropped 2039 overclaim consistent with economic sub"
+      ],
+      "stageScores": {
+        "pa": 85,
+        "ba": 65,
+        "fc": 64,
+        "af": 72,
+        "ct": 65,
+        "sr": 84
+      },
+      "finalScore": 72.5,
+      "scoring_mode": "6-stage",
+      "checks_passed": [
+        "3R",
+        "defamation",
+        "OSA",
+        "sedition",
+        "CMA233",
+        "analysis-framed",
+        "disclaimer",
+        "stealth",
+        "fact-trace",
+        "no cardinal sins",
+        "no drift from Stage 6"
+      ],
+      "gemini_dec29_flag": "rejected — Dec 30 verified by Reuters+Star+Malay Mail+Bernama+my Phase 6 web search"
+    },
+    "7a_sherlock": {
+      "done": true,
+      "at": "2026-04-20T05:15:49.660Z",
+      "related": [
+        "1867",
+        "1165",
+        "1961",
+        "1962"
+      ],
+      "bidirectional": true,
+      "rationale": "1867+1165 direct 1MDB recovery companions; 1961 MACC integrity sibling; 1962 editorial sibling (individual accountability vs system intact)"
+    },
+    "7b_image_prompt": {
+      "done": true,
+      "at": "2026-04-20T05:23:55.840Z",
+      "prompt_emitted": "gavel striking marble with cracks radiating outward + T4A master style"
+    },
+    "7b_image_uploaded": {
+      "done": true,
+      "at": "2026-04-20T05:23:55.935Z",
+      "file": "public/og/backgrounds/issue-1944-bg.png",
+      "dims": "1731x909 (≈1.90:1)",
+      "size_kb": 281,
+      "note": "T4A signature bottom-right — consistent brand mark with issue 1949"
+    },
+    "8_validated": {
+      "done": true,
+      "at": "2026-04-20T05:23:56.204Z",
+      "validator": "pass",
+      "stealth": "pass",
+      "image": "present",
+      "link_count": 4
+    },
+    "9_deployed": {
+      "done": false
+    }
+  },
+  "legacy_stages": {
+    "stage4": {
+      "collected_at": "2026-04-20T04:21:39.132Z",
+      "path": "engine/output/najib-1mdb-tanore-stage4.json",
+      "completeness_score": 72
+    },
+    "stage5": {
+      "collected_at": "2026-04-20T04:21:39.199Z",
+      "path": "engine/output/najib-1mdb-tanore-stage5.json",
+      "courage_score": 65
+    }
+  }
+}
