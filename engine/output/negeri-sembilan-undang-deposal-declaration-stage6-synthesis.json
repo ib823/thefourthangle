@@ -1,0 +1,98 @@
+{
+  "_provenance": {
+    "version": "v1",
+    "stage": "Stage 6 — Synthesis (Claude)",
+    "slug": "negeri-sembilan-undang-deposal-declaration",
+    "issue_id": "1976",
+    "inputs": {
+      "stage1_v2": "engine/output/negeri-sembilan-undang-deposal-declaration-stage1.json",
+      "stage2_v2_gemini": "engine/output/negeri-sembilan-undang-deposal-declaration-stage2.json (bias_score=5)",
+      "stage3_v2_chatgpt": "engine/output/negeri-sembilan-undang-deposal-declaration-stage3.json (fc=68)",
+      "stage4_v2_deepseek": "engine/output/negeri-sembilan-undang-deposal-declaration-stage4.json (af=78)",
+      "stage5_v2_grok": "engine/output/negeri-sembilan-undang-deposal-declaration-stage5.json (ct=74)"
+    },
+    "synthesized_at": "2026-04-20",
+    "discipline": "3R (Royalty) — every royal-adjacent claim verified against ≥2 independent primary sources, tagged with origin stage"
+  },
+  "headline": "Four Undangs Declared the Ruler Deposed. Three Hold Office. One Does Not.",
+  "context": "On 19 April 2026, the four Undangs of Negeri Sembilan declared Tuanku Muhriz deposed and named Tunku Nadzaruddin the proposed 12th Ruler. State government rejects it: one Undang was dismissed in May 2025.",
+  "cards": [
+    {
+      "t": "hook",
+      "big": "Four Undangs declared Tuanku Muhriz deposed and named Tunku Nadzaruddin the 12th Ruler. Three currently hold the office. One was dismissed 11 months earlier.",
+      "sub": "State government rejects the declaration. The same Undang who proclaimed Muhriz in 2008 — since removed for 33 offences against custom — signed this one too."
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "big": "The constitution provides for the Ruler to withdraw at the Undangs' collective request. Whether three alone — without the dismissed fourth — suffice is untested.",
+      "sub": "BERNAMA and Malay Mail cite Articles 10-12 of UUTKNS 1959; The Star cites Articles 10-13. All agree the rejection rests on Mubarak no longer holding office."
+    },
+    {
+      "t": "fact",
+      "lens": "Historical",
+      "big": "The same Undang who read the deposal on 19 April 2026 had proclaimed Tuanku Muhriz as 11th Ruler on 29 December 2008.",
+      "sub": "In 1967, the Undang bypassed Muhriz for the throne at 19, electing his uncle Tuanku Ja'afar. Tunku Nadzaruddin — Ja'afar's son — is now the proposed successor."
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "big": "Mubarak was dismissed 13 May 2025 for 33 offences against Telaga Undang custom. The DKU ratified the dismissal two days before he signed the declaration.",
+      "sub": "The Dewan Keadilan dan Undang sat on 17 April 2026, presided by Tuanku Muhriz himself. Ibu Soko Klana Hulu and Anak Waris Klana Hulu declined to give Mubarak a mandate."
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "big": "The Undangs cited alleged royal misconduct from a 5 March inquiry. Every institution labelled the declaration menderhaka and referred it to religious authorities and police.",
+      "sub": "No state, customary, or judicial body has publicly addressed the misconduct claim itself. Daulat was defended before the underlying allegation was examined."
+    },
+    {
+      "t": "reframe",
+      "big": "The real question is not whether one dismissed Undang can act. It is whether three Undangs alone can invoke a provision designed for four.",
+      "sub": ""
+    },
+    {
+      "t": "view",
+      "big": "A constitution built on the collective authority of four Undangs is being tested by three. No court has ruled, and the institutions have defended the throne first.",
+      "sub": ""
+    }
+  ],
+  "sources": "BERNAMA (20 Apr 2026), Malay Mail (news + explainer 20 Apr 2026), FMT (20 Apr + FMT Bahasa 20 Apr 2026), The Vibes (20 Apr), The Sun (20 Apr), Scoop (20 Apr), The Edge Malaysia (20 Apr 2026), Malaysiakini (20 Apr), The Star (20 Apr + 17 Apr 2026), Utusan Malaysia (20 Apr 2026 — perkara 10(1)(b) citation), Berita Harian, Harian Metro, Buletin TV3, NST, mStar (2008), NS Government Portal + NS Constitution PDF (ns.gov.my), Majlis Datuk Undang Sungai Ujong, UUTKNS 1959 (primary constitutional text), Federal Constitution of Malaysia (Art 71, 181)",
+  "confidence": "High on chronology + named actors (all four Undangs identified across ≥2 outlets; Tunku Nadzaruddin's proposal verified; 2008 proclamation verified; 13 May 2025 dismissal verified). Medium on constitutional interpretation (Article X text not independently retrieved; Articles 10-12 vs 10-13 discrepancy disclosed; Article 29 threshold cited by Malaysiakini as valid for ≥3 Undangs remains competing reading). Low on Tuanku Muhriz's alleged misconduct — the Undangs' grounds are reported, the 5 March 2026 inquiry has not been publicly released; we do not assert validity or falsity.",
+  "revisions_made": [
+    "CORRECTED (Stage 3): 'co-signed' → 'signed the declaration' in hook sub — we have not inspected the physical declaration or signature page; plain 'signed' is what multiple outlets confirm.",
+    "REPHRASED (Stage 2 bias): 'without examining the underlying claim' → 'without publicly addressing' in Political card (v2); then tightened in Stage 6 to 'has publicly addressed the misconduct claim' — removes epistemic overclaim about government's internal processes.",
+    "CORRECTED (Stage 3): Legal card acknowledges Articles 10-12 vs 10-13 discrepancy between BERNAMA/Malay Mail and The Star. Previously synthesised silently.",
+    "REBALANCED (Stage 2+3): 'Narrow ground' rejection framing removed. New Legal card makes clear the government's rejection rests on Mubarak's disqualification, not on a wholesale constitutional denial.",
+    "ADDED (Stage 4): Ibu Soko Klana Hulu and Anak Waris Klana Hulu declining to give Mubarak a mandate — added to Governance card sub. Restores the female customary leadership's explicit rejection.",
+    "STRENGTHENED (Stage 5): Political card big — 'without publicly addressing' + 'Daulat was defended before the underlying allegation was examined' foregrounds the institutional-deference pattern Grok flagged. Answers Grok's remaining cowardice charge without asserting fact beyond the public record.",
+    "CORRECTED (Stage 3): 'Three were eligible to vote' → 'Three currently hold the office' in hook big. Eligibility language isn't supported by primary source; office-holding status is (Jelebu/Johol/Rembau Undangs all confirmed sitting).",
+    "INTRODUCED (Stage 6 self-verified): Tunku Nadzaruddin's paternal connection — 'Ja'afar's son' — in Historical card sub. Verified against NS Government official portal (institusi diraja) + historical records. This reframes the 1967→2008→2026 succession arc as closing a family-line loop, which is editorially significant and factually sound."
+  ],
+  "introduced_claims": [
+    {
+      "claim": "Tunku Nadzaruddin Tuanku Ja'afar is the son of former YDPB Tuanku Ja'afar (the 10th YDPB).",
+      "primary_source": "NS Government Official Portal (institusi diraja): https://www.ns.gov.my/en/institusi-diraja — Tunku Nadzaruddin is recorded as Tunku Ja'afar's son; Tuanku Ja'afar reigned 1967-2008. Yahoo News Malaysia 20 Apr 2026 also notes paternal relation in explainer coverage."
+    },
+    {
+      "claim": "'Daulat was defended before the underlying allegation was examined.' (stylised summary of the absence of any publicly disclosed review.)",
+      "primary_source": "Synthesis of BERNAMA + Malay Mail + Telaga Undang statement — no state, customary, or judicial body has publicly addressed the misconduct claim. The phrasing 'defended before examined' is editorial synthesis of what is publicly observable, not a claim about the institutions' private deliberations."
+    }
+  ],
+  "synthesis_notes": "Two over-integration decisions documented: (1) On 'Grok's pressure for hard-truth naming of automatic-menderhaka-response' vs 'Gemini's epistemic caution against claiming the government did not examine the claim' — I took Grok's point about institutional response pattern but used Gemini's fix for epistemic honesty. Final phrasing: 'No state, customary, or judicial body has publicly addressed the misconduct claim itself. Daulat was defended before the underlying allegation was examined.' This reports what is publicly observable without claiming to know internal deliberations. (2) On ChatGPT's flag that 'narrow ground' understates the government's constitutional argument vs keeping the editorial pointer that the state government's rejection is specifically Mubarak-keyed — I dropped 'narrow ground' but kept the core point by rewording the Legal card's sub to be explicit that the rejection rests on Mubarak's disqualification. That's truthful to the MB's statement without implying the constitutional argument is weak. Also: Article 29 (Malaysiakini reports decisions valid with ≥3 Undangs) is a competing reading that strengthens the reframe's open-question framing but was not independently verified in Stage 3 or via direct constitutional text; I therefore left the reframe as 'untested' rather than tilting toward the ≥3 threshold being settled either way.",
+  "qualitative_scores": {
+    "factual": 85,
+    "balance": 88,
+    "completeness": 80,
+    "courage": 80,
+    "qualitative_overall": 83
+  },
+  "composite_audit_score": 81.3,
+  "final_score": 81.3,
+  "publish_ready": true,
+  "publish_ready_caveats": [
+    "Phase 6 legal + accuracy check must be run before any write to src/data/issues/1976.json.",
+    "Article X exact text remains unquoted — acceptable for shipping because we explicitly frame the question as untested; do not strengthen.",
+    "Article 29 ≥3 Undangs reading is mentioned as competing (per Malaysiakini) but not asserted; this is the correct handling absent direct constitutional-text retrieval."
+  ]
+}

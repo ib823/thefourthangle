@@ -1,0 +1,45 @@
+{
+  "_provenance": {
+    "version": "v2",
+    "stage": "Stage 2 — Bias Audit (Gemini)",
+    "audited_content": "engine/output/negeri-sembilan-undang-deposal-declaration-stage1.json (v2 rewritten after v1 audit)",
+    "audited_at": "2026-04-20",
+    "v1_preserved_at": "engine/output/negeri-sembilan-undang-deposal-declaration-stage2.v1-pre-reframe.json"
+  },
+  "bias_score": 5,
+  "political_lean_estimate": 0.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.1,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [],
+  "economic_flags": [],
+  "gender_flags": [],
+  "omission_flags": [],
+  "evasion_flags": [],
+  "shoe_test_failures": [],
+  "cardinal_sin_flags": [
+    {
+      "sin": "OVERCLAIM",
+      "quote": "The state government rejected their declaration without examining the underlying claim.",
+      "why": "We only know that the state government (via MB press statements) did not PUBLICLY ADDRESS the misconduct claims in their rejection, focusing instead on Mubarak's lack of legal standing. Asserting they rejected it 'without examining' assumes knowledge of government's internal administrative/investigative processes.",
+      "fix": "Change 'without examining' to 'without publicly addressing'."
+    }
+  ],
+  "verification_log": [
+    {"claim": "All four Undangs of Negeri Sembilan issued declaration deposing Tuanku Muhriz and naming Tunku Nadzaruddin Tuanku Ja'afar", "status": "VERIFIED", "primary_source": "The Star + Malay Mail 20 Apr 2026"},
+    {"claim": "Mubarak Dohak dismissed 341 days earlier", "status": "VERIFIED", "primary_source": "BERNAMA 20 Apr 2026 (13 May 2025 dismissal → 19 Apr 2026)"},
+    {"claim": "Article X(1)(b) UUTKNS 1959 refers to collective Undang action", "status": "VERIFIED", "primary_source": "Laws of the Constitution of NS 1959 (ns.gov.my)"},
+    {"claim": "1967 bypass of Tuanku Muhriz at age 19", "status": "VERIFIED", "primary_source": "The Edge 20 Apr 2026"},
+    {"claim": "Same Undang proclaimed Muhriz 29 Dec 2008", "status": "VERIFIED", "primary_source": "mStar archives 29 Dec 2008"},
+    {"claim": "DKU presided by Tuanku Muhriz confirmed dismissal 17 Apr 2026", "status": "VERIFIED", "primary_source": "The Star + BERNAMA"},
+    {"claim": "Four Undangs cited alleged royal misconduct from 5 Mar 2026 inquiry", "status": "VERIFIED", "primary_source": "Malay Mail 20 Apr 2026 citing Malaysiakini"},
+    {"claim": "Telaga Undang speaker Sarifah Norzaidah Al-Qadri called act 'menderhaka'", "status": "VERIFIED", "primary_source": "Sinar Harian / The Rakyat Post 20 Apr 2026"}
+  ],
+  "overall_assessment": "Highly factual, structurally sound, accurately incorporates complexities of breaking news. By restoring the context of the other three Undangs' involvement, it correctly elevates narrative from dismissed individual's lone stunt to a genuine, untested constitutional dispute. Only flaw: minor epistemic overclaim regarding state government 'not examining' underlying misconduct claims, when observable reality is they did not address those claims publicly."
+}

@@ -1,0 +1,49 @@
+{
+  "_provenance": {
+    "version": "v1",
+    "stage": "Stage 2 — Bias Audit (Gemini)",
+    "audited_content": "engine/output/negeri-sembilan-undang-deposal-declaration-stage1.json",
+    "audited_at": "2026-04-20"
+  },
+  "bias_score": 5,
+  "political_lean_estimate": 0.0,
+  "ethnic_framing_estimate": 0.0,
+  "religious_sensitivity_estimate": 0.0,
+  "narrative_framing_estimate": 0.2,
+  "geographic_bias_estimate": 0.0,
+  "economic_framing_estimate": 0.0,
+  "gender_agency_estimate": 0.0,
+  "partisan_flags": [],
+  "racial_flags": [],
+  "religious_flags": [],
+  "geographic_flags": [],
+  "economic_flags": [],
+  "gender_flags": [],
+  "omission_flags": [
+    "The analysis explicitly states in the confidence section that Mubarak's motivation is unknown and refrains from speculation. However, to avoid a potential omission bias regarding his agency, the body text itself should briefly clarify whether Mubarak offered any public rationale in his 19 April declaration."
+  ],
+  "evasion_flags": [],
+  "shoe_test_failures": [],
+  "cardinal_sin_flags": [
+    {
+      "sin": "MISLEADING_FRAMING",
+      "quote": "The same Undang crowned him in 2008.",
+      "why": "'Crowned' is culturally inaccurate for Negeri Sembilan's Adat Perpatih. The YDPB is 'proclaimed' (dimasyhurkan), not crowned, as no crown is utilized in the custom.",
+      "fix": "Change 'crowned' to 'proclaimed'."
+    }
+  ],
+  "verification_log": [
+    {"claim": "former Undang Luak Sungai Ujong, Datuk Mubarak Dohak, signed and read a declaration on 19 April 2026 purporting to depose Tuanku Muhriz", "status": "VERIFIED", "primary_source": "BERNAMA, 20 April 2026"},
+    {"claim": "state government, Telaga Undang customary council, constitution all reject the declaration", "status": "VERIFIED", "primary_source": "BERNAMA + FMT Bahasa, 20 April 2026"},
+    {"claim": "Mubarak Dohak himself removed from office 11 months ago", "status": "VERIFIED", "primary_source": "BERNAMA, 20 April 2026 (citing 13 May 2025)"},
+    {"claim": "Clause 14(3) UUTKNS 1959 governs Undang removal", "status": "VERIFIED", "primary_source": "BERNAMA, 20 April 2026"},
+    {"claim": "Articles 10-12 govern the Ruler; no unilateral-deposal provision", "status": "VERIFIED", "primary_source": "BERNAMA + The Edge Malaysia, 20 April 2026"},
+    {"claim": "29 December 2008 proclamation by Mubarak", "status": "VERIFIED", "primary_source": "Malaysiakini + BERNAMA archives, 29 December 2008"},
+    {"claim": "Istana Besar Seri Menanti, 3:45pm", "status": "VERIFIED", "primary_source": "contemporaneous news 29 Dec 2008"},
+    {"claim": "13 May 2025 dismissal for 33 offences", "status": "VERIFIED", "primary_source": "BERNAMA, 20 April 2026"},
+    {"claim": "341 days arithmetic", "status": "VERIFIED", "primary_source": "Arithmetic 13 May 2025 → 19 April 2026"},
+    {"claim": "17 April 2026 DKU sitting presided by Tuanku Muhriz", "status": "VERIFIED", "primary_source": "BERNAMA + FMT, 20 April 2026"},
+    {"claim": "Precedent: 2016 Undang Luak Johol dismissal", "status": "VERIFIED", "primary_source": "BERNAMA, 20 April 2026"}
+  ],
+  "overall_assessment": "Highly factual, objectively neutral, solidly grounded in breaking news without speculation. Synthesis of dates, constitutional citations, and historical precedents is accurate and rigorously verified. The only flaw is the culturally inaccurate 'crowned' which anglicises the Malay customary practice of proclamation."
+}

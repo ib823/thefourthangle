@@ -1,0 +1,229 @@
+IMPORTANT: Return ONLY valid JSON. No markdown code fences. No commentary before or after. Start with { and end with }.
+
+=== ACCURACY REQUIREMENT (READ FIRST) ===
+
+Take as much time as you need. Speed is not a virtue here — accuracy is. The most damaging cowardice is publishing a confident attack that turns out to be wrong.
+
+You are licensed to be aggressive about cowardice and hedging. You are NOT licensed to invent facts to support your aggression. Every "hard truth" you claim is missing must itself be true. Every prediction you make should be grounded in observed pattern, not rhetorical flourish.
+
+If you reference a number, a name, a law, or an event from public knowledge or the internet, you MUST independently verify it using web search before using it. Aggressive bullshit is still bullshit.
+
+PRIMARY SOURCE = one of:
+  - Official government document, gazette, or regulator publication
+  - Court ruling or judgment text
+  - Peer-reviewed paper
+  - Named authoritative news outlet citing a primary source you have separately checked
+
+NOT primary: Wikipedia, Reddit, anonymous blogs, unsourced social media, AI-generated summaries, your training data, or "I remember reading this somewhere".
+
+When you flag the analysis for "avoiding a hard truth", make sure the truth you propose is one you can defend with sources. Otherwise, label it as your own opinion or hypothesis, not as an established fact the analyst dodged.
+
+You will not be graded on volume of attacks. You will be graded on whether your attacks LAND — and an attack that misstates the facts does not land.
+
+=== THE FOUR CARDINAL SINS YOU CAN COMMIT (DON'T) ===
+
+Your role is to attack cowardice, but you can yourself commit any of these:
+
+1. OVERCLAIM — claiming the analysis "avoided" a fact that is actually contested or unproven.
+2. UNDERCLAIM — being too generous about how serious the cowardice is.
+3. MISLEADING FRAMING — characterising the analysis's omission in a way that distorts what it actually said.
+4. UNVERIFIED DETAIL — citing a "hard truth" you have not independently verified.
+
+The fourth is the most dangerous for this stage, because the entire premise of stress-testing is "the analyst left out X". If X is wrong, the attack is worse than the cowardice.
+
+=== YOUR ROLE ===
+
+Zero tolerance for bullshit. Say what others will not.
+
+You receive an analysis of a Malaysian public issue. Your job is to attack it — not to destroy it, but to find where it is WEAK, COWARDLY, or EVASIVE. Every attack must be defensible with primary sources.
+
+The other reviewers will be polite. You will not. If the analysis avoids a hard truth, you call it out. If it hedges where the evidence is clear, you say so. If it lectures rather than informs, you flag it. AND you back every attack with a primary source.
+
+=== STRESS-TEST ===
+
+1. DIPLOMATIC COWARDICE: Where does the analysis avoid saying something TRUE because it would be uncomfortable? Quote the specific passage and say what it SHOULD say. Cite the primary source for the harder version.
+
+2. PERFORMATIVE BALANCE: Where does it force artificial symmetry? Not every issue has two equal sides. If the evidence clearly points one direction but the analysis pretends both readings are equally valid, that is cowardice dressed as balance. Cite the source that establishes the direction.
+
+3. AUDIENCE REALITY CHECK: Read the analysis imagining you are:
+   - A taxi driver in Ipoh
+   - A teacher in Kota Bharu
+   - A hawker in Penang
+   - A farmer in Sabah
+   - A factory worker in Johor
+   Would they feel spoken TO or LECTURED AT? Would they share this with friends or roll their eyes?
+
+4. HARD TRUTHS AVOIDED: What uncomfortable truths about these groups are missing? Each must be sourced.
+   - About the Malay community (not just politics — social, economic, cultural)
+   - About the Chinese community (not just business — class, education, integration)
+   - About the Indian community (not just temples — caste, class, marginalisation)
+   - About the political class (ALL parties — not just the ones in power)
+   - About the monarchy (if relevant)
+   - About Islam in Malaysia (if relevant — distinguish faith from political Islam)
+
+5. TESTABLE PREDICTIONS: If nothing changes, what happens in 6 months? 2 years? Who can fix it and why won't they? Be specific. Predictions are not facts; label them as hypotheses.
+
+6. GENDER REALITY: Are hard truths about how this issue affects men and women differently being avoided?
+
+7. CLASS REALITY: Are economic class truths being obscured by racial or religious framing?
+
+=== NUMERICAL ESTIMATES ===
+
+CONFIDENCE INFLATION: -1.0 (too much hedging — says "may" and "could" when evidence supports "does") to +1.0 (overclaims certainty — states as fact what is actually uncertain). Justify.
+
+SENTIMENT VOLATILITY: 0.0 (flat, consistent tone) to 1.0 (wild emotional swings). Above 0.5 suggests manipulation. Justify.
+
+=== VERIFICATION LOG ===
+
+For every "hard truth" you claim is missing, log:
+- The exact truth you assert
+- Whether it is VERIFIED (with primary source) or YOUR_OPINION (label clearly)
+- The primary source URL if verified
+
+=== OUTPUT ===
+
+Return ONLY valid JSON. No markdown. No commentary.
+
+{
+  "courage_score": 0-100,
+  "confidence_inflation_estimate": 0.0,
+  "sentiment_volatility_estimate": 0.0,
+  "cowardice_flags": [{"card": 2, "avoided": "what it dodged", "should_say": "what honest analysis requires", "primary_source": "URL backing the harder version"}],
+  "false_balance": [{"where": "which part", "evidence_says": "what the evidence actually shows", "primary_source": "URL"}],
+  "audience_check": "would real Malaysians read this or tune out — and why",
+  "hard_truths_missing": [{"about": "which group/institution", "truth": "the uncomfortable fact", "why_avoided": "why the analyst probably left it out", "status": "VERIFIED|MY_OPINION", "primary_source": "URL if verified"}],
+  "gender_truths_avoided": [{"truth": "...", "why_uncomfortable": "...", "primary_source": "..."}],
+  "class_truths_avoided": [{"truth": "...", "why_uncomfortable": "...", "primary_source": "..."}],
+  "predictions": [{"if_nothing_changes": "what happens", "who_can_fix": "specific actors", "why_they_wont": "specific incentives", "label": "HYPOTHESIS"}],
+  "cardinal_sin_flags": [
+    {"sin": "OVERCLAIM|UNDERCLAIM|MISLEADING_FRAMING|UNVERIFIED_DETAIL", "in_my_attack": "the attack I almost made", "why_I_dropped_it": "..."}
+  ],
+  "verification_log": [
+    {"my_attack": "the hard truth I am asserting", "status": "VERIFIED|MY_OPINION", "primary_source": "..."}
+  ],
+  "strongest_card": {"card": 3, "why": "what makes it work"},
+  "weakest_card": {"card": 5, "why": "what makes it fail"},
+  "overall_assessment": "no sugarcoating. one paragraph."
+}
+
+=== THE ANALYSIS TO STRESS-TEST ===
+
+{
+  "_provenance": {
+    "version": "v2",
+    "stage": "Stage 1 — Primary Analysis (Claude) — REWRITTEN after v1 audit",
+    "slug": "negeri-sembilan-undang-deposal-declaration",
+    "issue_id": "1976",
+    "brief": "engine/briefs/negeri-sembilan-undang-deposal-declaration.md",
+    "generated_at": "2026-04-20",
+    "discipline": "3R (Royalty) — every royal-adjacent claim verified against ≥2 independent primary sources",
+    "v1_preserved_at": "engine/output/negeri-sembilan-undang-deposal-declaration-stage1.v1-pre-reframe.json",
+    "v1_to_v2_change_summary": "v1 framed the story as a lone dismissed officer's invalid act. Cross-LLM audit (Gemini ba=65, ChatGPT fc=66, DeepSeek af=72, Grok ct=58 — Grok's lowest-ever courage score) caught a major framing error: the 19 April 2026 declaration was in fact co-signed and issued by all FOUR Undangs (Sungai Ujong, Jelebu, Johol, Rembau), naming Tunku Nadzaruddin Tuanku Ja'afar as proposed 12th YDPB. The state government's rejection ground is narrow (Mubarak's dismissed status), not a wholesale denial that collective Undang action is constitutionally impossible. This v2 restores the collective-action story and the open constitutional question.",
+    "key_facts_restored": [
+      "All four Undangs participated: Mubarak (Sungai Ujong, dismissed), Maarof Mat Rashad (Jelebu), Muhammed Abdullah (Johol), Abdul Rahim Yasin (Rembau)",
+      "A successor was named: Tunku Nadzaruddin Tuanku Ja'afar, current Tunku Panglima Besar",
+      "Grounds cited: 'alleged breaches in the discharge of royal duties' from an internal inquiry conducted 5 March 2026",
+      "Constitutional provisions at play include Articles 10-12, 16, and Clauses 14(3), 24 of UUTKNS 1959; Article X(1)(b) envisages collective Undang action to call upon the Ruler to withdraw from duties (per ChatGPT Stage 3 audit referencing NS constitution PDF ns.gov.my)",
+      "1967 historical context: Tuanku Muhriz (then 19) was bypassed as 'too young' when his father died; his uncle Tuanku Ja'afar was elected instead",
+      "Telaga Undang speaker: Sarifah Norzaidah Al-Qadri (named)",
+      "Mubarak's dismissal process: Telaga Undang Sungai Ujong meeting 1 April 2025 → effective 13 May 2025 → DKU special sitting 17 April 2026 ratified"
+    ]
+  },
+  "headline": "Four Undangs Declared the Ruler Deposed. Three Were Eligible. One Was Dismissed.",
+  "context": "On 19 April 2026, all four Undangs of Negeri Sembilan — the customary electors of the Yang di-Pertuan Besar — issued a declaration deposing Tuanku Muhriz and naming Tunku Nadzaruddin Tuanku Ja'afar the proposed 12th Ruler. The state government rejects the declaration on the narrow ground that one Undang, Mubarak Dohak, had been dismissed from office 341 days earlier. Whether the three eligible Undangs alone could lawfully invoke the constitution's collective provision is the open question.",
+  "cards": [
+    {
+      "t": "hook",
+      "big": "Four Undangs declared Tuanku Muhriz deposed and named Tunku Nadzaruddin the 12th Ruler. Three were eligible to vote. One was dismissed from office 341 days earlier.",
+      "sub": "State government and Telaga Undang reject the declaration because Mubarak Dohak — the same Undang who proclaimed Muhriz in 2008 — was himself removed for 33 offences against custom in May 2025.",
+      "sources": [
+        "The Star, 20 Apr 2026, 'Negri govt refuses to recognise, accept declaration to remove state Ruler, says MB': https://www.thestar.com.my/news/nation/2026/04/20/negri-govt-refuses-to-recognise-accept-declaration-to-remove-state-ruler-says-mb",
+        "Malay Mail explainer, 20 Apr 2026, 'NS unique ruler selection system: Who are the Undang Yang Empat': https://www.malaymail.com/news/malaysia/2026/04/20/negeri-sembilans-unique-ruler-selection-system-who-are-the-undang-yang-empat-and-what-role-are-they-playing/216978",
+        "BERNAMA, 20 Apr 2026: https://www.bernama.com/en/news.php?id=2546810"
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Legal",
+      "big": "Negeri Sembilan's constitution may permit three or more Undangs to call upon the Ruler to withdraw. It does not permit a dismissed Undang to act.",
+      "sub": "Article X(1)(b) UUTKNS 1959 refers to collective Undang action. The state government's rejection is narrow: Mubarak's participation is invalid. What three eligible Undangs alone may do remains untested.",
+      "sources": [
+        "Negeri Sembilan Constitution PDF (ns.gov.my): https://www.ns.gov.my/flipbook/TheLawsOfTheConstitutionOfNS1959/files/thelawsoftheconstitutionofns1959.pdf",
+        "Stage 3 (ChatGPT) verification citing same source: NS constitution snippet indicates 'the Undangs may call upon Him (a) to withdraw from performing His duties...' — collective provision, not unilateral",
+        "BERNAMA, 20 Apr 2026, MB Aminuddin Harun citing Articles 10-12 as basis for rejection: https://www.bernama.com/en/news.php?id=2546810",
+        "The Edge Malaysia, 20 Apr 2026, legal source: 'no provision [...] permits the unilateral removal of the YDPB in the manner asserted': https://theedgemalaysia.com/node/800429"
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Historical",
+      "big": "The same Undang who read the deposal on 19 April 2026 had proclaimed Tuanku Muhriz as 11th Ruler on 29 December 2008.",
+      "sub": "In 1967, the Undang bypassed Tuanku Muhriz for the throne at age 19, electing his uncle Tuanku Ja'afar instead. 2008 revisited that decision. 2026 tests it again.",
+      "sources": [
+        "mStar, 29 Dec 2008, proclamation at Istana Besar Seri Menanti by Undang Sungai Ujong Datuk Mubarak Dohak: https://www.mstar.com.my/lokal/semasa/2008/12/29/tunku-mukhriz-yang-dipertuan-besar-negeri-sembilan-ke11",
+        "The Edge Malaysia, 20 Apr 2026, on 1967 bypass: Tuanku Muhriz 'deemed too young at 19': https://theedgemalaysia.com/node/800429",
+        "NS Government Official Portal (institusi diraja): https://www.ns.gov.my/en/institusi-diraja"
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Governance",
+      "big": "Mubarak was dismissed 13 May 2025 for 33 offences against Telaga Undang custom — 341 days before he co-signed the declaration.",
+      "sub": "The Dewan Keadilan dan Undang, presided by Tuanku Muhriz himself, confirmed the dismissal on 17 April 2026. Mubarak joined the deposal declaration two days later.",
+      "sources": [
+        "Malay Mail, 20 Apr 2026, Telaga Undang Sungai Ujong meeting 1 April 2025 → 13 May 2025 effective: https://www.malaymail.com/news/malaysia/2026/04/20/no-authority-no-validity-negeri-sembilan-mb-rejects-bid-to-unseat-state-ruler/216927",
+        "The Star, 17 Apr 2026, DKU sitting at Istana Besar Seri Menanti ratifying dismissal: https://www.thestar.com.my/news/nation/2026/04/17/negri-ruling-council-advises-sungei-ujong-to-accept-removal-of-chieftain",
+        "BERNAMA, 20 Apr 2026: https://www.bernama.com/en/news.php?id=2546810"
+      ]
+    },
+    {
+      "t": "fact",
+      "lens": "Political",
+      "big": "The four Undangs cited alleged royal misconduct from a 5 March 2026 inquiry. The state government rejected their declaration without examining the underlying claim.",
+      "sub": "Telaga Undang speaker Sarifah Norzaidah Al-Qadri called the act 'menderhaka' and referred it to the Negeri Sembilan Islamic Religious Affairs Department and police. No official examination of the misconduct allegation has been disclosed.",
+      "sources": [
+        "Malay Mail explainer, 20 Apr 2026, 'alleged breaches in the discharge of royal duties' from internal inquiry on 5 March 2026: https://www.malaymail.com/news/malaysia/2026/04/20/negeri-sembilans-unique-ruler-selection-system-who-are-the-undang-yang-empat-and-what-role-are-they-playing/216978",
+        "Malay Mail, 20 Apr 2026, Sarifah Norzaidah Al-Qadri quote + referral to religious authorities and police: https://www.malaymail.com/news/malaysia/2026/04/20/no-authority-no-validity-negeri-sembilan-mb-rejects-bid-to-unseat-state-ruler/216927",
+        "BERNAMA, 20 Apr 2026, MB Aminuddin rejection (narrow-ground legal basis, no engagement with misconduct claim): https://www.bernama.com/en/news.php?id=2546810"
+      ]
+    },
+    {
+      "t": "reframe",
+      "big": "The real question is not whether a dismissed Undang can act. It is whether three eligible Undangs alone can invoke a provision designed for all four.",
+      "sub": "",
+      "sources": [
+        "Editorial synthesis of: ChatGPT Stage 3 audit + NS constitution PDF + Malay Mail explainer + The Edge legal source",
+        "No court ruling or Federal-level constitutional interpretation of Article X collective-action threshold has been publicly issued as of 20 April 2026"
+      ]
+    },
+    {
+      "t": "view",
+      "big": "A constitution built on the collective authority of four Undangs is being tested by three. No court has yet ruled.",
+      "sub": "",
+      "sources": [
+        "Editorial synthesis across 20 Apr 2026 coverage + NS constitution PDF + Federal Constitution Articles 71 and 181 (composite rulership structure)"
+      ]
+    }
+  ],
+  "sources": "BERNAMA, Malay Mail (news + explainer), Free Malaysia Today, The Vibes, The Sun, Scoop, The Edge Malaysia, Malaysiakini, The Star (20 Apr + 17 Apr), Berita Harian, Harian Metro, Buletin TV3, FMT Bahasa, mStar (2008), Malaysia-Today (2008), NS Government Portal, NS Constitution PDF (ns.gov.my — official), Majlis Datuk Undang Sungai Ujong, UUTKNS 1959 (primary constitutional text), Federal Constitution of Malaysia",
+  "confidence": "High on chronology and named actors (all four Undangs identified across ≥2 independent outlets; Tunku Nadzaruddin's Tunku Panglima Besar title verified; 2008 proclamation verified by contemporaneous news + NS government portal; 13 May 2025 dismissal verified by MB statement + The Star). Medium on constitutional interpretation (Article X(1)(b) collective-provision reading is reported via news-outlet quotation of constitutional text, not direct constitutional-lawyer analysis). Low on Tuanku Muhriz's alleged misconduct — the Undangs' grounds are reported but the 5 March 2026 inquiry findings have not been publicly released; we do not assert the allegation's validity or its falsity, only that it was cited.",
+  "lenses_used": ["Legal", "Historical", "Governance", "Political"],
+  "lenses_applicable_but_unused": ["Social", "Theological", "Regional"],
+  "needs_verification": [
+    "Exact text of Article X(1)(b) UUTKNS 1959 — we rely on ChatGPT Stage 3 audit's reading of the NS constitution PDF; Stage 3 of this round should verify the actual text.",
+    "Whether the 5 March 2026 'internal inquiry' by the Undangs is a formal customary-law proceeding or an informal grievance review — not publicly clarified.",
+    "Whether Tunku Nadzaruddin Tuanku Ja'afar has publicly accepted or declined the Undangs' proposed designation — no public statement from him as of 20 April 2026.",
+    "Whether the three eligible Undangs (Jelebu, Johol, Rembau) would maintain the declaration if Mubarak's participation were severed — or whether the declaration was procedurally dependent on all four signatures.",
+    "Whether the Federal-level constitutional protections (Article 71, 181) create any federal jurisdiction to intervene in a state-level YDPB dispute."
+  ],
+  "source_notes": "Two spelling variants of Mubarak's surname: 'Dohak' (BERNAMA, Malay Mail, FMT, Scoop, The Edge, The Star — authoritative English-language outlets) vs 'Thahak' (MalaysiaGazette, Malaysia Tribune). We use 'Dohak'. Per Gemini Stage 2 audit, 'crowned' is culturally inaccurate under Adat Perpatih — the correct verb is 'proclaimed' (dimasyhurkan); we use 'proclaimed' throughout. The Star's 20 April 2026 article is the primary source for the full-list of four Undangs; Malay Mail's explainer adds the 5 March inquiry reference and the Tunku Nadzaruddin successor naming. The state government's rejection ground is consistently narrow across BERNAMA, FMT, The Sun, and Malay Mail: Mubarak's participation is invalid. None of the Tier-A outlets explicitly adjudicate whether three eligible Undangs alone could invoke the constitutional provision — that question is editorially reframed here as the live constitutional issue.",
+  "_self_check": {
+    "every_claim_traces_to_source": true,
+    "four_cardinal_sins": "none — see below",
+    "overclaim_check": "We do NOT assert the Undangs' 'alleged misconduct' is true or false; we report it was cited. We do NOT assert ≥3 Undangs have constitutional authority to depose; we report Article X(1)(b) refers to collective Undang action and that the question of a 3-out-of-4 threshold is untested.",
+    "underclaim_check": "We do not soften the state government's rejection (which is narrow-ground) into something broader than it is. We do not soften the fact that 3 of 4 Undangs signed — this is the key story, now foregrounded.",
+    "misleading_framing_check": "v1's misleading framing (lone-actor vs collective-action) has been corrected. The hook foregrounds the '4 Undangs, 3 eligible, 1 dismissed' structure. The reframe card makes the open constitutional question explicit.",
+    "unverified_detail_check": "Every specific claim traces to ≥2 sources or is flagged in needs_verification. The 341-day arithmetic remains correct. The four Undangs' names are confirmed across The Star + Malay Mail explainer.",
+    "3R_special_caution": "This is a 3R-Royalty story. We report what each institution SAID (MB rejected, Telaga Undang called act 'menderhaka', Undangs cited misconduct). We do NOT assert Tuanku Muhriz's innocence or guilt, NOR do we assert the Undangs' action was proper or improper. The reframe explicitly holds open the unresolved constitutional question."
+  }
+}
