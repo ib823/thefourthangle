@@ -33,6 +33,7 @@ OUTPUT_DIR = RADAR_DIR / "output"
 STATE_PATH = OUTPUT_DIR / "state.json"
 QUEUE_PATH = OUTPUT_DIR / "issue-queue.json"
 LOG_DIR = OUTPUT_DIR / "logs"
+MODELS_DIR = OUTPUT_DIR / "models"
 
 
 def load_config():
@@ -264,6 +265,41 @@ def _process_stream(name, stream, events):
         return name, "error", str(e)
 
 
+_PIPELINE_SINGLETON = None
+
+
+def _get_prediction_pipeline(config):
+    """Lazy-build the PredictionPipeline and reuse across cycles."""
+    global _PIPELINE_SINGLETON
+    if _PIPELINE_SINGLETON is not None:
+        return _PIPELINE_SINGLETON
+    from radar.prediction.pipeline import PredictionPipeline
+    calendar = config.get("calendar", {})
+    issues_dir = Path(__file__).parent.parent / "src" / "data" / "issues"
+    _PIPELINE_SINGLETON = PredictionPipeline(
+        calendar=calendar,
+        models_dir=MODELS_DIR,
+        issues_dir=issues_dir,
+    )
+    return _PIPELINE_SINGLETON
+
+
+def _log_prediction_status(log, result):
+    """Emit a concise one-line summary of each predictor's outcome."""
+    days = result.get("days_of_data", 0)
+    parts = [f"days_of_data={days}"]
+    for key in ("hmm", "cox", "sarima"):
+        st = result.get(key) or {}
+        if st.get("cold_start"):
+            parts.append(f"{key}=COLD({st.get('days_needed', '?')}d)")
+        elif st.get("error"):
+            parts.append(f"{key}=ERR")
+        else:
+            tag = "RT" if st.get("retrained") else "OK"
+            parts.append(f"{key}={tag}/{st.get('applied', 0)}")
+    log.info("Predictions: " + "  ".join(parts))
+
+
 def run_cycle(sources, streams, fusion, config):
     """Execute one full radar scan cycle."""
     log = logger.bind(component="cycle")
@@ -401,7 +437,44 @@ def run_cycle(sources, streams, fusion, config):
     write_issue_queue(issues)
     write_health(sources, active_streams, len(events), len(issues))
 
-    # Step 7: Save state
+    # Step 7: Predictions — HMM regime, Cox eruption timing, SARIMA windows.
+    # Each predictor has its own cold-start gate (7 / 14 / 30 days) and
+    # retrain cadence (weekly / monthly / weekly). The pipeline mutates
+    # `prediction_state` (persisted alongside the cycle state) and writes
+    # back the enriched queue in-place.
+    prior_state = load_state() or {}
+    prediction_state = prior_state.get("prediction_state", {})
+    try:
+        pipeline = _get_prediction_pipeline(config)
+        pipeline_result = pipeline.run(
+            queue_path=QUEUE_PATH,
+            state=prediction_state,
+            events_count=len(events),
+            now=cycle_start,
+        )
+        _log_prediction_status(log, pipeline_result)
+    except Exception as e:
+        log.error(f"Prediction pipeline failed: {e}")
+        pipeline_result = {"error": str(e)}
+
+    # Step 7b: Optional in-cycle brief generation with live events.
+    # Runs only when config.brief_generator.auto_trigger is enabled. Uses the
+    # fresh events fetched this cycle so context is multi-source. Off by
+    # default — operators flip it on once they trust the score thresholds.
+    bg_cfg = config.get("brief_generator", {}) or {}
+    if bg_cfg.get("auto_trigger"):
+        try:
+            from radar.brief_generator import BriefGenerator
+            with open(QUEUE_PATH) as f:
+                queue_now = json.load(f)
+            gen = BriefGenerator(config=config, calendar=config.get("calendar", {}))
+            brief_results = gen.generate(queue_now, events=events)
+            auto_n = sum(1 for r in brief_results if r.get("auto_triggered"))
+            log.info(f"Briefs: {len(brief_results)} generated, {auto_n} auto-triggered")
+        except Exception as e:
+            log.error(f"Brief generation failed: {e}")
+
+    # Step 8: Save state
     state = {
         "last_cycle": cycle_start.isoformat(),
         "events_processed": len(events),
@@ -412,6 +485,8 @@ def run_cycle(sources, streams, fusion, config):
             if streams.get("volume_monitor") else {},
         "cascade_tracker": streams.get("cascade_tracker").get_state()
             if streams.get("cascade_tracker") else {},
+        "prediction_state": prediction_state,
+        "last_pipeline_result": pipeline_result,
     }
     save_state(state)
 
@@ -429,7 +504,7 @@ def run_cycle(sources, streams, fusion, config):
 
 
 def print_status():
-    """Print current issue queue from last saved state."""
+    """Print current issue queue + prediction summary from last saved state."""
     if not QUEUE_PATH.exists():
         print("No issue queue found. Run a cycle first.")
         return
@@ -438,14 +513,64 @@ def print_status():
     if not issues:
         print("Issue queue is empty.")
         return
-    print(f"\n{'='*70}")
+
+    print(f"\n{'='*72}")
     print(f"T4A RADAR — Issue Queue ({len(issues)} active topics)")
-    print(f"{'='*70}")
-    for issue in issues:
+    print(f"{'='*72}")
+    for issue in issues[:20]:
         priority = issue.get("priority", "low").upper()
-        print(f"  [{priority:>8}] {issue.get('title', 'unknown'):<40} "
-              f"score={issue.get('controversy_score', 0):.2f}")
-    print(f"{'='*70}\n")
+        pred = issue.get("prediction") or {}
+        regime = pred.get("regime") or "-"
+        eh = pred.get("eruption_hours")
+        eh_str = f"{eh:>5.1f}h" if isinstance(eh, (int, float)) else "    -"
+        print(f"  [{priority:>8}] {issue.get('title', 'unknown'):<32} "
+              f"score={issue.get('controversy_score', 0):.2f}  "
+              f"regime={regime:<16} eta={eh_str}")
+    if len(issues) > 20:
+        print(f"  ... and {len(issues) - 20} more")
+
+    try:
+        from radar.prediction.pipeline import summarize_predictions
+    except ImportError:
+        print(f"{'='*72}\n")
+        return
+
+    summary = summarize_predictions(issues)
+
+    regime_counts = summary["regime_counts"]
+    if regime_counts:
+        print(f"\nRegimes: " + "  ".join(
+            f"{k}={v}" for k, v in sorted(
+                regime_counts.items(), key=lambda kv: -kv[1])
+        ))
+
+    escalations = summary["escalations"][:5]
+    if escalations:
+        print(f"\nEscalation warnings (top {len(escalations)}):")
+        for e in escalations:
+            p = (e.get("probabilities") or {}).get("PRE_CONTROVERSY", 0)
+            print(f"  {e['title']:<40} P(PRE)={p:.2f}  [{e.get('priority', '?')}]")
+
+    imminent = summary["imminent"][:5]
+    if imminent:
+        print(f"\nImminent eruptions (<72h, top {len(imminent)}):")
+        for m in imminent:
+            print(f"  {m['title']:<40} ETA={m['eruption_hours']:.1f}h  "
+                  f"P(72h)={m.get('p_eruption_within_72h', 0):.2f}")
+
+    windows = summary["upcoming_controversy_windows"]
+    if windows:
+        print("\nUpcoming controversy windows:")
+        for h in ("7", "14", "30", "90", "180"):
+            ws = windows.get(h) or []
+            if ws:
+                preview = ", ".join(
+                    f"{w.get('start')}→{w.get('end')}" for w in ws[:3]
+                )
+                extra = "" if len(ws) <= 3 else f" (+{len(ws) - 3} more)"
+                print(f"  {h:>4}d: {preview}{extra}")
+
+    print(f"{'='*72}\n")
 
 
 def print_topic_detail(topic_id):
@@ -462,12 +587,40 @@ def print_topic_detail(topic_id):
     print(f"Topic '{topic_id}' not found in issue queue.")
 
 
+def generate_briefs_cli(config):
+    """Generate pipeline-v3 research briefs from the current issue queue.
+
+    Invoked via `python run-radar.py --generate-briefs`. Operates off the
+    persisted issue queue — no live events, so briefs fall back to
+    signal-derived context. Briefs meeting the quality gate are tagged READY;
+    others are tagged DRAFT.
+    """
+    from radar.brief_generator import generate_from_queue
+    log = logger.bind(component="brief_gen")
+    results = generate_from_queue(
+        queue_path=QUEUE_PATH,
+        config=config,
+        calendar=config.get("calendar", {}),
+    )
+    if not results:
+        log.info("No qualifying issues (score >= threshold) in queue.")
+        return
+    ready = sum(1 for r in results if r["status"] == "READY")
+    draft = len(results) - ready
+    log.info(f"Generated {len(results)} briefs — READY={ready} DRAFT={draft}")
+    for r in results[:10]:
+        auto = " [auto-triggered]" if r.get("auto_triggered") else ""
+        log.info(f"  [{r['status']}] {r['title'][:50]}{auto}  → {r['path']}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="T4A Radar — Controversy Detection Engine")
     parser.add_argument("--once", action="store_true", help="Run single cycle and exit")
     parser.add_argument("--status", action="store_true", help="Print current issue queue")
     parser.add_argument("--history", action="store_true", help="Print 24-hour alert history")
     parser.add_argument("--topic", type=str, help="Print full detail for topic")
+    parser.add_argument("--generate-briefs", action="store_true",
+                        help="Generate pipeline-v3 briefs for score>threshold issues")
     args = parser.parse_args()
 
     load_dotenv()
@@ -484,6 +637,9 @@ def main():
         return
     if args.topic:
         print_topic_detail(args.topic)
+        return
+    if args.generate_briefs:
+        generate_briefs_cli(config)
         return
 
     # Initialize components
