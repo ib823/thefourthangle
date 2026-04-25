@@ -1,22 +1,22 @@
 {
-  "last_cycle": "2026-04-25T10:46:25.857325+00:00",
-  "events_processed": 206,
-  "active_topics": 2391,
+  "last_cycle": "2026-04-25T13:08:10.886728+00:00",
+  "events_processed": 164,
+  "active_topics": 2398,
   "stream_health": {
     "volume_monitor": "ok",
     "polarization": "ok",
     "network_bridge": "ok",
     "narrative_fragmentation": "ok",
-    "cascade_tracker": "error",
+    "cascade_tracker": "ok",
     "silence_detector": "ok"
   },
   "fusion": {
     "topics": {
       "macc": {
-        "alpha": 31.822708990489286,
+        "alpha": 32.77270899048929,
         "beta": 21.29219920893377,
         "created_at": "2026-03-24T14:39:16.811710+00:00",
-        "last_updated": "2026-04-25T10:46:54.105539+00:00",
+        "last_updated": "2026-04-25T13:08:31.877064+00:00",
         "stream_signals": {
           "polarization": {
             "keyword": "macc",
@@ -37,44 +37,44 @@
           },
           "volume_monitor": {
             "severity": 1.0,
-            "z_score": 6.2
+            "z_score": 6.4
           },
           "cascade_tracker": {
             "n_star": 0.9,
             "alert_level": "normal"
           },
           "silence_detector": {
-            "event_id": "INST-0036",
+            "event_id": "INST-0005",
             "keyword": "macc",
-            "title": "MACC tracing RM230m NGO embezzlement fund flow through banks, says Azam Baki. NILAI, April 24 &mdash; The Malaysian Anti-Corruption Commission (MACC) is tracing the flow of funds related to the embe..",
-            "structural_importance": 0.425,
-            "silence_score": 0.71,
+            "title": "MACC identifies 40 witnesses in Selangor NGO probe. KUALA PILAH, April 25 &mdash; The Malaysian Anti-Corruption Commission (MACC) has identified 40 witnesses in its investi...",
+            "structural_importance": 0.41,
+            "silence_score": 0.7,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 65,
-            "social_mentions": 22,
-            "expected_mentions": 300.0,
+            "news_mentions": 52,
+            "social_mentions": 20,
+            "expected_mentions": 240.0,
             "bias_dimensions_touched": [
               "ethnic",
               "institutional"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "pas": {
         "alpha": 43.74492358099496,
-        "beta": 74.65385179297482,
+        "beta": 75.00385179297483,
         "created_at": "2026-03-24T14:39:16.811773+00:00",
-        "last_updated": "2026-04-25T10:46:54.104502+00:00",
+        "last_updated": "2026-04-25T13:08:31.876183+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.65,
-            "z_score": 2.6
+            "severity": 0.3,
+            "z_score": 1.2
           },
           "cascade_tracker": {
-            "n_star": 0.43333333333333335,
+            "n_star": 0.2,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -97,8 +97,8 @@
         }
       },
       "india": {
-        "alpha": 1.0000513757356786,
-        "beta": 9.403757230526399,
+        "alpha": 1.000045517129454,
+        "beta": 9.357714977451899,
         "created_at": "2026-03-24T14:39:16.811805+00:00",
         "last_updated": "2026-04-25T10:46:54.104459+00:00",
         "stream_signals": {
@@ -161,9 +161,9 @@
       },
       "subsidi": {
         "alpha": 1.0,
-        "beta": 11.441887249311376,
+        "beta": 11.791887249311376,
         "created_at": "2026-03-24T14:39:16.811819+00:00",
-        "last_updated": "2026-04-25T10:46:54.104497+00:00",
+        "last_updated": "2026-04-25T13:08:31.876193+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.25,
@@ -195,9 +195,9 @@
       },
       "parlimen": {
         "alpha": 1.0000000000000577,
-        "beta": 9.351803810411882,
+        "beta": 9.701803810411882,
         "created_at": "2026-03-24T14:39:16.811906+00:00",
-        "last_updated": "2026-04-25T10:46:54.104444+00:00",
+        "last_updated": "2026-04-25T13:08:31.876053+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -227,10 +227,10 @@
         }
       },
       "parliament": {
-        "alpha": 225.39999999999998,
-        "beta": 66.75000000000009,
+        "alpha": 225.99999999999997,
+        "beta": 67.1000000000001,
         "created_at": "2026-03-24T14:39:16.811915+00:00",
-        "last_updated": "2026-04-25T10:46:54.105502+00:00",
+        "last_updated": "2026-04-25T13:08:31.877007+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -245,23 +245,23 @@
             "keyword": "parliament",
             "title": "Parliament second session session opens",
             "structural_importance": 0.465,
-            "silence_score": 1.0,
-            "suppression_pattern": "HIDDEN_STORY",
-            "news_mentions": 0,
-            "social_mentions": 0,
+            "silence_score": 0.9957,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 1,
+            "social_mentions": 1,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "indian": {
         "alpha": 1.0,
-        "beta": 9.026226571574236,
+        "beta": 9.011389589687049,
         "created_at": "2026-03-24T14:39:16.811928+00:00",
         "last_updated": "2026-04-24T20:52:52.752117+00:00",
         "stream_signals": {
@@ -276,26 +276,26 @@
         }
       },
       "rally": {
-        "alpha": 1.0,
+        "alpha": 1.3499999999999999,
         "beta": 11.335674307752786,
         "created_at": "2026-03-24T14:39:16.811939+00:00",
-        "last_updated": "2026-04-25T10:46:54.104507+00:00",
+        "last_updated": "2026-04-25T13:08:31.876089+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.5,
-            "z_score": 2.0
+            "severity": 0.8,
+            "z_score": 3.2
           },
           "cascade_tracker": {
-            "n_star": 0.3333333333333333,
+            "n_star": 0.5333333333333333,
             "alert_level": "normal"
           }
         }
       },
       "rasuah": {
-        "alpha": 1.4,
-        "beta": 10.939390382424603,
+        "alpha": 1.7999999999999998,
+        "beta": 11.289390382424603,
         "created_at": "2026-03-24T14:39:16.811946+00:00",
-        "last_updated": "2026-04-25T10:46:54.105489+00:00",
+        "last_updated": "2026-04-25T13:08:31.876999+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -306,13 +306,13 @@
             "alert_level": "normal"
           },
           "silence_detector": {
-            "event_id": "INST-0016",
+            "event_id": "INST-0027",
             "keyword": "rasuah",
             "title": "Rasuah di pelabuhan: 2 pengarah syarikat diberkas, SPRM beku RM185 juta. Mereka antara empat suspek terlibat pengubahan wang haram bagi elak dan kurangkan duti import yang dipercayai mengakibatkan keh",
             "structural_importance": 0.5192,
-            "silence_score": 0.9882,
+            "silence_score": 0.9911,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 5,
+            "news_mentions": 3,
             "social_mentions": 3,
             "expected_mentions": 677.0,
             "bias_dimensions_touched": [
@@ -321,7 +321,7 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           },
           "polarization": {
             "keyword": "rasuah",
@@ -360,16 +360,16 @@
       },
       "sprm": {
         "alpha": 2.1999999999999997,
-        "beta": 15.761072978519918,
+        "beta": 16.111072978519918,
         "created_at": "2026-03-24T14:39:16.811964+00:00",
-        "last_updated": "2026-04-25T10:46:54.104565+00:00",
+        "last_updated": "2026-04-25T13:08:31.876082+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.45,
-            "z_score": 1.8
+            "severity": 0.4,
+            "z_score": 1.6
           },
           "cascade_tracker": {
-            "n_star": 0.3,
+            "n_star": 0.26666666666666666,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -441,32 +441,32 @@
       },
       "protest": {
         "alpha": 1.0,
-        "beta": 9.0,
+        "beta": 9.35,
         "created_at": "2026-03-24T14:39:16.811976+00:00",
-        "last_updated": "2026-04-20T10:39:17.326784+00:00",
+        "last_updated": "2026-04-25T13:08:31.876119+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.1,
-            "z_score": 0.4
+            "severity": 0.2,
+            "z_score": 0.8
           },
           "cascade_tracker": {
-            "n_star": 0.06666666666666667,
+            "n_star": 0.13333333333333333,
             "alert_level": "normal"
           }
         }
       },
       "government": {
         "alpha": 38.49999999999983,
-        "beta": 105.400000000001,
+        "beta": 105.75000000000101,
         "created_at": "2026-03-24T14:39:16.811982+00:00",
-        "last_updated": "2026-04-25T10:46:54.104492+00:00",
+        "last_updated": "2026-04-25T13:08:31.876138+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.35,
-            "z_score": 1.4
+            "severity": 0.25,
+            "z_score": 1.0
           },
           "cascade_tracker": {
-            "n_star": 0.23333333333333334,
+            "n_star": 0.16666666666666666,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -492,7 +492,7 @@
       },
       "price": {
         "alpha": 1.0,
-        "beta": 13.685634879149744,
+        "beta": 13.15131086211808,
         "created_at": "2026-03-24T14:39:16.811992+00:00",
         "last_updated": "2026-04-25T10:46:54.104526+00:00",
         "stream_signals": {
@@ -508,7 +508,7 @@
       },
       "harga": {
         "alpha": 1.0,
-        "beta": 10.399999999999999,
+        "beta": 10.240351704574419,
         "created_at": "2026-03-24T14:39:16.811998+00:00",
         "last_updated": "2026-04-25T10:46:54.104555+00:00",
         "stream_signals": {
@@ -537,10 +537,10 @@
         }
       },
       "budget": {
-        "alpha": 150.60000000000107,
+        "alpha": 151.00000000000108,
         "beta": 48.54999999999996,
         "created_at": "2026-03-24T14:39:16.812004+00:00",
-        "last_updated": "2026-04-25T10:46:54.105482+00:00",
+        "last_updated": "2026-04-25T13:08:31.876996+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -566,22 +566,22 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "minister": {
-        "alpha": 82.15000000000042,
+        "alpha": 82.50000000000043,
         "beta": 68.75000000000027,
         "created_at": "2026-03-24T14:39:16.812015+00:00",
-        "last_updated": "2026-04-25T10:46:54.104413+00:00",
+        "last_updated": "2026-04-25T13:08:31.876129+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 1.0,
-            "z_score": 4.4
+            "severity": 0.9,
+            "z_score": 3.6
           },
           "cascade_tracker": {
-            "n_star": 0.7333333333333333,
+            "n_star": 0.6,
             "alert_level": "normal"
           },
           "polarization": {
@@ -622,16 +622,16 @@
       },
       "pkr": {
         "alpha": 1.0,
-        "beta": 9.000000000006247,
+        "beta": 9.350000000006247,
         "created_at": "2026-03-24T14:39:16.812021+00:00",
-        "last_updated": "2026-04-23T11:12:34.903100+00:00",
+        "last_updated": "2026-04-25T13:08:31.876178+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.1,
-            "z_score": 0.4
+            "severity": 0.15,
+            "z_score": 0.6
           },
           "cascade_tracker": {
-            "n_star": 0.06666666666666667,
+            "n_star": 0.1,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -687,10 +687,10 @@
         }
       },
       "malay": {
-        "alpha": 181.15000000000143,
+        "alpha": 181.70000000000144,
         "beta": 15.549999999999985,
         "created_at": "2026-03-24T14:39:16.812041+00:00",
-        "last_updated": "2026-04-25T10:46:54.104470+00:00",
+        "last_updated": "2026-04-25T13:08:31.876188+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 1.0,
@@ -719,45 +719,45 @@
         }
       },
       "parliament second session session opens": {
-        "alpha": 75.80000000000054,
+        "alpha": 76.00000000000054,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.812691+00:00",
-        "last_updated": "2026-04-25T10:46:54.104941+00:00",
+        "last_updated": "2026-04-25T13:08:31.876603+00:00",
         "stream_signals": {
           "silence_detector": {
             "event_id": "INST-0001",
             "keyword": "parliament",
             "title": "Parliament second session session opens",
             "structural_importance": 0.465,
-            "silence_score": 1.0,
-            "suppression_pattern": "HIDDEN_STORY",
-            "news_mentions": 0,
-            "social_mentions": 0,
+            "silence_score": 0.9957,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 1,
+            "social_mentions": 1,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "parliament budget session session opens": {
-        "alpha": 150.60000000000107,
+        "alpha": 151.00000000000108,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.812698+00:00",
-        "last_updated": "2026-04-25T10:46:54.104946+00:00",
+        "last_updated": "2026-04-25T13:08:31.876608+00:00",
         "stream_signals": {
           "silence_detector": {
             "event_id": "INST-0002",
             "keyword": "parliament",
             "title": "Parliament budget session session opens",
             "structural_importance": 0.515,
-            "silence_score": 1.0,
-            "suppression_pattern": "HIDDEN_STORY",
-            "news_mentions": 0,
-            "social_mentions": 0,
+            "silence_score": 0.997,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 1,
+            "social_mentions": 1,
             "expected_mentions": 660.0,
             "bias_dimensions_touched": [
               "economic",
@@ -765,15 +765,15 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "budget 2027 presentation": {
-        "alpha": 150.60000000000107,
+        "alpha": 151.00000000000108,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.812703+00:00",
-        "last_updated": "2026-04-25T10:46:54.104950+00:00",
+        "last_updated": "2026-04-25T13:08:31.876612+00:00",
         "stream_signals": {
           "silence_detector": {
             "event_id": "INST-0003",
@@ -791,7 +791,7 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -1418,20 +1418,20 @@
         }
       },
       "anwar:": {
-        "alpha": 1.2,
+        "alpha": 1.4,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.813282+00:00",
-        "last_updated": "2026-04-25T10:46:54.105544+00:00",
+        "last_updated": "2026-04-25T13:08:31.877068+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0004",
+            "event_id": "INST-0008",
             "keyword": "anwar:",
             "title": "Anwar: Abdul Halim free from business and political links, right choice to lead MACC. BATU KAWAN, April 25 &mdash; Prime Minister Datuk Seri Anwar Ibrahim today explained the selection of former judge",
             "structural_importance": 0.41,
-            "silence_score": 0.6542,
+            "silence_score": 0.6417,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 63,
-            "social_mentions": 20,
+            "news_mentions": 60,
+            "social_mentions": 26,
             "expected_mentions": 240.0,
             "bias_dimensions_touched": [
               "institutional",
@@ -1439,7 +1439,7 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -1522,7 +1522,7 @@
         }
       },
       "thai": {
-        "alpha": 1.0000055882958072,
+        "alpha": 1.000001140826619,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.813301+00:00",
         "last_updated": "2026-04-24T06:09:54.041400+00:00",
@@ -1701,7 +1701,7 @@
         }
       },
       "sultan": {
-        "alpha": 1.000000000000009,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-03-24T14:39:16.813335+00:00",
         "last_updated": "2026-04-23T06:07:48.519215+00:00",
@@ -2133,10 +2133,10 @@
         }
       },
       "malaysia": {
-        "alpha": 2.400468866956469,
+        "alpha": 2.600468866956469,
         "beta": 9.0,
         "created_at": "2026-03-24T16:28:08.673795+00:00",
-        "last_updated": "2026-04-25T10:46:54.105527+00:00",
+        "last_updated": "2026-04-25T13:08:31.877041+00:00",
         "stream_signals": {
           "cascade_tracker": {
             "keyword": "malaysia",
@@ -2159,14 +2159,14 @@
             }
           },
           "silence_detector": {
-            "event_id": "INST-0015",
+            "event_id": "INST-0026",
             "keyword": "malaysia",
             "title": "Malaysia names new MACC chief ahead of planned rally in KL. KUALA LUMPUR, April 25 &mdash; The Malaysian government today announced a new Malaysian Anti-Corruption Commission (MACC...",
             "structural_importance": 0.46,
-            "silence_score": 0.8318,
+            "silence_score": 0.825,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 56,
-            "social_mentions": 18,
+            "news_mentions": 54,
+            "social_mentions": 23,
             "expected_mentions": 440.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -2175,7 +2175,7 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -2223,7 +2223,7 @@
         }
       },
       "azam": {
-        "alpha": 1.0005735358633465,
+        "alpha": 1.0001510850858297,
         "beta": 9.0,
         "created_at": "2026-03-24T16:28:08.673987+00:00",
         "last_updated": "2026-04-24T11:08:07.184750+00:00",
@@ -2249,8 +2249,8 @@
         }
       },
       "opposition": {
-        "alpha": 1.000000371730427,
-        "beta": 9.000020210274721,
+        "alpha": 1.0000000758871714,
+        "beta": 9.000004125840848,
         "created_at": "2026-03-24T18:25:35.531025+00:00",
         "last_updated": "2026-04-24T06:09:54.040584+00:00",
         "stream_signals": {
@@ -2283,7 +2283,7 @@
       },
       "transparency": {
         "alpha": 1.0,
-        "beta": 9.000057636284888,
+        "beta": 9.000011766200204,
         "created_at": "2026-03-24T18:25:35.531030+00:00",
         "last_updated": "2026-04-24T06:09:54.040596+00:00",
         "stream_signals": {
@@ -2499,16 +2499,16 @@
       },
       "kerajaan": {
         "alpha": 2.638547103891463,
-        "beta": 14.530161998394044,
+        "beta": 14.880161998394044,
         "created_at": "2026-03-24T22:12:15.508273+00:00",
-        "last_updated": "2026-04-25T10:46:54.105407+00:00",
+        "last_updated": "2026-04-25T13:08:31.876061+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.35,
-            "z_score": 1.4
+            "severity": 0.25,
+            "z_score": 1.0
           },
           "cascade_tracker": {
-            "n_star": 0.23333333333333334,
+            "n_star": 0.16666666666666666,
             "alert_level": "normal"
           },
           "narrative_fragmentation": {
@@ -2681,7 +2681,7 @@
         }
       },
       "us": {
-        "alpha": 1.000004454223424,
+        "alpha": 1.0000007647435654,
         "beta": 9.0,
         "created_at": "2026-03-24T22:12:15.509180+00:00",
         "last_updated": "2026-04-24T02:47:21.844661+00:00",
@@ -2767,7 +2767,7 @@
       },
       "vote": {
         "alpha": 1.0,
-        "beta": 9.726127853007648,
+        "beta": 9.643324227608156,
         "created_at": "2026-03-25T00:35:44.154488+00:00",
         "last_updated": "2026-04-25T10:46:54.104433+00:00",
         "stream_signals": {
@@ -2783,7 +2783,7 @@
       },
       "undi": {
         "alpha": 1.0,
-        "beta": 11.690044462920875,
+        "beta": 11.168536068723508,
         "created_at": "2026-03-25T00:35:44.154557+00:00",
         "last_updated": "2026-04-25T08:56:26.702069+00:00",
         "stream_signals": {
@@ -2799,7 +2799,7 @@
       },
       "undang-undang": {
         "alpha": 1.0,
-        "beta": 9.00000000000012,
+        "beta": 9.000000000000009,
         "created_at": "2026-03-25T00:35:44.154565+00:00",
         "last_updated": "2026-04-23T09:46:44.201736+00:00",
         "stream_signals": {
@@ -3060,7 +3060,7 @@
         }
       },
       "no": {
-        "alpha": 1.000051596156381,
+        "alpha": 1.0000105331340152,
         "beta": 9.0,
         "created_at": "2026-03-25T00:35:44.155300+00:00",
         "last_updated": "2026-04-24T06:09:54.041416+00:00",
@@ -3232,16 +3232,16 @@
       },
       "ringgit": {
         "alpha": 1.0,
-        "beta": 9.000000868845145,
+        "beta": 9.350000868845145,
         "created_at": "2026-03-25T03:08:20.904260+00:00",
-        "last_updated": "2026-04-24T02:47:21.843876+00:00",
+        "last_updated": "2026-04-25T13:08:31.876153+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.2,
-            "z_score": 0.8
+            "severity": 0.1,
+            "z_score": 0.4
           },
           "cascade_tracker": {
-            "n_star": 0.13333333333333333,
+            "n_star": 0.06666666666666667,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -3308,8 +3308,8 @@
         }
       },
       "mahkamah": {
-        "alpha": 1.1409843404869842,
-        "beta": 9.637281307138956,
+        "alpha": 1.0671667266354519,
+        "beta": 9.303608891587768,
         "created_at": "2026-03-25T04:43:09.347442+00:00",
         "last_updated": "2026-04-24T22:41:12.021866+00:00",
         "stream_signals": {
@@ -3703,7 +3703,7 @@
         }
       },
       "health": {
-        "alpha": 1.1206926977578813,
+        "alpha": 1.057499531365578,
         "beta": 9.0,
         "created_at": "2026-03-25T04:43:09.348209+00:00",
         "last_updated": "2026-04-24T22:41:12.022478+00:00",
@@ -3726,7 +3726,7 @@
         }
       },
       "govt": {
-        "alpha": 1.279620262697864,
+        "alpha": 1.1332146381641006,
         "beta": 9.0,
         "created_at": "2026-03-25T04:43:09.348216+00:00",
         "last_updated": "2026-04-24T22:41:12.022458+00:00",
@@ -4584,7 +4584,7 @@
         }
       },
       "court": {
-        "alpha": 1.4820567561099358,
+        "alpha": 1.2296579501436125,
         "beta": 9.0,
         "created_at": "2026-03-25T10:22:09.632349+00:00",
         "last_updated": "2026-04-24T22:41:12.022469+00:00",
@@ -4763,7 +4763,7 @@
       },
       "islam": {
         "alpha": 1.0,
-        "beta": 10.415831468705791,
+        "beta": 10.051810517395692,
         "created_at": "2026-03-25T12:22:20.605417+00:00",
         "last_updated": "2026-04-25T07:20:52.718727+00:00",
         "stream_signals": {
@@ -4778,8 +4778,8 @@
         }
       },
       "umno": {
-        "alpha": 1.000007563324803,
-        "beta": 10.084612880907837,
+        "alpha": 1.000004403104382,
+        "beta": 9.631423858311322,
         "created_at": "2026-03-25T12:22:20.605427+00:00",
         "last_updated": "2026-04-25T02:35:41.916400+00:00",
         "stream_signals": {
@@ -4990,7 +4990,7 @@
       },
       "bangsa": {
         "alpha": 1.0,
-        "beta": 9.783773853636484,
+        "beta": 9.694396595537222,
         "created_at": "2026-03-25T14:32:20.351709+00:00",
         "last_updated": "2026-04-25T10:46:54.104439+00:00",
         "stream_signals": {
@@ -5006,7 +5006,7 @@
       },
       "scandal": {
         "alpha": 1.0,
-        "beta": 9.000000449753161,
+        "beta": 9.000000062978565,
         "created_at": "2026-03-25T14:32:20.351737+00:00",
         "last_updated": "2026-04-23T22:48:55.620401+00:00",
         "stream_signals": {
@@ -5022,9 +5022,9 @@
       },
       "perdana menteri": {
         "alpha": 1.0,
-        "beta": 9.617219580385791,
+        "beta": 9.967219580385791,
         "created_at": "2026-03-25T14:32:20.351757+00:00",
-        "last_updated": "2026-04-25T10:46:54.104545+00:00",
+        "last_updated": "2026-04-25T13:08:31.876114+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.15,
@@ -5226,7 +5226,7 @@
         }
       },
       "lelaki": {
-        "alpha": 1.0000000246252316,
+        "alpha": 1.000000003129384,
         "beta": 9.0,
         "created_at": "2026-03-25T16:31:46.890417+00:00",
         "last_updated": "2026-04-23T20:55:25.543278+00:00",
@@ -5375,7 +5375,7 @@
       },
       "accountability": {
         "alpha": 1.0,
-        "beta": 9.000009779516132,
+        "beta": 9.000001996446247,
         "created_at": "2026-03-25T20:16:38.554798+00:00",
         "last_updated": "2026-04-24T06:09:54.040555+00:00",
         "stream_signals": {
@@ -5812,7 +5812,7 @@
         }
       },
       "indonesia": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-03-26T03:09:51.148549+00:00",
         "last_updated": "2026-04-23T06:07:48.519197+00:00",
@@ -5836,7 +5836,7 @@
       },
       "bersatu": {
         "alpha": 1.0,
-        "beta": 9.000000866098874,
+        "beta": 9.000000148700115,
         "created_at": "2026-03-26T04:51:50.494307+00:00",
         "last_updated": "2026-04-24T02:47:21.843944+00:00",
         "stream_signals": {
@@ -5869,7 +5869,7 @@
       },
       "kaum": {
         "alpha": 1.0,
-        "beta": 9.000000000000599,
+        "beta": 9.000000000000046,
         "created_at": "2026-03-26T04:51:50.494314+00:00",
         "last_updated": "2026-04-23T11:12:34.903034+00:00",
         "stream_signals": {
@@ -5885,7 +5885,7 @@
       },
       "melayu": {
         "alpha": 1.0,
-        "beta": 9.110216476221042,
+        "beta": 9.064164195303725,
         "created_at": "2026-03-26T04:51:50.494341+00:00",
         "last_updated": "2026-04-25T02:35:41.916455+00:00",
         "stream_signals": {
@@ -6074,9 +6074,9 @@
       },
       "assembly": {
         "alpha": 1.0,
-        "beta": 10.050087150562158,
+        "beta": 10.400087150562157,
         "created_at": "2026-03-26T06:31:53.550092+00:00",
-        "last_updated": "2026-04-25T10:46:54.104515+00:00",
+        "last_updated": "2026-04-25T13:08:31.876198+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.15,
@@ -6542,7 +6542,7 @@
         }
       },
       "police": {
-        "alpha": 1.000055882958176,
+        "alpha": 1.0000114082662135,
         "beta": 9.0,
         "created_at": "2026-03-26T06:31:53.551504+00:00",
         "last_updated": "2026-04-24T06:09:54.041410+00:00",
@@ -6784,7 +6784,7 @@
       },
       "1mdb": {
         "alpha": 1.0,
-        "beta": 9.000000407087732,
+        "beta": 9.00000005700416,
         "created_at": "2026-03-26T10:24:46.830808+00:00",
         "last_updated": "2026-04-23T22:48:55.620404+00:00",
         "stream_signals": {
@@ -7101,7 +7101,7 @@
         }
       },
       "appeals": {
-        "alpha": 1.0000000000012268,
+        "alpha": 1.000000000000088,
         "beta": 9.0,
         "created_at": "2026-03-26T10:24:46.831490+00:00",
         "last_updated": "2026-04-23T09:46:44.202442+00:00",
@@ -7224,7 +7224,7 @@
         }
       },
       "penang": {
-        "alpha": 1.0032127328483054,
+        "alpha": 1.000954016501251,
         "beta": 9.0,
         "created_at": "2026-03-26T10:24:46.831532+00:00",
         "last_updated": "2026-04-24T13:28:13.972616+00:00",
@@ -7252,16 +7252,16 @@
       },
       "reform": {
         "alpha": 1.0,
-        "beta": 10.0533088972575,
+        "beta": 10.4033088972575,
         "created_at": "2026-03-26T12:26:13.670163+00:00",
-        "last_updated": "2026-04-25T10:46:54.104465+00:00",
+        "last_updated": "2026-04-25T13:08:31.876124+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.2,
-            "z_score": 0.8
+            "severity": 0.15,
+            "z_score": 0.6
           },
           "cascade_tracker": {
-            "n_star": 0.13333333333333333,
+            "n_star": 0.1,
             "alert_level": "normal"
           }
         }
@@ -7566,7 +7566,7 @@
       },
       "policy": {
         "alpha": 1.0,
-        "beta": 9.307894893196366,
+        "beta": 9.146685029258572,
         "created_at": "2026-03-26T14:38:08.348339+00:00",
         "last_updated": "2026-04-24T22:41:12.021817+00:00",
         "stream_signals": {
@@ -7896,25 +7896,25 @@
         }
       },
       "cops": {
-        "alpha": 1.0,
+        "alpha": 1.2,
         "beta": 9.0,
         "created_at": "2026-03-26T16:31:19.461174+00:00",
-        "last_updated": "2026-04-22T22:51:15.654016+00:00",
+        "last_updated": "2026-04-25T13:08:31.877031+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0032",
+            "event_id": "INST-0014",
             "keyword": "cops",
-            "title": "Cops make arrest after elderly man dies from head injuries. An autopsy found that the 83-year-old victim suffered skull fractures and internal bleeding caused by blunt trauma to the head.",
+            "title": "Cops probe firecracker incident at anti\u2011Azam rally. Police say they cannot confirm whether the firecrackers were lit as an act of sabotage.",
             "structural_importance": 0.415,
-            "silence_score": 0.95,
+            "silence_score": 0.9615,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 9,
-            "social_mentions": 4,
+            "news_mentions": 7,
+            "social_mentions": 3,
             "expected_mentions": 260.0,
             "bias_dimensions_touched": [],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-22T22:51:15.645177+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -8430,7 +8430,7 @@
         }
       },
       "trump": {
-        "alpha": 1.1543564681990168,
+        "alpha": 1.0735373783847546,
         "beta": 9.0,
         "created_at": "2026-03-27T00:38:51.270211+00:00",
         "last_updated": "2026-04-24T22:41:12.022467+00:00",
@@ -9588,7 +9588,7 @@
       },
       "pembangkang": {
         "alpha": 1.0,
-        "beta": 9.000000000000002,
+        "beta": 9.0,
         "created_at": "2026-03-27T08:21:17.587007+00:00",
         "last_updated": "2026-04-23T06:07:48.518302+00:00",
         "stream_signals": {
@@ -9710,7 +9710,7 @@
         }
       },
       "anwar": {
-        "alpha": 1.000011176591486,
+        "alpha": 1.00000228165321,
         "beta": 9.0,
         "created_at": "2026-03-27T08:21:17.587025+00:00",
         "last_updated": "2026-04-24T06:09:54.041338+00:00",
@@ -9759,8 +9759,8 @@
         }
       },
       "chinese": {
-        "alpha": 1.000000051504761,
-        "beta": 9.000027231715327,
+        "alpha": 1.000000010514476,
+        "beta": 9.000005559237811,
         "created_at": "2026-03-27T10:20:34.258244+00:00",
         "last_updated": "2026-04-24T06:09:54.040564+00:00",
         "stream_signals": {
@@ -11034,7 +11034,7 @@
         }
       },
       "woman": {
-        "alpha": 1.1386900027846196,
+        "alpha": 1.0660736756292997,
         "beta": 9.0,
         "created_at": "2026-03-28T00:35:19.176409+00:00",
         "last_updated": "2026-04-24T22:41:12.022454+00:00",
@@ -11511,7 +11511,7 @@
         }
       },
       "sabah": {
-        "alpha": 1.00000024070717,
+        "alpha": 1.0000000337060266,
         "beta": 9.0,
         "created_at": "2026-03-28T10:12:53.546535+00:00",
         "last_updated": "2026-04-23T22:48:55.621212+00:00",
@@ -12159,7 +12159,7 @@
         }
       },
       "from": {
-        "alpha": 1.0000002791459188,
+        "alpha": 1.000000039088573,
         "beta": 9.0,
         "created_at": "2026-03-29T00:40:22.089346+00:00",
         "last_updated": "2026-04-23T22:48:55.621157+00:00",
@@ -13391,27 +13391,27 @@
         }
       },
       "malaysia\u2019s": {
-        "alpha": 1.9999999999999998,
+        "alpha": 2.1999999999999997,
         "beta": 9.0,
         "created_at": "2026-03-30T00:40:32.009707+00:00",
-        "last_updated": "2026-04-25T10:46:54.105516+00:00",
+        "last_updated": "2026-04-25T13:08:31.877038+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0026",
+            "event_id": "INST-0037",
             "keyword": "malaysia\u2019s",
             "title": "Malaysia\u2019s fertility sector grows into regional medical tourism draw. PETALING JAYA, April 25 &mdash; Malaysian actress, television host and wellness entrepreneur Sarah Lian was in her late...",
             "structural_importance": 0.465,
-            "silence_score": 0.863,
+            "silence_score": 0.8543,
             "suppression_pattern": "NORMAL",
             "news_mentions": 49,
-            "social_mentions": 14,
+            "social_mentions": 18,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "ethnic"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -13852,7 +13852,7 @@
         }
       },
       "king": {
-        "alpha": 1.0000049491371725,
+        "alpha": 1.0000008497150792,
         "beta": 9.0,
         "created_at": "2026-03-30T05:01:56.770123+00:00",
         "last_updated": "2026-04-24T02:47:21.844696+00:00",
@@ -13879,9 +13879,9 @@
       },
       "haram": {
         "alpha": 1.0,
-        "beta": 9.884357012794744,
+        "beta": 10.234357012794744,
         "created_at": "2026-03-30T06:45:01.827844+00:00",
-        "last_updated": "2026-04-25T10:46:54.104449+00:00",
+        "last_updated": "2026-04-25T13:08:31.876208+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -13895,7 +13895,7 @@
       },
       "perkauman": {
         "alpha": 1.0,
-        "beta": 9.000000000009774,
+        "beta": 9.000000000000862,
         "created_at": "2026-03-30T06:45:01.827943+00:00",
         "last_updated": "2026-04-23T13:48:04.374829+00:00",
         "stream_signals": {
@@ -14659,25 +14659,25 @@
         }
       },
       "loke": {
-        "alpha": 1.5999999999999999,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-03-30T10:34:21.522813+00:00",
-        "last_updated": "2026-04-25T10:46:54.105536+00:00",
+        "last_updated": "2026-04-25T13:08:31.877059+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0008",
+            "event_id": "INST-0012",
             "keyword": "loke",
             "title": "Loke lambasts Kelantan lawmakers for \u2018irresponsible\u2019 Mat Motor convoy through Kota Bharu airport, orders roadblocks. KUALA LUMPUR, April 25 &mdash; Transport Minister Anthony Loke has condemned severa",
             "structural_importance": 0.415,
-            "silence_score": 0.7308,
+            "silence_score": 0.7269,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 55,
-            "social_mentions": 15,
+            "news_mentions": 52,
+            "social_mentions": 19,
             "expected_mentions": 260.0,
             "bias_dimensions_touched": [],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -15086,7 +15086,7 @@
         }
       },
       "2": {
-        "alpha": 1.000000000000004,
+        "alpha": 1.0000000000000002,
         "beta": 9.0,
         "created_at": "2026-03-30T14:37:27.874537+00:00",
         "last_updated": "2026-04-23T06:07:48.519155+00:00",
@@ -15136,27 +15136,27 @@
         }
       },
       "transport": {
-        "alpha": 1.5999999999999999,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-03-30T14:37:27.874590+00:00",
-        "last_updated": "2026-04-25T10:46:54.105521+00:00",
+        "last_updated": "2026-04-25T13:08:31.877034+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0007",
+            "event_id": "INST-0011",
             "keyword": "transport",
             "title": "Transport minister confirms MTEN to study lowering road tax for non-subsidised diesel owners. BATU KAWAN, April 25 &mdash; The Ministry of Transport has officially submitted a proposal to the National",
             "structural_importance": 0.465,
-            "silence_score": 0.8543,
+            "silence_score": 0.8565,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 53,
-            "social_mentions": 14,
+            "news_mentions": 49,
+            "social_mentions": 17,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "economic"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -15758,7 +15758,7 @@
         }
       },
       "china\u2019s": {
-        "alpha": 1.0000056171199763,
+        "alpha": 1.0000011467109489,
         "beta": 9.0,
         "created_at": "2026-03-31T04:53:07.873251+00:00",
         "last_updated": "2026-04-24T06:09:54.041356+00:00",
@@ -16206,7 +16206,7 @@
         }
       },
       "man": {
-        "alpha": 1.000000029550278,
+        "alpha": 1.0000000037552608,
         "beta": 9.0,
         "created_at": "2026-03-31T06:36:04.319692+00:00",
         "last_updated": "2026-04-23T20:55:25.543284+00:00",
@@ -16897,7 +16897,7 @@
         }
       },
       "microsoft": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-03-31T14:36:18.120210+00:00",
         "last_updated": "2026-04-23T06:07:48.519170+00:00",
@@ -17343,17 +17343,17 @@
         }
       },
       "himpunan": {
-        "alpha": 1.4999999999999998,
-        "beta": 9.358736708951955,
+        "alpha": 1.6999999999999997,
+        "beta": 9.708736708951955,
         "created_at": "2026-04-01T05:02:49.531187+00:00",
-        "last_updated": "2026-04-25T10:46:54.105503+00:00",
+        "last_updated": "2026-04-25T13:08:31.877009+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.25,
-            "z_score": 1.0
+            "severity": 0.2,
+            "z_score": 0.8
           },
           "cascade_tracker": {
-            "n_star": 0.16666666666666666,
+            "n_star": 0.13333333333333333,
             "alert_level": "normal"
           },
           "narrative_fragmentation": {
@@ -17371,13 +17371,13 @@
             "timestamp": "2026-04-25T10:46:54.091483+00:00"
           },
           "silence_detector": {
-            "event_id": "INST-0014",
+            "event_id": "INST-0025",
             "keyword": "himpunan",
             "title": "Himpunan anti-Azam desak perubahan menyeluruh. Ahli Parlimen Lee Chean Chung mahukan perubahan yang boleh memupuk keyakinan.",
             "structural_importance": 0.465,
-            "silence_score": 0.9935,
+            "silence_score": 0.9913,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 2,
+            "news_mentions": 3,
             "social_mentions": 1,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
@@ -17385,13 +17385,13 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "detention": {
         "alpha": 1.0,
-        "beta": 9.000007794889788,
+        "beta": 9.000001338301018,
         "created_at": "2026-04-01T05:02:49.531211+00:00",
         "last_updated": "2026-04-24T02:47:21.843887+00:00",
         "stream_signals": {
@@ -17407,7 +17407,7 @@
       },
       "court ruling": {
         "alpha": 1.0,
-        "beta": 9.000000000019547,
+        "beta": 9.000000000001723,
         "created_at": "2026-04-01T05:02:49.531239+00:00",
         "last_updated": "2026-04-23T13:48:04.374790+00:00",
         "stream_signals": {
@@ -17797,20 +17797,20 @@
         }
       },
       "perkeso": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.9999999999999996,
         "beta": 9.0,
         "created_at": "2026-04-01T05:02:49.531850+00:00",
-        "last_updated": "2026-04-25T10:46:54.105499+00:00",
+        "last_updated": "2026-04-25T13:08:31.877004+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0028",
+            "event_id": "INST-0039",
             "keyword": "perkeso",
             "title": "Perkeso gesa platform bertindak segera lindung pekerja gig. Gesaan susulan proses on-boarding ketika ini hanya membabitkan kira-kira 2% daripada anggaran 1.2 juta pekerja gig di Malaysia.",
             "structural_importance": 0.515,
-            "silence_score": 0.9894,
+            "silence_score": 0.997,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 5,
-            "social_mentions": 2,
+            "news_mentions": 1,
+            "social_mentions": 1,
             "expected_mentions": 660.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -17818,7 +17818,7 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -18297,9 +18297,9 @@
       },
       "perpaduan": {
         "alpha": 1.0,
-        "beta": 9.7,
+        "beta": 10.049999999999999,
         "created_at": "2026-04-01T10:27:05.372120+00:00",
-        "last_updated": "2026-04-25T10:46:54.104540+00:00",
+        "last_updated": "2026-04-25T13:08:31.876149+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.15,
@@ -19595,7 +19595,7 @@
         }
       },
       "johor": {
-        "alpha": 4.219910102685015,
+        "alpha": 3.595678751622296,
         "beta": 9.0,
         "created_at": "2026-04-02T04:49:16.102430+00:00",
         "last_updated": "2026-04-25T08:56:26.702648+00:00",
@@ -19619,7 +19619,7 @@
       },
       "human rights": {
         "alpha": 1.0,
-        "beta": 9.000019559032326,
+        "beta": 9.000003992892507,
         "created_at": "2026-04-02T06:33:34.326186+00:00",
         "last_updated": "2026-04-24T06:09:54.040572+00:00",
         "stream_signals": {
@@ -20244,7 +20244,7 @@
         }
       },
       "pesara": {
-        "alpha": 1.0000055882957917,
+        "alpha": 1.0000011408266156,
         "beta": 9.0,
         "created_at": "2026-04-02T08:27:39.234219+00:00",
         "last_updated": "2026-04-24T06:09:54.041385+00:00",
@@ -20493,7 +20493,7 @@
         }
       },
       "pakistan": {
-        "alpha": 1.0016063664319346,
+        "alpha": 1.0004770082531673,
         "beta": 9.0,
         "created_at": "2026-04-02T10:25:03.186934+00:00",
         "last_updated": "2026-04-24T13:28:13.972650+00:00",
@@ -20567,7 +20567,7 @@
         }
       },
       "bekas": {
-        "alpha": 1.0000000296849427,
+        "alpha": 1.0000000037723742,
         "beta": 9.0,
         "created_at": "2026-04-02T10:25:03.186949+00:00",
         "last_updated": "2026-04-23T20:55:25.543261+00:00",
@@ -23539,7 +23539,7 @@
       },
       "audit": {
         "alpha": 1.0,
-        "beta": 9.000501843818684,
+        "beta": 9.000132199432358,
         "created_at": "2026-04-04T10:13:54.338098+00:00",
         "last_updated": "2026-04-24T11:08:07.183965+00:00",
         "stream_signals": {
@@ -24618,27 +24618,27 @@
         }
       },
       "rafizi": {
-        "alpha": 1.0,
+        "alpha": 1.2,
         "beta": 9.0,
         "created_at": "2026-04-05T10:14:11.762287+00:00",
-        "last_updated": "2026-04-05T22:10:51.666511+00:00",
+        "last_updated": "2026-04-25T13:08:31.877016+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0024",
+            "event_id": "INST-0017",
             "keyword": "rafizi",
-            "title": "Rafizi terselamat usul tak percaya AGM PKR Pandan. Bekas timbalan presiden PKR itu capai kemenangan tipis dengan 42 ahli undi tolak usul, berbanding 34 menyokong.",
+            "title": "Rafizi to decide on forming new party in June. The former PKR deputy president says he will make his decision after discussions with his political friends as it would have an impact on them at parliam",
             "structural_importance": 0.465,
-            "silence_score": 0.9848,
+            "silence_score": 0.95,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 5,
-            "social_mentions": 2,
+            "news_mentions": 16,
+            "social_mentions": 7,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-05T22:10:51.653693+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -24669,9 +24669,9 @@
       },
       "race": {
         "alpha": 1.0,
-        "beta": 14.233116108385145,
+        "beta": 14.583116108385145,
         "created_at": "2026-04-05T12:16:35.201407+00:00",
-        "last_updated": "2026-04-25T10:46:54.104551+00:00",
+        "last_updated": "2026-04-25T13:08:31.876203+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -26288,7 +26288,7 @@
         }
       },
       "facebook": {
-        "alpha": 1.000000000000009,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-06T08:38:07.729053+00:00",
         "last_updated": "2026-04-23T06:07:48.519206+00:00",
@@ -31160,7 +31160,7 @@
         }
       },
       "malaysians": {
-        "alpha": 1.0000894127319555,
+        "alpha": 1.0000182532256938,
         "beta": 9.0,
         "created_at": "2026-04-09T00:33:34.704207+00:00",
         "last_updated": "2026-04-24T06:09:54.041342+00:00",
@@ -33180,7 +33180,7 @@
         }
       },
       "suhakam": {
-        "alpha": 1.0000055882957835,
+        "alpha": 1.0000011408266138,
         "beta": 9.0,
         "created_at": "2026-04-10T06:43:44.738869+00:00",
         "last_updated": "2026-04-24T06:09:54.041377+00:00",
@@ -33351,7 +33351,7 @@
         }
       },
       "azalina:": {
-        "alpha": 1.0000000000006135,
+        "alpha": 1.000000000000044,
         "beta": 9.0,
         "created_at": "2026-04-10T08:37:31.789954+00:00",
         "last_updated": "2026-04-23T09:46:44.202476+00:00",
@@ -35187,8 +35187,8 @@
         }
       },
       "economy": {
-        "alpha": 1.0000001108710181,
-        "beta": 9.000008199137614,
+        "alpha": 1.0000000190353937,
+        "beta": 9.000001407706138,
         "created_at": "2026-04-12T03:10:50.733394+00:00",
         "last_updated": "2026-04-24T02:47:21.843834+00:00",
         "stream_signals": {
@@ -36039,9 +36039,9 @@
       },
       "unity": {
         "alpha": 1.0,
-        "beta": 10.86933278401042,
+        "beta": 11.219332784010419,
         "created_at": "2026-04-12T16:14:39.653360+00:00",
-        "last_updated": "2026-04-25T10:46:54.104405+00:00",
+        "last_updated": "2026-04-25T13:08:31.876102+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.2,
@@ -36317,7 +36317,7 @@
       },
       "procurement": {
         "alpha": 1.0,
-        "beta": 9.002811140997942,
+        "beta": 9.000834764358787,
         "created_at": "2026-04-13T03:11:46.563101+00:00",
         "last_updated": "2026-04-24T13:28:13.972006+00:00",
         "stream_signals": {
@@ -37980,7 +37980,7 @@
         }
       },
       "goldman": {
-        "alpha": 1.0000002791459213,
+        "alpha": 1.0000000390885735,
         "beta": 9.0,
         "created_at": "2026-04-13T14:39:42.177645+00:00",
         "last_updated": "2026-04-23T22:48:55.621199+00:00",
@@ -38565,7 +38565,7 @@
         }
       },
       "venezuela,": {
-        "alpha": 1.2449516382853059,
+        "alpha": 1.1683980500700417,
         "beta": 9.0,
         "created_at": "2026-04-14T03:10:30.062953+00:00",
         "last_updated": "2026-04-25T05:50:11.566346+00:00",
@@ -39795,7 +39795,7 @@
       },
       "petrol": {
         "alpha": 1.0,
-        "beta": 9.00000000000014,
+        "beta": 9.00000000000001,
         "created_at": "2026-04-14T18:31:07.800660+00:00",
         "last_updated": "2026-04-23T09:46:44.201682+00:00",
         "stream_signals": {
@@ -39956,7 +39956,7 @@
         }
       },
       "hamzah": {
-        "alpha": 1.0000055882957792,
+        "alpha": 1.000001140826613,
         "beta": 9.0,
         "created_at": "2026-04-15T00:44:10.242227+00:00",
         "last_updated": "2026-04-24T06:09:54.041373+00:00",
@@ -41443,20 +41443,20 @@
         }
       },
       "new": {
-        "alpha": 1.4,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-15T12:28:53.430897+00:00",
-        "last_updated": "2026-04-25T10:46:54.105542+00:00",
+        "last_updated": "2026-04-25T13:08:31.877066+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0005",
+            "event_id": "INST-0009",
             "keyword": "new",
             "title": "New MACC chief must probe \u2018corporate mafia\u2019 claims, says DAP\u2019s Gobind. KUALA LUMPUR, April 25 &mdash; DAP national chairman Gobind Singh Deo today challenged the incoming Malaysian Anti-Corru...",
             "structural_importance": 0.41,
-            "silence_score": 0.6708,
+            "silence_score": 0.675,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 60,
-            "social_mentions": 19,
+            "news_mentions": 55,
+            "social_mentions": 23,
             "expected_mentions": 240.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -41464,7 +41464,7 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -44383,7 +44383,7 @@
         }
       },
       "terengganu": {
-        "alpha": 1.2311500052173878,
+        "alpha": 1.110122793044999,
         "beta": 9.0,
         "created_at": "2026-04-17T08:40:15.994803+00:00",
         "last_updated": "2026-04-24T22:41:12.022489+00:00",
@@ -46473,17 +46473,17 @@
         }
       },
       "prime minister": {
-        "alpha": 3.75,
-        "beta": 17.025377150507413,
+        "alpha": 3.9,
+        "beta": 17.225377150507413,
         "created_at": "2026-04-19T10:18:07.524225+00:00",
-        "last_updated": "2026-04-25T10:46:54.104536+00:00",
+        "last_updated": "2026-04-25T13:08:31.876164+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.75,
-            "z_score": 3.0
+            "severity": 0.6,
+            "z_score": 2.4
           },
           "cascade_tracker": {
-            "n_star": 0.5,
+            "n_star": 0.4,
             "alert_level": "normal"
           }
         }
@@ -46762,9 +46762,9 @@
       },
       "election": {
         "alpha": 1.0,
-        "beta": 9.372363341068468,
+        "beta": 9.722363341068467,
         "created_at": "2026-04-19T20:14:07.934799+00:00",
-        "last_updated": "2026-04-25T10:46:54.104425+00:00",
+        "last_updated": "2026-04-25T13:08:31.876070+00:00",
         "stream_signals": {
           "volume_monitor": {
             "severity": 0.1,
@@ -48023,7 +48023,7 @@
         }
       },
       "selangor": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.4175448241528463,
         "beta": 9.0,
         "created_at": "2026-04-20T06:53:29.472461+00:00",
         "last_updated": "2026-04-25T10:46:54.105492+00:00",
@@ -48855,16 +48855,16 @@
       },
       "dap": {
         "alpha": 2.8999999999999995,
-        "beta": 25.004994947339245,
+        "beta": 25.354994947339243,
         "created_at": "2026-04-20T16:31:38.007894+00:00",
-        "last_updated": "2026-04-25T10:46:54.104521+00:00",
+        "last_updated": "2026-04-25T13:08:31.876143+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.45,
-            "z_score": 1.8
+            "severity": 0.3,
+            "z_score": 1.2
           },
           "cascade_tracker": {
-            "n_star": 0.3,
+            "n_star": 0.2,
             "alert_level": "normal"
           },
           "silence_detector": {
@@ -51290,7 +51290,7 @@
         }
       },
       "johor man charged with bribing police rm18,500 to ignore friends\u2019 criminal histories. johor bahru, april 22 &mdash; a 31-year-old factory supervisor pleaded not guilty at the sessions court here today": {
-        "alpha": 1.0000000000000002,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-22T05:02:32.299345+00:00",
         "last_updated": "2026-04-23T02:46:50.658429+00:00",
@@ -51486,27 +51486,27 @@
         }
       },
       "kes": {
-        "alpha": 1.0002867679308118,
+        "alpha": 1.2002867679308118,
         "beta": 9.0,
         "created_at": "2026-04-22T05:02:32.299790+00:00",
-        "last_updated": "2026-04-24T11:08:07.184715+00:00",
+        "last_updated": "2026-04-25T13:08:31.877013+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0034",
+            "event_id": "INST-0019",
             "keyword": "kes",
-            "title": "Kes seleweng dana RM230 juta, SPRM kesan aliran wang daripada bank. Ketua Pesuruhjaya SPRM Azam Baki berkata pihaknya ketika ini sedang mendapatkan maklumat berkenaan daripada institusi perbankan.",
+            "title": "Kes seleweng NGO: 33 akaun RM150 juta dibeku. Ketua Pesuruhjaya SPRM Azam Baki berkata 40 saksi dikenal pasti untuk membantu siasatan kes seleweng sumbangan orang awam RM230 juta.",
             "structural_importance": 0.4715,
-            "silence_score": 0.9671,
+            "silence_score": 0.9424,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 10,
-            "social_mentions": 6,
+            "news_mentions": 15,
+            "social_mentions": 13,
             "expected_mentions": 486.0,
             "bias_dimensions_touched": [
               "institutional"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-24T11:08:07.175668+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
@@ -51583,7 +51583,7 @@
         }
       },
       "kangar pkr hit by resignations amid attendance row. kangar, april 22 &mdash; a total of 15 committee members from pkr&rsquo;s kangar division, including its deputy chief, h...": {
-        "alpha": 1.0000000000000002,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-22T06:45:20.233491+00:00",
         "last_updated": "2026-04-23T02:46:50.658418+00:00",
@@ -51606,7 +51606,7 @@
         }
       },
       "rm5b msme aid only \u2018small win,\u2019 more needed to tackle crisis, says guan eng. kuala lumpur, april 22 &mdash; dap advisor lim guan eng has described the government&rsquo;s latest rm5 billion aid pack...": {
-        "alpha": 1.0000000000000002,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-22T06:45:20.233497+00:00",
         "last_updated": "2026-04-23T02:46:50.658423+00:00",
@@ -51957,7 +51957,7 @@
         }
       },
       "rm5b": {
-        "alpha": 1.0000000000000002,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-22T06:45:20.233863+00:00",
         "last_updated": "2026-04-23T02:46:50.658677+00:00",
@@ -52082,7 +52082,7 @@
         }
       },
       "kangar": {
-        "alpha": 1.0000000000000002,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-22T06:45:20.233928+00:00",
         "last_updated": "2026-04-23T02:46:50.658754+00:00",
@@ -52105,7 +52105,7 @@
         }
       },
       "macc clarifies that rm230m misappropriated was public donations, not \u2018zakat\u2019 funds. kuala lumpur, april 22 &mdash; the malaysian anti-corruption commission (macc) has clarified that the alleged misapp": {
-        "alpha": 1.000000000000009,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T08:42:29.502626+00:00",
         "last_updated": "2026-04-23T06:07:48.518885+00:00",
@@ -52131,7 +52131,7 @@
         }
       },
       "sultan ibrahim orders royal foundation to assist sandakan families displaced by massive fire. kuala lumpur, april 22 &mdash; his majesty sultan ibrahim, king of malaysia, has graciously extended a per": {
-        "alpha": 1.000000000000009,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T08:42:29.502630+00:00",
         "last_updated": "2026-04-23T06:07:48.518888+00:00",
@@ -52156,7 +52156,7 @@
         }
       },
       "facebook posts on 3r issues land two men in court; 64-year-old gets four-month jail, retired soldier fights charges. sepang, april 22 &mdash; two men faced court action over offensive social media pos": {
-        "alpha": 1.000000000000009,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T08:42:29.502632+00:00",
         "last_updated": "2026-04-23T06:07:48.518890+00:00",
@@ -52394,7 +52394,7 @@
         }
       },
       "one night, one month: syed saddiq says fianc\u00e9e bella astillah out-earns his mp salary per show. kuala lumpur, april 22 &mdash; muar mp syed saddiq syed abdul rahman has revealed that his fianc&eacute;": {
-        "alpha": 1.0000000000000082,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T10:34:57.752480+00:00",
         "last_updated": "2026-04-23T06:07:48.518876+00:00",
@@ -52417,7 +52417,7 @@
         }
       },
       "takeovers not a crime, sc says amid \u2018corporate mafia\u2019 allegations. kuala lumpur, april 22 &mdash; the securities commission malaysia (sc) today said it has no authority to act on allegati...": {
-        "alpha": 1.0000000000000082,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T10:34:57.752485+00:00",
         "last_updated": "2026-04-23T06:07:48.518881+00:00",
@@ -52638,7 +52638,7 @@
         }
       },
       "takeovers": {
-        "alpha": 1.0000000000000082,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T10:34:57.752846+00:00",
         "last_updated": "2026-04-23T06:07:48.519213+00:00",
@@ -52663,7 +52663,7 @@
         }
       },
       "one": {
-        "alpha": 1.0000000000000082,
+        "alpha": 1.0000000000000004,
         "beta": 9.0,
         "created_at": "2026-04-22T10:34:57.752859+00:00",
         "last_updated": "2026-04-23T06:07:48.519231+00:00",
@@ -52686,7 +52686,7 @@
         }
       },
       "azalina: children, oku among groups to get wider access to free legal aid under new law. putrajaya, april 22 &mdash; the scope of services under the legal aid and public defence act 2025 has been expa": {
-        "alpha": 1.0000000000006135,
+        "alpha": 1.000000000000044,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895604+00:00",
         "last_updated": "2026-04-23T09:46:44.202119+00:00",
@@ -52709,7 +52709,7 @@
         }
       },
       "appeals court acquits ex-photographer over youtube video against police, orders refund of rm20,000 fine. putrajaya, april 22 &mdash; the court of appeal today acquitted and discharged a former photogr": {
-        "alpha": 1.0000000000012268,
+        "alpha": 1.000000000000088,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895607+00:00",
         "last_updated": "2026-04-23T09:46:44.202123+00:00",
@@ -52734,7 +52734,7 @@
         }
       },
       "fake import racket: company boss held in macc port klang sweep, rm160m accounts frozen over rm1.5b customs loss. kuala lumpur, april 22 &mdash; the malaysian anti-corruption commission (macc) has deta": {
-        "alpha": 1.0000000000006135,
+        "alpha": 1.000000000000044,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895613+00:00",
         "last_updated": "2026-04-23T09:46:44.202125+00:00",
@@ -52760,7 +52760,7 @@
         }
       },
       "fahmi: petrochemical shortage may affect food packaging, govt monitoring impact closely. putrajaya, april 22 &mdash; the government is closely reviewing petrochemical supply issues that may potentiall": {
-        "alpha": 1.0000000000000147,
+        "alpha": 1.0000000000000009,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895617+00:00",
         "last_updated": "2026-04-23T06:07:48.518872+00:00",
@@ -52883,33 +52883,30 @@
         }
       },
       "ukraine": {
-        "alpha": 1.0,
+        "alpha": 1.2,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895985+00:00",
-        "last_updated": "2026-04-22T20:24:06.996723+00:00",
+        "last_updated": "2026-04-25T13:08:31.877027+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0040",
+            "event_id": "INST-0015",
             "keyword": "ukraine",
-            "title": "Ukraine restarts Russian oil pipeline to Europe. Kyiv hopes the resumption of supplies will unblock the last hurdle to securing tens of billions of euros in EU support, held up by Hungary\u2019s former lea",
-            "structural_importance": 0.515,
-            "silence_score": 0.9894,
+            "title": "Ukraine signs pacts with Azerbaijan in drone cooperation push. Ukrainian president Volodymyr Zelensky has clinched several defence deals with Gulf countries that suffered Iranian drone attacks.",
+            "structural_importance": 0.415,
+            "silence_score": 0.9769,
             "suppression_pattern": "NORMAL",
             "news_mentions": 4,
-            "social_mentions": 3,
-            "expected_mentions": 660.0,
-            "bias_dimensions_touched": [
-              "environmental",
-              "political"
-            ],
-            "alert_level": "high",
+            "social_mentions": 2,
+            "expected_mentions": 260.0,
+            "bias_dimensions_touched": [],
+            "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-22T20:24:06.987894+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "fahmi:": {
-        "alpha": 1.0000000000000147,
+        "alpha": 1.0000000000000009,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.895993+00:00",
         "last_updated": "2026-04-23T06:07:48.519176+00:00",
@@ -52981,7 +52978,7 @@
         }
       },
       "fake": {
-        "alpha": 1.0000000000006135,
+        "alpha": 1.000000000000044,
         "beta": 9.0,
         "created_at": "2026-04-22T12:29:06.896052+00:00",
         "last_updated": "2026-04-23T09:46:44.202458+00:00",
@@ -53007,7 +53004,7 @@
         }
       },
       "inside the malaysian factory supplying the world\u2019s most critical minerals worth rm395,000 a bag. gebeng, april 22 &mdash; workers load tonnes of rare earth minerals into bags ready for shipping at a r": {
-        "alpha": 1.0000000000030826,
+        "alpha": 1.000000000000238,
         "beta": 9.0,
         "created_at": "2026-04-22T14:38:54.021198+00:00",
         "last_updated": "2026-04-23T11:12:34.903464+00:00",
@@ -53227,7 +53224,7 @@
         }
       },
       "inside": {
-        "alpha": 1.0000000000030826,
+        "alpha": 1.000000000000238,
         "beta": 9.0,
         "created_at": "2026-04-22T14:38:54.021572+00:00",
         "last_updated": "2026-04-23T11:12:34.903689+00:00",
@@ -53572,7 +53569,7 @@
         }
       },
       "goldman sachs ends 1mdb fraud lawsuit with agreement-in-principle. new york, april 23 &mdash; goldman &zwnj;sachs has agreed to settle a class-action \u200blawsuit accusing the wall street ban...": {
-        "alpha": 1.000000232621585,
+        "alpha": 1.0000000325738088,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658314+00:00",
         "last_updated": "2026-04-23T22:48:55.620877+00:00",
@@ -53595,7 +53592,7 @@
         }
       },
       "maritime corridor for gaza: malaysia joins global push to break unlawful blockade. brussels, april 23 &mdash; a malaysian delegation joined international parliamentarians and stakeholders in endorsing": {
-        "alpha": 1.0000004652431704,
+        "alpha": 1.0000000651476175,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658319+00:00",
         "last_updated": "2026-04-23T22:48:55.620879+00:00",
@@ -53621,7 +53618,7 @@
         }
       },
       "kdn deploys rapid response initiative to speed up free id replacements for sabah fire victims. kuala lumpur, april 23 &mdash; the home ministry (kdn), through the national registration department (jpn": {
-        "alpha": 1.0000002326215853,
+        "alpha": 1.0000000325738088,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658323+00:00",
         "last_updated": "2026-04-23T22:48:55.620880+00:00",
@@ -53644,7 +53641,7 @@
         }
       },
       "johor halts two property projects for causing flash floods. johor bahru, april 23 &mdash; the johor state government has taken firm action against two property developers in johor...": {
-        "alpha": 1.0000002326215853,
+        "alpha": 1.0000000325738088,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658327+00:00",
         "last_updated": "2026-04-23T22:48:55.620882+00:00",
@@ -53669,7 +53666,7 @@
         }
       },
       "amid middle east tensions, malaysia rules out unilateral action in strait of malacca. kuala lumpur, april 23 &mdash; foreign affairs minister datuk seri mohamad hasan on wednesday said no unilateral d": {
-        "alpha": 1.0000002326215855,
+        "alpha": 1.0000000325738088,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658331+00:00",
         "last_updated": "2026-04-23T22:48:55.620884+00:00",
@@ -53694,7 +53691,7 @@
         }
       },
       "sabah property development scandal: two lawyers remanded for misusing trust funds. putrajaya, april 23 &mdash; the malaysian anti-corruption commission (macc) has remanded two lawyers from a law firm ": {
-        "alpha": 1.0000002326215855,
+        "alpha": 1.0000000325738088,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658334+00:00",
         "last_updated": "2026-04-23T22:48:55.620886+00:00",
@@ -53720,7 +53717,7 @@
         }
       },
       "usno withdraws from grs after 2025 sabah election fallout. kota kinabalu, april 23 &mdash; controversial former dewan rakyat speaker tan sri pandikar amin mulia has pulled his uni...": {
-        "alpha": 1.00000000000137,
+        "alpha": 1.0000000000001057,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658337+00:00",
         "last_updated": "2026-04-23T11:12:34.903456+00:00",
@@ -53745,7 +53742,7 @@
         }
       },
       "florida governor desantis signs bill prohibiting dei in local governments. republican state leaders and us president donald trump's administration have rallied against diversity, equity and inclusion ": {
-        "alpha": 1.0000000000000018,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658340+00:00",
         "last_updated": "2026-04-23T06:07:48.518857+00:00",
@@ -53915,7 +53912,7 @@
         }
       },
       "florida": {
-        "alpha": 1.0000000000000018,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658696+00:00",
         "last_updated": "2026-04-23T06:07:48.519167+00:00",
@@ -53940,7 +53937,7 @@
         }
       },
       "maritime": {
-        "alpha": 1.0000004652431993,
+        "alpha": 1.000000065147622,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658699+00:00",
         "last_updated": "2026-04-23T22:48:55.621170+00:00",
@@ -53989,7 +53986,7 @@
         }
       },
       "usno": {
-        "alpha": 1.00000000000137,
+        "alpha": 1.0000000000001057,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658722+00:00",
         "last_updated": "2026-04-23T11:12:34.903695+00:00",
@@ -54014,7 +54011,7 @@
         }
       },
       "amid": {
-        "alpha": 1.0000002326216006,
+        "alpha": 1.0000000325738112,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658733+00:00",
         "last_updated": "2026-04-23T22:48:55.621189+00:00",
@@ -54039,7 +54036,7 @@
         }
       },
       "kdn": {
-        "alpha": 1.0009495770962173,
+        "alpha": 1.0002333687578426,
         "beta": 9.0,
         "created_at": "2026-04-23T02:46:50.658748+00:00",
         "last_updated": "2026-04-24T09:46:54.999743+00:00",
@@ -54064,7 +54061,7 @@
         }
       },
       "clean house or lose trust: deputy igp says even minor police misconduct can tarnish entire force\u2019s reputation. george town, april 23 &mdash; disciplinary action was taken against 1,429 police officers": {
-        "alpha": 1.000004949136809,
+        "alpha": 1.0000008497150121,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518788+00:00",
         "last_updated": "2026-04-24T02:47:21.844328+00:00",
@@ -54087,7 +54084,7 @@
         }
       },
       "king says he will determine who is next macc chief. kuala lumpur, april 23 &mdash; his majesty sultan ibrahim, king of malaysia today said he will determine the best candid...": {
-        "alpha": 1.000004949136813,
+        "alpha": 1.000000849715013,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518792+00:00",
         "last_updated": "2026-04-24T02:47:21.844332+00:00",
@@ -54113,7 +54110,7 @@
         }
       },
       "china\u2019s foreign minister calls for eradication of cambodian scam centres. rights monitors say cambodia hosts dozens of scam centres with tens of thousands of people perpetrating online scams in a mult": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518818+00:00",
         "last_updated": "2026-04-23T06:07:48.518819+00:00",
@@ -54138,7 +54135,7 @@
         }
       },
       "archer steps down as wta ceo after less than two years in the role. archer steps down as wta ceo after less than two years in the role, effective april 20 ahead of her contract renewal.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518821+00:00",
         "last_updated": "2026-04-23T06:07:48.518822+00:00",
@@ -54161,7 +54158,7 @@
         }
       },
       "dun selangor kecoh, pembangkang kemuka usul rujuk wong ke jk hak dan kebebasan. dr afif bahardin (pn-taman medan) memaklumkan telah menghantar usul berkenaan.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518824+00:00",
         "last_updated": "2026-04-23T06:07:48.518825+00:00",
@@ -54186,7 +54183,7 @@
         }
       },
       "court invalidates elderly woman\u2019s 2011 will, upholds one from 1976. the court of appeal, in a majority ruling, says the sole beneficiary named in the second will failed to dispel the suspicious circum": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518827+00:00",
         "last_updated": "2026-04-23T06:07:48.518829+00:00",
@@ -54211,7 +54208,7 @@
         }
       },
       "indonesia retracts plan to monetise straits of malacca. purbaya yudhi sadewa says indonesia will not seek to commercialise international shipping lanes simply because it can.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518830+00:00",
         "last_updated": "2026-04-23T06:07:48.518831+00:00",
@@ -54234,7 +54231,7 @@
         }
       },
       "2 maut kebocoran bahan kimia di kilang as. seramai 19 lagi dimasukkan ke hospital susulan kebocoran bahan kimia di sebuah kilang pembuatan pemangkin perak di virginia barat.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518833+00:00",
         "last_updated": "2026-04-23T06:07:48.518834+00:00",
@@ -54259,7 +54256,7 @@
         }
       },
       "1,429 police personnel faced disciplinary action in 2025, says ayob. deputy inspector-general of police says integrity is the most important value to uphold, regardless of the agency or ministry one s": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518835+00:00",
         "last_updated": "2026-04-23T06:07:48.518836+00:00",
@@ -54282,7 +54279,7 @@
         }
       },
       "tuanku muhriz ingatkan pemegang jawatan tinggi buat keputusan ikut fakta. yang dipertuan besar negeri sembilan tuanku muhriz tuanku munawir bertitah keputusan tidak boleh dibuat mengikut emosi.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518837+00:00",
         "last_updated": "2026-04-23T06:07:48.518838+00:00",
@@ -54305,7 +54302,7 @@
         }
       },
       "vip gamblers drive marina bay sands\u2019 q1 earnings jump. net revenue rises 28% to us$1.49 billion on strong demand from high-spending travellers despite uneven global tourism.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518843+00:00",
         "last_updated": "2026-04-23T06:07:48.518844+00:00",
@@ -54330,7 +54327,7 @@
         }
       },
       "sellers in china trade hub seek tariff reprieve from trump\u2019s visit. factories took the brunt of the escalating tit-for-tat trade war as us levies hit an eye-watering 145% on many goods.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518846+00:00",
         "last_updated": "2026-04-23T06:07:48.518847+00:00",
@@ -54355,7 +54352,7 @@
         }
       },
       "microsoft unveils \u2018largest-ever\u2019 investment in australia. the us$18 billion will be used to upgrade supercomputers used to churn through massive datasets powering the development of ai.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518850+00:00",
         "last_updated": "2026-04-23T06:07:48.518851+00:00",
@@ -54380,7 +54377,7 @@
         }
       },
       "sports council denies dg\u2019s involvement in badminton academy scam. nsc says it has never appointed, authorised, or recognised any individual or group to use its name, identity, or image to collect paym": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518853+00:00",
         "last_updated": "2026-04-23T06:07:48.518854+00:00",
@@ -54403,7 +54400,7 @@
         }
       },
       "jb firm denies fraud claims in steel hawk suit. ibrahim &#038; sons engineering sdn bhd says it complied with all terms in the contract for jobs linked to tenaga nasional bhd projects.": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.518855+00:00",
         "last_updated": "2026-04-23T06:07:48.518856+00:00",
@@ -54426,7 +54423,7 @@
         }
       },
       "dun": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519151+00:00",
         "last_updated": "2026-04-23T06:07:48.519153+00:00",
@@ -54451,7 +54448,7 @@
         }
       },
       "sellers": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519158+00:00",
         "last_updated": "2026-04-23T06:07:48.519160+00:00",
@@ -54476,7 +54473,7 @@
         }
       },
       "vip": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519164+00:00",
         "last_updated": "2026-04-23T06:07:48.519166+00:00",
@@ -54501,7 +54498,7 @@
         }
       },
       "sports": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519183+00:00",
         "last_updated": "2026-04-23T06:07:48.519185+00:00",
@@ -54524,7 +54521,7 @@
         }
       },
       "1,429": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519189+00:00",
         "last_updated": "2026-04-23T06:07:48.519190+00:00",
@@ -54547,7 +54544,7 @@
         }
       },
       "archer": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519190+00:00",
         "last_updated": "2026-04-23T06:07:48.519196+00:00",
@@ -54570,7 +54567,7 @@
         }
       },
       "tuanku": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519201+00:00",
         "last_updated": "2026-04-23T06:07:48.519202+00:00",
@@ -54593,7 +54590,7 @@
         }
       },
       "jb": {
-        "alpha": 1.0000000000000009,
+        "alpha": 1.0,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519208+00:00",
         "last_updated": "2026-04-23T06:07:48.519209+00:00",
@@ -54616,7 +54613,7 @@
         }
       },
       "clean": {
-        "alpha": 1.0000049491371625,
+        "alpha": 1.0000008497150772,
         "beta": 9.0,
         "created_at": "2026-04-23T06:07:48.519234+00:00",
         "last_updated": "2026-04-24T02:47:21.844686+00:00",
@@ -54639,7 +54636,7 @@
         }
       },
       "police bust homestay hopping syndicate in sarawak\u2019s biggest drug haul to date. kuching, april 23 &mdash; a drug syndicate&rsquo;s tactic of renting homestay premises as packaging and storage centres..": {
-        "alpha": 1.0000558829546773,
+        "alpha": 1.000011408265444,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202066+00:00",
         "last_updated": "2026-04-24T06:09:54.041072+00:00",
@@ -54662,7 +54659,7 @@
         }
       },
       "malaysia to target fuel smugglers with designated judges and fast-track trials. johor bahru, april 23 &mdash; the government is moving to expedite court proceedings for cases involving the smuggling o": {
-        "alpha": 1.000004454223122,
+        "alpha": 1.0000007647435099,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202069+00:00",
         "last_updated": "2026-04-24T02:47:21.844321+00:00",
@@ -54689,7 +54686,7 @@
         }
       },
       "first landslide in 30 years prompts dbkl to act on bukit lanjan flood risk. kuala lumpur, april 23 &mdash; kuala lumpur city hall (dbkl) has proposed the creation of an on-site detention area as a...": {
-        "alpha": 1.0000044542231246,
+        "alpha": 1.0000007647435103,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202072+00:00",
         "last_updated": "2026-04-24T02:47:21.844324+00:00",
@@ -54712,7 +54709,7 @@
         }
       },
       "electric vehicle sales in the eu rise amid soaring petrol prices. overall sales rose 12.5% in march from the same month last year to 1.16 million vehicles, according to the european automobile manufac": {
-        "alpha": 1.0000000000167546,
+        "alpha": 1.0000000000014775,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202094+00:00",
         "last_updated": "2026-04-23T13:48:04.375387+00:00",
@@ -54735,7 +54732,7 @@
         }
       },
       "us firms voice \u2018concern\u2019 over china\u2019s new supply chain rules. the regulations allow chinese authorities to take measures against foreign companies or individuals that harm china's industrial and suppl": {
-        "alpha": 1.0000000000167546,
+        "alpha": 1.0000000000014775,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202100+00:00",
         "last_updated": "2026-04-23T13:48:04.375393+00:00",
@@ -54760,7 +54757,7 @@
         }
       },
       "russian billionaires boost wealth despite war and sanctions, says forbes. russia\u2019s richest men saw their wealth rise by 11% as disruptions to trade flows boosted commodity prices, although forbes note": {
-        "alpha": 1.00000000000137,
+        "alpha": 1.0000000000001057,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202107+00:00",
         "last_updated": "2026-04-23T11:12:34.903459+00:00",
@@ -54786,7 +54783,7 @@
         }
       },
       "land encroachment involves farms, illegal factories too, says amirudin. selangor menteri besar says comprehensive enforcement is being carried out against all forms of illegal land use.": {
-        "alpha": 1.0000000000000682,
+        "alpha": 1.0000000000000049,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202110+00:00",
         "last_updated": "2026-04-23T09:46:44.202111+00:00",
@@ -54809,7 +54806,7 @@
         }
       },
       "opposition attempts to send selangor rep to rights committee over pig farming. however, selangor speaker lau weng san says he has yet to receive or examine the motion and is therefore unable to make a": {
-        "alpha": 1.0000000000000682,
+        "alpha": 1.0000000000000049,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202112+00:00",
         "last_updated": "2026-04-23T09:46:44.202113+00:00",
@@ -54834,7 +54831,7 @@
         }
       },
       "russian": {
-        "alpha": 1.00000000000137,
+        "alpha": 1.0000000000001057,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202397+00:00",
         "last_updated": "2026-04-23T11:12:34.903664+00:00",
@@ -54860,7 +54857,7 @@
         }
       },
       "electric": {
-        "alpha": 1.0000000000167546,
+        "alpha": 1.0000000000014775,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202435+00:00",
         "last_updated": "2026-04-23T13:48:04.375695+00:00",
@@ -54883,7 +54880,7 @@
         }
       },
       "land": {
-        "alpha": 1.0000000000000682,
+        "alpha": 1.0000000000000049,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202438+00:00",
         "last_updated": "2026-04-23T09:46:44.202440+00:00",
@@ -54906,7 +54903,7 @@
         }
       },
       "first": {
-        "alpha": 1.00000445422344,
+        "alpha": 1.0000007647435685,
         "beta": 9.0,
         "created_at": "2026-04-23T09:46:44.202464+00:00",
         "last_updated": "2026-04-24T02:47:21.844679+00:00",
@@ -54929,7 +54926,7 @@
         }
       },
       "court told ex-perlis mb\u2019s london travel claims were checked with immigration. kuala lumpur, april 23 &mdash; a malaysian anti-corruption commission assistant investigating officer told the sessions...": {
-        "alpha": 1.0000502946591538,
+        "alpha": 1.0000102674388875,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903394+00:00",
         "last_updated": "2026-04-24T06:09:54.041066+00:00",
@@ -54955,7 +54952,7 @@
         }
       },
       "no action in dungun cat abuse case after children found below age of criminal liability. kuala terengganu, april 23 &mdash; the terengganu state veterinary services department (jpvnt) today said that ": {
-        "alpha": 1.0000502946591818,
+        "alpha": 1.0000102674388938,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903397+00:00",
         "last_updated": "2026-04-24T06:09:54.041069+00:00",
@@ -54978,7 +54975,7 @@
         }
       },
       "shares stumble as war worries drive oil back above us$100. european shares fell as data highlighted the economic impact, while stocks in japan, south korea and taiwan hit new highs before retreating, ": {
-        "alpha": 1.0000000295502742,
+        "alpha": 1.0000000037552603,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903415+00:00",
         "last_updated": "2026-04-23T20:55:25.542721+00:00",
@@ -55001,7 +54998,7 @@
         }
       },
       "selepas dap, pemuda mca umum sertai himpunan anti-azam baki. jawatankuasa pusat kata sudah tiba masa kerajaan merangka suatu kerangka reformasi yang menyeluruh bagi sprm.": {
-        "alpha": 1.0000000886508227,
+        "alpha": 1.000000011265781,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903417+00:00",
         "last_updated": "2026-04-23T20:55:25.542727+00:00",
@@ -55027,7 +55024,7 @@
         }
       },
       "bekas timbalan pengarah dbkl mula hukuman penjara 4 tahun kerana rasuah. sabudin mohd salleh memulakan hukuman penjara empat tahun selepas mahkamah rayuan tolak rayuan sabitan terima rasuah rm200,000.": {
-        "alpha": 1.0000000295502742,
+        "alpha": 1.0000000037552603,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903420+00:00",
         "last_updated": "2026-04-23T20:55:25.542729+00:00",
@@ -55052,7 +55049,7 @@
         }
       },
       "man gets 17 years\u2019 jail for samurai sword crime spree. the court of appeal allows the prosecution's appeal to reinstate a ruling by the sessions court.": {
-        "alpha": 1.0000000295502742,
+        "alpha": 1.0000000037552603,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903423+00:00",
         "last_updated": "2026-04-23T20:55:25.542734+00:00",
@@ -55077,7 +55074,7 @@
         }
       },
       "ex-dbkl deputy director fails in corruption appeal, starts 4-year jail term. the court of appeal ruled that the prosecution had established evidence of corrupt payments made to the appellant in connec": {
-        "alpha": 1.0000000295502742,
+        "alpha": 1.0000000037552603,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903425+00:00",
         "last_updated": "2026-04-23T20:55:25.542737+00:00",
@@ -55102,7 +55099,7 @@
         }
       },
       "rm18.3mil in assets seized in rm230mil misappropriation probe. an macc source says seven residential properties, three office units and four plots of land were seized in a series of raids today.": {
-        "alpha": 1.0000000295502742,
+        "alpha": 1.0000000037552603,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903426+00:00",
         "last_updated": "2026-04-23T20:55:25.542739+00:00",
@@ -55127,7 +55124,7 @@
         }
       },
       "mca youth to join dap counterpart at saturday rally. mca and dap have remained critical of one another despite both being part of the government bloc in the dewan rakyat.": {
-        "alpha": 1.000000000149093,
+        "alpha": 1.000000000014667,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903436+00:00",
         "last_updated": "2026-04-23T15:55:55.207889+00:00",
@@ -55152,7 +55149,7 @@
         }
       },
       "pengasas bestinet hantar surat tuntutan kepada rafizi. aminul islam abdul nor mendakwa ahli parlimen pandan itu guna perkataan berunsur perkauman dalam video dan kenyataan di media sosial.": {
-        "alpha": 1.0000000000223395,
+        "alpha": 1.0000000000019702,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903443+00:00",
         "last_updated": "2026-04-23T13:48:04.375382+00:00",
@@ -55179,7 +55176,7 @@
         }
       },
       "pengasas": {
-        "alpha": 1.0000000000223395,
+        "alpha": 1.0000000000019702,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903655+00:00",
         "last_updated": "2026-04-23T13:48:04.375651+00:00",
@@ -55206,7 +55203,7 @@
         }
       },
       "selepas": {
-        "alpha": 1.0000000886508342,
+        "alpha": 1.0000000112657825,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903666+00:00",
         "last_updated": "2026-04-23T20:55:25.543300+00:00",
@@ -55232,7 +55229,7 @@
         }
       },
       "mca": {
-        "alpha": 1.1159792423149981,
+        "alpha": 1.0552539814302198,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903676+00:00",
         "last_updated": "2026-04-24T22:41:12.022472+00:00",
@@ -55255,7 +55252,7 @@
         }
       },
       "rm18.3mil": {
-        "alpha": 1.000000029550278,
+        "alpha": 1.0000000037552608,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903679+00:00",
         "last_updated": "2026-04-23T20:55:25.543282+00:00",
@@ -55280,7 +55277,7 @@
         }
       },
       "ex-dbkl": {
-        "alpha": 1.000078236141229,
+        "alpha": 1.0000159715726509,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903686+00:00",
         "last_updated": "2026-04-24T06:09:54.041395+00:00",
@@ -55305,7 +55302,7 @@
         }
       },
       "shares": {
-        "alpha": 1.000000029550278,
+        "alpha": 1.0000000037552608,
         "beta": 9.0,
         "created_at": "2026-04-23T11:12:34.903691+00:00",
         "last_updated": "2026-04-23T20:55:25.543292+00:00",
@@ -55328,7 +55325,7 @@
         }
       },
       "malaysians repaid a record rm23b in credit card debt in 2025 as household debt rises. kuala lumpur, april 23 &mdash; malaysians repaid over rm23 billion worth of credit card debt as of december 2025, ": {
-        "alpha": 1.0000894127270863,
+        "alpha": 1.0000182532246233,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375265+00:00",
         "last_updated": "2026-04-24T06:09:54.041048+00:00",
@@ -55354,7 +55351,7 @@
         }
       },
       "macc records statements from five in port klang false declarations probe. putrajaya, april 23 &mdash; the malaysian anti-corruption commission has recorded statements from five individuals linke...": {
-        "alpha": 1.000044706363568,
+        "alpha": 1.0000091266123172,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375269+00:00",
         "last_updated": "2026-04-24T06:09:54.041051+00:00",
@@ -55380,7 +55377,7 @@
         }
       },
       "ex-dbkl officer begins jail term after court of appeal upholds conviction over rm200,000 bribes. putrajaya, april 23 &mdash; former kuala lumpur city hall senior deputy director sabudin mohd salleh be": {
-        "alpha": 1.0000447063635847,
+        "alpha": 1.0000091266123208,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375273+00:00",
         "last_updated": "2026-04-24T06:09:54.041053+00:00",
@@ -55405,7 +55402,7 @@
         }
       },
       "macc seizes rm4mil in assets from preacher in rm12.3mil probe. two ngo committee members suspected of colluding with him have also been identified as his wife and the organisation\u2019s secretary.": {
-        "alpha": 1.0000004187188516,
+        "alpha": 1.0000000586328555,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375300+00:00",
         "last_updated": "2026-04-23T22:48:55.620860+00:00",
@@ -55430,7 +55427,7 @@
         }
       },
       "from systemic abuse to transparency: why we need fwcms. fwcms eliminated billions in annual leakage that previously flowed through informal intermediaries.": {
-        "alpha": 1.0000002791459013,
+        "alpha": 1.0000000390885704,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375305+00:00",
         "last_updated": "2026-04-23T22:48:55.620862+00:00",
@@ -55456,7 +55453,7 @@
         }
       },
       "romania\u2019s ruling coalition loses majority after its biggest party walks out. the likely collapse of the four-party coalition risks policy deadlock, threatening romania\u2019s credit rating, deficit cuts, b": {
-        "alpha": 1.0000001395729508,
+        "alpha": 1.0000000195442853,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375310+00:00",
         "last_updated": "2026-04-23T22:48:55.620865+00:00",
@@ -55481,7 +55478,7 @@
         }
       },
       "sweden may ration fuel as iran war threatens economy. the impact of the iran war on the swedish economy has worsened from \u2018limited\u2019 to \u2018significant\u2019, said prime minister ulf kristersson.": {
-        "alpha": 1.0000001395729508,
+        "alpha": 1.0000000195442853,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375317+00:00",
         "last_updated": "2026-04-23T22:48:55.620870+00:00",
@@ -55504,7 +55501,7 @@
         }
       },
       "uem sunrise emerges as a potential takeover target, says rhb research. property developer\u2019s low valuation and its huge landbank in johor makes it an attractive takeover or privatisation target.": {
-        "alpha": 1.000000139572951,
+        "alpha": 1.0000000195442853,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375321+00:00",
         "last_updated": "2026-04-23T22:48:55.620873+00:00",
@@ -55527,7 +55524,7 @@
         }
       },
       "lelaki samun guna pedang samurai dijel 17 tahun, 7 sebatan. mahkamah rayuan benar rayuan pendakwaan untuk mengembalikan hukuman mahkamah sesyen.": {
-        "alpha": 1.0000000246252285,
+        "alpha": 1.0000000031293836,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375323+00:00",
         "last_updated": "2026-04-23T20:55:25.542718+00:00",
@@ -55552,7 +55549,7 @@
         }
       },
       "romania\u2019s": {
-        "alpha": 1.0000001395729596,
+        "alpha": 1.0000000195442866,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375673+00:00",
         "last_updated": "2026-04-23T22:48:55.621165+00:00",
@@ -55577,7 +55574,7 @@
         }
       },
       "uem": {
-        "alpha": 1.0000001395729599,
+        "alpha": 1.0000000195442866,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375692+00:00",
         "last_updated": "2026-04-23T22:48:55.621175+00:00",
@@ -55600,7 +55597,7 @@
         }
       },
       "sweden": {
-        "alpha": 1.0000001395729603,
+        "alpha": 1.0000000195442866,
         "beta": 9.0,
         "created_at": "2026-04-23T13:48:04.375697+00:00",
         "last_updated": "2026-04-23T22:48:55.621185+00:00",
@@ -55623,7 +55620,7 @@
         }
       },
       "kdn dalam proses batal pengharaman 3 buku. menterinya saifuddin nasution ismail beliau kini masih tunggu maklum balas daripada pejabat peguam negara.": {
-        "alpha": 1.0000000000496976,
+        "alpha": 1.000000000004889,
         "beta": 9.0,
         "created_at": "2026-04-23T15:55:55.207796+00:00",
         "last_updated": "2026-04-23T15:55:55.207798+00:00",
@@ -55648,7 +55645,7 @@
         }
       },
       "us eases access to marijuana for medical use. the justice department says today\u2019s move follows president donald trump\u2019s executive order to increase medical marijuana research.": {
-        "alpha": 1.0000001163107917,
+        "alpha": 1.0000000162869043,
         "beta": 9.0,
         "created_at": "2026-04-23T15:55:55.207803+00:00",
         "last_updated": "2026-04-23T22:48:55.620846+00:00",
@@ -55671,7 +55668,7 @@
         }
       },
       "macc staff must declare ngo links to safeguard integrity. chief commissioner azam baki describes it as a proactive measure to ensure macc's image is not tarnished.": {
-        "alpha": 1.0000001163107919,
+        "alpha": 1.0000000162869043,
         "beta": 9.0,
         "created_at": "2026-04-23T15:55:55.207807+00:00",
         "last_updated": "2026-04-23T22:48:55.620848+00:00",
@@ -55696,7 +55693,7 @@
         }
       },
       "miami grand prix practice extended after rule changes, race cancellations. tweaks to the technical rules have been made during the break to address concerns from the first three races about driver saf": {
-        "alpha": 1.0000001163107919,
+        "alpha": 1.0000000162869043,
         "beta": 9.0,
         "created_at": "2026-04-23T15:55:55.207811+00:00",
         "last_updated": "2026-04-23T22:48:55.620850+00:00",
@@ -55721,7 +55718,7 @@
         }
       },
       "miami": {
-        "alpha": 1.0000001163107999,
+        "alpha": 1.0000000162869054,
         "beta": 9.0,
         "created_at": "2026-04-23T15:55:55.208274+00:00",
         "last_updated": "2026-04-23T22:48:55.621173+00:00",
@@ -55746,7 +55743,7 @@
         }
       },
       "trump orders us navy to destroy iranian mine-laying vessels in strait of hormuz. us president donald trump\u2019s announcement came after us forces boarded a vessel in the indian ocean carrying oil from ir": {
-        "alpha": 1.0000000930486332,
+        "alpha": 1.0000000130295235,
         "beta": 9.0,
         "created_at": "2026-04-23T17:22:59.146130+00:00",
         "last_updated": "2026-04-23T22:48:55.620838+00:00",
@@ -55771,7 +55768,7 @@
         }
       },
       "kdn dalam proses batal pengharaman 3 buku. menterinya saifuddin nasution ismail kata beliau kini tunggu maklum balas daripada pejabat peguam negara.": {
-        "alpha": 1.0000000930486332,
+        "alpha": 1.0000000130295235,
         "beta": 9.0,
         "created_at": "2026-04-23T17:22:59.146138+00:00",
         "last_updated": "2026-04-23T22:48:55.620842+00:00",
@@ -55797,22 +55794,22 @@
       },
       "corruption": {
         "alpha": 1.0,
-        "beta": 14.949999999999994,
+        "beta": 15.299999999999994,
         "created_at": "2026-04-23T20:55:25.541940+00:00",
-        "last_updated": "2026-04-25T10:46:54.104476+00:00",
+        "last_updated": "2026-04-25T13:08:31.876174+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.4,
-            "z_score": 1.6
+            "severity": 0.5,
+            "z_score": 2.0
           },
           "cascade_tracker": {
-            "n_star": 0.26666666666666666,
+            "n_star": 0.3333333333333333,
             "alert_level": "normal"
           }
         }
       },
       "macc seizes rm18.36m in properties in ngo fund probe. kuala lumpur, april 24 &mdash; the malaysian anti-corruption commission (macc) has seized immovable assets worth an esti...": {
-        "alpha": 1.0005735358308063,
+        "alpha": 1.0001510850764785,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844268+00:00",
         "last_updated": "2026-04-24T11:08:07.184388+00:00",
@@ -55838,7 +55835,7 @@
         }
       },
       "azam baki: macc officers must declare ngo ties to prevent conflicts of interest. putrajaya, april 24 &mdash; the malaysian anti-corruption commission (macc) now requires all its personnel to declare t": {
-        "alpha": 1.000573535831076,
+        "alpha": 1.000151085076556,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844272+00:00",
         "last_updated": "2026-04-24T11:08:07.184391+00:00",
@@ -55864,7 +55861,7 @@
         }
       },
       "mahkamah tolak rayuan siti mastura bayar rm750,000 dalam kes fitnah. panel tiga hakim dapati rayuan ahli parlimen kepala batas itu terhadap kes fitnah tiada merit.": {
-        "alpha": 1.0000335297726264,
+        "alpha": 1.000006844959227,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844275+00:00",
         "last_updated": "2026-04-24T06:09:54.041043+00:00",
@@ -55890,7 +55887,7 @@
         }
       },
       "court of appeal affirms rm750k award in siti mastura defamation case. a three-member bench unanimously says there is no merit to her appeal.": {
-        "alpha": 1.000000494913676,
+        "alpha": 1.0000000849715003,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844278+00:00",
         "last_updated": "2026-04-24T02:47:21.844279+00:00",
@@ -55915,7 +55912,7 @@
         }
       },
       "hamzah\u2019s resignation letter needed before decision, says johari. dewan rakyat speaker has received pn's letter notifying him of hamzah zainudin's resignation as opposition leader, but needs an officia": {
-        "alpha": 1.0000004949136765,
+        "alpha": 1.0000000849715005,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844282+00:00",
         "last_updated": "2026-04-24T02:47:21.844284+00:00",
@@ -55940,7 +55937,7 @@
         }
       },
       "health groups defend medical tourism against psm criticism. they say the sector supports low income workers, generates billions of ringgit for the economy, and helps curb the brain drain.": {
-        "alpha": 1.0000004949136767,
+        "alpha": 1.0000000849715005,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844285+00:00",
         "last_updated": "2026-04-24T02:47:21.844286+00:00",
@@ -55965,7 +55962,7 @@
         }
       },
       "investments in nuclear weapons production surge. investors held over us$709 billion in shares and bonds in 25 nuclear weapons firms from 2023 to 2025.": {
-        "alpha": 1.0000004949136772,
+        "alpha": 1.0000000849715005,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844288+00:00",
         "last_updated": "2026-04-24T02:47:21.844290+00:00",
@@ -55990,7 +55987,7 @@
         }
       },
       "us justice department to probe its handling of epstein files. lawmakers have complained about information being withheld, in particular the redaction of parts of the massive case file.": {
-        "alpha": 1.0000004949136774,
+        "alpha": 1.0000000849715005,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844291+00:00",
         "last_updated": "2026-04-24T02:47:21.844292+00:00",
@@ -56013,7 +56010,7 @@
         }
       },
       "intel earnings signal recovery at us chipmaker. intel reported revenue of us$13.6 billion in a 7% increase from the same quarter a year earlier, but logged a us$3.7 billion loss.": {
-        "alpha": 1.0000004949136776,
+        "alpha": 1.0000000849715007,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844293+00:00",
         "last_updated": "2026-04-24T02:47:21.844295+00:00",
@@ -56038,7 +56035,7 @@
         }
       },
       "hamzah\u2019s": {
-        "alpha": 1.0000004949137122,
+        "alpha": 1.000000084971507,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844643+00:00",
         "last_updated": "2026-04-24T02:47:21.844645+00:00",
@@ -56063,7 +56060,7 @@
         }
       },
       "intel": {
-        "alpha": 1.0000004949137131,
+        "alpha": 1.0000000849715072,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844654+00:00",
         "last_updated": "2026-04-24T02:47:21.844655+00:00",
@@ -56088,7 +56085,7 @@
         }
       },
       "investments": {
-        "alpha": 1.0000004949137136,
+        "alpha": 1.0000000849715072,
         "beta": 9.0,
         "created_at": "2026-04-24T02:47:21.844657+00:00",
         "last_updated": "2026-04-24T02:47:21.844658+00:00",
@@ -56114,22 +56111,22 @@
       },
       "menteri": {
         "alpha": 1.0,
-        "beta": 12.97779076481864,
+        "beta": 13.327790764818639,
         "created_at": "2026-04-24T06:09:54.040513+00:00",
-        "last_updated": "2026-04-25T10:46:54.104487+00:00",
+        "last_updated": "2026-04-25T13:08:31.876169+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.45,
-            "z_score": 1.8
+            "severity": 0.5,
+            "z_score": 2.0
           },
           "cascade_tracker": {
-            "n_star": 0.3,
+            "n_star": 0.3333333333333333,
             "alert_level": "normal"
           }
         }
       },
       "terengganu schools suspend outdoor activities amid hot weather. kuala terengganu, april 24 &mdash; all schools in terengganu have been instructed to suspend outdoor activities due to t...": {
-        "alpha": 1.2080350002791231,
+        "alpha": 1.0991105112155923,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.040987+00:00",
         "last_updated": "2026-04-24T22:41:12.022191+00:00",
@@ -56152,7 +56149,7 @@
         }
       },
       "court upholds rm825,000 defamation award to three dap leaders against siti mastura over chin peng claim. putrajaya, april 24 &mdash; the court of appeal here today dismissed the appeal by kepala batas": {
-        "alpha": 1.2080350003532259,
+        "alpha": 1.0991105112579564,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.040990+00:00",
         "last_updated": "2026-04-24T22:41:12.022196+00:00",
@@ -56177,7 +56174,7 @@
         }
       },
       "malaysia records historic rm203.99b tax collection in 2025, says anwar. kuala lumpur, april 24 &mdash; malaysia recorded its highest-ever tax revenue collection of rm203.99 billion in 2025, ma...": {
-        "alpha": 1.0008603037459398,
+        "alpha": 1.00022662761464,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.040993+00:00",
         "last_updated": "2026-04-24T11:08:07.184386+00:00",
@@ -56204,7 +56201,7 @@
         }
       },
       "kdn gagal rayu kembalikan larangan buku \u2018when i was a kid 3\u2019. panel mahkamah rayuan memutuskan mahkamah tinggi tidak melakukan sebarang kesilapan yang boleh dirayu apabila membatalkan larangan tersebu": {
-        "alpha": 1.000124666059538,
+        "alpha": 1.0000306380213506,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041002+00:00",
         "last_updated": "2026-04-24T09:46:54.999474+00:00",
@@ -56229,7 +56226,7 @@
         }
       },
       "warner bros discovery shareholders approve paramount deal. the transaction is expected to close in q3 2026, subject to customary closing conditions, including regulatory clearances.": {
-        "alpha": 1.0001246660596017,
+        "alpha": 1.0000306380213677,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041005+00:00",
         "last_updated": "2026-04-24T09:46:54.999477+00:00",
@@ -56252,7 +56249,7 @@
         }
       },
       "teresa kok dakwa pas selangor bercanggah berkait isu penternakan babi. ahli parlimen seputeh berkata pas selangor tidak mempunyai dasar konsisten dalam menangani isu berkenaan.": {
-        "alpha": 1.0001246660596446,
+        "alpha": 1.000030638021379,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041008+00:00",
         "last_updated": "2026-04-24T09:46:54.999479+00:00",
@@ -56277,7 +56274,7 @@
         }
       },
       "norway\u2019s government plans social media ban for children under 16. the bill will be introduced to parliament by the end of 2026, and will make technology companies responsible for age verification of y": {
-        "alpha": 1.0001246660597083,
+        "alpha": 1.000030638021396,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041012+00:00",
         "last_updated": "2026-04-24T09:46:54.999482+00:00",
@@ -56302,7 +56299,7 @@
         }
       },
       "pesara dakwa wujud berat sebelah, mohon panel hakim baharu dalam pertikaian pencen. permohonan difailkan di mahkamah rayuan itu dijadualkan untuk pengurusan kes pada minggu depan.": {
-        "alpha": 1.0000055882954109,
+        "alpha": 1.000001140826532,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041016+00:00",
         "last_updated": "2026-04-24T06:09:54.041017+00:00",
@@ -56327,7 +56324,7 @@
         }
       },
       "china\u2019s xpeng expects to start full-scale delivery of \u2018flying\u2019 cars in 2027. the chinese electric vehicle maker has received more than 7,000 orders for its flying cars, the majority of which are in ch": {
-        "alpha": 1.0000055882954149,
+        "alpha": 1.0000011408265328,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041020+00:00",
         "last_updated": "2026-04-24T06:09:54.041021+00:00",
@@ -56352,7 +56349,7 @@
         }
       },
       "thai court accepts ethics case against opposition leader, mps. the mps are accused of breaching ethics for trying to reform thailand's strict royal insult law.": {
-        "alpha": 1.000005588295417,
+        "alpha": 1.0000011408265332,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041022+00:00",
         "last_updated": "2026-04-24T06:09:54.041023+00:00",
@@ -56378,7 +56375,7 @@
         }
       },
       "suhakam flags need for child act reform after apex court decision. the office of suhakam's children's commissioner says the existing mechanism under section 97 of the act does not provide sufficient t": {
-        "alpha": 1.0000055882954202,
+        "alpha": 1.000001140826534,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041025+00:00",
         "last_updated": "2026-04-24T06:09:54.041026+00:00",
@@ -56403,7 +56400,7 @@
         }
       },
       "terengganu schools suspend outdoor activities amid hot weather. the state\u2019s education department says it has issued a notice, which took effect on april 20.": {
-        "alpha": 1.0000055882954242,
+        "alpha": 1.0000011408265348,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041029+00:00",
         "last_updated": "2026-04-24T06:09:54.041030+00:00",
@@ -56426,7 +56423,7 @@
         }
       },
       "anwar hails lhdn\u2019s strong 2025 performance. the rm203.99 billion collected by the tax agency last year marks a 10.4% year-on-year increase.": {
-        "alpha": 1.0000111765908548,
+        "alpha": 1.0000022816530711,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041032+00:00",
         "last_updated": "2026-04-24T06:09:54.041033+00:00",
@@ -56452,7 +56449,7 @@
         }
       },
       "kdn janji rundingan awal dengan penerbit sebelum ambil tindakan. kementerian juga akan nilai semula perintah larangan buku, ambil kira pandangan industri.": {
-        "alpha": 1.0000055882954304,
+        "alpha": 1.0000011408265361,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041034+00:00",
         "last_updated": "2026-04-24T06:09:54.041036+00:00",
@@ -56475,7 +56472,7 @@
         }
       },
       "hamzah eyes stronger pn with \u2018reset\u2019 move amid pushback from muhyiddin. saifuddin abdullah says although hamzah zainudin is no longer the opposition leader, he continues to play an active role through": {
-        "alpha": 1.0000055882954346,
+        "alpha": 1.0000011408265372,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041038+00:00",
         "last_updated": "2026-04-24T06:09:54.041040+00:00",
@@ -56500,7 +56497,7 @@
         }
       },
       "court of appeal affirms rm750,000 award in siti mastura defamation case. a three-member bench unanimously says there is no merit to her appeal.": {
-        "alpha": 1.0000055882954408,
+        "alpha": 1.0000011408265386,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041045+00:00",
         "last_updated": "2026-04-24T06:09:54.041046+00:00",
@@ -56525,7 +56522,7 @@
         }
       },
       "teresa": {
-        "alpha": 1.0001246660651437,
+        "alpha": 1.0000306380228432,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041360+00:00",
         "last_updated": "2026-04-24T09:46:54.999737+00:00",
@@ -56550,7 +56547,7 @@
         }
       },
       "norway\u2019s": {
-        "alpha": 1.0001246660650798,
+        "alpha": 1.000030638022826,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041364+00:00",
         "last_updated": "2026-04-24T09:46:54.999734+00:00",
@@ -56575,7 +56572,7 @@
         }
       },
       "warner": {
-        "alpha": 1.0001246660653995,
+        "alpha": 1.0000306380229111,
         "beta": 9.0,
         "created_at": "2026-04-24T06:09:54.041388+00:00",
         "last_updated": "2026-04-24T09:46:54.999749+00:00",
@@ -56599,22 +56596,22 @@
       },
       "isa": {
         "alpha": 1.0,
-        "beta": 12.691369570751839,
+        "beta": 13.041369570751838,
         "created_at": "2026-04-24T09:46:54.999094+00:00",
-        "last_updated": "2026-04-25T10:46:54.104561+00:00",
+        "last_updated": "2026-04-25T13:08:31.876134+00:00",
         "stream_signals": {
           "volume_monitor": {
-            "severity": 0.25,
-            "z_score": 1.0
+            "severity": 0.15,
+            "z_score": 0.6
           },
           "cascade_tracker": {
-            "n_star": 0.16666666666666666,
+            "n_star": 0.1,
             "alert_level": "normal"
           }
         }
       },
       "\u2018bring the evidence\u2019: anwar dismisses claims of stolen money moved to africa. johor bahru, april 24 &mdash; prime minister anwar ibrahim today rubbished allegations that he had ordered a former offi..": {
-        "alpha": 2.7000070004548813,
+        "alpha": 2.262922381377815,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999411+00:00",
         "last_updated": "2026-04-25T07:20:52.719016+00:00",
@@ -56637,7 +56634,7 @@
         }
       },
       "sarawak\u2019s first orang ulu full minister bo\u2019 tajang laing dies at 100. kuching, april 24 &mdash; former sarawak minister datuk seri bo&rsquo; tajang laing has passed away at the age of 100.hi...": {
-        "alpha": 1.1849200000768496,
+        "alpha": 1.0880982320937291,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999416+00:00",
         "last_updated": "2026-04-24T22:41:12.022178+00:00",
@@ -56660,7 +56657,7 @@
         }
       },
       "pas perlis sokong kerajaan hingga tamat penggal. tiada wakil rakyat pas akan kemuka usul undi tidak percaya terhadap menteri besar abu bakar hamzah, kata ketua penerangan zahid ibrahim.": {
-        "alpha": 1.0928306711451712,
+        "alpha": 1.0403142003259174,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999433+00:00",
         "last_updated": "2026-04-24T20:52:52.752488+00:00",
@@ -56685,7 +56682,7 @@
         }
       },
       "pakej 2 lrt laluan mutiara: p pinang tak terlibat pemilihan syarikat. kerajaan negeri hanya pemegang taruh penting dalam projek tersebut, dan terlibat dalam jawatankuasa procurement one-stop centre.": {
-        "alpha": 1.0032127327361555,
+        "alpha": 1.000954016464618,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999436+00:00",
         "last_updated": "2026-04-24T13:28:13.972371+00:00",
@@ -56712,7 +56709,7 @@
         }
       },
       "rantau temple committee gets interim injunction against chegubard, 2 others. sessions court restrains the activist and two others from making allegations against the committee, ahead of a press confer": {
-        "alpha": 1.0048190991069799,
+        "alpha": 1.001431024697824,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999438+00:00",
         "last_updated": "2026-04-24T13:28:13.972375+00:00",
@@ -56738,7 +56735,7 @@
         }
       },
       "penang govt not involved in lrt package 2 contractor selection, says cm. chow kon yeow says the state government is only a key stakeholder in the project and is involved in the procurement one-stop ce": {
-        "alpha": 1.003212732738902,
+        "alpha": 1.000954016465515,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999443+00:00",
         "last_updated": "2026-04-24T13:28:13.972377+00:00",
@@ -56765,7 +56762,7 @@
         }
       },
       "pakistan military kills 22 in northwest clashes. a ten-year-old child was killed during an exchange of fire in khyber district, near the border with afghanistan.": {
-        "alpha": 1.0016063663699089,
+        "alpha": 1.000477008232907,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999445+00:00",
         "last_updated": "2026-04-24T13:28:13.972379+00:00",
@@ -56788,7 +56785,7 @@
         }
       },
       "kerajaan bertanggungjawab pencerobohan kuarters guru. mahkamah rayuan memutuskan tiada kebenaran diperoleh daripada pasangan itu sebelum kontraktor yang dilantik kerajaan menjalankan kerja pengubahsua": {
-        "alpha": 1.0005735358326042,
+        "alpha": 1.000151085076995,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999448+00:00",
         "last_updated": "2026-04-24T11:08:07.184408+00:00",
@@ -56814,7 +56811,7 @@
         }
       },
       "kp sprm baharu akan diumum, kata pm. anwar ibrahim berkata demikian susulan pertemuan bersama yang di-pertuan agong sultan ibrahim hari ini.": {
-        "alpha": 1.0008603037494457,
+        "alpha": 1.0002266276156477,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999450+00:00",
         "last_updated": "2026-04-24T11:08:07.184412+00:00",
@@ -56840,7 +56837,7 @@
         }
       },
       "kes seleweng dana rm230 juta, sprm kesan aliran wang daripada bank. ketua pesuruhjaya sprm azam baki berkata pihaknya ketika ini sedang mendapatkan maklumat berkenaan daripada institusi perbankan.": {
-        "alpha": 1.0002867679165717,
+        "alpha": 1.000075542538575,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999455+00:00",
         "last_updated": "2026-04-24T11:08:07.184414+00:00",
@@ -56865,7 +56862,7 @@
         }
       },
       "govt held liable for trespass on teachers\u2019 quarters. court of appeal says no permission was sought from a couple before a government-appointed contractor carried out renovations.": {
-        "alpha": 1.0011470716675455,
+        "alpha": 1.000302170154662,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999459+00:00",
         "last_updated": "2026-04-24T11:08:07.184421+00:00",
@@ -56891,7 +56888,7 @@
         }
       },
       "mbsa employee seen littering to face disciplinary action. housing and local government minister nga kor ming says the individual in question will also be given a community service order.": {
-        "alpha": 1.0002867679169314,
+        "alpha": 1.0000755425386785,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999464+00:00",
         "last_updated": "2026-04-24T11:08:07.184422+00:00",
@@ -56916,7 +56913,7 @@
         }
       },
       "nak \u2018ot\u2019 bayar dulu, bekas penyelia kilang disyaki rasuah rm25,000. suspek berusia 40-an dipercayai terima rm25 hingga rm200 setiap bulan daripada pekerja asing sebagai dorongan lulus kerja lebih masa": {
-        "alpha": 1.0005735358341323,
+        "alpha": 1.0001510850774342,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999467+00:00",
         "last_updated": "2026-04-24T11:08:07.184425+00:00",
@@ -56939,7 +56936,7 @@
         }
       },
       "pakej": {
-        "alpha": 1.0032127328464744,
+        "alpha": 1.0009540165006527,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999708+00:00",
         "last_updated": "2026-04-24T13:28:13.972612+00:00",
@@ -56966,7 +56963,7 @@
         }
       },
       "nak": {
-        "alpha": 1.0005735358584924,
+        "alpha": 1.0001510850844348,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999717+00:00",
         "last_updated": "2026-04-24T11:08:07.184696+00:00",
@@ -56989,7 +56986,7 @@
         }
       },
       "rantau": {
-        "alpha": 1.0048190992999235,
+        "alpha": 1.0014310247608478,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999722+00:00",
         "last_updated": "2026-04-24T13:28:13.972656+00:00",
@@ -57015,7 +57012,7 @@
         }
       },
       "kp": {
-        "alpha": 1.000860303793132,
+        "alpha": 1.0002266276282021,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999728+00:00",
         "last_updated": "2026-04-24T11:08:07.184736+00:00",
@@ -57041,7 +57038,7 @@
         }
       },
       "mbsa": {
-        "alpha": 1.0002867679305047,
+        "alpha": 1.0000755425425791,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999746+00:00",
         "last_updated": "2026-04-24T11:08:07.184724+00:00",
@@ -57066,7 +57063,7 @@
         }
       },
       "sarawak\u2019s": {
-        "alpha": 1.1849200041343886,
+        "alpha": 1.088098234413405,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999761+00:00",
         "last_updated": "2026-04-24T22:41:12.022486+00:00",
@@ -57089,7 +57086,7 @@
         }
       },
       "\u2018bring": {
-        "alpha": 2.700007015278704,
+        "alpha": 2.2629223978965745,
         "beta": 9.0,
         "created_at": "2026-04-24T09:46:54.999766+00:00",
         "last_updated": "2026-04-25T07:20:52.719322+00:00",
@@ -57112,20 +57109,20 @@
         }
       },
       "macc tracing rm230m ngo embezzlement fund flow through banks, says azam baki. nilai, april 24 &mdash; the malaysian anti-corruption commission (macc) is tracing the flow of funds related to the embe..": {
-        "alpha": 3.400000000000001,
+        "alpha": 3.600000000000001,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184361+00:00",
-        "last_updated": "2026-04-25T10:46:54.105031+00:00",
+        "last_updated": "2026-04-25T13:08:31.876705+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0036",
+            "event_id": "INST-0041",
             "keyword": "macc",
             "title": "MACC tracing RM230m NGO embezzlement fund flow through banks, says Azam Baki. NILAI, April 24 &mdash; The Malaysian Anti-Corruption Commission (MACC) is tracing the flow of funds related to the embe..",
             "structural_importance": 0.425,
-            "silence_score": 0.71,
-            "suppression_pattern": "NORMAL",
-            "news_mentions": 65,
-            "social_mentions": 22,
+            "silence_score": 0.7033,
+            "suppression_pattern": "DELAYED_FUSE",
+            "news_mentions": 62,
+            "social_mentions": 27,
             "expected_mentions": 300.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -57133,12 +57130,12 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "johor police arrest suspected drug ring mastermind and girlfriend, seize rm1.95m in contraband. johor bahru, april 24 &mdash; johor police have crippled a drug syndicate believed active since early th": {
-        "alpha": 3.0017652386667475,
+        "alpha": 2.6136908521988467,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184364+00:00",
         "last_updated": "2026-04-25T08:56:26.702403+00:00",
@@ -57161,7 +57158,7 @@
         }
       },
       "perlis pas to support current state govt until end of term. information chief zahid ibrahim confirms that there will be no no-confidence motion tabled against menteri besar abu bakar hamzah.": {
-        "alpha": 1.1618050003900022,
+        "alpha": 1.0770859532665327,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184382+00:00",
         "last_updated": "2026-04-24T22:41:12.022206+00:00",
@@ -57186,7 +57183,7 @@
         }
       },
       "where\u2019s the proof my ex-officers stole funds, says anwar. the prime minister responds to claims his former aides acted on his instructions to siphon national funds and stash them overseas.": {
-        "alpha": 1.0795691466822563,
+        "alpha": 1.0345550288438934,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184394+00:00",
         "last_updated": "2026-04-24T20:52:52.752486+00:00",
@@ -57209,7 +57206,7 @@
         }
       },
       "perlis": {
-        "alpha": 1.1618050033409397,
+        "alpha": 1.0770859549535696,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184718+00:00",
         "last_updated": "2026-04-24T22:41:12.022462+00:00",
@@ -57234,7 +57231,7 @@
         }
       },
       "where\u2019s": {
-        "alpha": 1.0795691488521815,
+        "alpha": 1.0345550299432993,
         "beta": 9.0,
         "created_at": "2026-04-24T11:08:07.184733+00:00",
         "last_updated": "2026-04-24T20:52:52.752805+00:00",
@@ -57257,20 +57254,20 @@
         }
       },
       "macc: former company director arrested, to be charged over rm200m loan fraud. kuala lumpur, april 24 &mdash; the malaysian anti-corruption commission (macc) has detained a former director of a telec..": {
-        "alpha": 3.2000000000000006,
+        "alpha": 3.400000000000001,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972316+00:00",
-        "last_updated": "2026-04-25T10:46:54.105027+00:00",
+        "last_updated": "2026-04-25T13:08:31.876702+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0035",
+            "event_id": "INST-0040",
             "keyword": "macc:",
             "title": "MACC: Former company director arrested, to be charged over RM200m loan fraud. KUALA LUMPUR, April 24 &mdash; The Malaysian Anti-Corruption Commission (MACC) has detained a former director of a telec..",
             "structural_importance": 0.425,
-            "silence_score": 0.7667,
-            "suppression_pattern": "NORMAL",
+            "silence_score": 0.7533,
+            "suppression_pattern": "DELAYED_FUSE",
             "news_mentions": 54,
-            "social_mentions": 16,
+            "social_mentions": 20,
             "expected_mentions": 300.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -57278,12 +57275,12 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "sprm beku beberapa akaun padini dalam siasatan pengubahan wang haram. padini holdings kata akaun-akaun tersebut milik syarikat dan anak syarikat namun tidak digunakan secara aktif dalam operasi harian": {
-        "alpha": 1.1386900001366804,
+        "alpha": 1.0660736741154855,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972336+00:00",
         "last_updated": "2026-04-24T22:41:12.022186+00:00",
@@ -57309,7 +57306,7 @@
         }
       },
       "macc freezes several padini accounts in money laundering probe. fashion retailer padini holdings bhd says the accounts belonged to the company and its subsidiaries but are not actively being used in t": {
-        "alpha": 1.4160700005286053,
+        "alpha": 1.1982210224142391,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972339+00:00",
         "last_updated": "2026-04-24T22:41:12.022190+00:00",
@@ -57335,7 +57332,7 @@
         }
       },
       "trump grants 90-day jones act waiver extension to curb energy costs. the decision adds three months to a waiver set to expire on may 17, enabling foreign-flagged vessels to move commodities between us": {
-        "alpha": 1.1386900002157232,
+        "alpha": 1.066073674160674,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972347+00:00",
         "last_updated": "2026-04-24T22:41:12.022194+00:00",
@@ -57358,7 +57355,7 @@
         }
       },
       "woman ordered to pay rm900,000 to former mother-in-law. the high court rules that the amount is part of a rm1.2 million deposit for a housing loan and was not a gift.": {
-        "alpha": 1.1386900002552447,
+        "alpha": 1.0660736741832681,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972352+00:00",
         "last_updated": "2026-04-24T22:41:12.022198+00:00",
@@ -57383,7 +57380,7 @@
         }
       },
       "ex-telco director nabbed over false details in rm200mil loan application. macc special operations division senior director zamri zainul abidin says the suspect, in his 70s, will be charged on monday.": {
-        "alpha": 1.1386900002750053,
+        "alpha": 1.0660736741945653,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972355+00:00",
         "last_updated": "2026-04-24T22:41:12.022200+00:00",
@@ -57408,7 +57405,7 @@
         }
       },
       "press metal hits all-time high as iran war sparks aluminium surge. aluminium company\u2019s valuation has risen 18% or rm10.66 billion to rm69.38 billion since the middle east conflict erupted.": {
-        "alpha": 1.277380000609293,
+        "alpha": 1.1321473484230218,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972359+00:00",
         "last_updated": "2026-04-24T22:41:12.022203+00:00",
@@ -57433,7 +57430,7 @@
         }
       },
       "press": {
-        "alpha": 1.2773800053123496,
+        "alpha": 1.1321473511117368,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972606+00:00",
         "last_updated": "2026-04-24T22:41:12.022441+00:00",
@@ -57458,7 +57455,7 @@
         }
       },
       "ex-telco": {
-        "alpha": 1.1386900028537823,
+        "alpha": 1.0660736756688396,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972639+00:00",
         "last_updated": "2026-04-24T22:41:12.022461+00:00",
@@ -57483,20 +57480,20 @@
         }
       },
       "macc:": {
-        "alpha": 3.2000000000000006,
+        "alpha": 3.400000000000001,
         "beta": 9.0,
         "created_at": "2026-04-24T13:28:13.972670+00:00",
-        "last_updated": "2026-04-25T10:46:54.105533+00:00",
+        "last_updated": "2026-04-25T13:08:31.877055+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0035",
+            "event_id": "INST-0040",
             "keyword": "macc:",
             "title": "MACC: Former company director arrested, to be charged over RM200m loan fraud. KUALA LUMPUR, April 24 &mdash; The Malaysian Anti-Corruption Commission (MACC) has detained a former director of a telec..",
             "structural_importance": 0.425,
-            "silence_score": 0.7667,
-            "suppression_pattern": "NORMAL",
+            "silence_score": 0.7533,
+            "suppression_pattern": "DELAYED_FUSE",
             "news_mentions": 54,
-            "social_mentions": 16,
+            "social_mentions": 20,
             "expected_mentions": 300.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -57504,12 +57501,12 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "govt action ensured no fuel rationing in malaysia, says anwar. the prime minister says malaysia's ron95 price is among the lowest in the world, while it is as much as rm10.50 per litre elsewhere.": {
-        "alpha": 1.1155750000150966,
+        "alpha": 1.0550613950397523,
         "beta": 9.0,
         "created_at": "2026-04-24T15:10:25.667962+00:00",
         "last_updated": "2026-04-24T22:41:12.022174+00:00",
@@ -57534,7 +57531,7 @@
         }
       },
       "health dg has spoken: action, not silence, is needed. mma calls for political will and action by the prime minister to break the deadlock over the supply of health professionals.": {
-        "alpha": 1.1155750000644984,
+        "alpha": 1.055061395067995,
         "beta": 9.0,
         "created_at": "2026-04-24T15:10:25.667972+00:00",
         "last_updated": "2026-04-24T22:41:12.022180+00:00",
@@ -57557,7 +57554,7 @@
         }
       },
       "mca seeking younger candidates \u2018who can talk policy, not just rhetoric\u2019. the party's youth wing information chief says voters now gauge the credibility of candidates and their personality rather than ": {
-        "alpha": 1.115575000097433,
+        "alpha": 1.0550613950868235,
         "beta": 9.0,
         "created_at": "2026-04-24T15:10:25.667976+00:00",
         "last_updated": "2026-04-24T22:41:12.022184+00:00",
@@ -57581,7 +57578,7 @@
       },
       "jakim": {
         "alpha": 1.0,
-        "beta": 9.551082380853956,
+        "beta": 9.32082097633578,
         "created_at": "2026-04-24T16:59:56.332911+00:00",
         "last_updated": "2026-04-25T02:35:41.916447+00:00",
         "stream_signals": {
@@ -57596,7 +57593,7 @@
         }
       },
       "cross-state zakat payments now an offence, says jakim. the islamic development department says it is now up to each state to take action against any party from another state that collects zakat within": {
-        "alpha": 1.31490422211763,
+        "alpha": 1.183326275456946,
         "beta": 9.0,
         "created_at": "2026-04-24T16:59:56.333266+00:00",
         "last_updated": "2026-04-25T02:35:41.916697+00:00",
@@ -57621,7 +57618,7 @@
         }
       },
       "cross-state": {
-        "alpha": 1.3149042269813196,
+        "alpha": 1.1833262789962846,
         "beta": 9.0,
         "created_at": "2026-04-24T16:59:56.333532+00:00",
         "last_updated": "2026-04-25T02:35:41.916968+00:00",
@@ -57646,20 +57643,20 @@
         }
       },
       "malaysia names new macc chief ahead of planned rally in kl. kuala lumpur, april 25 &mdash; the malaysian government today announced a new malaysian anti-corruption commission (macc...": {
-        "alpha": 1.9999999999999998,
+        "alpha": 2.1999999999999997,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916661+00:00",
-        "last_updated": "2026-04-25T10:46:54.104991+00:00",
+        "last_updated": "2026-04-25T13:08:31.876677+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0015",
+            "event_id": "INST-0026",
             "keyword": "malaysia",
             "title": "Malaysia names new MACC chief ahead of planned rally in KL. KUALA LUMPUR, April 25 &mdash; The Malaysian government today announced a new Malaysian Anti-Corruption Commission (MACC...",
             "structural_importance": 0.46,
-            "silence_score": 0.8318,
+            "silence_score": 0.825,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 56,
-            "social_mentions": 18,
+            "news_mentions": 54,
+            "social_mentions": 23,
             "expected_mentions": 440.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -57668,37 +57665,37 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "malaysia\u2019s fertility sector grows into regional medical tourism draw. petaling jaya, april 25 &mdash; malaysian actress, television host and wellness entrepreneur sarah lian was in her late...": {
-        "alpha": 1.9999999999999998,
+        "alpha": 2.1999999999999997,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916667+00:00",
-        "last_updated": "2026-04-25T10:46:54.105011+00:00",
+        "last_updated": "2026-04-25T13:08:31.876694+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0026",
+            "event_id": "INST-0037",
             "keyword": "malaysia\u2019s",
             "title": "Malaysia\u2019s fertility sector grows into regional medical tourism draw. PETALING JAYA, April 25 &mdash; Malaysian actress, television host and wellness entrepreneur Sarah Lian was in her late...",
             "structural_importance": 0.465,
-            "silence_score": 0.863,
+            "silence_score": 0.8543,
             "suppression_pattern": "NORMAL",
             "news_mentions": 49,
-            "social_mentions": 14,
+            "social_mentions": 18,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "ethnic"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "ex-high court judge abdul halim named next macc chief. the king has consented to the appointment, which takes effect on may 13.": {
-        "alpha": 1.7279146321491106,
+        "alpha": 1.5867966733763597,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916670+00:00",
         "last_updated": "2026-04-25T08:56:26.702394+00:00",
@@ -57724,7 +57721,7 @@
         }
       },
       "bukan sekadar isytihar, sprm digesa larang pegawai pegang jawatan utama ngo. pemerhati rasuah malaysia berkata langkah itu terutama bagi ngo terlibat kutipan dana awam atau mempunyai kepentingan berka": {
-        "alpha": 1.7279146321698533,
+        "alpha": 1.5867966734098025,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916672+00:00",
         "last_updated": "2026-04-25T08:56:26.702396+00:00",
@@ -57750,7 +57747,7 @@
         }
       },
       "venezuela, colombia pledge military cooperation on first post-maduro visit. venezuelan president delcy rodriguez and her colombian counterpart gustavo petro pledged to combat 'mafias' on their shared ": {
-        "alpha": 1.2449516358352524,
+        "alpha": 1.1683980478242422,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916676+00:00",
         "last_updated": "2026-04-25T05:50:11.566112+00:00",
@@ -57773,7 +57770,7 @@
         }
       },
       "p&g earnings rise despite drag from higher oil prices. procter &#038; gamble's profits for the quarter ending march 31 were us$3.9 billion, up 4% from the year-ago period.": {
-        "alpha": 1.244951635856193,
+        "alpha": 1.1683980478434368,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916679+00:00",
         "last_updated": "2026-04-25T05:50:11.566114+00:00",
@@ -57798,7 +57795,7 @@
         }
       },
       "p&g": {
-        "alpha": 1.2449516382329542,
+        "alpha": 1.1683980500220545,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916962+00:00",
         "last_updated": "2026-04-25T05:50:11.566341+00:00",
@@ -57823,7 +57820,7 @@
         }
       },
       "ex-high": {
-        "alpha": 1.7279146346693675,
+        "alpha": 1.5867966774396887,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916978+00:00",
         "last_updated": "2026-04-25T08:56:26.702637+00:00",
@@ -57849,7 +57846,7 @@
         }
       },
       "bukan": {
-        "alpha": 1.7279146347627101,
+        "alpha": 1.5867966775901823,
         "beta": 9.0,
         "created_at": "2026-04-25T02:35:41.916980+00:00",
         "last_updated": "2026-04-25T08:56:26.702646+00:00",
@@ -57875,45 +57872,45 @@
         }
       },
       "organisers say rally against azam baki to proceed despite announcement of new macc chief. kuala lumpur, april 25 &mdash; the &ldquo;tangkap azam baki&rdquo; rally calling for action against outgoing m": {
-        "alpha": 1.7999999999999998,
+        "alpha": 1.9999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566078+00:00",
-        "last_updated": "2026-04-25T10:46:54.104984+00:00",
+        "last_updated": "2026-04-25T13:08:31.876670+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0011",
+            "event_id": "INST-0021",
             "keyword": "organisers",
             "title": "Organisers say rally against Azam Baki to proceed despite announcement of new MACC chief. KUALA LUMPUR, April 25 &mdash; The &ldquo;Tangkap Azam Baki&rdquo; rally calling for action against outgoing M",
             "structural_importance": 0.465,
-            "silence_score": 0.8348,
+            "silence_score": 0.8152,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 58,
-            "social_mentions": 18,
+            "news_mentions": 59,
+            "social_mentions": 26,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "institutional"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "perkeso gesa platform bertindak segera lindung pekerja gig. gesaan susulan proses on-boarding ketika ini hanya membabitkan kira-kira 2% daripada anggaran 1.2 juta pekerja gig di malaysia.": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.9999999999999996,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566092+00:00",
-        "last_updated": "2026-04-25T10:46:54.105014+00:00",
+        "last_updated": "2026-04-25T13:08:31.876697+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0028",
+            "event_id": "INST-0039",
             "keyword": "perkeso",
             "title": "Perkeso gesa platform bertindak segera lindung pekerja gig. Gesaan susulan proses on-boarding ketika ini hanya membabitkan kira-kira 2% daripada anggaran 1.2 juta pekerja gig di Malaysia.",
             "structural_importance": 0.515,
-            "silence_score": 0.9894,
+            "silence_score": 0.997,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 5,
-            "social_mentions": 2,
+            "news_mentions": 1,
+            "social_mentions": 1,
             "expected_mentions": 660.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -57921,12 +57918,12 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "selangor mb denies kinrara forest land sold below market rate. amirudin shari says the transaction was conducted through open tender at rm101 million, 5.9% above valuation.": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.4175448145792915,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566096+00:00",
         "last_updated": "2026-04-25T10:46:54.105018+00:00",
@@ -57949,7 +57946,7 @@
         }
       },
       "penjenayah jepun dideportasi selepas 7 tahun diburu. tindakan dilaksanakan semalam susulan permohonan pihak berkuasa jepun apabila suspek turut disenaraikan dalam notis merah interpol.": {
-        "alpha": 1.7999999999999998,
+        "alpha": 1.708772407319942,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566099+00:00",
         "last_updated": "2026-04-25T10:46:54.105021+00:00",
@@ -57974,7 +57971,7 @@
         }
       },
       "canada approves major natural gas pipeline expansion. work on the c$4 billion expansion of a pipeline system in british columbia is set to begin this summer, with a targeted completion date of late 20": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.4175448147004754,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566102+00:00",
         "last_updated": "2026-04-25T10:46:54.105024+00:00",
@@ -58000,7 +57997,7 @@
         }
       },
       "canada": {
-        "alpha": 2.5999999999999996,
+        "alpha": 2.417544824233636,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566331+00:00",
         "last_updated": "2026-04-25T10:46:54.105496+00:00",
@@ -58026,7 +58023,7 @@
         }
       },
       "penjenayah": {
-        "alpha": 1.7999999999999998,
+        "alpha": 1.7087724122077061,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566343+00:00",
         "last_updated": "2026-04-25T10:46:54.105505+00:00",
@@ -58051,32 +58048,32 @@
         }
       },
       "organisers": {
-        "alpha": 1.7999999999999998,
+        "alpha": 1.9999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T05:50:11.566353+00:00",
-        "last_updated": "2026-04-25T10:46:54.105524+00:00",
+        "last_updated": "2026-04-25T13:08:31.877045+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0011",
+            "event_id": "INST-0021",
             "keyword": "organisers",
             "title": "Organisers say rally against Azam Baki to proceed despite announcement of new MACC chief. KUALA LUMPUR, April 25 &mdash; The &ldquo;Tangkap Azam Baki&rdquo; rally calling for action against outgoing M",
             "structural_importance": 0.465,
-            "silence_score": 0.8348,
+            "silence_score": 0.8152,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 58,
-            "social_mentions": 18,
+            "news_mentions": 59,
+            "social_mentions": 26,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "institutional"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "rain dampens start of \u2018tangkap azam baki\u2019 rally at sogo. kuala lumpur, april 25 &mdash; a planned rally against outgoing malaysian anti-corruption commission (macc) chief tan sr...": {
-        "alpha": 1.1545460907698801,
+        "alpha": 1.1148111253785924,
         "beta": 9.0,
         "created_at": "2026-04-25T07:20:52.718973+00:00",
         "last_updated": "2026-04-25T07:20:52.718975+00:00",
@@ -58103,68 +58100,68 @@
         }
       },
       "transport minister confirms mten to study lowering road tax for non-subsidised diesel owners. batu kawan, april 25 &mdash; the ministry of transport has officially submitted a proposal to the national": {
-        "alpha": 1.5999999999999999,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T07:20:52.718976+00:00",
-        "last_updated": "2026-04-25T10:46:54.104975+00:00",
+        "last_updated": "2026-04-25T13:08:31.876645+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0007",
+            "event_id": "INST-0011",
             "keyword": "transport",
             "title": "Transport minister confirms MTEN to study lowering road tax for non-subsidised diesel owners. BATU KAWAN, April 25 &mdash; The Ministry of Transport has officially submitted a proposal to the National",
             "structural_importance": 0.465,
-            "silence_score": 0.8543,
+            "silence_score": 0.8565,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 53,
-            "social_mentions": 14,
+            "news_mentions": 49,
+            "social_mentions": 17,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "economic"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "loke lambasts kelantan lawmakers for \u2018irresponsible\u2019 mat motor convoy through kota bharu airport, orders roadblocks. kuala lumpur, april 25 &mdash; transport minister anthony loke has condemned severa": {
-        "alpha": 1.5999999999999999,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T07:20:52.718980+00:00",
-        "last_updated": "2026-04-25T10:46:54.104980+00:00",
+        "last_updated": "2026-04-25T13:08:31.876650+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0008",
+            "event_id": "INST-0012",
             "keyword": "loke",
             "title": "Loke lambasts Kelantan lawmakers for \u2018irresponsible\u2019 Mat Motor convoy through Kota Bharu airport, orders roadblocks. KUALA LUMPUR, April 25 &mdash; Transport Minister Anthony Loke has condemned severa",
             "structural_importance": 0.415,
-            "silence_score": 0.7308,
+            "silence_score": 0.7269,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 55,
-            "social_mentions": 15,
+            "news_mentions": 52,
+            "social_mentions": 19,
             "expected_mentions": 260.0,
             "bias_dimensions_touched": [],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "rain": {
-        "alpha": 1.5999999999999999,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T07:20:52.719300+00:00",
-        "last_updated": "2026-04-25T10:46:54.105530+00:00",
+        "last_updated": "2026-04-25T13:08:31.877048+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0006",
+            "event_id": "INST-0010",
             "keyword": "rain",
             "title": "Rain dampens start of \u2018Tangkap Azam Baki\u2019 rally at Sogo, but surprise fireworks briefly cause chaos (VIDEO). KUALA LUMPUR, April 25 &mdash; A planned rally against outgoing Malaysian Anti-Corruption C",
             "structural_importance": 0.46,
-            "silence_score": 0.8205,
+            "silence_score": 0.8068,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 60,
-            "social_mentions": 19,
+            "news_mentions": 59,
+            "social_mentions": 26,
             "expected_mentions": 440.0,
             "bias_dimensions_touched": [
               "environmental",
@@ -58173,25 +58170,25 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "rain dampens start of \u2018tangkap azam baki\u2019 rally at sogo, but surprise fireworks briefly cause chaos (video). kuala lumpur, april 25 &mdash; a planned rally against outgoing malaysian anti-corruption c": {
-        "alpha": 1.4,
+        "alpha": 1.5999999999999999,
         "beta": 9.0,
         "created_at": "2026-04-25T08:56:26.702357+00:00",
-        "last_updated": "2026-04-25T10:46:54.104970+00:00",
+        "last_updated": "2026-04-25T13:08:31.876641+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0006",
+            "event_id": "INST-0010",
             "keyword": "rain",
             "title": "Rain dampens start of \u2018Tangkap Azam Baki\u2019 rally at Sogo, but surprise fireworks briefly cause chaos (VIDEO). KUALA LUMPUR, April 25 &mdash; A planned rally against outgoing Malaysian Anti-Corruption C",
             "structural_importance": 0.46,
-            "silence_score": 0.8205,
+            "silence_score": 0.8068,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 60,
-            "social_mentions": 19,
+            "news_mentions": 59,
+            "social_mentions": 26,
             "expected_mentions": 440.0,
             "bias_dimensions_touched": [
               "environmental",
@@ -58200,75 +58197,75 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "siasatan saham azam baki selesai, ksn urus tindakan lanjut, kata fahmi. jurucakap kerajaan perpaduan berkata keputusan muktamad akan dibuat berdasarkan apa yang telah dibentangkan kepada jemaah menter": {
-        "alpha": 1.4,
+        "alpha": 1.5999999999999999,
         "beta": 9.0,
         "created_at": "2026-04-25T08:56:26.702375+00:00",
-        "last_updated": "2026-04-25T10:46:54.105006+00:00",
+        "last_updated": "2026-04-25T13:08:31.876689+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0024",
+            "event_id": "INST-0035",
             "keyword": "siasatan",
             "title": "Siasatan saham Azam Baki selesai, KSN urus tindakan lanjut, kata Fahmi. Jurucakap kerajaan perpaduan berkata keputusan muktamad akan dibuat berdasarkan apa yang telah dibentangkan kepada Jemaah Menter",
             "structural_importance": 0.465,
-            "silence_score": 0.9326,
+            "silence_score": 0.9391,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 21,
-            "social_mentions": 10,
+            "news_mentions": 16,
+            "social_mentions": 12,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "siasatan": {
-        "alpha": 1.4,
+        "alpha": 1.5999999999999999,
         "beta": 9.0,
         "created_at": "2026-04-25T08:56:26.702628+00:00",
-        "last_updated": "2026-04-25T10:46:54.105508+00:00",
+        "last_updated": "2026-04-25T13:08:31.877020+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0024",
+            "event_id": "INST-0035",
             "keyword": "siasatan",
             "title": "Siasatan saham Azam Baki selesai, KSN urus tindakan lanjut, kata Fahmi. Jurucakap kerajaan perpaduan berkata keputusan muktamad akan dibuat berdasarkan apa yang telah dibentangkan kepada Jemaah Menter",
             "structural_importance": 0.465,
-            "silence_score": 0.9326,
+            "silence_score": 0.9391,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 21,
-            "social_mentions": 10,
+            "news_mentions": 16,
+            "social_mentions": 12,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "anwar: abdul halim free from business and political links, right choice to lead macc. batu kawan, april 25 &mdash; prime minister datuk seri anwar ibrahim today explained the selection of former judge": {
-        "alpha": 1.2,
+        "alpha": 1.4,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.104956+00:00",
-        "last_updated": "2026-04-25T10:46:54.104959+00:00",
+        "last_updated": "2026-04-25T13:08:31.876628+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0004",
+            "event_id": "INST-0008",
             "keyword": "anwar:",
             "title": "Anwar: Abdul Halim free from business and political links, right choice to lead MACC. BATU KAWAN, April 25 &mdash; Prime Minister Datuk Seri Anwar Ibrahim today explained the selection of former judge",
             "structural_importance": 0.41,
-            "silence_score": 0.6542,
+            "silence_score": 0.6417,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 63,
-            "social_mentions": 20,
+            "news_mentions": 60,
+            "social_mentions": 26,
             "expected_mentions": 240.0,
             "bias_dimensions_touched": [
               "institutional",
@@ -58276,25 +58273,25 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "new macc chief must probe \u2018corporate mafia\u2019 claims, says dap\u2019s gobind. kuala lumpur, april 25 &mdash; dap national chairman gobind singh deo today challenged the incoming malaysian anti-corru...": {
-        "alpha": 1.2,
+        "alpha": 1.4,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.104963+00:00",
-        "last_updated": "2026-04-25T10:46:54.104965+00:00",
+        "last_updated": "2026-04-25T13:08:31.876635+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0005",
+            "event_id": "INST-0009",
             "keyword": "new",
             "title": "New MACC chief must probe \u2018corporate mafia\u2019 claims, says DAP\u2019s Gobind. KUALA LUMPUR, April 25 &mdash; DAP national chairman Gobind Singh Deo today challenged the incoming Malaysian Anti-Corru...",
             "structural_importance": 0.41,
-            "silence_score": 0.6708,
+            "silence_score": 0.675,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 60,
-            "social_mentions": 19,
+            "news_mentions": 55,
+            "social_mentions": 23,
             "expected_mentions": 240.0,
             "bias_dimensions_touched": [
               "ethnic",
@@ -58302,24 +58299,24 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "himpunan anti-azam desak perubahan menyeluruh. ahli parlimen lee chean chung mahukan perubahan yang boleh memupuk keyakinan.": {
-        "alpha": 1.2,
+        "alpha": 1.4,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.104987+00:00",
-        "last_updated": "2026-04-25T10:46:54.104988+00:00",
+        "last_updated": "2026-04-25T13:08:31.876673+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0014",
+            "event_id": "INST-0025",
             "keyword": "himpunan",
             "title": "Himpunan anti-Azam desak perubahan menyeluruh. Ahli Parlimen Lee Chean Chung mahukan perubahan yang boleh memupuk keyakinan.",
             "structural_importance": 0.465,
-            "silence_score": 0.9935,
+            "silence_score": 0.9913,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 2,
+            "news_mentions": 3,
             "social_mentions": 1,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
@@ -58327,24 +58324,24 @@
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "rasuah di pelabuhan: 2 pengarah syarikat diberkas, sprm beku rm185 juta. mereka antara empat suspek terlibat pengubahan wang haram bagi elak dan kurangkan duti import yang dipercayai mengakibatkan keh": {
-        "alpha": 1.4,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.104994+00:00",
-        "last_updated": "2026-04-25T10:46:54.104996+00:00",
+        "last_updated": "2026-04-25T13:08:31.876680+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0016",
+            "event_id": "INST-0027",
             "keyword": "rasuah",
             "title": "Rasuah di pelabuhan: 2 pengarah syarikat diberkas, SPRM beku RM185 juta. Mereka antara empat suspek terlibat pengubahan wang haram bagi elak dan kurangkan duti import yang dipercayai mengakibatkan keh",
             "structural_importance": 0.5192,
-            "silence_score": 0.9882,
+            "silence_score": 0.9911,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 5,
+            "news_mentions": 3,
             "social_mentions": 3,
             "expected_mentions": 677.0,
             "bias_dimensions_touched": [
@@ -58353,87 +58350,261 @@
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "new macc chief right man for the job, says anwar. the prime minister says abdul halim aman's background in judiciary, and his non-involvement in business or political activities make him the ideal cho": {
-        "alpha": 1.2,
+        "alpha": 1.4,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.104997+00:00",
-        "last_updated": "2026-04-25T10:46:54.104999+00:00",
+        "last_updated": "2026-04-25T13:08:31.876683+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0019",
+            "event_id": "INST-0030",
             "keyword": "new",
             "title": "New MACC chief right man for the job, says Anwar. The prime minister says Abdul Halim Aman's background in judiciary, and his non-involvement in business or political activities make him the ideal cho",
             "structural_importance": 0.465,
-            "silence_score": 0.8957,
+            "silence_score": 0.9022,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 31,
-            "social_mentions": 17,
+            "news_mentions": 26,
+            "social_mentions": 19,
             "expected_mentions": 460.0,
             "bias_dimensions_touched": [
               "institutional"
             ],
             "alert_level": "medium",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "development allocation for penang up 60% in 4 years, says anwar. the prime minister says rm7.8 billion has been earmarked for the state this year, compared to rm5.7 billion in 2023.": {
-        "alpha": 1.4,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.105002+00:00",
-        "last_updated": "2026-04-25T10:46:54.105003+00:00",
+        "last_updated": "2026-04-25T13:08:31.876686+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0021",
+            "event_id": "INST-0032",
             "keyword": "development",
             "title": "Development allocation for Penang up 60% in 4 years, says Anwar. The prime minister says RM7.8 billion has been earmarked for the state this year, compared to RM5.7 billion in 2023.",
             "structural_importance": 0.615,
-            "silence_score": 0.9808,
+            "silence_score": 0.9854,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 20,
-            "social_mentions": 5,
+            "news_mentions": 15,
+            "social_mentions": 4,
             "expected_mentions": 1300.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       },
       "development": {
-        "alpha": 1.4,
+        "alpha": 1.7999999999999998,
         "beta": 9.0,
         "created_at": "2026-04-25T10:46:54.105477+00:00",
-        "last_updated": "2026-04-25T10:46:54.105480+00:00",
+        "last_updated": "2026-04-25T13:08:31.876992+00:00",
         "stream_signals": {
           "silence_detector": {
-            "event_id": "INST-0021",
+            "event_id": "INST-0032",
             "keyword": "development",
             "title": "Development allocation for Penang up 60% in 4 years, says Anwar. The prime minister says RM7.8 billion has been earmarked for the state this year, compared to RM5.7 billion in 2023.",
             "structural_importance": 0.615,
-            "silence_score": 0.9808,
+            "silence_score": 0.9854,
             "suppression_pattern": "NORMAL",
-            "news_mentions": 20,
-            "social_mentions": 5,
+            "news_mentions": 15,
+            "social_mentions": 4,
             "expected_mentions": 1300.0,
             "bias_dimensions_touched": [
               "political"
             ],
             "alert_level": "high",
             "detection_type": "silence_anomaly",
-            "timestamp": "2026-04-25T10:46:54.091483+00:00"
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "macc identifies 40 witnesses in selangor ngo probe. kuala pilah, april 25 &mdash; the malaysian anti-corruption commission (macc) has identified 40 witnesses in its investi...": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876616+00:00",
+        "last_updated": "2026-04-25T13:08:31.876618+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0005",
+            "keyword": "macc",
+            "title": "MACC identifies 40 witnesses in Selangor NGO probe. KUALA PILAH, April 25 &mdash; The Malaysian Anti-Corruption Commission (MACC) has identified 40 witnesses in its investi...",
+            "structural_importance": 0.41,
+            "silence_score": 0.7,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 52,
+            "social_mentions": 20,
+            "expected_mentions": 240.0,
+            "bias_dimensions_touched": [
+              "ethnic",
+              "institutional"
+            ],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "\u2018we hope for a miracle\u2019: family holds hope for malaysian sentenced in japan to be returned home. kuala lumpur, april 25 &ndash; malaysian muhammad faiq zafran mohd jailani, currently detained in japan": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876622+00:00",
+        "last_updated": "2026-04-25T13:08:31.876624+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0006",
+            "keyword": "\u2018we",
+            "title": "\u2018We hope for a miracle\u2019: Family holds hope for Malaysian sentenced in Japan to be returned home. KUALA LUMPUR, April 25 &ndash; Malaysian Muhammad Faiq Zafran Mohd Jailani, currently detained in Japan",
+            "structural_importance": 0.41,
+            "silence_score": 0.8125,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 29,
+            "social_mentions": 16,
+            "expected_mentions": 240.0,
+            "bias_dimensions_touched": [
+              "ethnic",
+              "legal"
+            ],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "cops probe firecracker incident at anti\u2011azam rally. police say they cannot confirm whether the firecrackers were lit as an act of sabotage.": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876655+00:00",
+        "last_updated": "2026-04-25T13:08:31.876657+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0014",
+            "keyword": "cops",
+            "title": "Cops probe firecracker incident at anti\u2011Azam rally. Police say they cannot confirm whether the firecrackers were lit as an act of sabotage.",
+            "structural_importance": 0.415,
+            "silence_score": 0.9615,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 7,
+            "social_mentions": 3,
+            "expected_mentions": 260.0,
+            "bias_dimensions_touched": [],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "ukraine signs pacts with azerbaijan in drone cooperation push. ukrainian president volodymyr zelensky has clinched several defence deals with gulf countries that suffered iranian drone attacks.": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876658+00:00",
+        "last_updated": "2026-04-25T13:08:31.876660+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0015",
+            "keyword": "ukraine",
+            "title": "Ukraine signs pacts with Azerbaijan in drone cooperation push. Ukrainian president Volodymyr Zelensky has clinched several defence deals with Gulf countries that suffered Iranian drone attacks.",
+            "structural_importance": 0.415,
+            "silence_score": 0.9769,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 4,
+            "social_mentions": 2,
+            "expected_mentions": 260.0,
+            "bias_dimensions_touched": [],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "rafizi to decide on forming new party in june. the former pkr deputy president says he will make his decision after discussions with his political friends as it would have an impact on them at parliam": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876662+00:00",
+        "last_updated": "2026-04-25T13:08:31.876664+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0017",
+            "keyword": "rafizi",
+            "title": "Rafizi to decide on forming new party in June. The former PKR deputy president says he will make his decision after discussions with his political friends as it would have an impact on them at parliam",
+            "structural_importance": 0.465,
+            "silence_score": 0.95,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 16,
+            "social_mentions": 7,
+            "expected_mentions": 460.0,
+            "bias_dimensions_touched": [
+              "political"
+            ],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "kes seleweng ngo: 33 akaun rm150 juta dibeku. ketua pesuruhjaya sprm azam baki berkata 40 saksi dikenal pasti untuk membantu siasatan kes seleweng sumbangan orang awam rm230 juta.": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.876665+00:00",
+        "last_updated": "2026-04-25T13:08:31.876667+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0019",
+            "keyword": "kes",
+            "title": "Kes seleweng NGO: 33 akaun RM150 juta dibeku. Ketua Pesuruhjaya SPRM Azam Baki berkata 40 saksi dikenal pasti untuk membantu siasatan kes seleweng sumbangan orang awam RM230 juta.",
+            "structural_importance": 0.4715,
+            "silence_score": 0.9424,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 15,
+            "social_mentions": 13,
+            "expected_mentions": 486.0,
+            "bias_dimensions_touched": [
+              "institutional"
+            ],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
+          }
+        }
+      },
+      "\u2018we": {
+        "alpha": 1.2,
+        "beta": 9.0,
+        "created_at": "2026-04-25T13:08:31.877050+00:00",
+        "last_updated": "2026-04-25T13:08:31.877053+00:00",
+        "stream_signals": {
+          "silence_detector": {
+            "event_id": "INST-0006",
+            "keyword": "\u2018we",
+            "title": "\u2018We hope for a miracle\u2019: Family holds hope for Malaysian sentenced in Japan to be returned home. KUALA LUMPUR, April 25 &ndash; Malaysian Muhammad Faiq Zafran Mohd Jailani, currently detained in Japan",
+            "structural_importance": 0.41,
+            "silence_score": 0.8125,
+            "suppression_pattern": "NORMAL",
+            "news_mentions": 29,
+            "social_mentions": 16,
+            "expected_mentions": 240.0,
+            "bias_dimensions_touched": [
+              "ethnic",
+              "legal"
+            ],
+            "alert_level": "medium",
+            "detection_type": "silence_anomaly",
+            "timestamp": "2026-04-25T13:08:31.865469+00:00"
           }
         }
       }
     },
-    "issue_counter": 477734
+    "issue_counter": 480132
   },
   "volume_monitor": {
     "cusum": {},
@@ -58441,12 +58612,32 @@
   },
   "cascade_tracker": {
     "hawkes_params": {
-      "anwar:": {
+      "\u2018tangkap": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
       },
       "macc": {
+        "mu": 5.47397585047239e-05,
+        "alpha": 1.195299540894513,
+        "beta": 3.0921880309415943
+      },
+      "hope": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "cops": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "anwar\u2019s": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "anwar:": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
@@ -58496,22 +58687,182 @@
         "alpha": 0.5,
         "beta": 1.0
       },
+      "\u6bcf\u6b21\u4e703\u5305": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "number": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "2026\u970d\u68ee\u65af\u6c64\u5c24\u676f\uff5c\u8482\u5a1c": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "rafizi": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "2026\u970d\u68ee\u65af\u6c64\u5c24\u676f\uff5c\u5973\u53cc\u5c0f\u5c06\u9020\u9996\u80dc": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "noraqilah": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "sarawak": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "give": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "azam": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "ukraine": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u502a\u53ef\u654f\u634e\u5927\u60ca\u559c": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u4e09\u6b21\u5ef6\u4efb\u662f\u83ab\u5927\u8363\u8a89": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u8f66\u724c\u8d5a\u94b1": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u7802\u5173\u7a0e\u5c40\u9996\u5b63\u8d77\u5343\u4e07\u652f\u79c1\u70df": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u5185\u653f\u90e8\u5168\u529b\u9632\u8303\u7edf\u5236\u54c1\u8d70\u79c1": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u4f4e\u6e17\u900f\u7387\u9a71\u52a8\u589e\u957f": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u6821\u56ed\u6700\u53ef\u6015\u7684\u4e0d\u662f\u9738\u51cc": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u5a46\u7f57\u6d32\u9ad8\u539f\u53a8\u827a\u626c\u5a01\u6d77\u5916": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u9f99\u8fd0\u4e24\u7ae5\u8650\u732b\u6848": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "hawana\u5173\u7231\u57fa\u91d1\u53d1\u653e220\u4e07\u4ee4\u5409": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u902e\u6355\u963f\u5360\u96c6\u4f1a": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u7802\u5df2\u6545\u524d\u526f\u9996\u957f": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u7802\u62df\u65a5\u8d443000\u4e07": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u53cd\u8d2a\u7ec4\u7ec7": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "\u8fde\u7eed\u4e24\u5c4a\u83b7\u597d\u8bc4": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
       "guan": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
       },
+      "supreme": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "yu-noraqilah": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
       "padini": {
-        "mu": 0.00017496805710274217,
-        "alpha": 6180.412880753441,
-        "beta": 51955.596247929905
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "seleweng": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
       },
       "organisers": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
       },
+      "mindef": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "ducati\u2019s": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "polis": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
       "bomba": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "major": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
@@ -58527,196 +58878,6 @@
         "beta": 1.0
       },
       "ministry:": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "supreme": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "abdul": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "premier": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "simats": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "kerajaan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "puncak": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "laungan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "bilangan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "price": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "hong": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "kemuka": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "nihilent": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "fortis": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "vivo": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "dhaval": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "drink": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "peruntukan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "inspiring": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "meet": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "dasar": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "leading": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "late": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "hindustan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "science": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "sarawak": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "aster": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "anugerah": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "tanla": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "family": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "gokuldham": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "indian": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "ribut": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "business": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "bears": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "pelaku": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "former": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "konvoi": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "kuala": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
@@ -58741,131 +58902,6 @@
         "alpha": 0.5,
         "beta": 1.0
       },
-      "nino": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "pelumba": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "sudden": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "thailand": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "this": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "cubaan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "mara": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "nampak": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "zips": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "cuaca": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "wanita": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "hujan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "rakyat": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "izzah": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "another": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "netanyahu": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "saya": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "maut": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "mechanism": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "private": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "marine": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "azam": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "tetamu": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "heartbroken": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "letupan": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
       "turkey": {
         "mu": 1.0,
         "alpha": 0.5,
@@ -58877,11 +58913,6 @@
         "beta": 1.0
       },
       "your": {
-        "mu": 1.0,
-        "alpha": 0.5,
-        "beta": 1.0
-      },
-      "anwar\u2019s": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
@@ -58966,6 +58997,11 @@
         "alpha": 0.5,
         "beta": 1.0
       },
+      "mara": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
       "sertai": {
         "mu": 1.0,
         "alpha": 0.5,
@@ -59011,7 +59047,7 @@
         "alpha": 0.5,
         "beta": 1.0
       },
-      "cops": {
+      "kerajaan": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
@@ -59051,18 +59087,50 @@
         "alpha": 0.5,
         "beta": 1.0
       },
-      "workers": {
+      "supersonic": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
       },
-      "consider": {
+      "fahmi:": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "macc:": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "nadma": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "ktmb\u2019s": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "hannah": {
+        "mu": 1.0,
+        "alpha": 0.5,
+        "beta": 1.0
+      },
+      "tiris": {
         "mu": 1.0,
         "alpha": 0.5,
         "beta": 1.0
       }
     },
-    "n_star_history": {}
+    "n_star_history": {
+      "macc": [
+        [
+          "2026-04-24T18:55:00+08:00",
+          0.3865546108237588
+        ]
+      ]
+    }
   },
   "prediction_state": {
     "first_cycle_at": "2026-04-20T14:39:11.639486+00:00",
@@ -59072,7 +59140,7 @@
       "2026-04-22": 1701,
       "2026-04-23": 1533,
       "2026-04-24": 1369,
-      "2026-04-25": 762
+      "2026-04-25": 926
     }
   },
   "last_pipeline_result": {
